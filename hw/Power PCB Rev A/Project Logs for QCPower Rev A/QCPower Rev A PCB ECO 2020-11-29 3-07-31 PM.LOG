@@ -1,0 +1,14 @@
+Added Component: Designator=J200_BLDC1(CONN SOLDER MOTOR)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=J201_BLDC1(CONN SOLDER MOTOR)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = ""; VariantName = "[No Variations]"
+Added Pin To Net: NetName=OUTU_BLDC1 Pin=J200_BLDC1-1
+Added Pin To Net: NetName=OUTV_BLDC1 Pin=J201_BLDC1-1
+Added Member To Class: ClassName=BLDC1 Member=Component J200_BLDC1 (J200) PAD
+Added Member To Class: ClassName=BLDC1 Member=Component J201_BLDC1 (J201) PAD

@@ -1,0 +1,16 @@
+Removed Pin From Net: NetName=SWDIO_1 Pin=TP211_1-1
+Removed Pin From Net: NetName=SWDIO_2 Pin=TP211_2-1
+Removed Pin From Net: NetName=SWDIO_3 Pin=TP211_3-1
+Removed Pin From Net: NetName=SWDIO_4 Pin=TP211_4-1
+Removed Pin From Net: NetName=SWDCLK_1 Pin=TP212_1-1
+Removed Pin From Net: NetName=SWDCLK_2 Pin=TP212_2-1
+Removed Pin From Net: NetName=SWDCLK_3 Pin=TP212_3-1
+Removed Pin From Net: NetName=SWDCLK_4 Pin=TP212_4-1
+Removed Member From Class: ClassName=BLDC1 Member=TP211_1
+Removed Member From Class: ClassName=BLDC2 Member=TP211_2
+Removed Member From Class: ClassName=BLDC3 Member=TP211_3
+Removed Member From Class: ClassName=BLDC4 Member=TP211_4
+Removed Member From Class: ClassName=BLDC1 Member=TP212_1
+Removed Member From Class: ClassName=BLDC2 Member=TP212_2
+Removed Member From Class: ClassName=BLDC3 Member=TP212_3
+Removed Member From Class: ClassName=BLDC4 Member=TP212_4

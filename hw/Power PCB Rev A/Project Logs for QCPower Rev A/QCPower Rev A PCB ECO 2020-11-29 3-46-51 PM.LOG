@@ -1,0 +1,740 @@
+Change Component Designator: OldDesignator=C200_BLDC1 NewDesignator=C200_1
+Change Component Designator: OldDesignator=C200_BLDC2 NewDesignator=C200_2
+Change Component Designator: OldDesignator=C200_BLDC3 NewDesignator=C200_3
+Change Component Designator: OldDesignator=C200_BLDC4 NewDesignator=C200_4
+Change Component Designator: OldDesignator=C201_BLDC1 NewDesignator=C201_1
+Change Component Designator: OldDesignator=C201_BLDC2 NewDesignator=C201_2
+Change Component Designator: OldDesignator=C201_BLDC3 NewDesignator=C201_3
+Change Component Designator: OldDesignator=C201_BLDC4 NewDesignator=C201_4
+Change Component Designator: OldDesignator=C202_BLDC1 NewDesignator=C202_1
+Change Component Designator: OldDesignator=C202_BLDC2 NewDesignator=C202_2
+Change Component Designator: OldDesignator=C202_BLDC3 NewDesignator=C202_3
+Change Component Designator: OldDesignator=C202_BLDC4 NewDesignator=C202_4
+Change Component Designator: OldDesignator=C203_BLDC1 NewDesignator=C203_1
+Change Component Designator: OldDesignator=C203_BLDC2 NewDesignator=C203_2
+Change Component Designator: OldDesignator=C203_BLDC3 NewDesignator=C203_3
+Change Component Designator: OldDesignator=C203_BLDC4 NewDesignator=C203_4
+Change Component Designator: OldDesignator=C204_BLDC1 NewDesignator=C204_1
+Change Component Designator: OldDesignator=C204_BLDC2 NewDesignator=C204_2
+Change Component Designator: OldDesignator=C204_BLDC3 NewDesignator=C204_3
+Change Component Designator: OldDesignator=C204_BLDC4 NewDesignator=C204_4
+Change Component Designator: OldDesignator=C205_BLDC1 NewDesignator=C205_1
+Change Component Designator: OldDesignator=C205_BLDC2 NewDesignator=C205_2
+Change Component Designator: OldDesignator=C205_BLDC3 NewDesignator=C205_3
+Change Component Designator: OldDesignator=C205_BLDC4 NewDesignator=C205_4
+Change Component Designator: OldDesignator=C206_BLDC1 NewDesignator=C206_1
+Change Component Designator: OldDesignator=C206_BLDC2 NewDesignator=C206_2
+Change Component Designator: OldDesignator=C206_BLDC3 NewDesignator=C206_3
+Change Component Designator: OldDesignator=C206_BLDC4 NewDesignator=C206_4
+Change Component Designator: OldDesignator=C207_BLDC1 NewDesignator=C207_1
+Change Component Designator: OldDesignator=C207_BLDC2 NewDesignator=C207_2
+Change Component Designator: OldDesignator=C207_BLDC3 NewDesignator=C207_3
+Change Component Designator: OldDesignator=C207_BLDC4 NewDesignator=C207_4
+Change Component Designator: OldDesignator=C208_BLDC1 NewDesignator=C208_1
+Change Component Designator: OldDesignator=C208_BLDC2 NewDesignator=C208_2
+Change Component Designator: OldDesignator=C208_BLDC3 NewDesignator=C208_3
+Change Component Designator: OldDesignator=C208_BLDC4 NewDesignator=C208_4
+Change Component Designator: OldDesignator=C209_BLDC1 NewDesignator=C209_1
+Change Component Designator: OldDesignator=C209_BLDC2 NewDesignator=C209_2
+Change Component Designator: OldDesignator=C209_BLDC3 NewDesignator=C209_3
+Change Component Designator: OldDesignator=C209_BLDC4 NewDesignator=C209_4
+Change Component Designator: OldDesignator=C210_BLDC1 NewDesignator=C210_1
+Change Component Designator: OldDesignator=C210_BLDC2 NewDesignator=C210_2
+Change Component Designator: OldDesignator=C210_BLDC3 NewDesignator=C210_3
+Change Component Designator: OldDesignator=C210_BLDC4 NewDesignator=C210_4
+Change Component Designator: OldDesignator=C211_BLDC1 NewDesignator=C211_1
+Change Component Designator: OldDesignator=C211_BLDC2 NewDesignator=C211_2
+Change Component Designator: OldDesignator=C211_BLDC3 NewDesignator=C211_3
+Change Component Designator: OldDesignator=C211_BLDC4 NewDesignator=C211_4
+Change Component Designator: OldDesignator=C212_BLDC1 NewDesignator=C212_1
+Change Component Designator: OldDesignator=C212_BLDC2 NewDesignator=C212_2
+Change Component Designator: OldDesignator=C212_BLDC3 NewDesignator=C212_3
+Change Component Designator: OldDesignator=C212_BLDC4 NewDesignator=C212_4
+Change Component Designator: OldDesignator=C213_BLDC1 NewDesignator=C213_1
+Change Component Designator: OldDesignator=C213_BLDC2 NewDesignator=C213_2
+Change Component Designator: OldDesignator=C213_BLDC3 NewDesignator=C213_3
+Change Component Designator: OldDesignator=C213_BLDC4 NewDesignator=C213_4
+Change Component Designator: OldDesignator=C214_BLDC1 NewDesignator=C214_1
+Change Component Designator: OldDesignator=C214_BLDC2 NewDesignator=C214_2
+Change Component Designator: OldDesignator=C214_BLDC3 NewDesignator=C214_3
+Change Component Designator: OldDesignator=C214_BLDC4 NewDesignator=C214_4
+Change Component Designator: OldDesignator=C215_BLDC1 NewDesignator=C215_1
+Change Component Designator: OldDesignator=C215_BLDC2 NewDesignator=C215_2
+Change Component Designator: OldDesignator=C215_BLDC3 NewDesignator=C215_3
+Change Component Designator: OldDesignator=C215_BLDC4 NewDesignator=C215_4
+Change Component Designator: OldDesignator=C216_BLDC1 NewDesignator=C216_1
+Change Component Designator: OldDesignator=C216_BLDC2 NewDesignator=C216_2
+Change Component Designator: OldDesignator=C216_BLDC3 NewDesignator=C216_3
+Change Component Designator: OldDesignator=C216_BLDC4 NewDesignator=C216_4
+Change Component Designator: OldDesignator=C217_BLDC1 NewDesignator=C217_1
+Change Component Designator: OldDesignator=C217_BLDC2 NewDesignator=C217_2
+Change Component Designator: OldDesignator=C217_BLDC3 NewDesignator=C217_3
+Change Component Designator: OldDesignator=C217_BLDC4 NewDesignator=C217_4
+Change Component Designator: OldDesignator=C218_BLDC1 NewDesignator=C218_1
+Change Component Designator: OldDesignator=C218_BLDC2 NewDesignator=C218_2
+Change Component Designator: OldDesignator=C218_BLDC3 NewDesignator=C218_3
+Change Component Designator: OldDesignator=C218_BLDC4 NewDesignator=C218_4
+Change Component Designator: OldDesignator=C219_BLDC1 NewDesignator=C219_1
+Change Component Designator: OldDesignator=C219_BLDC2 NewDesignator=C219_2
+Change Component Designator: OldDesignator=C219_BLDC3 NewDesignator=C219_3
+Change Component Designator: OldDesignator=C219_BLDC4 NewDesignator=C219_4
+Change Component Designator: OldDesignator=C220_BLDC1 NewDesignator=C220_1
+Change Component Designator: OldDesignator=C220_BLDC2 NewDesignator=C220_2
+Change Component Designator: OldDesignator=C220_BLDC3 NewDesignator=C220_3
+Change Component Designator: OldDesignator=C220_BLDC4 NewDesignator=C220_4
+Change Component Designator: OldDesignator=C221_BLDC1 NewDesignator=C221_1
+Change Component Designator: OldDesignator=C221_BLDC2 NewDesignator=C221_2
+Change Component Designator: OldDesignator=C221_BLDC3 NewDesignator=C221_3
+Change Component Designator: OldDesignator=C221_BLDC4 NewDesignator=C221_4
+Change Component Designator: OldDesignator=C222_BLDC1 NewDesignator=C222_1
+Change Component Designator: OldDesignator=C222_BLDC2 NewDesignator=C222_2
+Change Component Designator: OldDesignator=C222_BLDC3 NewDesignator=C222_3
+Change Component Designator: OldDesignator=C222_BLDC4 NewDesignator=C222_4
+Change Component Designator: OldDesignator=C223_BLDC1 NewDesignator=C223_1
+Change Component Designator: OldDesignator=C223_BLDC2 NewDesignator=C223_2
+Change Component Designator: OldDesignator=C223_BLDC3 NewDesignator=C223_3
+Change Component Designator: OldDesignator=C223_BLDC4 NewDesignator=C223_4
+Change Component Designator: OldDesignator=D200_BLDC1 NewDesignator=D200_1
+Change Component Designator: OldDesignator=D200_BLDC2 NewDesignator=D200_2
+Change Component Designator: OldDesignator=D200_BLDC3 NewDesignator=D200_3
+Change Component Designator: OldDesignator=D200_BLDC4 NewDesignator=D200_4
+Change Component Designator: OldDesignator=D201_BLDC1 NewDesignator=D201_1
+Change Component Designator: OldDesignator=D201_BLDC2 NewDesignator=D201_2
+Change Component Designator: OldDesignator=D201_BLDC3 NewDesignator=D201_3
+Change Component Designator: OldDesignator=D201_BLDC4 NewDesignator=D201_4
+Change Component Designator: OldDesignator=D202_BLDC1 NewDesignator=D202_1
+Change Component Designator: OldDesignator=D202_BLDC2 NewDesignator=D202_2
+Change Component Designator: OldDesignator=D202_BLDC3 NewDesignator=D202_3
+Change Component Designator: OldDesignator=D202_BLDC4 NewDesignator=D202_4
+Change Component Designator: OldDesignator=D203_BLDC1 NewDesignator=D203_1
+Change Component Designator: OldDesignator=D203_BLDC2 NewDesignator=D203_2
+Change Component Designator: OldDesignator=D203_BLDC3 NewDesignator=D203_3
+Change Component Designator: OldDesignator=D203_BLDC4 NewDesignator=D203_4
+Change Component Designator: OldDesignator=D204_BLDC1 NewDesignator=D204_1
+Change Component Designator: OldDesignator=D204_BLDC2 NewDesignator=D204_2
+Change Component Designator: OldDesignator=D204_BLDC3 NewDesignator=D204_3
+Change Component Designator: OldDesignator=D204_BLDC4 NewDesignator=D204_4
+Change Component Designator: OldDesignator=D205_BLDC1 NewDesignator=D205_1
+Change Component Designator: OldDesignator=D205_BLDC2 NewDesignator=D205_2
+Change Component Designator: OldDesignator=D205_BLDC3 NewDesignator=D205_3
+Change Component Designator: OldDesignator=D205_BLDC4 NewDesignator=D205_4
+Change Component Designator: OldDesignator=D206_BLDC1 NewDesignator=D206_1
+Change Component Designator: OldDesignator=D206_BLDC2 NewDesignator=D206_2
+Change Component Designator: OldDesignator=D206_BLDC3 NewDesignator=D206_3
+Change Component Designator: OldDesignator=D206_BLDC4 NewDesignator=D206_4
+Change Component Designator: OldDesignator=D207_BLDC1 NewDesignator=D207_1
+Change Component Designator: OldDesignator=D207_BLDC2 NewDesignator=D207_2
+Change Component Designator: OldDesignator=D207_BLDC3 NewDesignator=D207_3
+Change Component Designator: OldDesignator=D207_BLDC4 NewDesignator=D207_4
+Change Component Designator: OldDesignator=J200_BLDC1 NewDesignator=J200_1
+Change Component Designator: OldDesignator=J200_BLDC2 NewDesignator=J200_2
+Change Component Designator: OldDesignator=J200_BLDC3 NewDesignator=J200_3
+Change Component Designator: OldDesignator=J200_BLDC4 NewDesignator=J200_4
+Change Component Designator: OldDesignator=J201_BLDC1 NewDesignator=J201_1
+Change Component Designator: OldDesignator=J201_BLDC2 NewDesignator=J201_2
+Change Component Designator: OldDesignator=J201_BLDC3 NewDesignator=J201_3
+Change Component Designator: OldDesignator=J201_BLDC4 NewDesignator=J201_4
+Change Component Designator: OldDesignator=J202_BLDC1 NewDesignator=J202_1
+Change Component Designator: OldDesignator=J202_BLDC2 NewDesignator=J202_2
+Change Component Designator: OldDesignator=J202_BLDC3 NewDesignator=J202_3
+Change Component Designator: OldDesignator=J202_BLDC4 NewDesignator=J202_4
+Change Component Designator: OldDesignator=J203_BLDC1 NewDesignator=J203_1
+Change Component Designator: OldDesignator=J203_BLDC2 NewDesignator=J203_2
+Change Component Designator: OldDesignator=J203_BLDC3 NewDesignator=J203_3
+Change Component Designator: OldDesignator=J203_BLDC4 NewDesignator=J203_4
+Change Component Designator: OldDesignator=L200_BLDC1 NewDesignator=L200_1
+Change Component Designator: OldDesignator=L200_BLDC2 NewDesignator=L200_2
+Change Component Designator: OldDesignator=L200_BLDC3 NewDesignator=L200_3
+Change Component Designator: OldDesignator=L200_BLDC4 NewDesignator=L200_4
+Change Component Designator: OldDesignator=Q200_BLDC1 NewDesignator=Q200_1
+Change Component Designator: OldDesignator=Q200_BLDC2 NewDesignator=Q200_2
+Change Component Designator: OldDesignator=Q200_BLDC3 NewDesignator=Q200_3
+Change Component Designator: OldDesignator=Q200_BLDC4 NewDesignator=Q200_4
+Change Component Designator: OldDesignator=Q201_BLDC1 NewDesignator=Q201_1
+Change Component Designator: OldDesignator=Q201_BLDC2 NewDesignator=Q201_2
+Change Component Designator: OldDesignator=Q201_BLDC3 NewDesignator=Q201_3
+Change Component Designator: OldDesignator=Q201_BLDC4 NewDesignator=Q201_4
+Change Component Designator: OldDesignator=Q202_BLDC1 NewDesignator=Q202_1
+Change Component Designator: OldDesignator=Q202_BLDC2 NewDesignator=Q202_2
+Change Component Designator: OldDesignator=Q202_BLDC3 NewDesignator=Q202_3
+Change Component Designator: OldDesignator=Q202_BLDC4 NewDesignator=Q202_4
+Change Component Designator: OldDesignator=Q203_BLDC1 NewDesignator=Q203_1
+Change Component Designator: OldDesignator=Q203_BLDC2 NewDesignator=Q203_2
+Change Component Designator: OldDesignator=Q203_BLDC3 NewDesignator=Q203_3
+Change Component Designator: OldDesignator=Q203_BLDC4 NewDesignator=Q203_4
+Change Component Designator: OldDesignator=Q204_BLDC1 NewDesignator=Q204_1
+Change Component Designator: OldDesignator=Q204_BLDC2 NewDesignator=Q204_2
+Change Component Designator: OldDesignator=Q204_BLDC3 NewDesignator=Q204_3
+Change Component Designator: OldDesignator=Q204_BLDC4 NewDesignator=Q204_4
+Change Component Designator: OldDesignator=Q205_BLDC1 NewDesignator=Q205_1
+Change Component Designator: OldDesignator=Q205_BLDC2 NewDesignator=Q205_2
+Change Component Designator: OldDesignator=Q205_BLDC3 NewDesignator=Q205_3
+Change Component Designator: OldDesignator=Q205_BLDC4 NewDesignator=Q205_4
+Change Component Designator: OldDesignator=Q206_BLDC1 NewDesignator=Q206_1
+Change Component Designator: OldDesignator=Q206_BLDC2 NewDesignator=Q206_2
+Change Component Designator: OldDesignator=Q206_BLDC3 NewDesignator=Q206_3
+Change Component Designator: OldDesignator=Q206_BLDC4 NewDesignator=Q206_4
+Change Component Designator: OldDesignator=Q207_BLDC1 NewDesignator=Q207_1
+Change Component Designator: OldDesignator=Q207_BLDC2 NewDesignator=Q207_2
+Change Component Designator: OldDesignator=Q207_BLDC3 NewDesignator=Q207_3
+Change Component Designator: OldDesignator=Q207_BLDC4 NewDesignator=Q207_4
+Change Component Designator: OldDesignator=R200_BLDC1 NewDesignator=R200_1
+Change Component Designator: OldDesignator=R200_BLDC2 NewDesignator=R200_2
+Change Component Designator: OldDesignator=R200_BLDC3 NewDesignator=R200_3
+Change Component Designator: OldDesignator=R200_BLDC4 NewDesignator=R200_4
+Change Component Designator: OldDesignator=R201_BLDC1 NewDesignator=R201_1
+Change Component Designator: OldDesignator=R201_BLDC2 NewDesignator=R201_2
+Change Component Designator: OldDesignator=R201_BLDC3 NewDesignator=R201_3
+Change Component Designator: OldDesignator=R201_BLDC4 NewDesignator=R201_4
+Change Component Designator: OldDesignator=R202_BLDC1 NewDesignator=R202_1
+Change Component Designator: OldDesignator=R202_BLDC2 NewDesignator=R202_2
+Change Component Designator: OldDesignator=R202_BLDC3 NewDesignator=R202_3
+Change Component Designator: OldDesignator=R202_BLDC4 NewDesignator=R202_4
+Change Component Designator: OldDesignator=R203_BLDC1 NewDesignator=R203_1
+Change Component Designator: OldDesignator=R203_BLDC2 NewDesignator=R203_2
+Change Component Designator: OldDesignator=R203_BLDC3 NewDesignator=R203_3
+Change Component Designator: OldDesignator=R203_BLDC4 NewDesignator=R203_4
+Change Component Designator: OldDesignator=R204_BLDC1 NewDesignator=R204_1
+Change Component Designator: OldDesignator=R204_BLDC2 NewDesignator=R204_2
+Change Component Designator: OldDesignator=R204_BLDC3 NewDesignator=R204_3
+Change Component Designator: OldDesignator=R204_BLDC4 NewDesignator=R204_4
+Change Component Designator: OldDesignator=R205_BLDC1 NewDesignator=R205_1
+Change Component Designator: OldDesignator=R205_BLDC2 NewDesignator=R205_2
+Change Component Designator: OldDesignator=R205_BLDC3 NewDesignator=R205_3
+Change Component Designator: OldDesignator=R205_BLDC4 NewDesignator=R205_4
+Change Component Designator: OldDesignator=R206_BLDC1 NewDesignator=R206_1
+Change Component Designator: OldDesignator=R206_BLDC2 NewDesignator=R206_2
+Change Component Designator: OldDesignator=R206_BLDC3 NewDesignator=R206_3
+Change Component Designator: OldDesignator=R206_BLDC4 NewDesignator=R206_4
+Change Component Designator: OldDesignator=R207_BLDC1 NewDesignator=R207_1
+Change Component Designator: OldDesignator=R207_BLDC2 NewDesignator=R207_2
+Change Component Designator: OldDesignator=R207_BLDC3 NewDesignator=R207_3
+Change Component Designator: OldDesignator=R207_BLDC4 NewDesignator=R207_4
+Change Component Designator: OldDesignator=R208_BLDC1 NewDesignator=R208_1
+Change Component Designator: OldDesignator=R208_BLDC2 NewDesignator=R208_2
+Change Component Designator: OldDesignator=R208_BLDC3 NewDesignator=R208_3
+Change Component Designator: OldDesignator=R208_BLDC4 NewDesignator=R208_4
+Change Component Designator: OldDesignator=R209_BLDC1 NewDesignator=R209_1
+Change Component Designator: OldDesignator=R209_BLDC2 NewDesignator=R209_2
+Change Component Designator: OldDesignator=R209_BLDC3 NewDesignator=R209_3
+Change Component Designator: OldDesignator=R209_BLDC4 NewDesignator=R209_4
+Change Component Designator: OldDesignator=R210_BLDC1 NewDesignator=R210_1
+Change Component Designator: OldDesignator=R210_BLDC2 NewDesignator=R210_2
+Change Component Designator: OldDesignator=R210_BLDC3 NewDesignator=R210_3
+Change Component Designator: OldDesignator=R210_BLDC4 NewDesignator=R210_4
+Change Component Designator: OldDesignator=R211_BLDC1 NewDesignator=R211_1
+Change Component Designator: OldDesignator=R211_BLDC2 NewDesignator=R211_2
+Change Component Designator: OldDesignator=R211_BLDC3 NewDesignator=R211_3
+Change Component Designator: OldDesignator=R211_BLDC4 NewDesignator=R211_4
+Change Component Designator: OldDesignator=R212_BLDC1 NewDesignator=R212_1
+Change Component Designator: OldDesignator=R212_BLDC2 NewDesignator=R212_2
+Change Component Designator: OldDesignator=R212_BLDC3 NewDesignator=R212_3
+Change Component Designator: OldDesignator=R212_BLDC4 NewDesignator=R212_4
+Change Component Designator: OldDesignator=R213_BLDC1 NewDesignator=R213_1
+Change Component Designator: OldDesignator=R213_BLDC2 NewDesignator=R213_2
+Change Component Designator: OldDesignator=R213_BLDC3 NewDesignator=R213_3
+Change Component Designator: OldDesignator=R213_BLDC4 NewDesignator=R213_4
+Change Component Designator: OldDesignator=R214_BLDC1 NewDesignator=R214_1
+Change Component Designator: OldDesignator=R214_BLDC2 NewDesignator=R214_2
+Change Component Designator: OldDesignator=R214_BLDC3 NewDesignator=R214_3
+Change Component Designator: OldDesignator=R214_BLDC4 NewDesignator=R214_4
+Change Component Designator: OldDesignator=R215_BLDC1 NewDesignator=R215_1
+Change Component Designator: OldDesignator=R215_BLDC2 NewDesignator=R215_2
+Change Component Designator: OldDesignator=R215_BLDC3 NewDesignator=R215_3
+Change Component Designator: OldDesignator=R215_BLDC4 NewDesignator=R215_4
+Change Component Designator: OldDesignator=R216_BLDC1 NewDesignator=R216_1
+Change Component Designator: OldDesignator=R216_BLDC2 NewDesignator=R216_2
+Change Component Designator: OldDesignator=R216_BLDC3 NewDesignator=R216_3
+Change Component Designator: OldDesignator=R216_BLDC4 NewDesignator=R216_4
+Change Component Designator: OldDesignator=R217_BLDC1 NewDesignator=R217_1
+Change Component Designator: OldDesignator=R217_BLDC2 NewDesignator=R217_2
+Change Component Designator: OldDesignator=R217_BLDC3 NewDesignator=R217_3
+Change Component Designator: OldDesignator=R217_BLDC4 NewDesignator=R217_4
+Change Component Designator: OldDesignator=R218_BLDC1 NewDesignator=R218_1
+Change Component Designator: OldDesignator=R218_BLDC2 NewDesignator=R218_2
+Change Component Designator: OldDesignator=R218_BLDC3 NewDesignator=R218_3
+Change Component Designator: OldDesignator=R218_BLDC4 NewDesignator=R218_4
+Change Component Designator: OldDesignator=R219_BLDC1 NewDesignator=R219_1
+Change Component Designator: OldDesignator=R219_BLDC2 NewDesignator=R219_2
+Change Component Designator: OldDesignator=R219_BLDC3 NewDesignator=R219_3
+Change Component Designator: OldDesignator=R219_BLDC4 NewDesignator=R219_4
+Change Component Designator: OldDesignator=R220_BLDC1 NewDesignator=R220_1
+Change Component Designator: OldDesignator=R220_BLDC2 NewDesignator=R220_2
+Change Component Designator: OldDesignator=R220_BLDC3 NewDesignator=R220_3
+Change Component Designator: OldDesignator=R220_BLDC4 NewDesignator=R220_4
+Change Component Designator: OldDesignator=R221_BLDC1 NewDesignator=R221_1
+Change Component Designator: OldDesignator=R221_BLDC2 NewDesignator=R221_2
+Change Component Designator: OldDesignator=R221_BLDC3 NewDesignator=R221_3
+Change Component Designator: OldDesignator=R221_BLDC4 NewDesignator=R221_4
+Change Component Designator: OldDesignator=R222_BLDC1 NewDesignator=R222_1
+Change Component Designator: OldDesignator=R222_BLDC2 NewDesignator=R222_2
+Change Component Designator: OldDesignator=R222_BLDC3 NewDesignator=R222_3
+Change Component Designator: OldDesignator=R222_BLDC4 NewDesignator=R222_4
+Change Component Designator: OldDesignator=R223_BLDC1 NewDesignator=R223_1
+Change Component Designator: OldDesignator=R223_BLDC2 NewDesignator=R223_2
+Change Component Designator: OldDesignator=R223_BLDC3 NewDesignator=R223_3
+Change Component Designator: OldDesignator=R223_BLDC4 NewDesignator=R223_4
+Change Component Designator: OldDesignator=R224_BLDC1 NewDesignator=R224_1
+Change Component Designator: OldDesignator=R224_BLDC2 NewDesignator=R224_2
+Change Component Designator: OldDesignator=R224_BLDC3 NewDesignator=R224_3
+Change Component Designator: OldDesignator=R224_BLDC4 NewDesignator=R224_4
+Change Component Designator: OldDesignator=R225_BLDC1 NewDesignator=R225_1
+Change Component Designator: OldDesignator=R225_BLDC2 NewDesignator=R225_2
+Change Component Designator: OldDesignator=R225_BLDC3 NewDesignator=R225_3
+Change Component Designator: OldDesignator=R225_BLDC4 NewDesignator=R225_4
+Change Component Designator: OldDesignator=R226_BLDC1 NewDesignator=R226_1
+Change Component Designator: OldDesignator=R226_BLDC2 NewDesignator=R226_2
+Change Component Designator: OldDesignator=R226_BLDC3 NewDesignator=R226_3
+Change Component Designator: OldDesignator=R226_BLDC4 NewDesignator=R226_4
+Change Component Designator: OldDesignator=R227_BLDC1 NewDesignator=R227_1
+Change Component Designator: OldDesignator=R227_BLDC2 NewDesignator=R227_2
+Change Component Designator: OldDesignator=R227_BLDC3 NewDesignator=R227_3
+Change Component Designator: OldDesignator=R227_BLDC4 NewDesignator=R227_4
+Change Component Designator: OldDesignator=R228_BLDC1 NewDesignator=R228_1
+Change Component Designator: OldDesignator=R228_BLDC2 NewDesignator=R228_2
+Change Component Designator: OldDesignator=R228_BLDC3 NewDesignator=R228_3
+Change Component Designator: OldDesignator=R228_BLDC4 NewDesignator=R228_4
+Change Component Designator: OldDesignator=R229_BLDC1 NewDesignator=R229_1
+Change Component Designator: OldDesignator=R229_BLDC2 NewDesignator=R229_2
+Change Component Designator: OldDesignator=R229_BLDC3 NewDesignator=R229_3
+Change Component Designator: OldDesignator=R229_BLDC4 NewDesignator=R229_4
+Change Component Designator: OldDesignator=R230_BLDC1 NewDesignator=R230_1
+Change Component Designator: OldDesignator=R230_BLDC2 NewDesignator=R230_2
+Change Component Designator: OldDesignator=R230_BLDC3 NewDesignator=R230_3
+Change Component Designator: OldDesignator=R230_BLDC4 NewDesignator=R230_4
+Change Component Designator: OldDesignator=R231_BLDC1 NewDesignator=R231_1
+Change Component Designator: OldDesignator=R231_BLDC2 NewDesignator=R231_2
+Change Component Designator: OldDesignator=R231_BLDC3 NewDesignator=R231_3
+Change Component Designator: OldDesignator=R231_BLDC4 NewDesignator=R231_4
+Change Component Designator: OldDesignator=R232_BLDC1 NewDesignator=R232_1
+Change Component Designator: OldDesignator=R232_BLDC2 NewDesignator=R232_2
+Change Component Designator: OldDesignator=R232_BLDC3 NewDesignator=R232_3
+Change Component Designator: OldDesignator=R232_BLDC4 NewDesignator=R232_4
+Change Component Designator: OldDesignator=R233_BLDC1 NewDesignator=R233_1
+Change Component Designator: OldDesignator=R233_BLDC2 NewDesignator=R233_2
+Change Component Designator: OldDesignator=R233_BLDC3 NewDesignator=R233_3
+Change Component Designator: OldDesignator=R233_BLDC4 NewDesignator=R233_4
+Change Component Designator: OldDesignator=R234_BLDC1 NewDesignator=R234_1
+Change Component Designator: OldDesignator=R234_BLDC2 NewDesignator=R234_2
+Change Component Designator: OldDesignator=R234_BLDC3 NewDesignator=R234_3
+Change Component Designator: OldDesignator=R234_BLDC4 NewDesignator=R234_4
+Change Component Designator: OldDesignator=R235_BLDC1 NewDesignator=R235_1
+Change Component Designator: OldDesignator=R235_BLDC2 NewDesignator=R235_2
+Change Component Designator: OldDesignator=R235_BLDC3 NewDesignator=R235_3
+Change Component Designator: OldDesignator=R235_BLDC4 NewDesignator=R235_4
+Change Component Designator: OldDesignator=R236_BLDC1 NewDesignator=R236_1
+Change Component Designator: OldDesignator=R236_BLDC2 NewDesignator=R236_2
+Change Component Designator: OldDesignator=R236_BLDC3 NewDesignator=R236_3
+Change Component Designator: OldDesignator=R236_BLDC4 NewDesignator=R236_4
+Change Component Designator: OldDesignator=R237_BLDC1 NewDesignator=R237_1
+Change Component Designator: OldDesignator=R237_BLDC2 NewDesignator=R237_2
+Change Component Designator: OldDesignator=R237_BLDC3 NewDesignator=R237_3
+Change Component Designator: OldDesignator=R237_BLDC4 NewDesignator=R237_4
+Change Component Designator: OldDesignator=R238_BLDC1 NewDesignator=R238_1
+Change Component Designator: OldDesignator=R238_BLDC2 NewDesignator=R238_2
+Change Component Designator: OldDesignator=R238_BLDC3 NewDesignator=R238_3
+Change Component Designator: OldDesignator=R238_BLDC4 NewDesignator=R238_4
+Change Component Designator: OldDesignator=R239_BLDC1 NewDesignator=R239_1
+Change Component Designator: OldDesignator=R239_BLDC2 NewDesignator=R239_2
+Change Component Designator: OldDesignator=R239_BLDC3 NewDesignator=R239_3
+Change Component Designator: OldDesignator=R239_BLDC4 NewDesignator=R239_4
+Change Component Designator: OldDesignator=R240_BLDC1 NewDesignator=R240_1
+Change Component Designator: OldDesignator=R240_BLDC2 NewDesignator=R240_2
+Change Component Designator: OldDesignator=R240_BLDC3 NewDesignator=R240_3
+Change Component Designator: OldDesignator=R240_BLDC4 NewDesignator=R240_4
+Change Component Designator: OldDesignator=R241_BLDC1 NewDesignator=R241_1
+Change Component Designator: OldDesignator=R241_BLDC2 NewDesignator=R241_2
+Change Component Designator: OldDesignator=R241_BLDC3 NewDesignator=R241_3
+Change Component Designator: OldDesignator=R241_BLDC4 NewDesignator=R241_4
+Change Component Designator: OldDesignator=R242_BLDC1 NewDesignator=R242_1
+Change Component Designator: OldDesignator=R242_BLDC2 NewDesignator=R242_2
+Change Component Designator: OldDesignator=R242_BLDC3 NewDesignator=R242_3
+Change Component Designator: OldDesignator=R242_BLDC4 NewDesignator=R242_4
+Change Component Designator: OldDesignator=R243_BLDC1 NewDesignator=R243_1
+Change Component Designator: OldDesignator=R243_BLDC2 NewDesignator=R243_2
+Change Component Designator: OldDesignator=R243_BLDC3 NewDesignator=R243_3
+Change Component Designator: OldDesignator=R243_BLDC4 NewDesignator=R243_4
+Change Component Designator: OldDesignator=TP200_BLDC1 NewDesignator=TP200_1
+Change Component Designator: OldDesignator=TP200_BLDC2 NewDesignator=TP200_2
+Change Component Designator: OldDesignator=TP200_BLDC3 NewDesignator=TP200_3
+Change Component Designator: OldDesignator=TP200_BLDC4 NewDesignator=TP200_4
+Change Component Designator: OldDesignator=TP201_BLDC1 NewDesignator=TP201_1
+Change Component Designator: OldDesignator=TP201_BLDC2 NewDesignator=TP201_2
+Change Component Designator: OldDesignator=TP201_BLDC3 NewDesignator=TP201_3
+Change Component Designator: OldDesignator=TP201_BLDC4 NewDesignator=TP201_4
+Change Component Designator: OldDesignator=TP202_BLDC1 NewDesignator=TP202_1
+Change Component Designator: OldDesignator=TP202_BLDC2 NewDesignator=TP202_2
+Change Component Designator: OldDesignator=TP202_BLDC3 NewDesignator=TP202_3
+Change Component Designator: OldDesignator=TP202_BLDC4 NewDesignator=TP202_4
+Change Component Designator: OldDesignator=TP203_BLDC1 NewDesignator=TP203_1
+Change Component Designator: OldDesignator=TP203_BLDC2 NewDesignator=TP203_2
+Change Component Designator: OldDesignator=TP203_BLDC3 NewDesignator=TP203_3
+Change Component Designator: OldDesignator=TP203_BLDC4 NewDesignator=TP203_4
+Change Component Designator: OldDesignator=TP204_BLDC1 NewDesignator=TP204_1
+Change Component Designator: OldDesignator=TP204_BLDC2 NewDesignator=TP204_2
+Change Component Designator: OldDesignator=TP204_BLDC3 NewDesignator=TP204_3
+Change Component Designator: OldDesignator=TP204_BLDC4 NewDesignator=TP204_4
+Change Component Designator: OldDesignator=TP205_BLDC1 NewDesignator=TP205_1
+Change Component Designator: OldDesignator=TP205_BLDC2 NewDesignator=TP205_2
+Change Component Designator: OldDesignator=TP205_BLDC3 NewDesignator=TP205_3
+Change Component Designator: OldDesignator=TP205_BLDC4 NewDesignator=TP205_4
+Change Component Designator: OldDesignator=TP206_BLDC1 NewDesignator=TP206_1
+Change Component Designator: OldDesignator=TP206_BLDC2 NewDesignator=TP206_2
+Change Component Designator: OldDesignator=TP206_BLDC3 NewDesignator=TP206_3
+Change Component Designator: OldDesignator=TP206_BLDC4 NewDesignator=TP206_4
+Change Component Designator: OldDesignator=TP207_BLDC1 NewDesignator=TP207_1
+Change Component Designator: OldDesignator=TP207_BLDC2 NewDesignator=TP207_2
+Change Component Designator: OldDesignator=TP207_BLDC3 NewDesignator=TP207_3
+Change Component Designator: OldDesignator=TP207_BLDC4 NewDesignator=TP207_4
+Change Component Designator: OldDesignator=TP208_BLDC1 NewDesignator=TP208_1
+Change Component Designator: OldDesignator=TP208_BLDC2 NewDesignator=TP208_2
+Change Component Designator: OldDesignator=TP208_BLDC3 NewDesignator=TP208_3
+Change Component Designator: OldDesignator=TP208_BLDC4 NewDesignator=TP208_4
+Change Component Designator: OldDesignator=TP209_BLDC1 NewDesignator=TP209_1
+Change Component Designator: OldDesignator=TP209_BLDC2 NewDesignator=TP209_2
+Change Component Designator: OldDesignator=TP209_BLDC3 NewDesignator=TP209_3
+Change Component Designator: OldDesignator=TP209_BLDC4 NewDesignator=TP209_4
+Change Component Designator: OldDesignator=TP210_BLDC1 NewDesignator=TP210_1
+Change Component Designator: OldDesignator=TP210_BLDC2 NewDesignator=TP210_2
+Change Component Designator: OldDesignator=TP210_BLDC3 NewDesignator=TP210_3
+Change Component Designator: OldDesignator=TP210_BLDC4 NewDesignator=TP210_4
+Change Component Designator: OldDesignator=TP211_BLDC1 NewDesignator=TP211_1
+Change Component Designator: OldDesignator=TP211_BLDC2 NewDesignator=TP211_2
+Change Component Designator: OldDesignator=TP211_BLDC3 NewDesignator=TP211_3
+Change Component Designator: OldDesignator=TP211_BLDC4 NewDesignator=TP211_4
+Change Component Designator: OldDesignator=TP212_BLDC1 NewDesignator=TP212_1
+Change Component Designator: OldDesignator=TP212_BLDC2 NewDesignator=TP212_2
+Change Component Designator: OldDesignator=TP212_BLDC3 NewDesignator=TP212_3
+Change Component Designator: OldDesignator=TP212_BLDC4 NewDesignator=TP212_4
+Change Component Designator: OldDesignator=TP214_BLDC1 NewDesignator=TP214_1
+Change Component Designator: OldDesignator=TP214_BLDC2 NewDesignator=TP214_2
+Change Component Designator: OldDesignator=TP214_BLDC3 NewDesignator=TP214_3
+Change Component Designator: OldDesignator=TP214_BLDC4 NewDesignator=TP214_4
+Change Component Designator: OldDesignator=TP217_BLDC1 NewDesignator=TP217_1
+Change Component Designator: OldDesignator=TP217_BLDC2 NewDesignator=TP217_2
+Change Component Designator: OldDesignator=TP217_BLDC3 NewDesignator=TP217_3
+Change Component Designator: OldDesignator=TP217_BLDC4 NewDesignator=TP217_4
+Change Component Designator: OldDesignator=TP218_BLDC1 NewDesignator=TP218_1
+Change Component Designator: OldDesignator=TP218_BLDC2 NewDesignator=TP218_2
+Change Component Designator: OldDesignator=TP218_BLDC3 NewDesignator=TP218_3
+Change Component Designator: OldDesignator=TP218_BLDC4 NewDesignator=TP218_4
+Change Component Designator: OldDesignator=TP219_BLDC1 NewDesignator=TP219_1
+Change Component Designator: OldDesignator=TP219_BLDC2 NewDesignator=TP219_2
+Change Component Designator: OldDesignator=TP219_BLDC3 NewDesignator=TP219_3
+Change Component Designator: OldDesignator=TP219_BLDC4 NewDesignator=TP219_4
+Change Component Designator: OldDesignator=TP220_BLDC1 NewDesignator=TP220_1
+Change Component Designator: OldDesignator=TP220_BLDC2 NewDesignator=TP220_2
+Change Component Designator: OldDesignator=TP220_BLDC3 NewDesignator=TP220_3
+Change Component Designator: OldDesignator=TP220_BLDC4 NewDesignator=TP220_4
+Change Component Designator: OldDesignator=TP221_BLDC1 NewDesignator=TP221_1
+Change Component Designator: OldDesignator=TP221_BLDC2 NewDesignator=TP221_2
+Change Component Designator: OldDesignator=TP221_BLDC3 NewDesignator=TP221_3
+Change Component Designator: OldDesignator=TP221_BLDC4 NewDesignator=TP221_4
+Change Component Designator: OldDesignator=TP222_BLDC1 NewDesignator=TP222_1
+Change Component Designator: OldDesignator=TP222_BLDC2 NewDesignator=TP222_2
+Change Component Designator: OldDesignator=TP222_BLDC3 NewDesignator=TP222_3
+Change Component Designator: OldDesignator=TP222_BLDC4 NewDesignator=TP222_4
+Change Component Designator: OldDesignator=TP223_BLDC1 NewDesignator=TP223_1
+Change Component Designator: OldDesignator=TP223_BLDC2 NewDesignator=TP223_2
+Change Component Designator: OldDesignator=TP223_BLDC3 NewDesignator=TP223_3
+Change Component Designator: OldDesignator=TP223_BLDC4 NewDesignator=TP223_4
+Change Component Designator: OldDesignator=TP224_BLDC1 NewDesignator=TP224_1
+Change Component Designator: OldDesignator=TP224_BLDC2 NewDesignator=TP224_2
+Change Component Designator: OldDesignator=TP224_BLDC3 NewDesignator=TP224_3
+Change Component Designator: OldDesignator=TP224_BLDC4 NewDesignator=TP224_4
+Change Component Designator: OldDesignator=TP225_BLDC1 NewDesignator=TP225_1
+Change Component Designator: OldDesignator=TP225_BLDC2 NewDesignator=TP225_2
+Change Component Designator: OldDesignator=TP225_BLDC3 NewDesignator=TP225_3
+Change Component Designator: OldDesignator=TP225_BLDC4 NewDesignator=TP225_4
+Change Component Designator: OldDesignator=TP226_BLDC1 NewDesignator=TP226_1
+Change Component Designator: OldDesignator=TP226_BLDC2 NewDesignator=TP226_2
+Change Component Designator: OldDesignator=TP226_BLDC3 NewDesignator=TP226_3
+Change Component Designator: OldDesignator=TP226_BLDC4 NewDesignator=TP226_4
+Change Component Designator: OldDesignator=TP227_BLDC1 NewDesignator=TP227_1
+Change Component Designator: OldDesignator=TP227_BLDC2 NewDesignator=TP227_2
+Change Component Designator: OldDesignator=TP227_BLDC3 NewDesignator=TP227_3
+Change Component Designator: OldDesignator=TP227_BLDC4 NewDesignator=TP227_4
+Change Component Designator: OldDesignator=U200_BLDC1 NewDesignator=U200_1
+Change Component Designator: OldDesignator=U200_BLDC2 NewDesignator=U200_2
+Change Component Designator: OldDesignator=U200_BLDC3 NewDesignator=U200_3
+Change Component Designator: OldDesignator=U200_BLDC4 NewDesignator=U200_4
+Change Component Designator: OldDesignator=U201_BLDC1 NewDesignator=U201_1
+Change Component Designator: OldDesignator=U201_BLDC2 NewDesignator=U201_2
+Change Component Designator: OldDesignator=U201_BLDC3 NewDesignator=U201_3
+Change Component Designator: OldDesignator=U201_BLDC4 NewDesignator=U201_4
+Change Component Designator: OldDesignator=U202_BLDC1 NewDesignator=U202_1
+Change Component Designator: OldDesignator=U202_BLDC2 NewDesignator=U202_2
+Change Component Designator: OldDesignator=U202_BLDC3 NewDesignator=U202_3
+Change Component Designator: OldDesignator=U202_BLDC4 NewDesignator=U202_4
+Change Net Name : Old Net Name=BLUE_BLDC1 New Net Name=BLUE_1
+Change Net Name : Old Net Name=BLUE_BLDC2 New Net Name=BLUE_2
+Change Net Name : Old Net Name=BLUE_BLDC3 New Net Name=BLUE_3
+Change Net Name : Old Net Name=BLUE_BLDC4 New Net Name=BLUE_4
+Change Net Name : Old Net Name=BOOT_BLDC1 New Net Name=BOOT_1
+Change Net Name : Old Net Name=BOOT_BLDC2 New Net Name=BOOT_2
+Change Net Name : Old Net Name=BOOT_BLDC3 New Net Name=BOOT_3
+Change Net Name : Old Net Name=BOOT_BLDC4 New Net Name=BOOT_4
+Change Net Name : Old Net Name=BOOTLOADER_RX_BLDC1 New Net Name=BOOTLOADER_RX_1
+Change Net Name : Old Net Name=BOOTLOADER_RX_BLDC2 New Net Name=BOOTLOADER_RX_2
+Change Net Name : Old Net Name=BOOTLOADER_RX_BLDC3 New Net Name=BOOTLOADER_RX_3
+Change Net Name : Old Net Name=BOOTLOADER_RX_BLDC4 New Net Name=BOOTLOADER_RX_4
+Change Net Name : Old Net Name=BOOTLOADER_TX_BLDC1 New Net Name=BOOTLOADER_TX_1
+Change Net Name : Old Net Name=BOOTLOADER_TX_BLDC2 New Net Name=BOOTLOADER_TX_2
+Change Net Name : Old Net Name=BOOTLOADER_TX_BLDC3 New Net Name=BOOTLOADER_TX_3
+Change Net Name : Old Net Name=BOOTLOADER_TX_BLDC4 New Net Name=BOOTLOADER_TX_4
+Change Net Name : Old Net Name=BOOTSEL_BLDC1 New Net Name=BOOTSEL_1
+Change Net Name : Old Net Name=BOOTSEL_BLDC2 New Net Name=BOOTSEL_2
+Change Net Name : Old Net Name=BOOTSEL_BLDC3 New Net Name=BOOTSEL_3
+Change Net Name : Old Net Name=BOOTSEL_BLDC4 New Net Name=BOOTSEL_4
+Change Net Name : Old Net Name=BT_RES_NEN_BLDC1 New Net Name=BT_RES_NEN_1
+Change Net Name : Old Net Name=BT_RES_NEN_BLDC2 New Net Name=BT_RES_NEN_2
+Change Net Name : Old Net Name=BT_RES_NEN_BLDC3 New Net Name=BT_RES_NEN_3
+Change Net Name : Old Net Name=BT_RES_NEN_BLDC4 New Net Name=BT_RES_NEN_4
+Change Net Name : Old Net Name=CSENSE_BLDC1 New Net Name=CSENSE_1
+Change Net Name : Old Net Name=CSENSE_BLDC2 New Net Name=CSENSE_2
+Change Net Name : Old Net Name=CSENSE_BLDC3 New Net Name=CSENSE_3
+Change Net Name : Old Net Name=CSENSE_BLDC4 New Net Name=CSENSE_4
+Change Net Name : Old Net Name=CURRENT_BLDC1 New Net Name=CURRENT_1
+Change Net Name : Old Net Name=CURRENT_BLDC2 New Net Name=CURRENT_2
+Change Net Name : Old Net Name=CURRENT_BLDC3 New Net Name=CURRENT_3
+Change Net Name : Old Net Name=CURRENT_BLDC4 New Net Name=CURRENT_4
+Change Net Name : Old Net Name=G1_BLDC1 New Net Name=G1_1
+Change Net Name : Old Net Name=G1_BLDC2 New Net Name=G1_2
+Change Net Name : Old Net Name=G1_BLDC3 New Net Name=G1_3
+Change Net Name : Old Net Name=G1_BLDC4 New Net Name=G1_4
+Change Net Name : Old Net Name=G2_BLDC1 New Net Name=G2_1
+Change Net Name : Old Net Name=G2_BLDC2 New Net Name=G2_2
+Change Net Name : Old Net Name=G2_BLDC3 New Net Name=G2_3
+Change Net Name : Old Net Name=G2_BLDC4 New Net Name=G2_4
+Change Net Name : Old Net Name=G3_BLDC1 New Net Name=G3_1
+Change Net Name : Old Net Name=G3_BLDC2 New Net Name=G3_2
+Change Net Name : Old Net Name=G3_BLDC3 New Net Name=G3_3
+Change Net Name : Old Net Name=G3_BLDC4 New Net Name=G3_4
+Change Net Name : Old Net Name=G4_BLDC1 New Net Name=G4_1
+Change Net Name : Old Net Name=G4_BLDC2 New Net Name=G4_2
+Change Net Name : Old Net Name=G4_BLDC3 New Net Name=G4_3
+Change Net Name : Old Net Name=G4_BLDC4 New Net Name=G4_4
+Change Net Name : Old Net Name=G5_BLDC1 New Net Name=G5_1
+Change Net Name : Old Net Name=G5_BLDC2 New Net Name=G5_2
+Change Net Name : Old Net Name=G5_BLDC3 New Net Name=G5_3
+Change Net Name : Old Net Name=G5_BLDC4 New Net Name=G5_4
+Change Net Name : Old Net Name=G6_BLDC1 New Net Name=G6_1
+Change Net Name : Old Net Name=G6_BLDC2 New Net Name=G6_2
+Change Net Name : Old Net Name=G6_BLDC3 New Net Name=G6_3
+Change Net Name : Old Net Name=G6_BLDC4 New Net Name=G6_4
+Change Net Name : Old Net Name=GREEN_BLDC1 New Net Name=GREEN_1
+Change Net Name : Old Net Name=GREEN_BLDC2 New Net Name=GREEN_2
+Change Net Name : Old Net Name=GREEN_BLDC3 New Net Name=GREEN_3
+Change Net Name : Old Net Name=GREEN_BLDC4 New Net Name=GREEN_4
+Change Net Name : Old Net Name=HSU_BLDC1 New Net Name=HSU_1
+Change Net Name : Old Net Name=HSU_BLDC2 New Net Name=HSU_2
+Change Net Name : Old Net Name=HSU_BLDC3 New Net Name=HSU_3
+Change Net Name : Old Net Name=HSU_BLDC4 New Net Name=HSU_4
+Change Net Name : Old Net Name=HSV_BLDC1 New Net Name=HSV_1
+Change Net Name : Old Net Name=HSV_BLDC2 New Net Name=HSV_2
+Change Net Name : Old Net Name=HSV_BLDC3 New Net Name=HSV_3
+Change Net Name : Old Net Name=HSV_BLDC4 New Net Name=HSV_4
+Change Net Name : Old Net Name=HSW_BLDC1 New Net Name=HSW_1
+Change Net Name : Old Net Name=HSW_BLDC2 New Net Name=HSW_2
+Change Net Name : Old Net Name=HSW_BLDC3 New Net Name=HSW_3
+Change Net Name : Old Net Name=HSW_BLDC4 New Net Name=HSW_4
+Change Net Name : Old Net Name=LSU_BLDC1 New Net Name=LSU_1
+Change Net Name : Old Net Name=LSU_BLDC2 New Net Name=LSU_2
+Change Net Name : Old Net Name=LSU_BLDC3 New Net Name=LSU_3
+Change Net Name : Old Net Name=LSU_BLDC4 New Net Name=LSU_4
+Change Net Name : Old Net Name=LSV_BLDC1 New Net Name=LSV_1
+Change Net Name : Old Net Name=LSV_BLDC2 New Net Name=LSV_2
+Change Net Name : Old Net Name=LSV_BLDC3 New Net Name=LSV_3
+Change Net Name : Old Net Name=LSV_BLDC4 New Net Name=LSV_4
+Change Net Name : Old Net Name=LSW_BLDC1 New Net Name=LSW_1
+Change Net Name : Old Net Name=LSW_BLDC2 New Net Name=LSW_2
+Change Net Name : Old Net Name=LSW_BLDC3 New Net Name=LSW_3
+Change Net Name : Old Net Name=LSW_BLDC4 New Net Name=LSW_4
+Change Net Name : Old Net Name=NetC208_BLDC1_1 New Net Name=NetC208_1_1
+Change Net Name : Old Net Name=NetC208_BLDC2_1 New Net Name=NetC208_2_1
+Change Net Name : Old Net Name=NetC208_BLDC3_1 New Net Name=NetC208_3_1
+Change Net Name : Old Net Name=NetC208_BLDC4_1 New Net Name=NetC208_4_1
+Change Net Name : Old Net Name=NetC214_BLDC1_1 New Net Name=NetC214_1_1
+Change Net Name : Old Net Name=NetC214_BLDC2_1 New Net Name=NetC214_2_1
+Change Net Name : Old Net Name=NetC214_BLDC3_1 New Net Name=NetC214_3_1
+Change Net Name : Old Net Name=NetC214_BLDC4_1 New Net Name=NetC214_4_1
+Change Net Name : Old Net Name=NetC216_BLDC1_1 New Net Name=NetC216_1_1
+Change Net Name : Old Net Name=NetC216_BLDC2_1 New Net Name=NetC216_2_1
+Change Net Name : Old Net Name=NetC216_BLDC3_1 New Net Name=NetC216_3_1
+Change Net Name : Old Net Name=NetC216_BLDC4_1 New Net Name=NetC216_4_1
+Change Net Name : Old Net Name=NetC220_BLDC1_1 New Net Name=NetC220_1_1
+Change Net Name : Old Net Name=NetC220_BLDC2_1 New Net Name=NetC220_2_1
+Change Net Name : Old Net Name=NetC220_BLDC3_1 New Net Name=NetC220_3_1
+Change Net Name : Old Net Name=NetC220_BLDC4_1 New Net Name=NetC220_4_1
+Change Net Name : Old Net Name=NetC221_BLDC1_1 New Net Name=NetC221_1_1
+Change Net Name : Old Net Name=NetC221_BLDC2_1 New Net Name=NetC221_2_1
+Change Net Name : Old Net Name=NetC221_BLDC3_1 New Net Name=NetC221_3_1
+Change Net Name : Old Net Name=NetC221_BLDC4_1 New Net Name=NetC221_4_1
+Change Net Name : Old Net Name=NetD200_BLDC1_A New Net Name=NetD200_1_A
+Change Net Name : Old Net Name=NetD200_BLDC2_A New Net Name=NetD200_2_A
+Change Net Name : Old Net Name=NetD200_BLDC3_A New Net Name=NetD200_3_A
+Change Net Name : Old Net Name=NetD200_BLDC4_A New Net Name=NetD200_4_A
+Change Net Name : Old Net Name=NetD201_BLDC1_K New Net Name=NetD201_1_K
+Change Net Name : Old Net Name=NetD201_BLDC2_K New Net Name=NetD201_2_K
+Change Net Name : Old Net Name=NetD201_BLDC3_K New Net Name=NetD201_3_K
+Change Net Name : Old Net Name=NetD201_BLDC4_K New Net Name=NetD201_4_K
+Change Net Name : Old Net Name=NetD202_BLDC1_K New Net Name=NetD202_1_K
+Change Net Name : Old Net Name=NetD202_BLDC2_K New Net Name=NetD202_2_K
+Change Net Name : Old Net Name=NetD202_BLDC3_K New Net Name=NetD202_3_K
+Change Net Name : Old Net Name=NetD202_BLDC4_K New Net Name=NetD202_4_K
+Change Net Name : Old Net Name=NetD206_BLDC1_K New Net Name=NetD206_1_K
+Change Net Name : Old Net Name=NetD206_BLDC2_K New Net Name=NetD206_2_K
+Change Net Name : Old Net Name=NetD206_BLDC3_K New Net Name=NetD206_3_K
+Change Net Name : Old Net Name=NetD206_BLDC4_K New Net Name=NetD206_4_K
+Change Net Name : Old Net Name=NetD207_BLDC1_2 New Net Name=NetD207_1_2
+Change Net Name : Old Net Name=NetD207_BLDC1_3 New Net Name=NetD207_1_3
+Change Net Name : Old Net Name=NetD207_BLDC1_4 New Net Name=NetD207_1_4
+Change Net Name : Old Net Name=NetD207_BLDC2_2 New Net Name=NetD207_2_2
+Change Net Name : Old Net Name=NetD207_BLDC2_3 New Net Name=NetD207_2_3
+Change Net Name : Old Net Name=NetD207_BLDC2_4 New Net Name=NetD207_2_4
+Change Net Name : Old Net Name=NetD207_BLDC3_2 New Net Name=NetD207_3_2
+Change Net Name : Old Net Name=NetD207_BLDC3_3 New Net Name=NetD207_3_3
+Change Net Name : Old Net Name=NetD207_BLDC3_4 New Net Name=NetD207_3_4
+Change Net Name : Old Net Name=NetD207_BLDC4_2 New Net Name=NetD207_4_2
+Change Net Name : Old Net Name=NetD207_BLDC4_3 New Net Name=NetD207_4_3
+Change Net Name : Old Net Name=NetD207_BLDC4_4 New Net Name=NetD207_4_4
+Change Net Name : Old Net Name=NetQ204_BLDC1_1 New Net Name=NetQ204_1_1
+Change Net Name : Old Net Name=NetQ204_BLDC2_1 New Net Name=NetQ204_2_1
+Change Net Name : Old Net Name=NetQ204_BLDC3_1 New Net Name=NetQ204_3_1
+Change Net Name : Old Net Name=NetQ204_BLDC4_1 New Net Name=NetQ204_4_1
+Change Net Name : Old Net Name=NetR217_BLDC1_2 New Net Name=NetR217_1_2
+Change Net Name : Old Net Name=NetR217_BLDC2_2 New Net Name=NetR217_2_2
+Change Net Name : Old Net Name=NetR217_BLDC3_2 New Net Name=NetR217_3_2
+Change Net Name : Old Net Name=NetR217_BLDC4_2 New Net Name=NetR217_4_2
+Change Net Name : Old Net Name=NetR220_BLDC1_2 New Net Name=NetR220_1_2
+Change Net Name : Old Net Name=NetR220_BLDC2_2 New Net Name=NetR220_2_2
+Change Net Name : Old Net Name=NetR220_BLDC3_2 New Net Name=NetR220_3_2
+Change Net Name : Old Net Name=NetR220_BLDC4_2 New Net Name=NetR220_4_2
+Change Net Name : Old Net Name=NetR222_BLDC1_2 New Net Name=NetR222_1_2
+Change Net Name : Old Net Name=NetR222_BLDC2_2 New Net Name=NetR222_2_2
+Change Net Name : Old Net Name=NetR222_BLDC3_2 New Net Name=NetR222_3_2
+Change Net Name : Old Net Name=NetR222_BLDC4_2 New Net Name=NetR222_4_2
+Change Net Name : Old Net Name=NetR223_BLDC1_2 New Net Name=NetR223_1_2
+Change Net Name : Old Net Name=NetR223_BLDC2_2 New Net Name=NetR223_2_2
+Change Net Name : Old Net Name=NetR223_BLDC3_2 New Net Name=NetR223_3_2
+Change Net Name : Old Net Name=NetR223_BLDC4_2 New Net Name=NetR223_4_2
+Change Net Name : Old Net Name=NetR224_BLDC1_1 New Net Name=NetR224_1_1
+Change Net Name : Old Net Name=NetR224_BLDC2_1 New Net Name=NetR224_2_1
+Change Net Name : Old Net Name=NetR224_BLDC3_1 New Net Name=NetR224_3_1
+Change Net Name : Old Net Name=NetR224_BLDC4_1 New Net Name=NetR224_4_1
+Change Net Name : Old Net Name=NetR226_BLDC1_1 New Net Name=NetR226_1_1
+Change Net Name : Old Net Name=NetR226_BLDC2_1 New Net Name=NetR226_2_1
+Change Net Name : Old Net Name=NetR226_BLDC3_1 New Net Name=NetR226_3_1
+Change Net Name : Old Net Name=NetR226_BLDC4_1 New Net Name=NetR226_4_1
+Change Net Name : Old Net Name=NetR234_BLDC1_1 New Net Name=NetR234_1_1
+Change Net Name : Old Net Name=NetR234_BLDC2_1 New Net Name=NetR234_2_1
+Change Net Name : Old Net Name=NetR234_BLDC3_1 New Net Name=NetR234_3_1
+Change Net Name : Old Net Name=NetR234_BLDC4_1 New Net Name=NetR234_4_1
+Change Net Name : Old Net Name=NetTP224_BLDC1_1 New Net Name=NetTP224_1_1
+Change Net Name : Old Net Name=NetTP224_BLDC2_1 New Net Name=NetTP224_2_1
+Change Net Name : Old Net Name=NetTP224_BLDC3_1 New Net Name=NetTP224_3_1
+Change Net Name : Old Net Name=NetTP224_BLDC4_1 New Net Name=NetTP224_4_1
+Change Net Name : Old Net Name=NetTP225_BLDC1_1 New Net Name=NetTP225_1_1
+Change Net Name : Old Net Name=NetTP225_BLDC2_1 New Net Name=NetTP225_2_1
+Change Net Name : Old Net Name=NetTP225_BLDC3_1 New Net Name=NetTP225_3_1
+Change Net Name : Old Net Name=NetTP225_BLDC4_1 New Net Name=NetTP225_4_1
+Change Net Name : Old Net Name=nRESET_BLDC1 New Net Name=nRESET_1
+Change Net Name : Old Net Name=nRESET_BLDC2 New Net Name=nRESET_2
+Change Net Name : Old Net Name=nRESET_BLDC3 New Net Name=nRESET_3
+Change Net Name : Old Net Name=nRESET_BLDC4 New Net Name=nRESET_4
+Change Net Name : Old Net Name=OCCOMP_BLDC1 New Net Name=OCCOMP_1
+Change Net Name : Old Net Name=OCCOMP_BLDC2 New Net Name=OCCOMP_2
+Change Net Name : Old Net Name=OCCOMP_BLDC3 New Net Name=OCCOMP_3
+Change Net Name : Old Net Name=OCCOMP_BLDC4 New Net Name=OCCOMP_4
+Change Net Name : Old Net Name=OP1N_BLDC1 New Net Name=OP1N_1
+Change Net Name : Old Net Name=OP1N_BLDC2 New Net Name=OP1N_2
+Change Net Name : Old Net Name=OP1N_BLDC3 New Net Name=OP1N_3
+Change Net Name : Old Net Name=OP1N_BLDC4 New Net Name=OP1N_4
+Change Net Name : Old Net Name=OP1O_BLDC1 New Net Name=OP1O_1
+Change Net Name : Old Net Name=OP1O_BLDC2 New Net Name=OP1O_2
+Change Net Name : Old Net Name=OP1O_BLDC3 New Net Name=OP1O_3
+Change Net Name : Old Net Name=OP1O_BLDC4 New Net Name=OP1O_4
+Change Net Name : Old Net Name=OP1P_BLDC1 New Net Name=OP1P_1
+Change Net Name : Old Net Name=OP1P_BLDC2 New Net Name=OP1P_2
+Change Net Name : Old Net Name=OP1P_BLDC3 New Net Name=OP1P_3
+Change Net Name : Old Net Name=OP1P_BLDC4 New Net Name=OP1P_4
+Change Net Name : Old Net Name=OP2N_BLDC1 New Net Name=OP2N_1
+Change Net Name : Old Net Name=OP2N_BLDC2 New Net Name=OP2N_2
+Change Net Name : Old Net Name=OP2N_BLDC3 New Net Name=OP2N_3
+Change Net Name : Old Net Name=OP2N_BLDC4 New Net Name=OP2N_4
+Change Net Name : Old Net Name=OP2O_BLDC1 New Net Name=OP2O_1
+Change Net Name : Old Net Name=OP2O_BLDC2 New Net Name=OP2O_2
+Change Net Name : Old Net Name=OP2O_BLDC3 New Net Name=OP2O_3
+Change Net Name : Old Net Name=OP2O_BLDC4 New Net Name=OP2O_4
+Change Net Name : Old Net Name=OP3N_BLDC1 New Net Name=OP3N_1
+Change Net Name : Old Net Name=OP3N_BLDC2 New Net Name=OP3N_2
+Change Net Name : Old Net Name=OP3N_BLDC3 New Net Name=OP3N_3
+Change Net Name : Old Net Name=OP3N_BLDC4 New Net Name=OP3N_4
+Change Net Name : Old Net Name=OP3O_BLDC1 New Net Name=OP3O_1
+Change Net Name : Old Net Name=OP3O_BLDC2 New Net Name=OP3O_2
+Change Net Name : Old Net Name=OP3O_BLDC3 New Net Name=OP3O_3
+Change Net Name : Old Net Name=OP3O_BLDC4 New Net Name=OP3O_4
+Change Net Name : Old Net Name=OUTU_BLDC1 New Net Name=OUTU_1
+Change Net Name : Old Net Name=OUTU_BLDC2 New Net Name=OUTU_2
+Change Net Name : Old Net Name=OUTU_BLDC3 New Net Name=OUTU_3
+Change Net Name : Old Net Name=OUTU_BLDC4 New Net Name=OUTU_4
+Change Net Name : Old Net Name=OUTV_BLDC1 New Net Name=OUTV_1
+Change Net Name : Old Net Name=OUTV_BLDC2 New Net Name=OUTV_2
+Change Net Name : Old Net Name=OUTV_BLDC3 New Net Name=OUTV_3
+Change Net Name : Old Net Name=OUTV_BLDC4 New Net Name=OUTV_4
+Change Net Name : Old Net Name=OUTW_BLDC1 New Net Name=OUTW_1
+Change Net Name : Old Net Name=OUTW_BLDC2 New Net Name=OUTW_2
+Change Net Name : Old Net Name=OUTW_BLDC3 New Net Name=OUTW_3
+Change Net Name : Old Net Name=OUTW_BLDC4 New Net Name=OUTW_4
+Change Net Name : Old Net Name=PWM_BLDC1 New Net Name=PWM_1
+Change Net Name : Old Net Name=PWM_BLDC2 New Net Name=PWM_2
+Change Net Name : Old Net Name=PWM_BLDC3 New Net Name=PWM_3
+Change Net Name : Old Net Name=PWM_BLDC4 New Net Name=PWM_4
+Change Net Name : Old Net Name=RED_BLDC1 New Net Name=RED_1
+Change Net Name : Old Net Name=RED_BLDC2 New Net Name=RED_2
+Change Net Name : Old Net Name=RED_BLDC3 New Net Name=RED_3
+Change Net Name : Old Net Name=RED_BLDC4 New Net Name=RED_4
+Change Net Name : Old Net Name=SWDCLK_BLDC1 New Net Name=SWDCLK_1
+Change Net Name : Old Net Name=SWDCLK_BLDC2 New Net Name=SWDCLK_2
+Change Net Name : Old Net Name=SWDCLK_BLDC3 New Net Name=SWDCLK_3
+Change Net Name : Old Net Name=SWDCLK_BLDC4 New Net Name=SWDCLK_4
+Change Net Name : Old Net Name=SWDIO_BLDC1 New Net Name=SWDIO_1
+Change Net Name : Old Net Name=SWDIO_BLDC2 New Net Name=SWDIO_2
+Change Net Name : Old Net Name=SWDIO_BLDC3 New Net Name=SWDIO_3
+Change Net Name : Old Net Name=SWDIO_BLDC4 New Net Name=SWDIO_4
+Change Net Name : Old Net Name=VBAT_BUS_FB_BLDC1 New Net Name=VBAT_BUS_FB_1
+Change Net Name : Old Net Name=VBAT_BUS_FB_BLDC2 New Net Name=VBAT_BUS_FB_2
+Change Net Name : Old Net Name=VBAT_BUS_FB_BLDC3 New Net Name=VBAT_BUS_FB_3
+Change Net Name : Old Net Name=VBAT_BUS_FB_BLDC4 New Net Name=VBAT_BUS_FB_4
+Change Net Name : Old Net Name=VDD_STPIN_BLDC1 New Net Name=VDD_STPIN_1
+Change Net Name : Old Net Name=VDD_STPIN_BLDC2 New Net Name=VDD_STPIN_2
+Change Net Name : Old Net Name=VDD_STPIN_BLDC3 New Net Name=VDD_STPIN_3
+Change Net Name : Old Net Name=VDD_STPIN_BLDC4 New Net Name=VDD_STPIN_4
+Change Net Name : Old Net Name=VM_BLDC1 New Net Name=VM_1
+Change Net Name : Old Net Name=VM_BLDC2 New Net Name=VM_2
+Change Net Name : Old Net Name=VM_BLDC3 New Net Name=VM_3
+Change Net Name : Old Net Name=VM_BLDC4 New Net Name=VM_4
+Change Net Name : Old Net Name=VREG_BLDC1 New Net Name=VREG_1
+Change Net Name : Old Net Name=VREG_BLDC2 New Net Name=VREG_2
+Change Net Name : Old Net Name=VREG_BLDC3 New Net Name=VREG_3
+Change Net Name : Old Net Name=VREG_BLDC4 New Net Name=VREG_4
+Change Net Name : Old Net Name=XTRA_COMM_A_BLDC1 New Net Name=XTRA_COMM_A_1
+Change Net Name : Old Net Name=XTRA_COMM_A_BLDC2 New Net Name=XTRA_COMM_A_2
+Change Net Name : Old Net Name=XTRA_COMM_A_BLDC3 New Net Name=XTRA_COMM_A_3
+Change Net Name : Old Net Name=XTRA_COMM_A_BLDC4 New Net Name=XTRA_COMM_A_4
+Change Net Name : Old Net Name=XTRA_COMM_B_BLDC1 New Net Name=XTRA_COMM_B_1
+Change Net Name : Old Net Name=XTRA_COMM_B_BLDC2 New Net Name=XTRA_COMM_B_2
+Change Net Name : Old Net Name=XTRA_COMM_B_BLDC3 New Net Name=XTRA_COMM_B_3
+Change Net Name : Old Net Name=XTRA_COMM_B_BLDC4 New Net Name=XTRA_COMM_B_4
+Change Net Name : Old Net Name=ZCU_BLDC1 New Net Name=ZCU_1
+Change Net Name : Old Net Name=ZCU_BLDC2 New Net Name=ZCU_2
+Change Net Name : Old Net Name=ZCU_BLDC3 New Net Name=ZCU_3
+Change Net Name : Old Net Name=ZCU_BLDC4 New Net Name=ZCU_4
+Change Net Name : Old Net Name=ZCV_BLDC1 New Net Name=ZCV_1
+Change Net Name : Old Net Name=ZCV_BLDC2 New Net Name=ZCV_2
+Change Net Name : Old Net Name=ZCV_BLDC3 New Net Name=ZCV_3
+Change Net Name : Old Net Name=ZCV_BLDC4 New Net Name=ZCV_4
+Change Net Name : Old Net Name=ZCW_BLDC1 New Net Name=ZCW_1
+Change Net Name : Old Net Name=ZCW_BLDC2 New Net Name=ZCW_2
+Change Net Name : Old Net Name=ZCW_BLDC3 New Net Name=ZCW_3
+Change Net Name : Old Net Name=ZCW_BLDC4 New Net Name=ZCW_4

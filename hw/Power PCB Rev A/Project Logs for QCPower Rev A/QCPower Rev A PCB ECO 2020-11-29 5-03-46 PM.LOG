@@ -1,0 +1,80 @@
+Removed Pin From Net: NetName=VM_1 Pin=TP202_1-1
+Removed Pin From Net: NetName=VM_2 Pin=TP202_2-1
+Removed Pin From Net: NetName=VM_3 Pin=TP202_3-1
+Removed Pin From Net: NetName=VM_4 Pin=TP202_4-1
+Removed Pin From Net: NetName=VDD_STPIN_1 Pin=TP203_1-1
+Removed Pin From Net: NetName=VDD_STPIN_2 Pin=TP203_2-1
+Removed Pin From Net: NetName=VDD_STPIN_3 Pin=TP203_3-1
+Removed Pin From Net: NetName=VDD_STPIN_4 Pin=TP203_4-1
+Change Component Footprint: Designator=TP202_1 Old Footprint=TESTPOINT TH New Footprint=TESTPOINT 0.5mm DIA
+Change Component Footprint: Designator=TP202_2 Old Footprint=TESTPOINT TH New Footprint=TESTPOINT 0.5mm DIA
+Change Component Footprint: Designator=TP202_3 Old Footprint=TESTPOINT TH New Footprint=TESTPOINT 0.5mm DIA
+Change Component Footprint: Designator=TP202_4 Old Footprint=TESTPOINT TH New Footprint=TESTPOINT 0.5mm DIA
+Change Component Footprint: Designator=TP203_1 Old Footprint=TESTPOINT TH New Footprint=TESTPOINT 0.5mm DIA
+Change Component Footprint: Designator=TP203_2 Old Footprint=TESTPOINT TH New Footprint=TESTPOINT 0.5mm DIA
+Change Component Footprint: Designator=TP203_3 Old Footprint=TESTPOINT TH New Footprint=TESTPOINT 0.5mm DIA
+Change Component Footprint: Designator=TP203_4 Old Footprint=TESTPOINT TH New Footprint=TESTPOINT 0.5mm DIA
+Change Component Comment : Designator=TP202_1 Old Comment=TESTPOINT TH New Comment=TESTPOINT SMD
+Change Component Comment : Designator=TP202_2 Old Comment=TESTPOINT TH New Comment=TESTPOINT SMD
+Change Component Comment : Designator=TP202_3 Old Comment=TESTPOINT TH New Comment=TESTPOINT SMD
+Change Component Comment : Designator=TP202_4 Old Comment=TESTPOINT TH New Comment=TESTPOINT SMD
+Change Component Comment : Designator=TP203_1 Old Comment=TESTPOINT TH New Comment=TESTPOINT SMD
+Change Component Comment : Designator=TP203_2 Old Comment=TESTPOINT TH New Comment=TESTPOINT SMD
+Change Component Comment : Designator=TP203_3 Old Comment=TESTPOINT TH New Comment=TESTPOINT SMD
+Change Component Comment : Designator=TP203_4 Old Comment=TESTPOINT TH New Comment=TESTPOINT SMD
+Change Component Kind : Designator=TP203_4 Old Kind=Standard New Kind=Standard (No BOM)
+Change Component Kind : Designator=TP203_3 Old Kind=Standard New Kind=Standard (No BOM)
+Change Component Kind : Designator=TP203_2 Old Kind=Standard New Kind=Standard (No BOM)
+Change Component Kind : Designator=TP203_1 Old Kind=Standard New Kind=Standard (No BOM)
+Change Component Kind : Designator=TP202_4 Old Kind=Standard New Kind=Standard (No BOM)
+Change Component Kind : Designator=TP202_3 Old Kind=Standard New Kind=Standard (No BOM)
+Change Component Kind : Designator=TP202_2 Old Kind=Standard New Kind=Standard (No BOM)
+Change Component Kind : Designator=TP202_1 Old Kind=Standard New Kind=Standard (No BOM)
+Change component parameters: Designator = "TP202_1"; Footprint = "TESTPOINT 0.5mm DIA"; UniqueID = "\1POMUXKQW\HUUPKNGE"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "1. Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "2. Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "3. Date Modified"; Value = ""; VariantName = "[No Variations]"
+Change component parameters: Designator = "TP202_2"; Footprint = "TESTPOINT 0.5mm DIA"; UniqueID = "\2POMUXKQW\HUUPKNGE"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "1. Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "2. Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "3. Date Modified"; Value = ""; VariantName = "[No Variations]"
+Change component parameters: Designator = "TP202_3"; Footprint = "TESTPOINT 0.5mm DIA"; UniqueID = "\3POMUXKQW\HUUPKNGE"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "1. Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "2. Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "3. Date Modified"; Value = ""; VariantName = "[No Variations]"
+Change component parameters: Designator = "TP202_4"; Footprint = "TESTPOINT 0.5mm DIA"; UniqueID = "\4POMUXKQW\HUUPKNGE"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "1. Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "2. Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "3. Date Modified"; Value = ""; VariantName = "[No Variations]"
+Change component parameters: Designator = "TP203_1"; Footprint = "TESTPOINT 0.5mm DIA"; UniqueID = "\1POMUXKQW\GUWSGJXC"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "1. Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "2. Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "3. Date Modified"; Value = ""; VariantName = "[No Variations]"
+Change component parameters: Designator = "TP203_2"; Footprint = "TESTPOINT 0.5mm DIA"; UniqueID = "\2POMUXKQW\GUWSGJXC"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "1. Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "2. Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "3. Date Modified"; Value = ""; VariantName = "[No Variations]"
+Change component parameters: Designator = "TP203_3"; Footprint = "TESTPOINT 0.5mm DIA"; UniqueID = "\3POMUXKQW\GUWSGJXC"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "1. Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "2. Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "3. Date Modified"; Value = ""; VariantName = "[No Variations]"
+Change component parameters: Designator = "TP203_4"; Footprint = "TESTPOINT 0.5mm DIA"; UniqueID = "\4POMUXKQW\GUWSGJXC"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "1. Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "2. Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "3. Date Modified"; Value = ""; VariantName = "[No Variations]"
+Added Pin To Net: NetName=VDD_STPIN_1 Pin=TP202_1-1
+Added Pin To Net: NetName=VDD_STPIN_2 Pin=TP202_2-1
+Added Pin To Net: NetName=VDD_STPIN_3 Pin=TP202_3-1
+Added Pin To Net: NetName=VDD_STPIN_4 Pin=TP202_4-1
+Added Pin To Net: NetName=VM_1 Pin=TP203_1-1
+Added Pin To Net: NetName=VM_2 Pin=TP203_2-1
+Added Pin To Net: NetName=VM_3 Pin=TP203_3-1
+Added Pin To Net: NetName=VM_4 Pin=TP203_4-1

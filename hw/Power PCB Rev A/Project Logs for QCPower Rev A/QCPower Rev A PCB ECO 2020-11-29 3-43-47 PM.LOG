@@ -1,0 +1,144 @@
+Removed Pin From Net: NetName=OP2O_BLDC1 Pin=U201_BLDC1-4
+Removed Pin From Net: NetName=OP3O_BLDC1 Pin=U201_BLDC1-5
+Removed Pin From Net: NetName=OP1O_BLDC1 Pin=U201_BLDC1-19
+Removed Pin From Net: NetName=OP2O_BLDC2 Pin=U201_BLDC2-4
+Removed Pin From Net: NetName=OP3O_BLDC2 Pin=U201_BLDC2-5
+Removed Pin From Net: NetName=OP1O_BLDC2 Pin=U201_BLDC2-19
+Removed Pin From Net: NetName=OP2O_BLDC3 Pin=U201_BLDC3-4
+Removed Pin From Net: NetName=OP3O_BLDC3 Pin=U201_BLDC3-5
+Removed Pin From Net: NetName=OP1O_BLDC3 Pin=U201_BLDC3-19
+Removed Pin From Net: NetName=OP2O_BLDC4 Pin=U201_BLDC4-4
+Removed Pin From Net: NetName=OP3O_BLDC4 Pin=U201_BLDC4-5
+Removed Pin From Net: NetName=OP1O_BLDC4 Pin=U201_BLDC4-19
+Added Component: Designator=R241_BLDC1(SMD RES 0402)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = "Yageo"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = "RC0402FR-070RL"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = "20201122"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "4. Package"; Value = "0402"; VariantName = "[No Variations]"
+Added Component: Designator=R241_BLDC2(SMD RES 0402)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = "Yageo"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = "RC0402FR-070RL"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = "20201122"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "4. Package"; Value = "0402"; VariantName = "[No Variations]"
+Added Component: Designator=R241_BLDC3(SMD RES 0402)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = "Yageo"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = "RC0402FR-070RL"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = "20201122"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "4. Package"; Value = "0402"; VariantName = "[No Variations]"
+Added Component: Designator=R241_BLDC4(SMD RES 0402)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = "Yageo"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = "RC0402FR-070RL"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = "20201122"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "4. Package"; Value = "0402"; VariantName = "[No Variations]"
+Added Component: Designator=R242_BLDC1(SMD RES 0402)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = "Yageo"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = "RC0402FR-070RL"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = "20201122"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "4. Package"; Value = "0402"; VariantName = "[No Variations]"
+Added Component: Designator=R242_BLDC2(SMD RES 0402)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = "Yageo"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = "RC0402FR-070RL"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = "20201122"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "4. Package"; Value = "0402"; VariantName = "[No Variations]"
+Added Component: Designator=R242_BLDC3(SMD RES 0402)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = "Yageo"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = "RC0402FR-070RL"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = "20201122"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "4. Package"; Value = "0402"; VariantName = "[No Variations]"
+Added Component: Designator=R242_BLDC4(SMD RES 0402)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = "Yageo"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = "RC0402FR-070RL"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = "20201122"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "4. Package"; Value = "0402"; VariantName = "[No Variations]"
+Added Component: Designator=R243_BLDC1(SMD RES 0402)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = "Yageo"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = "RC0402FR-070RL"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = "20201122"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "4. Package"; Value = "0402"; VariantName = "[No Variations]"
+Added Component: Designator=R243_BLDC2(SMD RES 0402)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = "Yageo"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = "RC0402FR-070RL"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = "20201122"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "4. Package"; Value = "0402"; VariantName = "[No Variations]"
+Added Component: Designator=R243_BLDC3(SMD RES 0402)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = "Yageo"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = "RC0402FR-070RL"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = "20201122"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "4. Package"; Value = "0402"; VariantName = "[No Variations]"
+Added Component: Designator=R243_BLDC4(SMD RES 0402)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = "Yageo"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = "RC0402FR-070RL"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = "20201122"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "4. Package"; Value = "0402"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=OP3O_BLDC1 Pin=R241_BLDC1-2
+Added Pin To Net: NetName=OP3O_BLDC2 Pin=R241_BLDC2-2
+Added Pin To Net: NetName=OP3O_BLDC3 Pin=R241_BLDC3-2
+Added Pin To Net: NetName=OP3O_BLDC4 Pin=R241_BLDC4-2
+Added Pin To Net: NetName=OP2O_BLDC1 Pin=R242_BLDC1-2
+Added Pin To Net: NetName=OP2O_BLDC2 Pin=R242_BLDC2-2
+Added Pin To Net: NetName=OP2O_BLDC3 Pin=R242_BLDC3-2
+Added Pin To Net: NetName=OP2O_BLDC4 Pin=R242_BLDC4-2
+Added Pin To Net: NetName=OP1O_BLDC1 Pin=R243_BLDC1-2
+Added Pin To Net: NetName=OP1O_BLDC2 Pin=R243_BLDC2-2
+Added Pin To Net: NetName=OP1O_BLDC3 Pin=R243_BLDC3-2
+Added Pin To Net: NetName=OP1O_BLDC4 Pin=R243_BLDC4-2
+Added Pin To Net: NetName=ZCU_BLDC1 Pin=R241_BLDC1-1
+Added Pin To Net: NetName=ZCU_BLDC1 Pin=U201_BLDC1-5
+Added Net: Name=ZCU_BLDC1
+Added Pin To Net: NetName=ZCU_BLDC2 Pin=R241_BLDC2-1
+Added Pin To Net: NetName=ZCU_BLDC2 Pin=U201_BLDC2-5
+Added Net: Name=ZCU_BLDC2
+Added Pin To Net: NetName=ZCU_BLDC3 Pin=R241_BLDC3-1
+Added Pin To Net: NetName=ZCU_BLDC3 Pin=U201_BLDC3-5
+Added Net: Name=ZCU_BLDC3
+Added Pin To Net: NetName=ZCU_BLDC4 Pin=R241_BLDC4-1
+Added Pin To Net: NetName=ZCU_BLDC4 Pin=U201_BLDC4-5
+Added Net: Name=ZCU_BLDC4
+Added Pin To Net: NetName=ZCV_BLDC1 Pin=R242_BLDC1-1
+Added Pin To Net: NetName=ZCV_BLDC1 Pin=U201_BLDC1-4
+Added Net: Name=ZCV_BLDC1
+Added Pin To Net: NetName=ZCV_BLDC2 Pin=R242_BLDC2-1
+Added Pin To Net: NetName=ZCV_BLDC2 Pin=U201_BLDC2-4
+Added Net: Name=ZCV_BLDC2
+Added Pin To Net: NetName=ZCV_BLDC3 Pin=R242_BLDC3-1
+Added Pin To Net: NetName=ZCV_BLDC3 Pin=U201_BLDC3-4
+Added Net: Name=ZCV_BLDC3
+Added Pin To Net: NetName=ZCV_BLDC4 Pin=R242_BLDC4-1
+Added Pin To Net: NetName=ZCV_BLDC4 Pin=U201_BLDC4-4
+Added Net: Name=ZCV_BLDC4
+Added Pin To Net: NetName=ZCW_BLDC1 Pin=R243_BLDC1-1
+Added Pin To Net: NetName=ZCW_BLDC1 Pin=U201_BLDC1-19
+Added Net: Name=ZCW_BLDC1
+Added Pin To Net: NetName=ZCW_BLDC2 Pin=R243_BLDC2-1
+Added Pin To Net: NetName=ZCW_BLDC2 Pin=U201_BLDC2-19
+Added Net: Name=ZCW_BLDC2
+Added Pin To Net: NetName=ZCW_BLDC3 Pin=R243_BLDC3-1
+Added Pin To Net: NetName=ZCW_BLDC3 Pin=U201_BLDC3-19
+Added Net: Name=ZCW_BLDC3
+Added Pin To Net: NetName=ZCW_BLDC4 Pin=R243_BLDC4-1
+Added Pin To Net: NetName=ZCW_BLDC4 Pin=U201_BLDC4-19
+Added Net: Name=ZCW_BLDC4
+Added Member To Class: ClassName=BLDC1 Member=Component R241_BLDC1 (R241) 0R0
+Added Member To Class: ClassName=BLDC2 Member=Component R241_BLDC2 (R241) 0R0
+Added Member To Class: ClassName=BLDC3 Member=Component R241_BLDC3 (R241) 0R0
+Added Member To Class: ClassName=BLDC4 Member=Component R241_BLDC4 (R241) 0R0
+Added Member To Class: ClassName=BLDC1 Member=Component R242_BLDC1 (R242) 0R0
+Added Member To Class: ClassName=BLDC2 Member=Component R242_BLDC2 (R242) 0R0
+Added Member To Class: ClassName=BLDC3 Member=Component R242_BLDC3 (R242) 0R0
+Added Member To Class: ClassName=BLDC4 Member=Component R242_BLDC4 (R242) 0R0
+Added Member To Class: ClassName=BLDC1 Member=Component R243_BLDC1 (R243) 0R0
+Added Member To Class: ClassName=BLDC2 Member=Component R243_BLDC2 (R243) 0R0
+Added Member To Class: ClassName=BLDC3 Member=Component R243_BLDC3 (R243) 0R0
+Added Member To Class: ClassName=BLDC4 Member=Component R243_BLDC4 (R243) 0R0

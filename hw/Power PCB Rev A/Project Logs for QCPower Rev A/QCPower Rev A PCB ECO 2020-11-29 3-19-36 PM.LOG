@@ -1,0 +1,12 @@
+Added Pin To Net: NetName=VDD_STPIN_BLDC2 Pin=J203_BLDC2-1
+Added Pin To Net: NetName=SWDIO_BLDC2 Pin=J203_BLDC2-2
+Added Pin To Net: NetName=SWDCLK_BLDC2 Pin=J203_BLDC2-4
+Added Pin To Net: NetName=GND Pin=J203_BLDC2-5
+Added Pin To Net: NetName=VDD_STPIN_BLDC3 Pin=J203_BLDC3-1
+Added Pin To Net: NetName=SWDIO_BLDC3 Pin=J203_BLDC3-2
+Added Pin To Net: NetName=SWDCLK_BLDC3 Pin=J203_BLDC3-4
+Added Pin To Net: NetName=GND Pin=J203_BLDC3-5
+Added Pin To Net: NetName=VDD_STPIN_BLDC4 Pin=J203_BLDC4-1
+Added Pin To Net: NetName=SWDIO_BLDC4 Pin=J203_BLDC4-2
+Added Pin To Net: NetName=SWDCLK_BLDC4 Pin=J203_BLDC4-4
+Added Pin To Net: NetName=GND Pin=J203_BLDC4-5

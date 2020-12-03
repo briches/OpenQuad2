@@ -1,0 +1,414 @@
+Added Pin To Net: NetName=VBAT Pin=C200_BLDC1-1
+Added Pin To Net: NetName=GND Pin=C200_BLDC1-2
+Added Pin To Net: NetName=VBAT Pin=C201_BLDC1-1
+Added Pin To Net: NetName=GND Pin=C201_BLDC1-2
+Added Pin To Net: NetName=VBAT Pin=C202_BLDC1-1
+Added Pin To Net: NetName=GND Pin=C202_BLDC1-2
+Added Pin To Net: NetName=VBAT Pin=C203_BLDC1-1
+Added Pin To Net: NetName=GND Pin=C203_BLDC1-2
+Added Pin To Net: NetName=VBAT Pin=C204_BLDC1-1
+Added Pin To Net: NetName=GND Pin=C204_BLDC1-2
+Added Pin To Net: NetName=VBAT Pin=C205_BLDC1-1
+Added Pin To Net: NetName=GND Pin=C205_BLDC1-2
+Added Pin To Net: NetName=VBAT Pin=C206_BLDC1-1
+Added Pin To Net: NetName=GND Pin=C206_BLDC1-2
+Added Pin To Net: NetName=VM_BLDC1 Pin=C207_BLDC1-1
+Added Pin To Net: NetName=GND Pin=C207_BLDC1-2
+Added Pin To Net: NetName=NetC208_BLDC1_1 Pin=C208_BLDC1-1
+Added Pin To Net: NetName=GND Pin=C208_BLDC1-2
+Added Pin To Net: NetName=OCCOMP_BLDC1 Pin=C209_BLDC1-1
+Added Pin To Net: NetName=GND Pin=C209_BLDC1-2
+Added Pin To Net: NetName=GND Pin=C210_BLDC1-1
+Added Pin To Net: NetName=VDD_STPIN_BLDC1 Pin=C210_BLDC1-2
+Added Pin To Net: NetName=CURRENT_BLDC1 Pin=C211_BLDC1-1
+Added Pin To Net: NetName=GND Pin=C211_BLDC1-2
+Added Pin To Net: NetName=GND Pin=C212_BLDC1-1
+Added Pin To Net: NetName=VREG_BLDC1 Pin=C212_BLDC1-2
+Added Pin To Net: NetName=VREG_BLDC1 Pin=C213_BLDC1-1
+Added Pin To Net: NetName=GND Pin=C213_BLDC1-2
+Added Pin To Net: NetName=NetC214_BLDC1_1 Pin=C214_BLDC1-1
+Added Pin To Net: NetName=OUTU_BLDC1 Pin=C214_BLDC1-2
+Added Pin To Net: NetName=VM_BLDC1 Pin=C215_BLDC1-1
+Added Pin To Net: NetName=GND Pin=C215_BLDC1-2
+Added Pin To Net: NetName=NetC216_BLDC1_1 Pin=C216_BLDC1-1
+Added Pin To Net: NetName=OUTV_BLDC1 Pin=C216_BLDC1-2
+Added Pin To Net: NetName=VDD_STPIN_BLDC1 Pin=C217_BLDC1-1
+Added Pin To Net: NetName=GND Pin=C217_BLDC1-2
+Added Pin To Net: NetName=GND Pin=C218_BLDC1-1
+Added Pin To Net: NetName=VDD_STPIN_BLDC1 Pin=C218_BLDC1-2
+Added Pin To Net: NetName=GND Pin=C219_BLDC1-1
+Added Pin To Net: NetName=VDD_STPIN_BLDC1 Pin=C219_BLDC1-2
+Added Pin To Net: NetName=NetC220_BLDC1_1 Pin=C220_BLDC1-1
+Added Pin To Net: NetName=OUTW_BLDC1 Pin=C220_BLDC1-2
+Added Pin To Net: NetName=NetC221_BLDC1_1 Pin=C221_BLDC1-1
+Added Pin To Net: NetName=GND Pin=C221_BLDC1-2
+Added Pin To Net: NetName=VBAT_BUS_FB_BLDC1 Pin=C222_BLDC1-1
+Added Pin To Net: NetName=GND Pin=C222_BLDC1-2
+Added Pin To Net: NetName=VBAT Pin=C223_BLDC1-1
+Added Pin To Net: NetName=GND Pin=C223_BLDC1-2
+Added Pin To Net: NetName=NetD200_BLDC1_A Pin=D200_BLDC1-A
+Added Pin To Net: NetName=VBAT Pin=D200_BLDC1-K
+Added Pin To Net: NetName=NetC208_BLDC1_1 Pin=D201_BLDC1-A
+Added Pin To Net: NetName=NetD201_BLDC1_K Pin=D201_BLDC1-K
+Added Pin To Net: NetName=OUTV_BLDC1 Pin=D202_BLDC1-A
+Added Pin To Net: NetName=NetD202_BLDC1_K Pin=D202_BLDC1-K
+Added Pin To Net: NetName=NetD202_BLDC1_K Pin=D203_BLDC1-A
+Added Pin To Net: NetName=VM_BLDC1 Pin=D203_BLDC1-K
+Added Pin To Net: NetName=OUTU_BLDC1 Pin=D204_BLDC1-A
+Added Pin To Net: NetName=NetD202_BLDC1_K Pin=D204_BLDC1-K
+Added Pin To Net: NetName=OUTW_BLDC1 Pin=D205_BLDC1-A
+Added Pin To Net: NetName=NetD202_BLDC1_K Pin=D205_BLDC1-K
+Added Pin To Net: NetName=GND Pin=D206_BLDC1-A
+Added Pin To Net: NetName=NetD206_BLDC1_K Pin=D206_BLDC1-K
+Added Pin To Net: NetName=VDD_STPIN_BLDC1 Pin=D207_BLDC1-1
+Added Pin To Net: NetName=NetD207_BLDC1_2 Pin=D207_BLDC1-2
+Added Pin To Net: NetName=NetD207_BLDC1_3 Pin=D207_BLDC1-3
+Added Pin To Net: NetName=NetD207_BLDC1_4 Pin=D207_BLDC1-4
+Added Pin To Net: NetName=OUTU_BLDC1 Pin=J200_BLDC1-1
+Added Pin To Net: NetName=OUTV_BLDC1 Pin=J201_BLDC1-1
+Added Pin To Net: NetName=OUTW_BLDC1 Pin=J202_BLDC1-1
+Added Pin To Net: NetName=VDD_STPIN_BLDC1 Pin=J203_BLDC1-1
+Added Pin To Net: NetName=SWDIO_BLDC1 Pin=J203_BLDC1-2
+Added Pin To Net: NetName=SWDCLK_BLDC1 Pin=J203_BLDC1-4
+Added Pin To Net: NetName=GND Pin=J203_BLDC1-5
+Added Pin To Net: NetName=NetD206_BLDC1_K Pin=L200_BLDC1-1
+Added Pin To Net: NetName=VDD_STPIN_BLDC1 Pin=L200_BLDC1-2
+Added Pin To Net: NetName=NetD200_BLDC1_A Pin=Q200_BLDC1-1
+Added Pin To Net: NetName=VBAT Pin=Q200_BLDC1-2
+Added Pin To Net: NetName=VM_BLDC1 Pin=Q200_BLDC1-3
+Added Pin To Net: NetName=OUTV_BLDC1 Pin=Q201_BLDC1-1
+Added Pin To Net: NetName=OUTV_BLDC1 Pin=Q201_BLDC1-2
+Added Pin To Net: NetName=OUTV_BLDC1 Pin=Q201_BLDC1-3
+Added Pin To Net: NetName=G3_BLDC1 Pin=Q201_BLDC1-4
+Added Pin To Net: NetName=VBAT Pin=Q201_BLDC1-5
+Added Pin To Net: NetName=VBAT Pin=Q201_BLDC1-6
+Added Pin To Net: NetName=VBAT Pin=Q201_BLDC1-7
+Added Pin To Net: NetName=VBAT Pin=Q201_BLDC1-8
+Added Pin To Net: NetName=OUTU_BLDC1 Pin=Q202_BLDC1-1
+Added Pin To Net: NetName=OUTU_BLDC1 Pin=Q202_BLDC1-2
+Added Pin To Net: NetName=OUTU_BLDC1 Pin=Q202_BLDC1-3
+Added Pin To Net: NetName=G1_BLDC1 Pin=Q202_BLDC1-4
+Added Pin To Net: NetName=VBAT Pin=Q202_BLDC1-5
+Added Pin To Net: NetName=VBAT Pin=Q202_BLDC1-6
+Added Pin To Net: NetName=VBAT Pin=Q202_BLDC1-7
+Added Pin To Net: NetName=VBAT Pin=Q202_BLDC1-8
+Added Pin To Net: NetName=OUTW_BLDC1 Pin=Q203_BLDC1-1
+Added Pin To Net: NetName=OUTW_BLDC1 Pin=Q203_BLDC1-2
+Added Pin To Net: NetName=OUTW_BLDC1 Pin=Q203_BLDC1-3
+Added Pin To Net: NetName=G5_BLDC1 Pin=Q203_BLDC1-4
+Added Pin To Net: NetName=VBAT Pin=Q203_BLDC1-5
+Added Pin To Net: NetName=VBAT Pin=Q203_BLDC1-6
+Added Pin To Net: NetName=VBAT Pin=Q203_BLDC1-7
+Added Pin To Net: NetName=VBAT Pin=Q203_BLDC1-8
+Added Pin To Net: NetName=NetQ204_BLDC1_1 Pin=Q204_BLDC1-1
+Added Pin To Net: NetName=GND Pin=Q204_BLDC1-2
+Added Pin To Net: NetName=NetD201_BLDC1_K Pin=Q204_BLDC1-3
+Added Pin To Net: NetName=CSENSE_BLDC1 Pin=Q205_BLDC1-1
+Added Pin To Net: NetName=CSENSE_BLDC1 Pin=Q205_BLDC1-2
+Added Pin To Net: NetName=CSENSE_BLDC1 Pin=Q205_BLDC1-3
+Added Pin To Net: NetName=G2_BLDC1 Pin=Q205_BLDC1-4
+Added Pin To Net: NetName=OUTU_BLDC1 Pin=Q205_BLDC1-5
+Added Pin To Net: NetName=OUTU_BLDC1 Pin=Q205_BLDC1-6
+Added Pin To Net: NetName=OUTU_BLDC1 Pin=Q205_BLDC1-7
+Added Pin To Net: NetName=OUTU_BLDC1 Pin=Q205_BLDC1-8
+Added Pin To Net: NetName=CSENSE_BLDC1 Pin=Q206_BLDC1-1
+Added Pin To Net: NetName=CSENSE_BLDC1 Pin=Q206_BLDC1-2
+Added Pin To Net: NetName=CSENSE_BLDC1 Pin=Q206_BLDC1-3
+Added Pin To Net: NetName=G6_BLDC1 Pin=Q206_BLDC1-4
+Added Pin To Net: NetName=OUTW_BLDC1 Pin=Q206_BLDC1-5
+Added Pin To Net: NetName=OUTW_BLDC1 Pin=Q206_BLDC1-6
+Added Pin To Net: NetName=OUTW_BLDC1 Pin=Q206_BLDC1-7
+Added Pin To Net: NetName=OUTW_BLDC1 Pin=Q206_BLDC1-8
+Added Pin To Net: NetName=CSENSE_BLDC1 Pin=Q207_BLDC1-1
+Added Pin To Net: NetName=CSENSE_BLDC1 Pin=Q207_BLDC1-2
+Added Pin To Net: NetName=CSENSE_BLDC1 Pin=Q207_BLDC1-3
+Added Pin To Net: NetName=G4_BLDC1 Pin=Q207_BLDC1-4
+Added Pin To Net: NetName=OUTV_BLDC1 Pin=Q207_BLDC1-5
+Added Pin To Net: NetName=OUTV_BLDC1 Pin=Q207_BLDC1-6
+Added Pin To Net: NetName=OUTV_BLDC1 Pin=Q207_BLDC1-7
+Added Pin To Net: NetName=OUTV_BLDC1 Pin=Q207_BLDC1-8
+Added Pin To Net: NetName=VBAT Pin=R200_BLDC1-1
+Added Pin To Net: NetName=NetD200_BLDC1_A Pin=R200_BLDC1-2
+Added Pin To Net: NetName=VBAT Pin=R201_BLDC1-1
+Added Pin To Net: NetName=NetD201_BLDC1_K Pin=R201_BLDC1-2
+Added Pin To Net: NetName=NetC208_BLDC1_1 Pin=R202_BLDC1-1
+Added Pin To Net: NetName=NetD200_BLDC1_A Pin=R202_BLDC1-2
+Added Pin To Net: NetName=HSU_BLDC1 Pin=R203_BLDC1-1
+Added Pin To Net: NetName=G1_BLDC1 Pin=R203_BLDC1-2
+Added Pin To Net: NetName=HSV_BLDC1 Pin=R204_BLDC1-1
+Added Pin To Net: NetName=G3_BLDC1 Pin=R204_BLDC1-2
+Added Pin To Net: NetName=HSW_BLDC1 Pin=R205_BLDC1-1
+Added Pin To Net: NetName=G5_BLDC1 Pin=R205_BLDC1-2
+Added Pin To Net: NetName=NetQ204_BLDC1_1 Pin=R206_BLDC1-1
+Added Pin To Net: NetName=ARM_BUS1 Pin=R206_BLDC1-2
+Added Pin To Net: NetName=LSU_BLDC1 Pin=R207_BLDC1-1
+Added Pin To Net: NetName=G2_BLDC1 Pin=R207_BLDC1-2
+Added Pin To Net: NetName=LSV_BLDC1 Pin=R208_BLDC1-1
+Added Pin To Net: NetName=G4_BLDC1 Pin=R208_BLDC1-2
+Added Pin To Net: NetName=LSW_BLDC1 Pin=R209_BLDC1-1
+Added Pin To Net: NetName=G6_BLDC1 Pin=R209_BLDC1-2
+Added Pin To Net: NetName=NetQ204_BLDC1_1 Pin=R210_BLDC1-1
+Added Pin To Net: NetName=GND Pin=R210_BLDC1-2
+Added Pin To Net: NetName=OCCOMP_BLDC1 Pin=R211_BLDC1-1
+Added Pin To Net: NetName=CSENSE_BLDC1 Pin=R211_BLDC1-2
+Added Pin To Net: NetName=OUTU_BLDC1 Pin=R212_BLDC1-1
+Added Pin To Net: NetName=OP3N_BLDC1 Pin=R212_BLDC1-2
+Added Pin To Net: NetName=OUTV_BLDC1 Pin=R213_BLDC1-1
+Added Pin To Net: NetName=OP2N_BLDC1 Pin=R213_BLDC1-2
+Added Pin To Net: NetName=OUTW_BLDC1 Pin=R214_BLDC1-1
+Added Pin To Net: NetName=OP1N_BLDC1 Pin=R214_BLDC1-2
+Added Pin To Net: NetName=GND Pin=R215_BLDC1-1
+Added Pin To Net: NetName=CSENSE_BLDC1 Pin=R215_BLDC1-2
+Added Pin To Net: NetName=OP3N_BLDC1 Pin=R216_BLDC1-1
+Added Pin To Net: NetName=OP1P_BLDC1 Pin=R216_BLDC1-2
+Added Pin To Net: NetName=RX_BUS1 Pin=R217_BLDC1-1
+Added Pin To Net: NetName=NetR217_BLDC1_2 Pin=R217_BLDC1-2
+Added Pin To Net: NetName=OP2N_BLDC1 Pin=R218_BLDC1-1
+Added Pin To Net: NetName=OP1P_BLDC1 Pin=R218_BLDC1-2
+Added Pin To Net: NetName=TX_BUS1 Pin=R219_BLDC1-1
+Added Pin To Net: NetName=SWDCLK_BLDC1 Pin=R219_BLDC1-2
+Added Pin To Net: NetName=VDD_STPIN_BLDC1 Pin=R220_BLDC1-1
+Added Pin To Net: NetName=NetR220_BLDC1_2 Pin=R220_BLDC1-2
+Added Pin To Net: NetName=NetR220_BLDC1_2 Pin=R221_BLDC1-1
+Added Pin To Net: NetName=CSENSE_BLDC1 Pin=R221_BLDC1-2
+Added Pin To Net: NetName=XTRA_COMM_A_BLDC1 Pin=R222_BLDC1-1
+Added Pin To Net: NetName=NetR222_BLDC1_2 Pin=R222_BLDC1-2
+Added Pin To Net: NetName=XTRA_COMM_B_BLDC1 Pin=R223_BLDC1-1
+Added Pin To Net: NetName=NetR223_BLDC1_2 Pin=R223_BLDC1-2
+Added Pin To Net: NetName=NetR224_BLDC1_1 Pin=R224_BLDC1-1
+Added Pin To Net: NetName=CURRENT_BLDC1 Pin=R224_BLDC1-2
+Added Pin To Net: NetName=OP1N_BLDC1 Pin=R225_BLDC1-1
+Added Pin To Net: NetName=OP1P_BLDC1 Pin=R225_BLDC1-2
+Added Pin To Net: NetName=NetR226_BLDC1_1 Pin=R226_BLDC1-1
+Added Pin To Net: NetName=NetR224_BLDC1_1 Pin=R226_BLDC1-2
+Added Pin To Net: NetName=NetR226_BLDC1_1 Pin=R227_BLDC1-1
+Added Pin To Net: NetName=GND Pin=R227_BLDC1-2
+Added Pin To Net: NetName=GND Pin=R228_BLDC1-1
+Added Pin To Net: NetName=OP3N_BLDC1 Pin=R228_BLDC1-2
+Added Pin To Net: NetName=GND Pin=R229_BLDC1-1
+Added Pin To Net: NetName=OP2N_BLDC1 Pin=R229_BLDC1-2
+Added Pin To Net: NetName=GND Pin=R230_BLDC1-1
+Added Pin To Net: NetName=OP1N_BLDC1 Pin=R230_BLDC1-2
+Added Pin To Net: NetName=VDD_STPIN_BLDC1 Pin=R231_BLDC1-1
+Added Pin To Net: NetName=NetC221_BLDC1_1 Pin=R231_BLDC1-2
+Added Pin To Net: NetName=RESET_BUS1 Pin=R232_BLDC1-1
+Added Pin To Net: NetName=NetC221_BLDC1_1 Pin=R232_BLDC1-2
+Added Pin To Net: NetName=VBAT Pin=R233_BLDC1-1
+Added Pin To Net: NetName=VBAT_BUS_FB_BLDC1 Pin=R233_BLDC1-2
+Added Pin To Net: NetName=NetR234_BLDC1_1 Pin=R234_BLDC1-1
+Added Pin To Net: NetName=BOOT_BLDC1 Pin=R234_BLDC1-2
+Added Pin To Net: NetName=VBAT_BUS_FB_BLDC1 Pin=R235_BLDC1-1
+Added Pin To Net: NetName=GND Pin=R235_BLDC1-2
+Added Pin To Net: NetName=NetD207_BLDC1_4 Pin=R236_BLDC1-1
+Added Pin To Net: NetName=RED_BLDC1 Pin=R236_BLDC1-2
+Added Pin To Net: NetName=GND Pin=R237_BLDC1-1
+Added Pin To Net: NetName=BOOT_BLDC1 Pin=R237_BLDC1-2
+Added Pin To Net: NetName=BT_RES_NEN_BLDC1 Pin=R238_BLDC1-1
+Added Pin To Net: NetName=VDD_STPIN_BLDC1 Pin=R238_BLDC1-2
+Added Pin To Net: NetName=NetD207_BLDC1_3 Pin=R239_BLDC1-1
+Added Pin To Net: NetName=GREEN_BLDC1 Pin=R239_BLDC1-2
+Added Pin To Net: NetName=NetD207_BLDC1_2 Pin=R240_BLDC1-1
+Added Pin To Net: NetName=BLUE_BLDC1 Pin=R240_BLDC1-2
+Added Pin To Net: NetName=OCCOMP_BLDC1 Pin=TP200_BLDC1-1
+Added Pin To Net: NetName=OP3O_BLDC1 Pin=TP201_BLDC1-1
+Added Pin To Net: NetName=VM_BLDC1 Pin=TP202_BLDC1-1
+Added Pin To Net: NetName=VDD_STPIN_BLDC1 Pin=TP203_BLDC1-1
+Added Pin To Net: NetName=PWM_BLDC1 Pin=TP204_BLDC1-1
+Added Pin To Net: NetName=nRESET_BLDC1 Pin=TP205_BLDC1-1
+Added Pin To Net: NetName=BOOTSEL_BLDC1 Pin=TP206_BLDC1-1
+Added Pin To Net: NetName=BOOT_BLDC1 Pin=TP207_BLDC1-1
+Added Pin To Net: NetName=BOOTLOADER_RX_BLDC1 Pin=TP208_BLDC1-1
+Added Pin To Net: NetName=OP2O_BLDC1 Pin=TP209_BLDC1-1
+Added Pin To Net: NetName=BOOTLOADER_TX_BLDC1 Pin=TP210_BLDC1-1
+Added Pin To Net: NetName=SWDIO_BLDC1 Pin=TP211_BLDC1-1
+Added Pin To Net: NetName=SWDCLK_BLDC1 Pin=TP212_BLDC1-1
+Added Pin To Net: NetName=OP2O_BLDC1 Pin=TP213_BLDC1-1
+Added Pin To Net: NetName=XTRA_COMM_A_BLDC1 Pin=TP214_BLDC1-1
+Added Pin To Net: NetName=OP3O_BLDC1 Pin=TP215_BLDC1-1
+Added Pin To Net: NetName=OP1O_BLDC1 Pin=TP216_BLDC1-1
+Added Pin To Net: NetName=HSU_BLDC1 Pin=TP217_BLDC1-1
+Added Pin To Net: NetName=LSU_BLDC1 Pin=TP218_BLDC1-1
+Added Pin To Net: NetName=OP1O_BLDC1 Pin=TP219_BLDC1-1
+Added Pin To Net: NetName=CURRENT_BLDC1 Pin=TP220_BLDC1-1
+Added Pin To Net: NetName=HSV_BLDC1 Pin=TP221_BLDC1-1
+Added Pin To Net: NetName=XTRA_COMM_B_BLDC1 Pin=TP222_BLDC1-1
+Added Pin To Net: NetName=LSV_BLDC1 Pin=TP223_BLDC1-1
+Added Pin To Net: NetName=NetTP224_BLDC1_1 Pin=TP224_BLDC1-1
+Added Pin To Net: NetName=NetTP225_BLDC1_1 Pin=TP225_BLDC1-1
+Added Pin To Net: NetName=HSW_BLDC1 Pin=TP226_BLDC1-1
+Added Pin To Net: NetName=LSW_BLDC1 Pin=TP227_BLDC1-1
+Added Pin To Net: NetName=NetR220_BLDC1_2 Pin=U200_BLDC1-1
+Added Pin To Net: NetName=GND Pin=U200_BLDC1-2
+Added Pin To Net: NetName=NetR226_BLDC1_1 Pin=U200_BLDC1-3
+Added Pin To Net: NetName=NetR224_BLDC1_1 Pin=U200_BLDC1-4
+Added Pin To Net: NetName=VDD_STPIN_BLDC1 Pin=U200_BLDC1-5
+Added Pin To Net: NetName=OP1P_BLDC1 Pin=U201_BLDC1-1
+Added Pin To Net: NetName=OP2N_BLDC1 Pin=U201_BLDC1-2
+Added Pin To Net: NetName=OP2O_BLDC1 Pin=U201_BLDC1-3
+Added Pin To Net: NetName=OP2O_BLDC1 Pin=U201_BLDC1-4
+Added Pin To Net: NetName=OP3O_BLDC1 Pin=U201_BLDC1-5
+Added Pin To Net: NetName=VREG_BLDC1 Pin=U201_BLDC1-6
+Added Pin To Net: NetName=NetC221_BLDC1_1 Pin=U201_BLDC1-7
+Added Pin To Net: NetName=VM_BLDC1 Pin=U201_BLDC1-8
+Added Pin To Net: NetName=NetD206_BLDC1_K Pin=U201_BLDC1-9
+Added Pin To Net: NetName=VDD_STPIN_BLDC1 Pin=U201_BLDC1-10
+Added Pin To Net: NetName=RED_BLDC1 Pin=U201_BLDC1-11
+Added Pin To Net: NetName=GREEN_BLDC1 Pin=U201_BLDC1-12
+Added Pin To Net: NetName=BLUE_BLDC1 Pin=U201_BLDC1-13
+Added Pin To Net: NetName=VBAT_BUS_FB_BLDC1 Pin=U201_BLDC1-14
+Added Pin To Net: NetName=CURRENT_BLDC1 Pin=U201_BLDC1-15
+Added Pin To Net: NetName=NetTP224_BLDC1_1 Pin=U201_BLDC1-16
+Added Pin To Net: NetName=PWM_BUS1 Pin=U201_BLDC1-17
+Added Pin To Net: NetName=NetTP225_BLDC1_1 Pin=U201_BLDC1-18
+Added Pin To Net: NetName=OP1O_BLDC1 Pin=U201_BLDC1-19
+Added Pin To Net: NetName=GND Pin=U201_BLDC1-20
+Added Pin To Net: NetName=OP1O_BLDC1 Pin=U201_BLDC1-21
+Added Pin To Net: NetName=OP1N_BLDC1 Pin=U201_BLDC1-22
+Added Pin To Net: NetName=OP1P_BLDC1 Pin=U201_BLDC1-23
+Added Pin To Net: NetName=OCCOMP_BLDC1 Pin=U201_BLDC1-24
+Added Pin To Net: NetName=HSW_BLDC1 Pin=U201_BLDC1-25
+Added Pin To Net: NetName=OUTW_BLDC1 Pin=U201_BLDC1-26
+Added Pin To Net: NetName=NetC220_BLDC1_1 Pin=U201_BLDC1-27
+Added Pin To Net: NetName=LSW_BLDC1 Pin=U201_BLDC1-28
+Added Pin To Net: NetName=HSV_BLDC1 Pin=U201_BLDC1-29
+Added Pin To Net: NetName=OUTV_BLDC1 Pin=U201_BLDC1-30
+Added Pin To Net: NetName=NetC216_BLDC1_1 Pin=U201_BLDC1-31
+Added Pin To Net: NetName=LSV_BLDC1 Pin=U201_BLDC1-32
+Added Pin To Net: NetName=HSU_BLDC1 Pin=U201_BLDC1-33
+Added Pin To Net: NetName=OUTU_BLDC1 Pin=U201_BLDC1-34
+Added Pin To Net: NetName=NetC214_BLDC1_1 Pin=U201_BLDC1-35
+Added Pin To Net: NetName=LSU_BLDC1 Pin=U201_BLDC1-36
+Added Pin To Net: NetName=SWDIO_BLDC1 Pin=U201_BLDC1-37
+Added Pin To Net: NetName=SWDCLK_BLDC1 Pin=U201_BLDC1-38
+Added Pin To Net: NetName=NetR217_BLDC1_2 Pin=U201_BLDC1-39
+Added Pin To Net: NetName=NetR223_BLDC1_2 Pin=U201_BLDC1-40
+Added Pin To Net: NetName=NetR222_BLDC1_2 Pin=U201_BLDC1-41
+Added Pin To Net: NetName=BOOT_BLDC1 Pin=U201_BLDC1-42
+Added Pin To Net: NetName=GND Pin=U201_BLDC1-43
+Added Pin To Net: NetName=GND Pin=U201_BLDC1-44
+Added Pin To Net: NetName=OP1P_BLDC1 Pin=U201_BLDC1-45
+Added Pin To Net: NetName=OP3N_BLDC1 Pin=U201_BLDC1-46
+Added Pin To Net: NetName=OP3O_BLDC1 Pin=U201_BLDC1-47
+Added Pin To Net: NetName=VDD_STPIN_BLDC1 Pin=U201_BLDC1-48
+Added Pin To Net: NetName=GND Pin=U201_BLDC1-49
+Added Pin To Net: NetName=BT_RES_NEN_BLDC1 Pin=U202_BLDC1-1
+Added Pin To Net: NetName=BOOTSEL_BUS1 Pin=U202_BLDC1-2
+Added Pin To Net: NetName=GND Pin=U202_BLDC1-3
+Added Pin To Net: NetName=NetR234_BLDC1_1 Pin=U202_BLDC1-4
+Added Pin To Net: NetName=VDD_STPIN_BLDC1 Pin=U202_BLDC1-5
+Added Member To Class: ClassName=BLDC1 Member=Component C200_BLDC1 (C200) 220uF
+Added Member To Class: ClassName=BLDC1 Member=Component C201_BLDC1 (C201) 4.7uF 50V
+Added Member To Class: ClassName=BLDC1 Member=Component C202_BLDC1 (C202) 4.7uF 50V
+Added Member To Class: ClassName=BLDC1 Member=Component C203_BLDC1 (C203) 4.7uF 50V
+Added Member To Class: ClassName=BLDC1 Member=Component C204_BLDC1 (C204) 4.7uF 50V
+Added Member To Class: ClassName=BLDC1 Member=Component C205_BLDC1 (C205) 4.7uF 50V
+Added Member To Class: ClassName=BLDC1 Member=Component C206_BLDC1 (C206) 4.7uF 50V
+Added Member To Class: ClassName=BLDC1 Member=Component C207_BLDC1 (C207) 4.7uF 50V
+Added Member To Class: ClassName=BLDC1 Member=Component C208_BLDC1 (C208) 0.01uF
+Added Member To Class: ClassName=BLDC1 Member=Component C209_BLDC1 (C209) 0.01uF
+Added Member To Class: ClassName=BLDC1 Member=Component C210_BLDC1 (C210) 0.1uF
+Added Member To Class: ClassName=BLDC1 Member=Component C211_BLDC1 (C211) 0.01uF
+Added Member To Class: ClassName=BLDC1 Member=Component C212_BLDC1 (C212) 0.1uF
+Added Member To Class: ClassName=BLDC1 Member=Component C213_BLDC1 (C213) 10uF
+Added Member To Class: ClassName=BLDC1 Member=Component C214_BLDC1 (C214) 680nF
+Added Member To Class: ClassName=BLDC1 Member=Component C215_BLDC1 (C215) 330nF
+Added Member To Class: ClassName=BLDC1 Member=Component C216_BLDC1 (C216) 680nF
+Added Member To Class: ClassName=BLDC1 Member=Component C217_BLDC1 (C217) 47uF
+Added Member To Class: ClassName=BLDC1 Member=Component C218_BLDC1 (C218) 0.1uF
+Added Member To Class: ClassName=BLDC1 Member=Component C219_BLDC1 (C219) 0.1uF
+Added Member To Class: ClassName=BLDC1 Member=Component C220_BLDC1 (C220) 680nF
+Added Member To Class: ClassName=BLDC1 Member=Component C221_BLDC1 (C221) 0.01uF
+Added Member To Class: ClassName=BLDC1 Member=Component C222_BLDC1 (C222) 0.01uF
+Added Member To Class: ClassName=BLDC1 Member=Component C223_BLDC1 (C223) 220uF
+Added Member To Class: ClassName=BLDC1 Member=Component D200_BLDC1 (D200) 10V
+Added Member To Class: ClassName=BLDC1 Member=Component D201_BLDC1 (D201) IN4148
+Added Member To Class: ClassName=BLDC1 Member=Component D202_BLDC1 (D202) IN4148
+Added Member To Class: ClassName=BLDC1 Member=Component D203_BLDC1 (D203) IN4148
+Added Member To Class: ClassName=BLDC1 Member=Component D204_BLDC1 (D204) IN4148
+Added Member To Class: ClassName=BLDC1 Member=Component D205_BLDC1 (D205) IN4148
+Added Member To Class: ClassName=BLDC1 Member=Component D206_BLDC1 (D206) STPS0560Z
+Added Member To Class: ClassName=BLDC1 Member=Component D207_BLDC1 (D207) RGD LED
+Added Member To Class: ClassName=BLDC1 Member=Component J200_BLDC1 (J200) PAD
+Added Member To Class: ClassName=BLDC1 Member=Component J201_BLDC1 (J201) PAD
+Added Member To Class: ClassName=BLDC1 Member=Component J202_BLDC1 (J202) PAD
+Added Member To Class: ClassName=BLDC1 Member=Component L200_BLDC1 (L200) SRN3015-220M
+Added Member To Class: ClassName=BLDC1 Member=Component Q200_BLDC1 (Q200) DMP4065S-7
+Added Member To Class: ClassName=BLDC1 Member=Component Q201_BLDC1 (Q201) STL140N6F7
+Added Member To Class: ClassName=BLDC1 Member=Component Q202_BLDC1 (Q202) STL140N6F7
+Added Member To Class: ClassName=BLDC1 Member=Component Q203_BLDC1 (Q203) STL140N6F7
+Added Member To Class: ClassName=BLDC1 Member=Component Q204_BLDC1 (Q204) BSS138-7-F
+Added Member To Class: ClassName=BLDC1 Member=Component Q205_BLDC1 (Q205) STL140N6F7
+Added Member To Class: ClassName=BLDC1 Member=Component Q206_BLDC1 (Q206) STL140N6F7
+Added Member To Class: ClassName=BLDC1 Member=Component Q207_BLDC1 (Q207) STL140N6F7
+Added Member To Class: ClassName=BLDC1 Member=Component R200_BLDC1 (R200) 100K
+Added Member To Class: ClassName=BLDC1 Member=Component R201_BLDC1 (R201) 100K
+Added Member To Class: ClassName=BLDC1 Member=Component R202_BLDC1 (R202) 24k
+Added Member To Class: ClassName=BLDC1 Member=Component R203_BLDC1 (R203) 24
+Added Member To Class: ClassName=BLDC1 Member=Component R204_BLDC1 (R204) 24
+Added Member To Class: ClassName=BLDC1 Member=Component R205_BLDC1 (R205) 24
+Added Member To Class: ClassName=BLDC1 Member=Component R206_BLDC1 (R206) 1K
+Added Member To Class: ClassName=BLDC1 Member=Component R207_BLDC1 (R207) 24
+Added Member To Class: ClassName=BLDC1 Member=Component R208_BLDC1 (R208) 24
+Added Member To Class: ClassName=BLDC1 Member=Component R209_BLDC1 (R209) 24
+Added Member To Class: ClassName=BLDC1 Member=Component R210_BLDC1 (R210) 100K
+Added Member To Class: ClassName=BLDC1 Member=Component R211_BLDC1 (R211) 1K
+Added Member To Class: ClassName=BLDC1 Member=Component R212_BLDC1 (R212) 10K
+Added Member To Class: ClassName=BLDC1 Member=Component R213_BLDC1 (R213) 10K
+Added Member To Class: ClassName=BLDC1 Member=Component R214_BLDC1 (R214) 10K
+Added Member To Class: ClassName=BLDC1 Member=Component R215_BLDC1 (R215) 1mOhm
+Added Member To Class: ClassName=BLDC1 Member=Component R216_BLDC1 (R216) 10K
+Added Member To Class: ClassName=BLDC1 Member=Component R217_BLDC1 (R217) 0R0
+Added Member To Class: ClassName=BLDC1 Member=Component R218_BLDC1 (R218) 10K
+Added Member To Class: ClassName=BLDC1 Member=Component R219_BLDC1 (R219) 0R0
+Added Member To Class: ClassName=BLDC1 Member=Component R220_BLDC1 (R220) 470k
+Added Member To Class: ClassName=BLDC1 Member=Component R221_BLDC1 (R221) 1K
+Added Member To Class: ClassName=BLDC1 Member=Component R222_BLDC1 (R222) 0R0
+Added Member To Class: ClassName=BLDC1 Member=Component R223_BLDC1 (R223) 0R0
+Added Member To Class: ClassName=BLDC1 Member=Component R224_BLDC1 (R224) 10K
+Added Member To Class: ClassName=BLDC1 Member=Component R225_BLDC1 (R225) 10K
+Added Member To Class: ClassName=BLDC1 Member=Component R226_BLDC1 (R226) 24k
+Added Member To Class: ClassName=BLDC1 Member=Component R227_BLDC1 (R227) 1K
+Added Member To Class: ClassName=BLDC1 Member=Component R228_BLDC1 (R228) 1K
+Added Member To Class: ClassName=BLDC1 Member=Component R229_BLDC1 (R229) 1K
+Added Member To Class: ClassName=BLDC1 Member=Component R230_BLDC1 (R230) 1K
+Added Member To Class: ClassName=BLDC1 Member=Component R231_BLDC1 (R231) 10K
+Added Member To Class: ClassName=BLDC1 Member=Component R232_BLDC1 (R232) 0R0
+Added Member To Class: ClassName=BLDC1 Member=Component R233_BLDC1 (R233) 470k
+Added Member To Class: ClassName=BLDC1 Member=Component R234_BLDC1 (R234) 0R0
+Added Member To Class: ClassName=BLDC1 Member=Component R235_BLDC1 (R235) 33k
+Added Member To Class: ClassName=BLDC1 Member=Component R236_BLDC1 (R236) 220
+Added Member To Class: ClassName=BLDC1 Member=Component R237_BLDC1 (R237) 330
+Added Member To Class: ClassName=BLDC1 Member=Component R238_BLDC1 (R238) 10K
+Added Member To Class: ClassName=BLDC1 Member=Component R239_BLDC1 (R239) 39
+Added Member To Class: ClassName=BLDC1 Member=Component R240_BLDC1 (R240) 39
+Added Member To Class: ClassName=BLDC1 Member=Component TP200_BLDC1 (TP200) TESTPOINT SMD
+Added Member To Class: ClassName=BLDC1 Member=Component TP201_BLDC1 (TP201) TESTPOINT SMD
+Added Member To Class: ClassName=BLDC1 Member=Component TP202_BLDC1 (TP202) TESTPOINT TH
+Added Member To Class: ClassName=BLDC1 Member=Component TP203_BLDC1 (TP203) TESTPOINT TH
+Added Member To Class: ClassName=BLDC1 Member=Component TP204_BLDC1 (TP204) TESTPOINT TH
+Added Member To Class: ClassName=BLDC1 Member=Component TP205_BLDC1 (TP205) TESTPOINT SMD
+Added Member To Class: ClassName=BLDC1 Member=Component TP206_BLDC1 (TP206) TESTPOINT SMD
+Added Member To Class: ClassName=BLDC1 Member=Component TP207_BLDC1 (TP207) TESTPOINT SMD
+Added Member To Class: ClassName=BLDC1 Member=Component TP208_BLDC1 (TP208) TESTPOINT SMD
+Added Member To Class: ClassName=BLDC1 Member=Component TP209_BLDC1 (TP209) TESTPOINT SMD
+Added Member To Class: ClassName=BLDC1 Member=Component TP210_BLDC1 (TP210) TESTPOINT SMD
+Added Member To Class: ClassName=BLDC1 Member=Component TP211_BLDC1 (TP211) TESTPOINT SMD
+Added Member To Class: ClassName=BLDC1 Member=Component TP212_BLDC1 (TP212) TESTPOINT SMD
+Added Member To Class: ClassName=BLDC1 Member=Component TP213_BLDC1 (TP213) TESTPOINT SMD
+Added Member To Class: ClassName=BLDC1 Member=Component TP214_BLDC1 (TP214) TESTPOINT SMD
+Added Member To Class: ClassName=BLDC1 Member=Component TP215_BLDC1 (TP215) TESTPOINT SMD
+Added Member To Class: ClassName=BLDC1 Member=Component TP216_BLDC1 (TP216) TESTPOINT SMD
+Added Member To Class: ClassName=BLDC1 Member=Component TP217_BLDC1 (TP217) TESTPOINT SMD
+Added Member To Class: ClassName=BLDC1 Member=Component TP218_BLDC1 (TP218) TESTPOINT SMD
+Added Member To Class: ClassName=BLDC1 Member=Component TP219_BLDC1 (TP219) TESTPOINT SMD
+Added Member To Class: ClassName=BLDC1 Member=Component TP220_BLDC1 (TP220) TESTPOINT SMD
+Added Member To Class: ClassName=BLDC1 Member=Component TP221_BLDC1 (TP221) TESTPOINT SMD
+Added Member To Class: ClassName=BLDC1 Member=Component TP222_BLDC1 (TP222) TESTPOINT SMD
+Added Member To Class: ClassName=BLDC1 Member=Component TP223_BLDC1 (TP223) TESTPOINT SMD
+Added Member To Class: ClassName=BLDC1 Member=Component TP224_BLDC1 (TP224) TESTPOINT SMD
+Added Member To Class: ClassName=BLDC1 Member=Component TP225_BLDC1 (TP225) TESTPOINT SMD
+Added Member To Class: ClassName=BLDC1 Member=Component TP226_BLDC1 (TP226) TESTPOINT SMD
+Added Member To Class: ClassName=BLDC1 Member=Component TP227_BLDC1 (TP227) TESTPOINT SMD
+Added Member To Class: ClassName=BLDC1 Member=Component U200_BLDC1 (U200) LMV321L
+Added Member To Class: ClassName=BLDC1 Member=Component U201_BLDC1 (U201) STSPIN32F0A
+Added Member To Class: ClassName=BLDC1 Member=Component U202_BLDC1 (U202) SN74LVC1G125
