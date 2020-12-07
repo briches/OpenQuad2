@@ -1,0 +1,5 @@
+h
+r
+loadbin build\stm32f401_coremark.bin,0x08000000
+r
+q

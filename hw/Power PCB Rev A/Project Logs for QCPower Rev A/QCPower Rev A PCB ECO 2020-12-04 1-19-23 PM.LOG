@@ -1,0 +1,83 @@
+Removed Pin From Net: NetName=VBAT Pin=C200_1-1
+Removed Pin From Net: NetName=GND Pin=C200_1-2
+Removed Pin From Net: NetName=VBAT Pin=C200_2-1
+Removed Pin From Net: NetName=GND Pin=C200_2-2
+Removed Pin From Net: NetName=VBAT Pin=C200_3-1
+Removed Pin From Net: NetName=GND Pin=C200_3-2
+Removed Pin From Net: NetName=VBAT Pin=C200_4-1
+Removed Pin From Net: NetName=GND Pin=C200_4-2
+Removed Pin From Net: NetName=VBAT Pin=C223_1-1
+Removed Pin From Net: NetName=GND Pin=C223_1-2
+Removed Pin From Net: NetName=VBAT Pin=C223_2-1
+Removed Pin From Net: NetName=GND Pin=C223_2-2
+Removed Pin From Net: NetName=VBAT Pin=C223_3-1
+Removed Pin From Net: NetName=GND Pin=C223_3-2
+Removed Pin From Net: NetName=VBAT Pin=C223_4-1
+Removed Pin From Net: NetName=GND Pin=C223_4-2
+Removed Member From Class: ClassName=BLDC1 Member=C200_1
+Removed Member From Class: ClassName=BLDC2 Member=C200_2
+Removed Member From Class: ClassName=BLDC3 Member=C200_3
+Removed Member From Class: ClassName=BLDC4 Member=C200_4
+Removed Member From Class: ClassName=BLDC1 Member=C223_1
+Removed Member From Class: ClassName=BLDC2 Member=C223_2
+Removed Member From Class: ClassName=BLDC3 Member=C223_3
+Removed Member From Class: ClassName=BLDC4 Member=C223_4
+Added Component: Designator=C104(POLARIZED CAP THROUGH HOLE SIDE MOUNT)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = "Panasonic Electronic Components"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = "ECA-1JM221"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = "20201204"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "4. Package"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=C105(POLARIZED CAP THROUGH HOLE SIDE MOUNT)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = "Nichicon"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = "UCD1J221MNQ1MS"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = "20201128"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "4. Package"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=C106(POLARIZED CAP THROUGH HOLE SIDE MOUNT)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = "Panasonic Electronic Components"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = "ECA-1JM221"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = "20201204"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "4. Package"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=C107(POLARIZED CAP THROUGH HOLE SIDE MOUNT)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = "Nichicon"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = "UCD1J221MNQ1MS"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = "20201128"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "4. Package"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=C108(POLARIZED CAP THROUGH HOLE SIDE MOUNT)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = "Panasonic Electronic Components"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = "ECA-1JM221"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = "20201204"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "4. Package"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=C109(POLARIZED CAP THROUGH HOLE SIDE MOUNT)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = "Nichicon"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = "UCD1J221MNQ1MS"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = "20201128"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "4. Package"; Value = ""; VariantName = "[No Variations]"
+Added Pin To Net: NetName=VBAT Pin=C104-1
+Added Pin To Net: NetName=GND Pin=C104-2
+Added Pin To Net: NetName=VBAT Pin=C105-1
+Added Pin To Net: NetName=GND Pin=C105-2
+Added Pin To Net: NetName=VBAT Pin=C106-1
+Added Pin To Net: NetName=GND Pin=C106-2
+Added Pin To Net: NetName=VBAT Pin=C107-1
+Added Pin To Net: NetName=GND Pin=C107-2
+Added Pin To Net: NetName=VBAT Pin=C108-1
+Added Pin To Net: NetName=GND Pin=C108-2
+Added Pin To Net: NetName=VBAT Pin=C109-1
+Added Pin To Net: NetName=GND Pin=C109-2
+Added Member To Class: ClassName=U_QCPower Rev A Sht1 Logic Connector Member=Component C104 220uF
+Added Member To Class: ClassName=U_QCPower Rev A Sht1 Logic Connector Member=Component C105 220uF
+Added Member To Class: ClassName=U_QCPower Rev A Sht1 Logic Connector Member=Component C106 220uF
+Added Member To Class: ClassName=U_QCPower Rev A Sht1 Logic Connector Member=Component C107 220uF
+Added Member To Class: ClassName=U_QCPower Rev A Sht1 Logic Connector Member=Component C108 220uF
+Added Member To Class: ClassName=U_QCPower Rev A Sht1 Logic Connector Member=Component C109 220uF
+Added Room: Name=BLDC1
+Added Room: Name=BLDC2
+Added Room: Name=BLDC3
+Added Room: Name=BLDC4
+Added Room: Name=U_QCPower Rev A Sht1 Logic Connector

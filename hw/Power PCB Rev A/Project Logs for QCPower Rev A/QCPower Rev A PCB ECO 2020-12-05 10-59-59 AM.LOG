@@ -1,0 +1,35 @@
+Added Component: Designator=TP100(TESTPOINT 1mm DIA)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=TP101(TESTPOINT 1mm DIA)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=TP102(TESTPOINT 1mm DIA)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=TP103(TESTPOINT 1mm DIA)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=TP104(TESTPOINT 1mm DIA)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = ""; VariantName = "[No Variations]"
+Added Pin To Net: NetName=EVENT_IN Pin=TP100-1
+Added Pin To Net: NetName=EXTRA2 Pin=TP101-1
+Added Pin To Net: NetName=EXTRA1 Pin=TP102-1
+Added Pin To Net: NetName=EXTRA3 Pin=TP103-1
+Added Pin To Net: NetName=EXTRA4 Pin=TP104-1
+Added Member To Class: ClassName=U_QCPower Rev A Sht1 Logic Connector Member=Component TP100 TESTPOINT SMD
+Added Member To Class: ClassName=U_QCPower Rev A Sht1 Logic Connector Member=Component TP101 TESTPOINT SMD
+Added Member To Class: ClassName=U_QCPower Rev A Sht1 Logic Connector Member=Component TP102 TESTPOINT SMD
+Added Member To Class: ClassName=U_QCPower Rev A Sht1 Logic Connector Member=Component TP103 TESTPOINT SMD
+Added Member To Class: ClassName=U_QCPower Rev A Sht1 Logic Connector Member=Component TP104 TESTPOINT SMD

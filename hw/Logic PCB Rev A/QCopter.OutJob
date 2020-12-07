@@ -48,7 +48,7 @@ PageOptions1=Record=PageOptions|CenterHorizontal=True|CenterVertical=True|PrintS
 Configuration1_Name1=ColumnNameFormat
 Configuration1_Item1=CaptionAsName
 Configuration1_Name2=General
-Configuration1_Item2=OpenExported=False|AddToProject=False|ReportBOMViolationsInMessages=False|ForceFit=False|NotFitted=False|Database=False|DatabasePriority=False|IncludePcbData=False|IncludeVaultData=False|IncludeCloudData=False|IncludeDocumentData=True|IncludeAlternatives=False|ShowExportOptions=True|TemplateFilename=|TemplateVaultGuid=|TemplateRevisionGuid=|BatchMode=5|FormWidth=1200|FormHeight=710|SupplierProdQty=1|SupplierAutoQty=False|SupplierUseCachedPricing=False|SupplierCurrency=USD|SolutionsPerItem=1|SuppliersPerSolution=1|ViewType=0|UseDirectApi=False|BomSetName=
+Configuration1_Item2=OpenExported=False|AddToProject=False|ReportBOMViolationsInMessages=False|ForceFit=False|NotFitted=False|Database=False|DatabasePriority=False|IncludePcbData=False|IncludeVaultData=False|IncludeCloudData=False|IncludeDocumentData=True|IncludeAlternatives=False|ShowExportOptions=True|TemplateFilename=|TemplateVaultGuid=|TemplateRevisionGuid=|BatchMode=2|FormWidth=1200|FormHeight=710|SupplierProdQty=1|SupplierAutoQty=False|SupplierUseCachedPricing=False|SupplierCurrency=USD|SolutionsPerItem=1|SuppliersPerSolution=1|ViewType=1|UseDirectApi=False|BomSetName=
 Configuration1_Name3=GroupOrder
 Configuration1_Item3=Comment=True|Footprint=True
 Configuration1_Name4=SortOrder
@@ -62,10 +62,10 @@ OutputName2=Gerber Files
 OutputCategory2=Fabrication
 OutputDocumentPath2=QCLogic Rev A.PcbDoc
 OutputVariantName2=
-OutputEnabled2=1
+OutputEnabled2=0
 OutputEnabled2_OutputMedium1=0
 OutputEnabled2_OutputMedium2=0
-OutputEnabled2_OutputMedium3=2
+OutputEnabled2_OutputMedium3=0
 OutputEnabled2_OutputMedium4=0
 OutputDefault2=0
 Configuration2_Name1=OutputConfigurationParameter1
@@ -75,10 +75,10 @@ OutputName3=NC Drill Files
 OutputCategory3=Fabrication
 OutputDocumentPath3=QCLogic Rev A.PcbDoc
 OutputVariantName3=
-OutputEnabled3=1
+OutputEnabled3=0
 OutputEnabled3_OutputMedium1=0
 OutputEnabled3_OutputMedium2=0
-OutputEnabled3_OutputMedium3=3
+OutputEnabled3_OutputMedium3=0
 OutputEnabled3_OutputMedium4=0
 OutputDefault3=0
 Configuration3_Name1=OutputConfigurationParameter1
@@ -112,7 +112,7 @@ ShowComponentParameters2=1
 GlobalBookmarks2=0
 PDFACompliance2=Disabled
 PDFVersion2=Default
-OutputFilePath3=C:\Users\Brandon\Desktop\QCopter\Logic PCB Rev A\Project Outputs for QCLogic Rev A\
+OutputFilePath3=C:\Users\Brandon\Desktop\OpenQuad2\hw\Logic PCB Rev A\Project Outputs for QCLogic Rev A\
 ReleaseManaged3=1
 OutputBasePath3=Project Outputs for QCLogic Rev A
 OutputPathMedia3=
@@ -166,7 +166,7 @@ WmvQuality4=80
 [GeneratedFilesSettings]
 RelativeOutputPath2=
 OpenOutputs2=1
-RelativeOutputPath3=C:\Users\Brandon\Desktop\QCopter\Logic PCB Rev A\Project Outputs for QCLogic Rev A\
+RelativeOutputPath3=C:\Users\Brandon\Desktop\OpenQuad2\hw\Logic PCB Rev A\Project Outputs for QCLogic Rev A\
 OpenOutputs3=1
 AddToProject3=1
 TimestampFolder3=0

@@ -1,0 +1,25 @@
+Change Net Name : Old Net Name=BOOTSEL_BUS1 New Net Name=BLDC_BOOTSEL1
+Change Net Name : Old Net Name=BOOTSEL_BUS2 New Net Name=BLDC_BOOTSEL2
+Change Net Name : Old Net Name=BOOTSEL_BUS3 New Net Name=BLDC_BOOTSEL3
+Change Net Name : Old Net Name=BOOTSEL_BUS4 New Net Name=BLDC_BOOTSEL4
+Change Net Name : Old Net Name=PWM_BUS1 New Net Name=CTRL_PWM1
+Change Net Name : Old Net Name=PWM_BUS2 New Net Name=CTRL_PWM2
+Change Net Name : Old Net Name=PWM_BUS3 New Net Name=CTRL_PWM3
+Change Net Name : Old Net Name=PWM_BUS4 New Net Name=CTRL_PWM4
+Change Net Name : Old Net Name=RESET_BUS1 New Net Name=BLDC_nRESET1
+Change Net Name : Old Net Name=RESET_BUS2 New Net Name=BLDC_nRESET2
+Change Net Name : Old Net Name=RESET_BUS3 New Net Name=BLDC_nRESET3
+Change Net Name : Old Net Name=RESET_BUS4 New Net Name=BLDC_nRESET4
+Change Net Name : Old Net Name=RX_BUS1 New Net Name=BLDC_BOOTLOADER_RX1
+Change Net Name : Old Net Name=RX_BUS2 New Net Name=BLDC_BOOTLOADER_RX2
+Change Net Name : Old Net Name=RX_BUS3 New Net Name=BLDC_BOOTLOADER_RX3
+Change Net Name : Old Net Name=RX_BUS4 New Net Name=BLDC_BOOTLOADER_RX4
+Change Net Name : Old Net Name=TX_BUS1 New Net Name=BLDC_BOOTLOADER_TX1
+Change Net Name : Old Net Name=TX_BUS2 New Net Name=BLDC_BOOTLOADER_TX2
+Change Net Name : Old Net Name=TX_BUS3 New Net Name=BLDC_BOOTLOADER_TX3
+Change Net Name : Old Net Name=TX_BUS4 New Net Name=BLDC_BOOTLOADER_TX4
+Added Class: Name=BLDC_BOOTLOADER_RX[4..1]
+Added Class: Name=BLDC_BOOTLOADER_TX[4..1]
+Added Class: Name=BLDC_BOOTSEL[4..1]
+Added Class: Name=BLDC_nRESET[4..1]
+Added Class: Name=CTRL_PWM[4..1]

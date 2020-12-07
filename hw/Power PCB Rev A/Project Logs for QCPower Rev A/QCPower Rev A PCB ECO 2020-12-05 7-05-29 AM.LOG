@@ -1,0 +1,21 @@
+Change Component Footprint: Designator=D201_1 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523
+Change Component Footprint: Designator=D201_2 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523
+Change Component Footprint: Designator=D201_3 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523
+Change Component Footprint: Designator=D201_4 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523
+Change Component Footprint: Designator=D202_1 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523
+Change Component Footprint: Designator=D202_2 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523
+Change Component Footprint: Designator=D202_3 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523
+Change Component Footprint: Designator=D202_4 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523
+Change Component Footprint: Designator=D203_1 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523
+Change Component Footprint: Designator=D203_2 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523
+Change Component Footprint: Designator=D203_3 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523
+Change Component Footprint: Designator=D203_4 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523
+Change Component Footprint: Designator=D204_1 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523
+Change Component Footprint: Designator=D204_2 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523
+Change Component Footprint: Designator=D204_3 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523
+Change Component Footprint: Designator=D204_4 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523
+Change Component Footprint: Designator=D205_1 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523
+Change Component Footprint: Designator=D205_2 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523
+Change Component Footprint: Designator=D205_3 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523
+Change Component Footprint: Designator=D205_4 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523
+Added Room: Name=U_QCPower Rev A Sht1 Logic Connector

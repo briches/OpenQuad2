@@ -1,0 +1,122 @@
+Removed Pin From Net: NetName=ARM_BUS4 Pin=J100-2
+Removed Pin From Net: NetName=ARM_BUS3 Pin=J100-4
+Removed Pin From Net: NetName=ARM_BUS2 Pin=J100-6
+Removed Pin From Net: NetName=ARM_BUS1 Pin=J100-8
+Removed Pin From Net: NetName=RESET_BUS1 Pin=J100-9
+Removed Pin From Net: NetName=RESET_BUS2 Pin=J100-11
+Removed Pin From Net: NetName=RESET_BUS3 Pin=J100-13
+Removed Pin From Net: NetName=RESET_BUS4 Pin=J100-15
+Removed Pin From Net: NetName=TX_BUS4 Pin=J100-17
+Removed Pin From Net: NetName=BOOTSEL_BUS4 Pin=J100-18
+Removed Pin From Net: NetName=TX_BUS3 Pin=J100-19
+Removed Pin From Net: NetName=BOOTSEL_BUS3 Pin=J100-20
+Removed Pin From Net: NetName=TX_BUS2 Pin=J100-21
+Removed Pin From Net: NetName=BOOTSEL_BUS2 Pin=J100-22
+Removed Pin From Net: NetName=TX_BUS1 Pin=J100-23
+Removed Pin From Net: NetName=BOOTSEL_BUS1 Pin=J100-24
+Removed Pin From Net: NetName=GND Pin=J100-25
+Removed Pin From Net: NetName=GND Pin=J100-26
+Removed Pin From Net: NetName=PWM_BUS4 Pin=J100-27
+Removed Pin From Net: NetName=RX_BUS4 Pin=J100-28
+Removed Pin From Net: NetName=PWM_BUS3 Pin=J100-29
+Removed Pin From Net: NetName=RX_BUS3 Pin=J100-30
+Removed Pin From Net: NetName=PWM_BUS2 Pin=J100-31
+Removed Pin From Net: NetName=RX_BUS2 Pin=J100-32
+Removed Pin From Net: NetName=PWM_BUS1 Pin=J100-33
+Removed Pin From Net: NetName=RX_BUS1 Pin=J100-34
+Removed Pin From Net: NetName=V3_3D Pin=J100-35
+Removed Pin From Net: NetName=EVENT_IN Pin=J100-36
+Removed Pin From Net: NetName=V3_3D Pin=J100-37
+Removed Pin From Net: NetName=GND Pin=J100-38
+Removed Pin From Net: NetName=V3_3D Pin=J100-39
+Removed Pin From Net: NetName=GND Pin=J100-40
+Removed Pin From Net: NetName=V3_3D Pin=J100-41
+Removed Pin From Net: NetName=GND Pin=J100-42
+Removed Pin From Net: NetName=V3_3D Pin=J100-43
+Removed Pin From Net: NetName=GND Pin=J100-44
+Removed Pin From Net: NetName=V3_3D Pin=J100-45
+Removed Pin From Net: NetName=GND Pin=J100-46
+Removed Pin From Net: NetName=V3_3D Pin=J100-47
+Removed Pin From Net: NetName=GND Pin=J100-48
+Removed Pin From Net: NetName=V3_3D Pin=J100-49
+Removed Pin From Net: NetName=GND Pin=J100-50
+Removed Pin From Net: NetName=V3_3D Pin=J100-51
+Removed Pin From Net: NetName=VBAT Pin=J100-52
+Change Component Footprint: Designator=J100 Old Footprint=CONN QCOPTER LOGIC New Footprint=CONN QCOPTER LOGIC Rev A
+Change component parameters: Designator = "J100"; Footprint = "CONN QCOPTER LOGIC Rev A"; UniqueID = "\TYQESLUC\WLQGMKXY"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "1. Manufacturer"; Value = "Amphenol ICC (FCI)"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "2. Manufacturer Part Number"; Value = "10144517-041802LF"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "3. Date Modified"; Value = "20201203"; VariantName = "[No Variations]"
+Added Component: Designator=TP101(TESTPOINT 1mm DIA)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=TP102(TESTPOINT 1mm DIA)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=TP103(TESTPOINT 1mm DIA)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=TP104(TESTPOINT 1mm DIA)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = ""; VariantName = "[No Variations]"
+Added Pin To Net: NetName=V3_3D Pin=J100-1
+Added Pin To Net: NetName=VBAT Pin=J100-2
+Added Pin To Net: NetName=V3_3D Pin=J100-3
+Added Pin To Net: NetName=GND Pin=J100-4
+Added Pin To Net: NetName=V3_3D Pin=J100-5
+Added Pin To Net: NetName=GND Pin=J100-6
+Added Pin To Net: NetName=V3_3D Pin=J100-7
+Added Pin To Net: NetName=GND Pin=J100-8
+Added Pin To Net: NetName=V3_3D Pin=J100-9
+Added Pin To Net: NetName=GND Pin=J100-10
+Added Pin To Net: NetName=GND Pin=J100-12
+Added Pin To Net: NetName=EVENT_IN Pin=J100-16
+Added Pin To Net: NetName=PWM_BUS1 Pin=J100-17
+Added Pin To Net: NetName=RX_BUS1 Pin=J100-18
+Added Pin To Net: NetName=PWM_BUS2 Pin=J100-19
+Added Pin To Net: NetName=RX_BUS2 Pin=J100-20
+Added Pin To Net: NetName=PWM_BUS3 Pin=J100-21
+Added Pin To Net: NetName=RX_BUS3 Pin=J100-22
+Added Pin To Net: NetName=PWM_BUS4 Pin=J100-23
+Added Pin To Net: NetName=RX_BUS4 Pin=J100-24
+Added Pin To Net: NetName=TX_BUS1 Pin=J100-25
+Added Pin To Net: NetName=BOOTSEL_BUS1 Pin=J100-26
+Added Pin To Net: NetName=TX_BUS2 Pin=J100-27
+Added Pin To Net: NetName=BOOTSEL_BUS2 Pin=J100-28
+Added Pin To Net: NetName=TX_BUS3 Pin=J100-29
+Added Pin To Net: NetName=BOOTSEL_BUS3 Pin=J100-30
+Added Pin To Net: NetName=TX_BUS4 Pin=J100-31
+Added Pin To Net: NetName=BOOTSEL_BUS4 Pin=J100-32
+Added Pin To Net: NetName=RESET_BUS4 Pin=J100-33
+Added Pin To Net: NetName=ARM_BUS1 Pin=J100-34
+Added Pin To Net: NetName=RESET_BUS3 Pin=J100-35
+Added Pin To Net: NetName=ARM_BUS2 Pin=J100-36
+Added Pin To Net: NetName=RESET_BUS2 Pin=J100-37
+Added Pin To Net: NetName=ARM_BUS3 Pin=J100-38
+Added Pin To Net: NetName=RESET_BUS1 Pin=J100-39
+Added Pin To Net: NetName=ARM_BUS4 Pin=J100-40
+Added Pin To Net: NetName=EXTRA1 Pin=J100-14
+Added Pin To Net: NetName=EXTRA1 Pin=TP102-1
+Added Net: Name=EXTRA1
+Added Pin To Net: NetName=EXTRA2 Pin=J100-11
+Added Pin To Net: NetName=EXTRA2 Pin=TP101-1
+Added Net: Name=EXTRA2
+Added Pin To Net: NetName=EXTRA3 Pin=J100-13
+Added Pin To Net: NetName=EXTRA3 Pin=TP103-1
+Added Net: Name=EXTRA3
+Added Pin To Net: NetName=EXTRA4 Pin=J100-15
+Added Pin To Net: NetName=EXTRA4 Pin=TP104-1
+Added Net: Name=EXTRA4
+Added Member To Class: ClassName=U_QCPower Rev A Sht1 Logic Connector Member=Component TP101 TESTPOINT SMD
+Added Member To Class: ClassName=U_QCPower Rev A Sht1 Logic Connector Member=Component TP102 TESTPOINT SMD
+Added Member To Class: ClassName=U_QCPower Rev A Sht1 Logic Connector Member=Component TP103 TESTPOINT SMD
+Added Member To Class: ClassName=U_QCPower Rev A Sht1 Logic Connector Member=Component TP104 TESTPOINT SMD

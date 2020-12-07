@@ -1,0 +1,2012 @@
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"SEGGER_RTT_printf.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text._StoreChar,"ax",%progbits
+  17              		.align	1
+  18              		.arch armv7e-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu fpv5-d16
+  24              	_StoreChar:
+  25              	.LVL0:
+  26              	.LFB0:
+  27              		.file 1 "Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c"
+   1:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** /*********************************************************************
+   2:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *                SEGGER Microcontroller GmbH & Co. KG                *
+   3:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *                        The Embedded Experts                        *
+   4:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** **********************************************************************
+   5:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *                                                                    *
+   6:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *       (c) 2014 - 2017  SEGGER Microcontroller GmbH & Co. KG        *
+   7:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *                                                                    *
+   8:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *       www.segger.com     Support: support@segger.com               *
+   9:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *                                                                    *
+  10:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** **********************************************************************
+  11:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *                                                                    *
+  12:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *       SEGGER RTT * Real Time Transfer for embedded targets         *
+  13:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *                                                                    *
+  14:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** **********************************************************************
+  15:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *                                                                    *
+  16:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** * All rights reserved.                                               *
+  17:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *                                                                    *
+  18:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** * SEGGER strongly recommends to not make any changes                 *
+  19:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** * to or modify the source code of this software in order to stay     *
+  20:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** * compatible with the RTT protocol and J-Link.                       *
+  21:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *                                                                    *
+  22:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** * Redistribution and use in source and binary forms, with or         *
+  23:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** * without modification, are permitted provided that the following    *
+  24:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** * conditions are met:                                                *
+  25:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *                                                                    *
+  26:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** * o Redistributions of source code must retain the above copyright   *
+  27:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *   notice, this list of conditions and the following disclaimer.    *
+  28:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *                                                                    *
+  29:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** * o Redistributions in binary form must reproduce the above          *
+  30:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *   copyright notice, this list of conditions and the following      *
+  31:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *   disclaimer in the documentation and/or other materials provided  *
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 2
+
+
+  32:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *   with the distribution.                                           *
+  33:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *                                                                    *
+  34:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** * o Neither the name of SEGGER Microcontroller GmbH & Co. KG         *
+  35:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *   nor the names of its contributors may be used to endorse or      *
+  36:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *   promote products derived from this software without specific     *
+  37:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *   prior written permission.                                        *
+  38:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *                                                                    *
+  39:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND             *
+  40:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** * CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,        *
+  41:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF           *
+  42:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE           *
+  43:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** * DISCLAIMED. IN NO EVENT SHALL SEGGER Microcontroller BE LIABLE FOR *
+  44:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR           *
+  45:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT  *
+  46:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;    *
+  47:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF      *
+  48:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT          *
+  49:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE  *
+  50:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH   *
+  51:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** * DAMAGE.                                                            *
+  52:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *                                                                    *
+  53:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** **********************************************************************
+  54:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *                                                                    *
+  55:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *       RTT version: 6.18a                                           *
+  56:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *                                                                    *
+  57:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** **********************************************************************
+  58:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** ---------------------------END-OF-HEADER------------------------------
+  59:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** File    : SEGGER_RTT_printf.c
+  60:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** Purpose : Replacement for printf to write formatted data via RTT
+  61:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** Revision: $Rev: 4351 $
+  62:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** ----------------------------------------------------------------------
+  63:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** */
+  64:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** #include "SEGGER_RTT.h"
+  65:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** #include "SEGGER_RTT_Conf.h"
+  66:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** 
+  67:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** /*********************************************************************
+  68:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *
+  69:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *       Defines, configurable
+  70:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *
+  71:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** **********************************************************************
+  72:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** */
+  73:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** 
+  74:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** #ifndef SEGGER_RTT_PRINTF_BUFFER_SIZE
+  75:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   #define SEGGER_RTT_PRINTF_BUFFER_SIZE (64)
+  76:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** #endif
+  77:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** 
+  78:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** #include <stdlib.h>
+  79:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** #include <stdarg.h>
+  80:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** 
+  81:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** 
+  82:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** #define FORMAT_FLAG_LEFT_JUSTIFY   (1u << 0)
+  83:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** #define FORMAT_FLAG_PAD_ZERO       (1u << 1)
+  84:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** #define FORMAT_FLAG_PRINT_SIGN     (1u << 2)
+  85:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** #define FORMAT_FLAG_ALTERNATE      (1u << 3)
+  86:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** 
+  87:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** /*********************************************************************
+  88:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 3
+
+
+  89:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *       Types
+  90:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *
+  91:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** **********************************************************************
+  92:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** */
+  93:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** 
+  94:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** typedef struct {
+  95:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   char*     pBuffer;
+  96:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   unsigned  BufferSize;
+  97:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   unsigned  Cnt;
+  98:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** 
+  99:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   int   ReturnValue;
+ 100:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** 
+ 101:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   unsigned RTTBufferIndex;
+ 102:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** } SEGGER_RTT_PRINTF_DESC;
+ 103:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** 
+ 104:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** /*********************************************************************
+ 105:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *
+ 106:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *       Function prototypes
+ 107:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *
+ 108:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** **********************************************************************
+ 109:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** */
+ 110:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** int SEGGER_RTT_vprintf(unsigned BufferIndex, const char * sFormat, va_list * pParamList);
+ 111:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** 
+ 112:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** /*********************************************************************
+ 113:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *
+ 114:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *       Static code
+ 115:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *
+ 116:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** **********************************************************************
+ 117:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** */
+ 118:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** /*********************************************************************
+ 119:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *
+ 120:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *       _StoreChar
+ 121:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** */
+ 122:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** static void _StoreChar(SEGGER_RTT_PRINTF_DESC * p, char c) {
+  28              		.loc 1 122 60 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		.loc 1 122 60 is_stmt 0 view .LVU1
+  33 0000 10B5     		push	{r4, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 4, -8
+  37              		.cfi_offset 14, -4
+  38 0002 0446     		mov	r4, r0
+ 123:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   unsigned Cnt;
+  39              		.loc 1 123 3 is_stmt 1 view .LVU2
+ 124:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** 
+ 125:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   Cnt = p->Cnt;
+  40              		.loc 1 125 3 view .LVU3
+  41              		.loc 1 125 7 is_stmt 0 view .LVU4
+  42 0004 8268     		ldr	r2, [r0, #8]
+  43              	.LVL1:
+ 126:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   if ((Cnt + 1u) <= p->BufferSize) {
+  44              		.loc 1 126 3 is_stmt 1 view .LVU5
+  45              		.loc 1 126 12 is_stmt 0 view .LVU6
+  46 0006 531C     		adds	r3, r2, #1
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 4
+
+
+  47              		.loc 1 126 22 view .LVU7
+  48 0008 4068     		ldr	r0, [r0, #4]
+  49              	.LVL2:
+  50              		.loc 1 126 6 view .LVU8
+  51 000a 8342     		cmp	r3, r0
+  52 000c 05D8     		bhi	.L2
+ 127:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     *(p->pBuffer + Cnt) = c;
+  53              		.loc 1 127 5 is_stmt 1 view .LVU9
+  54              		.loc 1 127 8 is_stmt 0 view .LVU10
+  55 000e 2068     		ldr	r0, [r4]
+  56              		.loc 1 127 25 view .LVU11
+  57 0010 8154     		strb	r1, [r0, r2]
+ 128:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     p->Cnt = Cnt + 1u;
+  58              		.loc 1 128 5 is_stmt 1 view .LVU12
+  59              		.loc 1 128 12 is_stmt 0 view .LVU13
+  60 0012 A360     		str	r3, [r4, #8]
+ 129:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     p->ReturnValue++;
+  61              		.loc 1 129 5 is_stmt 1 view .LVU14
+  62              		.loc 1 129 6 is_stmt 0 view .LVU15
+  63 0014 E368     		ldr	r3, [r4, #12]
+  64              		.loc 1 129 19 view .LVU16
+  65 0016 0133     		adds	r3, r3, #1
+  66 0018 E360     		str	r3, [r4, #12]
+  67              	.L2:
+ 130:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   }
+ 131:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   //
+ 132:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   // Write part of string, when the buffer is full
+ 133:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   //
+ 134:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   if (p->Cnt == p->BufferSize) {
+  68              		.loc 1 134 3 is_stmt 1 view .LVU17
+  69              		.loc 1 134 8 is_stmt 0 view .LVU18
+  70 001a A268     		ldr	r2, [r4, #8]
+  71              	.LVL3:
+  72              		.loc 1 134 18 view .LVU19
+  73 001c 6368     		ldr	r3, [r4, #4]
+  74              		.loc 1 134 6 view .LVU20
+  75 001e 9A42     		cmp	r2, r3
+  76 0020 00D0     		beq	.L6
+  77              	.LVL4:
+  78              	.L1:
+ 135:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     if (SEGGER_RTT_Write(p->RTTBufferIndex, p->pBuffer, p->Cnt) != p->Cnt) {
+ 136:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       p->ReturnValue = -1;
+ 137:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     } else {
+ 138:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       p->Cnt = 0u;
+ 139:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     }
+ 140:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   }
+ 141:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** }
+  79              		.loc 1 141 1 view .LVU21
+  80 0022 10BD     		pop	{r4, pc}
+  81              	.LVL5:
+  82              	.L6:
+ 135:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     if (SEGGER_RTT_Write(p->RTTBufferIndex, p->pBuffer, p->Cnt) != p->Cnt) {
+  83              		.loc 1 135 5 is_stmt 1 view .LVU22
+ 135:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     if (SEGGER_RTT_Write(p->RTTBufferIndex, p->pBuffer, p->Cnt) != p->Cnt) {
+  84              		.loc 1 135 9 is_stmt 0 view .LVU23
+  85 0024 2168     		ldr	r1, [r4]
+  86              	.LVL6:
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 5
+
+
+ 135:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     if (SEGGER_RTT_Write(p->RTTBufferIndex, p->pBuffer, p->Cnt) != p->Cnt) {
+  87              		.loc 1 135 9 view .LVU24
+  88 0026 2069     		ldr	r0, [r4, #16]
+  89 0028 FFF7FEFF 		bl	SEGGER_RTT_Write
+  90              	.LVL7:
+ 135:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     if (SEGGER_RTT_Write(p->RTTBufferIndex, p->pBuffer, p->Cnt) != p->Cnt) {
+  91              		.loc 1 135 69 view .LVU25
+  92 002c A368     		ldr	r3, [r4, #8]
+ 135:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     if (SEGGER_RTT_Write(p->RTTBufferIndex, p->pBuffer, p->Cnt) != p->Cnt) {
+  93              		.loc 1 135 8 view .LVU26
+  94 002e 9842     		cmp	r0, r3
+  95 0030 03D0     		beq	.L4
+ 136:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     } else {
+  96              		.loc 1 136 7 is_stmt 1 view .LVU27
+ 136:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     } else {
+  97              		.loc 1 136 22 is_stmt 0 view .LVU28
+  98 0032 4FF0FF33 		mov	r3, #-1
+  99 0036 E360     		str	r3, [r4, #12]
+ 100 0038 F3E7     		b	.L1
+ 101              	.L4:
+ 138:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     }
+ 102              		.loc 1 138 7 is_stmt 1 view .LVU29
+ 138:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     }
+ 103              		.loc 1 138 14 is_stmt 0 view .LVU30
+ 104 003a 0023     		movs	r3, #0
+ 105 003c A360     		str	r3, [r4, #8]
+ 106              		.loc 1 141 1 view .LVU31
+ 107 003e F0E7     		b	.L1
+ 108              		.cfi_endproc
+ 109              	.LFE0:
+ 111              		.section	.text._PrintUnsigned,"ax",%progbits
+ 112              		.align	1
+ 113              		.syntax unified
+ 114              		.thumb
+ 115              		.thumb_func
+ 116              		.fpu fpv5-d16
+ 118              	_PrintUnsigned:
+ 119              	.LVL8:
+ 120              	.LFB1:
+ 142:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** 
+ 143:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** /*********************************************************************
+ 144:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *
+ 145:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *       _PrintUnsigned
+ 146:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** */
+ 147:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** static void _PrintUnsigned(SEGGER_RTT_PRINTF_DESC * pBufferDesc, unsigned v, unsigned Base, unsigne
+ 121              		.loc 1 147 156 is_stmt 1 view -0
+ 122              		.cfi_startproc
+ 123              		@ args = 8, pretend = 0, frame = 0
+ 124              		@ frame_needed = 0, uses_anonymous_args = 0
+ 125              		.loc 1 147 156 is_stmt 0 view .LVU33
+ 126 0000 2DE9F84F 		push	{r3, r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 127              	.LCFI1:
+ 128              		.cfi_def_cfa_offset 40
+ 129              		.cfi_offset 3, -40
+ 130              		.cfi_offset 4, -36
+ 131              		.cfi_offset 5, -32
+ 132              		.cfi_offset 6, -28
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 6
+
+
+ 133              		.cfi_offset 7, -24
+ 134              		.cfi_offset 8, -20
+ 135              		.cfi_offset 9, -16
+ 136              		.cfi_offset 10, -12
+ 137              		.cfi_offset 11, -8
+ 138              		.cfi_offset 14, -4
+ 139 0004 8146     		mov	r9, r0
+ 140 0006 0F46     		mov	r7, r1
+ 141 0008 1546     		mov	r5, r2
+ 142 000a 1E46     		mov	r6, r3
+ 143 000c DDF828A0 		ldr	r10, [sp, #40]
+ 144 0010 0B9A     		ldr	r2, [sp, #44]
+ 145              	.LVL9:
+ 148:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   static const char _aV2C[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', '
+ 146              		.loc 1 148 3 is_stmt 1 view .LVU34
+ 149:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   unsigned Div;
+ 147              		.loc 1 149 3 view .LVU35
+ 150:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   unsigned Digit;
+ 148              		.loc 1 150 3 view .LVU36
+ 151:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   unsigned Number;
+ 149              		.loc 1 151 3 view .LVU37
+ 152:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   unsigned Width;
+ 150              		.loc 1 152 3 view .LVU38
+ 153:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   char c;
+ 151              		.loc 1 153 3 view .LVU39
+ 154:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** 
+ 155:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   Number = v;
+ 152              		.loc 1 155 3 view .LVU40
+ 156:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   Digit = 1u;
+ 153              		.loc 1 156 3 view .LVU41
+ 157:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   //
+ 158:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   // Get actual field width
+ 159:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   //
+ 160:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   Width = 1u;
+ 154              		.loc 1 160 3 view .LVU42
+ 161:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   while (Number >= Base) {
+ 155              		.loc 1 161 3 view .LVU43
+ 155:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   Digit = 1u;
+ 156              		.loc 1 155 10 is_stmt 0 view .LVU44
+ 157 0012 0B46     		mov	r3, r1
+ 158              	.LVL10:
+ 160:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   while (Number >= Base) {
+ 159              		.loc 1 160 9 view .LVU45
+ 160 0014 4FF00108 		mov	r8, #1
+ 161              	.LVL11:
+ 162              	.L8:
+ 163              		.loc 1 161 9 is_stmt 1 view .LVU46
+ 164 0018 AB42     		cmp	r3, r5
+ 165 001a 04D3     		bcc	.L28
+ 162:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     Number = (Number / Base);
+ 166              		.loc 1 162 5 view .LVU47
+ 167              		.loc 1 162 12 is_stmt 0 view .LVU48
+ 168 001c B3FBF5F3 		udiv	r3, r3, r5
+ 169              	.LVL12:
+ 163:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     Width++;
+ 170              		.loc 1 163 5 is_stmt 1 view .LVU49
+ 171              		.loc 1 163 10 is_stmt 0 view .LVU50
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 7
+
+
+ 172 0020 08F10108 		add	r8, r8, #1
+ 173              	.LVL13:
+ 174              		.loc 1 163 10 view .LVU51
+ 175 0024 F8E7     		b	.L8
+ 176              	.L28:
+ 164:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   }
+ 165:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   if (NumDigits > Width) {
+ 177              		.loc 1 165 3 is_stmt 1 view .LVU52
+ 178              		.loc 1 165 6 is_stmt 0 view .LVU53
+ 179 0026 B045     		cmp	r8, r6
+ 180 0028 00D2     		bcs	.L10
+ 166:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     Width = NumDigits;
+ 181              		.loc 1 166 11 view .LVU54
+ 182 002a B046     		mov	r8, r6
+ 183              	.LVL14:
+ 184              	.L10:
+ 167:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   }
+ 168:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   //
+ 169:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   // Print leading chars if necessary
+ 170:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   //
+ 171:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   if ((FormatFlags & FORMAT_FLAG_LEFT_JUSTIFY) == 0u) {
+ 185              		.loc 1 171 3 is_stmt 1 view .LVU55
+ 186              		.loc 1 171 6 is_stmt 0 view .LVU56
+ 187 002c 12F0010B 		ands	fp, r2, #1
+ 188 0030 1CD1     		bne	.L11
+ 172:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     if (FieldWidth != 0u) {
+ 189              		.loc 1 172 5 is_stmt 1 view .LVU57
+ 190              		.loc 1 172 8 is_stmt 0 view .LVU58
+ 191 0032 BAF1000F 		cmp	r10, #0
+ 192 0036 19D0     		beq	.L11
+ 173:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       if (((FormatFlags & FORMAT_FLAG_PAD_ZERO) == FORMAT_FLAG_PAD_ZERO) && (NumDigits == 0u)) {
+ 193              		.loc 1 173 7 is_stmt 1 view .LVU59
+ 194              		.loc 1 173 10 is_stmt 0 view .LVU60
+ 195 0038 12F0020F 		tst	r2, #2
+ 196 003c 02D0     		beq	.L24
+ 197              		.loc 1 173 74 discriminator 1 view .LVU61
+ 198 003e DEB1     		cbz	r6, .L25
+ 174:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         c = '0';
+ 175:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       } else {
+ 176:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         c = ' ';
+ 199              		.loc 1 176 11 view .LVU62
+ 200 0040 2024     		movs	r4, #32
+ 201 0042 00E0     		b	.L13
+ 202              	.L24:
+ 203 0044 2024     		movs	r4, #32
+ 204              	.LVL15:
+ 205              	.L13:
+ 177:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       }
+ 178:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       while ((FieldWidth != 0u) && (Width < FieldWidth)) {
+ 206              		.loc 1 178 13 is_stmt 1 view .LVU63
+ 207              		.loc 1 178 43 is_stmt 0 view .LVU64
+ 208 0046 C245     		cmp	r10, r8
+ 209 0048 94BF     		ite	ls
+ 210 004a 0023     		movls	r3, #0
+ 211 004c 0123     		movhi	r3, #1
+ 212              		.loc 1 178 33 view .LVU65
+ 213 004e BAF1000F 		cmp	r10, #0
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 8
+
+
+ 214 0052 08BF     		it	eq
+ 215 0054 0023     		moveq	r3, #0
+ 216              		.loc 1 178 13 view .LVU66
+ 217 0056 4BB1     		cbz	r3, .L11
+ 179:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         FieldWidth--;
+ 218              		.loc 1 179 9 is_stmt 1 view .LVU67
+ 219              		.loc 1 179 19 is_stmt 0 view .LVU68
+ 220 0058 0AF1FF3A 		add	r10, r10, #-1
+ 221              	.LVL16:
+ 180:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         _StoreChar(pBufferDesc, c);
+ 222              		.loc 1 180 9 is_stmt 1 view .LVU69
+ 223 005c 2146     		mov	r1, r4
+ 224 005e 4846     		mov	r0, r9
+ 225 0060 FFF7FEFF 		bl	_StoreChar
+ 226              	.LVL17:
+ 181:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         if (pBufferDesc->ReturnValue < 0) {
+ 227              		.loc 1 181 9 view .LVU70
+ 228              		.loc 1 181 24 is_stmt 0 view .LVU71
+ 229 0064 D9F80C30 		ldr	r3, [r9, #12]
+ 230              		.loc 1 181 12 view .LVU72
+ 231 0068 002B     		cmp	r3, #0
+ 232 006a ECDA     		bge	.L13
+ 233              	.LVL18:
+ 234              	.L11:
+ 182:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           break;
+ 183:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         }
+ 184:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       }
+ 185:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     }
+ 186:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   }
+ 187:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   if (pBufferDesc->ReturnValue >= 0) {
+ 235              		.loc 1 187 3 is_stmt 1 view .LVU73
+ 236              		.loc 1 187 18 is_stmt 0 view .LVU74
+ 237 006c D9F80C30 		ldr	r3, [r9, #12]
+ 238              		.loc 1 187 6 view .LVU75
+ 239 0070 002B     		cmp	r3, #0
+ 240 0072 25DB     		blt	.L7
+ 156:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   //
+ 241              		.loc 1 156 9 view .LVU76
+ 242 0074 0124     		movs	r4, #1
+ 243 0076 07E0     		b	.L19
+ 244              	.LVL19:
+ 245              	.L25:
+ 174:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       } else {
+ 246              		.loc 1 174 11 view .LVU77
+ 247 0078 3024     		movs	r4, #48
+ 248 007a E4E7     		b	.L13
+ 249              	.LVL20:
+ 250              	.L16:
+ 188:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     //
+ 189:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     // Compute Digit.
+ 190:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     // Loop until Digit has the value of the highest digit required.
+ 191:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     // Example: If the output is 345 (Base 10), loop 2 times until Digit is 100.
+ 192:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     //
+ 193:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     while (1) {
+ 194:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       if (NumDigits > 1u) {       // User specified a min number of digits to print? => Make sure w
+ 195:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         NumDigits--;
+ 196:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       } else {
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 9
+
+
+ 197:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         Div = v / Digit;
+ 251              		.loc 1 197 9 is_stmt 1 view .LVU78
+ 252              		.loc 1 197 13 is_stmt 0 view .LVU79
+ 253 007c B7FBF4F3 		udiv	r3, r7, r4
+ 254              	.LVL21:
+ 198:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         if (Div < Base) {        // Is our divider big enough to extract the highest digit from val
+ 255              		.loc 1 198 9 is_stmt 1 view .LVU80
+ 256              		.loc 1 198 12 is_stmt 0 view .LVU81
+ 257 0080 9D42     		cmp	r5, r3
+ 258 0082 06D8     		bhi	.L18
+ 259              	.LVL22:
+ 260              	.L17:
+ 199:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           break;
+ 200:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         }
+ 201:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       }
+ 202:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       Digit *= Base;
+ 261              		.loc 1 202 7 is_stmt 1 view .LVU82
+ 262              		.loc 1 202 13 is_stmt 0 view .LVU83
+ 263 0084 05FB04F4 		mul	r4, r5, r4
+ 264              	.LVL23:
+ 193:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       if (NumDigits > 1u) {       // User specified a min number of digits to print? => Make sure w
+ 265              		.loc 1 193 11 is_stmt 1 view .LVU84
+ 266              	.L19:
+ 193:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       if (NumDigits > 1u) {       // User specified a min number of digits to print? => Make sure w
+ 267              		.loc 1 193 5 view .LVU85
+ 194:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         NumDigits--;
+ 268              		.loc 1 194 7 view .LVU86
+ 194:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         NumDigits--;
+ 269              		.loc 1 194 10 is_stmt 0 view .LVU87
+ 270 0088 012E     		cmp	r6, #1
+ 271 008a F7D9     		bls	.L16
+ 195:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       } else {
+ 272              		.loc 1 195 9 is_stmt 1 view .LVU88
+ 195:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       } else {
+ 273              		.loc 1 195 18 is_stmt 0 view .LVU89
+ 274 008c 013E     		subs	r6, r6, #1
+ 275              	.LVL24:
+ 195:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       } else {
+ 276              		.loc 1 195 18 view .LVU90
+ 277 008e F9E7     		b	.L17
+ 278              	.LVL25:
+ 279              	.L26:
+ 203:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     }
+ 204:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     //
+ 205:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     // Output digits
+ 206:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     //
+ 207:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     do {
+ 208:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       Div = v / Digit;
+ 209:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       v -= Div * Digit;
+ 210:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       _StoreChar(pBufferDesc, _aV2C[Div]);
+ 211:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       if (pBufferDesc->ReturnValue < 0) {
+ 212:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         break;
+ 213:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       }
+ 214:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       Digit /= Base;
+ 280              		.loc 1 214 13 view .LVU91
+ 281 0090 1C46     		mov	r4, r3
+ 282              	.LVL26:
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 10
+
+
+ 283              	.L18:
+ 207:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       Div = v / Digit;
+ 284              		.loc 1 207 5 is_stmt 1 view .LVU92
+ 208:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       v -= Div * Digit;
+ 285              		.loc 1 208 7 view .LVU93
+ 208:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       v -= Div * Digit;
+ 286              		.loc 1 208 11 is_stmt 0 view .LVU94
+ 287 0092 B7FBF4F3 		udiv	r3, r7, r4
+ 288              	.LVL27:
+ 209:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       _StoreChar(pBufferDesc, _aV2C[Div]);
+ 289              		.loc 1 209 7 is_stmt 1 view .LVU95
+ 290 0096 04FB1377 		mls	r7, r4, r3, r7
+ 291              	.LVL28:
+ 210:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       if (pBufferDesc->ReturnValue < 0) {
+ 292              		.loc 1 210 7 view .LVU96
+ 293 009a 154A     		ldr	r2, .L29
+ 294 009c D15C     		ldrb	r1, [r2, r3]	@ zero_extendqisi2
+ 295 009e 4846     		mov	r0, r9
+ 296 00a0 FFF7FEFF 		bl	_StoreChar
+ 297              	.LVL29:
+ 211:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         break;
+ 298              		.loc 1 211 7 view .LVU97
+ 211:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         break;
+ 299              		.loc 1 211 22 is_stmt 0 view .LVU98
+ 300 00a4 D9F80C30 		ldr	r3, [r9, #12]
+ 211:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         break;
+ 301              		.loc 1 211 10 view .LVU99
+ 302 00a8 002B     		cmp	r3, #0
+ 303 00aa 03DB     		blt	.L20
+ 304              		.loc 1 214 7 is_stmt 1 view .LVU100
+ 305              		.loc 1 214 13 is_stmt 0 view .LVU101
+ 306 00ac B4FBF5F3 		udiv	r3, r4, r5
+ 307              	.LVL30:
+ 215:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     } while (Digit);
+ 308              		.loc 1 215 13 is_stmt 1 view .LVU102
+ 309              		.loc 1 215 5 is_stmt 0 view .LVU103
+ 310 00b0 AC42     		cmp	r4, r5
+ 311 00b2 EDD2     		bcs	.L26
+ 312              	.LVL31:
+ 313              	.L20:
+ 216:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     //
+ 217:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     // Print trailing spaces if necessary
+ 218:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     //
+ 219:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     if ((FormatFlags & FORMAT_FLAG_LEFT_JUSTIFY) == FORMAT_FLAG_LEFT_JUSTIFY) {
+ 314              		.loc 1 219 5 is_stmt 1 view .LVU104
+ 315              		.loc 1 219 8 is_stmt 0 view .LVU105
+ 316 00b4 BBF1000F 		cmp	fp, #0
+ 317 00b8 02D0     		beq	.L7
+ 220:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       if (FieldWidth != 0u) {
+ 318              		.loc 1 220 7 is_stmt 1 view .LVU106
+ 319              		.loc 1 220 10 is_stmt 0 view .LVU107
+ 320 00ba BAF1000F 		cmp	r10, #0
+ 321 00be 01D1     		bne	.L21
+ 322              	.L7:
+ 221:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         while ((FieldWidth != 0u) && (Width < FieldWidth)) {
+ 222:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           FieldWidth--;
+ 223:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           _StoreChar(pBufferDesc, ' ');
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 11
+
+
+ 224:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           if (pBufferDesc->ReturnValue < 0) {
+ 225:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****             break;
+ 226:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           }
+ 227:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         }
+ 228:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       }
+ 229:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     }
+ 230:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   }
+ 231:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** }
+ 323              		.loc 1 231 1 view .LVU108
+ 324 00c0 BDE8F88F 		pop	{r3, r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 325              	.LVL32:
+ 326              	.L21:
+ 221:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         while ((FieldWidth != 0u) && (Width < FieldWidth)) {
+ 327              		.loc 1 221 15 is_stmt 1 view .LVU109
+ 221:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         while ((FieldWidth != 0u) && (Width < FieldWidth)) {
+ 328              		.loc 1 221 45 is_stmt 0 view .LVU110
+ 329 00c4 C245     		cmp	r10, r8
+ 330 00c6 94BF     		ite	ls
+ 331 00c8 0023     		movls	r3, #0
+ 332 00ca 0123     		movhi	r3, #1
+ 221:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         while ((FieldWidth != 0u) && (Width < FieldWidth)) {
+ 333              		.loc 1 221 35 view .LVU111
+ 334 00cc BAF1000F 		cmp	r10, #0
+ 335 00d0 08BF     		it	eq
+ 336 00d2 0023     		moveq	r3, #0
+ 221:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         while ((FieldWidth != 0u) && (Width < FieldWidth)) {
+ 337              		.loc 1 221 15 view .LVU112
+ 338 00d4 002B     		cmp	r3, #0
+ 339 00d6 F3D0     		beq	.L7
+ 222:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           _StoreChar(pBufferDesc, ' ');
+ 340              		.loc 1 222 11 is_stmt 1 view .LVU113
+ 222:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           _StoreChar(pBufferDesc, ' ');
+ 341              		.loc 1 222 21 is_stmt 0 view .LVU114
+ 342 00d8 0AF1FF3A 		add	r10, r10, #-1
+ 343              	.LVL33:
+ 223:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           if (pBufferDesc->ReturnValue < 0) {
+ 344              		.loc 1 223 11 is_stmt 1 view .LVU115
+ 345 00dc 2021     		movs	r1, #32
+ 346 00de 4846     		mov	r0, r9
+ 347 00e0 FFF7FEFF 		bl	_StoreChar
+ 348              	.LVL34:
+ 224:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****             break;
+ 349              		.loc 1 224 11 view .LVU116
+ 224:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****             break;
+ 350              		.loc 1 224 26 is_stmt 0 view .LVU117
+ 351 00e4 D9F80C30 		ldr	r3, [r9, #12]
+ 224:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****             break;
+ 352              		.loc 1 224 14 view .LVU118
+ 353 00e8 002B     		cmp	r3, #0
+ 354 00ea EBDA     		bge	.L21
+ 355 00ec E8E7     		b	.L7
+ 356              	.L30:
+ 357 00ee 00BF     		.align	2
+ 358              	.L29:
+ 359 00f0 00000000 		.word	.LANCHOR0
+ 360              		.cfi_endproc
+ 361              	.LFE1:
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 12
+
+
+ 363              		.section	.text._PrintInt,"ax",%progbits
+ 364              		.align	1
+ 365              		.syntax unified
+ 366              		.thumb
+ 367              		.thumb_func
+ 368              		.fpu fpv5-d16
+ 370              	_PrintInt:
+ 371              	.LVL35:
+ 372              	.LFB2:
+ 232:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** 
+ 233:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** /*********************************************************************
+ 234:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *
+ 235:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *       _PrintInt
+ 236:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** */
+ 237:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** static void _PrintInt(SEGGER_RTT_PRINTF_DESC * pBufferDesc, int v, unsigned Base, unsigned NumDigit
+ 373              		.loc 1 237 146 is_stmt 1 view -0
+ 374              		.cfi_startproc
+ 375              		@ args = 8, pretend = 0, frame = 0
+ 376              		@ frame_needed = 0, uses_anonymous_args = 0
+ 377              		.loc 1 237 146 is_stmt 0 view .LVU120
+ 378 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 379              	.LCFI2:
+ 380              		.cfi_def_cfa_offset 36
+ 381              		.cfi_offset 4, -36
+ 382              		.cfi_offset 5, -32
+ 383              		.cfi_offset 6, -28
+ 384              		.cfi_offset 7, -24
+ 385              		.cfi_offset 8, -20
+ 386              		.cfi_offset 9, -16
+ 387              		.cfi_offset 10, -12
+ 388              		.cfi_offset 11, -8
+ 389              		.cfi_offset 14, -4
+ 390 0004 83B0     		sub	sp, sp, #12
+ 391              	.LCFI3:
+ 392              		.cfi_def_cfa_offset 48
+ 393 0006 8046     		mov	r8, r0
+ 394 0008 8946     		mov	r9, r1
+ 395 000a 1646     		mov	r6, r2
+ 396 000c 9A46     		mov	r10, r3
+ 397 000e 0C9F     		ldr	r7, [sp, #48]
+ 398 0010 DDF834B0 		ldr	fp, [sp, #52]
+ 238:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   unsigned Width;
+ 399              		.loc 1 238 3 is_stmt 1 view .LVU121
+ 239:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   int Number;
+ 400              		.loc 1 239 3 view .LVU122
+ 240:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** 
+ 241:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   Number = (v < 0) ? -v : v;
+ 401              		.loc 1 241 3 view .LVU123
+ 402              		.loc 1 241 10 is_stmt 0 view .LVU124
+ 403 0014 81EAE174 		eor	r4, r1, r1, asr #31
+ 404 0018 A4EBE174 		sub	r4, r4, r1, asr #31
+ 405              	.LVL36:
+ 242:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** 
+ 243:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   //
+ 244:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   // Get actual field width
+ 245:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   //
+ 246:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   Width = 1u;
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 13
+
+
+ 406              		.loc 1 246 3 is_stmt 1 view .LVU125
+ 247:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   while (Number >= (int)Base) {
+ 407              		.loc 1 247 3 view .LVU126
+ 246:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   while (Number >= (int)Base) {
+ 408              		.loc 1 246 9 is_stmt 0 view .LVU127
+ 409 001c 0125     		movs	r5, #1
+ 410              	.LVL37:
+ 411              	.L32:
+ 412              		.loc 1 247 9 is_stmt 1 view .LVU128
+ 413 001e A642     		cmp	r6, r4
+ 414 0020 03DC     		bgt	.L49
+ 248:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     Number = (Number / (int)Base);
+ 415              		.loc 1 248 5 view .LVU129
+ 416              		.loc 1 248 12 is_stmt 0 view .LVU130
+ 417 0022 94FBF6F4 		sdiv	r4, r4, r6
+ 418              	.LVL38:
+ 249:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     Width++;
+ 419              		.loc 1 249 5 is_stmt 1 view .LVU131
+ 420              		.loc 1 249 10 is_stmt 0 view .LVU132
+ 421 0026 0135     		adds	r5, r5, #1
+ 422              	.LVL39:
+ 423              		.loc 1 249 10 view .LVU133
+ 424 0028 F9E7     		b	.L32
+ 425              	.L49:
+ 250:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   }
+ 251:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   if (NumDigits > Width) {
+ 426              		.loc 1 251 3 is_stmt 1 view .LVU134
+ 427              		.loc 1 251 6 is_stmt 0 view .LVU135
+ 428 002a 5545     		cmp	r5, r10
+ 429 002c 00D2     		bcs	.L34
+ 252:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     Width = NumDigits;
+ 430              		.loc 1 252 11 view .LVU136
+ 431 002e 5546     		mov	r5, r10
+ 432              	.LVL40:
+ 433              	.L34:
+ 253:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   }
+ 254:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   if ((FieldWidth > 0u) && ((v < 0) || ((FormatFlags & FORMAT_FLAG_PRINT_SIGN) == FORMAT_FLAG_PRINT
+ 434              		.loc 1 254 3 is_stmt 1 view .LVU137
+ 435              		.loc 1 254 6 is_stmt 0 view .LVU138
+ 436 0030 37B1     		cbz	r7, .L35
+ 437              		.loc 1 254 25 discriminator 1 view .LVU139
+ 438 0032 B9F1000F 		cmp	r9, #0
+ 439 0036 02DB     		blt	.L36
+ 440              		.loc 1 254 37 discriminator 2 view .LVU140
+ 441 0038 1BF0040F 		tst	fp, #4
+ 442 003c 00D0     		beq	.L35
+ 443              	.L36:
+ 255:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     FieldWidth--;
+ 444              		.loc 1 255 5 is_stmt 1 view .LVU141
+ 445              		.loc 1 255 15 is_stmt 0 view .LVU142
+ 446 003e 013F     		subs	r7, r7, #1
+ 447              	.LVL41:
+ 448              	.L35:
+ 256:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   }
+ 257:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** 
+ 258:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   //
+ 259:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   // Print leading spaces if necessary
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 14
+
+
+ 260:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   //
+ 261:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   if ((((FormatFlags & FORMAT_FLAG_PAD_ZERO) == 0u) || (NumDigits != 0u)) && ((FormatFlags & FORMAT
+ 449              		.loc 1 261 3 is_stmt 1 view .LVU143
+ 450              		.loc 1 261 6 is_stmt 0 view .LVU144
+ 451 0040 1BF0020F 		tst	fp, #2
+ 452 0044 02D0     		beq	.L37
+ 453              		.loc 1 261 53 discriminator 2 view .LVU145
+ 454 0046 BAF1000F 		cmp	r10, #0
+ 455 004a 03D0     		beq	.L38
+ 456              	.L37:
+ 457              		.loc 1 261 75 discriminator 3 view .LVU146
+ 458 004c 1BF0010F 		tst	fp, #1
+ 459 0050 00D1     		bne	.L38
+ 262:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     if (FieldWidth != 0u) {
+ 460              		.loc 1 262 5 is_stmt 1 view .LVU147
+ 461              		.loc 1 262 8 is_stmt 0 view .LVU148
+ 462 0052 C7B9     		cbnz	r7, .L39
+ 463              	.LVL42:
+ 464              	.L38:
+ 263:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       while ((FieldWidth != 0u) && (Width < FieldWidth)) {
+ 264:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         FieldWidth--;
+ 265:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         _StoreChar(pBufferDesc, ' ');
+ 266:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         if (pBufferDesc->ReturnValue < 0) {
+ 267:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           break;
+ 268:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         }
+ 269:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       }
+ 270:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     }
+ 271:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   }
+ 272:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   //
+ 273:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   // Print sign if necessary
+ 274:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   //
+ 275:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   if (pBufferDesc->ReturnValue >= 0) {
+ 465              		.loc 1 275 3 is_stmt 1 view .LVU149
+ 466              		.loc 1 275 18 is_stmt 0 view .LVU150
+ 467 0054 D8F80C30 		ldr	r3, [r8, #12]
+ 468              		.loc 1 275 6 view .LVU151
+ 469 0058 002B     		cmp	r3, #0
+ 470 005a 11DB     		blt	.L31
+ 276:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     if (v < 0) {
+ 471              		.loc 1 276 5 is_stmt 1 view .LVU152
+ 472              		.loc 1 276 8 is_stmt 0 view .LVU153
+ 473 005c B9F1000F 		cmp	r9, #0
+ 474 0060 24DB     		blt	.L50
+ 277:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       v = -v;
+ 278:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       _StoreChar(pBufferDesc, '-');
+ 279:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     } else if ((FormatFlags & FORMAT_FLAG_PRINT_SIGN) == FORMAT_FLAG_PRINT_SIGN) {
+ 475              		.loc 1 279 12 is_stmt 1 view .LVU154
+ 476              		.loc 1 279 15 is_stmt 0 view .LVU155
+ 477 0062 1BF0040F 		tst	fp, #4
+ 478 0066 28D1     		bne	.L51
+ 479              	.L43:
+ 280:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       _StoreChar(pBufferDesc, '+');
+ 281:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     } else {
+ 282:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** 
+ 283:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     }
+ 480              		.loc 1 283 5 is_stmt 1 view .LVU156
+ 284:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     if (pBufferDesc->ReturnValue >= 0) {
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 15
+
+
+ 481              		.loc 1 284 5 view .LVU157
+ 482              		.loc 1 284 20 is_stmt 0 view .LVU158
+ 483 0068 D8F80C30 		ldr	r3, [r8, #12]
+ 484              		.loc 1 284 8 view .LVU159
+ 485 006c 002B     		cmp	r3, #0
+ 486 006e 07DB     		blt	.L31
+ 285:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       //
+ 286:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       // Print leading zeros if necessary
+ 287:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       //
+ 288:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       if (((FormatFlags & FORMAT_FLAG_PAD_ZERO) == FORMAT_FLAG_PAD_ZERO) && ((FormatFlags & FORMAT_
+ 487              		.loc 1 288 7 is_stmt 1 view .LVU160
+ 488              		.loc 1 288 74 is_stmt 0 view .LVU161
+ 489 0070 0BF00303 		and	r3, fp, #3
+ 490              		.loc 1 288 10 view .LVU162
+ 491 0074 022B     		cmp	r3, #2
+ 492 0076 25D0     		beq	.L52
+ 493              	.L44:
+ 289:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         if (FieldWidth != 0u) {
+ 290:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           while ((FieldWidth != 0u) && (Width < FieldWidth)) {
+ 291:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****             FieldWidth--;
+ 292:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****             _StoreChar(pBufferDesc, '0');
+ 293:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****             if (pBufferDesc->ReturnValue < 0) {
+ 294:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****               break;
+ 295:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****             }
+ 296:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           }
+ 297:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         }
+ 298:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       }
+ 299:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       if (pBufferDesc->ReturnValue >= 0) {
+ 494              		.loc 1 299 7 is_stmt 1 view .LVU163
+ 495              		.loc 1 299 22 is_stmt 0 view .LVU164
+ 496 0078 D8F80C30 		ldr	r3, [r8, #12]
+ 497              		.loc 1 299 10 view .LVU165
+ 498 007c 002B     		cmp	r3, #0
+ 499 007e 39DA     		bge	.L53
+ 500              	.L31:
+ 300:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         //
+ 301:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         // Print number without sign
+ 302:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         //
+ 303:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         _PrintUnsigned(pBufferDesc, (unsigned)v, Base, NumDigits, FieldWidth, FormatFlags);
+ 304:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       }
+ 305:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     }
+ 306:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   }
+ 307:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** }
+ 501              		.loc 1 307 1 view .LVU166
+ 502 0080 03B0     		add	sp, sp, #12
+ 503              	.LCFI4:
+ 504              		.cfi_remember_state
+ 505              		.cfi_def_cfa_offset 36
+ 506              		@ sp needed
+ 507 0082 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 508              	.LVL43:
+ 509              	.L39:
+ 510              	.LCFI5:
+ 511              		.cfi_restore_state
+ 263:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         FieldWidth--;
+ 512              		.loc 1 263 13 is_stmt 1 view .LVU167
+ 263:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         FieldWidth--;
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 16
+
+
+ 513              		.loc 1 263 43 is_stmt 0 view .LVU168
+ 514 0086 AF42     		cmp	r7, r5
+ 515 0088 94BF     		ite	ls
+ 516 008a 0023     		movls	r3, #0
+ 517 008c 0123     		movhi	r3, #1
+ 263:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         FieldWidth--;
+ 518              		.loc 1 263 33 view .LVU169
+ 519 008e 002F     		cmp	r7, #0
+ 520 0090 08BF     		it	eq
+ 521 0092 0023     		moveq	r3, #0
+ 263:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         FieldWidth--;
+ 522              		.loc 1 263 13 view .LVU170
+ 523 0094 002B     		cmp	r3, #0
+ 524 0096 DDD0     		beq	.L38
+ 264:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         _StoreChar(pBufferDesc, ' ');
+ 525              		.loc 1 264 9 is_stmt 1 view .LVU171
+ 264:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         _StoreChar(pBufferDesc, ' ');
+ 526              		.loc 1 264 19 is_stmt 0 view .LVU172
+ 527 0098 013F     		subs	r7, r7, #1
+ 528              	.LVL44:
+ 265:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         if (pBufferDesc->ReturnValue < 0) {
+ 529              		.loc 1 265 9 is_stmt 1 view .LVU173
+ 530 009a 2021     		movs	r1, #32
+ 531 009c 4046     		mov	r0, r8
+ 532 009e FFF7FEFF 		bl	_StoreChar
+ 533              	.LVL45:
+ 266:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           break;
+ 534              		.loc 1 266 9 view .LVU174
+ 266:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           break;
+ 535              		.loc 1 266 24 is_stmt 0 view .LVU175
+ 536 00a2 D8F80C30 		ldr	r3, [r8, #12]
+ 266:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           break;
+ 537              		.loc 1 266 12 view .LVU176
+ 538 00a6 002B     		cmp	r3, #0
+ 539 00a8 EDDA     		bge	.L39
+ 540 00aa D3E7     		b	.L38
+ 541              	.L50:
+ 277:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       _StoreChar(pBufferDesc, '-');
+ 542              		.loc 1 277 7 is_stmt 1 view .LVU177
+ 277:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       _StoreChar(pBufferDesc, '-');
+ 543              		.loc 1 277 9 is_stmt 0 view .LVU178
+ 544 00ac C9F10009 		rsb	r9, r9, #0
+ 545              	.LVL46:
+ 278:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     } else if ((FormatFlags & FORMAT_FLAG_PRINT_SIGN) == FORMAT_FLAG_PRINT_SIGN) {
+ 546              		.loc 1 278 7 is_stmt 1 view .LVU179
+ 547 00b0 2D21     		movs	r1, #45
+ 548 00b2 4046     		mov	r0, r8
+ 549 00b4 FFF7FEFF 		bl	_StoreChar
+ 550              	.LVL47:
+ 551 00b8 D6E7     		b	.L43
+ 552              	.L51:
+ 280:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     } else {
+ 553              		.loc 1 280 7 view .LVU180
+ 554 00ba 2B21     		movs	r1, #43
+ 555 00bc 4046     		mov	r0, r8
+ 556 00be FFF7FEFF 		bl	_StoreChar
+ 557              	.LVL48:
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 17
+
+
+ 558 00c2 D1E7     		b	.L43
+ 559              	.L52:
+ 288:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         if (FieldWidth != 0u) {
+ 560              		.loc 1 288 126 is_stmt 0 discriminator 1 view .LVU181
+ 561 00c4 BAF1000F 		cmp	r10, #0
+ 562 00c8 D6D1     		bne	.L44
+ 289:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           while ((FieldWidth != 0u) && (Width < FieldWidth)) {
+ 563              		.loc 1 289 9 is_stmt 1 view .LVU182
+ 289:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           while ((FieldWidth != 0u) && (Width < FieldWidth)) {
+ 564              		.loc 1 289 12 is_stmt 0 view .LVU183
+ 565 00ca 002F     		cmp	r7, #0
+ 566 00cc D4D0     		beq	.L44
+ 567              	.L45:
+ 290:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****             FieldWidth--;
+ 568              		.loc 1 290 17 is_stmt 1 view .LVU184
+ 290:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****             FieldWidth--;
+ 569              		.loc 1 290 47 is_stmt 0 view .LVU185
+ 570 00ce AF42     		cmp	r7, r5
+ 571 00d0 94BF     		ite	ls
+ 572 00d2 0023     		movls	r3, #0
+ 573 00d4 0123     		movhi	r3, #1
+ 290:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****             FieldWidth--;
+ 574              		.loc 1 290 37 view .LVU186
+ 575 00d6 002F     		cmp	r7, #0
+ 576 00d8 08BF     		it	eq
+ 577 00da 0023     		moveq	r3, #0
+ 290:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****             FieldWidth--;
+ 578              		.loc 1 290 17 view .LVU187
+ 579 00dc 002B     		cmp	r3, #0
+ 580 00de CBD0     		beq	.L44
+ 291:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****             _StoreChar(pBufferDesc, '0');
+ 581              		.loc 1 291 13 is_stmt 1 view .LVU188
+ 291:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****             _StoreChar(pBufferDesc, '0');
+ 582              		.loc 1 291 23 is_stmt 0 view .LVU189
+ 583 00e0 013F     		subs	r7, r7, #1
+ 584              	.LVL49:
+ 292:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****             if (pBufferDesc->ReturnValue < 0) {
+ 585              		.loc 1 292 13 is_stmt 1 view .LVU190
+ 586 00e2 3021     		movs	r1, #48
+ 587 00e4 4046     		mov	r0, r8
+ 588 00e6 FFF7FEFF 		bl	_StoreChar
+ 589              	.LVL50:
+ 293:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****               break;
+ 590              		.loc 1 293 13 view .LVU191
+ 293:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****               break;
+ 591              		.loc 1 293 28 is_stmt 0 view .LVU192
+ 592 00ea D8F80C30 		ldr	r3, [r8, #12]
+ 293:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****               break;
+ 593              		.loc 1 293 16 view .LVU193
+ 594 00ee 002B     		cmp	r3, #0
+ 595 00f0 EDDA     		bge	.L45
+ 596 00f2 C1E7     		b	.L44
+ 597              	.L53:
+ 303:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       }
+ 598              		.loc 1 303 9 is_stmt 1 view .LVU194
+ 599 00f4 CDF804B0 		str	fp, [sp, #4]
+ 600 00f8 0097     		str	r7, [sp]
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 18
+
+
+ 601 00fa 5346     		mov	r3, r10
+ 602 00fc 3246     		mov	r2, r6
+ 603 00fe 4946     		mov	r1, r9
+ 604 0100 4046     		mov	r0, r8
+ 605 0102 FFF7FEFF 		bl	_PrintUnsigned
+ 606              	.LVL51:
+ 607              		.loc 1 307 1 is_stmt 0 view .LVU195
+ 608 0106 BBE7     		b	.L31
+ 609              		.cfi_endproc
+ 610              	.LFE2:
+ 612              		.section	.text.SEGGER_RTT_vprintf,"ax",%progbits
+ 613              		.align	1
+ 614              		.global	SEGGER_RTT_vprintf
+ 615              		.syntax unified
+ 616              		.thumb
+ 617              		.thumb_func
+ 618              		.fpu fpv5-d16
+ 620              	SEGGER_RTT_vprintf:
+ 621              	.LVL52:
+ 622              	.LFB3:
+ 308:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** 
+ 309:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** /*********************************************************************
+ 310:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *
+ 311:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *       Public code
+ 312:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *
+ 313:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** **********************************************************************
+ 314:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** */
+ 315:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** /*********************************************************************
+ 316:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *
+ 317:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *       SEGGER_RTT_vprintf
+ 318:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *
+ 319:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *  Function description
+ 320:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *    Stores a formatted string in SEGGER RTT control block.
+ 321:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *    This data is read by the host.
+ 322:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *
+ 323:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *  Parameters
+ 324:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *    BufferIndex  Index of "Up"-buffer to be used. (e.g. 0 for "Terminal")
+ 325:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *    sFormat      Pointer to format string
+ 326:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *    pParamList   Pointer to the list of arguments for the format string
+ 327:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *
+ 328:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *  Return values
+ 329:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *    >= 0:  Number of bytes which have been stored in the "Up"-buffer.
+ 330:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *     < 0:  Error
+ 331:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** */
+ 332:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** int SEGGER_RTT_vprintf(unsigned BufferIndex, const char * sFormat, va_list * pParamList) {
+ 623              		.loc 1 332 90 is_stmt 1 view -0
+ 624              		.cfi_startproc
+ 625              		@ args = 0, pretend = 0, frame = 88
+ 626              		@ frame_needed = 0, uses_anonymous_args = 0
+ 627              		.loc 1 332 90 is_stmt 0 view .LVU197
+ 628 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 629              	.LCFI6:
+ 630              		.cfi_def_cfa_offset 20
+ 631              		.cfi_offset 4, -20
+ 632              		.cfi_offset 5, -16
+ 633              		.cfi_offset 6, -12
+ 634              		.cfi_offset 7, -8
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 19
+
+
+ 635              		.cfi_offset 14, -4
+ 636 0002 99B0     		sub	sp, sp, #100
+ 637              	.LCFI7:
+ 638              		.cfi_def_cfa_offset 120
+ 639 0004 0646     		mov	r6, r0
+ 640 0006 0C46     		mov	r4, r1
+ 641 0008 1546     		mov	r5, r2
+ 333:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   char c;
+ 642              		.loc 1 333 3 is_stmt 1 view .LVU198
+ 334:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   SEGGER_RTT_PRINTF_DESC BufferDesc;
+ 643              		.loc 1 334 3 view .LVU199
+ 335:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   int v;
+ 644              		.loc 1 335 3 view .LVU200
+ 336:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   unsigned NumDigits;
+ 645              		.loc 1 336 3 view .LVU201
+ 337:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   unsigned FormatFlags;
+ 646              		.loc 1 337 3 view .LVU202
+ 338:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   unsigned FieldWidth;
+ 647              		.loc 1 338 3 view .LVU203
+ 339:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   char acBuffer[SEGGER_RTT_PRINTF_BUFFER_SIZE];
+ 648              		.loc 1 339 3 view .LVU204
+ 340:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** 
+ 341:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   BufferDesc.pBuffer        = acBuffer;
+ 649              		.loc 1 341 3 view .LVU205
+ 650              		.loc 1 341 29 is_stmt 0 view .LVU206
+ 651 000a 03AB     		add	r3, sp, #12
+ 652 000c 1393     		str	r3, [sp, #76]
+ 342:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   BufferDesc.BufferSize     = SEGGER_RTT_PRINTF_BUFFER_SIZE;
+ 653              		.loc 1 342 3 is_stmt 1 view .LVU207
+ 654              		.loc 1 342 29 is_stmt 0 view .LVU208
+ 655 000e 4023     		movs	r3, #64
+ 656 0010 1493     		str	r3, [sp, #80]
+ 343:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   BufferDesc.Cnt            = 0u;
+ 657              		.loc 1 343 3 is_stmt 1 view .LVU209
+ 658              		.loc 1 343 29 is_stmt 0 view .LVU210
+ 659 0012 0023     		movs	r3, #0
+ 660 0014 1593     		str	r3, [sp, #84]
+ 344:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   BufferDesc.RTTBufferIndex = BufferIndex;
+ 661              		.loc 1 344 3 is_stmt 1 view .LVU211
+ 662              		.loc 1 344 29 is_stmt 0 view .LVU212
+ 663 0016 1790     		str	r0, [sp, #92]
+ 345:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   BufferDesc.ReturnValue    = 0;
+ 664              		.loc 1 345 3 is_stmt 1 view .LVU213
+ 665              		.loc 1 345 29 is_stmt 0 view .LVU214
+ 666 0018 1693     		str	r3, [sp, #88]
+ 667 001a 87E0     		b	.L81
+ 668              	.LVL53:
+ 669              	.L88:
+ 346:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** 
+ 347:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   do {
+ 348:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     c = *sFormat;
+ 349:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     sFormat++;
+ 350:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     if (c == 0u) {
+ 351:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       break;
+ 352:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     }
+ 353:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     if (c == '%') {
+ 354:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       //
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 20
+
+
+ 355:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       // Filter out flags
+ 356:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       //
+ 357:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       FormatFlags = 0u;
+ 670              		.loc 1 357 19 view .LVU215
+ 671 001c 0020     		movs	r0, #0
+ 358:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       v = 1;
+ 672              		.loc 1 358 9 view .LVU216
+ 673 001e 0122     		movs	r2, #1
+ 674 0020 11E0     		b	.L63
+ 675              	.LVL54:
+ 676              	.L60:
+ 359:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       do {
+ 360:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         c = *sFormat;
+ 361:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         switch (c) {
+ 362:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         case '-': FormatFlags |= FORMAT_FLAG_LEFT_JUSTIFY; sFormat++; break;
+ 677              		.loc 1 362 19 is_stmt 1 view .LVU217
+ 678              		.loc 1 362 31 is_stmt 0 view .LVU218
+ 679 0022 40F00100 		orr	r0, r0, #1
+ 680              	.LVL55:
+ 681              		.loc 1 362 60 is_stmt 1 view .LVU219
+ 682              		.loc 1 362 67 is_stmt 0 view .LVU220
+ 683 0026 0134     		adds	r4, r4, #1
+ 684              	.LVL56:
+ 685              		.loc 1 362 71 is_stmt 1 view .LVU221
+ 686              		.loc 1 362 9 is_stmt 0 view .LVU222
+ 687 0028 0CE0     		b	.L57
+ 688              	.L58:
+ 363:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         case '0': FormatFlags |= FORMAT_FLAG_PAD_ZERO;     sFormat++; break;
+ 689              		.loc 1 363 19 is_stmt 1 view .LVU223
+ 690              		.loc 1 363 31 is_stmt 0 view .LVU224
+ 691 002a 40F00200 		orr	r0, r0, #2
+ 692              	.LVL57:
+ 693              		.loc 1 363 60 is_stmt 1 view .LVU225
+ 694              		.loc 1 363 67 is_stmt 0 view .LVU226
+ 695 002e 0134     		adds	r4, r4, #1
+ 696              	.LVL58:
+ 697              		.loc 1 363 71 is_stmt 1 view .LVU227
+ 698              		.loc 1 363 9 is_stmt 0 view .LVU228
+ 699 0030 08E0     		b	.L57
+ 700              	.L61:
+ 364:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         case '+': FormatFlags |= FORMAT_FLAG_PRINT_SIGN;   sFormat++; break;
+ 701              		.loc 1 364 19 is_stmt 1 view .LVU229
+ 702              		.loc 1 364 31 is_stmt 0 view .LVU230
+ 703 0032 40F00400 		orr	r0, r0, #4
+ 704              	.LVL59:
+ 705              		.loc 1 364 60 is_stmt 1 view .LVU231
+ 706              		.loc 1 364 67 is_stmt 0 view .LVU232
+ 707 0036 0134     		adds	r4, r4, #1
+ 708              	.LVL60:
+ 709              		.loc 1 364 71 is_stmt 1 view .LVU233
+ 710              		.loc 1 364 9 is_stmt 0 view .LVU234
+ 711 0038 04E0     		b	.L57
+ 712              	.L62:
+ 365:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         case '#': FormatFlags |= FORMAT_FLAG_ALTERNATE;    sFormat++; break;
+ 713              		.loc 1 365 19 is_stmt 1 view .LVU235
+ 714              		.loc 1 365 31 is_stmt 0 view .LVU236
+ 715 003a 40F00800 		orr	r0, r0, #8
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 21
+
+
+ 716              	.LVL61:
+ 717              		.loc 1 365 60 is_stmt 1 view .LVU237
+ 718              		.loc 1 365 67 is_stmt 0 view .LVU238
+ 719 003e 0134     		adds	r4, r4, #1
+ 720              	.LVL62:
+ 721              		.loc 1 365 71 is_stmt 1 view .LVU239
+ 722              		.loc 1 365 9 is_stmt 0 view .LVU240
+ 723 0040 00E0     		b	.L57
+ 724              	.L84:
+ 360:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         switch (c) {
+ 725              		.loc 1 360 11 view .LVU241
+ 726 0042 0022     		movs	r2, #0
+ 727              	.LVL63:
+ 728              	.L57:
+ 366:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         default:  v = 0; break;
+ 367:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         }
+ 368:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       } while (v);
+ 729              		.loc 1 368 15 is_stmt 1 view .LVU242
+ 730              		.loc 1 368 7 is_stmt 0 view .LVU243
+ 731 0044 12B3     		cbz	r2, .L65
+ 732              	.LVL64:
+ 733              	.L63:
+ 359:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         c = *sFormat;
+ 734              		.loc 1 359 7 is_stmt 1 view .LVU244
+ 360:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         switch (c) {
+ 735              		.loc 1 360 9 view .LVU245
+ 360:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         switch (c) {
+ 736              		.loc 1 360 11 is_stmt 0 view .LVU246
+ 737 0046 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 738              	.LVL65:
+ 361:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         case '-': FormatFlags |= FORMAT_FLAG_LEFT_JUSTIFY; sFormat++; break;
+ 739              		.loc 1 361 9 is_stmt 1 view .LVU247
+ 740 0048 233B     		subs	r3, r3, #35
+ 741              	.LVL66:
+ 361:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         case '-': FormatFlags |= FORMAT_FLAG_LEFT_JUSTIFY; sFormat++; break;
+ 742              		.loc 1 361 9 is_stmt 0 view .LVU248
+ 743 004a 0D2B     		cmp	r3, #13
+ 744 004c F9D8     		bhi	.L84
+ 745 004e 01A1     		adr	r1, .L59
+ 746 0050 51F823F0 		ldr	pc, [r1, r3, lsl #2]
+ 747              		.p2align 2
+ 748              	.L59:
+ 749 0054 3B000000 		.word	.L62+1
+ 750 0058 43000000 		.word	.L84+1
+ 751 005c 43000000 		.word	.L84+1
+ 752 0060 43000000 		.word	.L84+1
+ 753 0064 43000000 		.word	.L84+1
+ 754 0068 43000000 		.word	.L84+1
+ 755 006c 43000000 		.word	.L84+1
+ 756 0070 43000000 		.word	.L84+1
+ 757 0074 33000000 		.word	.L61+1
+ 758 0078 43000000 		.word	.L84+1
+ 759 007c 23000000 		.word	.L60+1
+ 760 0080 43000000 		.word	.L84+1
+ 761 0084 43000000 		.word	.L84+1
+ 762 0088 2B000000 		.word	.L58+1
+ 763              	.LVL67:
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 22
+
+
+ 764              		.p2align 1
+ 765              	.L65:
+ 369:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       //
+ 370:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       // filter out field with
+ 371:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       //
+ 372:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       FieldWidth = 0u;
+ 373:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       do {
+ 766              		.loc 1 373 7 is_stmt 1 view .LVU249
+ 374:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         c = *sFormat;
+ 767              		.loc 1 374 9 view .LVU250
+ 768              		.loc 1 374 11 is_stmt 0 view .LVU251
+ 769 008c 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 770              	.LVL68:
+ 375:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         if ((c < '0') || (c > '9')) {
+ 771              		.loc 1 375 9 is_stmt 1 view .LVU252
+ 772              		.loc 1 375 23 is_stmt 0 view .LVU253
+ 773 008e A3F13001 		sub	r1, r3, #48
+ 774 0092 C9B2     		uxtb	r1, r1
+ 775              		.loc 1 375 12 view .LVU254
+ 776 0094 0929     		cmp	r1, #9
+ 777 0096 07D8     		bhi	.L64
+ 376:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           break;
+ 377:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         }
+ 378:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         sFormat++;
+ 778              		.loc 1 378 9 is_stmt 1 view .LVU255
+ 779              		.loc 1 378 16 is_stmt 0 view .LVU256
+ 780 0098 0134     		adds	r4, r4, #1
+ 781              	.LVL69:
+ 379:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         FieldWidth = (FieldWidth * 10u) + ((unsigned)c - '0');
+ 782              		.loc 1 379 9 is_stmt 1 view .LVU257
+ 783              		.loc 1 379 34 is_stmt 0 view .LVU258
+ 784 009a 02EB8202 		add	r2, r2, r2, lsl #2
+ 785              	.LVL70:
+ 786              		.loc 1 379 41 view .LVU259
+ 787 009e 03EB4203 		add	r3, r3, r2, lsl #1
+ 788              	.LVL71:
+ 789              		.loc 1 379 20 view .LVU260
+ 790 00a2 A3F13002 		sub	r2, r3, #48
+ 791              	.LVL72:
+ 380:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       } while (1);
+ 792              		.loc 1 380 15 is_stmt 1 view .LVU261
+ 374:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         if ((c < '0') || (c > '9')) {
+ 793              		.loc 1 374 11 is_stmt 0 view .LVU262
+ 794 00a6 F1E7     		b	.L65
+ 795              	.LVL73:
+ 796              	.L64:
+ 381:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** 
+ 382:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       //
+ 383:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       // Filter out precision (number of digits to display)
+ 384:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       //
+ 385:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       NumDigits = 0u;
+ 797              		.loc 1 385 7 is_stmt 1 view .LVU263
+ 386:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       c = *sFormat;
+ 798              		.loc 1 386 7 view .LVU264
+ 387:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       if (c == '.') {
+ 799              		.loc 1 387 7 view .LVU265
+ 800              		.loc 1 387 10 is_stmt 0 view .LVU266
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 23
+
+
+ 801 00a8 2E2B     		cmp	r3, #46
+ 802 00aa 08D0     		beq	.L87
+ 385:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       c = *sFormat;
+ 803              		.loc 1 385 17 view .LVU267
+ 804 00ac 0023     		movs	r3, #0
+ 805              	.LVL74:
+ 806              	.L66:
+ 388:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         sFormat++;
+ 389:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         do {
+ 390:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           c = *sFormat;
+ 391:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           if ((c < '0') || (c > '9')) {
+ 392:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****             break;
+ 393:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           }
+ 394:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           sFormat++;
+ 395:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           NumDigits = NumDigits * 10u + ((unsigned)c - '0');
+ 396:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         } while (1);
+ 397:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       }
+ 398:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       //
+ 399:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       // Filter out length modifier
+ 400:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       //
+ 401:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       c = *sFormat;
+ 807              		.loc 1 401 7 is_stmt 1 view .LVU268
+ 808              		.loc 1 401 9 is_stmt 0 view .LVU269
+ 809 00ae 2178     		ldrb	r1, [r4]	@ zero_extendqisi2
+ 810              	.LVL75:
+ 811              	.L69:
+ 402:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       do {
+ 812              		.loc 1 402 7 is_stmt 1 view .LVU270
+ 403:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         if ((c == 'l') || (c == 'h')) {
+ 813              		.loc 1 403 9 view .LVU271
+ 814              		.loc 1 403 12 is_stmt 0 view .LVU272
+ 815 00b0 6829     		cmp	r1, #104
+ 816 00b2 18BF     		it	ne
+ 817 00b4 6C29     		cmpne	r1, #108
+ 818 00b6 11D1     		bne	.L68
+ 404:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           sFormat++;
+ 819              		.loc 1 404 11 is_stmt 1 view .LVU273
+ 820              	.LVL76:
+ 405:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           c = *sFormat;
+ 821              		.loc 1 405 11 view .LVU274
+ 822              		.loc 1 405 13 is_stmt 0 view .LVU275
+ 823 00b8 14F8011F 		ldrb	r1, [r4, #1]!	@ zero_extendqisi2
+ 824              	.LVL77:
+ 406:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         } else {
+ 407:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           break;
+ 408:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         }
+ 409:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       } while (1);
+ 825              		.loc 1 409 15 is_stmt 1 view .LVU276
+ 403:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           sFormat++;
+ 826              		.loc 1 403 12 is_stmt 0 view .LVU277
+ 827 00bc F8E7     		b	.L69
+ 828              	.LVL78:
+ 829              	.L87:
+ 388:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         do {
+ 830              		.loc 1 388 9 is_stmt 1 view .LVU278
+ 388:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         do {
+ 831              		.loc 1 388 16 is_stmt 0 view .LVU279
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 24
+
+
+ 832 00be 0134     		adds	r4, r4, #1
+ 833              	.LVL79:
+ 385:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       c = *sFormat;
+ 834              		.loc 1 385 17 view .LVU280
+ 835 00c0 0023     		movs	r3, #0
+ 836              	.LVL80:
+ 837              	.L67:
+ 389:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           c = *sFormat;
+ 838              		.loc 1 389 9 is_stmt 1 view .LVU281
+ 390:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           if ((c < '0') || (c > '9')) {
+ 839              		.loc 1 390 11 view .LVU282
+ 390:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           if ((c < '0') || (c > '9')) {
+ 840              		.loc 1 390 13 is_stmt 0 view .LVU283
+ 841 00c2 2178     		ldrb	r1, [r4]	@ zero_extendqisi2
+ 842              	.LVL81:
+ 391:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****             break;
+ 843              		.loc 1 391 11 is_stmt 1 view .LVU284
+ 391:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****             break;
+ 844              		.loc 1 391 25 is_stmt 0 view .LVU285
+ 845 00c4 A1F13007 		sub	r7, r1, #48
+ 846 00c8 FFB2     		uxtb	r7, r7
+ 391:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****             break;
+ 847              		.loc 1 391 14 view .LVU286
+ 848 00ca 092F     		cmp	r7, #9
+ 849 00cc EFD8     		bhi	.L66
+ 394:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           NumDigits = NumDigits * 10u + ((unsigned)c - '0');
+ 850              		.loc 1 394 11 is_stmt 1 view .LVU287
+ 394:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           NumDigits = NumDigits * 10u + ((unsigned)c - '0');
+ 851              		.loc 1 394 18 is_stmt 0 view .LVU288
+ 852 00ce 0134     		adds	r4, r4, #1
+ 853              	.LVL82:
+ 395:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         } while (1);
+ 854              		.loc 1 395 11 is_stmt 1 view .LVU289
+ 395:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         } while (1);
+ 855              		.loc 1 395 33 is_stmt 0 view .LVU290
+ 856 00d0 03EB8303 		add	r3, r3, r3, lsl #2
+ 857              	.LVL83:
+ 395:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         } while (1);
+ 858              		.loc 1 395 39 view .LVU291
+ 859 00d4 01EB4303 		add	r3, r1, r3, lsl #1
+ 395:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         } while (1);
+ 860              		.loc 1 395 21 view .LVU292
+ 861 00d8 303B     		subs	r3, r3, #48
+ 862              	.LVL84:
+ 396:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       }
+ 863              		.loc 1 396 17 is_stmt 1 view .LVU293
+ 390:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           if ((c < '0') || (c > '9')) {
+ 864              		.loc 1 390 13 is_stmt 0 view .LVU294
+ 865 00da F2E7     		b	.L67
+ 866              	.L68:
+ 410:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       //
+ 411:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       // Handle specifiers
+ 412:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       //
+ 413:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       switch (c) {
+ 867              		.loc 1 413 7 is_stmt 1 view .LVU295
+ 868 00dc 2529     		cmp	r1, #37
+ 869 00de 6DD0     		beq	.L70
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 25
+
+
+ 870 00e0 20D3     		bcc	.L71
+ 871 00e2 7829     		cmp	r1, #120
+ 872 00e4 1ED8     		bhi	.L71
+ 873 00e6 5829     		cmp	r1, #88
+ 874 00e8 1CD3     		bcc	.L71
+ 875 00ea 5839     		subs	r1, r1, #88
+ 876              	.LVL85:
+ 877              		.loc 1 413 7 is_stmt 0 view .LVU296
+ 878 00ec 2029     		cmp	r1, #32
+ 879 00ee 19D8     		bhi	.L71
+ 880 00f0 DFE801F0 		tbb	[pc, r1]
+ 881              	.L73:
+ 882 00f4 3D       		.byte	(.L72-.L73)/2
+ 883 00f5 18       		.byte	(.L71-.L73)/2
+ 884 00f6 18       		.byte	(.L71-.L73)/2
+ 885 00f7 18       		.byte	(.L71-.L73)/2
+ 886 00f8 18       		.byte	(.L71-.L73)/2
+ 887 00f9 18       		.byte	(.L71-.L73)/2
+ 888 00fa 18       		.byte	(.L71-.L73)/2
+ 889 00fb 18       		.byte	(.L71-.L73)/2
+ 890 00fc 18       		.byte	(.L71-.L73)/2
+ 891 00fd 18       		.byte	(.L71-.L73)/2
+ 892 00fe 18       		.byte	(.L71-.L73)/2
+ 893 00ff 11       		.byte	(.L78-.L73)/2
+ 894 0100 27       		.byte	(.L77-.L73)/2
+ 895 0101 18       		.byte	(.L71-.L73)/2
+ 896 0102 18       		.byte	(.L71-.L73)/2
+ 897 0103 18       		.byte	(.L71-.L73)/2
+ 898 0104 18       		.byte	(.L71-.L73)/2
+ 899 0105 18       		.byte	(.L71-.L73)/2
+ 900 0106 18       		.byte	(.L71-.L73)/2
+ 901 0107 18       		.byte	(.L71-.L73)/2
+ 902 0108 18       		.byte	(.L71-.L73)/2
+ 903 0109 18       		.byte	(.L71-.L73)/2
+ 904 010a 18       		.byte	(.L71-.L73)/2
+ 905 010b 18       		.byte	(.L71-.L73)/2
+ 906 010c 57       		.byte	(.L76-.L73)/2
+ 907 010d 18       		.byte	(.L71-.L73)/2
+ 908 010e 18       		.byte	(.L71-.L73)/2
+ 909 010f 48       		.byte	(.L75-.L73)/2
+ 910 0110 18       		.byte	(.L71-.L73)/2
+ 911 0111 32       		.byte	(.L74-.L73)/2
+ 912 0112 18       		.byte	(.L71-.L73)/2
+ 913 0113 18       		.byte	(.L71-.L73)/2
+ 914 0114 3D       		.byte	(.L72-.L73)/2
+ 915 0115 00       		.p2align 1
+ 916              	.L78:
+ 917              	.LBB2:
+ 414:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       case 'c': {
+ 415:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         char c0;
+ 918              		.loc 1 415 9 is_stmt 1 view .LVU297
+ 416:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         v = va_arg(*pParamList, int);
+ 919              		.loc 1 416 9 view .LVU298
+ 920              		.loc 1 416 11 is_stmt 0 view .LVU299
+ 921 0116 2B68     		ldr	r3, [r5]
+ 922              	.LVL86:
+ 923              		.loc 1 416 11 view .LVU300
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 26
+
+
+ 924 0118 1A1D     		adds	r2, r3, #4
+ 925              	.LVL87:
+ 926              		.loc 1 416 11 view .LVU301
+ 927 011a 2A60     		str	r2, [r5]
+ 417:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         c0 = (char)v;
+ 928              		.loc 1 417 9 is_stmt 1 view .LVU302
+ 929              	.LVL88:
+ 418:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         _StoreChar(&BufferDesc, c0);
+ 930              		.loc 1 418 9 view .LVU303
+ 931 011c 1978     		ldrb	r1, [r3]	@ zero_extendqisi2
+ 932 011e 13A8     		add	r0, sp, #76
+ 933              	.LVL89:
+ 934              		.loc 1 418 9 is_stmt 0 view .LVU304
+ 935 0120 FFF7FEFF 		bl	_StoreChar
+ 936              	.LVL90:
+ 419:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         break;
+ 937              		.loc 1 419 9 is_stmt 1 view .LVU305
+ 938              	.L71:
+ 939              		.loc 1 419 9 is_stmt 0 view .LVU306
+ 940              	.LBE2:
+ 420:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       }
+ 421:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       case 'd':
+ 422:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         v = va_arg(*pParamList, int);
+ 423:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         _PrintInt(&BufferDesc, v, 10u, NumDigits, FieldWidth, FormatFlags);
+ 424:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         break;
+ 425:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       case 'u':
+ 426:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         v = va_arg(*pParamList, int);
+ 427:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         _PrintUnsigned(&BufferDesc, (unsigned)v, 10u, NumDigits, FieldWidth, FormatFlags);
+ 428:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         break;
+ 429:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       case 'x':
+ 430:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       case 'X':
+ 431:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         v = va_arg(*pParamList, int);
+ 432:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         _PrintUnsigned(&BufferDesc, (unsigned)v, 16u, NumDigits, FieldWidth, FormatFlags);
+ 433:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         break;
+ 434:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       case 's':
+ 435:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         {
+ 436:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           const char * s = va_arg(*pParamList, const char *);
+ 437:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           do {
+ 438:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****             c = *s;
+ 439:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****             s++;
+ 440:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****             if (c == '\0') {
+ 441:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****               break;
+ 442:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****             }
+ 443:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****            _StoreChar(&BufferDesc, c);
+ 444:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           } while (BufferDesc.ReturnValue >= 0);
+ 445:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         }
+ 446:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         break;
+ 447:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       case 'p':
+ 448:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         v = va_arg(*pParamList, int);
+ 449:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         _PrintUnsigned(&BufferDesc, (unsigned)v, 16u, 8u, 8u, 0u);
+ 450:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         break;
+ 451:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       case '%':
+ 452:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         _StoreChar(&BufferDesc, '%');
+ 453:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         break;
+ 454:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       default:
+ 455:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         break;
+ 456:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       }
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 27
+
+
+ 457:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       sFormat++;
+ 941              		.loc 1 457 7 is_stmt 1 view .LVU307
+ 942              		.loc 1 457 14 is_stmt 0 view .LVU308
+ 943 0124 0134     		adds	r4, r4, #1
+ 944              	.LVL91:
+ 945              	.L80:
+ 458:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     } else {
+ 459:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       _StoreChar(&BufferDesc, c);
+ 460:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     }
+ 461:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   } while (BufferDesc.ReturnValue >= 0);
+ 946              		.loc 1 461 11 is_stmt 1 view .LVU309
+ 947              		.loc 1 461 22 is_stmt 0 view .LVU310
+ 948 0126 169B     		ldr	r3, [sp, #88]
+ 949              		.loc 1 461 3 view .LVU311
+ 950 0128 002B     		cmp	r3, #0
+ 951 012a 4CDB     		blt	.L55
+ 952              	.L81:
+ 347:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     c = *sFormat;
+ 953              		.loc 1 347 3 is_stmt 1 view .LVU312
+ 348:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     sFormat++;
+ 954              		.loc 1 348 5 view .LVU313
+ 348:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     sFormat++;
+ 955              		.loc 1 348 7 is_stmt 0 view .LVU314
+ 956 012c 14F8011B 		ldrb	r1, [r4], #1	@ zero_extendqisi2
+ 957              	.LVL92:
+ 349:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     if (c == 0u) {
+ 958              		.loc 1 349 5 is_stmt 1 view .LVU315
+ 350:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       break;
+ 959              		.loc 1 350 5 view .LVU316
+ 350:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       break;
+ 960              		.loc 1 350 8 is_stmt 0 view .LVU317
+ 961 0130 0029     		cmp	r1, #0
+ 962 0132 48D0     		beq	.L55
+ 353:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       //
+ 963              		.loc 1 353 5 is_stmt 1 view .LVU318
+ 353:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       //
+ 964              		.loc 1 353 8 is_stmt 0 view .LVU319
+ 965 0134 2529     		cmp	r1, #37
+ 966 0136 3FF471AF 		beq	.L88
+ 459:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     }
+ 967              		.loc 1 459 7 is_stmt 1 view .LVU320
+ 968 013a 13A8     		add	r0, sp, #76
+ 969 013c FFF7FEFF 		bl	_StoreChar
+ 970              	.LVL93:
+ 459:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     }
+ 971              		.loc 1 459 7 is_stmt 0 view .LVU321
+ 972 0140 F1E7     		b	.L80
+ 973              	.LVL94:
+ 974              	.L77:
+ 422:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         _PrintInt(&BufferDesc, v, 10u, NumDigits, FieldWidth, FormatFlags);
+ 975              		.loc 1 422 9 is_stmt 1 view .LVU322
+ 422:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         _PrintInt(&BufferDesc, v, 10u, NumDigits, FieldWidth, FormatFlags);
+ 976              		.loc 1 422 11 is_stmt 0 view .LVU323
+ 977 0142 2968     		ldr	r1, [r5]
+ 978 0144 0F1D     		adds	r7, r1, #4
+ 979 0146 2F60     		str	r7, [r5]
+ 980 0148 0968     		ldr	r1, [r1]
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 28
+
+
+ 423:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         break;
+ 981              		.loc 1 423 9 is_stmt 1 view .LVU324
+ 982 014a 0190     		str	r0, [sp, #4]
+ 983 014c 0092     		str	r2, [sp]
+ 984 014e 0A22     		movs	r2, #10
+ 985              	.LVL95:
+ 423:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         break;
+ 986              		.loc 1 423 9 is_stmt 0 view .LVU325
+ 987 0150 13A8     		add	r0, sp, #76
+ 988              	.LVL96:
+ 423:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         break;
+ 989              		.loc 1 423 9 view .LVU326
+ 990 0152 FFF7FEFF 		bl	_PrintInt
+ 991              	.LVL97:
+ 424:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       case 'u':
+ 992              		.loc 1 424 9 is_stmt 1 view .LVU327
+ 993 0156 E5E7     		b	.L71
+ 994              	.LVL98:
+ 995              	.L74:
+ 426:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         _PrintUnsigned(&BufferDesc, (unsigned)v, 10u, NumDigits, FieldWidth, FormatFlags);
+ 996              		.loc 1 426 9 view .LVU328
+ 426:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         _PrintUnsigned(&BufferDesc, (unsigned)v, 10u, NumDigits, FieldWidth, FormatFlags);
+ 997              		.loc 1 426 11 is_stmt 0 view .LVU329
+ 998 0158 2968     		ldr	r1, [r5]
+ 999 015a 0F1D     		adds	r7, r1, #4
+ 1000 015c 2F60     		str	r7, [r5]
+ 1001 015e 0968     		ldr	r1, [r1]
+ 427:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         break;
+ 1002              		.loc 1 427 9 is_stmt 1 view .LVU330
+ 1003 0160 0190     		str	r0, [sp, #4]
+ 1004 0162 0092     		str	r2, [sp]
+ 1005 0164 0A22     		movs	r2, #10
+ 1006              	.LVL99:
+ 427:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         break;
+ 1007              		.loc 1 427 9 is_stmt 0 view .LVU331
+ 1008 0166 13A8     		add	r0, sp, #76
+ 1009              	.LVL100:
+ 427:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         break;
+ 1010              		.loc 1 427 9 view .LVU332
+ 1011 0168 FFF7FEFF 		bl	_PrintUnsigned
+ 1012              	.LVL101:
+ 428:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       case 'x':
+ 1013              		.loc 1 428 9 is_stmt 1 view .LVU333
+ 1014 016c DAE7     		b	.L71
+ 1015              	.LVL102:
+ 1016              	.L72:
+ 431:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         _PrintUnsigned(&BufferDesc, (unsigned)v, 16u, NumDigits, FieldWidth, FormatFlags);
+ 1017              		.loc 1 431 9 view .LVU334
+ 431:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         _PrintUnsigned(&BufferDesc, (unsigned)v, 16u, NumDigits, FieldWidth, FormatFlags);
+ 1018              		.loc 1 431 11 is_stmt 0 view .LVU335
+ 1019 016e 2968     		ldr	r1, [r5]
+ 1020 0170 0F1D     		adds	r7, r1, #4
+ 1021 0172 2F60     		str	r7, [r5]
+ 1022 0174 0968     		ldr	r1, [r1]
+ 432:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         break;
+ 1023              		.loc 1 432 9 is_stmt 1 view .LVU336
+ 1024 0176 0190     		str	r0, [sp, #4]
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 29
+
+
+ 1025 0178 0092     		str	r2, [sp]
+ 1026 017a 1022     		movs	r2, #16
+ 1027              	.LVL103:
+ 432:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         break;
+ 1028              		.loc 1 432 9 is_stmt 0 view .LVU337
+ 1029 017c 13A8     		add	r0, sp, #76
+ 1030              	.LVL104:
+ 432:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         break;
+ 1031              		.loc 1 432 9 view .LVU338
+ 1032 017e FFF7FEFF 		bl	_PrintUnsigned
+ 1033              	.LVL105:
+ 433:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       case 's':
+ 1034              		.loc 1 433 9 is_stmt 1 view .LVU339
+ 1035 0182 CFE7     		b	.L71
+ 1036              	.LVL106:
+ 1037              	.L75:
+ 1038              	.LBB3:
+ 436:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           do {
+ 1039              		.loc 1 436 11 view .LVU340
+ 436:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           do {
+ 1040              		.loc 1 436 24 is_stmt 0 view .LVU341
+ 1041 0184 2B68     		ldr	r3, [r5]
+ 1042              	.LVL107:
+ 436:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           do {
+ 1043              		.loc 1 436 24 view .LVU342
+ 1044 0186 1A1D     		adds	r2, r3, #4
+ 1045              	.LVL108:
+ 436:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           do {
+ 1046              		.loc 1 436 24 view .LVU343
+ 1047 0188 2A60     		str	r2, [r5]
+ 1048 018a 1F68     		ldr	r7, [r3]
+ 1049              	.LVL109:
+ 1050              	.L79:
+ 437:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****             c = *s;
+ 1051              		.loc 1 437 11 is_stmt 1 view .LVU344
+ 438:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****             s++;
+ 1052              		.loc 1 438 13 view .LVU345
+ 438:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****             s++;
+ 1053              		.loc 1 438 15 is_stmt 0 view .LVU346
+ 1054 018c 17F8011B 		ldrb	r1, [r7], #1	@ zero_extendqisi2
+ 1055              	.LVL110:
+ 439:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****             if (c == '\0') {
+ 1056              		.loc 1 439 13 is_stmt 1 view .LVU347
+ 440:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****               break;
+ 1057              		.loc 1 440 13 view .LVU348
+ 440:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****               break;
+ 1058              		.loc 1 440 16 is_stmt 0 view .LVU349
+ 1059 0190 0029     		cmp	r1, #0
+ 1060 0192 C7D0     		beq	.L71
+ 443:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****           } while (BufferDesc.ReturnValue >= 0);
+ 1061              		.loc 1 443 12 is_stmt 1 view .LVU350
+ 1062 0194 13A8     		add	r0, sp, #76
+ 1063 0196 FFF7FEFF 		bl	_StoreChar
+ 1064              	.LVL111:
+ 444:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         }
+ 1065              		.loc 1 444 19 view .LVU351
+ 444:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         }
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 30
+
+
+ 1066              		.loc 1 444 30 is_stmt 0 view .LVU352
+ 1067 019a 169B     		ldr	r3, [sp, #88]
+ 444:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         }
+ 1068              		.loc 1 444 11 view .LVU353
+ 1069 019c 002B     		cmp	r3, #0
+ 1070 019e F5DA     		bge	.L79
+ 1071 01a0 C0E7     		b	.L71
+ 1072              	.LVL112:
+ 1073              	.L76:
+ 444:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         }
+ 1074              		.loc 1 444 11 view .LVU354
+ 1075              	.LBE3:
+ 448:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         _PrintUnsigned(&BufferDesc, (unsigned)v, 16u, 8u, 8u, 0u);
+ 1076              		.loc 1 448 9 is_stmt 1 view .LVU355
+ 448:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         _PrintUnsigned(&BufferDesc, (unsigned)v, 16u, 8u, 8u, 0u);
+ 1077              		.loc 1 448 11 is_stmt 0 view .LVU356
+ 1078 01a2 2B68     		ldr	r3, [r5]
+ 1079              	.LVL113:
+ 448:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         _PrintUnsigned(&BufferDesc, (unsigned)v, 16u, 8u, 8u, 0u);
+ 1080              		.loc 1 448 11 view .LVU357
+ 1081 01a4 1A1D     		adds	r2, r3, #4
+ 1082              	.LVL114:
+ 448:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         _PrintUnsigned(&BufferDesc, (unsigned)v, 16u, 8u, 8u, 0u);
+ 1083              		.loc 1 448 11 view .LVU358
+ 1084 01a6 2A60     		str	r2, [r5]
+ 1085 01a8 1968     		ldr	r1, [r3]
+ 449:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         break;
+ 1086              		.loc 1 449 9 is_stmt 1 view .LVU359
+ 1087 01aa 0023     		movs	r3, #0
+ 1088 01ac 0193     		str	r3, [sp, #4]
+ 1089 01ae 0823     		movs	r3, #8
+ 1090 01b0 0093     		str	r3, [sp]
+ 1091 01b2 1022     		movs	r2, #16
+ 1092 01b4 13A8     		add	r0, sp, #76
+ 1093              	.LVL115:
+ 449:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         break;
+ 1094              		.loc 1 449 9 is_stmt 0 view .LVU360
+ 1095 01b6 FFF7FEFF 		bl	_PrintUnsigned
+ 1096              	.LVL116:
+ 450:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       case '%':
+ 1097              		.loc 1 450 9 is_stmt 1 view .LVU361
+ 1098 01ba B3E7     		b	.L71
+ 1099              	.LVL117:
+ 1100              	.L70:
+ 452:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         break;
+ 1101              		.loc 1 452 9 view .LVU362
+ 1102 01bc 2521     		movs	r1, #37
+ 1103              	.LVL118:
+ 452:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         break;
+ 1104              		.loc 1 452 9 is_stmt 0 view .LVU363
+ 1105 01be 13A8     		add	r0, sp, #76
+ 1106              	.LVL119:
+ 452:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****         break;
+ 1107              		.loc 1 452 9 view .LVU364
+ 1108 01c0 FFF7FEFF 		bl	_StoreChar
+ 1109              	.LVL120:
+ 453:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       default:
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 31
+
+
+ 1110              		.loc 1 453 9 is_stmt 1 view .LVU365
+ 1111 01c4 AEE7     		b	.L71
+ 1112              	.L55:
+ 462:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** 
+ 463:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   if (BufferDesc.ReturnValue > 0) {
+ 1113              		.loc 1 463 3 view .LVU366
+ 1114              		.loc 1 463 17 is_stmt 0 view .LVU367
+ 1115 01c6 169B     		ldr	r3, [sp, #88]
+ 1116              		.loc 1 463 6 view .LVU368
+ 1117 01c8 002B     		cmp	r3, #0
+ 1118 01ca 05DD     		ble	.L82
+ 464:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     //
+ 465:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     // Write remaining data, if any
+ 466:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     //
+ 467:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     if (BufferDesc.Cnt != 0u) {
+ 1119              		.loc 1 467 5 is_stmt 1 view .LVU369
+ 1120              		.loc 1 467 19 is_stmt 0 view .LVU370
+ 1121 01cc 159A     		ldr	r2, [sp, #84]
+ 1122              		.loc 1 467 8 view .LVU371
+ 1123 01ce 32B9     		cbnz	r2, .L89
+ 1124              	.L83:
+ 468:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       SEGGER_RTT_Write(BufferIndex, acBuffer, BufferDesc.Cnt);
+ 469:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     }
+ 470:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****     BufferDesc.ReturnValue += (int)BufferDesc.Cnt;
+ 1125              		.loc 1 470 5 is_stmt 1 view .LVU372
+ 1126              		.loc 1 470 28 is_stmt 0 view .LVU373
+ 1127 01d0 159A     		ldr	r2, [sp, #84]
+ 1128 01d2 169B     		ldr	r3, [sp, #88]
+ 1129 01d4 1344     		add	r3, r3, r2
+ 1130 01d6 1693     		str	r3, [sp, #88]
+ 1131              	.L82:
+ 471:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   }
+ 472:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   return BufferDesc.ReturnValue;
+ 1132              		.loc 1 472 3 is_stmt 1 view .LVU374
+ 473:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** }
+ 1133              		.loc 1 473 1 is_stmt 0 view .LVU375
+ 1134 01d8 1698     		ldr	r0, [sp, #88]
+ 1135 01da 19B0     		add	sp, sp, #100
+ 1136              	.LCFI8:
+ 1137              		.cfi_remember_state
+ 1138              		.cfi_def_cfa_offset 20
+ 1139              		@ sp needed
+ 1140 01dc F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1141              	.LVL121:
+ 1142              	.L89:
+ 1143              	.LCFI9:
+ 1144              		.cfi_restore_state
+ 468:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****       SEGGER_RTT_Write(BufferIndex, acBuffer, BufferDesc.Cnt);
+ 1145              		.loc 1 468 7 is_stmt 1 view .LVU376
+ 1146 01de 03A9     		add	r1, sp, #12
+ 1147 01e0 3046     		mov	r0, r6
+ 1148 01e2 FFF7FEFF 		bl	SEGGER_RTT_Write
+ 1149              	.LVL122:
+ 1150 01e6 F3E7     		b	.L83
+ 1151              		.cfi_endproc
+ 1152              	.LFE3:
+ 1154              		.section	.text.SEGGER_RTT_printf,"ax",%progbits
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 32
+
+
+ 1155              		.align	1
+ 1156              		.global	SEGGER_RTT_printf
+ 1157              		.syntax unified
+ 1158              		.thumb
+ 1159              		.thumb_func
+ 1160              		.fpu fpv5-d16
+ 1162              	SEGGER_RTT_printf:
+ 1163              	.LVL123:
+ 1164              	.LFB4:
+ 474:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** 
+ 475:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** /*********************************************************************
+ 476:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *
+ 477:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *       SEGGER_RTT_printf
+ 478:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *
+ 479:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *  Function description
+ 480:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *    Stores a formatted string in SEGGER RTT control block.
+ 481:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *    This data is read by the host.
+ 482:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *
+ 483:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *  Parameters
+ 484:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *    BufferIndex  Index of "Up"-buffer to be used. (e.g. 0 for "Terminal")
+ 485:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *    sFormat      Pointer to format string, followed by the arguments for conversion
+ 486:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *
+ 487:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *  Return values
+ 488:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *    >= 0:  Number of bytes which have been stored in the "Up"-buffer.
+ 489:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *     < 0:  Error
+ 490:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *
+ 491:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *  Notes
+ 492:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *    (1) Conversion specifications have following syntax:
+ 493:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *          %[flags][FieldWidth][.Precision]ConversionSpecifier
+ 494:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *    (2) Supported flags:
+ 495:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *          -: Left justify within the field width
+ 496:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *          +: Always print sign extension for signed conversions
+ 497:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *          0: Pad with 0 instead of spaces. Ignored when using '-'-flag or precision
+ 498:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *        Supported conversion specifiers:
+ 499:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *          c: Print the argument as one char
+ 500:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *          d: Print the argument as a signed integer
+ 501:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *          u: Print the argument as an unsigned integer
+ 502:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *          x: Print the argument as an hexadecimal integer
+ 503:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *          s: Print the string pointed to by the argument
+ 504:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** *          p: Print the argument as an 8-digit hexadecimal integer. (Argument shall be a pointer to
+ 505:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** */
+ 506:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** int SEGGER_RTT_printf(unsigned BufferIndex, const char * sFormat, ...) {
+ 1165              		.loc 1 506 72 view -0
+ 1166              		.cfi_startproc
+ 1167              		@ args = 4, pretend = 12, frame = 8
+ 1168              		@ frame_needed = 0, uses_anonymous_args = 1
+ 1169              		.loc 1 506 72 is_stmt 0 view .LVU378
+ 1170 0000 0EB4     		push	{r1, r2, r3}
+ 1171              	.LCFI10:
+ 1172              		.cfi_def_cfa_offset 12
+ 1173              		.cfi_offset 1, -12
+ 1174              		.cfi_offset 2, -8
+ 1175              		.cfi_offset 3, -4
+ 1176 0002 00B5     		push	{lr}
+ 1177              	.LCFI11:
+ 1178              		.cfi_def_cfa_offset 16
+ 1179              		.cfi_offset 14, -16
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 33
+
+
+ 1180 0004 82B0     		sub	sp, sp, #8
+ 1181              	.LCFI12:
+ 1182              		.cfi_def_cfa_offset 24
+ 1183 0006 03AB     		add	r3, sp, #12
+ 1184 0008 53F8041B 		ldr	r1, [r3], #4
+ 507:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   int r;
+ 1185              		.loc 1 507 3 is_stmt 1 view .LVU379
+ 508:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   va_list ParamList;
+ 1186              		.loc 1 508 3 view .LVU380
+ 509:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** 
+ 510:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   va_start(ParamList, sFormat);
+ 1187              		.loc 1 510 3 view .LVU381
+ 1188 000c 0193     		str	r3, [sp, #4]
+ 511:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   r = SEGGER_RTT_vprintf(BufferIndex, sFormat, &ParamList);
+ 1189              		.loc 1 511 3 view .LVU382
+ 1190              		.loc 1 511 7 is_stmt 0 view .LVU383
+ 1191 000e 01AA     		add	r2, sp, #4
+ 1192 0010 FFF7FEFF 		bl	SEGGER_RTT_vprintf
+ 1193              	.LVL124:
+ 512:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   va_end(ParamList);
+ 1194              		.loc 1 512 3 is_stmt 1 view .LVU384
+ 513:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c ****   return r;
+ 1195              		.loc 1 513 3 view .LVU385
+ 514:Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT_printf.c **** }
+ 1196              		.loc 1 514 1 is_stmt 0 view .LVU386
+ 1197 0014 02B0     		add	sp, sp, #8
+ 1198              	.LCFI13:
+ 1199              		.cfi_def_cfa_offset 16
+ 1200              		@ sp needed
+ 1201 0016 5DF804EB 		ldr	lr, [sp], #4
+ 1202              	.LCFI14:
+ 1203              		.cfi_restore 14
+ 1204              		.cfi_def_cfa_offset 12
+ 1205 001a 03B0     		add	sp, sp, #12
+ 1206              	.LCFI15:
+ 1207              		.cfi_restore 3
+ 1208              		.cfi_restore 2
+ 1209              		.cfi_restore 1
+ 1210              		.cfi_def_cfa_offset 0
+ 1211 001c 7047     		bx	lr
+ 1212              		.cfi_endproc
+ 1213              	.LFE4:
+ 1215              		.section	.rodata._aV2C.6281,"a"
+ 1216              		.align	2
+ 1217              		.set	.LANCHOR0,. + 0
+ 1220              	_aV2C.6281:
+ 1221 0000 30313233 		.ascii	"0123456789ABCDEF"
+ 1221      34353637 
+ 1221      38394142 
+ 1221      43444546 
+ 1222              		.text
+ 1223              	.Letext0:
+ 1224              		.file 2 "Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT.h"
+ 1225              		.file 3 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\lib\\gcc\\arm-none
+ 1226              		.file 4 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\arm-none-eabi\\inc
+ 1227              		.file 5 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\arm-none-eabi\\inc
+ 1228              		.file 6 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\arm-none-eabi\\inc
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 34
+
+
+ 1229              		.file 7 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\arm-none-eabi\\inc
+ 1230              		.file 8 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\lib\\gcc\\arm-none
+ 1231              		.file 9 "<built-in>"
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s 			page 35
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 SEGGER_RTT_printf.c
+C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s:17     .text._StoreChar:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s:24     .text._StoreChar:00000000 _StoreChar
+C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s:112    .text._PrintUnsigned:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s:118    .text._PrintUnsigned:00000000 _PrintUnsigned
+C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s:359    .text._PrintUnsigned:000000f0 $d
+C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s:364    .text._PrintInt:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s:370    .text._PrintInt:00000000 _PrintInt
+C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s:613    .text.SEGGER_RTT_vprintf:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s:620    .text.SEGGER_RTT_vprintf:00000000 SEGGER_RTT_vprintf
+C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s:749    .text.SEGGER_RTT_vprintf:00000054 $d
+C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s:764    .text.SEGGER_RTT_vprintf:0000008c $t
+C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s:882    .text.SEGGER_RTT_vprintf:000000f4 $d
+C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s:1155   .text.SEGGER_RTT_printf:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s:1162   .text.SEGGER_RTT_printf:00000000 SEGGER_RTT_printf
+C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s:1216   .rodata._aV2C.6281:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s:1220   .rodata._aV2C.6281:00000000 _aV2C.6281
+C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s:915    .text.SEGGER_RTT_vprintf:00000115 $d
+C:\Users\Brandon\AppData\Local\Temp\ccFLqBDp.s:915    .text.SEGGER_RTT_vprintf:00000116 $t
+
+UNDEFINED SYMBOLS
+SEGGER_RTT_Write

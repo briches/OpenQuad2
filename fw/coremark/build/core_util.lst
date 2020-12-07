@@ -1,0 +1,648 @@
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"core_util.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.get_seed_32,"ax",%progbits
+  17              		.align	1
+  18              		.global	get_seed_32
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	get_seed_32:
+  26              	.LVL0:
+  27              	.LFB3:
+  28              		.file 1 "Drivers/coremark_stm32_hal/core_util.c"
+   1:Drivers/coremark_stm32_hal/core_util.c **** /*
+   2:Drivers/coremark_stm32_hal/core_util.c **** Author : Shay Gal-On, EEMBC
+   3:Drivers/coremark_stm32_hal/core_util.c **** 
+   4:Drivers/coremark_stm32_hal/core_util.c **** This file is part of  EEMBC(R) and CoreMark(TM), which are Copyright (C) 2009 
+   5:Drivers/coremark_stm32_hal/core_util.c **** All rights reserved.                            
+   6:Drivers/coremark_stm32_hal/core_util.c **** 
+   7:Drivers/coremark_stm32_hal/core_util.c **** EEMBC CoreMark Software is a product of EEMBC and is provided under the terms of the
+   8:Drivers/coremark_stm32_hal/core_util.c **** CoreMark License that is distributed with the official EEMBC COREMARK Software release. 
+   9:Drivers/coremark_stm32_hal/core_util.c **** If you received this EEMBC CoreMark Software without the accompanying CoreMark License, 
+  10:Drivers/coremark_stm32_hal/core_util.c **** you must discontinue use and download the official release from www.coremark.org.  
+  11:Drivers/coremark_stm32_hal/core_util.c **** 
+  12:Drivers/coremark_stm32_hal/core_util.c **** Also, if you are publicly displaying scores generated from the EEMBC CoreMark software, 
+  13:Drivers/coremark_stm32_hal/core_util.c **** make sure that you are in compliance with Run and Reporting rules specified in the accompanying rea
+  14:Drivers/coremark_stm32_hal/core_util.c **** 
+  15:Drivers/coremark_stm32_hal/core_util.c **** EEMBC 
+  16:Drivers/coremark_stm32_hal/core_util.c **** 4354 Town Center Blvd. Suite 114-200
+  17:Drivers/coremark_stm32_hal/core_util.c **** El Dorado Hills, CA, 95762 
+  18:Drivers/coremark_stm32_hal/core_util.c **** */ 
+  19:Drivers/coremark_stm32_hal/core_util.c **** #include "coremark.h"
+  20:Drivers/coremark_stm32_hal/core_util.c **** /* Function: get_seed
+  21:Drivers/coremark_stm32_hal/core_util.c **** 	Get a values that cannot be determined at compile time.
+  22:Drivers/coremark_stm32_hal/core_util.c **** 
+  23:Drivers/coremark_stm32_hal/core_util.c **** 	Since different embedded systems and compilers are used, 3 different methods are provided:
+  24:Drivers/coremark_stm32_hal/core_util.c **** 	1 - Using a volatile variable. This method is only valid if the compiler is forced to generate cod
+  25:Drivers/coremark_stm32_hal/core_util.c **** 	reads the value of a volatile variable from memory at run time. 
+  26:Drivers/coremark_stm32_hal/core_util.c **** 	Please note, if using this method, you would need to modify core_portme.c to generate training pro
+  27:Drivers/coremark_stm32_hal/core_util.c **** 	2 - Command line arguments. This is the preferred method if command line arguments are supported.
+  28:Drivers/coremark_stm32_hal/core_util.c **** 	3 - System function. If none of the first 2 methods is available on the platform,
+  29:Drivers/coremark_stm32_hal/core_util.c **** 	a system function which is not a stub can be used.
+  30:Drivers/coremark_stm32_hal/core_util.c **** 	
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s 			page 2
+
+
+  31:Drivers/coremark_stm32_hal/core_util.c **** 	e.g. read the value on GPIO pins connected to switches, or invoke special simulator functions.
+  32:Drivers/coremark_stm32_hal/core_util.c **** */
+  33:Drivers/coremark_stm32_hal/core_util.c **** #if (SEED_METHOD==SEED_VOLATILE)
+  34:Drivers/coremark_stm32_hal/core_util.c **** 	extern volatile ee_s32 seed1_volatile;
+  35:Drivers/coremark_stm32_hal/core_util.c **** 	extern volatile ee_s32 seed2_volatile;
+  36:Drivers/coremark_stm32_hal/core_util.c **** 	extern volatile ee_s32 seed3_volatile;
+  37:Drivers/coremark_stm32_hal/core_util.c **** 	extern volatile ee_s32 seed4_volatile;
+  38:Drivers/coremark_stm32_hal/core_util.c **** 	extern volatile ee_s32 seed5_volatile;
+  39:Drivers/coremark_stm32_hal/core_util.c **** 	ee_s32 get_seed_32(int i) {
+  29              		.loc 1 39 28 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  40:Drivers/coremark_stm32_hal/core_util.c **** 		ee_s32 retval;
+  34              		.loc 1 40 3 view .LVU1
+  41:Drivers/coremark_stm32_hal/core_util.c **** 		switch (i) {
+  35              		.loc 1 41 3 view .LVU2
+  36 0000 0138     		subs	r0, r0, #1
+  37              	.LVL1:
+  38              		.loc 1 41 3 is_stmt 0 view .LVU3
+  39 0002 0428     		cmp	r0, #4
+  40 0004 13D8     		bhi	.L9
+  41 0006 DFE800F0 		tbb	[pc, r0]
+  42              	.L4:
+  43 000a 03       		.byte	(.L8-.L4)/2
+  44 000b 06       		.byte	(.L7-.L4)/2
+  45 000c 09       		.byte	(.L6-.L4)/2
+  46 000d 0C       		.byte	(.L5-.L4)/2
+  47 000e 0F       		.byte	(.L3-.L4)/2
+  48 000f 00       		.p2align 1
+  49              	.L8:
+  42:Drivers/coremark_stm32_hal/core_util.c **** 			case 1:
+  43:Drivers/coremark_stm32_hal/core_util.c **** 				retval=seed1_volatile;
+  50              		.loc 1 43 5 is_stmt 1 view .LVU4
+  51              		.loc 1 43 11 is_stmt 0 view .LVU5
+  52 0010 084B     		ldr	r3, .L10
+  53 0012 1868     		ldr	r0, [r3]
+  54              	.LVL2:
+  44:Drivers/coremark_stm32_hal/core_util.c **** 				break;
+  55              		.loc 1 44 5 is_stmt 1 view .LVU6
+  56 0014 7047     		bx	lr
+  57              	.LVL3:
+  58              	.L7:
+  45:Drivers/coremark_stm32_hal/core_util.c **** 			case 2:
+  46:Drivers/coremark_stm32_hal/core_util.c **** 				retval=seed2_volatile;
+  59              		.loc 1 46 5 view .LVU7
+  60              		.loc 1 46 11 is_stmt 0 view .LVU8
+  61 0016 084B     		ldr	r3, .L10+4
+  62 0018 1868     		ldr	r0, [r3]
+  63              	.LVL4:
+  47:Drivers/coremark_stm32_hal/core_util.c **** 				break;
+  64              		.loc 1 47 5 is_stmt 1 view .LVU9
+  65 001a 7047     		bx	lr
+  66              	.LVL5:
+  67              	.L6:
+  48:Drivers/coremark_stm32_hal/core_util.c **** 			case 3:
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s 			page 3
+
+
+  49:Drivers/coremark_stm32_hal/core_util.c **** 				retval=seed3_volatile;
+  68              		.loc 1 49 5 view .LVU10
+  69              		.loc 1 49 11 is_stmt 0 view .LVU11
+  70 001c 074B     		ldr	r3, .L10+8
+  71 001e 1868     		ldr	r0, [r3]
+  72              	.LVL6:
+  50:Drivers/coremark_stm32_hal/core_util.c **** 				break;
+  73              		.loc 1 50 5 is_stmt 1 view .LVU12
+  74 0020 7047     		bx	lr
+  75              	.LVL7:
+  76              	.L5:
+  51:Drivers/coremark_stm32_hal/core_util.c **** 			case 4:
+  52:Drivers/coremark_stm32_hal/core_util.c **** 				retval=seed4_volatile;
+  77              		.loc 1 52 5 view .LVU13
+  78              		.loc 1 52 11 is_stmt 0 view .LVU14
+  79 0022 074B     		ldr	r3, .L10+12
+  80 0024 1868     		ldr	r0, [r3]
+  81              	.LVL8:
+  53:Drivers/coremark_stm32_hal/core_util.c **** 				break;
+  82              		.loc 1 53 5 is_stmt 1 view .LVU15
+  83 0026 7047     		bx	lr
+  84              	.LVL9:
+  85              	.L3:
+  54:Drivers/coremark_stm32_hal/core_util.c **** 			case 5:
+  55:Drivers/coremark_stm32_hal/core_util.c **** 				retval=seed5_volatile;
+  86              		.loc 1 55 5 view .LVU16
+  87              		.loc 1 55 11 is_stmt 0 view .LVU17
+  88 0028 064B     		ldr	r3, .L10+16
+  89 002a 1868     		ldr	r0, [r3]
+  90              	.LVL10:
+  56:Drivers/coremark_stm32_hal/core_util.c **** 				break;
+  91              		.loc 1 56 5 is_stmt 1 view .LVU18
+  92 002c 7047     		bx	lr
+  93              	.LVL11:
+  94              	.L9:
+  39:Drivers/coremark_stm32_hal/core_util.c **** 		ee_s32 retval;
+  95              		.loc 1 39 28 is_stmt 0 view .LVU19
+  96 002e 0020     		movs	r0, #0
+  97              	.LVL12:
+  57:Drivers/coremark_stm32_hal/core_util.c **** 			default:
+  58:Drivers/coremark_stm32_hal/core_util.c **** 				retval=0;
+  59:Drivers/coremark_stm32_hal/core_util.c **** 				break;
+  60:Drivers/coremark_stm32_hal/core_util.c **** 		}
+  61:Drivers/coremark_stm32_hal/core_util.c **** 		return retval;
+  98              		.loc 1 61 3 is_stmt 1 view .LVU20
+  62:Drivers/coremark_stm32_hal/core_util.c **** 	}
+  99              		.loc 1 62 2 is_stmt 0 view .LVU21
+ 100 0030 7047     		bx	lr
+ 101              	.L11:
+ 102 0032 00BF     		.align	2
+ 103              	.L10:
+ 104 0034 00000000 		.word	seed1_volatile
+ 105 0038 00000000 		.word	seed2_volatile
+ 106 003c 00000000 		.word	seed3_volatile
+ 107 0040 00000000 		.word	seed4_volatile
+ 108 0044 00000000 		.word	seed5_volatile
+ 109              		.cfi_endproc
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s 			page 4
+
+
+ 110              	.LFE3:
+ 112              		.section	.text.crcu8,"ax",%progbits
+ 113              		.align	1
+ 114              		.global	crcu8
+ 115              		.syntax unified
+ 116              		.thumb
+ 117              		.thumb_func
+ 118              		.fpu fpv5-d16
+ 120              	crcu8:
+ 121              	.LVL13:
+ 122              	.LFB4:
+  63:Drivers/coremark_stm32_hal/core_util.c **** #elif (SEED_METHOD==SEED_ARG)
+  64:Drivers/coremark_stm32_hal/core_util.c **** ee_s32 parseval(char *valstring) {
+  65:Drivers/coremark_stm32_hal/core_util.c **** 	ee_s32 retval=0;
+  66:Drivers/coremark_stm32_hal/core_util.c **** 	ee_s32 neg=1;
+  67:Drivers/coremark_stm32_hal/core_util.c **** 	int hexmode=0;
+  68:Drivers/coremark_stm32_hal/core_util.c **** 	if (*valstring == '-') {
+  69:Drivers/coremark_stm32_hal/core_util.c **** 		neg=-1;
+  70:Drivers/coremark_stm32_hal/core_util.c **** 		valstring++;
+  71:Drivers/coremark_stm32_hal/core_util.c **** 	}
+  72:Drivers/coremark_stm32_hal/core_util.c **** 	if ((valstring[0] == '0') && (valstring[1] == 'x')) {
+  73:Drivers/coremark_stm32_hal/core_util.c **** 		hexmode=1;
+  74:Drivers/coremark_stm32_hal/core_util.c **** 		valstring+=2;
+  75:Drivers/coremark_stm32_hal/core_util.c **** 	}
+  76:Drivers/coremark_stm32_hal/core_util.c **** 		/* first look for digits */
+  77:Drivers/coremark_stm32_hal/core_util.c **** 	if (hexmode) {
+  78:Drivers/coremark_stm32_hal/core_util.c **** 		while (((*valstring >= '0') && (*valstring <= '9')) || ((*valstring >= 'a') && (*valstring <= 'f'
+  79:Drivers/coremark_stm32_hal/core_util.c **** 			ee_s32 digit=*valstring-'0';
+  80:Drivers/coremark_stm32_hal/core_util.c **** 			if (digit>9)
+  81:Drivers/coremark_stm32_hal/core_util.c **** 				digit=10+*valstring-'a';
+  82:Drivers/coremark_stm32_hal/core_util.c **** 			retval*=16;
+  83:Drivers/coremark_stm32_hal/core_util.c **** 			retval+=digit;
+  84:Drivers/coremark_stm32_hal/core_util.c **** 			valstring++;
+  85:Drivers/coremark_stm32_hal/core_util.c **** 		}
+  86:Drivers/coremark_stm32_hal/core_util.c **** 	} else {
+  87:Drivers/coremark_stm32_hal/core_util.c **** 		while ((*valstring >= '0') && (*valstring <= '9')) {
+  88:Drivers/coremark_stm32_hal/core_util.c **** 			ee_s32 digit=*valstring-'0';
+  89:Drivers/coremark_stm32_hal/core_util.c **** 			retval*=10;
+  90:Drivers/coremark_stm32_hal/core_util.c **** 			retval+=digit;
+  91:Drivers/coremark_stm32_hal/core_util.c **** 			valstring++;
+  92:Drivers/coremark_stm32_hal/core_util.c **** 		}
+  93:Drivers/coremark_stm32_hal/core_util.c **** 	}
+  94:Drivers/coremark_stm32_hal/core_util.c **** 	/* now add qualifiers */
+  95:Drivers/coremark_stm32_hal/core_util.c **** 	if (*valstring=='K')
+  96:Drivers/coremark_stm32_hal/core_util.c **** 		retval*=1024;
+  97:Drivers/coremark_stm32_hal/core_util.c **** 	if (*valstring=='M')
+  98:Drivers/coremark_stm32_hal/core_util.c **** 		retval*=1024*1024;
+  99:Drivers/coremark_stm32_hal/core_util.c **** 
+ 100:Drivers/coremark_stm32_hal/core_util.c **** 	retval*=neg;
+ 101:Drivers/coremark_stm32_hal/core_util.c **** 	return retval;
+ 102:Drivers/coremark_stm32_hal/core_util.c **** }
+ 103:Drivers/coremark_stm32_hal/core_util.c **** 
+ 104:Drivers/coremark_stm32_hal/core_util.c **** ee_s32 get_seed_args(int i, int argc, char *argv[]) {
+ 105:Drivers/coremark_stm32_hal/core_util.c **** 	if (argc>i)
+ 106:Drivers/coremark_stm32_hal/core_util.c **** 		return parseval(argv[i]);
+ 107:Drivers/coremark_stm32_hal/core_util.c **** 	return 0;
+ 108:Drivers/coremark_stm32_hal/core_util.c **** }
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s 			page 5
+
+
+ 109:Drivers/coremark_stm32_hal/core_util.c **** 
+ 110:Drivers/coremark_stm32_hal/core_util.c **** #elif (SEED_METHOD==SEED_FUNC)
+ 111:Drivers/coremark_stm32_hal/core_util.c **** /* If using OS based function, you must define and implement the functions below in core_portme.h a
+ 112:Drivers/coremark_stm32_hal/core_util.c **** ee_s32 get_seed_32(int i) {
+ 113:Drivers/coremark_stm32_hal/core_util.c **** 	ee_s32 retval;
+ 114:Drivers/coremark_stm32_hal/core_util.c **** 	switch (i) {
+ 115:Drivers/coremark_stm32_hal/core_util.c **** 		case 1:
+ 116:Drivers/coremark_stm32_hal/core_util.c **** 			retval=portme_sys1();
+ 117:Drivers/coremark_stm32_hal/core_util.c **** 			break;
+ 118:Drivers/coremark_stm32_hal/core_util.c **** 		case 2:
+ 119:Drivers/coremark_stm32_hal/core_util.c **** 			retval=portme_sys2();
+ 120:Drivers/coremark_stm32_hal/core_util.c **** 			break;
+ 121:Drivers/coremark_stm32_hal/core_util.c **** 		case 3:
+ 122:Drivers/coremark_stm32_hal/core_util.c **** 			retval=portme_sys3();
+ 123:Drivers/coremark_stm32_hal/core_util.c **** 			break;
+ 124:Drivers/coremark_stm32_hal/core_util.c **** 		case 4:
+ 125:Drivers/coremark_stm32_hal/core_util.c **** 			retval=portme_sys4();
+ 126:Drivers/coremark_stm32_hal/core_util.c **** 			break;
+ 127:Drivers/coremark_stm32_hal/core_util.c **** 		case 5:
+ 128:Drivers/coremark_stm32_hal/core_util.c **** 			retval=portme_sys5();
+ 129:Drivers/coremark_stm32_hal/core_util.c **** 			break;
+ 130:Drivers/coremark_stm32_hal/core_util.c **** 		default:
+ 131:Drivers/coremark_stm32_hal/core_util.c **** 			retval=0;
+ 132:Drivers/coremark_stm32_hal/core_util.c **** 			break;
+ 133:Drivers/coremark_stm32_hal/core_util.c **** 	}
+ 134:Drivers/coremark_stm32_hal/core_util.c **** 	return retval;
+ 135:Drivers/coremark_stm32_hal/core_util.c **** }
+ 136:Drivers/coremark_stm32_hal/core_util.c **** #endif
+ 137:Drivers/coremark_stm32_hal/core_util.c **** 
+ 138:Drivers/coremark_stm32_hal/core_util.c **** /* Function: crc*
+ 139:Drivers/coremark_stm32_hal/core_util.c **** 	Service functions to calculate 16b CRC code.
+ 140:Drivers/coremark_stm32_hal/core_util.c **** 
+ 141:Drivers/coremark_stm32_hal/core_util.c **** */
+ 142:Drivers/coremark_stm32_hal/core_util.c **** ee_u16 crcu8(ee_u8 data, ee_u16 crc )
+ 143:Drivers/coremark_stm32_hal/core_util.c **** {
+ 123              		.loc 1 143 1 is_stmt 1 view -0
+ 124              		.cfi_startproc
+ 125              		@ args = 0, pretend = 0, frame = 0
+ 126              		@ frame_needed = 0, uses_anonymous_args = 0
+ 127              		@ link register save eliminated.
+ 128              		.loc 1 143 1 is_stmt 0 view .LVU23
+ 129 0000 10B4     		push	{r4}
+ 130              	.LCFI0:
+ 131              		.cfi_def_cfa_offset 4
+ 132              		.cfi_offset 4, -4
+ 133 0002 0446     		mov	r4, r0
+ 134 0004 0846     		mov	r0, r1
+ 135              	.LVL14:
+ 144:Drivers/coremark_stm32_hal/core_util.c **** 	ee_u8 i=0,x16=0,carry=0;
+ 136              		.loc 1 144 2 is_stmt 1 view .LVU24
+ 145:Drivers/coremark_stm32_hal/core_util.c **** 
+ 146:Drivers/coremark_stm32_hal/core_util.c **** 	for (i = 0; i < 8; i++)
+ 137              		.loc 1 146 2 view .LVU25
+ 138              		.loc 1 146 9 is_stmt 0 view .LVU26
+ 139 0006 0022     		movs	r2, #0
+ 140              		.loc 1 146 2 view .LVU27
+ 141 0008 01E0     		b	.L13
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s 			page 6
+
+
+ 142              	.LVL15:
+ 143              	.L15:
+ 144              		.loc 1 146 21 is_stmt 1 discriminator 2 view .LVU28
+ 145              		.loc 1 146 22 is_stmt 0 discriminator 2 view .LVU29
+ 146 000a 0132     		adds	r2, r2, #1
+ 147              	.LVL16:
+ 148              		.loc 1 146 22 discriminator 2 view .LVU30
+ 149 000c D2B2     		uxtb	r2, r2
+ 150              	.LVL17:
+ 151              	.L13:
+ 152              		.loc 1 146 14 is_stmt 1 discriminator 1 view .LVU31
+ 153              		.loc 1 146 2 is_stmt 0 discriminator 1 view .LVU32
+ 154 000e 072A     		cmp	r2, #7
+ 155 0010 12D8     		bhi	.L18
+ 147:Drivers/coremark_stm32_hal/core_util.c ****     {
+ 148:Drivers/coremark_stm32_hal/core_util.c **** 		x16 = (ee_u8)((data & 1) ^ ((ee_u8)crc & 1));
+ 156              		.loc 1 148 3 is_stmt 1 view .LVU33
+ 157              		.loc 1 148 31 is_stmt 0 view .LVU34
+ 158 0012 43B2     		sxtb	r3, r0
+ 159              		.loc 1 148 28 view .LVU35
+ 160 0014 6340     		eors	r3, r3, r4
+ 161              	.LVL18:
+ 149:Drivers/coremark_stm32_hal/core_util.c **** 		data >>= 1;
+ 162              		.loc 1 149 3 is_stmt 1 view .LVU36
+ 150:Drivers/coremark_stm32_hal/core_util.c **** 
+ 151:Drivers/coremark_stm32_hal/core_util.c **** 		if (x16 == 1)
+ 163              		.loc 1 151 3 view .LVU37
+ 164              		.loc 1 151 6 is_stmt 0 view .LVU38
+ 165 0016 13F00103 		ands	r3, r3, #1
+ 166              	.LVL19:
+ 167              		.loc 1 151 6 view .LVU39
+ 168 001a 4FEA5404 		lsr	r4, r4, #1
+ 169              	.LVL20:
+ 170              		.loc 1 151 6 view .LVU40
+ 171 001e 04D0     		beq	.L14
+ 152:Drivers/coremark_stm32_hal/core_util.c **** 		{
+ 153:Drivers/coremark_stm32_hal/core_util.c **** 		   crc ^= 0x4002;
+ 172              		.loc 1 153 6 is_stmt 1 view .LVU41
+ 173              		.loc 1 153 10 is_stmt 0 view .LVU42
+ 174 0020 80F48040 		eor	r0, r0, #16384
+ 175              	.LVL21:
+ 176              		.loc 1 153 10 view .LVU43
+ 177 0024 80F00200 		eor	r0, r0, #2
+ 178              	.LVL22:
+ 154:Drivers/coremark_stm32_hal/core_util.c **** 		   carry = 1;
+ 179              		.loc 1 154 6 is_stmt 1 view .LVU44
+ 180              		.loc 1 154 12 is_stmt 0 view .LVU45
+ 181 0028 0123     		movs	r3, #1
+ 182              	.LVL23:
+ 183              	.L14:
+ 155:Drivers/coremark_stm32_hal/core_util.c **** 		}
+ 156:Drivers/coremark_stm32_hal/core_util.c **** 		else 
+ 157:Drivers/coremark_stm32_hal/core_util.c **** 			carry = 0;
+ 158:Drivers/coremark_stm32_hal/core_util.c **** 		crc >>= 1;
+ 184              		.loc 1 158 3 is_stmt 1 view .LVU46
+ 185              		.loc 1 158 7 is_stmt 0 view .LVU47
+ 186 002a 4008     		lsrs	r0, r0, #1
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s 			page 7
+
+
+ 187              	.LVL24:
+ 159:Drivers/coremark_stm32_hal/core_util.c **** 		if (carry)
+ 188              		.loc 1 159 3 is_stmt 1 view .LVU48
+ 189              		.loc 1 159 6 is_stmt 0 view .LVU49
+ 190 002c 002B     		cmp	r3, #0
+ 191 002e ECD0     		beq	.L15
+ 160:Drivers/coremark_stm32_hal/core_util.c **** 		   crc |= 0x8000;
+ 192              		.loc 1 160 6 is_stmt 1 view .LVU50
+ 193              		.loc 1 160 10 is_stmt 0 view .LVU51
+ 194 0030 034B     		ldr	r3, .L19
+ 195              	.LVL25:
+ 196              		.loc 1 160 10 view .LVU52
+ 197 0032 0343     		orrs	r3, r3, r0
+ 198 0034 98B2     		uxth	r0, r3
+ 199              	.LVL26:
+ 200              		.loc 1 160 10 view .LVU53
+ 201 0036 E8E7     		b	.L15
+ 202              	.LVL27:
+ 203              	.L18:
+ 161:Drivers/coremark_stm32_hal/core_util.c **** 		else
+ 162:Drivers/coremark_stm32_hal/core_util.c **** 		   crc &= 0x7fff;
+ 163:Drivers/coremark_stm32_hal/core_util.c ****     }
+ 164:Drivers/coremark_stm32_hal/core_util.c **** 	return crc;
+ 165:Drivers/coremark_stm32_hal/core_util.c **** } 
+ 204              		.loc 1 165 1 view .LVU54
+ 205 0038 5DF8044B 		ldr	r4, [sp], #4
+ 206              	.LCFI1:
+ 207              		.cfi_restore 4
+ 208              		.cfi_def_cfa_offset 0
+ 209              	.LVL28:
+ 210              		.loc 1 165 1 view .LVU55
+ 211 003c 7047     		bx	lr
+ 212              	.L20:
+ 213 003e 00BF     		.align	2
+ 214              	.L19:
+ 215 0040 0080FFFF 		.word	-32768
+ 216              		.cfi_endproc
+ 217              	.LFE4:
+ 219              		.section	.text.crcu16,"ax",%progbits
+ 220              		.align	1
+ 221              		.global	crcu16
+ 222              		.syntax unified
+ 223              		.thumb
+ 224              		.thumb_func
+ 225              		.fpu fpv5-d16
+ 227              	crcu16:
+ 228              	.LVL29:
+ 229              	.LFB5:
+ 166:Drivers/coremark_stm32_hal/core_util.c **** ee_u16 crcu16(ee_u16 newval, ee_u16 crc) {
+ 230              		.loc 1 166 42 is_stmt 1 view -0
+ 231              		.cfi_startproc
+ 232              		@ args = 0, pretend = 0, frame = 0
+ 233              		@ frame_needed = 0, uses_anonymous_args = 0
+ 234              		.loc 1 166 42 is_stmt 0 view .LVU57
+ 235 0000 10B5     		push	{r4, lr}
+ 236              	.LCFI2:
+ 237              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s 			page 8
+
+
+ 238              		.cfi_offset 4, -8
+ 239              		.cfi_offset 14, -4
+ 240 0002 0446     		mov	r4, r0
+ 167:Drivers/coremark_stm32_hal/core_util.c **** 	crc=crcu8( (ee_u8) (newval)				,crc);
+ 241              		.loc 1 167 2 is_stmt 1 view .LVU58
+ 242              		.loc 1 167 6 is_stmt 0 view .LVU59
+ 243 0004 C0B2     		uxtb	r0, r0
+ 244              	.LVL30:
+ 245              		.loc 1 167 6 view .LVU60
+ 246 0006 FFF7FEFF 		bl	crcu8
+ 247              	.LVL31:
+ 248              		.loc 1 167 6 view .LVU61
+ 249 000a 0146     		mov	r1, r0
+ 250              	.LVL32:
+ 168:Drivers/coremark_stm32_hal/core_util.c **** 	crc=crcu8( (ee_u8) ((newval)>>8)	,crc);
+ 251              		.loc 1 168 2 is_stmt 1 view .LVU62
+ 252              		.loc 1 168 6 is_stmt 0 view .LVU63
+ 253 000c 200A     		lsrs	r0, r4, #8
+ 254 000e FFF7FEFF 		bl	crcu8
+ 255              	.LVL33:
+ 169:Drivers/coremark_stm32_hal/core_util.c **** 	return crc;
+ 256              		.loc 1 169 2 is_stmt 1 view .LVU64
+ 170:Drivers/coremark_stm32_hal/core_util.c **** }
+ 257              		.loc 1 170 1 is_stmt 0 view .LVU65
+ 258 0012 10BD     		pop	{r4, pc}
+ 259              		.cfi_endproc
+ 260              	.LFE5:
+ 262              		.section	.text.crc16,"ax",%progbits
+ 263              		.align	1
+ 264              		.global	crc16
+ 265              		.syntax unified
+ 266              		.thumb
+ 267              		.thumb_func
+ 268              		.fpu fpv5-d16
+ 270              	crc16:
+ 271              	.LVL34:
+ 272              	.LFB7:
+ 171:Drivers/coremark_stm32_hal/core_util.c **** ee_u16 crcu32(ee_u32 newval, ee_u16 crc) {
+ 172:Drivers/coremark_stm32_hal/core_util.c **** 	crc=crc16((ee_s16) newval		,crc);
+ 173:Drivers/coremark_stm32_hal/core_util.c **** 	crc=crc16((ee_s16) (newval>>16)	,crc);
+ 174:Drivers/coremark_stm32_hal/core_util.c **** 	return crc;
+ 175:Drivers/coremark_stm32_hal/core_util.c **** }
+ 176:Drivers/coremark_stm32_hal/core_util.c **** ee_u16 crc16(ee_s16 newval, ee_u16 crc) {
+ 273              		.loc 1 176 41 is_stmt 1 view -0
+ 274              		.cfi_startproc
+ 275              		@ args = 0, pretend = 0, frame = 0
+ 276              		@ frame_needed = 0, uses_anonymous_args = 0
+ 277              		.loc 1 176 41 is_stmt 0 view .LVU67
+ 278 0000 08B5     		push	{r3, lr}
+ 279              	.LCFI3:
+ 280              		.cfi_def_cfa_offset 8
+ 281              		.cfi_offset 3, -8
+ 282              		.cfi_offset 14, -4
+ 177:Drivers/coremark_stm32_hal/core_util.c **** 	return crcu16((ee_u16)newval, crc);
+ 283              		.loc 1 177 2 is_stmt 1 view .LVU68
+ 284              		.loc 1 177 9 is_stmt 0 view .LVU69
+ 285 0002 80B2     		uxth	r0, r0
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s 			page 9
+
+
+ 286              		.loc 1 177 9 view .LVU70
+ 287 0004 FFF7FEFF 		bl	crcu16
+ 288              	.LVL35:
+ 178:Drivers/coremark_stm32_hal/core_util.c **** }
+ 289              		.loc 1 178 1 view .LVU71
+ 290 0008 08BD     		pop	{r3, pc}
+ 291              		.cfi_endproc
+ 292              	.LFE7:
+ 294              		.section	.text.crcu32,"ax",%progbits
+ 295              		.align	1
+ 296              		.global	crcu32
+ 297              		.syntax unified
+ 298              		.thumb
+ 299              		.thumb_func
+ 300              		.fpu fpv5-d16
+ 302              	crcu32:
+ 303              	.LVL36:
+ 304              	.LFB6:
+ 171:Drivers/coremark_stm32_hal/core_util.c **** ee_u16 crcu32(ee_u32 newval, ee_u16 crc) {
+ 305              		.loc 1 171 42 is_stmt 1 view -0
+ 306              		.cfi_startproc
+ 307              		@ args = 0, pretend = 0, frame = 0
+ 308              		@ frame_needed = 0, uses_anonymous_args = 0
+ 171:Drivers/coremark_stm32_hal/core_util.c **** ee_u16 crcu32(ee_u32 newval, ee_u16 crc) {
+ 309              		.loc 1 171 42 is_stmt 0 view .LVU73
+ 310 0000 10B5     		push	{r4, lr}
+ 311              	.LCFI4:
+ 312              		.cfi_def_cfa_offset 8
+ 313              		.cfi_offset 4, -8
+ 314              		.cfi_offset 14, -4
+ 315 0002 0446     		mov	r4, r0
+ 172:Drivers/coremark_stm32_hal/core_util.c **** 	crc=crc16((ee_s16) (newval>>16)	,crc);
+ 316              		.loc 1 172 2 is_stmt 1 view .LVU74
+ 172:Drivers/coremark_stm32_hal/core_util.c **** 	crc=crc16((ee_s16) (newval>>16)	,crc);
+ 317              		.loc 1 172 6 is_stmt 0 view .LVU75
+ 318 0004 00B2     		sxth	r0, r0
+ 319              	.LVL37:
+ 172:Drivers/coremark_stm32_hal/core_util.c **** 	crc=crc16((ee_s16) (newval>>16)	,crc);
+ 320              		.loc 1 172 6 view .LVU76
+ 321 0006 FFF7FEFF 		bl	crc16
+ 322              	.LVL38:
+ 172:Drivers/coremark_stm32_hal/core_util.c **** 	crc=crc16((ee_s16) (newval>>16)	,crc);
+ 323              		.loc 1 172 6 view .LVU77
+ 324 000a 0146     		mov	r1, r0
+ 325              	.LVL39:
+ 173:Drivers/coremark_stm32_hal/core_util.c **** 	return crc;
+ 326              		.loc 1 173 2 is_stmt 1 view .LVU78
+ 173:Drivers/coremark_stm32_hal/core_util.c **** 	return crc;
+ 327              		.loc 1 173 6 is_stmt 0 view .LVU79
+ 328 000c 2014     		asrs	r0, r4, #16
+ 329 000e FFF7FEFF 		bl	crc16
+ 330              	.LVL40:
+ 174:Drivers/coremark_stm32_hal/core_util.c **** }
+ 331              		.loc 1 174 2 is_stmt 1 view .LVU80
+ 175:Drivers/coremark_stm32_hal/core_util.c **** ee_u16 crc16(ee_s16 newval, ee_u16 crc) {
+ 332              		.loc 1 175 1 is_stmt 0 view .LVU81
+ 333 0012 10BD     		pop	{r4, pc}
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s 			page 10
+
+
+ 175:Drivers/coremark_stm32_hal/core_util.c **** ee_u16 crc16(ee_s16 newval, ee_u16 crc) {
+ 334              		.loc 1 175 1 view .LVU82
+ 335              		.cfi_endproc
+ 336              	.LFE6:
+ 338              		.section	.text.check_data_types,"ax",%progbits
+ 339              		.align	1
+ 340              		.global	check_data_types
+ 341              		.syntax unified
+ 342              		.thumb
+ 343              		.thumb_func
+ 344              		.fpu fpv5-d16
+ 346              	check_data_types:
+ 347              	.LFB8:
+ 179:Drivers/coremark_stm32_hal/core_util.c **** 
+ 180:Drivers/coremark_stm32_hal/core_util.c **** ee_u8 check_data_types() {
+ 348              		.loc 1 180 26 is_stmt 1 view -0
+ 349              		.cfi_startproc
+ 350              		@ args = 0, pretend = 0, frame = 0
+ 351              		@ frame_needed = 0, uses_anonymous_args = 0
+ 352              		@ link register save eliminated.
+ 181:Drivers/coremark_stm32_hal/core_util.c **** 	ee_u8 retval=0;
+ 353              		.loc 1 181 2 view .LVU84
+ 354              	.LVL41:
+ 182:Drivers/coremark_stm32_hal/core_util.c **** 	if (sizeof(ee_u8) != 1) {
+ 355              		.loc 1 182 2 view .LVU85
+ 183:Drivers/coremark_stm32_hal/core_util.c **** 		ee_printf("ERROR: ee_u8 is not an 8b datatype!\n");
+ 184:Drivers/coremark_stm32_hal/core_util.c **** 		retval++;
+ 185:Drivers/coremark_stm32_hal/core_util.c **** 	}
+ 186:Drivers/coremark_stm32_hal/core_util.c **** 	if (sizeof(ee_u16) != 2) {
+ 356              		.loc 1 186 2 view .LVU86
+ 187:Drivers/coremark_stm32_hal/core_util.c **** 		ee_printf("ERROR: ee_u16 is not a 16b datatype!\n");
+ 188:Drivers/coremark_stm32_hal/core_util.c **** 		retval++;
+ 189:Drivers/coremark_stm32_hal/core_util.c **** 	}
+ 190:Drivers/coremark_stm32_hal/core_util.c **** 	if (sizeof(ee_s16) != 2) {
+ 357              		.loc 1 190 2 view .LVU87
+ 191:Drivers/coremark_stm32_hal/core_util.c **** 		ee_printf("ERROR: ee_s16 is not a 16b datatype!\n");
+ 192:Drivers/coremark_stm32_hal/core_util.c **** 		retval++;
+ 193:Drivers/coremark_stm32_hal/core_util.c **** 	}
+ 194:Drivers/coremark_stm32_hal/core_util.c **** 	if (sizeof(ee_s32) != 4) {
+ 358              		.loc 1 194 2 view .LVU88
+ 195:Drivers/coremark_stm32_hal/core_util.c **** 		ee_printf("ERROR: ee_s32 is not a 32b datatype!\n");
+ 196:Drivers/coremark_stm32_hal/core_util.c **** 		retval++;
+ 197:Drivers/coremark_stm32_hal/core_util.c **** 	}
+ 198:Drivers/coremark_stm32_hal/core_util.c **** 	if (sizeof(ee_u32) != 4) {
+ 359              		.loc 1 198 2 view .LVU89
+ 199:Drivers/coremark_stm32_hal/core_util.c **** 		ee_printf("ERROR: ee_u32 is not a 32b datatype!\n");
+ 200:Drivers/coremark_stm32_hal/core_util.c **** 		retval++;
+ 201:Drivers/coremark_stm32_hal/core_util.c **** 	}
+ 202:Drivers/coremark_stm32_hal/core_util.c **** 	if (sizeof(ee_ptr_int) != sizeof(int *)) {
+ 360              		.loc 1 202 2 view .LVU90
+ 203:Drivers/coremark_stm32_hal/core_util.c **** 		ee_printf("ERROR: ee_ptr_int is not a datatype that holds an int pointer!\n");
+ 204:Drivers/coremark_stm32_hal/core_util.c **** 		retval++;
+ 205:Drivers/coremark_stm32_hal/core_util.c **** 	}
+ 206:Drivers/coremark_stm32_hal/core_util.c **** 	if (retval>0) {
+ 361              		.loc 1 206 2 view .LVU91
+ 207:Drivers/coremark_stm32_hal/core_util.c **** 		ee_printf("ERROR: Please modify the datatypes in core_portme.h!\n");
+ 208:Drivers/coremark_stm32_hal/core_util.c **** 	}
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s 			page 11
+
+
+ 209:Drivers/coremark_stm32_hal/core_util.c **** 	return retval;
+ 362              		.loc 1 209 2 view .LVU92
+ 210:Drivers/coremark_stm32_hal/core_util.c **** }
+ 363              		.loc 1 210 1 is_stmt 0 view .LVU93
+ 364 0000 0020     		movs	r0, #0
+ 365 0002 7047     		bx	lr
+ 366              		.cfi_endproc
+ 367              	.LFE8:
+ 369              		.text
+ 370              	.Letext0:
+ 371              		.file 2 "Drivers/coremark_stm32_hal/core_portme.h"
+ 372              		.file 3 "Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT.h"
+ 373              		.file 4 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\lib\\gcc\\arm-none
+ 374              		.file 5 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\arm-none-eabi\\inc
+ 375              		.file 6 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\arm-none-eabi\\inc
+ 376              		.file 7 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\arm-none-eabi\\inc
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s 			page 12
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 core_util.c
+C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s:17     .text.get_seed_32:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s:25     .text.get_seed_32:00000000 get_seed_32
+C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s:43     .text.get_seed_32:0000000a $d
+C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s:104    .text.get_seed_32:00000034 $d
+C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s:113    .text.crcu8:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s:120    .text.crcu8:00000000 crcu8
+C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s:215    .text.crcu8:00000040 $d
+C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s:220    .text.crcu16:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s:227    .text.crcu16:00000000 crcu16
+C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s:263    .text.crc16:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s:270    .text.crc16:00000000 crc16
+C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s:295    .text.crcu32:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s:302    .text.crcu32:00000000 crcu32
+C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s:339    .text.check_data_types:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s:346    .text.check_data_types:00000000 check_data_types
+C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s:48     .text.get_seed_32:0000000f $d
+C:\Users\Brandon\AppData\Local\Temp\cccpTfgR.s:48     .text.get_seed_32:00000010 $t
+
+UNDEFINED SYMBOLS
+seed1_volatile
+seed2_volatile
+seed3_volatile
+seed4_volatile
+seed5_volatile

@@ -1,13 +1,15 @@
-Output: NC Drill Files
-Type  : NC Drill
-From  : PCB Document [QCLogic Rev A.PcbDoc]
-   Generated File[QCLogic Rev A.TXT]
-   Generated File[QCLogic Rev A.DRL]
-   Generated File[QCLogic Rev A.LDP]
-   Generated File[QCLogic Rev A.DRR]
+Project Outputs Generation Report
+---------------------------------
+Start Output Generation At 8:16:21 PM On 2020-12-02
+
+Output: Bill of Materials
+Type  : BOM
+From  : Variant [[No Variations]] of Project [QCLogic Rev A.PrjPcb]
+   Generated File[Bill of Materials-QCLogic Rev A.xls]
+   Generated File[Bill of Materials-QCLogic Rev A.xls]
 
 
-Files Generated   : 4
+Files Generated   : 2
 Documents Printed : 0
 
-Finished Output Generation At 8:44:15 PM On 2020-12-01
+Finished Output Generation At 8:16:26 PM On 2020-12-02

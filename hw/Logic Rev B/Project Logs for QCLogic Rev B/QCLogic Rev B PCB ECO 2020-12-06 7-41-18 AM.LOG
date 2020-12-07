@@ -1,0 +1,6 @@
+Added Component: Designator=U100(TFBGA240+25)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = "STMicroelectronics"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = "STM32H755XIH6"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = "20201206"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "4. Footprint"; Value = "TFBGA240+25"; VariantName = "[No Variations]"

@@ -1,0 +1,1520 @@
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"core_matrix.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.core_init_matrix,"ax",%progbits
+  17              		.align	1
+  18              		.global	core_init_matrix
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	core_init_matrix:
+  26              	.LVL0:
+  27              	.LFB5:
+  28              		.file 1 "Drivers/coremark_stm32_hal/core_matrix.c"
+   1:Drivers/coremark_stm32_hal/core_matrix.c **** /*
+   2:Drivers/coremark_stm32_hal/core_matrix.c **** Author : Shay Gal-On, EEMBC
+   3:Drivers/coremark_stm32_hal/core_matrix.c **** 
+   4:Drivers/coremark_stm32_hal/core_matrix.c **** This file is part of  EEMBC(R) and CoreMark(TM), which are Copyright (C) 2009 
+   5:Drivers/coremark_stm32_hal/core_matrix.c **** All rights reserved.                            
+   6:Drivers/coremark_stm32_hal/core_matrix.c **** 
+   7:Drivers/coremark_stm32_hal/core_matrix.c **** EEMBC CoreMark Software is a product of EEMBC and is provided under the terms of the
+   8:Drivers/coremark_stm32_hal/core_matrix.c **** CoreMark License that is distributed with the official EEMBC COREMARK Software release. 
+   9:Drivers/coremark_stm32_hal/core_matrix.c **** If you received this EEMBC CoreMark Software without the accompanying CoreMark License, 
+  10:Drivers/coremark_stm32_hal/core_matrix.c **** you must discontinue use and download the official release from www.coremark.org.  
+  11:Drivers/coremark_stm32_hal/core_matrix.c **** 
+  12:Drivers/coremark_stm32_hal/core_matrix.c **** Also, if you are publicly displaying scores generated from the EEMBC CoreMark software, 
+  13:Drivers/coremark_stm32_hal/core_matrix.c **** make sure that you are in compliance with Run and Reporting rules specified in the accompanying rea
+  14:Drivers/coremark_stm32_hal/core_matrix.c **** 
+  15:Drivers/coremark_stm32_hal/core_matrix.c **** EEMBC 
+  16:Drivers/coremark_stm32_hal/core_matrix.c **** 4354 Town Center Blvd. Suite 114-200
+  17:Drivers/coremark_stm32_hal/core_matrix.c **** El Dorado Hills, CA, 95762 
+  18:Drivers/coremark_stm32_hal/core_matrix.c **** */ 
+  19:Drivers/coremark_stm32_hal/core_matrix.c **** #include "coremark.h"
+  20:Drivers/coremark_stm32_hal/core_matrix.c **** /*
+  21:Drivers/coremark_stm32_hal/core_matrix.c **** Topic: Description
+  22:Drivers/coremark_stm32_hal/core_matrix.c **** 	Matrix manipulation benchmark
+  23:Drivers/coremark_stm32_hal/core_matrix.c **** 	
+  24:Drivers/coremark_stm32_hal/core_matrix.c **** 	This very simple algorithm forms the basis of many more complex algorithms. 
+  25:Drivers/coremark_stm32_hal/core_matrix.c **** 	
+  26:Drivers/coremark_stm32_hal/core_matrix.c **** 	The tight inner loop is the focus of many optimizations (compiler as well as hardware based) 
+  27:Drivers/coremark_stm32_hal/core_matrix.c **** 	and is thus relevant for embedded processing. 
+  28:Drivers/coremark_stm32_hal/core_matrix.c **** 	
+  29:Drivers/coremark_stm32_hal/core_matrix.c **** 	The total available data space will be divided to 3 parts:
+  30:Drivers/coremark_stm32_hal/core_matrix.c **** 	NxN Matrix A - initialized with small values (upper 3/4 of the bits all zero).
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s 			page 2
+
+
+  31:Drivers/coremark_stm32_hal/core_matrix.c **** 	NxN Matrix B - initialized with medium values (upper half of the bits all zero).
+  32:Drivers/coremark_stm32_hal/core_matrix.c **** 	NxN Matrix C - used for the result.
+  33:Drivers/coremark_stm32_hal/core_matrix.c **** 
+  34:Drivers/coremark_stm32_hal/core_matrix.c **** 	The actual values for A and B must be derived based on input that is not available at compile time
+  35:Drivers/coremark_stm32_hal/core_matrix.c **** */
+  36:Drivers/coremark_stm32_hal/core_matrix.c **** ee_s16 matrix_test(ee_u32 N, MATRES *C, MATDAT *A, MATDAT *B, MATDAT val);
+  37:Drivers/coremark_stm32_hal/core_matrix.c **** ee_s16 matrix_sum(ee_u32 N, MATRES *C, MATDAT clipval);
+  38:Drivers/coremark_stm32_hal/core_matrix.c **** void matrix_mul_const(ee_u32 N, MATRES *C, MATDAT *A, MATDAT val);
+  39:Drivers/coremark_stm32_hal/core_matrix.c **** void matrix_mul_vect(ee_u32 N, MATRES *C, MATDAT *A, MATDAT *B);
+  40:Drivers/coremark_stm32_hal/core_matrix.c **** void matrix_mul_matrix(ee_u32 N, MATRES *C, MATDAT *A, MATDAT *B);
+  41:Drivers/coremark_stm32_hal/core_matrix.c **** void matrix_mul_matrix_bitextract(ee_u32 N, MATRES *C, MATDAT *A, MATDAT *B);
+  42:Drivers/coremark_stm32_hal/core_matrix.c **** void matrix_add_const(ee_u32 N, MATDAT *A, MATDAT val);
+  43:Drivers/coremark_stm32_hal/core_matrix.c **** 
+  44:Drivers/coremark_stm32_hal/core_matrix.c **** #define matrix_test_next(x) (x+1)
+  45:Drivers/coremark_stm32_hal/core_matrix.c **** #define matrix_clip(x,y) ((y) ? (x) & 0x0ff : (x) & 0x0ffff)
+  46:Drivers/coremark_stm32_hal/core_matrix.c **** #define matrix_big(x) (0xf000 | (x))
+  47:Drivers/coremark_stm32_hal/core_matrix.c **** #define bit_extract(x,from,to) (((x)>>(from)) & (~(0xffffffff << (to))))
+  48:Drivers/coremark_stm32_hal/core_matrix.c **** 
+  49:Drivers/coremark_stm32_hal/core_matrix.c **** #if CORE_DEBUG
+  50:Drivers/coremark_stm32_hal/core_matrix.c **** void printmat(MATDAT *A, ee_u32 N, char *name) {
+  51:Drivers/coremark_stm32_hal/core_matrix.c **** 	ee_u32 i,j;
+  52:Drivers/coremark_stm32_hal/core_matrix.c **** 	ee_printf("Matrix %s [%dx%d]:\n",name,N,N);
+  53:Drivers/coremark_stm32_hal/core_matrix.c **** 	for (i=0; i<N; i++) {
+  54:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+  55:Drivers/coremark_stm32_hal/core_matrix.c **** 			if (j!=0)
+  56:Drivers/coremark_stm32_hal/core_matrix.c **** 				ee_printf(",");
+  57:Drivers/coremark_stm32_hal/core_matrix.c **** 			ee_printf("%d",A[i*N+j]);
+  58:Drivers/coremark_stm32_hal/core_matrix.c **** 		}
+  59:Drivers/coremark_stm32_hal/core_matrix.c **** 		ee_printf("\n");
+  60:Drivers/coremark_stm32_hal/core_matrix.c **** 	}
+  61:Drivers/coremark_stm32_hal/core_matrix.c **** }
+  62:Drivers/coremark_stm32_hal/core_matrix.c **** void printmatC(MATRES *C, ee_u32 N, char *name) {
+  63:Drivers/coremark_stm32_hal/core_matrix.c **** 	ee_u32 i,j;
+  64:Drivers/coremark_stm32_hal/core_matrix.c **** 	ee_printf("Matrix %s [%dx%d]:\n",name,N,N);
+  65:Drivers/coremark_stm32_hal/core_matrix.c **** 	for (i=0; i<N; i++) {
+  66:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+  67:Drivers/coremark_stm32_hal/core_matrix.c **** 			if (j!=0)
+  68:Drivers/coremark_stm32_hal/core_matrix.c **** 				ee_printf(",");
+  69:Drivers/coremark_stm32_hal/core_matrix.c **** 			ee_printf("%d",C[i*N+j]);
+  70:Drivers/coremark_stm32_hal/core_matrix.c **** 		}
+  71:Drivers/coremark_stm32_hal/core_matrix.c **** 		ee_printf("\n");
+  72:Drivers/coremark_stm32_hal/core_matrix.c **** 	}
+  73:Drivers/coremark_stm32_hal/core_matrix.c **** }
+  74:Drivers/coremark_stm32_hal/core_matrix.c **** #endif
+  75:Drivers/coremark_stm32_hal/core_matrix.c **** /* Function: core_bench_matrix
+  76:Drivers/coremark_stm32_hal/core_matrix.c **** 	Benchmark function
+  77:Drivers/coremark_stm32_hal/core_matrix.c **** 
+  78:Drivers/coremark_stm32_hal/core_matrix.c **** 	Iterate <matrix_test> N times, 
+  79:Drivers/coremark_stm32_hal/core_matrix.c **** 	changing the matrix values slightly by a constant amount each time.
+  80:Drivers/coremark_stm32_hal/core_matrix.c **** */
+  81:Drivers/coremark_stm32_hal/core_matrix.c **** ee_u16 core_bench_matrix(mat_params *p, ee_s16 seed, ee_u16 crc) {
+  82:Drivers/coremark_stm32_hal/core_matrix.c **** 	ee_u32 N=p->N;
+  83:Drivers/coremark_stm32_hal/core_matrix.c **** 	MATRES *C=p->C;
+  84:Drivers/coremark_stm32_hal/core_matrix.c **** 	MATDAT *A=p->A;
+  85:Drivers/coremark_stm32_hal/core_matrix.c **** 	MATDAT *B=p->B;
+  86:Drivers/coremark_stm32_hal/core_matrix.c **** 	MATDAT val=(MATDAT)seed;
+  87:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s 			page 3
+
+
+  88:Drivers/coremark_stm32_hal/core_matrix.c **** 	crc=crc16(matrix_test(N,C,A,B,val),crc);
+  89:Drivers/coremark_stm32_hal/core_matrix.c **** 
+  90:Drivers/coremark_stm32_hal/core_matrix.c **** 	return crc;
+  91:Drivers/coremark_stm32_hal/core_matrix.c **** }
+  92:Drivers/coremark_stm32_hal/core_matrix.c **** 
+  93:Drivers/coremark_stm32_hal/core_matrix.c **** /* Function: matrix_test
+  94:Drivers/coremark_stm32_hal/core_matrix.c **** 	Perform matrix manipulation.
+  95:Drivers/coremark_stm32_hal/core_matrix.c **** 
+  96:Drivers/coremark_stm32_hal/core_matrix.c **** 	Parameters:
+  97:Drivers/coremark_stm32_hal/core_matrix.c **** 	N - Dimensions of the matrix.
+  98:Drivers/coremark_stm32_hal/core_matrix.c **** 	C - memory for result matrix.
+  99:Drivers/coremark_stm32_hal/core_matrix.c **** 	A - input matrix
+ 100:Drivers/coremark_stm32_hal/core_matrix.c **** 	B - operator matrix (not changed during operations)
+ 101:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ 102:Drivers/coremark_stm32_hal/core_matrix.c **** 	Returns:
+ 103:Drivers/coremark_stm32_hal/core_matrix.c **** 	A CRC value that captures all results calculated in the function.
+ 104:Drivers/coremark_stm32_hal/core_matrix.c **** 	In particular, crc of the value calculated on the result matrix 
+ 105:Drivers/coremark_stm32_hal/core_matrix.c **** 	after each step by <matrix_sum>.
+ 106:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ 107:Drivers/coremark_stm32_hal/core_matrix.c **** 	Operation:
+ 108:Drivers/coremark_stm32_hal/core_matrix.c **** 	
+ 109:Drivers/coremark_stm32_hal/core_matrix.c **** 	1 - Add a constant value to all elements of a matrix.
+ 110:Drivers/coremark_stm32_hal/core_matrix.c **** 	2 - Multiply a matrix by a constant.
+ 111:Drivers/coremark_stm32_hal/core_matrix.c **** 	3 - Multiply a matrix by a vector.
+ 112:Drivers/coremark_stm32_hal/core_matrix.c **** 	4 - Multiply a matrix by a matrix.
+ 113:Drivers/coremark_stm32_hal/core_matrix.c **** 	5 - Add a constant value to all elements of a matrix.
+ 114:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ 115:Drivers/coremark_stm32_hal/core_matrix.c **** 	After the last step, matrix A is back to original contents.
+ 116:Drivers/coremark_stm32_hal/core_matrix.c **** */
+ 117:Drivers/coremark_stm32_hal/core_matrix.c **** ee_s16 matrix_test(ee_u32 N, MATRES *C, MATDAT *A, MATDAT *B, MATDAT val) {
+ 118:Drivers/coremark_stm32_hal/core_matrix.c **** 	ee_u16 crc=0;
+ 119:Drivers/coremark_stm32_hal/core_matrix.c **** 	MATDAT clipval=matrix_big(val);
+ 120:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ 121:Drivers/coremark_stm32_hal/core_matrix.c **** 	matrix_add_const(N,A,val); /* make sure data changes  */
+ 122:Drivers/coremark_stm32_hal/core_matrix.c **** #if CORE_DEBUG
+ 123:Drivers/coremark_stm32_hal/core_matrix.c **** 	printmat(A,N,"matrix_add_const");
+ 124:Drivers/coremark_stm32_hal/core_matrix.c **** #endif
+ 125:Drivers/coremark_stm32_hal/core_matrix.c **** 	matrix_mul_const(N,C,A,val);
+ 126:Drivers/coremark_stm32_hal/core_matrix.c **** 	crc=crc16(matrix_sum(N,C,clipval),crc);
+ 127:Drivers/coremark_stm32_hal/core_matrix.c **** #if CORE_DEBUG
+ 128:Drivers/coremark_stm32_hal/core_matrix.c **** 	printmatC(C,N,"matrix_mul_const");
+ 129:Drivers/coremark_stm32_hal/core_matrix.c **** #endif
+ 130:Drivers/coremark_stm32_hal/core_matrix.c **** 	matrix_mul_vect(N,C,A,B);
+ 131:Drivers/coremark_stm32_hal/core_matrix.c **** 	crc=crc16(matrix_sum(N,C,clipval),crc);
+ 132:Drivers/coremark_stm32_hal/core_matrix.c **** #if CORE_DEBUG
+ 133:Drivers/coremark_stm32_hal/core_matrix.c **** 	printmatC(C,N,"matrix_mul_vect");
+ 134:Drivers/coremark_stm32_hal/core_matrix.c **** #endif
+ 135:Drivers/coremark_stm32_hal/core_matrix.c **** 	matrix_mul_matrix(N,C,A,B);
+ 136:Drivers/coremark_stm32_hal/core_matrix.c **** 	crc=crc16(matrix_sum(N,C,clipval),crc);
+ 137:Drivers/coremark_stm32_hal/core_matrix.c **** #if CORE_DEBUG
+ 138:Drivers/coremark_stm32_hal/core_matrix.c **** 	printmatC(C,N,"matrix_mul_matrix");
+ 139:Drivers/coremark_stm32_hal/core_matrix.c **** #endif
+ 140:Drivers/coremark_stm32_hal/core_matrix.c **** 	matrix_mul_matrix_bitextract(N,C,A,B);
+ 141:Drivers/coremark_stm32_hal/core_matrix.c **** 	crc=crc16(matrix_sum(N,C,clipval),crc);
+ 142:Drivers/coremark_stm32_hal/core_matrix.c **** #if CORE_DEBUG
+ 143:Drivers/coremark_stm32_hal/core_matrix.c **** 	printmatC(C,N,"matrix_mul_matrix_bitextract");
+ 144:Drivers/coremark_stm32_hal/core_matrix.c **** #endif
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s 			page 4
+
+
+ 145:Drivers/coremark_stm32_hal/core_matrix.c **** 	
+ 146:Drivers/coremark_stm32_hal/core_matrix.c **** 	matrix_add_const(N,A,-val); /* return matrix to initial value */
+ 147:Drivers/coremark_stm32_hal/core_matrix.c **** 	return crc;
+ 148:Drivers/coremark_stm32_hal/core_matrix.c **** }
+ 149:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ 150:Drivers/coremark_stm32_hal/core_matrix.c **** /* Function : matrix_init
+ 151:Drivers/coremark_stm32_hal/core_matrix.c **** 	Initialize the memory block for matrix benchmarking.
+ 152:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ 153:Drivers/coremark_stm32_hal/core_matrix.c **** 	Parameters:
+ 154:Drivers/coremark_stm32_hal/core_matrix.c **** 	blksize - Size of memory to be initialized.
+ 155:Drivers/coremark_stm32_hal/core_matrix.c **** 	memblk - Pointer to memory block.
+ 156:Drivers/coremark_stm32_hal/core_matrix.c **** 	seed - Actual values chosen depend on the seed parameter.
+ 157:Drivers/coremark_stm32_hal/core_matrix.c **** 	p - pointers to <mat_params> containing initialized matrixes.
+ 158:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ 159:Drivers/coremark_stm32_hal/core_matrix.c **** 	Returns:
+ 160:Drivers/coremark_stm32_hal/core_matrix.c **** 	Matrix dimensions.
+ 161:Drivers/coremark_stm32_hal/core_matrix.c **** 	
+ 162:Drivers/coremark_stm32_hal/core_matrix.c **** 	Note:
+ 163:Drivers/coremark_stm32_hal/core_matrix.c **** 	The seed parameter MUST be supplied from a source that cannot be determined at compile time
+ 164:Drivers/coremark_stm32_hal/core_matrix.c **** */
+ 165:Drivers/coremark_stm32_hal/core_matrix.c **** ee_u32 core_init_matrix(ee_u32 blksize, void *memblk, ee_s32 seed, mat_params *p) {
+  29              		.loc 1 165 83 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		.loc 1 165 83 is_stmt 0 view .LVU1
+  34 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 28
+  37              		.cfi_offset 4, -28
+  38              		.cfi_offset 5, -24
+  39              		.cfi_offset 6, -20
+  40              		.cfi_offset 7, -16
+  41              		.cfi_offset 8, -12
+  42              		.cfi_offset 9, -8
+  43              		.cfi_offset 14, -4
+  44 0004 9C46     		mov	ip, r3
+ 166:Drivers/coremark_stm32_hal/core_matrix.c **** 	ee_u32 N=0;
+  45              		.loc 1 166 2 is_stmt 1 view .LVU2
+  46              	.LVL1:
+ 167:Drivers/coremark_stm32_hal/core_matrix.c **** 	MATDAT *A;
+  47              		.loc 1 167 2 view .LVU3
+ 168:Drivers/coremark_stm32_hal/core_matrix.c **** 	MATDAT *B;
+  48              		.loc 1 168 2 view .LVU4
+ 169:Drivers/coremark_stm32_hal/core_matrix.c **** 	ee_s32 order=1;
+  49              		.loc 1 169 2 view .LVU5
+ 170:Drivers/coremark_stm32_hal/core_matrix.c **** 	MATDAT val;
+  50              		.loc 1 170 2 view .LVU6
+ 171:Drivers/coremark_stm32_hal/core_matrix.c **** 	ee_u32 i=0,j=0;
+  51              		.loc 1 171 2 view .LVU7
+ 172:Drivers/coremark_stm32_hal/core_matrix.c **** 	if (seed==0)
+  52              		.loc 1 172 2 view .LVU8
+  53              		.loc 1 172 5 is_stmt 0 view .LVU9
+  54 0006 1446     		mov	r4, r2
+  55 0008 02B9     		cbnz	r2, .L2
+ 173:Drivers/coremark_stm32_hal/core_matrix.c **** 		seed=1;
+  56              		.loc 1 173 7 view .LVU10
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s 			page 5
+
+
+  57 000a 0124     		movs	r4, #1
+  58              	.L2:
+  59              	.LVL2:
+  60              		.loc 1 173 7 view .LVU11
+  61 000c 0023     		movs	r3, #0
+  62              	.LVL3:
+  63              		.loc 1 173 7 view .LVU12
+  64 000e 1A46     		mov	r2, r3
+  65 0010 03E0     		b	.L3
+  66              	.LVL4:
+  67              	.L4:
+ 174:Drivers/coremark_stm32_hal/core_matrix.c **** 	while (j<blksize) {
+ 175:Drivers/coremark_stm32_hal/core_matrix.c **** 		i++;
+  68              		.loc 1 175 3 is_stmt 1 view .LVU13
+  69              		.loc 1 175 4 is_stmt 0 view .LVU14
+  70 0012 0132     		adds	r2, r2, #1
+  71              	.LVL5:
+ 176:Drivers/coremark_stm32_hal/core_matrix.c **** 		j=i*i*2*4;		
+  72              		.loc 1 176 3 is_stmt 1 view .LVU15
+  73              		.loc 1 176 6 is_stmt 0 view .LVU16
+  74 0014 02FB02F3 		mul	r3, r2, r2
+  75              	.LVL6:
+  76              		.loc 1 176 4 view .LVU17
+  77 0018 DB00     		lsls	r3, r3, #3
+  78              	.LVL7:
+  79              	.L3:
+ 174:Drivers/coremark_stm32_hal/core_matrix.c **** 	while (j<blksize) {
+  80              		.loc 1 174 8 is_stmt 1 view .LVU18
+  81 001a 8342     		cmp	r3, r0
+  82 001c F9D3     		bcc	.L4
+ 177:Drivers/coremark_stm32_hal/core_matrix.c **** 	}
+ 178:Drivers/coremark_stm32_hal/core_matrix.c **** 	N=i-1;
+  83              		.loc 1 178 2 view .LVU19
+  84              		.loc 1 178 3 is_stmt 0 view .LVU20
+  85 001e 501E     		subs	r0, r2, #1
+  86              	.LVL8:
+ 179:Drivers/coremark_stm32_hal/core_matrix.c **** 	A=(MATDAT *)align_mem(memblk);
+  87              		.loc 1 179 2 is_stmt 1 view .LVU21
+  88              		.loc 1 179 14 is_stmt 0 view .LVU22
+  89 0020 4B1E     		subs	r3, r1, #1
+  90              	.LVL9:
+  91              		.loc 1 179 14 view .LVU23
+  92 0022 23F00303 		bic	r3, r3, #3
+  93 0026 0433     		adds	r3, r3, #4
+  94              	.LVL10:
+ 180:Drivers/coremark_stm32_hal/core_matrix.c **** 	B=A+N*N;
+  95              		.loc 1 180 2 is_stmt 1 view .LVU24
+  96              		.loc 1 180 7 is_stmt 0 view .LVU25
+  97 0028 00FB00F7 		mul	r7, r0, r0
+  98              		.loc 1 180 5 view .LVU26
+  99 002c 4FEA470E 		lsl	lr, r7, #1
+ 100              		.loc 1 180 3 view .LVU27
+ 101 0030 03EB4707 		add	r7, r3, r7, lsl #1
+ 102              	.LVL11:
+ 181:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ 182:Drivers/coremark_stm32_hal/core_matrix.c **** 	for (i=0; i<N; i++) {
+ 103              		.loc 1 182 2 is_stmt 1 view .LVU28
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s 			page 6
+
+
+ 104              		.loc 1 182 8 is_stmt 0 view .LVU29
+ 105 0034 0026     		movs	r6, #0
+ 169:Drivers/coremark_stm32_hal/core_matrix.c **** 	MATDAT val;
+ 106              		.loc 1 169 9 view .LVU30
+ 107 0036 0125     		movs	r5, #1
+ 108              		.loc 1 182 2 view .LVU31
+ 109 0038 18E0     		b	.L5
+ 110              	.LVL12:
+ 111              	.L6:
+ 183:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 184:Drivers/coremark_stm32_hal/core_matrix.c **** 			seed = ( ( order * seed ) % 65536 );
+ 112              		.loc 1 184 4 is_stmt 1 discriminator 3 view .LVU32
+ 113              		.loc 1 184 21 is_stmt 0 discriminator 3 view .LVU33
+ 114 003a 05FB04F4 		mul	r4, r5, r4
+ 115              	.LVL13:
+ 116              		.loc 1 184 9 discriminator 3 view .LVU34
+ 117 003e 6242     		rsbs	r2, r4, #0
+ 118 0040 A4B2     		uxth	r4, r4
+ 119 0042 92B2     		uxth	r2, r2
+ 120 0044 58BF     		it	pl
+ 121 0046 5442     		rsbpl	r4, r2, #0
+ 122              	.LVL14:
+ 185:Drivers/coremark_stm32_hal/core_matrix.c **** 			val = (seed + order);
+ 123              		.loc 1 185 4 is_stmt 1 discriminator 3 view .LVU35
+ 124              		.loc 1 185 16 is_stmt 0 discriminator 3 view .LVU36
+ 125 0048 1FFA85F9 		uxth	r9, r5
+ 126 004c 09EB0402 		add	r2, r9, r4
+ 127              	.LVL15:
+ 186:Drivers/coremark_stm32_hal/core_matrix.c **** 			val=matrix_clip(val,0);
+ 128              		.loc 1 186 4 is_stmt 1 discriminator 3 view .LVU37
+ 187:Drivers/coremark_stm32_hal/core_matrix.c **** 			B[i*N+j] = val;
+ 129              		.loc 1 187 4 discriminator 3 view .LVU38
+ 130              		.loc 1 187 9 is_stmt 0 discriminator 3 view .LVU39
+ 131 0050 00FB0618 		mla	r8, r0, r6, r1
+ 132              		.loc 1 187 13 discriminator 3 view .LVU40
+ 133 0054 27F81820 		strh	r2, [r7, r8, lsl #1]	@ movhi
+ 188:Drivers/coremark_stm32_hal/core_matrix.c **** 			val =  (val + order);
+ 134              		.loc 1 188 4 is_stmt 1 discriminator 3 view .LVU41
+ 135              		.loc 1 188 16 is_stmt 0 discriminator 3 view .LVU42
+ 136 0058 19FA82F2 		uxtah	r2, r9, r2
+ 137              	.LVL16:
+ 189:Drivers/coremark_stm32_hal/core_matrix.c **** 			val=matrix_clip(val,1);
+ 138              		.loc 1 189 4 is_stmt 1 discriminator 3 view .LVU43
+ 139              		.loc 1 189 7 is_stmt 0 discriminator 3 view .LVU44
+ 140 005c D2B2     		uxtb	r2, r2
+ 141              	.LVL17:
+ 190:Drivers/coremark_stm32_hal/core_matrix.c **** 			A[i*N+j] = val;
+ 142              		.loc 1 190 4 is_stmt 1 discriminator 3 view .LVU45
+ 143              		.loc 1 190 13 is_stmt 0 discriminator 3 view .LVU46
+ 144 005e 23F81820 		strh	r2, [r3, r8, lsl #1]	@ movhi
+ 191:Drivers/coremark_stm32_hal/core_matrix.c **** 			order++;
+ 145              		.loc 1 191 4 is_stmt 1 discriminator 3 view .LVU47
+ 146              		.loc 1 191 9 is_stmt 0 discriminator 3 view .LVU48
+ 147 0062 0135     		adds	r5, r5, #1
+ 148              	.LVL18:
+ 183:Drivers/coremark_stm32_hal/core_matrix.c **** 			seed = ( ( order * seed ) % 65536 );
+ 149              		.loc 1 183 18 is_stmt 1 discriminator 3 view .LVU49
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s 			page 7
+
+
+ 183:Drivers/coremark_stm32_hal/core_matrix.c **** 			seed = ( ( order * seed ) % 65536 );
+ 150              		.loc 1 183 19 is_stmt 0 discriminator 3 view .LVU50
+ 151 0064 0131     		adds	r1, r1, #1
+ 152              	.LVL19:
+ 153              	.L7:
+ 183:Drivers/coremark_stm32_hal/core_matrix.c **** 			seed = ( ( order * seed ) % 65536 );
+ 154              		.loc 1 183 13 is_stmt 1 discriminator 1 view .LVU51
+ 183:Drivers/coremark_stm32_hal/core_matrix.c **** 			seed = ( ( order * seed ) % 65536 );
+ 155              		.loc 1 183 3 is_stmt 0 discriminator 1 view .LVU52
+ 156 0066 8142     		cmp	r1, r0
+ 157 0068 E7D3     		bcc	.L6
+ 182:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 158              		.loc 1 182 17 is_stmt 1 discriminator 2 view .LVU53
+ 182:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 159              		.loc 1 182 18 is_stmt 0 discriminator 2 view .LVU54
+ 160 006a 0136     		adds	r6, r6, #1
+ 161              	.LVL20:
+ 162              	.L5:
+ 182:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 163              		.loc 1 182 12 is_stmt 1 discriminator 1 view .LVU55
+ 182:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 164              		.loc 1 182 2 is_stmt 0 discriminator 1 view .LVU56
+ 165 006c 8642     		cmp	r6, r0
+ 166 006e 01D2     		bcs	.L11
+ 183:Drivers/coremark_stm32_hal/core_matrix.c **** 			seed = ( ( order * seed ) % 65536 );
+ 167              		.loc 1 183 9 view .LVU57
+ 168 0070 0021     		movs	r1, #0
+ 169 0072 F8E7     		b	.L7
+ 170              	.L11:
+ 192:Drivers/coremark_stm32_hal/core_matrix.c **** 		}
+ 193:Drivers/coremark_stm32_hal/core_matrix.c **** 	}
+ 194:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ 195:Drivers/coremark_stm32_hal/core_matrix.c **** 	p->A=A;
+ 171              		.loc 1 195 2 is_stmt 1 view .LVU58
+ 172              		.loc 1 195 6 is_stmt 0 view .LVU59
+ 173 0074 CCF80430 		str	r3, [ip, #4]
+ 196:Drivers/coremark_stm32_hal/core_matrix.c **** 	p->B=B;
+ 174              		.loc 1 196 2 is_stmt 1 view .LVU60
+ 175              		.loc 1 196 6 is_stmt 0 view .LVU61
+ 176 0078 CCF80870 		str	r7, [ip, #8]
+ 197:Drivers/coremark_stm32_hal/core_matrix.c **** 	p->C=(MATRES *)align_mem(B+N*N);
+ 177              		.loc 1 197 2 is_stmt 1 view .LVU62
+ 178              		.loc 1 197 17 is_stmt 0 view .LVU63
+ 179 007c 07EB0E03 		add	r3, r7, lr
+ 180              	.LVL21:
+ 181              		.loc 1 197 17 view .LVU64
+ 182 0080 013B     		subs	r3, r3, #1
+ 183 0082 23F00303 		bic	r3, r3, #3
+ 184 0086 0433     		adds	r3, r3, #4
+ 185              		.loc 1 197 6 view .LVU65
+ 186 0088 CCF80C30 		str	r3, [ip, #12]
+ 198:Drivers/coremark_stm32_hal/core_matrix.c **** 	p->N=N;
+ 187              		.loc 1 198 2 is_stmt 1 view .LVU66
+ 188              		.loc 1 198 6 is_stmt 0 view .LVU67
+ 189 008c CCF80000 		str	r0, [ip]
+ 199:Drivers/coremark_stm32_hal/core_matrix.c **** #if CORE_DEBUG
+ 200:Drivers/coremark_stm32_hal/core_matrix.c **** 	printmat(A,N,"A");
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s 			page 8
+
+
+ 201:Drivers/coremark_stm32_hal/core_matrix.c **** 	printmat(B,N,"B");
+ 202:Drivers/coremark_stm32_hal/core_matrix.c **** #endif
+ 203:Drivers/coremark_stm32_hal/core_matrix.c **** 	return N;
+ 190              		.loc 1 203 2 is_stmt 1 view .LVU68
+ 204:Drivers/coremark_stm32_hal/core_matrix.c **** }
+ 191              		.loc 1 204 1 is_stmt 0 view .LVU69
+ 192 0090 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 193              		.loc 1 204 1 view .LVU70
+ 194              		.cfi_endproc
+ 195              	.LFE5:
+ 197              		.section	.text.matrix_sum,"ax",%progbits
+ 198              		.align	1
+ 199              		.global	matrix_sum
+ 200              		.syntax unified
+ 201              		.thumb
+ 202              		.thumb_func
+ 203              		.fpu fpv5-d16
+ 205              	matrix_sum:
+ 206              	.LVL22:
+ 207              	.LFB6:
+ 205:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ 206:Drivers/coremark_stm32_hal/core_matrix.c **** /* Function: matrix_sum
+ 207:Drivers/coremark_stm32_hal/core_matrix.c **** 	Calculate a function that depends on the values of elements in the matrix.
+ 208:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ 209:Drivers/coremark_stm32_hal/core_matrix.c **** 	For each element, accumulate into a temporary variable.
+ 210:Drivers/coremark_stm32_hal/core_matrix.c **** 	
+ 211:Drivers/coremark_stm32_hal/core_matrix.c **** 	As long as this value is under the parameter clipval, 
+ 212:Drivers/coremark_stm32_hal/core_matrix.c **** 	add 1 to the result if the element is bigger then the previous.
+ 213:Drivers/coremark_stm32_hal/core_matrix.c **** 	
+ 214:Drivers/coremark_stm32_hal/core_matrix.c **** 	Otherwise, reset the accumulator and add 10 to the result.
+ 215:Drivers/coremark_stm32_hal/core_matrix.c **** */
+ 216:Drivers/coremark_stm32_hal/core_matrix.c **** ee_s16 matrix_sum(ee_u32 N, MATRES *C, MATDAT clipval) {
+ 208              		.loc 1 216 56 is_stmt 1 view -0
+ 209              		.cfi_startproc
+ 210              		@ args = 0, pretend = 0, frame = 0
+ 211              		@ frame_needed = 0, uses_anonymous_args = 0
+ 212              		@ link register save eliminated.
+ 213              		.loc 1 216 56 is_stmt 0 view .LVU72
+ 214 0000 F0B4     		push	{r4, r5, r6, r7}
+ 215              	.LCFI1:
+ 216              		.cfi_def_cfa_offset 16
+ 217              		.cfi_offset 4, -16
+ 218              		.cfi_offset 5, -12
+ 219              		.cfi_offset 6, -8
+ 220              		.cfi_offset 7, -4
+ 221 0002 0646     		mov	r6, r0
+ 217:Drivers/coremark_stm32_hal/core_matrix.c **** 	MATRES tmp=0,prev=0,cur=0;
+ 222              		.loc 1 217 2 is_stmt 1 view .LVU73
+ 223              	.LVL23:
+ 218:Drivers/coremark_stm32_hal/core_matrix.c **** 	ee_s16 ret=0;
+ 224              		.loc 1 218 2 view .LVU74
+ 219:Drivers/coremark_stm32_hal/core_matrix.c **** 	ee_u32 i,j;
+ 225              		.loc 1 219 2 view .LVU75
+ 220:Drivers/coremark_stm32_hal/core_matrix.c **** 	for (i=0; i<N; i++) {
+ 226              		.loc 1 220 2 view .LVU76
+ 227              		.loc 1 220 8 is_stmt 0 view .LVU77
+ 228 0004 4FF0000C 		mov	ip, #0
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s 			page 9
+
+
+ 218:Drivers/coremark_stm32_hal/core_matrix.c **** 	ee_s16 ret=0;
+ 229              		.loc 1 218 9 view .LVU78
+ 230 0008 6046     		mov	r0, ip
+ 231              	.LVL24:
+ 217:Drivers/coremark_stm32_hal/core_matrix.c **** 	ee_s16 ret=0;
+ 232              		.loc 1 217 15 view .LVU79
+ 233 000a 6746     		mov	r7, ip
+ 217:Drivers/coremark_stm32_hal/core_matrix.c **** 	ee_s16 ret=0;
+ 234              		.loc 1 217 9 view .LVU80
+ 235 000c 6446     		mov	r4, ip
+ 236              		.loc 1 220 2 view .LVU81
+ 237 000e 14E0     		b	.L13
+ 238              	.LVL25:
+ 239              	.L14:
+ 221:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 222:Drivers/coremark_stm32_hal/core_matrix.c **** 			cur=C[i*N+j];
+ 223:Drivers/coremark_stm32_hal/core_matrix.c **** 			tmp+=cur;
+ 224:Drivers/coremark_stm32_hal/core_matrix.c **** 			if (tmp>clipval) {
+ 225:Drivers/coremark_stm32_hal/core_matrix.c **** 				ret+=10;
+ 226:Drivers/coremark_stm32_hal/core_matrix.c **** 				tmp=0;
+ 227:Drivers/coremark_stm32_hal/core_matrix.c **** 			} else {
+ 228:Drivers/coremark_stm32_hal/core_matrix.c **** 				ret += (cur>prev) ? 1 : 0;
+ 240              		.loc 1 228 5 is_stmt 1 view .LVU82
+ 241              		.loc 1 228 9 is_stmt 0 view .LVU83
+ 242 0010 AF42     		cmp	r7, r5
+ 243 0012 B8BF     		it	lt
+ 244 0014 0130     		addlt	r0, r0, #1
+ 245              	.LVL26:
+ 246              		.loc 1 228 9 view .LVU84
+ 247 0016 00B2     		sxth	r0, r0
+ 248              	.LVL27:
+ 249              	.L15:
+ 229:Drivers/coremark_stm32_hal/core_matrix.c **** 			}
+ 230:Drivers/coremark_stm32_hal/core_matrix.c **** 			prev=cur;
+ 250              		.loc 1 230 4 is_stmt 1 discriminator 2 view .LVU85
+ 221:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 251              		.loc 1 221 18 discriminator 2 view .LVU86
+ 221:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 252              		.loc 1 221 19 is_stmt 0 discriminator 2 view .LVU87
+ 253 0018 0133     		adds	r3, r3, #1
+ 254              	.LVL28:
+ 255              		.loc 1 230 8 discriminator 2 view .LVU88
+ 256 001a 2F46     		mov	r7, r5
+ 257              	.LVL29:
+ 258              	.L17:
+ 221:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 259              		.loc 1 221 13 is_stmt 1 discriminator 1 view .LVU89
+ 221:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 260              		.loc 1 221 3 is_stmt 0 discriminator 1 view .LVU90
+ 261 001c B342     		cmp	r3, r6
+ 262 001e 0AD2     		bcs	.L20
+ 222:Drivers/coremark_stm32_hal/core_matrix.c **** 			tmp+=cur;
+ 263              		.loc 1 222 4 is_stmt 1 view .LVU91
+ 222:Drivers/coremark_stm32_hal/core_matrix.c **** 			tmp+=cur;
+ 264              		.loc 1 222 13 is_stmt 0 view .LVU92
+ 265 0020 06FB0C35 		mla	r5, r6, ip, r3
+ 222:Drivers/coremark_stm32_hal/core_matrix.c **** 			tmp+=cur;
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s 			page 10
+
+
+ 266              		.loc 1 222 7 view .LVU93
+ 267 0024 51F82550 		ldr	r5, [r1, r5, lsl #2]
+ 268              	.LVL30:
+ 223:Drivers/coremark_stm32_hal/core_matrix.c **** 			if (tmp>clipval) {
+ 269              		.loc 1 223 4 is_stmt 1 view .LVU94
+ 223:Drivers/coremark_stm32_hal/core_matrix.c **** 			if (tmp>clipval) {
+ 270              		.loc 1 223 7 is_stmt 0 view .LVU95
+ 271 0028 2C44     		add	r4, r4, r5
+ 272              	.LVL31:
+ 224:Drivers/coremark_stm32_hal/core_matrix.c **** 				ret+=10;
+ 273              		.loc 1 224 4 is_stmt 1 view .LVU96
+ 224:Drivers/coremark_stm32_hal/core_matrix.c **** 				ret+=10;
+ 274              		.loc 1 224 7 is_stmt 0 view .LVU97
+ 275 002a A242     		cmp	r2, r4
+ 276 002c F0DA     		bge	.L14
+ 225:Drivers/coremark_stm32_hal/core_matrix.c **** 				tmp=0;
+ 277              		.loc 1 225 5 is_stmt 1 view .LVU98
+ 225:Drivers/coremark_stm32_hal/core_matrix.c **** 				tmp=0;
+ 278              		.loc 1 225 8 is_stmt 0 view .LVU99
+ 279 002e 0A30     		adds	r0, r0, #10
+ 280              	.LVL32:
+ 225:Drivers/coremark_stm32_hal/core_matrix.c **** 				tmp=0;
+ 281              		.loc 1 225 8 view .LVU100
+ 282 0030 00B2     		sxth	r0, r0
+ 283              	.LVL33:
+ 226:Drivers/coremark_stm32_hal/core_matrix.c **** 			} else {
+ 284              		.loc 1 226 5 is_stmt 1 view .LVU101
+ 226:Drivers/coremark_stm32_hal/core_matrix.c **** 			} else {
+ 285              		.loc 1 226 8 is_stmt 0 view .LVU102
+ 286 0032 0024     		movs	r4, #0
+ 287 0034 F0E7     		b	.L15
+ 288              	.LVL34:
+ 289              	.L20:
+ 220:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 290              		.loc 1 220 17 is_stmt 1 discriminator 2 view .LVU103
+ 220:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 291              		.loc 1 220 18 is_stmt 0 discriminator 2 view .LVU104
+ 292 0036 0CF1010C 		add	ip, ip, #1
+ 293              	.LVL35:
+ 294              	.L13:
+ 220:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 295              		.loc 1 220 12 is_stmt 1 discriminator 1 view .LVU105
+ 220:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 296              		.loc 1 220 2 is_stmt 0 discriminator 1 view .LVU106
+ 297 003a B445     		cmp	ip, r6
+ 298 003c 01D2     		bcs	.L21
+ 221:Drivers/coremark_stm32_hal/core_matrix.c **** 			cur=C[i*N+j];
+ 299              		.loc 1 221 9 view .LVU107
+ 300 003e 0023     		movs	r3, #0
+ 301 0040 ECE7     		b	.L17
+ 302              	.L21:
+ 231:Drivers/coremark_stm32_hal/core_matrix.c **** 		}
+ 232:Drivers/coremark_stm32_hal/core_matrix.c **** 	}
+ 233:Drivers/coremark_stm32_hal/core_matrix.c **** 	return ret;
+ 234:Drivers/coremark_stm32_hal/core_matrix.c **** }
+ 303              		.loc 1 234 1 view .LVU108
+ 304 0042 F0BC     		pop	{r4, r5, r6, r7}
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s 			page 11
+
+
+ 305              	.LCFI2:
+ 306              		.cfi_restore 7
+ 307              		.cfi_restore 6
+ 308              		.cfi_restore 5
+ 309              		.cfi_restore 4
+ 310              		.cfi_def_cfa_offset 0
+ 311              	.LVL36:
+ 312              		.loc 1 234 1 view .LVU109
+ 313 0044 7047     		bx	lr
+ 314              		.cfi_endproc
+ 315              	.LFE6:
+ 317              		.section	.text.matrix_mul_const,"ax",%progbits
+ 318              		.align	1
+ 319              		.global	matrix_mul_const
+ 320              		.syntax unified
+ 321              		.thumb
+ 322              		.thumb_func
+ 323              		.fpu fpv5-d16
+ 325              	matrix_mul_const:
+ 326              	.LVL37:
+ 327              	.LFB7:
+ 235:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ 236:Drivers/coremark_stm32_hal/core_matrix.c **** /* Function: matrix_mul_const
+ 237:Drivers/coremark_stm32_hal/core_matrix.c **** 	Multiply a matrix by a constant.
+ 238:Drivers/coremark_stm32_hal/core_matrix.c **** 	This could be used as a scaler for instance.
+ 239:Drivers/coremark_stm32_hal/core_matrix.c **** */
+ 240:Drivers/coremark_stm32_hal/core_matrix.c **** void matrix_mul_const(ee_u32 N, MATRES *C, MATDAT *A, MATDAT val) {
+ 328              		.loc 1 240 67 is_stmt 1 view -0
+ 329              		.cfi_startproc
+ 330              		@ args = 0, pretend = 0, frame = 0
+ 331              		@ frame_needed = 0, uses_anonymous_args = 0
+ 332              		@ link register save eliminated.
+ 333              		.loc 1 240 67 is_stmt 0 view .LVU111
+ 334 0000 F0B4     		push	{r4, r5, r6, r7}
+ 335              	.LCFI3:
+ 336              		.cfi_def_cfa_offset 16
+ 337              		.cfi_offset 4, -16
+ 338              		.cfi_offset 5, -12
+ 339              		.cfi_offset 6, -8
+ 340              		.cfi_offset 7, -4
+ 241:Drivers/coremark_stm32_hal/core_matrix.c **** 	ee_u32 i,j;
+ 341              		.loc 1 241 2 is_stmt 1 view .LVU112
+ 242:Drivers/coremark_stm32_hal/core_matrix.c **** 	for (i=0; i<N; i++) {
+ 342              		.loc 1 242 2 view .LVU113
+ 343              	.LVL38:
+ 344              		.loc 1 242 8 is_stmt 0 view .LVU114
+ 345 0002 0027     		movs	r7, #0
+ 346              		.loc 1 242 2 view .LVU115
+ 347 0004 0BE0     		b	.L23
+ 348              	.LVL39:
+ 349              	.L24:
+ 243:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 244:Drivers/coremark_stm32_hal/core_matrix.c **** 			C[i*N+j]=(MATRES)A[i*N+j] * (MATRES)val;
+ 350              		.loc 1 244 4 is_stmt 1 discriminator 3 view .LVU116
+ 351              		.loc 1 244 26 is_stmt 0 discriminator 3 view .LVU117
+ 352 0006 00FB0746 		mla	r6, r0, r7, r4
+ 353              		.loc 1 244 22 discriminator 3 view .LVU118
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s 			page 12
+
+
+ 354 000a 32F91650 		ldrsh	r5, [r2, r6, lsl #1]
+ 355              		.loc 1 244 30 discriminator 3 view .LVU119
+ 356 000e 03FB05F5 		mul	r5, r3, r5
+ 357              		.loc 1 244 12 discriminator 3 view .LVU120
+ 358 0012 41F82650 		str	r5, [r1, r6, lsl #2]
+ 243:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 359              		.loc 1 243 18 is_stmt 1 discriminator 3 view .LVU121
+ 243:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 360              		.loc 1 243 19 is_stmt 0 discriminator 3 view .LVU122
+ 361 0016 0134     		adds	r4, r4, #1
+ 362              	.LVL40:
+ 363              	.L25:
+ 243:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 364              		.loc 1 243 13 is_stmt 1 discriminator 1 view .LVU123
+ 243:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 365              		.loc 1 243 3 is_stmt 0 discriminator 1 view .LVU124
+ 366 0018 8442     		cmp	r4, r0
+ 367 001a F4D3     		bcc	.L24
+ 242:Drivers/coremark_stm32_hal/core_matrix.c **** 	for (i=0; i<N; i++) {
+ 368              		.loc 1 242 17 is_stmt 1 discriminator 2 view .LVU125
+ 242:Drivers/coremark_stm32_hal/core_matrix.c **** 	for (i=0; i<N; i++) {
+ 369              		.loc 1 242 18 is_stmt 0 discriminator 2 view .LVU126
+ 370 001c 0137     		adds	r7, r7, #1
+ 371              	.LVL41:
+ 372              	.L23:
+ 242:Drivers/coremark_stm32_hal/core_matrix.c **** 	for (i=0; i<N; i++) {
+ 373              		.loc 1 242 12 is_stmt 1 discriminator 1 view .LVU127
+ 242:Drivers/coremark_stm32_hal/core_matrix.c **** 	for (i=0; i<N; i++) {
+ 374              		.loc 1 242 2 is_stmt 0 discriminator 1 view .LVU128
+ 375 001e 8742     		cmp	r7, r0
+ 376 0020 01D2     		bcs	.L28
+ 243:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 377              		.loc 1 243 9 view .LVU129
+ 378 0022 0024     		movs	r4, #0
+ 379 0024 F8E7     		b	.L25
+ 380              	.L28:
+ 245:Drivers/coremark_stm32_hal/core_matrix.c **** 		}
+ 246:Drivers/coremark_stm32_hal/core_matrix.c **** 	}
+ 247:Drivers/coremark_stm32_hal/core_matrix.c **** }
+ 381              		.loc 1 247 1 view .LVU130
+ 382 0026 F0BC     		pop	{r4, r5, r6, r7}
+ 383              	.LCFI4:
+ 384              		.cfi_restore 7
+ 385              		.cfi_restore 6
+ 386              		.cfi_restore 5
+ 387              		.cfi_restore 4
+ 388              		.cfi_def_cfa_offset 0
+ 389              	.LVL42:
+ 390              		.loc 1 247 1 view .LVU131
+ 391 0028 7047     		bx	lr
+ 392              		.cfi_endproc
+ 393              	.LFE7:
+ 395              		.section	.text.matrix_add_const,"ax",%progbits
+ 396              		.align	1
+ 397              		.global	matrix_add_const
+ 398              		.syntax unified
+ 399              		.thumb
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s 			page 13
+
+
+ 400              		.thumb_func
+ 401              		.fpu fpv5-d16
+ 403              	matrix_add_const:
+ 404              	.LVL43:
+ 405              	.LFB8:
+ 248:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ 249:Drivers/coremark_stm32_hal/core_matrix.c **** /* Function: matrix_add_const
+ 250:Drivers/coremark_stm32_hal/core_matrix.c **** 	Add a constant value to all elements of a matrix.
+ 251:Drivers/coremark_stm32_hal/core_matrix.c **** */
+ 252:Drivers/coremark_stm32_hal/core_matrix.c **** void matrix_add_const(ee_u32 N, MATDAT *A, MATDAT val) {
+ 406              		.loc 1 252 56 is_stmt 1 view -0
+ 407              		.cfi_startproc
+ 408              		@ args = 0, pretend = 0, frame = 0
+ 409              		@ frame_needed = 0, uses_anonymous_args = 0
+ 410              		@ link register save eliminated.
+ 411              		.loc 1 252 56 is_stmt 0 view .LVU133
+ 412 0000 70B4     		push	{r4, r5, r6}
+ 413              	.LCFI5:
+ 414              		.cfi_def_cfa_offset 12
+ 415              		.cfi_offset 4, -12
+ 416              		.cfi_offset 5, -8
+ 417              		.cfi_offset 6, -4
+ 253:Drivers/coremark_stm32_hal/core_matrix.c **** 	ee_u32 i,j;
+ 418              		.loc 1 253 2 is_stmt 1 view .LVU134
+ 254:Drivers/coremark_stm32_hal/core_matrix.c **** 	for (i=0; i<N; i++) {
+ 419              		.loc 1 254 2 view .LVU135
+ 420              	.LVL44:
+ 421              		.loc 1 254 8 is_stmt 0 view .LVU136
+ 422 0002 0026     		movs	r6, #0
+ 423              		.loc 1 254 2 view .LVU137
+ 424 0004 0AE0     		b	.L30
+ 425              	.LVL45:
+ 426              	.L31:
+ 255:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 256:Drivers/coremark_stm32_hal/core_matrix.c **** 			A[i*N+j] += val;
+ 427              		.loc 1 256 4 is_stmt 1 discriminator 3 view .LVU138
+ 428              		.loc 1 256 13 is_stmt 0 discriminator 3 view .LVU139
+ 429 0006 00FB0635 		mla	r5, r0, r6, r3
+ 430 000a 31F81540 		ldrh	r4, [r1, r5, lsl #1]
+ 431 000e 1444     		add	r4, r4, r2
+ 432 0010 21F81540 		strh	r4, [r1, r5, lsl #1]	@ movhi
+ 255:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 433              		.loc 1 255 18 is_stmt 1 discriminator 3 view .LVU140
+ 255:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 434              		.loc 1 255 19 is_stmt 0 discriminator 3 view .LVU141
+ 435 0014 0133     		adds	r3, r3, #1
+ 436              	.LVL46:
+ 437              	.L32:
+ 255:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 438              		.loc 1 255 13 is_stmt 1 discriminator 1 view .LVU142
+ 255:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 439              		.loc 1 255 3 is_stmt 0 discriminator 1 view .LVU143
+ 440 0016 8342     		cmp	r3, r0
+ 441 0018 F5D3     		bcc	.L31
+ 254:Drivers/coremark_stm32_hal/core_matrix.c **** 	for (i=0; i<N; i++) {
+ 442              		.loc 1 254 17 is_stmt 1 discriminator 2 view .LVU144
+ 254:Drivers/coremark_stm32_hal/core_matrix.c **** 	for (i=0; i<N; i++) {
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s 			page 14
+
+
+ 443              		.loc 1 254 18 is_stmt 0 discriminator 2 view .LVU145
+ 444 001a 0136     		adds	r6, r6, #1
+ 445              	.LVL47:
+ 446              	.L30:
+ 254:Drivers/coremark_stm32_hal/core_matrix.c **** 	for (i=0; i<N; i++) {
+ 447              		.loc 1 254 12 is_stmt 1 discriminator 1 view .LVU146
+ 254:Drivers/coremark_stm32_hal/core_matrix.c **** 	for (i=0; i<N; i++) {
+ 448              		.loc 1 254 2 is_stmt 0 discriminator 1 view .LVU147
+ 449 001c 8642     		cmp	r6, r0
+ 450 001e 01D2     		bcs	.L35
+ 255:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 451              		.loc 1 255 9 view .LVU148
+ 452 0020 0023     		movs	r3, #0
+ 453 0022 F8E7     		b	.L32
+ 454              	.L35:
+ 257:Drivers/coremark_stm32_hal/core_matrix.c **** 		}
+ 258:Drivers/coremark_stm32_hal/core_matrix.c **** 	}
+ 259:Drivers/coremark_stm32_hal/core_matrix.c **** }
+ 455              		.loc 1 259 1 view .LVU149
+ 456 0024 70BC     		pop	{r4, r5, r6}
+ 457              	.LCFI6:
+ 458              		.cfi_restore 6
+ 459              		.cfi_restore 5
+ 460              		.cfi_restore 4
+ 461              		.cfi_def_cfa_offset 0
+ 462              	.LVL48:
+ 463              		.loc 1 259 1 view .LVU150
+ 464 0026 7047     		bx	lr
+ 465              		.cfi_endproc
+ 466              	.LFE8:
+ 468              		.section	.text.matrix_mul_vect,"ax",%progbits
+ 469              		.align	1
+ 470              		.global	matrix_mul_vect
+ 471              		.syntax unified
+ 472              		.thumb
+ 473              		.thumb_func
+ 474              		.fpu fpv5-d16
+ 476              	matrix_mul_vect:
+ 477              	.LVL49:
+ 478              	.LFB9:
+ 260:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ 261:Drivers/coremark_stm32_hal/core_matrix.c **** /* Function: matrix_mul_vect
+ 262:Drivers/coremark_stm32_hal/core_matrix.c **** 	Multiply a matrix by a vector.
+ 263:Drivers/coremark_stm32_hal/core_matrix.c **** 	This is common in many simple filters (e.g. fir where a vector of coefficients is applied to the m
+ 264:Drivers/coremark_stm32_hal/core_matrix.c **** */
+ 265:Drivers/coremark_stm32_hal/core_matrix.c **** void matrix_mul_vect(ee_u32 N, MATRES *C, MATDAT *A, MATDAT *B) {
+ 479              		.loc 1 265 65 is_stmt 1 view -0
+ 480              		.cfi_startproc
+ 481              		@ args = 0, pretend = 0, frame = 0
+ 482              		@ frame_needed = 0, uses_anonymous_args = 0
+ 483              		.loc 1 265 65 is_stmt 0 view .LVU152
+ 484 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 485              	.LCFI7:
+ 486              		.cfi_def_cfa_offset 20
+ 487              		.cfi_offset 4, -20
+ 488              		.cfi_offset 5, -16
+ 489              		.cfi_offset 6, -12
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s 			page 15
+
+
+ 490              		.cfi_offset 7, -8
+ 491              		.cfi_offset 14, -4
+ 266:Drivers/coremark_stm32_hal/core_matrix.c **** 	ee_u32 i,j;
+ 492              		.loc 1 266 2 is_stmt 1 view .LVU153
+ 267:Drivers/coremark_stm32_hal/core_matrix.c **** 	for (i=0; i<N; i++) {
+ 493              		.loc 1 267 2 view .LVU154
+ 494              	.LVL50:
+ 495              		.loc 1 267 8 is_stmt 0 view .LVU155
+ 496 0002 4FF0000E 		mov	lr, #0
+ 497              		.loc 1 267 2 view .LVU156
+ 498 0006 0EE0     		b	.L37
+ 499              	.LVL51:
+ 500              	.L39:
+ 268:Drivers/coremark_stm32_hal/core_matrix.c **** 		C[i]=0;
+ 269:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 270:Drivers/coremark_stm32_hal/core_matrix.c **** 			C[i]+=(MATRES)A[i*N+j] * (MATRES)B[j];
+ 501              		.loc 1 270 4 is_stmt 1 discriminator 3 view .LVU157
+ 502              		.loc 1 270 23 is_stmt 0 discriminator 3 view .LVU158
+ 503 0008 00FB0E45 		mla	r5, r0, lr, r4
+ 504              		.loc 1 270 19 discriminator 3 view .LVU159
+ 505 000c 32F91550 		ldrsh	r5, [r2, r5, lsl #1]
+ 506              		.loc 1 270 38 discriminator 3 view .LVU160
+ 507 0010 33F914C0 		ldrsh	ip, [r3, r4, lsl #1]
+ 508              		.loc 1 270 8 discriminator 3 view .LVU161
+ 509 0014 3768     		ldr	r7, [r6]
+ 510 0016 0CFB0575 		mla	r5, ip, r5, r7
+ 511 001a 3560     		str	r5, [r6]
+ 269:Drivers/coremark_stm32_hal/core_matrix.c **** 			C[i]+=(MATRES)A[i*N+j] * (MATRES)B[j];
+ 512              		.loc 1 269 18 is_stmt 1 discriminator 3 view .LVU162
+ 269:Drivers/coremark_stm32_hal/core_matrix.c **** 			C[i]+=(MATRES)A[i*N+j] * (MATRES)B[j];
+ 513              		.loc 1 269 19 is_stmt 0 discriminator 3 view .LVU163
+ 514 001c 0134     		adds	r4, r4, #1
+ 515              	.LVL52:
+ 516              	.L38:
+ 269:Drivers/coremark_stm32_hal/core_matrix.c **** 			C[i]+=(MATRES)A[i*N+j] * (MATRES)B[j];
+ 517              		.loc 1 269 13 is_stmt 1 discriminator 1 view .LVU164
+ 269:Drivers/coremark_stm32_hal/core_matrix.c **** 			C[i]+=(MATRES)A[i*N+j] * (MATRES)B[j];
+ 518              		.loc 1 269 3 is_stmt 0 discriminator 1 view .LVU165
+ 519 001e 8442     		cmp	r4, r0
+ 520 0020 F2D3     		bcc	.L39
+ 267:Drivers/coremark_stm32_hal/core_matrix.c **** 	for (i=0; i<N; i++) {
+ 521              		.loc 1 267 17 is_stmt 1 discriminator 2 view .LVU166
+ 267:Drivers/coremark_stm32_hal/core_matrix.c **** 	for (i=0; i<N; i++) {
+ 522              		.loc 1 267 18 is_stmt 0 discriminator 2 view .LVU167
+ 523 0022 0EF1010E 		add	lr, lr, #1
+ 524              	.LVL53:
+ 525              	.L37:
+ 267:Drivers/coremark_stm32_hal/core_matrix.c **** 	for (i=0; i<N; i++) {
+ 526              		.loc 1 267 12 is_stmt 1 discriminator 1 view .LVU168
+ 267:Drivers/coremark_stm32_hal/core_matrix.c **** 	for (i=0; i<N; i++) {
+ 527              		.loc 1 267 2 is_stmt 0 discriminator 1 view .LVU169
+ 528 0026 8645     		cmp	lr, r0
+ 529 0028 05D2     		bcs	.L42
+ 268:Drivers/coremark_stm32_hal/core_matrix.c **** 		C[i]=0;
+ 530              		.loc 1 268 3 is_stmt 1 view .LVU170
+ 268:Drivers/coremark_stm32_hal/core_matrix.c **** 		C[i]=0;
+ 531              		.loc 1 268 4 is_stmt 0 view .LVU171
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s 			page 16
+
+
+ 532 002a 01EB8E06 		add	r6, r1, lr, lsl #2
+ 268:Drivers/coremark_stm32_hal/core_matrix.c **** 		C[i]=0;
+ 533              		.loc 1 268 7 view .LVU172
+ 534 002e 0024     		movs	r4, #0
+ 535 0030 41F82E40 		str	r4, [r1, lr, lsl #2]
+ 269:Drivers/coremark_stm32_hal/core_matrix.c **** 			C[i]+=(MATRES)A[i*N+j] * (MATRES)B[j];
+ 536              		.loc 1 269 3 is_stmt 1 view .LVU173
+ 537              	.LVL54:
+ 269:Drivers/coremark_stm32_hal/core_matrix.c **** 			C[i]+=(MATRES)A[i*N+j] * (MATRES)B[j];
+ 538              		.loc 1 269 3 is_stmt 0 view .LVU174
+ 539 0034 F3E7     		b	.L38
+ 540              	.LVL55:
+ 541              	.L42:
+ 271:Drivers/coremark_stm32_hal/core_matrix.c **** 		}
+ 272:Drivers/coremark_stm32_hal/core_matrix.c **** 	}
+ 273:Drivers/coremark_stm32_hal/core_matrix.c **** }
+ 542              		.loc 1 273 1 view .LVU175
+ 543 0036 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 544              		.cfi_endproc
+ 545              	.LFE9:
+ 547              		.section	.text.matrix_mul_matrix,"ax",%progbits
+ 548              		.align	1
+ 549              		.global	matrix_mul_matrix
+ 550              		.syntax unified
+ 551              		.thumb
+ 552              		.thumb_func
+ 553              		.fpu fpv5-d16
+ 555              	matrix_mul_matrix:
+ 556              	.LVL56:
+ 557              	.LFB10:
+ 274:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ 275:Drivers/coremark_stm32_hal/core_matrix.c **** /* Function: matrix_mul_matrix
+ 276:Drivers/coremark_stm32_hal/core_matrix.c **** 	Multiply a matrix by a matrix.
+ 277:Drivers/coremark_stm32_hal/core_matrix.c **** 	Basic code is used in many algorithms, mostly with minor changes such as scaling.
+ 278:Drivers/coremark_stm32_hal/core_matrix.c **** */
+ 279:Drivers/coremark_stm32_hal/core_matrix.c **** void matrix_mul_matrix(ee_u32 N, MATRES *C, MATDAT *A, MATDAT *B) {
+ 558              		.loc 1 279 67 is_stmt 1 view -0
+ 559              		.cfi_startproc
+ 560              		@ args = 0, pretend = 0, frame = 0
+ 561              		@ frame_needed = 0, uses_anonymous_args = 0
+ 562              		.loc 1 279 67 is_stmt 0 view .LVU177
+ 563 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 564              	.LCFI8:
+ 565              		.cfi_def_cfa_offset 28
+ 566              		.cfi_offset 4, -28
+ 567              		.cfi_offset 5, -24
+ 568              		.cfi_offset 6, -20
+ 569              		.cfi_offset 7, -16
+ 570              		.cfi_offset 8, -12
+ 571              		.cfi_offset 9, -8
+ 572              		.cfi_offset 14, -4
+ 573 0004 8E46     		mov	lr, r1
+ 574 0006 9046     		mov	r8, r2
+ 575 0008 9C46     		mov	ip, r3
+ 280:Drivers/coremark_stm32_hal/core_matrix.c **** 	ee_u32 i,j,k;
+ 576              		.loc 1 280 2 is_stmt 1 view .LVU178
+ 281:Drivers/coremark_stm32_hal/core_matrix.c **** 	for (i=0; i<N; i++) {
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s 			page 17
+
+
+ 577              		.loc 1 281 2 view .LVU179
+ 578              	.LVL57:
+ 579              		.loc 1 281 8 is_stmt 0 view .LVU180
+ 580 000a 4FF00009 		mov	r9, #0
+ 581              		.loc 1 281 2 view .LVU181
+ 582 000e 1BE0     		b	.L44
+ 583              	.LVL58:
+ 584              	.L46:
+ 282:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 283:Drivers/coremark_stm32_hal/core_matrix.c **** 			C[i*N+j]=0;
+ 284:Drivers/coremark_stm32_hal/core_matrix.c **** 			for(k=0;k<N;k++)
+ 285:Drivers/coremark_stm32_hal/core_matrix.c **** 			{
+ 286:Drivers/coremark_stm32_hal/core_matrix.c **** 				C[i*N+j]+=(MATRES)A[i*N+k] * (MATRES)B[k*N+j];
+ 585              		.loc 1 286 5 is_stmt 1 discriminator 3 view .LVU182
+ 586              		.loc 1 286 28 is_stmt 0 discriminator 3 view .LVU183
+ 587 0010 FA18     		adds	r2, r7, r3
+ 588              		.loc 1 286 24 discriminator 3 view .LVU184
+ 589 0012 38F91220 		ldrsh	r2, [r8, r2, lsl #1]
+ 590              		.loc 1 286 47 discriminator 3 view .LVU185
+ 591 0016 00FB0364 		mla	r4, r0, r3, r6
+ 592              		.loc 1 286 43 discriminator 3 view .LVU186
+ 593 001a 3CF91450 		ldrsh	r5, [ip, r4, lsl #1]
+ 594              		.loc 1 286 13 discriminator 3 view .LVU187
+ 595 001e 0C68     		ldr	r4, [r1]
+ 596 0020 05FB0242 		mla	r2, r5, r2, r4
+ 597 0024 0A60     		str	r2, [r1]
+ 284:Drivers/coremark_stm32_hal/core_matrix.c **** 			{
+ 598              		.loc 1 284 16 is_stmt 1 discriminator 3 view .LVU188
+ 284:Drivers/coremark_stm32_hal/core_matrix.c **** 			{
+ 599              		.loc 1 284 17 is_stmt 0 discriminator 3 view .LVU189
+ 600 0026 0133     		adds	r3, r3, #1
+ 601              	.LVL59:
+ 602              	.L45:
+ 284:Drivers/coremark_stm32_hal/core_matrix.c **** 			{
+ 603              		.loc 1 284 12 is_stmt 1 discriminator 1 view .LVU190
+ 284:Drivers/coremark_stm32_hal/core_matrix.c **** 			{
+ 604              		.loc 1 284 4 is_stmt 0 discriminator 1 view .LVU191
+ 605 0028 8342     		cmp	r3, r0
+ 606 002a F1D3     		bcc	.L46
+ 282:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 607              		.loc 1 282 18 is_stmt 1 discriminator 2 view .LVU192
+ 282:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 608              		.loc 1 282 19 is_stmt 0 discriminator 2 view .LVU193
+ 609 002c 0136     		adds	r6, r6, #1
+ 610              	.LVL60:
+ 611              	.L48:
+ 282:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 612              		.loc 1 282 13 is_stmt 1 discriminator 1 view .LVU194
+ 282:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 613              		.loc 1 282 3 is_stmt 0 discriminator 1 view .LVU195
+ 614 002e 8642     		cmp	r6, r0
+ 615 0030 08D2     		bcs	.L51
+ 283:Drivers/coremark_stm32_hal/core_matrix.c **** 			for(k=0;k<N;k++)
+ 616              		.loc 1 283 4 is_stmt 1 view .LVU196
+ 283:Drivers/coremark_stm32_hal/core_matrix.c **** 			for(k=0;k<N;k++)
+ 617              		.loc 1 283 7 is_stmt 0 view .LVU197
+ 618 0032 00FB09F7 		mul	r7, r0, r9
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s 			page 18
+
+
+ 283:Drivers/coremark_stm32_hal/core_matrix.c **** 			for(k=0;k<N;k++)
+ 619              		.loc 1 283 9 view .LVU198
+ 620 0036 BA19     		adds	r2, r7, r6
+ 283:Drivers/coremark_stm32_hal/core_matrix.c **** 			for(k=0;k<N;k++)
+ 621              		.loc 1 283 5 view .LVU199
+ 622 0038 0EEB8201 		add	r1, lr, r2, lsl #2
+ 283:Drivers/coremark_stm32_hal/core_matrix.c **** 			for(k=0;k<N;k++)
+ 623              		.loc 1 283 12 view .LVU200
+ 624 003c 0023     		movs	r3, #0
+ 625 003e 4EF82230 		str	r3, [lr, r2, lsl #2]
+ 284:Drivers/coremark_stm32_hal/core_matrix.c **** 			{
+ 626              		.loc 1 284 4 is_stmt 1 view .LVU201
+ 627              	.LVL61:
+ 284:Drivers/coremark_stm32_hal/core_matrix.c **** 			{
+ 628              		.loc 1 284 4 is_stmt 0 view .LVU202
+ 629 0042 F1E7     		b	.L45
+ 630              	.LVL62:
+ 631              	.L51:
+ 281:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 632              		.loc 1 281 17 is_stmt 1 discriminator 2 view .LVU203
+ 281:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 633              		.loc 1 281 18 is_stmt 0 discriminator 2 view .LVU204
+ 634 0044 09F10109 		add	r9, r9, #1
+ 635              	.LVL63:
+ 636              	.L44:
+ 281:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 637              		.loc 1 281 12 is_stmt 1 discriminator 1 view .LVU205
+ 281:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 638              		.loc 1 281 2 is_stmt 0 discriminator 1 view .LVU206
+ 639 0048 8145     		cmp	r9, r0
+ 640 004a 01D2     		bcs	.L52
+ 282:Drivers/coremark_stm32_hal/core_matrix.c **** 			C[i*N+j]=0;
+ 641              		.loc 1 282 9 view .LVU207
+ 642 004c 0026     		movs	r6, #0
+ 643 004e EEE7     		b	.L48
+ 644              	.L52:
+ 287:Drivers/coremark_stm32_hal/core_matrix.c **** 			}
+ 288:Drivers/coremark_stm32_hal/core_matrix.c **** 		}
+ 289:Drivers/coremark_stm32_hal/core_matrix.c **** 	}
+ 290:Drivers/coremark_stm32_hal/core_matrix.c **** }
+ 645              		.loc 1 290 1 view .LVU208
+ 646 0050 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 647              		.loc 1 290 1 view .LVU209
+ 648              		.cfi_endproc
+ 649              	.LFE10:
+ 651              		.section	.text.matrix_mul_matrix_bitextract,"ax",%progbits
+ 652              		.align	1
+ 653              		.global	matrix_mul_matrix_bitextract
+ 654              		.syntax unified
+ 655              		.thumb
+ 656              		.thumb_func
+ 657              		.fpu fpv5-d16
+ 659              	matrix_mul_matrix_bitextract:
+ 660              	.LVL64:
+ 661              	.LFB11:
+ 291:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ 292:Drivers/coremark_stm32_hal/core_matrix.c **** /* Function: matrix_mul_matrix_bitextract
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s 			page 19
+
+
+ 293:Drivers/coremark_stm32_hal/core_matrix.c **** 	Multiply a matrix by a matrix, and extract some bits from the result.
+ 294:Drivers/coremark_stm32_hal/core_matrix.c **** 	Basic code is used in many algorithms, mostly with minor changes such as scaling.
+ 295:Drivers/coremark_stm32_hal/core_matrix.c **** */
+ 296:Drivers/coremark_stm32_hal/core_matrix.c **** void matrix_mul_matrix_bitextract(ee_u32 N, MATRES *C, MATDAT *A, MATDAT *B) {
+ 662              		.loc 1 296 78 is_stmt 1 view -0
+ 663              		.cfi_startproc
+ 664              		@ args = 0, pretend = 0, frame = 0
+ 665              		@ frame_needed = 0, uses_anonymous_args = 0
+ 666              		.loc 1 296 78 is_stmt 0 view .LVU211
+ 667 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 668              	.LCFI9:
+ 669              		.cfi_def_cfa_offset 28
+ 670              		.cfi_offset 4, -28
+ 671              		.cfi_offset 5, -24
+ 672              		.cfi_offset 6, -20
+ 673              		.cfi_offset 7, -16
+ 674              		.cfi_offset 8, -12
+ 675              		.cfi_offset 9, -8
+ 676              		.cfi_offset 14, -4
+ 677 0004 8C46     		mov	ip, r1
+ 678 0006 9646     		mov	lr, r2
+ 679 0008 1F46     		mov	r7, r3
+ 297:Drivers/coremark_stm32_hal/core_matrix.c **** 	ee_u32 i,j,k;
+ 680              		.loc 1 297 2 is_stmt 1 view .LVU212
+ 298:Drivers/coremark_stm32_hal/core_matrix.c **** 	for (i=0; i<N; i++) {
+ 681              		.loc 1 298 2 view .LVU213
+ 682              	.LVL65:
+ 683              		.loc 1 298 8 is_stmt 0 view .LVU214
+ 684 000a 4FF00008 		mov	r8, #0
+ 685              		.loc 1 298 2 view .LVU215
+ 686 000e 21E0     		b	.L54
+ 687              	.LVL66:
+ 688              	.L56:
+ 689              	.LBB2:
+ 299:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 300:Drivers/coremark_stm32_hal/core_matrix.c **** 			C[i*N+j]=0;
+ 301:Drivers/coremark_stm32_hal/core_matrix.c **** 			for(k=0;k<N;k++)
+ 302:Drivers/coremark_stm32_hal/core_matrix.c **** 			{
+ 303:Drivers/coremark_stm32_hal/core_matrix.c **** 				MATRES tmp=(MATRES)A[i*N+k] * (MATRES)B[k*N+j];
+ 690              		.loc 1 303 5 is_stmt 1 discriminator 3 view .LVU216
+ 691              		.loc 1 303 29 is_stmt 0 discriminator 3 view .LVU217
+ 692 0010 B318     		adds	r3, r6, r2
+ 693              		.loc 1 303 25 discriminator 3 view .LVU218
+ 694 0012 3EF91340 		ldrsh	r4, [lr, r3, lsl #1]
+ 695              		.loc 1 303 48 discriminator 3 view .LVU219
+ 696 0016 00FB0253 		mla	r3, r0, r2, r5
+ 697              		.loc 1 303 44 discriminator 3 view .LVU220
+ 698 001a 37F91330 		ldrsh	r3, [r7, r3, lsl #1]
+ 699              		.loc 1 303 12 discriminator 3 view .LVU221
+ 700 001e 03FB04F3 		mul	r3, r3, r4
+ 701              	.LVL67:
+ 304:Drivers/coremark_stm32_hal/core_matrix.c **** 				C[i*N+j]+=bit_extract(tmp,2,4)*bit_extract(tmp,5,7);
+ 702              		.loc 1 304 5 is_stmt 1 discriminator 3 view .LVU222
+ 703              		.loc 1 304 15 is_stmt 0 discriminator 3 view .LVU223
+ 704 0022 C3F38309 		ubfx	r9, r3, #2, #4
+ 705              		.loc 1 304 36 discriminator 3 view .LVU224
+ 706 0026 C3F34613 		ubfx	r3, r3, #5, #7
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s 			page 20
+
+
+ 707              	.LVL68:
+ 708              		.loc 1 304 13 discriminator 3 view .LVU225
+ 709 002a 0C68     		ldr	r4, [r1]
+ 710              	.LVL69:
+ 711              		.loc 1 304 13 discriminator 3 view .LVU226
+ 712 002c 03FB0943 		mla	r3, r3, r9, r4
+ 713 0030 0B60     		str	r3, [r1]
+ 714              	.LVL70:
+ 715              		.loc 1 304 13 discriminator 3 view .LVU227
+ 716              	.LBE2:
+ 301:Drivers/coremark_stm32_hal/core_matrix.c **** 			{
+ 717              		.loc 1 301 16 is_stmt 1 discriminator 3 view .LVU228
+ 301:Drivers/coremark_stm32_hal/core_matrix.c **** 			{
+ 718              		.loc 1 301 17 is_stmt 0 discriminator 3 view .LVU229
+ 719 0032 0132     		adds	r2, r2, #1
+ 720              	.LVL71:
+ 721              	.L55:
+ 301:Drivers/coremark_stm32_hal/core_matrix.c **** 			{
+ 722              		.loc 1 301 12 is_stmt 1 discriminator 1 view .LVU230
+ 301:Drivers/coremark_stm32_hal/core_matrix.c **** 			{
+ 723              		.loc 1 301 4 is_stmt 0 discriminator 1 view .LVU231
+ 724 0034 8242     		cmp	r2, r0
+ 725 0036 EBD3     		bcc	.L56
+ 299:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 726              		.loc 1 299 18 is_stmt 1 discriminator 2 view .LVU232
+ 299:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 727              		.loc 1 299 19 is_stmt 0 discriminator 2 view .LVU233
+ 728 0038 0135     		adds	r5, r5, #1
+ 729              	.LVL72:
+ 730              	.L58:
+ 299:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 731              		.loc 1 299 13 is_stmt 1 discriminator 1 view .LVU234
+ 299:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 732              		.loc 1 299 3 is_stmt 0 discriminator 1 view .LVU235
+ 733 003a 8542     		cmp	r5, r0
+ 734 003c 08D2     		bcs	.L61
+ 300:Drivers/coremark_stm32_hal/core_matrix.c **** 			for(k=0;k<N;k++)
+ 735              		.loc 1 300 4 is_stmt 1 view .LVU236
+ 300:Drivers/coremark_stm32_hal/core_matrix.c **** 			for(k=0;k<N;k++)
+ 736              		.loc 1 300 7 is_stmt 0 view .LVU237
+ 737 003e 00FB08F6 		mul	r6, r0, r8
+ 300:Drivers/coremark_stm32_hal/core_matrix.c **** 			for(k=0;k<N;k++)
+ 738              		.loc 1 300 9 view .LVU238
+ 739 0042 7319     		adds	r3, r6, r5
+ 300:Drivers/coremark_stm32_hal/core_matrix.c **** 			for(k=0;k<N;k++)
+ 740              		.loc 1 300 5 view .LVU239
+ 741 0044 0CEB8301 		add	r1, ip, r3, lsl #2
+ 300:Drivers/coremark_stm32_hal/core_matrix.c **** 			for(k=0;k<N;k++)
+ 742              		.loc 1 300 12 view .LVU240
+ 743 0048 0022     		movs	r2, #0
+ 744 004a 4CF82320 		str	r2, [ip, r3, lsl #2]
+ 301:Drivers/coremark_stm32_hal/core_matrix.c **** 			{
+ 745              		.loc 1 301 4 is_stmt 1 view .LVU241
+ 746              	.LVL73:
+ 301:Drivers/coremark_stm32_hal/core_matrix.c **** 			{
+ 747              		.loc 1 301 4 is_stmt 0 view .LVU242
+ 748 004e F1E7     		b	.L55
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s 			page 21
+
+
+ 749              	.LVL74:
+ 750              	.L61:
+ 298:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 751              		.loc 1 298 17 is_stmt 1 discriminator 2 view .LVU243
+ 298:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 752              		.loc 1 298 18 is_stmt 0 discriminator 2 view .LVU244
+ 753 0050 08F10108 		add	r8, r8, #1
+ 754              	.LVL75:
+ 755              	.L54:
+ 298:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 756              		.loc 1 298 12 is_stmt 1 discriminator 1 view .LVU245
+ 298:Drivers/coremark_stm32_hal/core_matrix.c **** 		for (j=0; j<N; j++) {
+ 757              		.loc 1 298 2 is_stmt 0 discriminator 1 view .LVU246
+ 758 0054 8045     		cmp	r8, r0
+ 759 0056 01D2     		bcs	.L62
+ 299:Drivers/coremark_stm32_hal/core_matrix.c **** 			C[i*N+j]=0;
+ 760              		.loc 1 299 9 view .LVU247
+ 761 0058 0025     		movs	r5, #0
+ 762 005a EEE7     		b	.L58
+ 763              	.L62:
+ 305:Drivers/coremark_stm32_hal/core_matrix.c **** 			}
+ 306:Drivers/coremark_stm32_hal/core_matrix.c **** 		}
+ 307:Drivers/coremark_stm32_hal/core_matrix.c **** 	}
+ 308:Drivers/coremark_stm32_hal/core_matrix.c **** }
+ 764              		.loc 1 308 1 view .LVU248
+ 765 005c BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 766              		.loc 1 308 1 view .LVU249
+ 767              		.cfi_endproc
+ 768              	.LFE11:
+ 770              		.section	.text.matrix_test,"ax",%progbits
+ 771              		.align	1
+ 772              		.global	matrix_test
+ 773              		.syntax unified
+ 774              		.thumb
+ 775              		.thumb_func
+ 776              		.fpu fpv5-d16
+ 778              	matrix_test:
+ 779              	.LVL76:
+ 780              	.LFB4:
+ 117:Drivers/coremark_stm32_hal/core_matrix.c **** 	ee_u16 crc=0;
+ 781              		.loc 1 117 75 is_stmt 1 view -0
+ 782              		.cfi_startproc
+ 783              		@ args = 4, pretend = 0, frame = 0
+ 784              		@ frame_needed = 0, uses_anonymous_args = 0
+ 117:Drivers/coremark_stm32_hal/core_matrix.c **** 	ee_u16 crc=0;
+ 785              		.loc 1 117 75 is_stmt 0 view .LVU251
+ 786 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+ 787              	.LCFI10:
+ 788              		.cfi_def_cfa_offset 32
+ 789              		.cfi_offset 4, -32
+ 790              		.cfi_offset 5, -28
+ 791              		.cfi_offset 6, -24
+ 792              		.cfi_offset 7, -20
+ 793              		.cfi_offset 8, -16
+ 794              		.cfi_offset 9, -12
+ 795              		.cfi_offset 10, -8
+ 796              		.cfi_offset 14, -4
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s 			page 22
+
+
+ 797 0004 0446     		mov	r4, r0
+ 798 0006 0D46     		mov	r5, r1
+ 799 0008 1646     		mov	r6, r2
+ 800 000a 9946     		mov	r9, r3
+ 801 000c BDF92070 		ldrsh	r7, [sp, #32]
+ 118:Drivers/coremark_stm32_hal/core_matrix.c **** 	MATDAT clipval=matrix_big(val);
+ 802              		.loc 1 118 2 is_stmt 1 view .LVU252
+ 803              	.LVL77:
+ 119:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ 804              		.loc 1 119 2 view .LVU253
+ 119:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ 805              		.loc 1 119 9 is_stmt 0 view .LVU254
+ 806 0010 DFF89880 		ldr	r8, .L65
+ 807 0014 47EA0808 		orr	r8, r7, r8
+ 808              	.LVL78:
+ 121:Drivers/coremark_stm32_hal/core_matrix.c **** #if CORE_DEBUG
+ 809              		.loc 1 121 2 is_stmt 1 view .LVU255
+ 810 0018 3A46     		mov	r2, r7
+ 811              	.LVL79:
+ 121:Drivers/coremark_stm32_hal/core_matrix.c **** #if CORE_DEBUG
+ 812              		.loc 1 121 2 is_stmt 0 view .LVU256
+ 813 001a 3146     		mov	r1, r6
+ 814              	.LVL80:
+ 121:Drivers/coremark_stm32_hal/core_matrix.c **** #if CORE_DEBUG
+ 815              		.loc 1 121 2 view .LVU257
+ 816 001c FFF7FEFF 		bl	matrix_add_const
+ 817              	.LVL81:
+ 125:Drivers/coremark_stm32_hal/core_matrix.c **** 	crc=crc16(matrix_sum(N,C,clipval),crc);
+ 818              		.loc 1 125 2 is_stmt 1 view .LVU258
+ 819 0020 3B46     		mov	r3, r7
+ 820 0022 3246     		mov	r2, r6
+ 821 0024 2946     		mov	r1, r5
+ 822 0026 2046     		mov	r0, r4
+ 823 0028 FFF7FEFF 		bl	matrix_mul_const
+ 824              	.LVL82:
+ 126:Drivers/coremark_stm32_hal/core_matrix.c **** #if CORE_DEBUG
+ 825              		.loc 1 126 2 view .LVU259
+ 126:Drivers/coremark_stm32_hal/core_matrix.c **** #if CORE_DEBUG
+ 826              		.loc 1 126 6 is_stmt 0 view .LVU260
+ 827 002c 4246     		mov	r2, r8
+ 828 002e 2946     		mov	r1, r5
+ 829 0030 2046     		mov	r0, r4
+ 830 0032 FFF7FEFF 		bl	matrix_sum
+ 831              	.LVL83:
+ 832 0036 0021     		movs	r1, #0
+ 833 0038 FFF7FEFF 		bl	crc16
+ 834              	.LVL84:
+ 835 003c 8246     		mov	r10, r0
+ 836              	.LVL85:
+ 130:Drivers/coremark_stm32_hal/core_matrix.c **** 	crc=crc16(matrix_sum(N,C,clipval),crc);
+ 837              		.loc 1 130 2 is_stmt 1 view .LVU261
+ 838 003e 4B46     		mov	r3, r9
+ 839 0040 3246     		mov	r2, r6
+ 840 0042 2946     		mov	r1, r5
+ 841 0044 2046     		mov	r0, r4
+ 842 0046 FFF7FEFF 		bl	matrix_mul_vect
+ 843              	.LVL86:
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s 			page 23
+
+
+ 131:Drivers/coremark_stm32_hal/core_matrix.c **** #if CORE_DEBUG
+ 844              		.loc 1 131 2 view .LVU262
+ 131:Drivers/coremark_stm32_hal/core_matrix.c **** #if CORE_DEBUG
+ 845              		.loc 1 131 6 is_stmt 0 view .LVU263
+ 846 004a 4246     		mov	r2, r8
+ 847 004c 2946     		mov	r1, r5
+ 848 004e 2046     		mov	r0, r4
+ 849 0050 FFF7FEFF 		bl	matrix_sum
+ 850              	.LVL87:
+ 851 0054 5146     		mov	r1, r10
+ 852 0056 FFF7FEFF 		bl	crc16
+ 853              	.LVL88:
+ 854 005a 8246     		mov	r10, r0
+ 855              	.LVL89:
+ 135:Drivers/coremark_stm32_hal/core_matrix.c **** 	crc=crc16(matrix_sum(N,C,clipval),crc);
+ 856              		.loc 1 135 2 is_stmt 1 view .LVU264
+ 857 005c 4B46     		mov	r3, r9
+ 858 005e 3246     		mov	r2, r6
+ 859 0060 2946     		mov	r1, r5
+ 860 0062 2046     		mov	r0, r4
+ 861 0064 FFF7FEFF 		bl	matrix_mul_matrix
+ 862              	.LVL90:
+ 136:Drivers/coremark_stm32_hal/core_matrix.c **** #if CORE_DEBUG
+ 863              		.loc 1 136 2 view .LVU265
+ 136:Drivers/coremark_stm32_hal/core_matrix.c **** #if CORE_DEBUG
+ 864              		.loc 1 136 6 is_stmt 0 view .LVU266
+ 865 0068 4246     		mov	r2, r8
+ 866 006a 2946     		mov	r1, r5
+ 867 006c 2046     		mov	r0, r4
+ 868 006e FFF7FEFF 		bl	matrix_sum
+ 869              	.LVL91:
+ 870 0072 5146     		mov	r1, r10
+ 871 0074 FFF7FEFF 		bl	crc16
+ 872              	.LVL92:
+ 873 0078 8246     		mov	r10, r0
+ 874              	.LVL93:
+ 140:Drivers/coremark_stm32_hal/core_matrix.c **** 	crc=crc16(matrix_sum(N,C,clipval),crc);
+ 875              		.loc 1 140 2 is_stmt 1 view .LVU267
+ 876 007a 4B46     		mov	r3, r9
+ 877 007c 3246     		mov	r2, r6
+ 878 007e 2946     		mov	r1, r5
+ 879 0080 2046     		mov	r0, r4
+ 880 0082 FFF7FEFF 		bl	matrix_mul_matrix_bitextract
+ 881              	.LVL94:
+ 141:Drivers/coremark_stm32_hal/core_matrix.c **** #if CORE_DEBUG
+ 882              		.loc 1 141 2 view .LVU268
+ 141:Drivers/coremark_stm32_hal/core_matrix.c **** #if CORE_DEBUG
+ 883              		.loc 1 141 6 is_stmt 0 view .LVU269
+ 884 0086 4246     		mov	r2, r8
+ 885 0088 2946     		mov	r1, r5
+ 886 008a 2046     		mov	r0, r4
+ 887 008c FFF7FEFF 		bl	matrix_sum
+ 888              	.LVL95:
+ 889 0090 5146     		mov	r1, r10
+ 890 0092 FFF7FEFF 		bl	crc16
+ 891              	.LVL96:
+ 892 0096 0546     		mov	r5, r0
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s 			page 24
+
+
+ 893              	.LVL97:
+ 146:Drivers/coremark_stm32_hal/core_matrix.c **** 	return crc;
+ 894              		.loc 1 146 2 is_stmt 1 view .LVU270
+ 895 0098 7A42     		rsbs	r2, r7, #0
+ 896 009a 12B2     		sxth	r2, r2
+ 897 009c 3146     		mov	r1, r6
+ 898 009e 2046     		mov	r0, r4
+ 899 00a0 FFF7FEFF 		bl	matrix_add_const
+ 900              	.LVL98:
+ 147:Drivers/coremark_stm32_hal/core_matrix.c **** }
+ 901              		.loc 1 147 2 view .LVU271
+ 148:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ 902              		.loc 1 148 1 is_stmt 0 view .LVU272
+ 903 00a4 28B2     		sxth	r0, r5
+ 904 00a6 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 905              	.LVL99:
+ 906              	.L66:
+ 148:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ 907              		.loc 1 148 1 view .LVU273
+ 908 00aa 00BF     		.align	2
+ 909              	.L65:
+ 910 00ac 00F0FFFF 		.word	-4096
+ 911              		.cfi_endproc
+ 912              	.LFE4:
+ 914              		.section	.text.core_bench_matrix,"ax",%progbits
+ 915              		.align	1
+ 916              		.global	core_bench_matrix
+ 917              		.syntax unified
+ 918              		.thumb
+ 919              		.thumb_func
+ 920              		.fpu fpv5-d16
+ 922              	core_bench_matrix:
+ 923              	.LVL100:
+ 924              	.LFB3:
+  81:Drivers/coremark_stm32_hal/core_matrix.c **** 	ee_u32 N=p->N;
+ 925              		.loc 1 81 66 is_stmt 1 view -0
+ 926              		.cfi_startproc
+ 927              		@ args = 0, pretend = 0, frame = 0
+ 928              		@ frame_needed = 0, uses_anonymous_args = 0
+  81:Drivers/coremark_stm32_hal/core_matrix.c **** 	ee_u32 N=p->N;
+ 929              		.loc 1 81 66 is_stmt 0 view .LVU275
+ 930 0000 10B5     		push	{r4, lr}
+ 931              	.LCFI11:
+ 932              		.cfi_def_cfa_offset 8
+ 933              		.cfi_offset 4, -8
+ 934              		.cfi_offset 14, -4
+ 935 0002 82B0     		sub	sp, sp, #8
+ 936              	.LCFI12:
+ 937              		.cfi_def_cfa_offset 16
+ 938 0004 1446     		mov	r4, r2
+  82:Drivers/coremark_stm32_hal/core_matrix.c **** 	MATRES *C=p->C;
+ 939              		.loc 1 82 2 is_stmt 1 view .LVU276
+ 940              	.LVL101:
+  83:Drivers/coremark_stm32_hal/core_matrix.c **** 	MATDAT *A=p->A;
+ 941              		.loc 1 83 2 view .LVU277
+  84:Drivers/coremark_stm32_hal/core_matrix.c **** 	MATDAT *B=p->B;
+ 942              		.loc 1 84 2 view .LVU278
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s 			page 25
+
+
+  85:Drivers/coremark_stm32_hal/core_matrix.c **** 	MATDAT val=(MATDAT)seed;
+ 943              		.loc 1 85 2 view .LVU279
+  86:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ 944              		.loc 1 86 2 view .LVU280
+  88:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ 945              		.loc 1 88 2 view .LVU281
+  88:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ 946              		.loc 1 88 6 is_stmt 0 view .LVU282
+ 947 0006 0091     		str	r1, [sp]
+ 948              	.LVL102:
+  88:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ 949              		.loc 1 88 6 view .LVU283
+ 950 0008 8368     		ldr	r3, [r0, #8]
+ 951 000a 4268     		ldr	r2, [r0, #4]
+ 952              	.LVL103:
+  88:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ 953              		.loc 1 88 6 view .LVU284
+ 954 000c C168     		ldr	r1, [r0, #12]
+ 955              	.LVL104:
+  88:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ 956              		.loc 1 88 6 view .LVU285
+ 957 000e 0068     		ldr	r0, [r0]
+ 958              	.LVL105:
+  88:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ 959              		.loc 1 88 6 view .LVU286
+ 960 0010 FFF7FEFF 		bl	matrix_test
+ 961              	.LVL106:
+ 962 0014 2146     		mov	r1, r4
+ 963 0016 FFF7FEFF 		bl	crc16
+ 964              	.LVL107:
+  90:Drivers/coremark_stm32_hal/core_matrix.c **** }
+ 965              		.loc 1 90 2 is_stmt 1 view .LVU287
+  91:Drivers/coremark_stm32_hal/core_matrix.c **** 
+ 966              		.loc 1 91 1 is_stmt 0 view .LVU288
+ 967 001a 02B0     		add	sp, sp, #8
+ 968              	.LCFI13:
+ 969              		.cfi_def_cfa_offset 8
+ 970              		@ sp needed
+ 971 001c 10BD     		pop	{r4, pc}
+ 972              		.cfi_endproc
+ 973              	.LFE3:
+ 975              		.text
+ 976              	.Letext0:
+ 977              		.file 2 "Drivers/coremark_stm32_hal/core_portme.h"
+ 978              		.file 3 "Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT.h"
+ 979              		.file 4 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\lib\\gcc\\arm-none
+ 980              		.file 5 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\arm-none-eabi\\inc
+ 981              		.file 6 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\arm-none-eabi\\inc
+ 982              		.file 7 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\arm-none-eabi\\inc
+ 983              		.file 8 "Drivers/coremark_stm32_hal/coremark.h"
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s 			page 26
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 core_matrix.c
+C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s:17     .text.core_init_matrix:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s:25     .text.core_init_matrix:00000000 core_init_matrix
+C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s:198    .text.matrix_sum:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s:205    .text.matrix_sum:00000000 matrix_sum
+C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s:318    .text.matrix_mul_const:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s:325    .text.matrix_mul_const:00000000 matrix_mul_const
+C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s:396    .text.matrix_add_const:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s:403    .text.matrix_add_const:00000000 matrix_add_const
+C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s:469    .text.matrix_mul_vect:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s:476    .text.matrix_mul_vect:00000000 matrix_mul_vect
+C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s:548    .text.matrix_mul_matrix:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s:555    .text.matrix_mul_matrix:00000000 matrix_mul_matrix
+C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s:652    .text.matrix_mul_matrix_bitextract:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s:659    .text.matrix_mul_matrix_bitextract:00000000 matrix_mul_matrix_bitextract
+C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s:771    .text.matrix_test:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s:778    .text.matrix_test:00000000 matrix_test
+C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s:910    .text.matrix_test:000000ac $d
+C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s:915    .text.core_bench_matrix:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccKAAajc.s:922    .text.core_bench_matrix:00000000 core_bench_matrix
+
+UNDEFINED SYMBOLS
+crc16

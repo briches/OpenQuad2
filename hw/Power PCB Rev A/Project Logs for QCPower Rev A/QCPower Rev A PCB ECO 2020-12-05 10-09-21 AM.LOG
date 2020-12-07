@@ -1,0 +1,36 @@
+Added Component: Designator=C200_1(SMD CAP 0402)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = "Yageo"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = "CC0402KRX7R8BB104"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = "20201122"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "4. Package"; Value = "0402"; VariantName = "[No Variations]"
+Added Component: Designator=C200_2(SMD CAP 0402)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = "Yageo"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = "CC0402KRX7R8BB104"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = "20201122"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "4. Package"; Value = "0402"; VariantName = "[No Variations]"
+Added Component: Designator=C200_3(SMD CAP 0402)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = "Yageo"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = "CC0402KRX7R8BB104"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = "20201122"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "4. Package"; Value = "0402"; VariantName = "[No Variations]"
+Added Component: Designator=C200_4(SMD CAP 0402)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "1. Manufacturer"; Value = "Yageo"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "2. Manufacturer Part Number"; Value = "CC0402KRX7R8BB104"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "3. Date Modified"; Value = "20201122"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "4. Package"; Value = "0402"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=C200_1-1
+Added Pin To Net: NetName=VDD_STPIN_1 Pin=C200_1-2
+Added Pin To Net: NetName=GND Pin=C200_2-1
+Added Pin To Net: NetName=VDD_STPIN_2 Pin=C200_2-2
+Added Pin To Net: NetName=GND Pin=C200_3-1
+Added Pin To Net: NetName=VDD_STPIN_3 Pin=C200_3-2
+Added Pin To Net: NetName=GND Pin=C200_4-1
+Added Pin To Net: NetName=VDD_STPIN_4 Pin=C200_4-2
+Added Member To Class: ClassName=BLDC1 Member=Component C200_1 (C200) 0.1uF
+Added Member To Class: ClassName=BLDC2 Member=Component C200_2 (C200) 0.1uF
+Added Member To Class: ClassName=BLDC3 Member=Component C200_3 (C200) 0.1uF
+Added Member To Class: ClassName=BLDC4 Member=Component C200_4 (C200) 0.1uF

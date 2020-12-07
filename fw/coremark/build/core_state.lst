@@ -1,0 +1,1635 @@
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"core_state.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.ee_isdigit,"ax",%progbits
+  17              		.align	1
+  18              		.arch armv7e-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu fpv5-d16
+  24              	ee_isdigit:
+  25              	.LVL0:
+  26              	.LFB5:
+  27              		.file 1 "Drivers/coremark_stm32_hal/core_state.c"
+   1:Drivers/coremark_stm32_hal/core_state.c **** /*
+   2:Drivers/coremark_stm32_hal/core_state.c **** Author : Shay Gal-On, EEMBC
+   3:Drivers/coremark_stm32_hal/core_state.c **** 
+   4:Drivers/coremark_stm32_hal/core_state.c **** This file is part of  EEMBC(R) and CoreMark(TM), which are Copyright (C) 2009 
+   5:Drivers/coremark_stm32_hal/core_state.c **** All rights reserved.                            
+   6:Drivers/coremark_stm32_hal/core_state.c **** 
+   7:Drivers/coremark_stm32_hal/core_state.c **** EEMBC CoreMark Software is a product of EEMBC and is provided under the terms of the
+   8:Drivers/coremark_stm32_hal/core_state.c **** CoreMark License that is distributed with the official EEMBC COREMARK Software release. 
+   9:Drivers/coremark_stm32_hal/core_state.c **** If you received this EEMBC CoreMark Software without the accompanying CoreMark License, 
+  10:Drivers/coremark_stm32_hal/core_state.c **** you must discontinue use and download the official release from www.coremark.org.  
+  11:Drivers/coremark_stm32_hal/core_state.c **** 
+  12:Drivers/coremark_stm32_hal/core_state.c **** Also, if you are publicly displaying scores generated from the EEMBC CoreMark software, 
+  13:Drivers/coremark_stm32_hal/core_state.c **** make sure that you are in compliance with Run and Reporting rules specified in the accompanying rea
+  14:Drivers/coremark_stm32_hal/core_state.c **** 
+  15:Drivers/coremark_stm32_hal/core_state.c **** EEMBC 
+  16:Drivers/coremark_stm32_hal/core_state.c **** 4354 Town Center Blvd. Suite 114-200
+  17:Drivers/coremark_stm32_hal/core_state.c **** El Dorado Hills, CA, 95762 
+  18:Drivers/coremark_stm32_hal/core_state.c **** */ 
+  19:Drivers/coremark_stm32_hal/core_state.c **** #include "coremark.h"
+  20:Drivers/coremark_stm32_hal/core_state.c **** /* local functions */
+  21:Drivers/coremark_stm32_hal/core_state.c **** enum CORE_STATE core_state_transition( ee_u8 **instr , ee_u32 *transition_count);
+  22:Drivers/coremark_stm32_hal/core_state.c **** 
+  23:Drivers/coremark_stm32_hal/core_state.c **** /*
+  24:Drivers/coremark_stm32_hal/core_state.c **** Topic: Description
+  25:Drivers/coremark_stm32_hal/core_state.c **** 	Simple state machines like this one are used in many embedded products.
+  26:Drivers/coremark_stm32_hal/core_state.c **** 	
+  27:Drivers/coremark_stm32_hal/core_state.c **** 	For more complex state machines, sometimes a state transition table implementation is used instead
+  28:Drivers/coremark_stm32_hal/core_state.c **** 	trading speed of direct coding for ease of maintenance.
+  29:Drivers/coremark_stm32_hal/core_state.c **** 	
+  30:Drivers/coremark_stm32_hal/core_state.c **** 	Since the main goal of using a state machine in CoreMark is to excercise the switch/if behaviour,
+  31:Drivers/coremark_stm32_hal/core_state.c **** 	we are using a small moore machine. 
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s 			page 2
+
+
+  32:Drivers/coremark_stm32_hal/core_state.c **** 	
+  33:Drivers/coremark_stm32_hal/core_state.c **** 	In particular, this machine tests type of string input,
+  34:Drivers/coremark_stm32_hal/core_state.c **** 	trying to determine whether the input is a number or something else.
+  35:Drivers/coremark_stm32_hal/core_state.c **** 	(see core_state.png).
+  36:Drivers/coremark_stm32_hal/core_state.c **** */
+  37:Drivers/coremark_stm32_hal/core_state.c **** 
+  38:Drivers/coremark_stm32_hal/core_state.c **** /* Function: core_bench_state
+  39:Drivers/coremark_stm32_hal/core_state.c **** 	Benchmark function
+  40:Drivers/coremark_stm32_hal/core_state.c **** 
+  41:Drivers/coremark_stm32_hal/core_state.c **** 	Go over the input twice, once direct, and once after introducing some corruption. 
+  42:Drivers/coremark_stm32_hal/core_state.c **** */
+  43:Drivers/coremark_stm32_hal/core_state.c **** ee_u16 core_bench_state(ee_u32 blksize, ee_u8 *memblock, 
+  44:Drivers/coremark_stm32_hal/core_state.c **** 		ee_s16 seed1, ee_s16 seed2, ee_s16 step, ee_u16 crc) 
+  45:Drivers/coremark_stm32_hal/core_state.c **** {
+  46:Drivers/coremark_stm32_hal/core_state.c **** 	ee_u32 final_counts[NUM_CORE_STATES];
+  47:Drivers/coremark_stm32_hal/core_state.c **** 	ee_u32 track_counts[NUM_CORE_STATES];
+  48:Drivers/coremark_stm32_hal/core_state.c **** 	ee_u8 *p=memblock;
+  49:Drivers/coremark_stm32_hal/core_state.c **** 	ee_u32 i;
+  50:Drivers/coremark_stm32_hal/core_state.c **** 
+  51:Drivers/coremark_stm32_hal/core_state.c **** 
+  52:Drivers/coremark_stm32_hal/core_state.c **** #if CORE_DEBUG
+  53:Drivers/coremark_stm32_hal/core_state.c **** 	ee_printf("State Bench: %d,%d,%d,%04x\n",seed1,seed2,step,crc);
+  54:Drivers/coremark_stm32_hal/core_state.c **** #endif
+  55:Drivers/coremark_stm32_hal/core_state.c **** 	for (i=0; i<NUM_CORE_STATES; i++) {
+  56:Drivers/coremark_stm32_hal/core_state.c **** 		final_counts[i]=track_counts[i]=0;
+  57:Drivers/coremark_stm32_hal/core_state.c **** 	}
+  58:Drivers/coremark_stm32_hal/core_state.c **** 	/* run the state machine over the input */
+  59:Drivers/coremark_stm32_hal/core_state.c **** 	while (*p!=0) {
+  60:Drivers/coremark_stm32_hal/core_state.c **** 		enum CORE_STATE fstate=core_state_transition(&p,track_counts);
+  61:Drivers/coremark_stm32_hal/core_state.c **** 		final_counts[fstate]++;
+  62:Drivers/coremark_stm32_hal/core_state.c **** #if CORE_DEBUG
+  63:Drivers/coremark_stm32_hal/core_state.c **** 	ee_printf("%d,",fstate);
+  64:Drivers/coremark_stm32_hal/core_state.c **** 	}
+  65:Drivers/coremark_stm32_hal/core_state.c **** 	ee_printf("\n");
+  66:Drivers/coremark_stm32_hal/core_state.c **** #else
+  67:Drivers/coremark_stm32_hal/core_state.c **** 	}
+  68:Drivers/coremark_stm32_hal/core_state.c **** #endif
+  69:Drivers/coremark_stm32_hal/core_state.c **** 	p=memblock;
+  70:Drivers/coremark_stm32_hal/core_state.c **** 	while (p < (memblock+blksize)) { /* insert some corruption */
+  71:Drivers/coremark_stm32_hal/core_state.c **** 		if (*p!=',')
+  72:Drivers/coremark_stm32_hal/core_state.c **** 			*p^=(ee_u8)seed1;
+  73:Drivers/coremark_stm32_hal/core_state.c **** 		p+=step;
+  74:Drivers/coremark_stm32_hal/core_state.c **** 	}
+  75:Drivers/coremark_stm32_hal/core_state.c **** 	p=memblock;
+  76:Drivers/coremark_stm32_hal/core_state.c **** 	/* run the state machine over the input again */
+  77:Drivers/coremark_stm32_hal/core_state.c **** 	while (*p!=0) {
+  78:Drivers/coremark_stm32_hal/core_state.c **** 		enum CORE_STATE fstate=core_state_transition(&p,track_counts);
+  79:Drivers/coremark_stm32_hal/core_state.c **** 		final_counts[fstate]++;
+  80:Drivers/coremark_stm32_hal/core_state.c **** #if CORE_DEBUG
+  81:Drivers/coremark_stm32_hal/core_state.c **** 	ee_printf("%d,",fstate);
+  82:Drivers/coremark_stm32_hal/core_state.c **** 	}
+  83:Drivers/coremark_stm32_hal/core_state.c **** 	ee_printf("\n");
+  84:Drivers/coremark_stm32_hal/core_state.c **** #else
+  85:Drivers/coremark_stm32_hal/core_state.c **** 	}
+  86:Drivers/coremark_stm32_hal/core_state.c **** #endif
+  87:Drivers/coremark_stm32_hal/core_state.c **** 	p=memblock;
+  88:Drivers/coremark_stm32_hal/core_state.c **** 	while (p < (memblock+blksize)) { /* undo corruption is seed1 and seed2 are equal */
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s 			page 3
+
+
+  89:Drivers/coremark_stm32_hal/core_state.c **** 		if (*p!=',')
+  90:Drivers/coremark_stm32_hal/core_state.c **** 			*p^=(ee_u8)seed2;
+  91:Drivers/coremark_stm32_hal/core_state.c **** 		p+=step;
+  92:Drivers/coremark_stm32_hal/core_state.c **** 	}
+  93:Drivers/coremark_stm32_hal/core_state.c **** 	/* end timing */
+  94:Drivers/coremark_stm32_hal/core_state.c **** 	for (i=0; i<NUM_CORE_STATES; i++) {
+  95:Drivers/coremark_stm32_hal/core_state.c **** 		crc=crcu32(final_counts[i],crc);
+  96:Drivers/coremark_stm32_hal/core_state.c **** 		crc=crcu32(track_counts[i],crc);
+  97:Drivers/coremark_stm32_hal/core_state.c **** 	}
+  98:Drivers/coremark_stm32_hal/core_state.c **** 	return crc;
+  99:Drivers/coremark_stm32_hal/core_state.c **** }
+ 100:Drivers/coremark_stm32_hal/core_state.c **** 
+ 101:Drivers/coremark_stm32_hal/core_state.c **** /* Default initialization patterns */
+ 102:Drivers/coremark_stm32_hal/core_state.c **** static ee_u8 *intpat[4]  ={(ee_u8 *)"5012",(ee_u8 *)"1234",(ee_u8 *)"-874",(ee_u8 *)"+122"};
+ 103:Drivers/coremark_stm32_hal/core_state.c **** static ee_u8 *floatpat[4]={(ee_u8 *)"35.54400",(ee_u8 *)".1234500",(ee_u8 *)"-110.700",(ee_u8 *)"+0
+ 104:Drivers/coremark_stm32_hal/core_state.c **** static ee_u8 *scipat[4]  ={(ee_u8 *)"5.500e+3",(ee_u8 *)"-.123e-2",(ee_u8 *)"-87e+832",(ee_u8 *)"+0
+ 105:Drivers/coremark_stm32_hal/core_state.c **** static ee_u8 *errpat[4]  ={(ee_u8 *)"T0.3e-1F",(ee_u8 *)"-T.T++Tq",(ee_u8 *)"1T3.4e4z",(ee_u8 *)"34
+ 106:Drivers/coremark_stm32_hal/core_state.c **** 
+ 107:Drivers/coremark_stm32_hal/core_state.c **** /* Function: core_init_state
+ 108:Drivers/coremark_stm32_hal/core_state.c **** 	Initialize the input data for the state machine.
+ 109:Drivers/coremark_stm32_hal/core_state.c **** 
+ 110:Drivers/coremark_stm32_hal/core_state.c **** 	Populate the input with several predetermined strings, interspersed.
+ 111:Drivers/coremark_stm32_hal/core_state.c **** 	Actual patterns chosen depend on the seed parameter.
+ 112:Drivers/coremark_stm32_hal/core_state.c **** 	
+ 113:Drivers/coremark_stm32_hal/core_state.c **** 	Note:
+ 114:Drivers/coremark_stm32_hal/core_state.c **** 	The seed parameter MUST be supplied from a source that cannot be determined at compile time
+ 115:Drivers/coremark_stm32_hal/core_state.c **** */
+ 116:Drivers/coremark_stm32_hal/core_state.c **** void core_init_state(ee_u32 size, ee_s16 seed, ee_u8 *p) {
+ 117:Drivers/coremark_stm32_hal/core_state.c **** 	ee_u32 total=0,next=0,i;
+ 118:Drivers/coremark_stm32_hal/core_state.c **** 	ee_u8 *buf=0;
+ 119:Drivers/coremark_stm32_hal/core_state.c **** #if CORE_DEBUG
+ 120:Drivers/coremark_stm32_hal/core_state.c **** 	ee_u8 *start=p;
+ 121:Drivers/coremark_stm32_hal/core_state.c **** 	ee_printf("State: %d,%d\n",size,seed);
+ 122:Drivers/coremark_stm32_hal/core_state.c **** #endif
+ 123:Drivers/coremark_stm32_hal/core_state.c **** 	size--;
+ 124:Drivers/coremark_stm32_hal/core_state.c **** 	next=0;
+ 125:Drivers/coremark_stm32_hal/core_state.c **** 	while ((total+next+1)<size) {
+ 126:Drivers/coremark_stm32_hal/core_state.c **** 		if (next>0) {
+ 127:Drivers/coremark_stm32_hal/core_state.c **** 			for(i=0;i<next;i++)
+ 128:Drivers/coremark_stm32_hal/core_state.c **** 				*(p+total+i)=buf[i];
+ 129:Drivers/coremark_stm32_hal/core_state.c **** 			*(p+total+i)=',';
+ 130:Drivers/coremark_stm32_hal/core_state.c **** 			total+=next+1;
+ 131:Drivers/coremark_stm32_hal/core_state.c **** 		}
+ 132:Drivers/coremark_stm32_hal/core_state.c **** 		seed++;
+ 133:Drivers/coremark_stm32_hal/core_state.c **** 		switch (seed & 0x7) {
+ 134:Drivers/coremark_stm32_hal/core_state.c **** 			case 0: /* int */
+ 135:Drivers/coremark_stm32_hal/core_state.c **** 			case 1: /* int */
+ 136:Drivers/coremark_stm32_hal/core_state.c **** 			case 2: /* int */
+ 137:Drivers/coremark_stm32_hal/core_state.c **** 				buf=intpat[(seed>>3) & 0x3];
+ 138:Drivers/coremark_stm32_hal/core_state.c **** 				next=4;
+ 139:Drivers/coremark_stm32_hal/core_state.c **** 			break;
+ 140:Drivers/coremark_stm32_hal/core_state.c **** 			case 3: /* float */
+ 141:Drivers/coremark_stm32_hal/core_state.c **** 			case 4: /* float */
+ 142:Drivers/coremark_stm32_hal/core_state.c **** 				buf=floatpat[(seed>>3) & 0x3];
+ 143:Drivers/coremark_stm32_hal/core_state.c **** 				next=8;
+ 144:Drivers/coremark_stm32_hal/core_state.c **** 			break;
+ 145:Drivers/coremark_stm32_hal/core_state.c **** 			case 5: /* scientific */
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s 			page 4
+
+
+ 146:Drivers/coremark_stm32_hal/core_state.c **** 			case 6: /* scientific */
+ 147:Drivers/coremark_stm32_hal/core_state.c **** 				buf=scipat[(seed>>3) & 0x3];
+ 148:Drivers/coremark_stm32_hal/core_state.c **** 				next=8;
+ 149:Drivers/coremark_stm32_hal/core_state.c **** 			break;
+ 150:Drivers/coremark_stm32_hal/core_state.c **** 			case 7: /* invalid */
+ 151:Drivers/coremark_stm32_hal/core_state.c **** 				buf=errpat[(seed>>3) & 0x3];
+ 152:Drivers/coremark_stm32_hal/core_state.c **** 				next=8;
+ 153:Drivers/coremark_stm32_hal/core_state.c **** 			break;
+ 154:Drivers/coremark_stm32_hal/core_state.c **** 			default: /* Never happen, just to make some compilers happy */
+ 155:Drivers/coremark_stm32_hal/core_state.c **** 			break;
+ 156:Drivers/coremark_stm32_hal/core_state.c **** 		}
+ 157:Drivers/coremark_stm32_hal/core_state.c **** 	}
+ 158:Drivers/coremark_stm32_hal/core_state.c **** 	size++;
+ 159:Drivers/coremark_stm32_hal/core_state.c **** 	while (total<size) { /* fill the rest with 0 */
+ 160:Drivers/coremark_stm32_hal/core_state.c **** 		*(p+total)=0;
+ 161:Drivers/coremark_stm32_hal/core_state.c **** 		total++;
+ 162:Drivers/coremark_stm32_hal/core_state.c **** 	}
+ 163:Drivers/coremark_stm32_hal/core_state.c **** #if CORE_DEBUG
+ 164:Drivers/coremark_stm32_hal/core_state.c **** 	ee_printf("State Input: %s\n",start);
+ 165:Drivers/coremark_stm32_hal/core_state.c **** #endif
+ 166:Drivers/coremark_stm32_hal/core_state.c **** }
+ 167:Drivers/coremark_stm32_hal/core_state.c **** 
+ 168:Drivers/coremark_stm32_hal/core_state.c **** static ee_u8 ee_isdigit(ee_u8 c) {
+  28              		.loc 1 168 34 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+ 169:Drivers/coremark_stm32_hal/core_state.c **** 	ee_u8 retval;
+  33              		.loc 1 169 2 view .LVU1
+ 170:Drivers/coremark_stm32_hal/core_state.c **** 	retval = ((c>='0') & (c<='9')) ? 1 : 0;
+  34              		.loc 1 170 2 view .LVU2
+  35              		.loc 1 170 21 is_stmt 0 view .LVU3
+  36 0000 3038     		subs	r0, r0, #48
+  37              	.LVL1:
+  38              		.loc 1 170 21 view .LVU4
+  39 0002 C0B2     		uxtb	r0, r0
+  40              		.loc 1 170 9 view .LVU5
+  41 0004 0928     		cmp	r0, #9
+  42 0006 01D8     		bhi	.L3
+  43 0008 0120     		movs	r0, #1
+  44 000a 7047     		bx	lr
+  45              	.L3:
+  46 000c 0020     		movs	r0, #0
+  47              	.LVL2:
+ 171:Drivers/coremark_stm32_hal/core_state.c **** 	return retval;
+  48              		.loc 1 171 2 is_stmt 1 view .LVU6
+ 172:Drivers/coremark_stm32_hal/core_state.c **** }
+  49              		.loc 1 172 1 is_stmt 0 view .LVU7
+  50 000e 7047     		bx	lr
+  51              		.cfi_endproc
+  52              	.LFE5:
+  54              		.section	.text.core_init_state,"ax",%progbits
+  55              		.align	1
+  56              		.global	core_init_state
+  57              		.syntax unified
+  58              		.thumb
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s 			page 5
+
+
+  59              		.thumb_func
+  60              		.fpu fpv5-d16
+  62              	core_init_state:
+  63              	.LVL3:
+  64              	.LFB4:
+ 116:Drivers/coremark_stm32_hal/core_state.c **** 	ee_u32 total=0,next=0,i;
+  65              		.loc 1 116 58 is_stmt 1 view -0
+  66              		.cfi_startproc
+  67              		@ args = 0, pretend = 0, frame = 0
+  68              		@ frame_needed = 0, uses_anonymous_args = 0
+ 116:Drivers/coremark_stm32_hal/core_state.c **** 	ee_u32 total=0,next=0,i;
+  69              		.loc 1 116 58 is_stmt 0 view .LVU9
+  70 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+  71              	.LCFI0:
+  72              		.cfi_def_cfa_offset 24
+  73              		.cfi_offset 4, -24
+  74              		.cfi_offset 5, -20
+  75              		.cfi_offset 6, -16
+  76              		.cfi_offset 7, -12
+  77              		.cfi_offset 8, -8
+  78              		.cfi_offset 14, -4
+  79 0004 8C46     		mov	ip, r1
+ 117:Drivers/coremark_stm32_hal/core_state.c **** 	ee_u8 *buf=0;
+  80              		.loc 1 117 2 is_stmt 1 view .LVU10
+  81              	.LVL4:
+ 118:Drivers/coremark_stm32_hal/core_state.c **** #if CORE_DEBUG
+  82              		.loc 1 118 2 view .LVU11
+ 123:Drivers/coremark_stm32_hal/core_state.c **** 	next=0;
+  83              		.loc 1 123 2 view .LVU12
+ 123:Drivers/coremark_stm32_hal/core_state.c **** 	next=0;
+  84              		.loc 1 123 6 is_stmt 0 view .LVU13
+  85 0006 00F1FF3E 		add	lr, r0, #-1
+  86              	.LVL5:
+ 124:Drivers/coremark_stm32_hal/core_state.c **** 	while ((total+next+1)<size) {
+  87              		.loc 1 124 2 is_stmt 1 view .LVU14
+ 125:Drivers/coremark_stm32_hal/core_state.c **** 		if (next>0) {
+  88              		.loc 1 125 2 view .LVU15
+ 118:Drivers/coremark_stm32_hal/core_state.c **** #if CORE_DEBUG
+  89              		.loc 1 118 9 is_stmt 0 view .LVU16
+  90 000a 0021     		movs	r1, #0
+  91              	.LVL6:
+ 124:Drivers/coremark_stm32_hal/core_state.c **** 	while ((total+next+1)<size) {
+  92              		.loc 1 124 6 view .LVU17
+  93 000c 0D46     		mov	r5, r1
+ 117:Drivers/coremark_stm32_hal/core_state.c **** 	ee_u8 *buf=0;
+  94              		.loc 1 117 9 view .LVU18
+  95 000e 0C46     		mov	r4, r1
+ 125:Drivers/coremark_stm32_hal/core_state.c **** 		if (next>0) {
+  96              		.loc 1 125 8 view .LVU19
+  97 0010 14E0     		b	.L5
+  98              	.LVL7:
+  99              	.L8:
+ 128:Drivers/coremark_stm32_hal/core_state.c **** 			*(p+total+i)=',';
+ 100              		.loc 1 128 5 is_stmt 1 discriminator 3 view .LVU20
+ 128:Drivers/coremark_stm32_hal/core_state.c **** 			*(p+total+i)=',';
+ 101              		.loc 1 128 14 is_stmt 0 discriminator 3 view .LVU21
+ 102 0012 E718     		adds	r7, r4, r3
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s 			page 6
+
+
+ 128:Drivers/coremark_stm32_hal/core_state.c **** 			*(p+total+i)=',';
+ 103              		.loc 1 128 21 discriminator 3 view .LVU22
+ 104 0014 11F80380 		ldrb	r8, [r1, r3]	@ zero_extendqisi2
+ 128:Drivers/coremark_stm32_hal/core_state.c **** 			*(p+total+i)=',';
+ 105              		.loc 1 128 17 discriminator 3 view .LVU23
+ 106 0018 02F80780 		strb	r8, [r2, r7]
+ 127:Drivers/coremark_stm32_hal/core_state.c **** 				*(p+total+i)=buf[i];
+ 107              		.loc 1 127 19 is_stmt 1 discriminator 3 view .LVU24
+ 127:Drivers/coremark_stm32_hal/core_state.c **** 				*(p+total+i)=buf[i];
+ 108              		.loc 1 127 20 is_stmt 0 discriminator 3 view .LVU25
+ 109 001c 0133     		adds	r3, r3, #1
+ 110              	.LVL8:
+ 111              	.L6:
+ 127:Drivers/coremark_stm32_hal/core_state.c **** 				*(p+total+i)=buf[i];
+ 112              		.loc 1 127 12 is_stmt 1 discriminator 1 view .LVU26
+ 127:Drivers/coremark_stm32_hal/core_state.c **** 				*(p+total+i)=buf[i];
+ 113              		.loc 1 127 4 is_stmt 0 discriminator 1 view .LVU27
+ 114 001e 9D42     		cmp	r5, r3
+ 115 0020 F7D8     		bhi	.L8
+ 129:Drivers/coremark_stm32_hal/core_state.c **** 			total+=next+1;
+ 116              		.loc 1 129 4 is_stmt 1 view .LVU28
+ 129:Drivers/coremark_stm32_hal/core_state.c **** 			total+=next+1;
+ 117              		.loc 1 129 13 is_stmt 0 view .LVU29
+ 118 0022 2344     		add	r3, r3, r4
+ 119              	.LVL9:
+ 129:Drivers/coremark_stm32_hal/core_state.c **** 			total+=next+1;
+ 120              		.loc 1 129 16 view .LVU30
+ 121 0024 2C24     		movs	r4, #44
+ 122              	.LVL10:
+ 129:Drivers/coremark_stm32_hal/core_state.c **** 			total+=next+1;
+ 123              		.loc 1 129 16 view .LVU31
+ 124 0026 D454     		strb	r4, [r2, r3]
+ 130:Drivers/coremark_stm32_hal/core_state.c **** 		}
+ 125              		.loc 1 130 4 is_stmt 1 view .LVU32
+ 126              	.LVL11:
+ 130:Drivers/coremark_stm32_hal/core_state.c **** 		}
+ 127              		.loc 1 130 9 is_stmt 0 view .LVU33
+ 128 0028 3446     		mov	r4, r6
+ 129 002a 0DE0     		b	.L7
+ 130              	.LVL12:
+ 131              	.L20:
+ 127:Drivers/coremark_stm32_hal/core_state.c **** 				*(p+total+i)=buf[i];
+ 132              		.loc 1 127 9 view .LVU34
+ 133 002c 0023     		movs	r3, #0
+ 134 002e F6E7     		b	.L6
+ 135              	.L14:
+ 137:Drivers/coremark_stm32_hal/core_state.c **** 				next=4;
+ 136              		.loc 1 137 5 is_stmt 1 view .LVU35
+ 137:Drivers/coremark_stm32_hal/core_state.c **** 				next=4;
+ 137              		.loc 1 137 26 is_stmt 0 view .LVU36
+ 138 0030 CCF3C103 		ubfx	r3, ip, #3, #2
+ 137:Drivers/coremark_stm32_hal/core_state.c **** 				next=4;
+ 139              		.loc 1 137 8 view .LVU37
+ 140 0034 2149     		ldr	r1, .L22
+ 141              	.LVL13:
+ 137:Drivers/coremark_stm32_hal/core_state.c **** 				next=4;
+ 142              		.loc 1 137 8 view .LVU38
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s 			page 7
+
+
+ 143 0036 51F82310 		ldr	r1, [r1, r3, lsl #2]
+ 144              	.LVL14:
+ 138:Drivers/coremark_stm32_hal/core_state.c **** 			break;
+ 145              		.loc 1 138 5 is_stmt 1 view .LVU39
+ 139:Drivers/coremark_stm32_hal/core_state.c **** 			case 3: /* float */
+ 146              		.loc 1 139 4 view .LVU40
+ 138:Drivers/coremark_stm32_hal/core_state.c **** 			break;
+ 147              		.loc 1 138 9 is_stmt 0 view .LVU41
+ 148 003a 0425     		movs	r5, #4
+ 149              	.LVL15:
+ 150              	.L5:
+ 125:Drivers/coremark_stm32_hal/core_state.c **** 		if (next>0) {
+ 151              		.loc 1 125 8 is_stmt 1 view .LVU42
+ 125:Drivers/coremark_stm32_hal/core_state.c **** 		if (next>0) {
+ 152              		.loc 1 125 15 is_stmt 0 view .LVU43
+ 153 003c 6619     		adds	r6, r4, r5
+ 125:Drivers/coremark_stm32_hal/core_state.c **** 		if (next>0) {
+ 154              		.loc 1 125 20 view .LVU44
+ 155 003e 0136     		adds	r6, r6, #1
+ 125:Drivers/coremark_stm32_hal/core_state.c **** 		if (next>0) {
+ 156              		.loc 1 125 8 view .LVU45
+ 157 0040 7645     		cmp	r6, lr
+ 158 0042 32D2     		bcs	.L16
+ 126:Drivers/coremark_stm32_hal/core_state.c **** 			for(i=0;i<next;i++)
+ 159              		.loc 1 126 3 is_stmt 1 view .LVU46
+ 126:Drivers/coremark_stm32_hal/core_state.c **** 			for(i=0;i<next;i++)
+ 160              		.loc 1 126 6 is_stmt 0 view .LVU47
+ 161 0044 002D     		cmp	r5, #0
+ 162 0046 F1D1     		bne	.L20
+ 163              	.L7:
+ 132:Drivers/coremark_stm32_hal/core_state.c **** 		switch (seed & 0x7) {
+ 164              		.loc 1 132 3 is_stmt 1 view .LVU48
+ 132:Drivers/coremark_stm32_hal/core_state.c **** 		switch (seed & 0x7) {
+ 165              		.loc 1 132 7 is_stmt 0 view .LVU49
+ 166 0048 0CF10103 		add	r3, ip, #1
+ 167 004c 0FFA83FC 		sxth	ip, r3
+ 168              	.LVL16:
+ 133:Drivers/coremark_stm32_hal/core_state.c **** 			case 0: /* int */
+ 169              		.loc 1 133 3 is_stmt 1 view .LVU50
+ 170 0050 03F00703 		and	r3, r3, #7
+ 171 0054 072B     		cmp	r3, #7
+ 172 0056 F1D8     		bhi	.L5
+ 173 0058 01A6     		adr	r6, .L11
+ 174 005a 56F823F0 		ldr	pc, [r6, r3, lsl #2]
+ 175 005e 00BF     		.p2align 2
+ 176              	.L11:
+ 177 0060 31000000 		.word	.L14+1
+ 178 0064 31000000 		.word	.L14+1
+ 179 0068 31000000 		.word	.L14+1
+ 180 006c 81000000 		.word	.L13+1
+ 181 0070 81000000 		.word	.L13+1
+ 182 0074 8F000000 		.word	.L12+1
+ 183 0078 8F000000 		.word	.L12+1
+ 184 007c 9D000000 		.word	.L10+1
+ 185              		.p2align 1
+ 186              	.L13:
+ 142:Drivers/coremark_stm32_hal/core_state.c **** 				next=8;
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s 			page 8
+
+
+ 187              		.loc 1 142 5 view .LVU51
+ 142:Drivers/coremark_stm32_hal/core_state.c **** 				next=8;
+ 188              		.loc 1 142 28 is_stmt 0 view .LVU52
+ 189 0080 CCF3C103 		ubfx	r3, ip, #3, #2
+ 142:Drivers/coremark_stm32_hal/core_state.c **** 				next=8;
+ 190              		.loc 1 142 8 view .LVU53
+ 191 0084 0E49     		ldr	r1, .L22+4
+ 192              	.LVL17:
+ 142:Drivers/coremark_stm32_hal/core_state.c **** 				next=8;
+ 193              		.loc 1 142 8 view .LVU54
+ 194 0086 51F82310 		ldr	r1, [r1, r3, lsl #2]
+ 195              	.LVL18:
+ 143:Drivers/coremark_stm32_hal/core_state.c **** 			break;
+ 196              		.loc 1 143 5 is_stmt 1 view .LVU55
+ 144:Drivers/coremark_stm32_hal/core_state.c **** 			case 5: /* scientific */
+ 197              		.loc 1 144 4 view .LVU56
+ 143:Drivers/coremark_stm32_hal/core_state.c **** 			break;
+ 198              		.loc 1 143 9 is_stmt 0 view .LVU57
+ 199 008a 0825     		movs	r5, #8
+ 144:Drivers/coremark_stm32_hal/core_state.c **** 			case 5: /* scientific */
+ 200              		.loc 1 144 4 view .LVU58
+ 201 008c D6E7     		b	.L5
+ 202              	.LVL19:
+ 203              	.L12:
+ 147:Drivers/coremark_stm32_hal/core_state.c **** 				next=8;
+ 204              		.loc 1 147 5 is_stmt 1 view .LVU59
+ 147:Drivers/coremark_stm32_hal/core_state.c **** 				next=8;
+ 205              		.loc 1 147 26 is_stmt 0 view .LVU60
+ 206 008e CCF3C103 		ubfx	r3, ip, #3, #2
+ 147:Drivers/coremark_stm32_hal/core_state.c **** 				next=8;
+ 207              		.loc 1 147 8 view .LVU61
+ 208 0092 0C49     		ldr	r1, .L22+8
+ 209              	.LVL20:
+ 147:Drivers/coremark_stm32_hal/core_state.c **** 				next=8;
+ 210              		.loc 1 147 8 view .LVU62
+ 211 0094 51F82310 		ldr	r1, [r1, r3, lsl #2]
+ 212              	.LVL21:
+ 148:Drivers/coremark_stm32_hal/core_state.c **** 			break;
+ 213              		.loc 1 148 5 is_stmt 1 view .LVU63
+ 149:Drivers/coremark_stm32_hal/core_state.c **** 			case 7: /* invalid */
+ 214              		.loc 1 149 4 view .LVU64
+ 148:Drivers/coremark_stm32_hal/core_state.c **** 			break;
+ 215              		.loc 1 148 9 is_stmt 0 view .LVU65
+ 216 0098 0825     		movs	r5, #8
+ 149:Drivers/coremark_stm32_hal/core_state.c **** 			case 7: /* invalid */
+ 217              		.loc 1 149 4 view .LVU66
+ 218 009a CFE7     		b	.L5
+ 219              	.LVL22:
+ 220              	.L10:
+ 151:Drivers/coremark_stm32_hal/core_state.c **** 				next=8;
+ 221              		.loc 1 151 5 is_stmt 1 view .LVU67
+ 151:Drivers/coremark_stm32_hal/core_state.c **** 				next=8;
+ 222              		.loc 1 151 26 is_stmt 0 view .LVU68
+ 223 009c CCF3C103 		ubfx	r3, ip, #3, #2
+ 151:Drivers/coremark_stm32_hal/core_state.c **** 				next=8;
+ 224              		.loc 1 151 8 view .LVU69
+ 225 00a0 0949     		ldr	r1, .L22+12
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s 			page 9
+
+
+ 226              	.LVL23:
+ 151:Drivers/coremark_stm32_hal/core_state.c **** 				next=8;
+ 227              		.loc 1 151 8 view .LVU70
+ 228 00a2 51F82310 		ldr	r1, [r1, r3, lsl #2]
+ 229              	.LVL24:
+ 152:Drivers/coremark_stm32_hal/core_state.c **** 			break;
+ 230              		.loc 1 152 5 is_stmt 1 view .LVU71
+ 153:Drivers/coremark_stm32_hal/core_state.c **** 			default: /* Never happen, just to make some compilers happy */
+ 231              		.loc 1 153 4 view .LVU72
+ 152:Drivers/coremark_stm32_hal/core_state.c **** 			break;
+ 232              		.loc 1 152 9 is_stmt 0 view .LVU73
+ 233 00a6 0825     		movs	r5, #8
+ 153:Drivers/coremark_stm32_hal/core_state.c **** 			default: /* Never happen, just to make some compilers happy */
+ 234              		.loc 1 153 4 view .LVU74
+ 235 00a8 C8E7     		b	.L5
+ 236              	.LVL25:
+ 237              	.L16:
+ 159:Drivers/coremark_stm32_hal/core_state.c **** 		*(p+total)=0;
+ 238              		.loc 1 159 8 is_stmt 1 view .LVU75
+ 239 00aa 8442     		cmp	r4, r0
+ 240 00ac 03D2     		bcs	.L21
+ 160:Drivers/coremark_stm32_hal/core_state.c **** 		total++;
+ 241              		.loc 1 160 3 view .LVU76
+ 160:Drivers/coremark_stm32_hal/core_state.c **** 		total++;
+ 242              		.loc 1 160 13 is_stmt 0 view .LVU77
+ 243 00ae 0023     		movs	r3, #0
+ 244 00b0 1355     		strb	r3, [r2, r4]
+ 161:Drivers/coremark_stm32_hal/core_state.c **** 	}
+ 245              		.loc 1 161 3 is_stmt 1 view .LVU78
+ 161:Drivers/coremark_stm32_hal/core_state.c **** 	}
+ 246              		.loc 1 161 8 is_stmt 0 view .LVU79
+ 247 00b2 0134     		adds	r4, r4, #1
+ 248              	.LVL26:
+ 161:Drivers/coremark_stm32_hal/core_state.c **** 	}
+ 249              		.loc 1 161 8 view .LVU80
+ 250 00b4 F9E7     		b	.L16
+ 251              	.L21:
+ 166:Drivers/coremark_stm32_hal/core_state.c **** 
+ 252              		.loc 1 166 1 view .LVU81
+ 253 00b6 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 254              	.LVL27:
+ 255              	.L23:
+ 166:Drivers/coremark_stm32_hal/core_state.c **** 
+ 256              		.loc 1 166 1 view .LVU82
+ 257 00ba 00BF     		.align	2
+ 258              	.L22:
+ 259 00bc 00000000 		.word	.LANCHOR0
+ 260 00c0 00000000 		.word	.LANCHOR1
+ 261 00c4 00000000 		.word	.LANCHOR2
+ 262 00c8 00000000 		.word	.LANCHOR3
+ 263              		.cfi_endproc
+ 264              	.LFE4:
+ 266              		.section	.text.core_state_transition,"ax",%progbits
+ 267              		.align	1
+ 268              		.global	core_state_transition
+ 269              		.syntax unified
+ 270              		.thumb
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s 			page 10
+
+
+ 271              		.thumb_func
+ 272              		.fpu fpv5-d16
+ 274              	core_state_transition:
+ 275              	.LVL28:
+ 276              	.LFB6:
+ 173:Drivers/coremark_stm32_hal/core_state.c **** 
+ 174:Drivers/coremark_stm32_hal/core_state.c **** /* Function: core_state_transition
+ 175:Drivers/coremark_stm32_hal/core_state.c **** 	Actual state machine.
+ 176:Drivers/coremark_stm32_hal/core_state.c **** 
+ 177:Drivers/coremark_stm32_hal/core_state.c **** 	The state machine will continue scanning until either:
+ 178:Drivers/coremark_stm32_hal/core_state.c **** 	1 - an invalid input is detcted.
+ 179:Drivers/coremark_stm32_hal/core_state.c **** 	2 - a valid number has been detected.
+ 180:Drivers/coremark_stm32_hal/core_state.c **** 	
+ 181:Drivers/coremark_stm32_hal/core_state.c **** 	The input pointer is updated to point to the end of the token, and the end state is returned (eith
+ 182:Drivers/coremark_stm32_hal/core_state.c **** */
+ 183:Drivers/coremark_stm32_hal/core_state.c **** 
+ 184:Drivers/coremark_stm32_hal/core_state.c **** enum CORE_STATE core_state_transition( ee_u8 **instr , ee_u32 *transition_count) {
+ 277              		.loc 1 184 82 is_stmt 1 view -0
+ 278              		.cfi_startproc
+ 279              		@ args = 0, pretend = 0, frame = 0
+ 280              		@ frame_needed = 0, uses_anonymous_args = 0
+ 281              		.loc 1 184 82 is_stmt 0 view .LVU84
+ 282 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 283              	.LCFI1:
+ 284              		.cfi_def_cfa_offset 24
+ 285              		.cfi_offset 4, -24
+ 286              		.cfi_offset 5, -20
+ 287              		.cfi_offset 6, -16
+ 288              		.cfi_offset 7, -12
+ 289              		.cfi_offset 8, -8
+ 290              		.cfi_offset 14, -4
+ 291 0004 8046     		mov	r8, r0
+ 292 0006 0F46     		mov	r7, r1
+ 185:Drivers/coremark_stm32_hal/core_state.c **** 	ee_u8 *str=*instr;
+ 293              		.loc 1 185 2 is_stmt 1 view .LVU85
+ 294              		.loc 1 185 9 is_stmt 0 view .LVU86
+ 295 0008 0668     		ldr	r6, [r0]
+ 296              	.LVL29:
+ 186:Drivers/coremark_stm32_hal/core_state.c **** 	ee_u8 NEXT_SYMBOL;
+ 297              		.loc 1 186 2 is_stmt 1 view .LVU87
+ 187:Drivers/coremark_stm32_hal/core_state.c **** 	enum CORE_STATE state=CORE_START;
+ 298              		.loc 1 187 2 view .LVU88
+ 188:Drivers/coremark_stm32_hal/core_state.c **** 	for( ; *str && state != CORE_INVALID; str++ ) {
+ 299              		.loc 1 188 2 view .LVU89
+ 187:Drivers/coremark_stm32_hal/core_state.c **** 	enum CORE_STATE state=CORE_START;
+ 300              		.loc 1 187 18 is_stmt 0 view .LVU90
+ 301 000a 0025     		movs	r5, #0
+ 302              		.loc 1 188 2 view .LVU91
+ 303 000c 19E0     		b	.L25
+ 304              	.LVL30:
+ 305              	.L49:
+ 189:Drivers/coremark_stm32_hal/core_state.c **** 		NEXT_SYMBOL = *str;
+ 190:Drivers/coremark_stm32_hal/core_state.c **** 		if (NEXT_SYMBOL==',') /* end of this input */ {
+ 191:Drivers/coremark_stm32_hal/core_state.c **** 			str++;
+ 306              		.loc 1 191 4 is_stmt 1 view .LVU92
+ 307              		.loc 1 191 7 is_stmt 0 view .LVU93
+ 308 000e 0136     		adds	r6, r6, #1
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s 			page 11
+
+
+ 309              	.LVL31:
+ 192:Drivers/coremark_stm32_hal/core_state.c **** 			break;
+ 310              		.loc 1 192 4 is_stmt 1 view .LVU94
+ 311              	.L27:
+ 193:Drivers/coremark_stm32_hal/core_state.c **** 		}
+ 194:Drivers/coremark_stm32_hal/core_state.c **** 		switch(state) {
+ 195:Drivers/coremark_stm32_hal/core_state.c **** 		case CORE_START:
+ 196:Drivers/coremark_stm32_hal/core_state.c **** 			if(ee_isdigit(NEXT_SYMBOL)) {
+ 197:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_INT;
+ 198:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 199:Drivers/coremark_stm32_hal/core_state.c **** 			else if( NEXT_SYMBOL == '+' || NEXT_SYMBOL == '-' ) {
+ 200:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_S1;
+ 201:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 202:Drivers/coremark_stm32_hal/core_state.c **** 			else if( NEXT_SYMBOL == '.' ) {
+ 203:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_FLOAT;
+ 204:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 205:Drivers/coremark_stm32_hal/core_state.c **** 			else {
+ 206:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_INVALID;
+ 207:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_INVALID]++;
+ 208:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 209:Drivers/coremark_stm32_hal/core_state.c **** 			transition_count[CORE_START]++;
+ 210:Drivers/coremark_stm32_hal/core_state.c **** 			break;
+ 211:Drivers/coremark_stm32_hal/core_state.c **** 		case CORE_S1:
+ 212:Drivers/coremark_stm32_hal/core_state.c **** 			if(ee_isdigit(NEXT_SYMBOL)) {
+ 213:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_INT;
+ 214:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_S1]++;
+ 215:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 216:Drivers/coremark_stm32_hal/core_state.c **** 			else if( NEXT_SYMBOL == '.' ) {
+ 217:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_FLOAT;
+ 218:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_S1]++;
+ 219:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 220:Drivers/coremark_stm32_hal/core_state.c **** 			else {
+ 221:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_INVALID;
+ 222:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_S1]++;
+ 223:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 224:Drivers/coremark_stm32_hal/core_state.c **** 			break;
+ 225:Drivers/coremark_stm32_hal/core_state.c **** 		case CORE_INT:
+ 226:Drivers/coremark_stm32_hal/core_state.c **** 			if( NEXT_SYMBOL == '.' ) {
+ 227:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_FLOAT;
+ 228:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_INT]++;
+ 229:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 230:Drivers/coremark_stm32_hal/core_state.c **** 			else if(!ee_isdigit(NEXT_SYMBOL)) {
+ 231:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_INVALID;
+ 232:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_INT]++;
+ 233:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 234:Drivers/coremark_stm32_hal/core_state.c **** 			break;
+ 235:Drivers/coremark_stm32_hal/core_state.c **** 		case CORE_FLOAT:
+ 236:Drivers/coremark_stm32_hal/core_state.c **** 			if( NEXT_SYMBOL == 'E' || NEXT_SYMBOL == 'e' ) {
+ 237:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_S2;
+ 238:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_FLOAT]++;
+ 239:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 240:Drivers/coremark_stm32_hal/core_state.c **** 			else if(!ee_isdigit(NEXT_SYMBOL)) {
+ 241:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_INVALID;
+ 242:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_FLOAT]++;
+ 243:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 244:Drivers/coremark_stm32_hal/core_state.c **** 			break;
+ 245:Drivers/coremark_stm32_hal/core_state.c **** 		case CORE_S2:
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s 			page 12
+
+
+ 246:Drivers/coremark_stm32_hal/core_state.c **** 			if( NEXT_SYMBOL == '+' || NEXT_SYMBOL == '-' ) {
+ 247:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_EXPONENT;
+ 248:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_S2]++;
+ 249:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 250:Drivers/coremark_stm32_hal/core_state.c **** 			else {
+ 251:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_INVALID;
+ 252:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_S2]++;
+ 253:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 254:Drivers/coremark_stm32_hal/core_state.c **** 			break;
+ 255:Drivers/coremark_stm32_hal/core_state.c **** 		case CORE_EXPONENT:
+ 256:Drivers/coremark_stm32_hal/core_state.c **** 			if(ee_isdigit(NEXT_SYMBOL)) {
+ 257:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_SCIENTIFIC;
+ 258:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_EXPONENT]++;
+ 259:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 260:Drivers/coremark_stm32_hal/core_state.c **** 			else {
+ 261:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_INVALID;
+ 262:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_EXPONENT]++;
+ 263:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 264:Drivers/coremark_stm32_hal/core_state.c **** 			break;
+ 265:Drivers/coremark_stm32_hal/core_state.c **** 		case CORE_SCIENTIFIC:
+ 266:Drivers/coremark_stm32_hal/core_state.c **** 			if(!ee_isdigit(NEXT_SYMBOL)) {
+ 267:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_INVALID;
+ 268:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_INVALID]++;
+ 269:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 270:Drivers/coremark_stm32_hal/core_state.c **** 			break;
+ 271:Drivers/coremark_stm32_hal/core_state.c **** 		default:
+ 272:Drivers/coremark_stm32_hal/core_state.c **** 			break;
+ 273:Drivers/coremark_stm32_hal/core_state.c **** 		}
+ 274:Drivers/coremark_stm32_hal/core_state.c **** 	}
+ 275:Drivers/coremark_stm32_hal/core_state.c **** 	*instr=str;
+ 312              		.loc 1 275 2 view .LVU95
+ 313              		.loc 1 275 8 is_stmt 0 view .LVU96
+ 314 0010 C8F80060 		str	r6, [r8]
+ 276:Drivers/coremark_stm32_hal/core_state.c **** 	return state;
+ 315              		.loc 1 276 2 is_stmt 1 view .LVU97
+ 277:Drivers/coremark_stm32_hal/core_state.c **** }
+ 316              		.loc 1 277 1 is_stmt 0 view .LVU98
+ 317 0014 2846     		mov	r0, r5
+ 318 0016 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 319              	.LVL32:
+ 320              	.L36:
+ 196:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_INT;
+ 321              		.loc 1 196 4 is_stmt 1 view .LVU99
+ 196:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_INT;
+ 322              		.loc 1 196 7 is_stmt 0 view .LVU100
+ 323 001a 2046     		mov	r0, r4
+ 324 001c FFF7FEFF 		bl	ee_isdigit
+ 325              	.LVL33:
+ 196:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_INT;
+ 326              		.loc 1 196 6 view .LVU101
+ 327 0020 50B9     		cbnz	r0, .L45
+ 199:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_S1;
+ 328              		.loc 1 199 9 is_stmt 1 view .LVU102
+ 199:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_S1;
+ 329              		.loc 1 199 11 is_stmt 0 view .LVU103
+ 330 0022 2D2C     		cmp	r4, #45
+ 331 0024 18BF     		it	ne
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s 			page 13
+
+
+ 332 0026 2B2C     		cmpne	r4, #43
+ 333 0028 28D0     		beq	.L46
+ 202:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_FLOAT;
+ 334              		.loc 1 202 9 is_stmt 1 view .LVU104
+ 202:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_FLOAT;
+ 335              		.loc 1 202 11 is_stmt 0 view .LVU105
+ 336 002a 2E2C     		cmp	r4, #46
+ 337 002c 28D0     		beq	.L47
+ 206:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_INVALID]++;
+ 338              		.loc 1 206 5 is_stmt 1 view .LVU106
+ 339              	.LVL34:
+ 207:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 340              		.loc 1 207 5 view .LVU107
+ 207:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 341              		.loc 1 207 21 is_stmt 0 view .LVU108
+ 342 002e 7B68     		ldr	r3, [r7, #4]
+ 207:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 343              		.loc 1 207 35 view .LVU109
+ 344 0030 0133     		adds	r3, r3, #1
+ 345 0032 7B60     		str	r3, [r7, #4]
+ 206:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_INVALID]++;
+ 346              		.loc 1 206 11 view .LVU110
+ 347 0034 0125     		movs	r5, #1
+ 348 0036 00E0     		b	.L37
+ 349              	.LVL35:
+ 350              	.L45:
+ 197:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 351              		.loc 1 197 11 view .LVU111
+ 352 0038 0425     		movs	r5, #4
+ 353              	.LVL36:
+ 354              	.L37:
+ 209:Drivers/coremark_stm32_hal/core_state.c **** 			break;
+ 355              		.loc 1 209 4 is_stmt 1 view .LVU112
+ 209:Drivers/coremark_stm32_hal/core_state.c **** 			break;
+ 356              		.loc 1 209 20 is_stmt 0 view .LVU113
+ 357 003a 3B68     		ldr	r3, [r7]
+ 209:Drivers/coremark_stm32_hal/core_state.c **** 			break;
+ 358              		.loc 1 209 32 view .LVU114
+ 359 003c 0133     		adds	r3, r3, #1
+ 360 003e 3B60     		str	r3, [r7]
+ 210:Drivers/coremark_stm32_hal/core_state.c **** 		case CORE_S1:
+ 361              		.loc 1 210 4 is_stmt 1 view .LVU115
+ 362              	.LVL37:
+ 363              	.L28:
+ 188:Drivers/coremark_stm32_hal/core_state.c **** 		NEXT_SYMBOL = *str;
+ 364              		.loc 1 188 40 view .LVU116
+ 188:Drivers/coremark_stm32_hal/core_state.c **** 		NEXT_SYMBOL = *str;
+ 365              		.loc 1 188 43 is_stmt 0 view .LVU117
+ 366 0040 0136     		adds	r6, r6, #1
+ 367              	.LVL38:
+ 368              	.L25:
+ 188:Drivers/coremark_stm32_hal/core_state.c **** 		NEXT_SYMBOL = *str;
+ 369              		.loc 1 188 9 is_stmt 1 discriminator 1 view .LVU118
+ 370 0042 3478     		ldrb	r4, [r6]	@ zero_extendqisi2
+ 188:Drivers/coremark_stm32_hal/core_state.c **** 		NEXT_SYMBOL = *str;
+ 371              		.loc 1 188 2 is_stmt 0 discriminator 1 view .LVU119
+ 372 0044 002C     		cmp	r4, #0
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s 			page 14
+
+
+ 373 0046 E3D0     		beq	.L27
+ 188:Drivers/coremark_stm32_hal/core_state.c **** 		NEXT_SYMBOL = *str;
+ 374              		.loc 1 188 14 discriminator 2 view .LVU120
+ 375 0048 012D     		cmp	r5, #1
+ 376 004a E1D0     		beq	.L27
+ 189:Drivers/coremark_stm32_hal/core_state.c **** 		if (NEXT_SYMBOL==',') /* end of this input */ {
+ 377              		.loc 1 189 3 is_stmt 1 view .LVU121
+ 378              	.LVL39:
+ 190:Drivers/coremark_stm32_hal/core_state.c **** 			str++;
+ 379              		.loc 1 190 3 view .LVU122
+ 190:Drivers/coremark_stm32_hal/core_state.c **** 			str++;
+ 380              		.loc 1 190 6 is_stmt 0 view .LVU123
+ 381 004c 2C2C     		cmp	r4, #44
+ 382 004e DED0     		beq	.L49
+ 194:Drivers/coremark_stm32_hal/core_state.c **** 		case CORE_START:
+ 383              		.loc 1 194 3 is_stmt 1 view .LVU124
+ 384 0050 072D     		cmp	r5, #7
+ 385 0052 F5D8     		bhi	.L28
+ 386 0054 01A3     		adr	r3, .L30
+ 387 0056 53F825F0 		ldr	pc, [r3, r5, lsl #2]
+ 388 005a 00BF     		.p2align 2
+ 389              	.L30:
+ 390 005c 1B000000 		.word	.L36+1
+ 391 0060 41000000 		.word	.L28+1
+ 392 0064 85000000 		.word	.L35+1
+ 393 0068 F7000000 		.word	.L34+1
+ 394 006c AF000000 		.word	.L33+1
+ 395 0070 D1000000 		.word	.L32+1
+ 396 0074 13010000 		.word	.L31+1
+ 397 0078 2F010000 		.word	.L29+1
+ 398              		.p2align 1
+ 399              	.L46:
+ 200:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 400              		.loc 1 200 11 is_stmt 0 view .LVU125
+ 401 007c 0225     		movs	r5, #2
+ 402              	.LVL40:
+ 200:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 403              		.loc 1 200 11 view .LVU126
+ 404 007e DCE7     		b	.L37
+ 405              	.LVL41:
+ 406              	.L47:
+ 203:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 407              		.loc 1 203 11 view .LVU127
+ 408 0080 0525     		movs	r5, #5
+ 409              	.LVL42:
+ 203:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 410              		.loc 1 203 11 view .LVU128
+ 411 0082 DAE7     		b	.L37
+ 412              	.LVL43:
+ 413              	.L35:
+ 212:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_INT;
+ 414              		.loc 1 212 4 is_stmt 1 view .LVU129
+ 212:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_INT;
+ 415              		.loc 1 212 7 is_stmt 0 view .LVU130
+ 416 0084 2046     		mov	r0, r4
+ 417 0086 FFF7FEFF 		bl	ee_isdigit
+ 418              	.LVL44:
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s 			page 15
+
+
+ 212:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_INT;
+ 419              		.loc 1 212 6 view .LVU131
+ 420 008a 20B1     		cbz	r0, .L38
+ 213:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_S1]++;
+ 421              		.loc 1 213 5 is_stmt 1 view .LVU132
+ 422              	.LVL45:
+ 214:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 423              		.loc 1 214 5 view .LVU133
+ 214:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 424              		.loc 1 214 21 is_stmt 0 view .LVU134
+ 425 008c BB68     		ldr	r3, [r7, #8]
+ 214:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 426              		.loc 1 214 30 view .LVU135
+ 427 008e 0133     		adds	r3, r3, #1
+ 428 0090 BB60     		str	r3, [r7, #8]
+ 213:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_S1]++;
+ 429              		.loc 1 213 11 view .LVU136
+ 430 0092 0425     		movs	r5, #4
+ 431 0094 D4E7     		b	.L28
+ 432              	.LVL46:
+ 433              	.L38:
+ 216:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_FLOAT;
+ 434              		.loc 1 216 9 is_stmt 1 view .LVU137
+ 216:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_FLOAT;
+ 435              		.loc 1 216 11 is_stmt 0 view .LVU138
+ 436 0096 2E2C     		cmp	r4, #46
+ 437 0098 04D0     		beq	.L50
+ 221:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_S1]++;
+ 438              		.loc 1 221 5 is_stmt 1 view .LVU139
+ 439              	.LVL47:
+ 222:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 440              		.loc 1 222 5 view .LVU140
+ 222:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 441              		.loc 1 222 21 is_stmt 0 view .LVU141
+ 442 009a BB68     		ldr	r3, [r7, #8]
+ 222:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 443              		.loc 1 222 30 view .LVU142
+ 444 009c 0133     		adds	r3, r3, #1
+ 445 009e BB60     		str	r3, [r7, #8]
+ 221:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_S1]++;
+ 446              		.loc 1 221 11 view .LVU143
+ 447 00a0 0125     		movs	r5, #1
+ 448 00a2 CDE7     		b	.L28
+ 449              	.LVL48:
+ 450              	.L50:
+ 217:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_S1]++;
+ 451              		.loc 1 217 5 is_stmt 1 view .LVU144
+ 218:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 452              		.loc 1 218 5 view .LVU145
+ 218:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 453              		.loc 1 218 21 is_stmt 0 view .LVU146
+ 454 00a4 BB68     		ldr	r3, [r7, #8]
+ 218:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 455              		.loc 1 218 30 view .LVU147
+ 456 00a6 0133     		adds	r3, r3, #1
+ 457 00a8 BB60     		str	r3, [r7, #8]
+ 217:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_S1]++;
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s 			page 16
+
+
+ 458              		.loc 1 217 11 view .LVU148
+ 459 00aa 0525     		movs	r5, #5
+ 460 00ac C8E7     		b	.L28
+ 461              	.LVL49:
+ 462              	.L33:
+ 226:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_FLOAT;
+ 463              		.loc 1 226 4 is_stmt 1 view .LVU149
+ 226:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_FLOAT;
+ 464              		.loc 1 226 6 is_stmt 0 view .LVU150
+ 465 00ae 2E2C     		cmp	r4, #46
+ 466 00b0 09D0     		beq	.L51
+ 230:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_INVALID;
+ 467              		.loc 1 230 9 is_stmt 1 view .LVU151
+ 230:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_INVALID;
+ 468              		.loc 1 230 13 is_stmt 0 view .LVU152
+ 469 00b2 2046     		mov	r0, r4
+ 470 00b4 FFF7FEFF 		bl	ee_isdigit
+ 471              	.LVL50:
+ 230:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_INVALID;
+ 472              		.loc 1 230 11 view .LVU153
+ 473 00b8 0028     		cmp	r0, #0
+ 474 00ba C1D1     		bne	.L28
+ 231:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_INT]++;
+ 475              		.loc 1 231 5 is_stmt 1 view .LVU154
+ 476              	.LVL51:
+ 232:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 477              		.loc 1 232 5 view .LVU155
+ 232:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 478              		.loc 1 232 21 is_stmt 0 view .LVU156
+ 479 00bc 3B69     		ldr	r3, [r7, #16]
+ 232:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 480              		.loc 1 232 31 view .LVU157
+ 481 00be 0133     		adds	r3, r3, #1
+ 482 00c0 3B61     		str	r3, [r7, #16]
+ 231:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_INT]++;
+ 483              		.loc 1 231 11 view .LVU158
+ 484 00c2 0125     		movs	r5, #1
+ 485 00c4 BCE7     		b	.L28
+ 486              	.LVL52:
+ 487              	.L51:
+ 227:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_INT]++;
+ 488              		.loc 1 227 5 is_stmt 1 view .LVU159
+ 228:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 489              		.loc 1 228 5 view .LVU160
+ 228:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 490              		.loc 1 228 21 is_stmt 0 view .LVU161
+ 491 00c6 3B69     		ldr	r3, [r7, #16]
+ 228:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 492              		.loc 1 228 31 view .LVU162
+ 493 00c8 0133     		adds	r3, r3, #1
+ 494 00ca 3B61     		str	r3, [r7, #16]
+ 227:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_INT]++;
+ 495              		.loc 1 227 11 view .LVU163
+ 496 00cc 0525     		movs	r5, #5
+ 497 00ce B7E7     		b	.L28
+ 498              	.LVL53:
+ 499              	.L32:
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s 			page 17
+
+
+ 236:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_S2;
+ 500              		.loc 1 236 4 is_stmt 1 view .LVU164
+ 236:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_S2;
+ 501              		.loc 1 236 6 is_stmt 0 view .LVU165
+ 502 00d0 652C     		cmp	r4, #101
+ 503 00d2 18BF     		it	ne
+ 504 00d4 452C     		cmpne	r4, #69
+ 505 00d6 04D1     		bne	.L41
+ 237:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_FLOAT]++;
+ 506              		.loc 1 237 5 is_stmt 1 view .LVU166
+ 507              	.LVL54:
+ 238:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 508              		.loc 1 238 5 view .LVU167
+ 238:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 509              		.loc 1 238 21 is_stmt 0 view .LVU168
+ 510 00d8 7B69     		ldr	r3, [r7, #20]
+ 238:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 511              		.loc 1 238 33 view .LVU169
+ 512 00da 0133     		adds	r3, r3, #1
+ 513 00dc 7B61     		str	r3, [r7, #20]
+ 237:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_FLOAT]++;
+ 514              		.loc 1 237 11 view .LVU170
+ 515 00de 0325     		movs	r5, #3
+ 516 00e0 AEE7     		b	.L28
+ 517              	.LVL55:
+ 518              	.L41:
+ 240:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_INVALID;
+ 519              		.loc 1 240 9 is_stmt 1 view .LVU171
+ 240:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_INVALID;
+ 520              		.loc 1 240 13 is_stmt 0 view .LVU172
+ 521 00e2 2046     		mov	r0, r4
+ 522 00e4 FFF7FEFF 		bl	ee_isdigit
+ 523              	.LVL56:
+ 240:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_INVALID;
+ 524              		.loc 1 240 11 view .LVU173
+ 525 00e8 0028     		cmp	r0, #0
+ 526 00ea A9D1     		bne	.L28
+ 241:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_FLOAT]++;
+ 527              		.loc 1 241 5 is_stmt 1 view .LVU174
+ 528              	.LVL57:
+ 242:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 529              		.loc 1 242 5 view .LVU175
+ 242:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 530              		.loc 1 242 21 is_stmt 0 view .LVU176
+ 531 00ec 7B69     		ldr	r3, [r7, #20]
+ 242:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 532              		.loc 1 242 33 view .LVU177
+ 533 00ee 0133     		adds	r3, r3, #1
+ 534 00f0 7B61     		str	r3, [r7, #20]
+ 241:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_FLOAT]++;
+ 535              		.loc 1 241 11 view .LVU178
+ 536 00f2 0125     		movs	r5, #1
+ 537 00f4 A4E7     		b	.L28
+ 538              	.LVL58:
+ 539              	.L34:
+ 246:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_EXPONENT;
+ 540              		.loc 1 246 4 is_stmt 1 view .LVU179
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s 			page 18
+
+
+ 246:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_EXPONENT;
+ 541              		.loc 1 246 6 is_stmt 0 view .LVU180
+ 542 00f6 2D2C     		cmp	r4, #45
+ 543 00f8 18BF     		it	ne
+ 544 00fa 2B2C     		cmpne	r4, #43
+ 545 00fc 04D1     		bne	.L42
+ 247:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_S2]++;
+ 546              		.loc 1 247 5 is_stmt 1 view .LVU181
+ 547              	.LVL59:
+ 248:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 548              		.loc 1 248 5 view .LVU182
+ 248:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 549              		.loc 1 248 21 is_stmt 0 view .LVU183
+ 550 00fe FB68     		ldr	r3, [r7, #12]
+ 248:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 551              		.loc 1 248 30 view .LVU184
+ 552 0100 0133     		adds	r3, r3, #1
+ 553 0102 FB60     		str	r3, [r7, #12]
+ 247:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_S2]++;
+ 554              		.loc 1 247 11 view .LVU185
+ 555 0104 0625     		movs	r5, #6
+ 556 0106 9BE7     		b	.L28
+ 557              	.LVL60:
+ 558              	.L42:
+ 251:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_S2]++;
+ 559              		.loc 1 251 5 is_stmt 1 view .LVU186
+ 252:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 560              		.loc 1 252 5 view .LVU187
+ 252:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 561              		.loc 1 252 21 is_stmt 0 view .LVU188
+ 562 0108 FB68     		ldr	r3, [r7, #12]
+ 252:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 563              		.loc 1 252 30 view .LVU189
+ 564 010a 0133     		adds	r3, r3, #1
+ 565 010c FB60     		str	r3, [r7, #12]
+ 251:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_S2]++;
+ 566              		.loc 1 251 11 view .LVU190
+ 567 010e 0125     		movs	r5, #1
+ 568 0110 96E7     		b	.L28
+ 569              	.LVL61:
+ 570              	.L31:
+ 256:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_SCIENTIFIC;
+ 571              		.loc 1 256 4 is_stmt 1 view .LVU191
+ 256:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_SCIENTIFIC;
+ 572              		.loc 1 256 7 is_stmt 0 view .LVU192
+ 573 0112 2046     		mov	r0, r4
+ 574 0114 FFF7FEFF 		bl	ee_isdigit
+ 575              	.LVL62:
+ 256:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_SCIENTIFIC;
+ 576              		.loc 1 256 6 view .LVU193
+ 577 0118 20B1     		cbz	r0, .L43
+ 257:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_EXPONENT]++;
+ 578              		.loc 1 257 5 is_stmt 1 view .LVU194
+ 579              	.LVL63:
+ 258:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 580              		.loc 1 258 5 view .LVU195
+ 258:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s 			page 19
+
+
+ 581              		.loc 1 258 21 is_stmt 0 view .LVU196
+ 582 011a BB69     		ldr	r3, [r7, #24]
+ 258:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 583              		.loc 1 258 36 view .LVU197
+ 584 011c 0133     		adds	r3, r3, #1
+ 585 011e BB61     		str	r3, [r7, #24]
+ 257:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_EXPONENT]++;
+ 586              		.loc 1 257 11 view .LVU198
+ 587 0120 0725     		movs	r5, #7
+ 588 0122 8DE7     		b	.L28
+ 589              	.LVL64:
+ 590              	.L43:
+ 261:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_EXPONENT]++;
+ 591              		.loc 1 261 5 is_stmt 1 view .LVU199
+ 262:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 592              		.loc 1 262 5 view .LVU200
+ 262:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 593              		.loc 1 262 21 is_stmt 0 view .LVU201
+ 594 0124 BB69     		ldr	r3, [r7, #24]
+ 262:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 595              		.loc 1 262 36 view .LVU202
+ 596 0126 0133     		adds	r3, r3, #1
+ 597 0128 BB61     		str	r3, [r7, #24]
+ 261:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_EXPONENT]++;
+ 598              		.loc 1 261 11 view .LVU203
+ 599 012a 0125     		movs	r5, #1
+ 600 012c 88E7     		b	.L28
+ 601              	.LVL65:
+ 602              	.L29:
+ 266:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_INVALID;
+ 603              		.loc 1 266 4 is_stmt 1 view .LVU204
+ 266:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_INVALID;
+ 604              		.loc 1 266 8 is_stmt 0 view .LVU205
+ 605 012e 2046     		mov	r0, r4
+ 606 0130 FFF7FEFF 		bl	ee_isdigit
+ 607              	.LVL66:
+ 266:Drivers/coremark_stm32_hal/core_state.c **** 				state = CORE_INVALID;
+ 608              		.loc 1 266 6 view .LVU206
+ 609 0134 0028     		cmp	r0, #0
+ 610 0136 83D1     		bne	.L28
+ 267:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_INVALID]++;
+ 611              		.loc 1 267 5 is_stmt 1 view .LVU207
+ 612              	.LVL67:
+ 268:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 613              		.loc 1 268 5 view .LVU208
+ 268:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 614              		.loc 1 268 21 is_stmt 0 view .LVU209
+ 615 0138 7B68     		ldr	r3, [r7, #4]
+ 268:Drivers/coremark_stm32_hal/core_state.c **** 			}
+ 616              		.loc 1 268 35 view .LVU210
+ 617 013a 0133     		adds	r3, r3, #1
+ 618 013c 7B60     		str	r3, [r7, #4]
+ 267:Drivers/coremark_stm32_hal/core_state.c **** 				transition_count[CORE_INVALID]++;
+ 619              		.loc 1 267 11 view .LVU211
+ 620 013e 0125     		movs	r5, #1
+ 621 0140 7EE7     		b	.L28
+ 622              		.cfi_endproc
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s 			page 20
+
+
+ 623              	.LFE6:
+ 625 0142 00BF     		.section	.text.core_bench_state,"ax",%progbits
+ 626              		.align	1
+ 627              		.global	core_bench_state
+ 628              		.syntax unified
+ 629              		.thumb
+ 630              		.thumb_func
+ 631              		.fpu fpv5-d16
+ 633              	core_bench_state:
+ 634              	.LVL68:
+ 635              	.LFB3:
+  45:Drivers/coremark_stm32_hal/core_state.c **** 	ee_u32 final_counts[NUM_CORE_STATES];
+ 636              		.loc 1 45 1 is_stmt 1 view -0
+ 637              		.cfi_startproc
+ 638              		@ args = 8, pretend = 0, frame = 72
+ 639              		@ frame_needed = 0, uses_anonymous_args = 0
+  45:Drivers/coremark_stm32_hal/core_state.c **** 	ee_u32 final_counts[NUM_CORE_STATES];
+ 640              		.loc 1 45 1 is_stmt 0 view .LVU213
+ 641 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+ 642              	.LCFI2:
+ 643              		.cfi_def_cfa_offset 32
+ 644              		.cfi_offset 4, -32
+ 645              		.cfi_offset 5, -28
+ 646              		.cfi_offset 6, -24
+ 647              		.cfi_offset 7, -20
+ 648              		.cfi_offset 8, -16
+ 649              		.cfi_offset 9, -12
+ 650              		.cfi_offset 10, -8
+ 651              		.cfi_offset 14, -4
+ 652 0004 92B0     		sub	sp, sp, #72
+ 653              	.LCFI3:
+ 654              		.cfi_def_cfa_offset 104
+ 655 0006 8146     		mov	r9, r0
+ 656 0008 0F46     		mov	r7, r1
+ 657 000a 9246     		mov	r10, r2
+ 658 000c 9846     		mov	r8, r3
+ 659 000e BDF96860 		ldrsh	r6, [sp, #104]
+ 660 0012 BDF86C50 		ldrh	r5, [sp, #108]
+  46:Drivers/coremark_stm32_hal/core_state.c **** 	ee_u32 track_counts[NUM_CORE_STATES];
+ 661              		.loc 1 46 2 is_stmt 1 view .LVU214
+  47:Drivers/coremark_stm32_hal/core_state.c **** 	ee_u8 *p=memblock;
+ 662              		.loc 1 47 2 view .LVU215
+  48:Drivers/coremark_stm32_hal/core_state.c **** 	ee_u32 i;
+ 663              		.loc 1 48 2 view .LVU216
+  48:Drivers/coremark_stm32_hal/core_state.c **** 	ee_u32 i;
+ 664              		.loc 1 48 9 is_stmt 0 view .LVU217
+ 665 0016 0191     		str	r1, [sp, #4]
+  49:Drivers/coremark_stm32_hal/core_state.c **** 
+ 666              		.loc 1 49 2 is_stmt 1 view .LVU218
+  55:Drivers/coremark_stm32_hal/core_state.c **** 		final_counts[i]=track_counts[i]=0;
+ 667              		.loc 1 55 2 view .LVU219
+ 668              	.LVL69:
+  55:Drivers/coremark_stm32_hal/core_state.c **** 		final_counts[i]=track_counts[i]=0;
+ 669              		.loc 1 55 8 is_stmt 0 view .LVU220
+ 670 0018 0023     		movs	r3, #0
+ 671              	.LVL70:
+  55:Drivers/coremark_stm32_hal/core_state.c **** 		final_counts[i]=track_counts[i]=0;
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s 			page 21
+
+
+ 672              		.loc 1 55 2 view .LVU221
+ 673 001a 08E0     		b	.L53
+ 674              	.LVL71:
+ 675              	.L54:
+  56:Drivers/coremark_stm32_hal/core_state.c **** 	}
+ 676              		.loc 1 56 3 is_stmt 1 discriminator 3 view .LVU222
+  56:Drivers/coremark_stm32_hal/core_state.c **** 	}
+ 677              		.loc 1 56 34 is_stmt 0 discriminator 3 view .LVU223
+ 678 001c 12AA     		add	r2, sp, #72
+ 679 001e 02EB8302 		add	r2, r2, r3, lsl #2
+ 680 0022 0021     		movs	r1, #0
+ 681 0024 42F8401C 		str	r1, [r2, #-64]
+  56:Drivers/coremark_stm32_hal/core_state.c **** 	}
+ 682              		.loc 1 56 18 discriminator 3 view .LVU224
+ 683 0028 42F8201C 		str	r1, [r2, #-32]
+  55:Drivers/coremark_stm32_hal/core_state.c **** 		final_counts[i]=track_counts[i]=0;
+ 684              		.loc 1 55 31 is_stmt 1 discriminator 3 view .LVU225
+  55:Drivers/coremark_stm32_hal/core_state.c **** 		final_counts[i]=track_counts[i]=0;
+ 685              		.loc 1 55 32 is_stmt 0 discriminator 3 view .LVU226
+ 686 002c 0133     		adds	r3, r3, #1
+ 687              	.LVL72:
+ 688              	.L53:
+  55:Drivers/coremark_stm32_hal/core_state.c **** 		final_counts[i]=track_counts[i]=0;
+ 689              		.loc 1 55 12 is_stmt 1 discriminator 1 view .LVU227
+  55:Drivers/coremark_stm32_hal/core_state.c **** 		final_counts[i]=track_counts[i]=0;
+ 690              		.loc 1 55 2 is_stmt 0 discriminator 1 view .LVU228
+ 691 002e 072B     		cmp	r3, #7
+ 692 0030 F4D9     		bls	.L54
+ 693 0032 0BE0     		b	.L55
+ 694              	.LVL73:
+ 695              	.L56:
+ 696              	.LBB2:
+  60:Drivers/coremark_stm32_hal/core_state.c **** 		final_counts[fstate]++;
+ 697              		.loc 1 60 3 is_stmt 1 view .LVU229
+  60:Drivers/coremark_stm32_hal/core_state.c **** 		final_counts[fstate]++;
+ 698              		.loc 1 60 26 is_stmt 0 view .LVU230
+ 699 0034 02A9     		add	r1, sp, #8
+ 700 0036 01A8     		add	r0, sp, #4
+ 701 0038 FFF7FEFF 		bl	core_state_transition
+ 702              	.LVL74:
+  61:Drivers/coremark_stm32_hal/core_state.c **** #if CORE_DEBUG
+ 703              		.loc 1 61 3 is_stmt 1 view .LVU231
+  61:Drivers/coremark_stm32_hal/core_state.c **** #if CORE_DEBUG
+ 704              		.loc 1 61 15 is_stmt 0 view .LVU232
+ 705 003c 12AB     		add	r3, sp, #72
+ 706 003e 03EB8004 		add	r4, r3, r0, lsl #2
+ 707 0042 54F8203C 		ldr	r3, [r4, #-32]
+  61:Drivers/coremark_stm32_hal/core_state.c **** #if CORE_DEBUG
+ 708              		.loc 1 61 23 view .LVU233
+ 709 0046 0133     		adds	r3, r3, #1
+ 710 0048 44F8203C 		str	r3, [r4, #-32]
+ 711              	.LVL75:
+ 712              	.L55:
+  61:Drivers/coremark_stm32_hal/core_state.c **** #if CORE_DEBUG
+ 713              		.loc 1 61 23 view .LVU234
+ 714              	.LBE2:
+  59:Drivers/coremark_stm32_hal/core_state.c **** 		enum CORE_STATE fstate=core_state_transition(&p,track_counts);
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s 			page 22
+
+
+ 715              		.loc 1 59 8 is_stmt 1 view .LVU235
+  59:Drivers/coremark_stm32_hal/core_state.c **** 		enum CORE_STATE fstate=core_state_transition(&p,track_counts);
+ 716              		.loc 1 59 9 is_stmt 0 view .LVU236
+ 717 004c 019B     		ldr	r3, [sp, #4]
+ 718 004e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  59:Drivers/coremark_stm32_hal/core_state.c **** 		enum CORE_STATE fstate=core_state_transition(&p,track_counts);
+ 719              		.loc 1 59 8 view .LVU237
+ 720 0050 002B     		cmp	r3, #0
+ 721 0052 EFD1     		bne	.L56
+  69:Drivers/coremark_stm32_hal/core_state.c **** 	while (p < (memblock+blksize)) { /* insert some corruption */
+ 722              		.loc 1 69 2 is_stmt 1 view .LVU238
+  69:Drivers/coremark_stm32_hal/core_state.c **** 	while (p < (memblock+blksize)) { /* insert some corruption */
+ 723              		.loc 1 69 3 is_stmt 0 view .LVU239
+ 724 0054 0197     		str	r7, [sp, #4]
+  70:Drivers/coremark_stm32_hal/core_state.c **** 		if (*p!=',')
+ 725              		.loc 1 70 2 is_stmt 1 view .LVU240
+  70:Drivers/coremark_stm32_hal/core_state.c **** 		if (*p!=',')
+ 726              		.loc 1 70 8 is_stmt 0 view .LVU241
+ 727 0056 06E0     		b	.L57
+ 728              	.L69:
+  72:Drivers/coremark_stm32_hal/core_state.c **** 		p+=step;
+ 729              		.loc 1 72 4 is_stmt 1 view .LVU242
+  72:Drivers/coremark_stm32_hal/core_state.c **** 		p+=step;
+ 730              		.loc 1 72 8 is_stmt 0 view .LVU243
+ 731 0058 5FFA8AF1 		uxtb	r1, r10
+  72:Drivers/coremark_stm32_hal/core_state.c **** 		p+=step;
+ 732              		.loc 1 72 6 view .LVU244
+ 733 005c 4B40     		eors	r3, r3, r1
+ 734 005e 1370     		strb	r3, [r2]
+ 735              	.L58:
+  73:Drivers/coremark_stm32_hal/core_state.c **** 	}
+ 736              		.loc 1 73 3 is_stmt 1 view .LVU245
+  73:Drivers/coremark_stm32_hal/core_state.c **** 	}
+ 737              		.loc 1 73 4 is_stmt 0 view .LVU246
+ 738 0060 019B     		ldr	r3, [sp, #4]
+ 739 0062 3344     		add	r3, r3, r6
+ 740 0064 0193     		str	r3, [sp, #4]
+ 741              	.L57:
+  70:Drivers/coremark_stm32_hal/core_state.c **** 		if (*p!=',')
+ 742              		.loc 1 70 8 is_stmt 1 view .LVU247
+  70:Drivers/coremark_stm32_hal/core_state.c **** 		if (*p!=',')
+ 743              		.loc 1 70 22 is_stmt 0 view .LVU248
+ 744 0066 07EB0904 		add	r4, r7, r9
+  70:Drivers/coremark_stm32_hal/core_state.c **** 		if (*p!=',')
+ 745              		.loc 1 70 11 view .LVU249
+ 746 006a 019A     		ldr	r2, [sp, #4]
+  70:Drivers/coremark_stm32_hal/core_state.c **** 		if (*p!=',')
+ 747              		.loc 1 70 8 view .LVU250
+ 748 006c 9442     		cmp	r4, r2
+ 749 006e 03D9     		bls	.L68
+  71:Drivers/coremark_stm32_hal/core_state.c **** 			*p^=(ee_u8)seed1;
+ 750              		.loc 1 71 3 is_stmt 1 view .LVU251
+  71:Drivers/coremark_stm32_hal/core_state.c **** 			*p^=(ee_u8)seed1;
+ 751              		.loc 1 71 7 is_stmt 0 view .LVU252
+ 752 0070 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+  71:Drivers/coremark_stm32_hal/core_state.c **** 			*p^=(ee_u8)seed1;
+ 753              		.loc 1 71 6 view .LVU253
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s 			page 23
+
+
+ 754 0072 2C2B     		cmp	r3, #44
+ 755 0074 F0D1     		bne	.L69
+ 756 0076 F3E7     		b	.L58
+ 757              	.L68:
+  75:Drivers/coremark_stm32_hal/core_state.c **** 	/* run the state machine over the input again */
+ 758              		.loc 1 75 2 is_stmt 1 view .LVU254
+  75:Drivers/coremark_stm32_hal/core_state.c **** 	/* run the state machine over the input again */
+ 759              		.loc 1 75 3 is_stmt 0 view .LVU255
+ 760 0078 0197     		str	r7, [sp, #4]
+  77:Drivers/coremark_stm32_hal/core_state.c **** 		enum CORE_STATE fstate=core_state_transition(&p,track_counts);
+ 761              		.loc 1 77 2 is_stmt 1 view .LVU256
+ 762              	.L60:
+  77:Drivers/coremark_stm32_hal/core_state.c **** 		enum CORE_STATE fstate=core_state_transition(&p,track_counts);
+ 763              		.loc 1 77 8 view .LVU257
+  77:Drivers/coremark_stm32_hal/core_state.c **** 		enum CORE_STATE fstate=core_state_transition(&p,track_counts);
+ 764              		.loc 1 77 9 is_stmt 0 view .LVU258
+ 765 007a 019B     		ldr	r3, [sp, #4]
+ 766 007c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  77:Drivers/coremark_stm32_hal/core_state.c **** 		enum CORE_STATE fstate=core_state_transition(&p,track_counts);
+ 767              		.loc 1 77 8 view .LVU259
+ 768 007e 63B1     		cbz	r3, .L70
+ 769              	.LBB3:
+  78:Drivers/coremark_stm32_hal/core_state.c **** 		final_counts[fstate]++;
+ 770              		.loc 1 78 3 is_stmt 1 view .LVU260
+  78:Drivers/coremark_stm32_hal/core_state.c **** 		final_counts[fstate]++;
+ 771              		.loc 1 78 26 is_stmt 0 view .LVU261
+ 772 0080 02A9     		add	r1, sp, #8
+ 773 0082 01A8     		add	r0, sp, #4
+ 774 0084 FFF7FEFF 		bl	core_state_transition
+ 775              	.LVL76:
+  79:Drivers/coremark_stm32_hal/core_state.c **** #if CORE_DEBUG
+ 776              		.loc 1 79 3 is_stmt 1 view .LVU262
+  79:Drivers/coremark_stm32_hal/core_state.c **** #if CORE_DEBUG
+ 777              		.loc 1 79 15 is_stmt 0 view .LVU263
+ 778 0088 12AB     		add	r3, sp, #72
+ 779 008a 03EB8002 		add	r2, r3, r0, lsl #2
+ 780 008e 52F8203C 		ldr	r3, [r2, #-32]
+  79:Drivers/coremark_stm32_hal/core_state.c **** #if CORE_DEBUG
+ 781              		.loc 1 79 23 view .LVU264
+ 782 0092 0133     		adds	r3, r3, #1
+ 783 0094 42F8203C 		str	r3, [r2, #-32]
+ 784 0098 EFE7     		b	.L60
+ 785              	.LVL77:
+ 786              	.L70:
+  79:Drivers/coremark_stm32_hal/core_state.c **** #if CORE_DEBUG
+ 787              		.loc 1 79 23 view .LVU265
+ 788              	.LBE3:
+  87:Drivers/coremark_stm32_hal/core_state.c **** 	while (p < (memblock+blksize)) { /* undo corruption is seed1 and seed2 are equal */
+ 789              		.loc 1 87 2 is_stmt 1 view .LVU266
+  87:Drivers/coremark_stm32_hal/core_state.c **** 	while (p < (memblock+blksize)) { /* undo corruption is seed1 and seed2 are equal */
+ 790              		.loc 1 87 3 is_stmt 0 view .LVU267
+ 791 009a 0197     		str	r7, [sp, #4]
+  88:Drivers/coremark_stm32_hal/core_state.c **** 		if (*p!=',')
+ 792              		.loc 1 88 2 is_stmt 1 view .LVU268
+  88:Drivers/coremark_stm32_hal/core_state.c **** 		if (*p!=',')
+ 793              		.loc 1 88 8 is_stmt 0 view .LVU269
+ 794 009c 06E0     		b	.L62
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s 			page 24
+
+
+ 795              	.L72:
+  90:Drivers/coremark_stm32_hal/core_state.c **** 		p+=step;
+ 796              		.loc 1 90 4 is_stmt 1 view .LVU270
+  90:Drivers/coremark_stm32_hal/core_state.c **** 		p+=step;
+ 797              		.loc 1 90 8 is_stmt 0 view .LVU271
+ 798 009e 5FFA88F1 		uxtb	r1, r8
+  90:Drivers/coremark_stm32_hal/core_state.c **** 		p+=step;
+ 799              		.loc 1 90 6 view .LVU272
+ 800 00a2 4B40     		eors	r3, r3, r1
+ 801 00a4 1370     		strb	r3, [r2]
+ 802              	.L63:
+  91:Drivers/coremark_stm32_hal/core_state.c **** 	}
+ 803              		.loc 1 91 3 is_stmt 1 view .LVU273
+  91:Drivers/coremark_stm32_hal/core_state.c **** 	}
+ 804              		.loc 1 91 4 is_stmt 0 view .LVU274
+ 805 00a6 019B     		ldr	r3, [sp, #4]
+ 806 00a8 3344     		add	r3, r3, r6
+ 807 00aa 0193     		str	r3, [sp, #4]
+ 808              	.L62:
+  88:Drivers/coremark_stm32_hal/core_state.c **** 		if (*p!=',')
+ 809              		.loc 1 88 8 is_stmt 1 view .LVU275
+  88:Drivers/coremark_stm32_hal/core_state.c **** 		if (*p!=',')
+ 810              		.loc 1 88 11 is_stmt 0 view .LVU276
+ 811 00ac 019A     		ldr	r2, [sp, #4]
+  88:Drivers/coremark_stm32_hal/core_state.c **** 		if (*p!=',')
+ 812              		.loc 1 88 8 view .LVU277
+ 813 00ae 9442     		cmp	r4, r2
+ 814 00b0 03D9     		bls	.L71
+  89:Drivers/coremark_stm32_hal/core_state.c **** 			*p^=(ee_u8)seed2;
+ 815              		.loc 1 89 3 is_stmt 1 view .LVU278
+  89:Drivers/coremark_stm32_hal/core_state.c **** 			*p^=(ee_u8)seed2;
+ 816              		.loc 1 89 7 is_stmt 0 view .LVU279
+ 817 00b2 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+  89:Drivers/coremark_stm32_hal/core_state.c **** 			*p^=(ee_u8)seed2;
+ 818              		.loc 1 89 6 view .LVU280
+ 819 00b4 2C2B     		cmp	r3, #44
+ 820 00b6 F2D1     		bne	.L72
+ 821 00b8 F5E7     		b	.L63
+ 822              	.L71:
+  94:Drivers/coremark_stm32_hal/core_state.c **** 		crc=crcu32(final_counts[i],crc);
+ 823              		.loc 1 94 8 view .LVU281
+ 824 00ba 0024     		movs	r4, #0
+ 825 00bc 0EE0     		b	.L65
+ 826              	.LVL78:
+ 827              	.L66:
+  95:Drivers/coremark_stm32_hal/core_state.c **** 		crc=crcu32(track_counts[i],crc);
+ 828              		.loc 1 95 3 is_stmt 1 discriminator 3 view .LVU282
+  95:Drivers/coremark_stm32_hal/core_state.c **** 		crc=crcu32(track_counts[i],crc);
+ 829              		.loc 1 95 7 is_stmt 0 discriminator 3 view .LVU283
+ 830 00be 12AB     		add	r3, sp, #72
+ 831 00c0 03EB8406 		add	r6, r3, r4, lsl #2
+ 832 00c4 2946     		mov	r1, r5
+ 833 00c6 56F8200C 		ldr	r0, [r6, #-32]
+ 834 00ca FFF7FEFF 		bl	crcu32
+ 835              	.LVL79:
+ 836 00ce 0146     		mov	r1, r0
+ 837              	.LVL80:
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s 			page 25
+
+
+  96:Drivers/coremark_stm32_hal/core_state.c **** 	}
+ 838              		.loc 1 96 3 is_stmt 1 discriminator 3 view .LVU284
+  96:Drivers/coremark_stm32_hal/core_state.c **** 	}
+ 839              		.loc 1 96 7 is_stmt 0 discriminator 3 view .LVU285
+ 840 00d0 56F8400C 		ldr	r0, [r6, #-64]
+ 841 00d4 FFF7FEFF 		bl	crcu32
+ 842              	.LVL81:
+  96:Drivers/coremark_stm32_hal/core_state.c **** 	}
+ 843              		.loc 1 96 7 discriminator 3 view .LVU286
+ 844 00d8 0546     		mov	r5, r0
+ 845              	.LVL82:
+  94:Drivers/coremark_stm32_hal/core_state.c **** 		crc=crcu32(final_counts[i],crc);
+ 846              		.loc 1 94 31 is_stmt 1 discriminator 3 view .LVU287
+  94:Drivers/coremark_stm32_hal/core_state.c **** 		crc=crcu32(final_counts[i],crc);
+ 847              		.loc 1 94 32 is_stmt 0 discriminator 3 view .LVU288
+ 848 00da 0134     		adds	r4, r4, #1
+ 849              	.LVL83:
+ 850              	.L65:
+  94:Drivers/coremark_stm32_hal/core_state.c **** 		crc=crcu32(final_counts[i],crc);
+ 851              		.loc 1 94 12 is_stmt 1 discriminator 1 view .LVU289
+  94:Drivers/coremark_stm32_hal/core_state.c **** 		crc=crcu32(final_counts[i],crc);
+ 852              		.loc 1 94 2 is_stmt 0 discriminator 1 view .LVU290
+ 853 00dc 072C     		cmp	r4, #7
+ 854 00de EED9     		bls	.L66
+  98:Drivers/coremark_stm32_hal/core_state.c **** }
+ 855              		.loc 1 98 2 is_stmt 1 view .LVU291
+  99:Drivers/coremark_stm32_hal/core_state.c **** 
+ 856              		.loc 1 99 1 is_stmt 0 view .LVU292
+ 857 00e0 2846     		mov	r0, r5
+ 858 00e2 12B0     		add	sp, sp, #72
+ 859              	.LCFI4:
+ 860              		.cfi_def_cfa_offset 32
+ 861              		@ sp needed
+ 862 00e4 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+  99:Drivers/coremark_stm32_hal/core_state.c **** 
+ 863              		.loc 1 99 1 view .LVU293
+ 864              		.cfi_endproc
+ 865              	.LFE3:
+ 867              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 868              		.align	2
+ 869              	.LC0:
+ 870 0000 54302E33 		.ascii	"T0.3e-1F\000"
+ 870      652D3146 
+ 870      00
+ 871 0009 000000   		.align	2
+ 872              	.LC1:
+ 873 000c 2D542E54 		.ascii	"-T.T++Tq\000"
+ 873      2B2B5471 
+ 873      00
+ 874 0015 000000   		.align	2
+ 875              	.LC2:
+ 876 0018 3154332E 		.ascii	"1T3.4e4z\000"
+ 876      3465347A 
+ 876      00
+ 877 0021 000000   		.align	2
+ 878              	.LC3:
+ 879 0024 33342E30 		.ascii	"34.0e-T^\000"
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s 			page 26
+
+
+ 879      652D545E 
+ 879      00
+ 880 002d 000000   		.align	2
+ 881              	.LC4:
+ 882 0030 352E3530 		.ascii	"5.500e+3\000"
+ 882      30652B33 
+ 882      00
+ 883 0039 000000   		.align	2
+ 884              	.LC5:
+ 885 003c 2D2E3132 		.ascii	"-.123e-2\000"
+ 885      33652D32 
+ 885      00
+ 886 0045 000000   		.align	2
+ 887              	.LC6:
+ 888 0048 2D383765 		.ascii	"-87e+832\000"
+ 888      2B383332 
+ 888      00
+ 889 0051 000000   		.align	2
+ 890              	.LC7:
+ 891 0054 2B302E36 		.ascii	"+0.6e-12\000"
+ 891      652D3132 
+ 891      00
+ 892 005d 000000   		.align	2
+ 893              	.LC8:
+ 894 0060 33352E35 		.ascii	"35.54400\000"
+ 894      34343030 
+ 894      00
+ 895 0069 000000   		.align	2
+ 896              	.LC9:
+ 897 006c 2E313233 		.ascii	".1234500\000"
+ 897      34353030 
+ 897      00
+ 898 0075 000000   		.align	2
+ 899              	.LC10:
+ 900 0078 2D313130 		.ascii	"-110.700\000"
+ 900      2E373030 
+ 900      00
+ 901 0081 000000   		.align	2
+ 902              	.LC11:
+ 903 0084 2B302E36 		.ascii	"+0.64400\000"
+ 903      34343030 
+ 903      00
+ 904 008d 000000   		.align	2
+ 905              	.LC12:
+ 906 0090 35303132 		.ascii	"5012\000"
+ 906      00
+ 907 0095 000000   		.align	2
+ 908              	.LC13:
+ 909 0098 31323334 		.ascii	"1234\000"
+ 909      00
+ 910 009d 000000   		.align	2
+ 911              	.LC14:
+ 912 00a0 2D383734 		.ascii	"-874\000"
+ 912      00
+ 913 00a5 000000   		.align	2
+ 914              	.LC15:
+ 915 00a8 2B313232 		.ascii	"+122\000"
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s 			page 27
+
+
+ 915      00
+ 916              		.section	.rodata.errpat,"a"
+ 917              		.align	2
+ 918              		.set	.LANCHOR3,. + 0
+ 921              	errpat:
+ 922 0000 00000000 		.word	.LC0
+ 923 0004 0C000000 		.word	.LC1
+ 924 0008 18000000 		.word	.LC2
+ 925 000c 24000000 		.word	.LC3
+ 926              		.section	.rodata.floatpat,"a"
+ 927              		.align	2
+ 928              		.set	.LANCHOR1,. + 0
+ 931              	floatpat:
+ 932 0000 60000000 		.word	.LC8
+ 933 0004 6C000000 		.word	.LC9
+ 934 0008 78000000 		.word	.LC10
+ 935 000c 84000000 		.word	.LC11
+ 936              		.section	.rodata.intpat,"a"
+ 937              		.align	2
+ 938              		.set	.LANCHOR0,. + 0
+ 941              	intpat:
+ 942 0000 90000000 		.word	.LC12
+ 943 0004 98000000 		.word	.LC13
+ 944 0008 A0000000 		.word	.LC14
+ 945 000c A8000000 		.word	.LC15
+ 946              		.section	.rodata.scipat,"a"
+ 947              		.align	2
+ 948              		.set	.LANCHOR2,. + 0
+ 951              	scipat:
+ 952 0000 30000000 		.word	.LC4
+ 953 0004 3C000000 		.word	.LC5
+ 954 0008 48000000 		.word	.LC6
+ 955 000c 54000000 		.word	.LC7
+ 956              		.text
+ 957              	.Letext0:
+ 958              		.file 2 "Drivers/coremark_stm32_hal/core_portme.h"
+ 959              		.file 3 "Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT.h"
+ 960              		.file 4 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\lib\\gcc\\arm-none
+ 961              		.file 5 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\arm-none-eabi\\inc
+ 962              		.file 6 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\arm-none-eabi\\inc
+ 963              		.file 7 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\arm-none-eabi\\inc
+ 964              		.file 8 "Drivers/coremark_stm32_hal/coremark.h"
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s 			page 28
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 core_state.c
+C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s:17     .text.ee_isdigit:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s:24     .text.ee_isdigit:00000000 ee_isdigit
+C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s:55     .text.core_init_state:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s:62     .text.core_init_state:00000000 core_init_state
+C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s:177    .text.core_init_state:00000060 $d
+C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s:185    .text.core_init_state:00000080 $t
+C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s:259    .text.core_init_state:000000bc $d
+C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s:267    .text.core_state_transition:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s:274    .text.core_state_transition:00000000 core_state_transition
+C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s:390    .text.core_state_transition:0000005c $d
+C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s:398    .text.core_state_transition:0000007c $t
+C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s:626    .text.core_bench_state:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s:633    .text.core_bench_state:00000000 core_bench_state
+C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s:868    .rodata.str1.4:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s:917    .rodata.errpat:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s:921    .rodata.errpat:00000000 errpat
+C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s:927    .rodata.floatpat:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s:931    .rodata.floatpat:00000000 floatpat
+C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s:937    .rodata.intpat:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s:941    .rodata.intpat:00000000 intpat
+C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s:947    .rodata.scipat:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\ccyEFz5D.s:951    .rodata.scipat:00000000 scipat
+
+UNDEFINED SYMBOLS
+crcu32

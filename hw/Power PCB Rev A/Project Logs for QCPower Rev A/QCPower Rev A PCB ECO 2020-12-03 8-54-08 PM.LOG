@@ -1,0 +1,448 @@
+Change Physical Footprint: Designator=C100 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C101 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C102 Old Footprint=SMD CAP TANT 2917 New Footprint=SMD CAP TANT 2917
+Change Physical Footprint: Designator=C103 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C200_1 Old Footprint=CAP POL UCD1J221MNQ1MS New Footprint=CAP POL UCD1J221MNQ1MS
+Change Physical Footprint: Designator=C200_2 Old Footprint=CAP POL UCD1J221MNQ1MS New Footprint=CAP POL UCD1J221MNQ1MS
+Change Physical Footprint: Designator=C200_3 Old Footprint=CAP POL UCD1J221MNQ1MS New Footprint=CAP POL UCD1J221MNQ1MS
+Change Physical Footprint: Designator=C200_4 Old Footprint=CAP POL UCD1J221MNQ1MS New Footprint=CAP POL UCD1J221MNQ1MS
+Change Physical Footprint: Designator=C201_1 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C201_2 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C201_3 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C201_4 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C202_1 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C202_2 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C202_3 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C202_4 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C203_1 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C203_2 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C203_3 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C203_4 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C204_1 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C204_2 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C204_3 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C204_4 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C205_1 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C205_2 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C205_3 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C205_4 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C206_1 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C206_2 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C206_3 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C206_4 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C207_1 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C207_2 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C207_3 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C207_4 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C208_1 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C208_2 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C208_3 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C208_4 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C209_1 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C209_2 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C209_3 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C209_4 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C210_1 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C210_2 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C210_3 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C210_4 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C211_1 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C211_2 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C211_3 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C211_4 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C212_1 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C212_2 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C212_3 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C212_4 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C213_1 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C213_2 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C213_3 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C213_4 Old Footprint=SMD CAP 0805 New Footprint=SMD CAP 0805
+Change Physical Footprint: Designator=C214_1 Old Footprint=SMD CAP 0603 New Footprint=SMD CAP 0603
+Change Physical Footprint: Designator=C214_2 Old Footprint=SMD CAP 0603 New Footprint=SMD CAP 0603
+Change Physical Footprint: Designator=C214_3 Old Footprint=SMD CAP 0603 New Footprint=SMD CAP 0603
+Change Physical Footprint: Designator=C214_4 Old Footprint=SMD CAP 0603 New Footprint=SMD CAP 0603
+Change Physical Footprint: Designator=C215_1 Old Footprint=SMD CAP 0603 New Footprint=SMD CAP 0603
+Change Physical Footprint: Designator=C215_2 Old Footprint=SMD CAP 0603 New Footprint=SMD CAP 0603
+Change Physical Footprint: Designator=C215_3 Old Footprint=SMD CAP 0603 New Footprint=SMD CAP 0603
+Change Physical Footprint: Designator=C215_4 Old Footprint=SMD CAP 0603 New Footprint=SMD CAP 0603
+Change Physical Footprint: Designator=C216_1 Old Footprint=SMD CAP 0603 New Footprint=SMD CAP 0603
+Change Physical Footprint: Designator=C216_2 Old Footprint=SMD CAP 0603 New Footprint=SMD CAP 0603
+Change Physical Footprint: Designator=C216_3 Old Footprint=SMD CAP 0603 New Footprint=SMD CAP 0603
+Change Physical Footprint: Designator=C216_4 Old Footprint=SMD CAP 0603 New Footprint=SMD CAP 0603
+Change Physical Footprint: Designator=C217_1 Old Footprint=SMD CAP 1206 New Footprint=SMD CAP 1206
+Change Physical Footprint: Designator=C217_2 Old Footprint=SMD CAP 1206 New Footprint=SMD CAP 1206
+Change Physical Footprint: Designator=C217_3 Old Footprint=SMD CAP 1206 New Footprint=SMD CAP 1206
+Change Physical Footprint: Designator=C217_4 Old Footprint=SMD CAP 1206 New Footprint=SMD CAP 1206
+Change Physical Footprint: Designator=C218_1 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C218_2 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C218_3 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C218_4 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C219_1 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C219_2 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C219_3 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C219_4 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C220_1 Old Footprint=SMD CAP 0603 New Footprint=SMD CAP 0603
+Change Physical Footprint: Designator=C220_2 Old Footprint=SMD CAP 0603 New Footprint=SMD CAP 0603
+Change Physical Footprint: Designator=C220_3 Old Footprint=SMD CAP 0603 New Footprint=SMD CAP 0603
+Change Physical Footprint: Designator=C220_4 Old Footprint=SMD CAP 0603 New Footprint=SMD CAP 0603
+Change Physical Footprint: Designator=C221_1 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C221_2 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C221_3 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C221_4 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C222_1 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C222_2 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C222_3 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C222_4 Old Footprint=SMD CAP 0402 New Footprint=SMD CAP 0402
+Change Physical Footprint: Designator=C223_1 Old Footprint=CAP POL UCD1J221MNQ1MS New Footprint=CAP POL UCD1J221MNQ1MS
+Change Physical Footprint: Designator=C223_2 Old Footprint=CAP POL UCD1J221MNQ1MS New Footprint=CAP POL UCD1J221MNQ1MS
+Change Physical Footprint: Designator=C223_3 Old Footprint=CAP POL UCD1J221MNQ1MS New Footprint=CAP POL UCD1J221MNQ1MS
+Change Physical Footprint: Designator=C223_4 Old Footprint=CAP POL UCD1J221MNQ1MS New Footprint=CAP POL UCD1J221MNQ1MS
+Change Physical Footprint: Designator=D200_1 Old Footprint=DIODE SOD-523 New Footprint=DIODE SOD-523
+Change Physical Footprint: Designator=D200_2 Old Footprint=DIODE SOD-523 New Footprint=DIODE SOD-523
+Change Physical Footprint: Designator=D200_3 Old Footprint=DIODE SOD-523 New Footprint=DIODE SOD-523
+Change Physical Footprint: Designator=D200_4 Old Footprint=DIODE SOD-523 New Footprint=DIODE SOD-523
+Change Physical Footprint: Designator=D201_1 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523F
+Change Physical Footprint: Designator=D201_2 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523F
+Change Physical Footprint: Designator=D201_3 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523F
+Change Physical Footprint: Designator=D201_4 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523F
+Change Physical Footprint: Designator=D202_1 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523F
+Change Physical Footprint: Designator=D202_2 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523F
+Change Physical Footprint: Designator=D202_3 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523F
+Change Physical Footprint: Designator=D202_4 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523F
+Change Physical Footprint: Designator=D203_1 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523F
+Change Physical Footprint: Designator=D203_2 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523F
+Change Physical Footprint: Designator=D203_3 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523F
+Change Physical Footprint: Designator=D203_4 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523F
+Change Physical Footprint: Designator=D204_1 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523F
+Change Physical Footprint: Designator=D204_2 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523F
+Change Physical Footprint: Designator=D204_3 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523F
+Change Physical Footprint: Designator=D204_4 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523F
+Change Physical Footprint: Designator=D205_1 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523F
+Change Physical Footprint: Designator=D205_2 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523F
+Change Physical Footprint: Designator=D205_3 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523F
+Change Physical Footprint: Designator=D205_4 Old Footprint=DIODE SOD-523F New Footprint=DIODE SOD-523F
+Change Physical Footprint: Designator=D206_1 Old Footprint=DIODE SOD123 New Footprint=DIODE SOD123
+Change Physical Footprint: Designator=D206_2 Old Footprint=DIODE SOD123 New Footprint=DIODE SOD123
+Change Physical Footprint: Designator=D206_3 Old Footprint=DIODE SOD123 New Footprint=DIODE SOD123
+Change Physical Footprint: Designator=D206_4 Old Footprint=DIODE SOD123 New Footprint=DIODE SOD123
+Change Physical Footprint: Designator=D207_1 Old Footprint=PLCC-4 LED ASMB-MTB0-0A3A2 New Footprint=PLCC-4 LED ASMB-MTB0-0A3A2
+Change Physical Footprint: Designator=D207_2 Old Footprint=PLCC-4 LED ASMB-MTB0-0A3A2 New Footprint=PLCC-4 LED ASMB-MTB0-0A3A2
+Change Physical Footprint: Designator=D207_3 Old Footprint=PLCC-4 LED ASMB-MTB0-0A3A2 New Footprint=PLCC-4 LED ASMB-MTB0-0A3A2
+Change Physical Footprint: Designator=D207_4 Old Footprint=PLCC-4 LED ASMB-MTB0-0A3A2 New Footprint=PLCC-4 LED ASMB-MTB0-0A3A2
+Change Physical Footprint: Designator=J100 Old Footprint=CONN QCOPTER LOGIC Rev A New Footprint=CONN QCOPTER LOGIC Rev A
+Change Physical Footprint: Designator=J101 Old Footprint=CONN SOLDER MOTOR New Footprint=CONN SOLDER MOTOR
+Change Physical Footprint: Designator=J102 Old Footprint=CONN SOLDER MOTOR New Footprint=CONN SOLDER MOTOR
+Change Physical Footprint: Designator=J200_1 Old Footprint=CONN SOLDER MOTOR New Footprint=CONN SOLDER MOTOR
+Change Physical Footprint: Designator=J200_2 Old Footprint=CONN SOLDER MOTOR New Footprint=CONN SOLDER MOTOR
+Change Physical Footprint: Designator=J200_3 Old Footprint=CONN SOLDER MOTOR New Footprint=CONN SOLDER MOTOR
+Change Physical Footprint: Designator=J200_4 Old Footprint=CONN SOLDER MOTOR New Footprint=CONN SOLDER MOTOR
+Change Physical Footprint: Designator=J201_1 Old Footprint=CONN SOLDER MOTOR New Footprint=CONN SOLDER MOTOR
+Change Physical Footprint: Designator=J201_2 Old Footprint=CONN SOLDER MOTOR New Footprint=CONN SOLDER MOTOR
+Change Physical Footprint: Designator=J201_3 Old Footprint=CONN SOLDER MOTOR New Footprint=CONN SOLDER MOTOR
+Change Physical Footprint: Designator=J201_4 Old Footprint=CONN SOLDER MOTOR New Footprint=CONN SOLDER MOTOR
+Change Physical Footprint: Designator=J202_1 Old Footprint=CONN SOLDER MOTOR New Footprint=CONN SOLDER MOTOR
+Change Physical Footprint: Designator=J202_2 Old Footprint=CONN SOLDER MOTOR New Footprint=CONN SOLDER MOTOR
+Change Physical Footprint: Designator=J202_3 Old Footprint=CONN SOLDER MOTOR New Footprint=CONN SOLDER MOTOR
+Change Physical Footprint: Designator=J202_4 Old Footprint=CONN SOLDER MOTOR New Footprint=CONN SOLDER MOTOR
+Change Physical Footprint: Designator=L100 Old Footprint=IND SMD 0806 New Footprint=IND SMD 0806
+Change Physical Footprint: Designator=L200_1 Old Footprint=INDUCTOR SRN3015-220M New Footprint=INDUCTOR SRN3015-220M
+Change Physical Footprint: Designator=L200_2 Old Footprint=INDUCTOR SRN3015-220M New Footprint=INDUCTOR SRN3015-220M
+Change Physical Footprint: Designator=L200_3 Old Footprint=INDUCTOR SRN3015-220M New Footprint=INDUCTOR SRN3015-220M
+Change Physical Footprint: Designator=L200_4 Old Footprint=INDUCTOR SRN3015-220M New Footprint=INDUCTOR SRN3015-220M
+Change Physical Footprint: Designator=Q200_1 Old Footprint=SOT-23-3 New Footprint=SOT-23-3
+Change Physical Footprint: Designator=Q200_2 Old Footprint=SOT-23-3 New Footprint=SOT-23-3
+Change Physical Footprint: Designator=Q200_3 Old Footprint=SOT-23-3 New Footprint=SOT-23-3
+Change Physical Footprint: Designator=Q200_4 Old Footprint=SOT-23-3 New Footprint=SOT-23-3
+Change Physical Footprint: Designator=Q201_1 Old Footprint=PowerFLAT 5x6 New Footprint=PowerFLAT 5x6
+Change Physical Footprint: Designator=Q201_2 Old Footprint=PowerFLAT 5x6 New Footprint=PowerFLAT 5x6
+Change Physical Footprint: Designator=Q201_3 Old Footprint=PowerFLAT 5x6 New Footprint=PowerFLAT 5x6
+Change Physical Footprint: Designator=Q201_4 Old Footprint=PowerFLAT 5x6 New Footprint=PowerFLAT 5x6
+Change Physical Footprint: Designator=Q202_1 Old Footprint=PowerFLAT 5x6 New Footprint=PowerFLAT 5x6
+Change Physical Footprint: Designator=Q202_2 Old Footprint=PowerFLAT 5x6 New Footprint=PowerFLAT 5x6
+Change Physical Footprint: Designator=Q202_3 Old Footprint=PowerFLAT 5x6 New Footprint=PowerFLAT 5x6
+Change Physical Footprint: Designator=Q202_4 Old Footprint=PowerFLAT 5x6 New Footprint=PowerFLAT 5x6
+Change Physical Footprint: Designator=Q203_1 Old Footprint=PowerFLAT 5x6 New Footprint=PowerFLAT 5x6
+Change Physical Footprint: Designator=Q203_2 Old Footprint=PowerFLAT 5x6 New Footprint=PowerFLAT 5x6
+Change Physical Footprint: Designator=Q203_3 Old Footprint=PowerFLAT 5x6 New Footprint=PowerFLAT 5x6
+Change Physical Footprint: Designator=Q203_4 Old Footprint=PowerFLAT 5x6 New Footprint=PowerFLAT 5x6
+Change Physical Footprint: Designator=Q204_1 Old Footprint=SOT-23-3 New Footprint=SOT-23-3
+Change Physical Footprint: Designator=Q204_2 Old Footprint=SOT-23-3 New Footprint=SOT-23-3
+Change Physical Footprint: Designator=Q204_3 Old Footprint=SOT-23-3 New Footprint=SOT-23-3
+Change Physical Footprint: Designator=Q204_4 Old Footprint=SOT-23-3 New Footprint=SOT-23-3
+Change Physical Footprint: Designator=Q205_1 Old Footprint=PowerFLAT 5x6 New Footprint=PowerFLAT 5x6
+Change Physical Footprint: Designator=Q205_2 Old Footprint=PowerFLAT 5x6 New Footprint=PowerFLAT 5x6
+Change Physical Footprint: Designator=Q205_3 Old Footprint=PowerFLAT 5x6 New Footprint=PowerFLAT 5x6
+Change Physical Footprint: Designator=Q205_4 Old Footprint=PowerFLAT 5x6 New Footprint=PowerFLAT 5x6
+Change Physical Footprint: Designator=Q206_1 Old Footprint=PowerFLAT 5x6 New Footprint=PowerFLAT 5x6
+Change Physical Footprint: Designator=Q206_2 Old Footprint=PowerFLAT 5x6 New Footprint=PowerFLAT 5x6
+Change Physical Footprint: Designator=Q206_3 Old Footprint=PowerFLAT 5x6 New Footprint=PowerFLAT 5x6
+Change Physical Footprint: Designator=Q206_4 Old Footprint=PowerFLAT 5x6 New Footprint=PowerFLAT 5x6
+Change Physical Footprint: Designator=Q207_1 Old Footprint=PowerFLAT 5x6 New Footprint=PowerFLAT 5x6
+Change Physical Footprint: Designator=Q207_2 Old Footprint=PowerFLAT 5x6 New Footprint=PowerFLAT 5x6
+Change Physical Footprint: Designator=Q207_3 Old Footprint=PowerFLAT 5x6 New Footprint=PowerFLAT 5x6
+Change Physical Footprint: Designator=Q207_4 Old Footprint=PowerFLAT 5x6 New Footprint=PowerFLAT 5x6
+Change Physical Footprint: Designator=R100 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R101 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R200_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R200_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R200_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R200_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R201_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R201_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R201_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R201_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R202_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R202_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R202_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R202_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R203_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R203_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R203_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R203_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R204_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R204_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R204_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R204_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R205_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R205_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R205_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R205_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R206_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R206_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R206_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R206_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R207_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R207_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R207_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R207_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R208_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R208_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R208_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R208_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R209_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R209_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R209_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R209_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R210_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R210_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R210_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R210_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R211_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R211_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R211_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R211_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R212_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R212_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R212_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R212_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R213_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R213_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R213_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R213_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R214_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R214_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R214_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R214_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R215_1 Old Footprint=SMD RES 2010 New Footprint=SMD RES 2010
+Change Physical Footprint: Designator=R215_2 Old Footprint=SMD RES 2010 New Footprint=SMD RES 2010
+Change Physical Footprint: Designator=R215_3 Old Footprint=SMD RES 2010 New Footprint=SMD RES 2010
+Change Physical Footprint: Designator=R215_4 Old Footprint=SMD RES 2010 New Footprint=SMD RES 2010
+Change Physical Footprint: Designator=R216_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R216_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R216_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R216_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R217_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R217_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R217_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R217_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R218_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R218_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R218_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R218_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R219_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R219_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R219_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R219_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R220_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R220_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R220_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R220_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R221_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R221_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R221_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R221_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R222_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R222_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R222_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R222_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R223_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R223_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R223_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R223_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R224_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R224_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R224_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R224_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R225_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R225_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R225_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R225_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R226_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R226_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R226_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R226_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R227_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R227_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R227_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R227_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R228_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R228_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R228_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R228_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R229_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R229_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R229_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R229_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R230_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R230_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R230_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R230_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R231_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R231_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R231_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R231_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R232_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R232_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R232_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R232_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R233_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R233_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R233_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R233_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R234_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R234_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R234_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R234_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R235_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R235_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R235_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R235_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R236_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R236_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R236_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R236_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R237_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R237_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R237_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R237_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R238_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R238_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R238_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R238_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R239_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R239_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R239_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R239_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R240_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R240_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R240_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R240_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R241_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R241_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R241_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R241_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R242_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R242_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R242_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R242_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R243_1 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R243_2 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R243_3 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=R243_4 Old Footprint=SMD RES 0402 New Footprint=SMD RES 0402
+Change Physical Footprint: Designator=TP100 Old Footprint=TESTPOINT 1mm DIA New Footprint=TESTPOINT 1mm DIA
+Change Physical Footprint: Designator=TP101 Old Footprint=TESTPOINT 1mm DIA New Footprint=TESTPOINT 1mm DIA
+Change Physical Footprint: Designator=TP102 Old Footprint=TESTPOINT 1mm DIA New Footprint=TESTPOINT 1mm DIA
+Change Physical Footprint: Designator=TP103 Old Footprint=TESTPOINT 1mm DIA New Footprint=TESTPOINT 1mm DIA
+Change Physical Footprint: Designator=TP104 Old Footprint=TESTPOINT 1mm DIA New Footprint=TESTPOINT 1mm DIA
+Change Physical Footprint: Designator=TP200_1 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP200_2 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP200_3 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP200_4 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP201_1 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP201_2 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP201_3 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP201_4 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP202_1 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP202_2 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP202_3 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP202_4 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP203_1 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP203_2 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP203_3 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP203_4 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP204_1 Old Footprint=TESTPOINT TH New Footprint=TESTPOINT TH
+Change Physical Footprint: Designator=TP204_2 Old Footprint=TESTPOINT TH New Footprint=TESTPOINT TH
+Change Physical Footprint: Designator=TP204_3 Old Footprint=TESTPOINT TH New Footprint=TESTPOINT TH
+Change Physical Footprint: Designator=TP204_4 Old Footprint=TESTPOINT TH New Footprint=TESTPOINT TH
+Change Physical Footprint: Designator=TP205_1 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP205_2 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP205_3 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP205_4 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP206_1 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP206_2 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP206_3 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP206_4 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP207_1 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP207_2 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP207_3 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP207_4 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP208_1 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP208_2 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP208_3 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP208_4 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP209_1 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP209_2 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP209_3 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP209_4 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP210_1 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP210_2 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP210_3 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP210_4 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP214_1 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP214_2 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP214_3 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP214_4 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP219_1 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP219_2 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP219_3 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP219_4 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP220_1 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP220_2 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP220_3 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP220_4 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP222_1 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP222_2 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP222_3 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP222_4 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP224_1 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP224_2 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP224_3 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP224_4 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP225_1 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP225_2 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP225_3 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=TP225_4 Old Footprint=TESTPOINT 0.5mm DIA New Footprint=TESTPOINT 0.5mm DIA
+Change Physical Footprint: Designator=U100 Old Footprint=SOT-23-6 New Footprint=SOT-23-6
+Change Physical Footprint: Designator=U200_1 Old Footprint=SOT-23-5 New Footprint=SOT-23-5
+Change Physical Footprint: Designator=U200_2 Old Footprint=SOT-23-5 New Footprint=SOT-23-5
+Change Physical Footprint: Designator=U200_3 Old Footprint=SOT-23-5 New Footprint=SOT-23-5
+Change Physical Footprint: Designator=U200_4 Old Footprint=SOT-23-5 New Footprint=SOT-23-5
+Change Physical Footprint: Designator=U201_1 Old Footprint=VQFN-48 7x7 New Footprint=VQFN-48 7x7
+Change Physical Footprint: Designator=U201_2 Old Footprint=VQFN-48 7x7 New Footprint=VQFN-48 7x7
+Change Physical Footprint: Designator=U201_3 Old Footprint=VQFN-48 7x7 New Footprint=VQFN-48 7x7
+Change Physical Footprint: Designator=U201_4 Old Footprint=VQFN-48 7x7 New Footprint=VQFN-48 7x7
+Change Physical Footprint: Designator=U202_1 Old Footprint=SC70-5 New Footprint=SC70-5
+Change Physical Footprint: Designator=U202_2 Old Footprint=SC70-5 New Footprint=SC70-5
+Change Physical Footprint: Designator=U202_3 Old Footprint=SC70-5 New Footprint=SC70-5
+Change Physical Footprint: Designator=U202_4 Old Footprint=SC70-5 New Footprint=SC70-5

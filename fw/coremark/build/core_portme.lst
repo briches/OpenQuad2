@@ -1,0 +1,485 @@
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"core_portme.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.barebones_clock,"ax",%progbits
+  17              		.align	1
+  18              		.global	barebones_clock
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	barebones_clock:
+  26              	.LFB144:
+  27              		.file 1 "Drivers/coremark_stm32_hal/core_portme.c"
+   1:Drivers/coremark_stm32_hal/core_portme.c **** /* 
+   2:Drivers/coremark_stm32_hal/core_portme.c **** 	File : core_portme.c
+   3:Drivers/coremark_stm32_hal/core_portme.c **** */
+   4:Drivers/coremark_stm32_hal/core_portme.c **** /*
+   5:Drivers/coremark_stm32_hal/core_portme.c **** 	Author : Shay Gal-On, EEMBC
+   6:Drivers/coremark_stm32_hal/core_portme.c **** 	Legal : TODO!
+   7:Drivers/coremark_stm32_hal/core_portme.c **** */ 
+   8:Drivers/coremark_stm32_hal/core_portme.c **** #include "coremark.h"
+   9:Drivers/coremark_stm32_hal/core_portme.c **** #include "core_portme.h"
+  10:Drivers/coremark_stm32_hal/core_portme.c **** 
+  11:Drivers/coremark_stm32_hal/core_portme.c **** /* user must provides following implementations */
+  12:Drivers/coremark_stm32_hal/core_portme.c **** 
+  13:Drivers/coremark_stm32_hal/core_portme.c **** #include  "stm32h7xx_hal.h"
+  14:Drivers/coremark_stm32_hal/core_portme.c **** // #include "stm32f4xx_hal.h"
+  15:Drivers/coremark_stm32_hal/core_portme.c **** //
+  16:Drivers/coremark_stm32_hal/core_portme.c **** 
+  17:Drivers/coremark_stm32_hal/core_portme.c **** /* user defined uart */
+  18:Drivers/coremark_stm32_hal/core_portme.c **** 
+  19:Drivers/coremark_stm32_hal/core_portme.c **** // extern UART_HandleTypeDef huart6;
+  20:Drivers/coremark_stm32_hal/core_portme.c **** 
+  21:Drivers/coremark_stm32_hal/core_portme.c **** // int fputc(int ch, FILE *f) {
+  22:Drivers/coremark_stm32_hal/core_portme.c **** // redirect STDOUT
+  23:Drivers/coremark_stm32_hal/core_portme.c ****   /* Write a character to the USART */
+  24:Drivers/coremark_stm32_hal/core_portme.c **** //   extern UART_HandleTypeDef huart6;
+  25:Drivers/coremark_stm32_hal/core_portme.c **** 	
+  26:Drivers/coremark_stm32_hal/core_portme.c **** //   HAL_UART_Transmit(&huart6, (uint8_t *)&ch, 1, 10);
+  27:Drivers/coremark_stm32_hal/core_portme.c **** 
+  28:Drivers/coremark_stm32_hal/core_portme.c **** //   return (ch);
+  29:Drivers/coremark_stm32_hal/core_portme.c **** // }
+  30:Drivers/coremark_stm32_hal/core_portme.c **** 
+  31:Drivers/coremark_stm32_hal/core_portme.c **** /* user implementations ended. */
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s 			page 2
+
+
+  32:Drivers/coremark_stm32_hal/core_portme.c **** 
+  33:Drivers/coremark_stm32_hal/core_portme.c **** #if VALIDATION_RUN
+  34:Drivers/coremark_stm32_hal/core_portme.c **** 	volatile ee_s32 seed1_volatile=0x3415;
+  35:Drivers/coremark_stm32_hal/core_portme.c **** 	volatile ee_s32 seed2_volatile=0x3415;
+  36:Drivers/coremark_stm32_hal/core_portme.c **** 	volatile ee_s32 seed3_volatile=0x66;
+  37:Drivers/coremark_stm32_hal/core_portme.c **** #endif
+  38:Drivers/coremark_stm32_hal/core_portme.c **** #if PERFORMANCE_RUN
+  39:Drivers/coremark_stm32_hal/core_portme.c **** 	volatile ee_s32 seed1_volatile=0x0;
+  40:Drivers/coremark_stm32_hal/core_portme.c **** 	volatile ee_s32 seed2_volatile=0x0;
+  41:Drivers/coremark_stm32_hal/core_portme.c **** 	volatile ee_s32 seed3_volatile=0x66;
+  42:Drivers/coremark_stm32_hal/core_portme.c **** #endif
+  43:Drivers/coremark_stm32_hal/core_portme.c **** #if PROFILE_RUN
+  44:Drivers/coremark_stm32_hal/core_portme.c **** 	volatile ee_s32 seed1_volatile=0x8;
+  45:Drivers/coremark_stm32_hal/core_portme.c **** 	volatile ee_s32 seed2_volatile=0x8;
+  46:Drivers/coremark_stm32_hal/core_portme.c **** 	volatile ee_s32 seed3_volatile=0x8;
+  47:Drivers/coremark_stm32_hal/core_portme.c **** #endif
+  48:Drivers/coremark_stm32_hal/core_portme.c **** 	volatile ee_s32 seed4_volatile=ITERATIONS;
+  49:Drivers/coremark_stm32_hal/core_portme.c **** 	volatile ee_s32 seed5_volatile=0;
+  50:Drivers/coremark_stm32_hal/core_portme.c **** /* Porting : Timing functions
+  51:Drivers/coremark_stm32_hal/core_portme.c **** 	How to capture time and convert to seconds must be ported to whatever is supported by the platform
+  52:Drivers/coremark_stm32_hal/core_portme.c **** 	e.g. Read value from on board RTC, read value from cpu clock cycles performance counter etc. 
+  53:Drivers/coremark_stm32_hal/core_portme.c **** 	Sample implementation for standard time.h and windows.h definitions included.
+  54:Drivers/coremark_stm32_hal/core_portme.c **** */
+  55:Drivers/coremark_stm32_hal/core_portme.c **** CORETIMETYPE barebones_clock() {
+  28              		.loc 1 55 32 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 08B5     		push	{r3, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 3, -8
+  36              		.cfi_offset 14, -4
+  56:Drivers/coremark_stm32_hal/core_portme.c **** 	//#error "You must implement a method to measure time in barebones_clock()! This function should r
+  57:Drivers/coremark_stm32_hal/core_portme.c ****   return HAL_GetTick();
+  37              		.loc 1 57 3 view .LVU1
+  38              		.loc 1 57 10 is_stmt 0 view .LVU2
+  39 0002 FFF7FEFF 		bl	HAL_GetTick
+  40              	.LVL0:
+  58:Drivers/coremark_stm32_hal/core_portme.c **** }
+  41              		.loc 1 58 1 view .LVU3
+  42 0006 08BD     		pop	{r3, pc}
+  43              		.cfi_endproc
+  44              	.LFE144:
+  46              		.section	.text.start_time,"ax",%progbits
+  47              		.align	1
+  48              		.global	start_time
+  49              		.syntax unified
+  50              		.thumb
+  51              		.thumb_func
+  52              		.fpu fpv5-d16
+  54              	start_time:
+  55              	.LFB145:
+  59:Drivers/coremark_stm32_hal/core_portme.c **** /* Define : TIMER_RES_DIVIDER
+  60:Drivers/coremark_stm32_hal/core_portme.c **** 	Divider to trade off timer resolution and total time that can be measured.
+  61:Drivers/coremark_stm32_hal/core_portme.c **** 
+  62:Drivers/coremark_stm32_hal/core_portme.c **** 	Use lower values to increase resolution, but make sure that overflow does not occur.
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s 			page 3
+
+
+  63:Drivers/coremark_stm32_hal/core_portme.c **** 	If there are issues with the return value overflowing, increase this value.
+  64:Drivers/coremark_stm32_hal/core_portme.c **** 	*/
+  65:Drivers/coremark_stm32_hal/core_portme.c **** #define GETMYTIME(_t) (*_t=barebones_clock())
+  66:Drivers/coremark_stm32_hal/core_portme.c **** #define MYTIMEDIFF(fin,ini) ((fin)-(ini))
+  67:Drivers/coremark_stm32_hal/core_portme.c **** #define TIMER_RES_DIVIDER 1
+  68:Drivers/coremark_stm32_hal/core_portme.c **** #define SAMPLE_TIME_IMPLEMENTATION 1
+  69:Drivers/coremark_stm32_hal/core_portme.c **** #define EE_TICKS_PER_SEC (CLOCKS_PER_SEC / TIMER_RES_DIVIDER)
+  70:Drivers/coremark_stm32_hal/core_portme.c **** 
+  71:Drivers/coremark_stm32_hal/core_portme.c **** /** Define Host specific (POSIX), or target specific global time variables. */
+  72:Drivers/coremark_stm32_hal/core_portme.c **** static CORETIMETYPE start_time_val, stop_time_val;
+  73:Drivers/coremark_stm32_hal/core_portme.c **** 
+  74:Drivers/coremark_stm32_hal/core_portme.c **** /* Function : start_time
+  75:Drivers/coremark_stm32_hal/core_portme.c **** 	This function will be called right before starting the timed portion of the benchmark.
+  76:Drivers/coremark_stm32_hal/core_portme.c **** 
+  77:Drivers/coremark_stm32_hal/core_portme.c **** 	Implementation may be capturing a system timer (as implemented in the example code) 
+  78:Drivers/coremark_stm32_hal/core_portme.c **** 	or zeroing some system parameters - e.g. setting the cpu clocks cycles to 0.
+  79:Drivers/coremark_stm32_hal/core_portme.c **** */
+  80:Drivers/coremark_stm32_hal/core_portme.c **** void start_time(void) {
+  56              		.loc 1 80 23 is_stmt 1 view -0
+  57              		.cfi_startproc
+  58              		@ args = 0, pretend = 0, frame = 0
+  59              		@ frame_needed = 0, uses_anonymous_args = 0
+  60 0000 08B5     		push	{r3, lr}
+  61              	.LCFI1:
+  62              		.cfi_def_cfa_offset 8
+  63              		.cfi_offset 3, -8
+  64              		.cfi_offset 14, -4
+  81:Drivers/coremark_stm32_hal/core_portme.c **** 	GETMYTIME(&start_time_val );      
+  65              		.loc 1 81 2 view .LVU5
+  66 0002 FFF7FEFF 		bl	barebones_clock
+  67              	.LVL1:
+  68 0006 014B     		ldr	r3, .L5
+  69 0008 1860     		str	r0, [r3]
+  82:Drivers/coremark_stm32_hal/core_portme.c **** }
+  70              		.loc 1 82 1 is_stmt 0 view .LVU6
+  71 000a 08BD     		pop	{r3, pc}
+  72              	.L6:
+  73              		.align	2
+  74              	.L5:
+  75 000c 00000000 		.word	.LANCHOR0
+  76              		.cfi_endproc
+  77              	.LFE145:
+  79              		.section	.text.stop_time,"ax",%progbits
+  80              		.align	1
+  81              		.global	stop_time
+  82              		.syntax unified
+  83              		.thumb
+  84              		.thumb_func
+  85              		.fpu fpv5-d16
+  87              	stop_time:
+  88              	.LFB146:
+  83:Drivers/coremark_stm32_hal/core_portme.c **** /* Function : stop_time
+  84:Drivers/coremark_stm32_hal/core_portme.c **** 	This function will be called right after ending the timed portion of the benchmark.
+  85:Drivers/coremark_stm32_hal/core_portme.c **** 
+  86:Drivers/coremark_stm32_hal/core_portme.c **** 	Implementation may be capturing a system timer (as implemented in the example code) 
+  87:Drivers/coremark_stm32_hal/core_portme.c **** 	or other system parameters - e.g. reading the current value of cpu cycles counter.
+  88:Drivers/coremark_stm32_hal/core_portme.c **** */
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s 			page 4
+
+
+  89:Drivers/coremark_stm32_hal/core_portme.c **** void stop_time(void) {
+  89              		.loc 1 89 22 is_stmt 1 view -0
+  90              		.cfi_startproc
+  91              		@ args = 0, pretend = 0, frame = 0
+  92              		@ frame_needed = 0, uses_anonymous_args = 0
+  93 0000 08B5     		push	{r3, lr}
+  94              	.LCFI2:
+  95              		.cfi_def_cfa_offset 8
+  96              		.cfi_offset 3, -8
+  97              		.cfi_offset 14, -4
+  90:Drivers/coremark_stm32_hal/core_portme.c **** 	GETMYTIME(&stop_time_val );      
+  98              		.loc 1 90 2 view .LVU8
+  99 0002 FFF7FEFF 		bl	barebones_clock
+ 100              	.LVL2:
+ 101 0006 014B     		ldr	r3, .L9
+ 102 0008 1860     		str	r0, [r3]
+  91:Drivers/coremark_stm32_hal/core_portme.c **** }
+ 103              		.loc 1 91 1 is_stmt 0 view .LVU9
+ 104 000a 08BD     		pop	{r3, pc}
+ 105              	.L10:
+ 106              		.align	2
+ 107              	.L9:
+ 108 000c 00000000 		.word	.LANCHOR1
+ 109              		.cfi_endproc
+ 110              	.LFE146:
+ 112              		.section	.text.get_time,"ax",%progbits
+ 113              		.align	1
+ 114              		.global	get_time
+ 115              		.syntax unified
+ 116              		.thumb
+ 117              		.thumb_func
+ 118              		.fpu fpv5-d16
+ 120              	get_time:
+ 121              	.LFB147:
+  92:Drivers/coremark_stm32_hal/core_portme.c **** /* Function : get_time
+  93:Drivers/coremark_stm32_hal/core_portme.c **** 	Return an abstract "ticks" number that signifies time on the system.
+  94:Drivers/coremark_stm32_hal/core_portme.c **** 	
+  95:Drivers/coremark_stm32_hal/core_portme.c **** 	Actual value returned may be cpu cycles, milliseconds or any other value,
+  96:Drivers/coremark_stm32_hal/core_portme.c **** 	as long as it can be converted to seconds by <time_in_secs>.
+  97:Drivers/coremark_stm32_hal/core_portme.c **** 	This methodology is taken to accomodate any hardware or simulated platform.
+  98:Drivers/coremark_stm32_hal/core_portme.c **** 	The sample implementation returns millisecs by default, 
+  99:Drivers/coremark_stm32_hal/core_portme.c **** 	and the resolution is controlled by <TIMER_RES_DIVIDER>
+ 100:Drivers/coremark_stm32_hal/core_portme.c **** */
+ 101:Drivers/coremark_stm32_hal/core_portme.c **** CORE_TICKS get_time(void) {
+ 122              		.loc 1 101 27 is_stmt 1 view -0
+ 123              		.cfi_startproc
+ 124              		@ args = 0, pretend = 0, frame = 0
+ 125              		@ frame_needed = 0, uses_anonymous_args = 0
+ 126              		@ link register save eliminated.
+ 102:Drivers/coremark_stm32_hal/core_portme.c **** 	CORE_TICKS elapsed=(CORE_TICKS)(MYTIMEDIFF(stop_time_val, start_time_val));
+ 127              		.loc 1 102 2 view .LVU11
+ 128              		.loc 1 102 21 is_stmt 0 view .LVU12
+ 129 0000 024B     		ldr	r3, .L12
+ 130 0002 1868     		ldr	r0, [r3]
+ 131 0004 024B     		ldr	r3, .L12+4
+ 132 0006 1B68     		ldr	r3, [r3]
+ 133              	.LVL3:
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s 			page 5
+
+
+ 103:Drivers/coremark_stm32_hal/core_portme.c **** 	return elapsed;
+ 134              		.loc 1 103 2 is_stmt 1 view .LVU13
+ 104:Drivers/coremark_stm32_hal/core_portme.c **** }
+ 135              		.loc 1 104 1 is_stmt 0 view .LVU14
+ 136 0008 C01A     		subs	r0, r0, r3
+ 137              	.LVL4:
+ 138              		.loc 1 104 1 view .LVU15
+ 139 000a 7047     		bx	lr
+ 140              	.L13:
+ 141              		.align	2
+ 142              	.L12:
+ 143 000c 00000000 		.word	.LANCHOR1
+ 144 0010 00000000 		.word	.LANCHOR0
+ 145              		.cfi_endproc
+ 146              	.LFE147:
+ 148              		.section	.text.time_in_secs,"ax",%progbits
+ 149              		.align	1
+ 150              		.global	time_in_secs
+ 151              		.syntax unified
+ 152              		.thumb
+ 153              		.thumb_func
+ 154              		.fpu fpv5-d16
+ 156              	time_in_secs:
+ 157              	.LVL5:
+ 158              	.LFB148:
+ 105:Drivers/coremark_stm32_hal/core_portme.c **** /* Function : time_in_secs
+ 106:Drivers/coremark_stm32_hal/core_portme.c **** 	Convert the value returned by get_time to seconds.
+ 107:Drivers/coremark_stm32_hal/core_portme.c **** 
+ 108:Drivers/coremark_stm32_hal/core_portme.c **** 	The <secs_ret> type is used to accomodate systems with no support for floating point.
+ 109:Drivers/coremark_stm32_hal/core_portme.c **** 	Default implementation implemented by the EE_TICKS_PER_SEC macro above.
+ 110:Drivers/coremark_stm32_hal/core_portme.c **** */
+ 111:Drivers/coremark_stm32_hal/core_portme.c **** secs_ret time_in_secs(CORE_TICKS ticks) {
+ 159              		.loc 1 111 41 is_stmt 1 view -0
+ 160              		.cfi_startproc
+ 161              		@ args = 0, pretend = 0, frame = 0
+ 162              		@ frame_needed = 0, uses_anonymous_args = 0
+ 163              		@ link register save eliminated.
+ 164              		.loc 1 111 41 is_stmt 0 view .LVU17
+ 165 0000 07EE100A 		vmov	s14, r0	@ int
+ 112:Drivers/coremark_stm32_hal/core_portme.c **** 	secs_ret retval=((secs_ret)ticks) / (secs_ret)EE_TICKS_PER_SEC;
+ 166              		.loc 1 112 2 is_stmt 1 view .LVU18
+ 167              		.loc 1 112 19 is_stmt 0 view .LVU19
+ 168 0004 B8EE477B 		vcvt.f64.u32	d7, s14
+ 169              	.LVL6:
+ 113:Drivers/coremark_stm32_hal/core_portme.c **** 	return retval;
+ 170              		.loc 1 113 2 is_stmt 1 view .LVU20
+ 114:Drivers/coremark_stm32_hal/core_portme.c **** }
+ 171              		.loc 1 114 1 is_stmt 0 view .LVU21
+ 172 0008 9FED030B 		vldr.64	d0, .L15
+ 173 000c 87EE000B 		vdiv.f64	d0, d7, d0
+ 174              	.LVL7:
+ 175              		.loc 1 114 1 view .LVU22
+ 176 0010 7047     		bx	lr
+ 177              	.L16:
+ 178 0012 00BFAFF3 		.align	3
+ 178      0080
+ 179              	.L15:
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s 			page 6
+
+
+ 180 0018 00000000 		.word	0
+ 181 001c 00408F40 		.word	1083129856
+ 182              		.cfi_endproc
+ 183              	.LFE148:
+ 185              		.section	.text.portable_init,"ax",%progbits
+ 186              		.align	1
+ 187              		.global	portable_init
+ 188              		.syntax unified
+ 189              		.thumb
+ 190              		.thumb_func
+ 191              		.fpu fpv5-d16
+ 193              	portable_init:
+ 194              	.LVL8:
+ 195              	.LFB149:
+ 115:Drivers/coremark_stm32_hal/core_portme.c **** 
+ 116:Drivers/coremark_stm32_hal/core_portme.c **** ee_u32 default_num_contexts=1;
+ 117:Drivers/coremark_stm32_hal/core_portme.c **** 
+ 118:Drivers/coremark_stm32_hal/core_portme.c **** /* Function : portable_init
+ 119:Drivers/coremark_stm32_hal/core_portme.c **** 	Target specific initialization code 
+ 120:Drivers/coremark_stm32_hal/core_portme.c **** 	Test for some common mistakes.
+ 121:Drivers/coremark_stm32_hal/core_portme.c **** */
+ 122:Drivers/coremark_stm32_hal/core_portme.c **** void portable_init(core_portable *p, int *argc, char *argv[])
+ 123:Drivers/coremark_stm32_hal/core_portme.c **** {
+ 196              		.loc 1 123 1 is_stmt 1 view -0
+ 197              		.cfi_startproc
+ 198              		@ args = 0, pretend = 0, frame = 0
+ 199              		@ frame_needed = 0, uses_anonymous_args = 0
+ 200              		@ link register save eliminated.
+ 124:Drivers/coremark_stm32_hal/core_portme.c **** 	//#error "Call board initialization routines in portable init (if needed), in particular initializ
+ 125:Drivers/coremark_stm32_hal/core_portme.c **** 	if (sizeof(ee_ptr_int) != sizeof(ee_u8 *)) {
+ 201              		.loc 1 125 2 view .LVU24
+ 126:Drivers/coremark_stm32_hal/core_portme.c **** 		ee_printf("ERROR! Please define ee_ptr_int to a type that holds a pointer!\n");
+ 127:Drivers/coremark_stm32_hal/core_portme.c **** 	}
+ 128:Drivers/coremark_stm32_hal/core_portme.c **** 	if (sizeof(ee_u32) != 4) {
+ 202              		.loc 1 128 2 view .LVU25
+ 129:Drivers/coremark_stm32_hal/core_portme.c **** 		ee_printf("ERROR! Please define ee_u32 to a 32b unsigned type!\n");
+ 130:Drivers/coremark_stm32_hal/core_portme.c **** 	}
+ 131:Drivers/coremark_stm32_hal/core_portme.c **** 	p->portable_id=1;
+ 203              		.loc 1 131 2 view .LVU26
+ 204              		.loc 1 131 16 is_stmt 0 view .LVU27
+ 205 0000 0123     		movs	r3, #1
+ 206 0002 0370     		strb	r3, [r0]
+ 132:Drivers/coremark_stm32_hal/core_portme.c **** }
+ 207              		.loc 1 132 1 view .LVU28
+ 208 0004 7047     		bx	lr
+ 209              		.cfi_endproc
+ 210              	.LFE149:
+ 212              		.section	.text.portable_fini,"ax",%progbits
+ 213              		.align	1
+ 214              		.global	portable_fini
+ 215              		.syntax unified
+ 216              		.thumb
+ 217              		.thumb_func
+ 218              		.fpu fpv5-d16
+ 220              	portable_fini:
+ 221              	.LVL9:
+ 222              	.LFB150:
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s 			page 7
+
+
+ 133:Drivers/coremark_stm32_hal/core_portme.c **** /* Function : portable_fini
+ 134:Drivers/coremark_stm32_hal/core_portme.c **** 	Target specific final code 
+ 135:Drivers/coremark_stm32_hal/core_portme.c **** */
+ 136:Drivers/coremark_stm32_hal/core_portme.c **** void portable_fini(core_portable *p)
+ 137:Drivers/coremark_stm32_hal/core_portme.c **** {
+ 223              		.loc 1 137 1 is_stmt 1 view -0
+ 224              		.cfi_startproc
+ 225              		@ args = 0, pretend = 0, frame = 0
+ 226              		@ frame_needed = 0, uses_anonymous_args = 0
+ 227              		@ link register save eliminated.
+ 138:Drivers/coremark_stm32_hal/core_portme.c **** 	p->portable_id=0;
+ 228              		.loc 1 138 2 view .LVU30
+ 229              		.loc 1 138 16 is_stmt 0 view .LVU31
+ 230 0000 0023     		movs	r3, #0
+ 231 0002 0370     		strb	r3, [r0]
+ 139:Drivers/coremark_stm32_hal/core_portme.c **** }
+ 232              		.loc 1 139 1 view .LVU32
+ 233 0004 7047     		bx	lr
+ 234              		.cfi_endproc
+ 235              	.LFE150:
+ 237              		.global	default_num_contexts
+ 238              		.global	seed5_volatile
+ 239              		.global	seed4_volatile
+ 240              		.global	seed3_volatile
+ 241              		.global	seed2_volatile
+ 242              		.global	seed1_volatile
+ 243              		.section	.bss.seed1_volatile,"aw",%nobits
+ 244              		.align	2
+ 247              	seed1_volatile:
+ 248 0000 00000000 		.space	4
+ 249              		.section	.bss.seed2_volatile,"aw",%nobits
+ 250              		.align	2
+ 253              	seed2_volatile:
+ 254 0000 00000000 		.space	4
+ 255              		.section	.bss.seed5_volatile,"aw",%nobits
+ 256              		.align	2
+ 259              	seed5_volatile:
+ 260 0000 00000000 		.space	4
+ 261              		.section	.bss.start_time_val,"aw",%nobits
+ 262              		.align	2
+ 263              		.set	.LANCHOR0,. + 0
+ 266              	start_time_val:
+ 267 0000 00000000 		.space	4
+ 268              		.section	.bss.stop_time_val,"aw",%nobits
+ 269              		.align	2
+ 270              		.set	.LANCHOR1,. + 0
+ 273              	stop_time_val:
+ 274 0000 00000000 		.space	4
+ 275              		.section	.data.default_num_contexts,"aw"
+ 276              		.align	2
+ 279              	default_num_contexts:
+ 280 0000 01000000 		.word	1
+ 281              		.section	.data.seed3_volatile,"aw"
+ 282              		.align	2
+ 285              	seed3_volatile:
+ 286 0000 66000000 		.word	102
+ 287              		.section	.data.seed4_volatile,"aw"
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s 			page 8
+
+
+ 288              		.align	2
+ 291              	seed4_volatile:
+ 292 0000 10270000 		.word	10000
+ 293              		.text
+ 294              	.Letext0:
+ 295              		.file 2 "Drivers/coremark_stm32_hal/core_portme.h"
+ 296              		.file 3 "Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT.h"
+ 297              		.file 4 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\arm-none-eabi\\inc
+ 298              		.file 5 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\arm-none-eabi\\inc
+ 299              		.file 6 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\lib\\gcc\\arm-none
+ 300              		.file 7 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\arm-none-eabi\\inc
+ 301              		.file 8 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\arm-none-eabi\\inc
+ 302              		.file 9 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\arm-none-eabi\\inc
+ 303              		.file 10 "Drivers/coremark_stm32_hal/coremark.h"
+ 304              		.file 11 "Drivers/CMSIS/Include/core_cm7.h"
+ 305              		.file 12 "Drivers/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h"
+ 306              		.file 13 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\arm-none-eabi\\in
+ 307              		.file 14 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
+ 308              		.file 15 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h"
+ 309              		.file 16 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 core_portme.c
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:17     .text.barebones_clock:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:25     .text.barebones_clock:00000000 barebones_clock
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:47     .text.start_time:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:54     .text.start_time:00000000 start_time
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:75     .text.start_time:0000000c $d
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:80     .text.stop_time:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:87     .text.stop_time:00000000 stop_time
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:108    .text.stop_time:0000000c $d
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:113    .text.get_time:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:120    .text.get_time:00000000 get_time
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:143    .text.get_time:0000000c $d
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:149    .text.time_in_secs:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:156    .text.time_in_secs:00000000 time_in_secs
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:180    .text.time_in_secs:00000018 $d
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:186    .text.portable_init:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:193    .text.portable_init:00000000 portable_init
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:213    .text.portable_fini:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:220    .text.portable_fini:00000000 portable_fini
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:279    .data.default_num_contexts:00000000 default_num_contexts
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:259    .bss.seed5_volatile:00000000 seed5_volatile
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:291    .data.seed4_volatile:00000000 seed4_volatile
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:285    .data.seed3_volatile:00000000 seed3_volatile
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:253    .bss.seed2_volatile:00000000 seed2_volatile
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:247    .bss.seed1_volatile:00000000 seed1_volatile
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:244    .bss.seed1_volatile:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:250    .bss.seed2_volatile:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:256    .bss.seed5_volatile:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:262    .bss.start_time_val:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:266    .bss.start_time_val:00000000 start_time_val
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:269    .bss.stop_time_val:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:273    .bss.stop_time_val:00000000 stop_time_val
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:276    .data.default_num_contexts:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:282    .data.seed3_volatile:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\ccMjnxYm.s:288    .data.seed4_volatile:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_GetTick
