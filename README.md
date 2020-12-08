@@ -7,4 +7,4 @@ System block diagram
 
 Android app block diagram:
 
-![App](https://github.com/briches/openquad2/blob/master/appblockdiagram.PNG?raw=true)
+![App](https://github.com/briches/openquad2/blob/main/appblockdiagram.PNG?raw=true)
