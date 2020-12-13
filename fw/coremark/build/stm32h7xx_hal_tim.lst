@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccjaogap.s 			page 1
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccUwFzOy.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,27 +9,13 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccjaogap.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 30, 2
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"stm32h7xx_hal_tim.c"
   13              		.text
-  14              	.Ltext0:
-  15              		.cfi_sections	.debug_frame
-  16              	.Letext0:
-  17              		.file 1 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\arm-none-eabi\\inc
-  18              		.file 2 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\arm-none-eabi\\inc
-  19              		.file 3 "Drivers/CMSIS/Include/core_cm7.h"
-  20              		.file 4 "Drivers/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h"
-  21              		.file 5 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\lib\\gcc\\arm-none
-  22              		.file 6 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\arm-none-eabi\\inc
-  23              		.file 7 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\arm-none-eabi\\inc
-  24              		.file 8 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\arm-none-eabi\\inc
-  25              		.file 9 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\arm-none-eabi\\inc
-  26              		.file 10 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
-  27              		.file 11 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h"
-  28              		.file 12 "Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccjaogap.s 			page 2
+  14              		.ident	"GCC: (GNU Arm Embedded Toolchain 9-2020-q2-update) 9.3.1 20200408 (release)"
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccUwFzOy.s 			page 2
 
 
 DEFINED SYMBOLS

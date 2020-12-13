@@ -1,0 +1,109 @@
+{
+    "C_Cpp.default.cStandard": "c11",
+    "C_Cpp.default.intelliSenseMode": "gcc-arm",
+    "C_Cpp.default.compilerPath": "C:/Program Files (x86)/GNU Arm Embedded Toolchain/9 2020-q2-update/bin/arm-none-eabi-gcc.exe",
+    "C_Cpp.formatting": "vcFormat",
+    "C_Cpp.codeFolding": "Disabled",
+    "C_Cpp.inactiveRegionOpacity": 0.5,
+    "C_Cpp.workspaceSymbols": "All",
+    "C_Cpp.loggingLevel": "Error",
+    "C_Cpp.clang_format_sortIncludes": true,
+    "files.associations": {
+        "*.h": "c",
+        "*.c": "c"
+    },
+    "C_Cpp.default.includePath": [
+        "${workspaceFolder}",
+        "${workspaceFolder}/application",
+        "${workspaceFolder}/application/config",
+        "${workspaceFolder}/application/sensor_thread",
+        "${workspaceFolder}/application/sensor_thread/platform",
+        "${workspaceFolder}/application/sys",
+        "${workspaceFolder}/application/freertos",
+        "${workspaceFolder}/Drivers/DebugLog",
+        "${workspaceFolder}/Drivers/CMSIS/Include/**",
+        "${workspaceFolder}/Drivers/CMSIS/Device/ST/STM32H7xx",
+        "${workspaceFolder}/Drivers/CMSIS/Device/ST/STM32H7xx/**",
+        "${workspaceFolder}/Drivers/CMSIS/Device/ST/STM32H7xx/Include",
+        "${workspaceFolder}/Drivers/Mems/**",
+        "${workspaceFolder}/Drivers/STM32H7xx_HAL_Driver/Inc",
+        "${workspaceFolder}/FATFS/**",
+        "${workspaceFolder}/Middlewares/ST/STM32_USB_Device_Library/**",
+        "${workspaceFolder}/Middlewares/Third_Party/FatFs/src",
+        "${workspaceFolder}/Middlewares/Third_Party/FatFs/src/option",
+        "${workspaceFolder}/Middlewares/Third_Party/FreeRTOS/**",
+        "${workspaceFolder}/Middlewares/Third_Party/FreeRTOS-Plus-Trace",
+        "${workspaceFolder}/Middlewares/Third_Party/FreeRTOS-Plus-Trace/Include",
+        "${workspaceFolder}/Middlewares/Third_Party/FreeRTOS-Plus-Trace/Config",
+        "${workspaceFolder}/Middlewares/Third_Party/FreeRTOS-Plus-Trace/streamports/Jlink_RTT/include",
+        "${workspaceFolder}/USB_DEVICE/**"
+    ],
+    "git.openDiffOnClick": false,
+    "C_Cpp.default.browse.limitSymbolsToIncludedHeaders": false,
+    "C_Cpp.default.defines": [
+        "STM32H735xx",
+        "FREERTOS"
+    ],
+    "psi-header.license-text": [
+        "Copyright (c) 2020 OpenQuad2.",
+        "All rights reserved.",
+        "",
+        "Redistribution and use in source or binary forms, with or without modification,",
+        "are not permitted without express written approval of OpenQuad2",
+    ],
+    "psi-header.config": {
+        "forceToTop": true,
+        "blankLinesAfter": 2,
+        "license": "Custom"
+    },
+    "psi-header.changes-tracking": {
+        "enforceHeader": true,
+        "isActive": true,
+        "include": ["C", "c", "h", ".h"],
+        "excludeGlob": [
+            "**/settings.json"
+        ],
+        "exclude": ["jsonc, json"],
+        "autoHeader": "autoSave",
+    },
+    "psi-header.variables": [
+        ["company", "OpenQuad2"],
+        ["author", "Brandon Riches"],
+        ["authoremail", "richesbc@gmail.com"]
+    ],
+    "psi-header.lang-config": [
+        {
+            "language": "c",
+            "begin": "/*",
+            "prefix": " * ",
+            "suffix": "/",
+            "end": "*/",
+            "blankLinesAfter": 2,
+            "lineLength": 100,
+        },
+    ],
+    "psi-header.templates": [
+        {
+            "changeLogNaturalOrder": true,
+            "language": "*",
+            "template": [
+                "File: <<filepath>>",
+                "Project: OQ2",
+                "Created Date: <<filecreated('dddd, MMMM Do YYYY, h:mm:ss a')>>",
+                "Author: <<author>>",
+                "Email: <<authoremail>>",
+                "-----",
+                "",
+                "<<licensetext>>",
+                "-----",
+                "HISTORY:"
+            ],
+            "changeLogCaption": "HISTORY:",
+            "changeLogHeaderLineCount": 2,
+            "changeLogEntryTemplate": [
+                "<<dateformat('YYYY-MM-DD')>>\t<<initials>>\t"
+            ]
+        },
+    ],
+
+}

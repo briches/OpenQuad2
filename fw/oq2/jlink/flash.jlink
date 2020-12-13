@@ -1,0 +1,5 @@
+h
+r
+loadbin _build\_oq2.bin,0x08000000
+r
+q

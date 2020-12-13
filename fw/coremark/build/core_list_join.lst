@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 1
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,2481 +9,776 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 30, 2
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"core_list_join.c"
   13              		.text
-  14              	.Ltext0:
-  15              		.cfi_sections	.debug_frame
-  16              		.section	.text.cmp_idx,"ax",%progbits
-  17              		.align	1
-  18              		.global	cmp_idx
-  19              		.arch armv7e-m
-  20              		.syntax unified
-  21              		.thumb
-  22              		.thumb_func
-  23              		.fpu fpv5-d16
-  25              	cmp_idx:
-  26              	.LVL0:
-  27              	.LFB5:
-  28              		.file 1 "Drivers/coremark_stm32_hal/core_list_join.c"
-   1:Drivers/coremark_stm32_hal/core_list_join.c **** /*
-   2:Drivers/coremark_stm32_hal/core_list_join.c **** Author : Shay Gal-On, EEMBC
-   3:Drivers/coremark_stm32_hal/core_list_join.c **** 
-   4:Drivers/coremark_stm32_hal/core_list_join.c **** This file is part of  EEMBC(R) and CoreMark(TM), which are Copyright (C) 2009 
-   5:Drivers/coremark_stm32_hal/core_list_join.c **** All rights reserved.                            
-   6:Drivers/coremark_stm32_hal/core_list_join.c **** 
-   7:Drivers/coremark_stm32_hal/core_list_join.c **** EEMBC CoreMark Software is a product of EEMBC and is provided under the terms of the
-   8:Drivers/coremark_stm32_hal/core_list_join.c **** CoreMark License that is distributed with the official EEMBC COREMARK Software release. 
-   9:Drivers/coremark_stm32_hal/core_list_join.c **** If you received this EEMBC CoreMark Software without the accompanying CoreMark License, 
-  10:Drivers/coremark_stm32_hal/core_list_join.c **** you must discontinue use and download the official release from www.coremark.org.  
-  11:Drivers/coremark_stm32_hal/core_list_join.c **** 
-  12:Drivers/coremark_stm32_hal/core_list_join.c **** Also, if you are publicly displaying scores generated from the EEMBC CoreMark software, 
-  13:Drivers/coremark_stm32_hal/core_list_join.c **** make sure that you are in compliance with Run and Reporting rules specified in the accompanying rea
-  14:Drivers/coremark_stm32_hal/core_list_join.c **** 
-  15:Drivers/coremark_stm32_hal/core_list_join.c **** EEMBC 
-  16:Drivers/coremark_stm32_hal/core_list_join.c **** 4354 Town Center Blvd. Suite 114-200
-  17:Drivers/coremark_stm32_hal/core_list_join.c **** El Dorado Hills, CA, 95762 
-  18:Drivers/coremark_stm32_hal/core_list_join.c **** */ 
-  19:Drivers/coremark_stm32_hal/core_list_join.c **** 
-  20:Drivers/coremark_stm32_hal/core_list_join.c **** #include "coremark.h"
-  21:Drivers/coremark_stm32_hal/core_list_join.c **** /*
-  22:Drivers/coremark_stm32_hal/core_list_join.c **** Topic: Description
-  23:Drivers/coremark_stm32_hal/core_list_join.c **** 	Benchmark using a linked list.
-  24:Drivers/coremark_stm32_hal/core_list_join.c **** 
-  25:Drivers/coremark_stm32_hal/core_list_join.c **** 	Linked list is a common data structure used in many applications.
-  26:Drivers/coremark_stm32_hal/core_list_join.c **** 	
-  27:Drivers/coremark_stm32_hal/core_list_join.c **** 	For our purposes, this will excercise the memory units of the processor.
-  28:Drivers/coremark_stm32_hal/core_list_join.c **** 	In particular, usage of the list pointers to find and alter data.
-  29:Drivers/coremark_stm32_hal/core_list_join.c **** 	
-  30:Drivers/coremark_stm32_hal/core_list_join.c **** 	We are not using Malloc since some platforms do not support this library.
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 2
-
-
-  31:Drivers/coremark_stm32_hal/core_list_join.c **** 	
-  32:Drivers/coremark_stm32_hal/core_list_join.c **** 	Instead, the memory block being passed in is used to create a list,
-  33:Drivers/coremark_stm32_hal/core_list_join.c **** 	and the benchmark takes care not to add more items then can be
-  34:Drivers/coremark_stm32_hal/core_list_join.c **** 	accomodated by the memory block. The porting layer will make sure
-  35:Drivers/coremark_stm32_hal/core_list_join.c **** 	that we have a valid memory block.
-  36:Drivers/coremark_stm32_hal/core_list_join.c **** 	
-  37:Drivers/coremark_stm32_hal/core_list_join.c **** 	All operations are done in place, without using any extra memory.
-  38:Drivers/coremark_stm32_hal/core_list_join.c **** 	
-  39:Drivers/coremark_stm32_hal/core_list_join.c **** 	The list itself contains list pointers and pointers to data items.
-  40:Drivers/coremark_stm32_hal/core_list_join.c **** 	Data items contain the following:
-  41:Drivers/coremark_stm32_hal/core_list_join.c **** 	
-  42:Drivers/coremark_stm32_hal/core_list_join.c **** 	idx - An index that captures the initial order of the list.
-  43:Drivers/coremark_stm32_hal/core_list_join.c **** 	data - Variable data initialized based on the input parameters. The 16b are divided as follows:
-  44:Drivers/coremark_stm32_hal/core_list_join.c **** 	o Upper 8b are backup of original data.
-  45:Drivers/coremark_stm32_hal/core_list_join.c **** 	o Bit 7 indicates if the lower 7 bits are to be used as is or calculated.
-  46:Drivers/coremark_stm32_hal/core_list_join.c **** 	o Bits 0-2 indicate type of operation to perform to get a 7b value.
-  47:Drivers/coremark_stm32_hal/core_list_join.c **** 	o Bits 3-6 provide input for the operation.
-  48:Drivers/coremark_stm32_hal/core_list_join.c **** 	
-  49:Drivers/coremark_stm32_hal/core_list_join.c **** */
-  50:Drivers/coremark_stm32_hal/core_list_join.c **** 
-  51:Drivers/coremark_stm32_hal/core_list_join.c **** /* local functions */
-  52:Drivers/coremark_stm32_hal/core_list_join.c **** 
-  53:Drivers/coremark_stm32_hal/core_list_join.c **** list_head *core_list_find(list_head *list,list_data *info);
-  54:Drivers/coremark_stm32_hal/core_list_join.c **** list_head *core_list_reverse(list_head *list);
-  55:Drivers/coremark_stm32_hal/core_list_join.c **** list_head *core_list_remove(list_head *item);
-  56:Drivers/coremark_stm32_hal/core_list_join.c **** list_head *core_list_undo_remove(list_head *item_removed, list_head *item_modified);
-  57:Drivers/coremark_stm32_hal/core_list_join.c **** list_head *core_list_insert_new(list_head *insert_point
-  58:Drivers/coremark_stm32_hal/core_list_join.c **** 	, list_data *info, list_head **memblock, list_data **datablock
-  59:Drivers/coremark_stm32_hal/core_list_join.c **** 	, list_head *memblock_end, list_data *datablock_end);
-  60:Drivers/coremark_stm32_hal/core_list_join.c **** typedef ee_s32(*list_cmp)(list_data *a, list_data *b, core_results *res);
-  61:Drivers/coremark_stm32_hal/core_list_join.c **** list_head *core_list_mergesort(list_head *list, list_cmp cmp, core_results *res);
-  62:Drivers/coremark_stm32_hal/core_list_join.c **** 
-  63:Drivers/coremark_stm32_hal/core_list_join.c **** ee_s16 calc_func(ee_s16 *pdata, core_results *res) {
-  64:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_s16 data=*pdata;
-  65:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_s16 retval;
-  66:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_u8 optype=(data>>7) & 1; /* bit 7 indicates if the function result has been cached */
-  67:Drivers/coremark_stm32_hal/core_list_join.c **** 	if (optype) /* if cached, use cache */
-  68:Drivers/coremark_stm32_hal/core_list_join.c **** 		return (data & 0x007f);
-  69:Drivers/coremark_stm32_hal/core_list_join.c **** 	else { /* otherwise calculate and cache the result */
-  70:Drivers/coremark_stm32_hal/core_list_join.c **** 		ee_s16 flag=data & 0x7; /* bits 0-2 is type of function to perform */
-  71:Drivers/coremark_stm32_hal/core_list_join.c **** 		ee_s16 dtype=((data>>3) & 0xf); /* bits 3-6 is specific data for the operation */
-  72:Drivers/coremark_stm32_hal/core_list_join.c **** 		dtype |= dtype << 4; /* replicate the lower 4 bits to get an 8b value */
-  73:Drivers/coremark_stm32_hal/core_list_join.c **** 		switch (flag) {
-  74:Drivers/coremark_stm32_hal/core_list_join.c **** 			case 0:
-  75:Drivers/coremark_stm32_hal/core_list_join.c **** 				if (dtype<0x22) /* set min period for bit corruption */
-  76:Drivers/coremark_stm32_hal/core_list_join.c **** 					dtype=0x22;
-  77:Drivers/coremark_stm32_hal/core_list_join.c **** 				retval=core_bench_state(res->size,res->memblock[3],res->seed1,res->seed2,dtype,res->crc);
-  78:Drivers/coremark_stm32_hal/core_list_join.c **** 				if (res->crcstate==0)
-  79:Drivers/coremark_stm32_hal/core_list_join.c **** 					res->crcstate=retval;
-  80:Drivers/coremark_stm32_hal/core_list_join.c **** 				break;
-  81:Drivers/coremark_stm32_hal/core_list_join.c **** 			case 1:
-  82:Drivers/coremark_stm32_hal/core_list_join.c **** 				retval=core_bench_matrix(&(res->mat),dtype,res->crc);
-  83:Drivers/coremark_stm32_hal/core_list_join.c **** 				if (res->crcmatrix==0)
-  84:Drivers/coremark_stm32_hal/core_list_join.c **** 					res->crcmatrix=retval;
-  85:Drivers/coremark_stm32_hal/core_list_join.c **** 				break;
-  86:Drivers/coremark_stm32_hal/core_list_join.c **** 			default:
-  87:Drivers/coremark_stm32_hal/core_list_join.c **** 				retval=data;
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 3
-
-
-  88:Drivers/coremark_stm32_hal/core_list_join.c **** 				break;
-  89:Drivers/coremark_stm32_hal/core_list_join.c **** 		}
-  90:Drivers/coremark_stm32_hal/core_list_join.c **** 		res->crc=crcu16(retval,res->crc);
-  91:Drivers/coremark_stm32_hal/core_list_join.c **** 		retval &= 0x007f; 
-  92:Drivers/coremark_stm32_hal/core_list_join.c **** 		*pdata = (data & 0xff00) | 0x0080 | retval; /* cache the result */
-  93:Drivers/coremark_stm32_hal/core_list_join.c **** 		return retval;
-  94:Drivers/coremark_stm32_hal/core_list_join.c **** 	}
-  95:Drivers/coremark_stm32_hal/core_list_join.c **** }
-  96:Drivers/coremark_stm32_hal/core_list_join.c **** /* Function: cmp_complex
-  97:Drivers/coremark_stm32_hal/core_list_join.c **** 	Compare the data item in a list cell.
-  98:Drivers/coremark_stm32_hal/core_list_join.c **** 
-  99:Drivers/coremark_stm32_hal/core_list_join.c **** 	Can be used by mergesort.
- 100:Drivers/coremark_stm32_hal/core_list_join.c **** */
- 101:Drivers/coremark_stm32_hal/core_list_join.c **** ee_s32 cmp_complex(list_data *a, list_data *b, core_results *res) {
- 102:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_s16 val1=calc_func(&(a->data16),res);
- 103:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_s16 val2=calc_func(&(b->data16),res);
- 104:Drivers/coremark_stm32_hal/core_list_join.c **** 	return val1 - val2;
- 105:Drivers/coremark_stm32_hal/core_list_join.c **** }
- 106:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 107:Drivers/coremark_stm32_hal/core_list_join.c **** /* Function: cmp_idx
- 108:Drivers/coremark_stm32_hal/core_list_join.c **** 	Compare the idx item in a list cell, and regen the data.
- 109:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 110:Drivers/coremark_stm32_hal/core_list_join.c **** 	Can be used by mergesort.
- 111:Drivers/coremark_stm32_hal/core_list_join.c **** */
- 112:Drivers/coremark_stm32_hal/core_list_join.c **** ee_s32 cmp_idx(list_data *a, list_data *b, core_results *res) {
-  29              		.loc 1 112 63 view -0
-  30              		.cfi_startproc
-  31              		@ args = 0, pretend = 0, frame = 0
-  32              		@ frame_needed = 0, uses_anonymous_args = 0
-  33              		@ link register save eliminated.
- 113:Drivers/coremark_stm32_hal/core_list_join.c **** 	if (res==NULL) {
-  34              		.loc 1 113 2 view .LVU1
-  35              		.loc 1 113 5 is_stmt 0 view .LVU2
-  36 0000 2AB1     		cbz	r2, .L3
-  37              	.LVL1:
-  38              	.L2:
- 114:Drivers/coremark_stm32_hal/core_list_join.c **** 		a->data16 = (a->data16 & 0xff00) | (0x00ff & (a->data16>>8));
- 115:Drivers/coremark_stm32_hal/core_list_join.c **** 		b->data16 = (b->data16 & 0xff00) | (0x00ff & (b->data16>>8));
- 116:Drivers/coremark_stm32_hal/core_list_join.c **** 	}
- 117:Drivers/coremark_stm32_hal/core_list_join.c **** 	return a->idx - b->idx;
-  39              		.loc 1 117 2 is_stmt 1 view .LVU3
-  40              		.loc 1 117 10 is_stmt 0 view .LVU4
-  41 0002 B0F90200 		ldrsh	r0, [r0, #2]
-  42              	.LVL2:
-  43              		.loc 1 117 19 view .LVU5
-  44 0006 B1F90230 		ldrsh	r3, [r1, #2]
- 118:Drivers/coremark_stm32_hal/core_list_join.c **** }
-  45              		.loc 1 118 1 view .LVU6
-  46 000a C01A     		subs	r0, r0, r3
-  47 000c 7047     		bx	lr
-  48              	.LVL3:
-  49              	.L3:
- 114:Drivers/coremark_stm32_hal/core_list_join.c **** 		a->data16 = (a->data16 & 0xff00) | (0x00ff & (a->data16>>8));
-  50              		.loc 1 114 3 is_stmt 1 view .LVU7
- 114:Drivers/coremark_stm32_hal/core_list_join.c **** 		a->data16 = (a->data16 & 0xff00) | (0x00ff & (a->data16>>8));
-  51              		.loc 1 114 17 is_stmt 0 view .LVU8
-  52 000e B0F90030 		ldrsh	r3, [r0]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 4
-
-
- 114:Drivers/coremark_stm32_hal/core_list_join.c **** 		a->data16 = (a->data16 & 0xff00) | (0x00ff & (a->data16>>8));
-  53              		.loc 1 114 26 view .LVU9
-  54 0012 23F0FF02 		bic	r2, r3, #255
-  55              	.LVL4:
- 114:Drivers/coremark_stm32_hal/core_list_join.c **** 		a->data16 = (a->data16 & 0xff00) | (0x00ff & (a->data16>>8));
-  56              		.loc 1 114 36 view .LVU10
-  57 0016 C3F30723 		ubfx	r3, r3, #8, #8
-  58 001a 1343     		orrs	r3, r3, r2
- 114:Drivers/coremark_stm32_hal/core_list_join.c **** 		a->data16 = (a->data16 & 0xff00) | (0x00ff & (a->data16>>8));
-  59              		.loc 1 114 13 view .LVU11
-  60 001c 0380     		strh	r3, [r0]	@ movhi
- 115:Drivers/coremark_stm32_hal/core_list_join.c **** 	}
-  61              		.loc 1 115 3 is_stmt 1 view .LVU12
- 115:Drivers/coremark_stm32_hal/core_list_join.c **** 	}
-  62              		.loc 1 115 17 is_stmt 0 view .LVU13
-  63 001e B1F90030 		ldrsh	r3, [r1]
- 115:Drivers/coremark_stm32_hal/core_list_join.c **** 	}
-  64              		.loc 1 115 26 view .LVU14
-  65 0022 23F0FF02 		bic	r2, r3, #255
- 115:Drivers/coremark_stm32_hal/core_list_join.c **** 	}
-  66              		.loc 1 115 36 view .LVU15
-  67 0026 C3F30723 		ubfx	r3, r3, #8, #8
-  68 002a 1343     		orrs	r3, r3, r2
- 115:Drivers/coremark_stm32_hal/core_list_join.c **** 	}
-  69              		.loc 1 115 13 view .LVU16
-  70 002c 0B80     		strh	r3, [r1]	@ movhi
-  71 002e E8E7     		b	.L2
-  72              		.cfi_endproc
-  73              	.LFE5:
-  75              		.section	.text.calc_func,"ax",%progbits
-  76              		.align	1
-  77              		.global	calc_func
-  78              		.syntax unified
-  79              		.thumb
-  80              		.thumb_func
-  81              		.fpu fpv5-d16
-  83              	calc_func:
-  84              	.LVL5:
-  85              	.LFB3:
-  63:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_s16 data=*pdata;
-  86              		.loc 1 63 52 is_stmt 1 view -0
-  87              		.cfi_startproc
-  88              		@ args = 0, pretend = 0, frame = 0
-  89              		@ frame_needed = 0, uses_anonymous_args = 0
-  63:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_s16 data=*pdata;
-  90              		.loc 1 63 52 is_stmt 0 view .LVU18
-  91 0000 F0B5     		push	{r4, r5, r6, r7, lr}
-  92              	.LCFI0:
-  93              		.cfi_def_cfa_offset 20
-  94              		.cfi_offset 4, -20
-  95              		.cfi_offset 5, -16
-  96              		.cfi_offset 6, -12
-  97              		.cfi_offset 7, -8
-  98              		.cfi_offset 14, -4
-  99 0002 83B0     		sub	sp, sp, #12
- 100              	.LCFI1:
- 101              		.cfi_def_cfa_offset 32
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 5
-
-
-  64:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_s16 retval;
- 102              		.loc 1 64 2 is_stmt 1 view .LVU19
-  64:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_s16 retval;
- 103              		.loc 1 64 9 is_stmt 0 view .LVU20
- 104 0004 B0F90040 		ldrsh	r4, [r0]
- 105              	.LVL6:
-  65:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_u8 optype=(data>>7) & 1; /* bit 7 indicates if the function result has been cached */
- 106              		.loc 1 65 2 is_stmt 1 view .LVU21
-  66:Drivers/coremark_stm32_hal/core_list_join.c **** 	if (optype) /* if cached, use cache */
- 107              		.loc 1 66 2 view .LVU22
-  67:Drivers/coremark_stm32_hal/core_list_join.c **** 		return (data & 0x007f);
- 108              		.loc 1 67 2 view .LVU23
-  67:Drivers/coremark_stm32_hal/core_list_join.c **** 		return (data & 0x007f);
- 109              		.loc 1 67 5 is_stmt 0 view .LVU24
- 110 0008 14F0800F 		tst	r4, #128
- 111 000c 03D0     		beq	.L5
-  68:Drivers/coremark_stm32_hal/core_list_join.c **** 	else { /* otherwise calculate and cache the result */
- 112              		.loc 1 68 3 is_stmt 1 view .LVU25
-  68:Drivers/coremark_stm32_hal/core_list_join.c **** 	else { /* otherwise calculate and cache the result */
- 113              		.loc 1 68 16 is_stmt 0 view .LVU26
- 114 000e 04F07F00 		and	r0, r4, #127
- 115              	.LVL7:
- 116              	.L6:
-  95:Drivers/coremark_stm32_hal/core_list_join.c **** /* Function: cmp_complex
- 117              		.loc 1 95 1 view .LVU27
- 118 0012 03B0     		add	sp, sp, #12
- 119              	.LCFI2:
- 120              		.cfi_remember_state
- 121              		.cfi_def_cfa_offset 20
- 122              		@ sp needed
- 123 0014 F0BD     		pop	{r4, r5, r6, r7, pc}
- 124              	.LVL8:
- 125              	.L5:
- 126              	.LCFI3:
- 127              		.cfi_restore_state
-  95:Drivers/coremark_stm32_hal/core_list_join.c **** /* Function: cmp_complex
- 128              		.loc 1 95 1 view .LVU28
- 129 0016 0646     		mov	r6, r0
- 130 0018 0D46     		mov	r5, r1
- 131              	.LBB2:
-  70:Drivers/coremark_stm32_hal/core_list_join.c **** 		ee_s16 dtype=((data>>3) & 0xf); /* bits 3-6 is specific data for the operation */
- 132              		.loc 1 70 3 is_stmt 1 view .LVU29
- 133              	.LVL9:
-  71:Drivers/coremark_stm32_hal/core_list_join.c **** 		dtype |= dtype << 4; /* replicate the lower 4 bits to get an 8b value */
- 134              		.loc 1 71 3 view .LVU30
-  71:Drivers/coremark_stm32_hal/core_list_join.c **** 		dtype |= dtype << 4; /* replicate the lower 4 bits to get an 8b value */
- 135              		.loc 1 71 10 is_stmt 0 view .LVU31
- 136 001a C4F3C301 		ubfx	r1, r4, #3, #4
- 137              	.LVL10:
-  72:Drivers/coremark_stm32_hal/core_list_join.c **** 		switch (flag) {
- 138              		.loc 1 72 3 is_stmt 1 view .LVU32
-  72:Drivers/coremark_stm32_hal/core_list_join.c **** 		switch (flag) {
- 139              		.loc 1 72 9 is_stmt 0 view .LVU33
- 140 001e 41EA0111 		orr	r1, r1, r1, lsl #4
- 141              	.LVL11:
-  73:Drivers/coremark_stm32_hal/core_list_join.c **** 			case 0:
- 142              		.loc 1 73 3 is_stmt 1 view .LVU34
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 6
-
-
- 143 0022 14F00703 		ands	r3, r4, #7
- 144 0026 10D0     		beq	.L7
-  73:Drivers/coremark_stm32_hal/core_list_join.c **** 			case 0:
- 145              		.loc 1 73 3 is_stmt 0 view .LVU35
- 146 0028 012B     		cmp	r3, #1
- 147 002a 22D0     		beq	.L8
- 148 002c 2746     		mov	r7, r4
- 149              	.LVL12:
- 150              	.L9:
-  90:Drivers/coremark_stm32_hal/core_list_join.c **** 		retval &= 0x007f; 
- 151              		.loc 1 90 3 is_stmt 1 view .LVU36
-  90:Drivers/coremark_stm32_hal/core_list_join.c **** 		retval &= 0x007f; 
- 152              		.loc 1 90 12 is_stmt 0 view .LVU37
- 153 002e 298F     		ldrh	r1, [r5, #56]
- 154 0030 B8B2     		uxth	r0, r7
- 155 0032 FFF7FEFF 		bl	crcu16
- 156              	.LVL13:
-  90:Drivers/coremark_stm32_hal/core_list_join.c **** 		retval &= 0x007f; 
- 157              		.loc 1 90 11 view .LVU38
- 158 0036 2887     		strh	r0, [r5, #56]	@ movhi
-  91:Drivers/coremark_stm32_hal/core_list_join.c **** 		*pdata = (data & 0xff00) | 0x0080 | retval; /* cache the result */
- 159              		.loc 1 91 3 is_stmt 1 view .LVU39
-  91:Drivers/coremark_stm32_hal/core_list_join.c **** 		*pdata = (data & 0xff00) | 0x0080 | retval; /* cache the result */
- 160              		.loc 1 91 10 is_stmt 0 view .LVU40
- 161 0038 07F07F00 		and	r0, r7, #127
- 162              	.LVL14:
-  92:Drivers/coremark_stm32_hal/core_list_join.c **** 		return retval;
- 163              		.loc 1 92 3 is_stmt 1 view .LVU41
-  92:Drivers/coremark_stm32_hal/core_list_join.c **** 		return retval;
- 164              		.loc 1 92 18 is_stmt 0 view .LVU42
- 165 003c 24F0FF04 		bic	r4, r4, #255
- 166              	.LVL15:
-  92:Drivers/coremark_stm32_hal/core_list_join.c **** 		return retval;
- 167              		.loc 1 92 28 view .LVU43
- 168 0040 44F08004 		orr	r4, r4, #128
-  92:Drivers/coremark_stm32_hal/core_list_join.c **** 		return retval;
- 169              		.loc 1 92 37 view .LVU44
- 170 0044 0443     		orrs	r4, r4, r0
-  92:Drivers/coremark_stm32_hal/core_list_join.c **** 		return retval;
- 171              		.loc 1 92 10 view .LVU45
- 172 0046 3480     		strh	r4, [r6]	@ movhi
-  93:Drivers/coremark_stm32_hal/core_list_join.c **** 	}
- 173              		.loc 1 93 3 is_stmt 1 view .LVU46
-  93:Drivers/coremark_stm32_hal/core_list_join.c **** 	}
- 174              		.loc 1 93 10 is_stmt 0 view .LVU47
- 175 0048 E3E7     		b	.L6
- 176              	.LVL16:
- 177              	.L7:
-  75:Drivers/coremark_stm32_hal/core_list_join.c **** 					dtype=0x22;
- 178              		.loc 1 75 5 is_stmt 1 view .LVU48
-  75:Drivers/coremark_stm32_hal/core_list_join.c **** 					dtype=0x22;
- 179              		.loc 1 75 8 is_stmt 0 view .LVU49
- 180 004a 2129     		cmp	r1, #33
- 181 004c 00DC     		bgt	.L10
-  76:Drivers/coremark_stm32_hal/core_list_join.c **** 				retval=core_bench_state(res->size,res->memblock[3],res->seed1,res->seed2,dtype,res->crc);
- 182              		.loc 1 76 11 view .LVU50
- 183 004e 2221     		movs	r1, #34
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 7
-
-
- 184              	.LVL17:
- 185              	.L10:
-  77:Drivers/coremark_stm32_hal/core_list_join.c **** 				if (res->crcstate==0)
- 186              		.loc 1 77 5 is_stmt 1 view .LVU51
-  77:Drivers/coremark_stm32_hal/core_list_join.c **** 				if (res->crcstate==0)
- 187              		.loc 1 77 12 is_stmt 0 view .LVU52
- 188 0050 2B8F     		ldrh	r3, [r5, #56]
- 189 0052 0193     		str	r3, [sp, #4]
- 190 0054 0091     		str	r1, [sp]
- 191 0056 B5F90230 		ldrsh	r3, [r5, #2]
- 192 005a B5F90020 		ldrsh	r2, [r5]
- 193 005e 6969     		ldr	r1, [r5, #20]
- 194              	.LVL18:
-  77:Drivers/coremark_stm32_hal/core_list_join.c **** 				if (res->crcstate==0)
- 195              		.loc 1 77 12 view .LVU53
- 196 0060 A869     		ldr	r0, [r5, #24]
- 197              	.LVL19:
-  77:Drivers/coremark_stm32_hal/core_list_join.c **** 				if (res->crcstate==0)
- 198              		.loc 1 77 12 view .LVU54
- 199 0062 FFF7FEFF 		bl	core_bench_state
- 200              	.LVL20:
-  77:Drivers/coremark_stm32_hal/core_list_join.c **** 				if (res->crcstate==0)
- 201              		.loc 1 77 11 view .LVU55
- 202 0066 07B2     		sxth	r7, r0
- 203              	.LVL21:
-  78:Drivers/coremark_stm32_hal/core_list_join.c **** 					res->crcstate=retval;
- 204              		.loc 1 78 5 is_stmt 1 view .LVU56
-  78:Drivers/coremark_stm32_hal/core_list_join.c **** 					res->crcstate=retval;
- 205              		.loc 1 78 12 is_stmt 0 view .LVU57
- 206 0068 EB8F     		ldrh	r3, [r5, #62]
-  78:Drivers/coremark_stm32_hal/core_list_join.c **** 					res->crcstate=retval;
- 207              		.loc 1 78 8 view .LVU58
- 208 006a 002B     		cmp	r3, #0
- 209 006c DFD1     		bne	.L9
-  79:Drivers/coremark_stm32_hal/core_list_join.c **** 				break;
- 210              		.loc 1 79 6 is_stmt 1 view .LVU59
-  79:Drivers/coremark_stm32_hal/core_list_join.c **** 				break;
- 211              		.loc 1 79 19 is_stmt 0 view .LVU60
- 212 006e E887     		strh	r0, [r5, #62]	@ movhi
- 213 0070 DDE7     		b	.L9
- 214              	.LVL22:
- 215              	.L8:
-  82:Drivers/coremark_stm32_hal/core_list_join.c **** 				if (res->crcmatrix==0)
- 216              		.loc 1 82 5 is_stmt 1 view .LVU61
-  82:Drivers/coremark_stm32_hal/core_list_join.c **** 				if (res->crcmatrix==0)
- 217              		.loc 1 82 12 is_stmt 0 view .LVU62
- 218 0072 2A8F     		ldrh	r2, [r5, #56]
- 219 0074 05F12800 		add	r0, r5, #40
- 220              	.LVL23:
-  82:Drivers/coremark_stm32_hal/core_list_join.c **** 				if (res->crcmatrix==0)
- 221              		.loc 1 82 12 view .LVU63
- 222 0078 FFF7FEFF 		bl	core_bench_matrix
- 223              	.LVL24:
-  82:Drivers/coremark_stm32_hal/core_list_join.c **** 				if (res->crcmatrix==0)
- 224              		.loc 1 82 11 view .LVU64
- 225 007c 07B2     		sxth	r7, r0
- 226              	.LVL25:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 8
-
-
-  83:Drivers/coremark_stm32_hal/core_list_join.c **** 					res->crcmatrix=retval;
- 227              		.loc 1 83 5 is_stmt 1 view .LVU65
-  83:Drivers/coremark_stm32_hal/core_list_join.c **** 					res->crcmatrix=retval;
- 228              		.loc 1 83 12 is_stmt 0 view .LVU66
- 229 007e AB8F     		ldrh	r3, [r5, #60]
-  83:Drivers/coremark_stm32_hal/core_list_join.c **** 					res->crcmatrix=retval;
- 230              		.loc 1 83 8 view .LVU67
- 231 0080 002B     		cmp	r3, #0
- 232 0082 D4D1     		bne	.L9
-  84:Drivers/coremark_stm32_hal/core_list_join.c **** 				break;
- 233              		.loc 1 84 6 is_stmt 1 view .LVU68
-  84:Drivers/coremark_stm32_hal/core_list_join.c **** 				break;
- 234              		.loc 1 84 20 is_stmt 0 view .LVU69
- 235 0084 A887     		strh	r0, [r5, #60]	@ movhi
- 236 0086 D2E7     		b	.L9
- 237              	.LBE2:
- 238              		.cfi_endproc
- 239              	.LFE3:
- 241              		.section	.text.cmp_complex,"ax",%progbits
- 242              		.align	1
- 243              		.global	cmp_complex
- 244              		.syntax unified
- 245              		.thumb
- 246              		.thumb_func
- 247              		.fpu fpv5-d16
- 249              	cmp_complex:
- 250              	.LVL26:
- 251              	.LFB4:
- 101:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_s16 val1=calc_func(&(a->data16),res);
- 252              		.loc 1 101 67 is_stmt 1 view -0
- 253              		.cfi_startproc
- 254              		@ args = 0, pretend = 0, frame = 0
- 255              		@ frame_needed = 0, uses_anonymous_args = 0
- 101:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_s16 val1=calc_func(&(a->data16),res);
- 256              		.loc 1 101 67 is_stmt 0 view .LVU71
- 257 0000 70B5     		push	{r4, r5, r6, lr}
- 258              	.LCFI4:
- 259              		.cfi_def_cfa_offset 16
- 260              		.cfi_offset 4, -16
- 261              		.cfi_offset 5, -12
- 262              		.cfi_offset 6, -8
- 263              		.cfi_offset 14, -4
- 264 0002 0E46     		mov	r6, r1
- 265 0004 1446     		mov	r4, r2
- 102:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_s16 val2=calc_func(&(b->data16),res);
- 266              		.loc 1 102 2 is_stmt 1 view .LVU72
- 102:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_s16 val2=calc_func(&(b->data16),res);
- 267              		.loc 1 102 14 is_stmt 0 view .LVU73
- 268 0006 1146     		mov	r1, r2
- 269              	.LVL27:
- 102:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_s16 val2=calc_func(&(b->data16),res);
- 270              		.loc 1 102 14 view .LVU74
- 271 0008 FFF7FEFF 		bl	calc_func
- 272              	.LVL28:
- 102:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_s16 val2=calc_func(&(b->data16),res);
- 273              		.loc 1 102 14 view .LVU75
- 274 000c 0546     		mov	r5, r0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 9
-
-
- 275              	.LVL29:
- 103:Drivers/coremark_stm32_hal/core_list_join.c **** 	return val1 - val2;
- 276              		.loc 1 103 2 is_stmt 1 view .LVU76
- 103:Drivers/coremark_stm32_hal/core_list_join.c **** 	return val1 - val2;
- 277              		.loc 1 103 14 is_stmt 0 view .LVU77
- 278 000e 2146     		mov	r1, r4
- 279 0010 3046     		mov	r0, r6
- 280 0012 FFF7FEFF 		bl	calc_func
- 281              	.LVL30:
- 104:Drivers/coremark_stm32_hal/core_list_join.c **** }
- 282              		.loc 1 104 2 is_stmt 1 view .LVU78
- 105:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 283              		.loc 1 105 1 is_stmt 0 view .LVU79
- 284 0016 281A     		subs	r0, r5, r0
- 285              	.LVL31:
- 105:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 286              		.loc 1 105 1 view .LVU80
- 287 0018 70BD     		pop	{r4, r5, r6, pc}
- 105:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 288              		.loc 1 105 1 view .LVU81
- 289              		.cfi_endproc
- 290              	.LFE4:
- 292              		.section	.text.copy_info,"ax",%progbits
- 293              		.align	1
- 294              		.global	copy_info
- 295              		.syntax unified
- 296              		.thumb
- 297              		.thumb_func
- 298              		.fpu fpv5-d16
- 300              	copy_info:
- 301              	.LVL32:
- 302              	.LFB6:
- 119:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 120:Drivers/coremark_stm32_hal/core_list_join.c **** void copy_info(list_data *to,list_data *from) {
- 303              		.loc 1 120 47 is_stmt 1 view -0
- 304              		.cfi_startproc
- 305              		@ args = 0, pretend = 0, frame = 0
- 306              		@ frame_needed = 0, uses_anonymous_args = 0
- 307              		@ link register save eliminated.
- 121:Drivers/coremark_stm32_hal/core_list_join.c **** 	to->data16=from->data16;
- 308              		.loc 1 121 2 view .LVU83
- 309              		.loc 1 121 17 is_stmt 0 view .LVU84
- 310 0000 B1F90030 		ldrsh	r3, [r1]
- 311              		.loc 1 121 12 view .LVU85
- 312 0004 0380     		strh	r3, [r0]	@ movhi
- 122:Drivers/coremark_stm32_hal/core_list_join.c **** 	to->idx=from->idx;
- 313              		.loc 1 122 2 is_stmt 1 view .LVU86
- 314              		.loc 1 122 14 is_stmt 0 view .LVU87
- 315 0006 B1F90230 		ldrsh	r3, [r1, #2]
- 316              		.loc 1 122 9 view .LVU88
- 317 000a 4380     		strh	r3, [r0, #2]	@ movhi
- 123:Drivers/coremark_stm32_hal/core_list_join.c **** }
- 318              		.loc 1 123 1 view .LVU89
- 319 000c 7047     		bx	lr
- 320              		.cfi_endproc
- 321              	.LFE6:
- 323              		.section	.text.core_list_insert_new,"ax",%progbits
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 10
-
-
- 324              		.align	1
- 325              		.global	core_list_insert_new
- 326              		.syntax unified
- 327              		.thumb
- 328              		.thumb_func
- 329              		.fpu fpv5-d16
- 331              	core_list_insert_new:
- 332              	.LVL33:
- 333              	.LFB9:
- 124:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 125:Drivers/coremark_stm32_hal/core_list_join.c **** /* Benchmark for linked list:
- 126:Drivers/coremark_stm32_hal/core_list_join.c **** 	- Try to find multiple data items.
- 127:Drivers/coremark_stm32_hal/core_list_join.c **** 	- List sort
- 128:Drivers/coremark_stm32_hal/core_list_join.c **** 	- Operate on data from list (crc)
- 129:Drivers/coremark_stm32_hal/core_list_join.c **** 	- Single remove/reinsert
- 130:Drivers/coremark_stm32_hal/core_list_join.c **** 	* At the end of this function, the list is back to original state
- 131:Drivers/coremark_stm32_hal/core_list_join.c **** */
- 132:Drivers/coremark_stm32_hal/core_list_join.c **** ee_u16 core_bench_list(core_results *res, ee_s16 finder_idx) {
- 133:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_u16 retval=0;
- 134:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_u16 found=0,missed=0;
- 135:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_head *list=res->list;
- 136:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_s16 find_num=res->seed3;
- 137:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_head *this_find;
- 138:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_head *finder, *remover;
- 139:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_data info;
- 140:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_s16 i;
- 141:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 142:Drivers/coremark_stm32_hal/core_list_join.c **** 	info.idx=finder_idx;
- 143:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* find <find_num> values in the list, and change the list each time (reverse and cache if value f
- 144:Drivers/coremark_stm32_hal/core_list_join.c **** 	for (i=0; i<find_num; i++) {
- 145:Drivers/coremark_stm32_hal/core_list_join.c **** 		info.data16= (i & 0xff) ;
- 146:Drivers/coremark_stm32_hal/core_list_join.c **** 		this_find=core_list_find(list,&info);
- 147:Drivers/coremark_stm32_hal/core_list_join.c **** 		list=core_list_reverse(list);
- 148:Drivers/coremark_stm32_hal/core_list_join.c **** 		if (this_find==NULL) {
- 149:Drivers/coremark_stm32_hal/core_list_join.c **** 			missed++;
- 150:Drivers/coremark_stm32_hal/core_list_join.c **** 			retval+=(list->next->info->data16 >> 8) & 1;
- 151:Drivers/coremark_stm32_hal/core_list_join.c **** 		}
- 152:Drivers/coremark_stm32_hal/core_list_join.c **** 		else {
- 153:Drivers/coremark_stm32_hal/core_list_join.c **** 			found++;
- 154:Drivers/coremark_stm32_hal/core_list_join.c **** 			if (this_find->info->data16 & 0x1) /* use found value */
- 155:Drivers/coremark_stm32_hal/core_list_join.c **** 				retval+=(this_find->info->data16 >> 9) & 1;
- 156:Drivers/coremark_stm32_hal/core_list_join.c **** 			/* and cache next item at the head of the list (if any) */
- 157:Drivers/coremark_stm32_hal/core_list_join.c **** 			if (this_find->next != NULL) {
- 158:Drivers/coremark_stm32_hal/core_list_join.c **** 				finder = this_find->next;
- 159:Drivers/coremark_stm32_hal/core_list_join.c **** 				this_find->next = finder->next;
- 160:Drivers/coremark_stm32_hal/core_list_join.c **** 				finder->next=list->next;
- 161:Drivers/coremark_stm32_hal/core_list_join.c **** 				list->next=finder;
- 162:Drivers/coremark_stm32_hal/core_list_join.c **** 			}
- 163:Drivers/coremark_stm32_hal/core_list_join.c **** 		}
- 164:Drivers/coremark_stm32_hal/core_list_join.c **** 		if (info.idx>=0)
- 165:Drivers/coremark_stm32_hal/core_list_join.c **** 			info.idx++;
- 166:Drivers/coremark_stm32_hal/core_list_join.c **** #if CORE_DEBUG
- 167:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_printf("List find %d: [%d,%d,%d]\n",i,retval,missed,found);
- 168:Drivers/coremark_stm32_hal/core_list_join.c **** #endif
- 169:Drivers/coremark_stm32_hal/core_list_join.c **** 	}
- 170:Drivers/coremark_stm32_hal/core_list_join.c **** 	retval+=found*4-missed;
- 171:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* sort the list by data content and remove one item*/
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 11
-
-
- 172:Drivers/coremark_stm32_hal/core_list_join.c **** 	if (finder_idx>0)
- 173:Drivers/coremark_stm32_hal/core_list_join.c **** 		list=core_list_mergesort(list,cmp_complex,res);
- 174:Drivers/coremark_stm32_hal/core_list_join.c **** 	remover=core_list_remove(list->next);
- 175:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* CRC data content of list from location of index N forward, and then undo remove */
- 176:Drivers/coremark_stm32_hal/core_list_join.c **** 	finder=core_list_find(list,&info);
- 177:Drivers/coremark_stm32_hal/core_list_join.c **** 	if (!finder)
- 178:Drivers/coremark_stm32_hal/core_list_join.c **** 		finder=list->next;
- 179:Drivers/coremark_stm32_hal/core_list_join.c **** 	while (finder) {
- 180:Drivers/coremark_stm32_hal/core_list_join.c **** 		retval=crc16(list->info->data16,retval);
- 181:Drivers/coremark_stm32_hal/core_list_join.c **** 		finder=finder->next;
- 182:Drivers/coremark_stm32_hal/core_list_join.c **** 	}
- 183:Drivers/coremark_stm32_hal/core_list_join.c **** #if CORE_DEBUG
- 184:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_printf("List sort 1: %04x\n",retval);
- 185:Drivers/coremark_stm32_hal/core_list_join.c **** #endif
- 186:Drivers/coremark_stm32_hal/core_list_join.c **** 	remover=core_list_undo_remove(remover,list->next);
- 187:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* sort the list by index, in effect returning the list to original state */
- 188:Drivers/coremark_stm32_hal/core_list_join.c **** 	list=core_list_mergesort(list,cmp_idx,NULL);
- 189:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* CRC data content of list */
- 190:Drivers/coremark_stm32_hal/core_list_join.c **** 	finder=list->next;
- 191:Drivers/coremark_stm32_hal/core_list_join.c **** 	while (finder) {
- 192:Drivers/coremark_stm32_hal/core_list_join.c **** 		retval=crc16(list->info->data16,retval);
- 193:Drivers/coremark_stm32_hal/core_list_join.c **** 		finder=finder->next;
- 194:Drivers/coremark_stm32_hal/core_list_join.c **** 	}
- 195:Drivers/coremark_stm32_hal/core_list_join.c **** #if CORE_DEBUG
- 196:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_printf("List sort 2: %04x\n",retval);
- 197:Drivers/coremark_stm32_hal/core_list_join.c **** #endif
- 198:Drivers/coremark_stm32_hal/core_list_join.c **** 	return retval;
- 199:Drivers/coremark_stm32_hal/core_list_join.c **** }
- 200:Drivers/coremark_stm32_hal/core_list_join.c **** /* Function: core_list_init
- 201:Drivers/coremark_stm32_hal/core_list_join.c **** 	Initialize list with data.
- 202:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 203:Drivers/coremark_stm32_hal/core_list_join.c **** 	Parameters:
- 204:Drivers/coremark_stm32_hal/core_list_join.c **** 	blksize - Size of memory to be initialized.
- 205:Drivers/coremark_stm32_hal/core_list_join.c **** 	memblock - Pointer to memory block.
- 206:Drivers/coremark_stm32_hal/core_list_join.c **** 	seed - 	Actual values chosen depend on the seed parameter.
- 207:Drivers/coremark_stm32_hal/core_list_join.c **** 		The seed parameter MUST be supplied from a source that cannot be determined at compile time
- 208:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 209:Drivers/coremark_stm32_hal/core_list_join.c **** 	Returns:
- 210:Drivers/coremark_stm32_hal/core_list_join.c **** 	Pointer to the head of the list.
- 211:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 212:Drivers/coremark_stm32_hal/core_list_join.c **** */
- 213:Drivers/coremark_stm32_hal/core_list_join.c **** list_head *core_list_init(ee_u32 blksize, list_head *memblock, ee_s16 seed) {
- 214:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* calculated pointers for the list */
- 215:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_u32 per_item=16+sizeof(struct list_data_s);
- 216:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_u32 size=(blksize/per_item)-2; /* to accomodate systems with 64b pointers, and make sure same c
- 217:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_head *memblock_end=memblock+size;
- 218:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_data *datablock=(list_data *)(memblock_end);
- 219:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_data *datablock_end=datablock+size;
- 220:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* some useful variables */
- 221:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_u32 i;
- 222:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_head *finder,*list=memblock;
- 223:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_data info;
- 224:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 225:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* create a fake items for the list head and tail */
- 226:Drivers/coremark_stm32_hal/core_list_join.c **** 	list->next=NULL;
- 227:Drivers/coremark_stm32_hal/core_list_join.c **** 	list->info=datablock;
- 228:Drivers/coremark_stm32_hal/core_list_join.c **** 	list->info->idx=0x0000;
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 12
-
-
- 229:Drivers/coremark_stm32_hal/core_list_join.c **** 	list->info->data16=(ee_s16)0x8080;
- 230:Drivers/coremark_stm32_hal/core_list_join.c **** 	memblock++;
- 231:Drivers/coremark_stm32_hal/core_list_join.c **** 	datablock++;
- 232:Drivers/coremark_stm32_hal/core_list_join.c **** 	info.idx=0x7fff;
- 233:Drivers/coremark_stm32_hal/core_list_join.c **** 	info.data16=(ee_s16)0xffff;
- 234:Drivers/coremark_stm32_hal/core_list_join.c **** 	core_list_insert_new(list,&info,&memblock,&datablock,memblock_end,datablock_end);
- 235:Drivers/coremark_stm32_hal/core_list_join.c **** 	
- 236:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* then insert size items */
- 237:Drivers/coremark_stm32_hal/core_list_join.c **** 	for (i=0; i<size; i++) {
- 238:Drivers/coremark_stm32_hal/core_list_join.c **** 		ee_u16 datpat=((ee_u16)(seed^i) & 0xf);
- 239:Drivers/coremark_stm32_hal/core_list_join.c **** 		ee_u16 dat=(datpat<<3) | (i&0x7); /* alternate between algorithms */
- 240:Drivers/coremark_stm32_hal/core_list_join.c **** 		info.data16=(dat<<8) | dat;		/* fill the data with actual data and upper bits with rebuild value 
- 241:Drivers/coremark_stm32_hal/core_list_join.c **** 		core_list_insert_new(list,&info,&memblock,&datablock,memblock_end,datablock_end);
- 242:Drivers/coremark_stm32_hal/core_list_join.c **** 	}
- 243:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* and now index the list so we know initial seed order of the list */
- 244:Drivers/coremark_stm32_hal/core_list_join.c **** 	finder=list->next;
- 245:Drivers/coremark_stm32_hal/core_list_join.c **** 	i=1;
- 246:Drivers/coremark_stm32_hal/core_list_join.c **** 	while (finder->next!=NULL) {
- 247:Drivers/coremark_stm32_hal/core_list_join.c **** 		if (i<size/5) /* first 20% of the list in order */
- 248:Drivers/coremark_stm32_hal/core_list_join.c **** 			finder->info->idx=i++;
- 249:Drivers/coremark_stm32_hal/core_list_join.c **** 		else { 
- 250:Drivers/coremark_stm32_hal/core_list_join.c **** 			ee_u16 pat=(ee_u16)(i++ ^ seed); /* get a pseudo random number */
- 251:Drivers/coremark_stm32_hal/core_list_join.c **** 			finder->info->idx=0x3fff & (((i & 0x07) << 8) | pat); /* make sure the mixed items end up after 
- 252:Drivers/coremark_stm32_hal/core_list_join.c **** 		}
- 253:Drivers/coremark_stm32_hal/core_list_join.c **** 		finder=finder->next;
- 254:Drivers/coremark_stm32_hal/core_list_join.c **** 	}
- 255:Drivers/coremark_stm32_hal/core_list_join.c **** 	list = core_list_mergesort(list,cmp_idx,NULL);
- 256:Drivers/coremark_stm32_hal/core_list_join.c **** #if CORE_DEBUG
- 257:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_printf("Initialized list:\n");
- 258:Drivers/coremark_stm32_hal/core_list_join.c **** 	finder=list;
- 259:Drivers/coremark_stm32_hal/core_list_join.c **** 	while (finder) {
- 260:Drivers/coremark_stm32_hal/core_list_join.c **** 		ee_printf("[%04x,%04x]",finder->info->idx,(ee_u16)finder->info->data16);
- 261:Drivers/coremark_stm32_hal/core_list_join.c **** 		finder=finder->next;
- 262:Drivers/coremark_stm32_hal/core_list_join.c **** 	}
- 263:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_printf("\n");
- 264:Drivers/coremark_stm32_hal/core_list_join.c **** #endif
- 265:Drivers/coremark_stm32_hal/core_list_join.c **** 	return list;
- 266:Drivers/coremark_stm32_hal/core_list_join.c **** }
- 267:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 268:Drivers/coremark_stm32_hal/core_list_join.c **** /* Function: core_list_insert
- 269:Drivers/coremark_stm32_hal/core_list_join.c **** 	Insert an item to the list
- 270:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 271:Drivers/coremark_stm32_hal/core_list_join.c **** 	Parameters:
- 272:Drivers/coremark_stm32_hal/core_list_join.c **** 	insert_point - where to insert the item.
- 273:Drivers/coremark_stm32_hal/core_list_join.c **** 	info - data for the cell.
- 274:Drivers/coremark_stm32_hal/core_list_join.c **** 	memblock - pointer for the list header
- 275:Drivers/coremark_stm32_hal/core_list_join.c **** 	datablock - pointer for the list data
- 276:Drivers/coremark_stm32_hal/core_list_join.c **** 	memblock_end - end of region for list headers
- 277:Drivers/coremark_stm32_hal/core_list_join.c **** 	datablock_end - end of region for list data
- 278:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 279:Drivers/coremark_stm32_hal/core_list_join.c **** 	Returns:
- 280:Drivers/coremark_stm32_hal/core_list_join.c **** 	Pointer to new item.
- 281:Drivers/coremark_stm32_hal/core_list_join.c **** */
- 282:Drivers/coremark_stm32_hal/core_list_join.c **** list_head *core_list_insert_new(list_head *insert_point, list_data *info, list_head **memblock, lis
- 283:Drivers/coremark_stm32_hal/core_list_join.c **** 	, list_head *memblock_end, list_data *datablock_end) {
- 334              		.loc 1 283 55 is_stmt 1 view -0
- 335              		.cfi_startproc
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 13
-
-
- 336              		@ args = 8, pretend = 0, frame = 0
- 337              		@ frame_needed = 0, uses_anonymous_args = 0
- 338              		.loc 1 283 55 is_stmt 0 view .LVU91
- 339 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
- 340              	.LCFI5:
- 341              		.cfi_def_cfa_offset 24
- 342              		.cfi_offset 3, -24
- 343              		.cfi_offset 4, -20
- 344              		.cfi_offset 5, -16
- 345              		.cfi_offset 6, -12
- 346              		.cfi_offset 7, -8
- 347              		.cfi_offset 14, -4
- 284:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_head *newitem;
- 348              		.loc 1 284 2 is_stmt 1 view .LVU92
- 285:Drivers/coremark_stm32_hal/core_list_join.c **** 	
- 286:Drivers/coremark_stm32_hal/core_list_join.c **** 	if ((*memblock+1) >= memblock_end)
- 349              		.loc 1 286 2 view .LVU93
- 350              		.loc 1 286 7 is_stmt 0 view .LVU94
- 351 0002 1468     		ldr	r4, [r2]
- 352              		.loc 1 286 16 view .LVU95
- 353 0004 04F10806 		add	r6, r4, #8
- 354              		.loc 1 286 5 view .LVU96
- 355 0008 069D     		ldr	r5, [sp, #24]
- 356 000a AE42     		cmp	r6, r5
- 357 000c 11D2     		bcs	.L18
- 287:Drivers/coremark_stm32_hal/core_list_join.c **** 		return NULL;
- 288:Drivers/coremark_stm32_hal/core_list_join.c **** 	if ((*datablock+1) >= datablock_end)
- 358              		.loc 1 288 2 is_stmt 1 view .LVU97
- 359              		.loc 1 288 7 is_stmt 0 view .LVU98
- 360 000e 1D68     		ldr	r5, [r3]
- 361              		.loc 1 288 17 view .LVU99
- 362 0010 0435     		adds	r5, r5, #4
- 363              		.loc 1 288 5 view .LVU100
- 364 0012 079F     		ldr	r7, [sp, #28]
- 365 0014 BD42     		cmp	r5, r7
- 366 0016 0ED2     		bcs	.L19
- 289:Drivers/coremark_stm32_hal/core_list_join.c **** 		return NULL;
- 290:Drivers/coremark_stm32_hal/core_list_join.c **** 		
- 291:Drivers/coremark_stm32_hal/core_list_join.c **** 	newitem=*memblock;
- 367              		.loc 1 291 2 is_stmt 1 view .LVU101
- 368              	.LVL34:
- 292:Drivers/coremark_stm32_hal/core_list_join.c **** 	(*memblock)++;
- 369              		.loc 1 292 2 view .LVU102
- 370              		.loc 1 292 13 is_stmt 0 view .LVU103
- 371 0018 1660     		str	r6, [r2]
- 293:Drivers/coremark_stm32_hal/core_list_join.c **** 	newitem->next=insert_point->next;
- 372              		.loc 1 293 2 is_stmt 1 view .LVU104
- 373              		.loc 1 293 28 is_stmt 0 view .LVU105
- 374 001a 0268     		ldr	r2, [r0]
- 375              	.LVL35:
- 376              		.loc 1 293 15 view .LVU106
- 377 001c 2260     		str	r2, [r4]
- 294:Drivers/coremark_stm32_hal/core_list_join.c **** 	insert_point->next=newitem;
- 378              		.loc 1 294 2 is_stmt 1 view .LVU107
- 379              		.loc 1 294 20 is_stmt 0 view .LVU108
- 380 001e 0460     		str	r4, [r0]
- 295:Drivers/coremark_stm32_hal/core_list_join.c **** 	
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 14
-
-
- 296:Drivers/coremark_stm32_hal/core_list_join.c **** 	newitem->info=*datablock;
- 381              		.loc 1 296 2 is_stmt 1 view .LVU109
- 382              		.loc 1 296 16 is_stmt 0 view .LVU110
- 383 0020 1A68     		ldr	r2, [r3]
- 384              		.loc 1 296 15 view .LVU111
- 385 0022 6260     		str	r2, [r4, #4]
- 297:Drivers/coremark_stm32_hal/core_list_join.c **** 	(*datablock)++;
- 386              		.loc 1 297 2 is_stmt 1 view .LVU112
- 387              		.loc 1 297 14 is_stmt 0 view .LVU113
- 388 0024 0432     		adds	r2, r2, #4
- 389 0026 1A60     		str	r2, [r3]
- 298:Drivers/coremark_stm32_hal/core_list_join.c **** 	copy_info(newitem->info,info);
- 390              		.loc 1 298 2 is_stmt 1 view .LVU114
- 391 0028 6068     		ldr	r0, [r4, #4]
- 392              	.LVL36:
- 393              		.loc 1 298 2 is_stmt 0 view .LVU115
- 394 002a FFF7FEFF 		bl	copy_info
- 395              	.LVL37:
- 299:Drivers/coremark_stm32_hal/core_list_join.c **** 	
- 300:Drivers/coremark_stm32_hal/core_list_join.c **** 	return newitem;
- 396              		.loc 1 300 2 is_stmt 1 view .LVU116
- 397              	.L16:
- 301:Drivers/coremark_stm32_hal/core_list_join.c **** }
- 398              		.loc 1 301 1 is_stmt 0 view .LVU117
- 399 002e 2046     		mov	r0, r4
- 400 0030 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
- 401              	.LVL38:
- 402              	.L18:
- 287:Drivers/coremark_stm32_hal/core_list_join.c **** 	if ((*datablock+1) >= datablock_end)
- 403              		.loc 1 287 10 view .LVU118
- 404 0032 0024     		movs	r4, #0
- 405 0034 FBE7     		b	.L16
- 406              	.L19:
- 289:Drivers/coremark_stm32_hal/core_list_join.c **** 		
- 407              		.loc 1 289 10 view .LVU119
- 408 0036 0024     		movs	r4, #0
- 409 0038 F9E7     		b	.L16
- 410              		.cfi_endproc
- 411              	.LFE9:
- 413              		.section	.text.core_list_remove,"ax",%progbits
- 414              		.align	1
- 415              		.global	core_list_remove
- 416              		.syntax unified
- 417              		.thumb
- 418              		.thumb_func
- 419              		.fpu fpv5-d16
- 421              	core_list_remove:
- 422              	.LVL39:
- 423              	.LFB10:
- 302:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 303:Drivers/coremark_stm32_hal/core_list_join.c **** /* Function: core_list_remove
- 304:Drivers/coremark_stm32_hal/core_list_join.c **** 	Remove an item from the list.
- 305:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 306:Drivers/coremark_stm32_hal/core_list_join.c **** 	Operation:
- 307:Drivers/coremark_stm32_hal/core_list_join.c **** 	For a singly linked list, remove by copying the data from the next item 
- 308:Drivers/coremark_stm32_hal/core_list_join.c **** 	over to the current cell, and unlinking the next item.
- 309:Drivers/coremark_stm32_hal/core_list_join.c **** 
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 15
-
-
- 310:Drivers/coremark_stm32_hal/core_list_join.c **** 	Note: 
- 311:Drivers/coremark_stm32_hal/core_list_join.c **** 	since there is always a fake item at the end of the list, no need to check for NULL.
- 312:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 313:Drivers/coremark_stm32_hal/core_list_join.c **** 	Returns:
- 314:Drivers/coremark_stm32_hal/core_list_join.c **** 	Removed item.
- 315:Drivers/coremark_stm32_hal/core_list_join.c **** */
- 316:Drivers/coremark_stm32_hal/core_list_join.c **** list_head *core_list_remove(list_head *item) {
- 424              		.loc 1 316 46 is_stmt 1 view -0
- 425              		.cfi_startproc
- 426              		@ args = 0, pretend = 0, frame = 0
- 427              		@ frame_needed = 0, uses_anonymous_args = 0
- 428              		@ link register save eliminated.
- 429              		.loc 1 316 46 is_stmt 0 view .LVU121
- 430 0000 0346     		mov	r3, r0
- 317:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_data *tmp;
- 431              		.loc 1 317 2 is_stmt 1 view .LVU122
- 318:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_head *ret=item->next;
- 432              		.loc 1 318 2 view .LVU123
- 433              		.loc 1 318 13 is_stmt 0 view .LVU124
- 434 0002 0068     		ldr	r0, [r0]
- 435              	.LVL40:
- 319:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* swap data pointers */
- 320:Drivers/coremark_stm32_hal/core_list_join.c **** 	tmp=item->info;
- 436              		.loc 1 320 2 is_stmt 1 view .LVU125
- 437              		.loc 1 320 5 is_stmt 0 view .LVU126
- 438 0004 5A68     		ldr	r2, [r3, #4]
- 439              	.LVL41:
- 321:Drivers/coremark_stm32_hal/core_list_join.c **** 	item->info=ret->info;
- 440              		.loc 1 321 2 is_stmt 1 view .LVU127
- 441              		.loc 1 321 16 is_stmt 0 view .LVU128
- 442 0006 4168     		ldr	r1, [r0, #4]
- 443              		.loc 1 321 12 view .LVU129
- 444 0008 5960     		str	r1, [r3, #4]
- 322:Drivers/coremark_stm32_hal/core_list_join.c **** 	ret->info=tmp;
- 445              		.loc 1 322 2 is_stmt 1 view .LVU130
- 446              		.loc 1 322 11 is_stmt 0 view .LVU131
- 447 000a 4260     		str	r2, [r0, #4]
- 323:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* and eliminate item */
- 324:Drivers/coremark_stm32_hal/core_list_join.c **** 	item->next=item->next->next;
- 448              		.loc 1 324 2 is_stmt 1 view .LVU132
- 449              		.loc 1 324 17 is_stmt 0 view .LVU133
- 450 000c 1A68     		ldr	r2, [r3]
- 451              	.LVL42:
- 452              		.loc 1 324 23 view .LVU134
- 453 000e 1268     		ldr	r2, [r2]
- 454              		.loc 1 324 12 view .LVU135
- 455 0010 1A60     		str	r2, [r3]
- 456              	.LVL43:
- 325:Drivers/coremark_stm32_hal/core_list_join.c **** 	ret->next=NULL;
- 457              		.loc 1 325 2 is_stmt 1 view .LVU136
- 458              		.loc 1 325 11 is_stmt 0 view .LVU137
- 459 0012 0023     		movs	r3, #0
- 460              	.LVL44:
- 461              		.loc 1 325 11 view .LVU138
- 462 0014 0360     		str	r3, [r0]
- 326:Drivers/coremark_stm32_hal/core_list_join.c **** 	return ret;
- 463              		.loc 1 326 2 is_stmt 1 view .LVU139
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 16
-
-
- 327:Drivers/coremark_stm32_hal/core_list_join.c **** }
- 464              		.loc 1 327 1 is_stmt 0 view .LVU140
- 465 0016 7047     		bx	lr
- 466              		.cfi_endproc
- 467              	.LFE10:
- 469              		.section	.text.core_list_undo_remove,"ax",%progbits
- 470              		.align	1
- 471              		.global	core_list_undo_remove
- 472              		.syntax unified
- 473              		.thumb
- 474              		.thumb_func
- 475              		.fpu fpv5-d16
- 477              	core_list_undo_remove:
- 478              	.LVL45:
- 479              	.LFB11:
- 328:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 329:Drivers/coremark_stm32_hal/core_list_join.c **** /* Function: core_list_undo_remove
- 330:Drivers/coremark_stm32_hal/core_list_join.c **** 	Undo a remove operation.
- 331:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 332:Drivers/coremark_stm32_hal/core_list_join.c **** 	Operation:
- 333:Drivers/coremark_stm32_hal/core_list_join.c **** 	Since we want each iteration of the benchmark to be exactly the same,
- 334:Drivers/coremark_stm32_hal/core_list_join.c **** 	we need to be able to undo a remove. 
- 335:Drivers/coremark_stm32_hal/core_list_join.c **** 	Link the removed item back into the list, and switch the info items.
- 336:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 337:Drivers/coremark_stm32_hal/core_list_join.c **** 	Parameters:
- 338:Drivers/coremark_stm32_hal/core_list_join.c **** 	item_removed - Return value from the <core_list_remove>
- 339:Drivers/coremark_stm32_hal/core_list_join.c **** 	item_modified - List item that was modified during <core_list_remove>
- 340:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 341:Drivers/coremark_stm32_hal/core_list_join.c **** 	Returns:
- 342:Drivers/coremark_stm32_hal/core_list_join.c **** 	The item that was linked back to the list.
- 343:Drivers/coremark_stm32_hal/core_list_join.c **** 	
- 344:Drivers/coremark_stm32_hal/core_list_join.c **** */
- 345:Drivers/coremark_stm32_hal/core_list_join.c **** list_head *core_list_undo_remove(list_head *item_removed, list_head *item_modified) {
- 480              		.loc 1 345 85 is_stmt 1 view -0
- 481              		.cfi_startproc
- 482              		@ args = 0, pretend = 0, frame = 0
- 483              		@ frame_needed = 0, uses_anonymous_args = 0
- 484              		@ link register save eliminated.
- 485              		.loc 1 345 85 is_stmt 0 view .LVU142
- 486 0000 10B4     		push	{r4}
- 487              	.LCFI6:
- 488              		.cfi_def_cfa_offset 4
- 489              		.cfi_offset 4, -4
- 346:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_data *tmp;
- 490              		.loc 1 346 2 is_stmt 1 view .LVU143
- 347:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* swap data pointers */
- 348:Drivers/coremark_stm32_hal/core_list_join.c **** 	tmp=item_removed->info;
- 491              		.loc 1 348 2 view .LVU144
- 492              		.loc 1 348 5 is_stmt 0 view .LVU145
- 493 0002 4268     		ldr	r2, [r0, #4]
- 494              	.LVL46:
- 349:Drivers/coremark_stm32_hal/core_list_join.c **** 	item_removed->info=item_modified->info;
- 495              		.loc 1 349 2 is_stmt 1 view .LVU146
- 496              		.loc 1 349 34 is_stmt 0 view .LVU147
- 497 0004 4C68     		ldr	r4, [r1, #4]
- 498              		.loc 1 349 20 view .LVU148
- 499 0006 4460     		str	r4, [r0, #4]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 17
-
-
- 350:Drivers/coremark_stm32_hal/core_list_join.c **** 	item_modified->info=tmp;
- 500              		.loc 1 350 2 is_stmt 1 view .LVU149
- 501              		.loc 1 350 21 is_stmt 0 view .LVU150
- 502 0008 4A60     		str	r2, [r1, #4]
- 351:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* and insert item */
- 352:Drivers/coremark_stm32_hal/core_list_join.c **** 	item_removed->next=item_modified->next;
- 503              		.loc 1 352 2 is_stmt 1 view .LVU151
- 504              		.loc 1 352 34 is_stmt 0 view .LVU152
- 505 000a 0A68     		ldr	r2, [r1]
- 506              	.LVL47:
- 507              		.loc 1 352 20 view .LVU153
- 508 000c 0260     		str	r2, [r0]
- 509              	.LVL48:
- 353:Drivers/coremark_stm32_hal/core_list_join.c **** 	item_modified->next=item_removed;
- 510              		.loc 1 353 2 is_stmt 1 view .LVU154
- 511              		.loc 1 353 21 is_stmt 0 view .LVU155
- 512 000e 0860     		str	r0, [r1]
- 354:Drivers/coremark_stm32_hal/core_list_join.c **** 	return item_removed;
- 513              		.loc 1 354 2 is_stmt 1 view .LVU156
- 355:Drivers/coremark_stm32_hal/core_list_join.c **** }
- 514              		.loc 1 355 1 is_stmt 0 view .LVU157
- 515 0010 5DF8044B 		ldr	r4, [sp], #4
- 516              	.LCFI7:
- 517              		.cfi_restore 4
- 518              		.cfi_def_cfa_offset 0
- 519 0014 7047     		bx	lr
- 520              		.cfi_endproc
- 521              	.LFE11:
- 523              		.section	.text.core_list_find,"ax",%progbits
- 524              		.align	1
- 525              		.global	core_list_find
- 526              		.syntax unified
- 527              		.thumb
- 528              		.thumb_func
- 529              		.fpu fpv5-d16
- 531              	core_list_find:
- 532              	.LVL49:
- 533              	.LFB12:
- 356:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 357:Drivers/coremark_stm32_hal/core_list_join.c **** /* Function: core_list_find
- 358:Drivers/coremark_stm32_hal/core_list_join.c **** 	Find an item in the list
- 359:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 360:Drivers/coremark_stm32_hal/core_list_join.c **** 	Operation:
- 361:Drivers/coremark_stm32_hal/core_list_join.c **** 	Find an item by idx (if not 0) or specific data value
- 362:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 363:Drivers/coremark_stm32_hal/core_list_join.c **** 	Parameters:
- 364:Drivers/coremark_stm32_hal/core_list_join.c **** 	list - list head
- 365:Drivers/coremark_stm32_hal/core_list_join.c **** 	info - idx or data to find
- 366:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 367:Drivers/coremark_stm32_hal/core_list_join.c **** 	Returns:
- 368:Drivers/coremark_stm32_hal/core_list_join.c **** 	Found item, or NULL if not found.
- 369:Drivers/coremark_stm32_hal/core_list_join.c **** */
- 370:Drivers/coremark_stm32_hal/core_list_join.c **** list_head *core_list_find(list_head *list,list_data *info) {
- 534              		.loc 1 370 60 is_stmt 1 view -0
- 535              		.cfi_startproc
- 536              		@ args = 0, pretend = 0, frame = 0
- 537              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 18
-
-
- 538              		@ link register save eliminated.
- 371:Drivers/coremark_stm32_hal/core_list_join.c **** 	if (info->idx>=0) {
- 539              		.loc 1 371 2 view .LVU159
- 540              		.loc 1 371 10 is_stmt 0 view .LVU160
- 541 0000 B1F90220 		ldrsh	r2, [r1, #2]
- 542              		.loc 1 371 5 view .LVU161
- 543 0004 002A     		cmp	r2, #0
- 544 0006 09DB     		blt	.L26
- 545              	.L25:
- 372:Drivers/coremark_stm32_hal/core_list_join.c **** 		while (list && (list->info->idx != info->idx))
- 546              		.loc 1 372 9 is_stmt 1 view .LVU162
- 547 0008 88B1     		cbz	r0, .L27
- 548              		.loc 1 372 23 is_stmt 0 discriminator 1 view .LVU163
- 549 000a 4368     		ldr	r3, [r0, #4]
- 550              		.loc 1 372 29 discriminator 1 view .LVU164
- 551 000c B3F90230 		ldrsh	r3, [r3, #2]
- 552              		.loc 1 372 15 discriminator 1 view .LVU165
- 553 0010 9A42     		cmp	r2, r3
- 554 0012 01D0     		beq	.L30
- 373:Drivers/coremark_stm32_hal/core_list_join.c **** 			list=list->next;
- 555              		.loc 1 373 4 is_stmt 1 view .LVU166
- 556              		.loc 1 373 8 is_stmt 0 view .LVU167
- 557 0014 0068     		ldr	r0, [r0]
- 558              	.LVL50:
- 559              		.loc 1 373 8 view .LVU168
- 560 0016 F7E7     		b	.L25
- 561              	.L30:
- 562              		.loc 1 373 8 view .LVU169
- 563 0018 7047     		bx	lr
- 564              	.L29:
- 374:Drivers/coremark_stm32_hal/core_list_join.c **** 		return list;
- 375:Drivers/coremark_stm32_hal/core_list_join.c **** 	} else {
- 376:Drivers/coremark_stm32_hal/core_list_join.c **** 		while (list && ((list->info->data16 & 0xff) != info->data16))
- 377:Drivers/coremark_stm32_hal/core_list_join.c **** 			list=list->next;
- 565              		.loc 1 377 4 is_stmt 1 view .LVU170
- 566              		.loc 1 377 8 is_stmt 0 view .LVU171
- 567 001a 0068     		ldr	r0, [r0]
- 568              	.LVL51:
- 569              	.L26:
- 376:Drivers/coremark_stm32_hal/core_list_join.c **** 			list=list->next;
- 570              		.loc 1 376 9 is_stmt 1 view .LVU172
- 571 001c 38B1     		cbz	r0, .L27
- 376:Drivers/coremark_stm32_hal/core_list_join.c **** 			list=list->next;
- 572              		.loc 1 376 24 is_stmt 0 discriminator 1 view .LVU173
- 573 001e 4368     		ldr	r3, [r0, #4]
- 376:Drivers/coremark_stm32_hal/core_list_join.c **** 			list=list->next;
- 574              		.loc 1 376 30 discriminator 1 view .LVU174
- 575 0020 B3F90030 		ldrsh	r3, [r3]
- 376:Drivers/coremark_stm32_hal/core_list_join.c **** 			list=list->next;
- 576              		.loc 1 376 39 discriminator 1 view .LVU175
- 577 0024 DBB2     		uxtb	r3, r3
- 376:Drivers/coremark_stm32_hal/core_list_join.c **** 			list=list->next;
- 578              		.loc 1 376 54 discriminator 1 view .LVU176
- 579 0026 B1F90020 		ldrsh	r2, [r1]
- 376:Drivers/coremark_stm32_hal/core_list_join.c **** 			list=list->next;
- 580              		.loc 1 376 15 discriminator 1 view .LVU177
- 581 002a 9342     		cmp	r3, r2
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 19
-
-
- 582 002c F5D1     		bne	.L29
- 583              	.L27:
- 378:Drivers/coremark_stm32_hal/core_list_join.c **** 		return list;
- 379:Drivers/coremark_stm32_hal/core_list_join.c **** 	}
- 380:Drivers/coremark_stm32_hal/core_list_join.c **** }
- 584              		.loc 1 380 1 view .LVU178
- 585 002e 7047     		bx	lr
- 586              		.cfi_endproc
- 587              	.LFE12:
- 589              		.section	.text.core_list_reverse,"ax",%progbits
- 590              		.align	1
- 591              		.global	core_list_reverse
- 592              		.syntax unified
- 593              		.thumb
- 594              		.thumb_func
- 595              		.fpu fpv5-d16
- 597              	core_list_reverse:
- 598              	.LVL52:
- 599              	.LFB13:
- 381:Drivers/coremark_stm32_hal/core_list_join.c **** /* Function: core_list_reverse
- 382:Drivers/coremark_stm32_hal/core_list_join.c **** 	Reverse a list
- 383:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 384:Drivers/coremark_stm32_hal/core_list_join.c **** 	Operation:
- 385:Drivers/coremark_stm32_hal/core_list_join.c **** 	Rearrange the pointers so the list is reversed.
- 386:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 387:Drivers/coremark_stm32_hal/core_list_join.c **** 	Parameters:
- 388:Drivers/coremark_stm32_hal/core_list_join.c **** 	list - list head
- 389:Drivers/coremark_stm32_hal/core_list_join.c **** 	info - idx or data to find
- 390:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 391:Drivers/coremark_stm32_hal/core_list_join.c **** 	Returns:
- 392:Drivers/coremark_stm32_hal/core_list_join.c **** 	Found item, or NULL if not found.
- 393:Drivers/coremark_stm32_hal/core_list_join.c **** */
- 394:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 395:Drivers/coremark_stm32_hal/core_list_join.c **** list_head *core_list_reverse(list_head *list) {
- 600              		.loc 1 395 47 is_stmt 1 view -0
- 601              		.cfi_startproc
- 602              		@ args = 0, pretend = 0, frame = 0
- 603              		@ frame_needed = 0, uses_anonymous_args = 0
- 604              		@ link register save eliminated.
- 605              		.loc 1 395 47 is_stmt 0 view .LVU180
- 606 0000 0346     		mov	r3, r0
- 396:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_head *next=NULL, *tmp;
- 607              		.loc 1 396 2 is_stmt 1 view .LVU181
- 608              	.LVL53:
- 397:Drivers/coremark_stm32_hal/core_list_join.c **** 	while (list) {
- 609              		.loc 1 397 2 view .LVU182
- 396:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_head *next=NULL, *tmp;
- 610              		.loc 1 396 13 is_stmt 0 view .LVU183
- 611 0002 0020     		movs	r0, #0
- 612              	.LVL54:
- 613              	.L32:
- 614              		.loc 1 397 8 is_stmt 1 view .LVU184
- 615 0004 23B1     		cbz	r3, .L34
- 398:Drivers/coremark_stm32_hal/core_list_join.c **** 		tmp=list->next;
- 616              		.loc 1 398 3 view .LVU185
- 617              		.loc 1 398 6 is_stmt 0 view .LVU186
- 618 0006 1A68     		ldr	r2, [r3]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 20
-
-
- 619              	.LVL55:
- 399:Drivers/coremark_stm32_hal/core_list_join.c **** 		list->next=next;
- 620              		.loc 1 399 3 is_stmt 1 view .LVU187
- 621              		.loc 1 399 13 is_stmt 0 view .LVU188
- 622 0008 1860     		str	r0, [r3]
- 400:Drivers/coremark_stm32_hal/core_list_join.c **** 		next=list;
- 623              		.loc 1 400 3 is_stmt 1 view .LVU189
- 624              	.LVL56:
- 401:Drivers/coremark_stm32_hal/core_list_join.c **** 		list=tmp;
- 625              		.loc 1 401 3 view .LVU190
- 400:Drivers/coremark_stm32_hal/core_list_join.c **** 		next=list;
- 626              		.loc 1 400 7 is_stmt 0 view .LVU191
- 627 000a 1846     		mov	r0, r3
- 628              		.loc 1 401 7 view .LVU192
- 629 000c 1346     		mov	r3, r2
- 630              	.LVL57:
- 631              		.loc 1 401 7 view .LVU193
- 632 000e F9E7     		b	.L32
- 633              	.LVL58:
- 634              	.L34:
- 402:Drivers/coremark_stm32_hal/core_list_join.c **** 	}
- 403:Drivers/coremark_stm32_hal/core_list_join.c **** 	return next;
- 404:Drivers/coremark_stm32_hal/core_list_join.c **** }
- 635              		.loc 1 404 1 view .LVU194
- 636 0010 7047     		bx	lr
- 637              		.cfi_endproc
- 638              	.LFE13:
- 640              		.section	.text.core_list_mergesort,"ax",%progbits
- 641              		.align	1
- 642              		.global	core_list_mergesort
- 643              		.syntax unified
- 644              		.thumb
- 645              		.thumb_func
- 646              		.fpu fpv5-d16
- 648              	core_list_mergesort:
- 649              	.LVL59:
- 650              	.LFB14:
- 405:Drivers/coremark_stm32_hal/core_list_join.c **** /* Function: core_list_mergesort
- 406:Drivers/coremark_stm32_hal/core_list_join.c **** 	Sort the list in place without recursion.
- 407:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 408:Drivers/coremark_stm32_hal/core_list_join.c **** 	Description:
- 409:Drivers/coremark_stm32_hal/core_list_join.c **** 	Use mergesort, as for linked list this is a realistic solution. 
- 410:Drivers/coremark_stm32_hal/core_list_join.c **** 	Also, since this is aimed at embedded, care was taken to use iterative rather then recursive algor
- 411:Drivers/coremark_stm32_hal/core_list_join.c **** 	The sort can either return the list to original order (by idx) ,
- 412:Drivers/coremark_stm32_hal/core_list_join.c **** 	or use the data item to invoke other other algorithms and change the order of the list.
- 413:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 414:Drivers/coremark_stm32_hal/core_list_join.c **** 	Parameters:
- 415:Drivers/coremark_stm32_hal/core_list_join.c **** 	list - list to be sorted.
- 416:Drivers/coremark_stm32_hal/core_list_join.c **** 	cmp - cmp function to use
- 417:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 418:Drivers/coremark_stm32_hal/core_list_join.c **** 	Returns:
- 419:Drivers/coremark_stm32_hal/core_list_join.c **** 	New head of the list.
- 420:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 421:Drivers/coremark_stm32_hal/core_list_join.c **** 	Note: 
- 422:Drivers/coremark_stm32_hal/core_list_join.c **** 	We have a special header for the list that will always be first,
- 423:Drivers/coremark_stm32_hal/core_list_join.c **** 	but the algorithm could theoretically modify where the list starts.
- 424:Drivers/coremark_stm32_hal/core_list_join.c **** 
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 21
-
-
- 425:Drivers/coremark_stm32_hal/core_list_join.c ****  */
- 426:Drivers/coremark_stm32_hal/core_list_join.c **** list_head *core_list_mergesort(list_head *list, list_cmp cmp, core_results *res) {
- 651              		.loc 1 426 82 is_stmt 1 view -0
- 652              		.cfi_startproc
- 653              		@ args = 0, pretend = 0, frame = 8
- 654              		@ frame_needed = 0, uses_anonymous_args = 0
- 655              		.loc 1 426 82 is_stmt 0 view .LVU196
- 656 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
- 657              	.LCFI8:
- 658              		.cfi_def_cfa_offset 36
- 659              		.cfi_offset 4, -36
- 660              		.cfi_offset 5, -32
- 661              		.cfi_offset 6, -28
- 662              		.cfi_offset 7, -24
- 663              		.cfi_offset 8, -20
- 664              		.cfi_offset 9, -16
- 665              		.cfi_offset 10, -12
- 666              		.cfi_offset 11, -8
- 667              		.cfi_offset 14, -4
- 668 0004 83B0     		sub	sp, sp, #12
- 669              	.LCFI9:
- 670              		.cfi_def_cfa_offset 48
- 671 0006 0546     		mov	r5, r0
- 672 0008 8A46     		mov	r10, r1
- 673 000a 9346     		mov	fp, r2
- 427:Drivers/coremark_stm32_hal/core_list_join.c ****     list_head *p, *q, *e, *tail;
- 674              		.loc 1 427 5 is_stmt 1 view .LVU197
- 428:Drivers/coremark_stm32_hal/core_list_join.c ****     ee_s32 insize, nmerges, psize, qsize, i;
- 675              		.loc 1 428 5 view .LVU198
- 429:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 430:Drivers/coremark_stm32_hal/core_list_join.c ****     insize = 1;
- 676              		.loc 1 430 5 view .LVU199
- 677              	.LVL60:
- 678              		.loc 1 430 12 is_stmt 0 view .LVU200
- 679 000c 4FF00109 		mov	r9, #1
- 680              	.LVL61:
- 681              	.L50:
- 431:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 432:Drivers/coremark_stm32_hal/core_list_join.c ****     while (1) {
- 682              		.loc 1 432 5 is_stmt 1 view .LVU201
- 433:Drivers/coremark_stm32_hal/core_list_join.c ****         p = list;
- 683              		.loc 1 433 9 view .LVU202
- 434:Drivers/coremark_stm32_hal/core_list_join.c ****         list = NULL;
- 684              		.loc 1 434 9 view .LVU203
- 435:Drivers/coremark_stm32_hal/core_list_join.c ****         tail = NULL;
- 685              		.loc 1 435 9 view .LVU204
- 436:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 437:Drivers/coremark_stm32_hal/core_list_join.c ****         nmerges = 0;  /* count number of merges we do in this pass */
- 686              		.loc 1 437 9 view .LVU205
- 438:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 439:Drivers/coremark_stm32_hal/core_list_join.c ****         while (p) {
- 687              		.loc 1 439 9 view .LVU206
- 437:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 688              		.loc 1 437 17 is_stmt 0 view .LVU207
- 689 0010 0023     		movs	r3, #0
- 690 0012 0193     		str	r3, [sp, #4]
- 435:Drivers/coremark_stm32_hal/core_list_join.c **** 
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 22
-
-
- 691              		.loc 1 435 14 view .LVU208
- 692 0014 1E46     		mov	r6, r3
- 434:Drivers/coremark_stm32_hal/core_list_join.c ****         tail = NULL;
- 693              		.loc 1 434 14 view .LVU209
- 694 0016 0093     		str	r3, [sp]
- 695              		.loc 1 439 15 view .LVU210
- 696 0018 2FE0     		b	.L36
- 697              	.LVL62:
- 698              	.L41:
- 440:Drivers/coremark_stm32_hal/core_list_join.c ****             nmerges++;  /* there exists a merge to be done */
- 441:Drivers/coremark_stm32_hal/core_list_join.c ****             /* step `insize' places along from p */
- 442:Drivers/coremark_stm32_hal/core_list_join.c ****             q = p;
- 443:Drivers/coremark_stm32_hal/core_list_join.c ****             psize = 0;
- 444:Drivers/coremark_stm32_hal/core_list_join.c ****             for (i = 0; i < insize; i++) {
- 445:Drivers/coremark_stm32_hal/core_list_join.c ****                 psize++;
- 446:Drivers/coremark_stm32_hal/core_list_join.c **** 			    q = q->next;
- 447:Drivers/coremark_stm32_hal/core_list_join.c ****                 if (!q) break;
- 448:Drivers/coremark_stm32_hal/core_list_join.c ****             }
- 449:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 450:Drivers/coremark_stm32_hal/core_list_join.c ****             /* if q hasn't fallen off end, we have two lists to merge */
- 451:Drivers/coremark_stm32_hal/core_list_join.c ****             qsize = insize;
- 452:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 453:Drivers/coremark_stm32_hal/core_list_join.c ****             /* now we have two lists; merge them */
- 454:Drivers/coremark_stm32_hal/core_list_join.c ****             while (psize > 0 || (qsize > 0 && q)) {
- 455:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 456:Drivers/coremark_stm32_hal/core_list_join.c **** 				/* decide whether next element of merge comes from p or q */
- 457:Drivers/coremark_stm32_hal/core_list_join.c **** 				if (psize == 0) {
- 458:Drivers/coremark_stm32_hal/core_list_join.c **** 				    /* p is empty; e must come from q. */
- 459:Drivers/coremark_stm32_hal/core_list_join.c **** 				    e = q; q = q->next; qsize--;
- 460:Drivers/coremark_stm32_hal/core_list_join.c **** 				} else if (qsize == 0 || !q) {
- 461:Drivers/coremark_stm32_hal/core_list_join.c **** 				    /* q is empty; e must come from p. */
- 462:Drivers/coremark_stm32_hal/core_list_join.c **** 				    e = p; p = p->next; psize--;
- 463:Drivers/coremark_stm32_hal/core_list_join.c **** 				} else if (cmp(p->info,q->info,res) <= 0) {
- 464:Drivers/coremark_stm32_hal/core_list_join.c **** 				    /* First element of p is lower (or same); e must come from p. */
- 465:Drivers/coremark_stm32_hal/core_list_join.c **** 				    e = p; p = p->next; psize--;
- 466:Drivers/coremark_stm32_hal/core_list_join.c **** 				} else {
- 467:Drivers/coremark_stm32_hal/core_list_join.c **** 				    /* First element of q is lower; e must come from q. */
- 468:Drivers/coremark_stm32_hal/core_list_join.c **** 				    e = q; q = q->next; qsize--;
- 469:Drivers/coremark_stm32_hal/core_list_join.c **** 				}
- 470:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 471:Drivers/coremark_stm32_hal/core_list_join.c **** 		        /* add the next element to the merged list */
- 472:Drivers/coremark_stm32_hal/core_list_join.c **** 				if (tail) {
- 473:Drivers/coremark_stm32_hal/core_list_join.c **** 				    tail->next = e;
- 474:Drivers/coremark_stm32_hal/core_list_join.c **** 				} else {
- 475:Drivers/coremark_stm32_hal/core_list_join.c **** 				    list = e;
- 699              		.loc 1 475 14 view .LVU211
- 700 001a 4F46     		mov	r7, r9
- 701 001c A846     		mov	r8, r5
- 702 001e 1D46     		mov	r5, r3
- 703              	.LVL63:
- 704              		.loc 1 475 14 view .LVU212
- 705 0020 0DE0     		b	.L39
- 706              	.LVL64:
- 707              	.L42:
- 460:Drivers/coremark_stm32_hal/core_list_join.c **** 				    /* q is empty; e must come from p. */
- 708              		.loc 1 460 12 is_stmt 1 view .LVU213
- 460:Drivers/coremark_stm32_hal/core_list_join.c **** 				    /* q is empty; e must come from p. */
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 23
-
-
- 709              		.loc 1 460 30 is_stmt 0 view .LVU214
- 710 0022 B5FA85F3 		clz	r3, r5
- 711 0026 5B09     		lsrs	r3, r3, #5
- 460:Drivers/coremark_stm32_hal/core_list_join.c **** 				    /* q is empty; e must come from p. */
- 712              		.loc 1 460 27 view .LVU215
- 713 0028 002F     		cmp	r7, #0
- 714 002a 08BF     		it	eq
- 715 002c 0123     		moveq	r3, #1
- 460:Drivers/coremark_stm32_hal/core_list_join.c **** 				    /* q is empty; e must come from p. */
- 716              		.loc 1 460 15 view .LVU216
- 717 002e 73B1     		cbz	r3, .L44
- 462:Drivers/coremark_stm32_hal/core_list_join.c **** 				} else if (cmp(p->info,q->info,res) <= 0) {
- 718              		.loc 1 462 9 is_stmt 1 view .LVU217
- 719              	.LVL65:
- 462:Drivers/coremark_stm32_hal/core_list_join.c **** 				} else if (cmp(p->info,q->info,res) <= 0) {
- 720              		.loc 1 462 16 view .LVU218
- 462:Drivers/coremark_stm32_hal/core_list_join.c **** 				} else if (cmp(p->info,q->info,res) <= 0) {
- 721              		.loc 1 462 29 view .LVU219
- 462:Drivers/coremark_stm32_hal/core_list_join.c **** 				} else if (cmp(p->info,q->info,res) <= 0) {
- 722              		.loc 1 462 34 is_stmt 0 view .LVU220
- 723 0030 013C     		subs	r4, r4, #1
- 724              	.LVL66:
- 462:Drivers/coremark_stm32_hal/core_list_join.c **** 				} else if (cmp(p->info,q->info,res) <= 0) {
- 725              		.loc 1 462 11 view .LVU221
- 726 0032 4346     		mov	r3, r8
- 462:Drivers/coremark_stm32_hal/core_list_join.c **** 				} else if (cmp(p->info,q->info,res) <= 0) {
- 727              		.loc 1 462 18 view .LVU222
- 728 0034 D8F80080 		ldr	r8, [r8]
- 729              	.LVL67:
- 730              	.L43:
- 472:Drivers/coremark_stm32_hal/core_list_join.c **** 				    tail->next = e;
- 731              		.loc 1 472 5 is_stmt 1 view .LVU223
- 472:Drivers/coremark_stm32_hal/core_list_join.c **** 				    tail->next = e;
- 732              		.loc 1 472 8 is_stmt 0 view .LVU224
- 733 0038 CEB1     		cbz	r6, .L51
- 473:Drivers/coremark_stm32_hal/core_list_join.c **** 				} else {
- 734              		.loc 1 473 9 is_stmt 1 view .LVU225
- 473:Drivers/coremark_stm32_hal/core_list_join.c **** 				} else {
- 735              		.loc 1 473 20 is_stmt 0 view .LVU226
- 736 003a 3360     		str	r3, [r6]
- 737              	.LVL68:
- 738              	.L46:
- 739              		.loc 1 475 14 view .LVU227
- 740 003c 1E46     		mov	r6, r3
- 741              	.LVL69:
- 742              	.L39:
- 454:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 743              		.loc 1 454 19 is_stmt 1 view .LVU228
- 744 003e 002C     		cmp	r4, #0
- 745 0040 17DD     		ble	.L54
- 746              	.L47:
- 457:Drivers/coremark_stm32_hal/core_list_join.c **** 				    /* p is empty; e must come from q. */
- 747              		.loc 1 457 5 view .LVU229
- 457:Drivers/coremark_stm32_hal/core_list_join.c **** 				    /* p is empty; e must come from q. */
- 748              		.loc 1 457 8 is_stmt 0 view .LVU230
- 749 0042 002C     		cmp	r4, #0
- 750 0044 EDD1     		bne	.L42
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 24
-
-
- 459:Drivers/coremark_stm32_hal/core_list_join.c **** 				} else if (qsize == 0 || !q) {
- 751              		.loc 1 459 9 is_stmt 1 view .LVU231
- 752              	.LVL70:
- 459:Drivers/coremark_stm32_hal/core_list_join.c **** 				} else if (qsize == 0 || !q) {
- 753              		.loc 1 459 16 view .LVU232
- 459:Drivers/coremark_stm32_hal/core_list_join.c **** 				} else if (qsize == 0 || !q) {
- 754              		.loc 1 459 29 view .LVU233
- 459:Drivers/coremark_stm32_hal/core_list_join.c **** 				} else if (qsize == 0 || !q) {
- 755              		.loc 1 459 34 is_stmt 0 view .LVU234
- 756 0046 013F     		subs	r7, r7, #1
- 757              	.LVL71:
- 459:Drivers/coremark_stm32_hal/core_list_join.c **** 				} else if (qsize == 0 || !q) {
- 758              		.loc 1 459 11 view .LVU235
- 759 0048 2B46     		mov	r3, r5
- 459:Drivers/coremark_stm32_hal/core_list_join.c **** 				} else if (qsize == 0 || !q) {
- 760              		.loc 1 459 18 view .LVU236
- 761 004a 2D68     		ldr	r5, [r5]
- 762              	.LVL72:
- 459:Drivers/coremark_stm32_hal/core_list_join.c **** 				} else if (qsize == 0 || !q) {
- 763              		.loc 1 459 18 view .LVU237
- 764 004c F4E7     		b	.L43
- 765              	.LVL73:
- 766              	.L44:
- 463:Drivers/coremark_stm32_hal/core_list_join.c **** 				    /* First element of p is lower (or same); e must come from p. */
- 767              		.loc 1 463 12 is_stmt 1 view .LVU238
- 463:Drivers/coremark_stm32_hal/core_list_join.c **** 				    /* First element of p is lower (or same); e must come from p. */
- 768              		.loc 1 463 16 is_stmt 0 view .LVU239
- 769 004e 5A46     		mov	r2, fp
- 770 0050 6968     		ldr	r1, [r5, #4]
- 771 0052 D8F80400 		ldr	r0, [r8, #4]
- 772 0056 D047     		blx	r10
- 773              	.LVL74:
- 463:Drivers/coremark_stm32_hal/core_list_join.c **** 				    /* First element of p is lower (or same); e must come from p. */
- 774              		.loc 1 463 15 view .LVU240
- 775 0058 0028     		cmp	r0, #0
- 776 005a 03DD     		ble	.L55
- 468:Drivers/coremark_stm32_hal/core_list_join.c **** 				}
- 777              		.loc 1 468 9 is_stmt 1 view .LVU241
- 778              	.LVL75:
- 468:Drivers/coremark_stm32_hal/core_list_join.c **** 				}
- 779              		.loc 1 468 16 view .LVU242
- 468:Drivers/coremark_stm32_hal/core_list_join.c **** 				}
- 780              		.loc 1 468 29 view .LVU243
- 468:Drivers/coremark_stm32_hal/core_list_join.c **** 				}
- 781              		.loc 1 468 34 is_stmt 0 view .LVU244
- 782 005c 013F     		subs	r7, r7, #1
- 783              	.LVL76:
- 468:Drivers/coremark_stm32_hal/core_list_join.c **** 				}
- 784              		.loc 1 468 11 view .LVU245
- 785 005e 2B46     		mov	r3, r5
- 468:Drivers/coremark_stm32_hal/core_list_join.c **** 				}
- 786              		.loc 1 468 18 view .LVU246
- 787 0060 2D68     		ldr	r5, [r5]
- 788              	.LVL77:
- 468:Drivers/coremark_stm32_hal/core_list_join.c **** 				}
- 789              		.loc 1 468 18 view .LVU247
- 790 0062 E9E7     		b	.L43
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 25
-
-
- 791              	.LVL78:
- 792              	.L55:
- 465:Drivers/coremark_stm32_hal/core_list_join.c **** 				} else {
- 793              		.loc 1 465 9 is_stmt 1 view .LVU248
- 465:Drivers/coremark_stm32_hal/core_list_join.c **** 				} else {
- 794              		.loc 1 465 16 view .LVU249
- 465:Drivers/coremark_stm32_hal/core_list_join.c **** 				} else {
- 795              		.loc 1 465 29 view .LVU250
- 465:Drivers/coremark_stm32_hal/core_list_join.c **** 				} else {
- 796              		.loc 1 465 34 is_stmt 0 view .LVU251
- 797 0064 013C     		subs	r4, r4, #1
- 798              	.LVL79:
- 465:Drivers/coremark_stm32_hal/core_list_join.c **** 				} else {
- 799              		.loc 1 465 11 view .LVU252
- 800 0066 4346     		mov	r3, r8
- 465:Drivers/coremark_stm32_hal/core_list_join.c **** 				} else {
- 801              		.loc 1 465 18 view .LVU253
- 802 0068 D8F80080 		ldr	r8, [r8]
- 803              	.LVL80:
- 465:Drivers/coremark_stm32_hal/core_list_join.c **** 				} else {
- 804              		.loc 1 465 18 view .LVU254
- 805 006c E4E7     		b	.L43
- 806              	.L51:
- 807              		.loc 1 475 14 view .LVU255
- 808 006e 0093     		str	r3, [sp]
- 809              	.LVL81:
- 810              		.loc 1 475 14 view .LVU256
- 811 0070 E4E7     		b	.L46
- 812              	.LVL82:
- 813              	.L54:
- 454:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 814              		.loc 1 454 30 discriminator 1 view .LVU257
- 815 0072 002D     		cmp	r5, #0
- 816 0074 18BF     		it	ne
- 817 0076 002F     		cmpne	r7, #0
- 818 0078 E3DC     		bgt	.L47
- 819              	.LVL83:
- 820              	.L36:
- 439:Drivers/coremark_stm32_hal/core_list_join.c ****             nmerges++;  /* there exists a merge to be done */
- 821              		.loc 1 439 15 is_stmt 1 view .LVU258
- 822 007a 6DB1     		cbz	r5, .L56
- 440:Drivers/coremark_stm32_hal/core_list_join.c ****             /* step `insize' places along from p */
- 823              		.loc 1 440 13 view .LVU259
- 440:Drivers/coremark_stm32_hal/core_list_join.c ****             /* step `insize' places along from p */
- 824              		.loc 1 440 20 is_stmt 0 view .LVU260
- 825 007c 019B     		ldr	r3, [sp, #4]
- 826 007e 0133     		adds	r3, r3, #1
- 827 0080 0193     		str	r3, [sp, #4]
- 828              	.LVL84:
- 442:Drivers/coremark_stm32_hal/core_list_join.c ****             psize = 0;
- 829              		.loc 1 442 13 is_stmt 1 view .LVU261
- 443:Drivers/coremark_stm32_hal/core_list_join.c ****             for (i = 0; i < insize; i++) {
- 830              		.loc 1 443 13 view .LVU262
- 444:Drivers/coremark_stm32_hal/core_list_join.c ****                 psize++;
- 831              		.loc 1 444 13 view .LVU263
- 442:Drivers/coremark_stm32_hal/core_list_join.c ****             psize = 0;
- 832              		.loc 1 442 15 is_stmt 0 view .LVU264
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 26
-
-
- 833 0082 2B46     		mov	r3, r5
- 834              	.LVL85:
- 444:Drivers/coremark_stm32_hal/core_list_join.c ****                 psize++;
- 835              		.loc 1 444 20 view .LVU265
- 836 0084 0022     		movs	r2, #0
- 443:Drivers/coremark_stm32_hal/core_list_join.c ****             for (i = 0; i < insize; i++) {
- 837              		.loc 1 443 19 view .LVU266
- 838 0086 1446     		mov	r4, r2
- 839              	.LVL86:
- 840              	.L37:
- 444:Drivers/coremark_stm32_hal/core_list_join.c ****                 psize++;
- 841              		.loc 1 444 25 is_stmt 1 discriminator 1 view .LVU267
- 444:Drivers/coremark_stm32_hal/core_list_join.c ****                 psize++;
- 842              		.loc 1 444 13 is_stmt 0 discriminator 1 view .LVU268
- 843 0088 9145     		cmp	r9, r2
- 844 008a C6DD     		ble	.L41
- 445:Drivers/coremark_stm32_hal/core_list_join.c **** 			    q = q->next;
- 845              		.loc 1 445 17 is_stmt 1 view .LVU269
- 445:Drivers/coremark_stm32_hal/core_list_join.c **** 			    q = q->next;
- 846              		.loc 1 445 22 is_stmt 0 view .LVU270
- 847 008c 0134     		adds	r4, r4, #1
- 848              	.LVL87:
- 446:Drivers/coremark_stm32_hal/core_list_join.c ****                 if (!q) break;
- 849              		.loc 1 446 8 is_stmt 1 view .LVU271
- 446:Drivers/coremark_stm32_hal/core_list_join.c ****                 if (!q) break;
- 850              		.loc 1 446 10 is_stmt 0 view .LVU272
- 851 008e 1B68     		ldr	r3, [r3]
- 852              	.LVL88:
- 447:Drivers/coremark_stm32_hal/core_list_join.c ****             }
- 853              		.loc 1 447 17 is_stmt 1 view .LVU273
- 447:Drivers/coremark_stm32_hal/core_list_join.c ****             }
- 854              		.loc 1 447 20 is_stmt 0 view .LVU274
- 855 0090 002B     		cmp	r3, #0
- 856 0092 C2D0     		beq	.L41
- 444:Drivers/coremark_stm32_hal/core_list_join.c ****                 psize++;
- 857              		.loc 1 444 37 is_stmt 1 discriminator 2 view .LVU275
- 444:Drivers/coremark_stm32_hal/core_list_join.c ****                 psize++;
- 858              		.loc 1 444 38 is_stmt 0 discriminator 2 view .LVU276
- 859 0094 0132     		adds	r2, r2, #1
- 860              	.LVL89:
- 444:Drivers/coremark_stm32_hal/core_list_join.c ****                 psize++;
- 861              		.loc 1 444 38 discriminator 2 view .LVU277
- 862 0096 F7E7     		b	.L37
- 863              	.LVL90:
- 864              	.L56:
- 476:Drivers/coremark_stm32_hal/core_list_join.c **** 				}
- 477:Drivers/coremark_stm32_hal/core_list_join.c **** 				tail = e;
- 478:Drivers/coremark_stm32_hal/core_list_join.c **** 	        }
- 479:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 480:Drivers/coremark_stm32_hal/core_list_join.c **** 			/* now p has stepped `insize' places along, and q has too */
- 481:Drivers/coremark_stm32_hal/core_list_join.c **** 			p = q;
- 482:Drivers/coremark_stm32_hal/core_list_join.c ****         }
- 483:Drivers/coremark_stm32_hal/core_list_join.c **** 		
- 484:Drivers/coremark_stm32_hal/core_list_join.c **** 	    tail->next = NULL;
- 865              		.loc 1 484 6 is_stmt 1 view .LVU278
- 866              		.loc 1 484 17 is_stmt 0 view .LVU279
- 867 0098 0023     		movs	r3, #0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 27
-
-
- 868 009a 3360     		str	r3, [r6]
- 485:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 486:Drivers/coremark_stm32_hal/core_list_join.c ****         /* If we have done only one merge, we're finished. */
- 487:Drivers/coremark_stm32_hal/core_list_join.c ****         if (nmerges <= 1)   /* allow for nmerges==0, the empty list case */
- 869              		.loc 1 487 9 is_stmt 1 view .LVU280
- 870              		.loc 1 487 12 is_stmt 0 view .LVU281
- 871 009c 019B     		ldr	r3, [sp, #4]
- 872 009e 012B     		cmp	r3, #1
- 873 00a0 03DC     		bgt	.L57
- 488:Drivers/coremark_stm32_hal/core_list_join.c ****             return list;
- 489:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 490:Drivers/coremark_stm32_hal/core_list_join.c ****         /* Otherwise repeat, merging lists twice the size */
- 491:Drivers/coremark_stm32_hal/core_list_join.c ****         insize *= 2;
- 492:Drivers/coremark_stm32_hal/core_list_join.c ****     }
- 493:Drivers/coremark_stm32_hal/core_list_join.c **** #if COMPILER_REQUIRES_SORT_RETURN
- 494:Drivers/coremark_stm32_hal/core_list_join.c **** 	return list;
- 495:Drivers/coremark_stm32_hal/core_list_join.c **** #endif
- 496:Drivers/coremark_stm32_hal/core_list_join.c **** }
- 874              		.loc 1 496 1 view .LVU282
- 875 00a2 0098     		ldr	r0, [sp]
- 876 00a4 03B0     		add	sp, sp, #12
- 877              	.LCFI10:
- 878              		.cfi_remember_state
- 879              		.cfi_def_cfa_offset 36
- 880              	.LVL91:
- 881              		.loc 1 496 1 view .LVU283
- 882              		@ sp needed
- 883 00a6 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
- 884              	.LVL92:
- 885              	.L57:
- 886              	.LCFI11:
- 887              		.cfi_restore_state
- 491:Drivers/coremark_stm32_hal/core_list_join.c ****     }
- 888              		.loc 1 491 9 is_stmt 1 view .LVU284
- 491:Drivers/coremark_stm32_hal/core_list_join.c ****     }
- 889              		.loc 1 491 16 is_stmt 0 view .LVU285
- 890 00aa 4FEA4909 		lsl	r9, r9, #1
- 891              	.LVL93:
- 432:Drivers/coremark_stm32_hal/core_list_join.c ****         p = list;
- 892              		.loc 1 432 11 is_stmt 1 view .LVU286
- 433:Drivers/coremark_stm32_hal/core_list_join.c ****         list = NULL;
- 893              		.loc 1 433 11 is_stmt 0 view .LVU287
- 894 00ae 009D     		ldr	r5, [sp]
- 895              	.LVL94:
- 433:Drivers/coremark_stm32_hal/core_list_join.c ****         list = NULL;
- 896              		.loc 1 433 11 view .LVU288
- 897 00b0 AEE7     		b	.L50
- 898              		.cfi_endproc
- 899              	.LFE14:
- 901              		.section	.text.core_bench_list,"ax",%progbits
- 902              		.align	1
- 903              		.global	core_bench_list
- 904              		.syntax unified
- 905              		.thumb
- 906              		.thumb_func
- 907              		.fpu fpv5-d16
- 909              	core_bench_list:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 28
-
-
- 910              	.LVL95:
- 911              	.LFB7:
- 132:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_u16 retval=0;
- 912              		.loc 1 132 62 is_stmt 1 view -0
- 913              		.cfi_startproc
- 914              		@ args = 0, pretend = 0, frame = 16
- 915              		@ frame_needed = 0, uses_anonymous_args = 0
- 132:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_u16 retval=0;
- 916              		.loc 1 132 62 is_stmt 0 view .LVU290
- 917 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
- 918              	.LCFI12:
- 919              		.cfi_def_cfa_offset 36
- 920              		.cfi_offset 4, -36
- 921              		.cfi_offset 5, -32
- 922              		.cfi_offset 6, -28
- 923              		.cfi_offset 7, -24
- 924              		.cfi_offset 8, -20
- 925              		.cfi_offset 9, -16
- 926              		.cfi_offset 10, -12
- 927              		.cfi_offset 11, -8
- 928              		.cfi_offset 14, -4
- 929 0004 85B0     		sub	sp, sp, #20
- 930              	.LCFI13:
- 931              		.cfi_def_cfa_offset 56
- 932 0006 8346     		mov	fp, r0
- 933 0008 0191     		str	r1, [sp, #4]
- 133:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_u16 found=0,missed=0;
- 934              		.loc 1 133 2 is_stmt 1 view .LVU291
- 935              	.LVL96:
- 134:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_head *list=res->list;
- 936              		.loc 1 134 2 view .LVU292
- 135:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_s16 find_num=res->seed3;
- 937              		.loc 1 135 2 view .LVU293
- 135:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_s16 find_num=res->seed3;
- 938              		.loc 1 135 13 is_stmt 0 view .LVU294
- 939 000a 456A     		ldr	r5, [r0, #36]
- 940              	.LVL97:
- 136:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_head *this_find;
- 941              		.loc 1 136 2 is_stmt 1 view .LVU295
- 136:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_head *this_find;
- 942              		.loc 1 136 9 is_stmt 0 view .LVU296
- 943 000c B0F904A0 		ldrsh	r10, [r0, #4]
- 944              	.LVL98:
- 137:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_head *finder, *remover;
- 945              		.loc 1 137 2 is_stmt 1 view .LVU297
- 138:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_data info;
- 946              		.loc 1 138 2 view .LVU298
- 139:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_s16 i;
- 947              		.loc 1 139 2 view .LVU299
- 140:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 948              		.loc 1 140 2 view .LVU300
- 142:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* find <find_num> values in the list, and change the list each time (reverse and cache if value f
- 949              		.loc 1 142 2 view .LVU301
- 142:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* find <find_num> values in the list, and change the list each time (reverse and cache if value f
- 950              		.loc 1 142 10 is_stmt 0 view .LVU302
- 951 0010 ADF80E10 		strh	r1, [sp, #14]	@ movhi
- 144:Drivers/coremark_stm32_hal/core_list_join.c **** 		info.data16= (i & 0xff) ;
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 29
-
-
- 952              		.loc 1 144 2 is_stmt 1 view .LVU303
- 953              	.LVL99:
- 144:Drivers/coremark_stm32_hal/core_list_join.c **** 		info.data16= (i & 0xff) ;
- 954              		.loc 1 144 8 is_stmt 0 view .LVU304
- 955 0014 0026     		movs	r6, #0
- 134:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_head *list=res->list;
- 956              		.loc 1 134 17 view .LVU305
- 957 0016 3446     		mov	r4, r6
- 134:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_head *list=res->list;
- 958              		.loc 1 134 9 view .LVU306
- 959 0018 B046     		mov	r8, r6
- 133:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_u16 found=0,missed=0;
- 960              		.loc 1 133 9 view .LVU307
- 961 001a B146     		mov	r9, r6
- 144:Drivers/coremark_stm32_hal/core_list_join.c **** 		info.data16= (i & 0xff) ;
- 962              		.loc 1 144 2 view .LVU308
- 963 001c 1BE0     		b	.L59
- 964              	.LVL100:
- 965              	.L73:
- 149:Drivers/coremark_stm32_hal/core_list_join.c **** 			retval+=(list->next->info->data16 >> 8) & 1;
- 966              		.loc 1 149 4 is_stmt 1 view .LVU309
- 149:Drivers/coremark_stm32_hal/core_list_join.c **** 			retval+=(list->next->info->data16 >> 8) & 1;
- 967              		.loc 1 149 10 is_stmt 0 view .LVU310
- 968 001e 0134     		adds	r4, r4, #1
- 969              	.LVL101:
- 149:Drivers/coremark_stm32_hal/core_list_join.c **** 			retval+=(list->next->info->data16 >> 8) & 1;
- 970              		.loc 1 149 10 view .LVU311
- 971 0020 A4B2     		uxth	r4, r4
- 972              	.LVL102:
- 150:Drivers/coremark_stm32_hal/core_list_join.c **** 		}
- 973              		.loc 1 150 4 is_stmt 1 view .LVU312
- 150:Drivers/coremark_stm32_hal/core_list_join.c **** 		}
- 974              		.loc 1 150 17 is_stmt 0 view .LVU313
- 975 0022 0368     		ldr	r3, [r0]
- 150:Drivers/coremark_stm32_hal/core_list_join.c **** 		}
- 976              		.loc 1 150 23 view .LVU314
- 977 0024 5B68     		ldr	r3, [r3, #4]
- 150:Drivers/coremark_stm32_hal/core_list_join.c **** 		}
- 978              		.loc 1 150 44 view .LVU315
- 979 0026 93F90130 		ldrsb	r3, [r3, #1]
- 980 002a 03F00103 		and	r3, r3, #1
- 150:Drivers/coremark_stm32_hal/core_list_join.c **** 		}
- 981              		.loc 1 150 10 view .LVU316
- 982 002e 9944     		add	r9, r9, r3
- 983              	.LVL103:
- 150:Drivers/coremark_stm32_hal/core_list_join.c **** 		}
- 984              		.loc 1 150 10 view .LVU317
- 985 0030 1FFA89F9 		uxth	r9, r9
- 986              	.LVL104:
- 150:Drivers/coremark_stm32_hal/core_list_join.c **** 		}
- 987              		.loc 1 150 10 view .LVU318
- 988 0034 06E0     		b	.L61
- 989              	.L62:
- 157:Drivers/coremark_stm32_hal/core_list_join.c **** 				finder = this_find->next;
- 990              		.loc 1 157 4 is_stmt 1 view .LVU319
- 157:Drivers/coremark_stm32_hal/core_list_join.c **** 				finder = this_find->next;
- 991              		.loc 1 157 17 is_stmt 0 view .LVU320
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 30
-
-
- 992 0036 3B68     		ldr	r3, [r7]
- 157:Drivers/coremark_stm32_hal/core_list_join.c **** 				finder = this_find->next;
- 993              		.loc 1 157 7 view .LVU321
- 994 0038 23B1     		cbz	r3, .L61
- 158:Drivers/coremark_stm32_hal/core_list_join.c **** 				this_find->next = finder->next;
- 995              		.loc 1 158 5 is_stmt 1 view .LVU322
- 996              	.LVL105:
- 159:Drivers/coremark_stm32_hal/core_list_join.c **** 				finder->next=list->next;
- 997              		.loc 1 159 5 view .LVU323
- 159:Drivers/coremark_stm32_hal/core_list_join.c **** 				finder->next=list->next;
- 998              		.loc 1 159 29 is_stmt 0 view .LVU324
- 999 003a 1A68     		ldr	r2, [r3]
- 159:Drivers/coremark_stm32_hal/core_list_join.c **** 				finder->next=list->next;
- 1000              		.loc 1 159 21 view .LVU325
- 1001 003c 3A60     		str	r2, [r7]
- 160:Drivers/coremark_stm32_hal/core_list_join.c **** 				list->next=finder;
- 1002              		.loc 1 160 5 is_stmt 1 view .LVU326
- 160:Drivers/coremark_stm32_hal/core_list_join.c **** 				list->next=finder;
- 1003              		.loc 1 160 22 is_stmt 0 view .LVU327
- 1004 003e 2A68     		ldr	r2, [r5]
- 160:Drivers/coremark_stm32_hal/core_list_join.c **** 				list->next=finder;
- 1005              		.loc 1 160 17 view .LVU328
- 1006 0040 1A60     		str	r2, [r3]
- 161:Drivers/coremark_stm32_hal/core_list_join.c **** 			}
- 1007              		.loc 1 161 5 is_stmt 1 view .LVU329
- 161:Drivers/coremark_stm32_hal/core_list_join.c **** 			}
- 1008              		.loc 1 161 15 is_stmt 0 view .LVU330
- 1009 0042 2B60     		str	r3, [r5]
- 1010              	.LVL106:
- 1011              	.L61:
- 164:Drivers/coremark_stm32_hal/core_list_join.c **** 			info.idx++;
- 1012              		.loc 1 164 3 is_stmt 1 view .LVU331
- 164:Drivers/coremark_stm32_hal/core_list_join.c **** 			info.idx++;
- 1013              		.loc 1 164 11 is_stmt 0 view .LVU332
- 1014 0044 BDF90E30 		ldrsh	r3, [sp, #14]
- 164:Drivers/coremark_stm32_hal/core_list_join.c **** 			info.idx++;
- 1015              		.loc 1 164 6 view .LVU333
- 1016 0048 002B     		cmp	r3, #0
- 1017 004a 02DB     		blt	.L63
- 165:Drivers/coremark_stm32_hal/core_list_join.c **** #if CORE_DEBUG
- 1018              		.loc 1 165 4 is_stmt 1 view .LVU334
- 165:Drivers/coremark_stm32_hal/core_list_join.c **** #if CORE_DEBUG
- 1019              		.loc 1 165 12 is_stmt 0 view .LVU335
- 1020 004c 0133     		adds	r3, r3, #1
- 1021 004e ADF80E30 		strh	r3, [sp, #14]	@ movhi
- 1022              	.L63:
- 144:Drivers/coremark_stm32_hal/core_list_join.c **** 		info.data16= (i & 0xff) ;
- 1023              		.loc 1 144 24 is_stmt 1 discriminator 2 view .LVU336
- 144:Drivers/coremark_stm32_hal/core_list_join.c **** 		info.data16= (i & 0xff) ;
- 1024              		.loc 1 144 25 is_stmt 0 discriminator 2 view .LVU337
- 1025 0052 0136     		adds	r6, r6, #1
- 1026              	.LVL107:
- 144:Drivers/coremark_stm32_hal/core_list_join.c **** 		info.data16= (i & 0xff) ;
- 1027              		.loc 1 144 25 discriminator 2 view .LVU338
- 1028 0054 36B2     		sxth	r6, r6
- 1029              	.LVL108:
- 1030              	.L59:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 31
-
-
- 144:Drivers/coremark_stm32_hal/core_list_join.c **** 		info.data16= (i & 0xff) ;
- 1031              		.loc 1 144 12 is_stmt 1 discriminator 1 view .LVU339
- 144:Drivers/coremark_stm32_hal/core_list_join.c **** 		info.data16= (i & 0xff) ;
- 1032              		.loc 1 144 2 is_stmt 0 discriminator 1 view .LVU340
- 1033 0056 5645     		cmp	r6, r10
- 1034 0058 1DDA     		bge	.L72
- 145:Drivers/coremark_stm32_hal/core_list_join.c **** 		this_find=core_list_find(list,&info);
- 1035              		.loc 1 145 3 is_stmt 1 view .LVU341
- 145:Drivers/coremark_stm32_hal/core_list_join.c **** 		this_find=core_list_find(list,&info);
- 1036              		.loc 1 145 19 is_stmt 0 view .LVU342
- 1037 005a F3B2     		uxtb	r3, r6
- 145:Drivers/coremark_stm32_hal/core_list_join.c **** 		this_find=core_list_find(list,&info);
- 1038              		.loc 1 145 14 view .LVU343
- 1039 005c ADF80C30 		strh	r3, [sp, #12]	@ movhi
- 146:Drivers/coremark_stm32_hal/core_list_join.c **** 		list=core_list_reverse(list);
- 1040              		.loc 1 146 3 is_stmt 1 view .LVU344
- 146:Drivers/coremark_stm32_hal/core_list_join.c **** 		list=core_list_reverse(list);
- 1041              		.loc 1 146 13 is_stmt 0 view .LVU345
- 1042 0060 03A9     		add	r1, sp, #12
- 1043 0062 2846     		mov	r0, r5
- 1044 0064 FFF7FEFF 		bl	core_list_find
- 1045              	.LVL109:
- 1046 0068 0746     		mov	r7, r0
- 1047              	.LVL110:
- 147:Drivers/coremark_stm32_hal/core_list_join.c **** 		if (this_find==NULL) {
- 1048              		.loc 1 147 3 is_stmt 1 view .LVU346
- 147:Drivers/coremark_stm32_hal/core_list_join.c **** 		if (this_find==NULL) {
- 1049              		.loc 1 147 8 is_stmt 0 view .LVU347
- 1050 006a 2846     		mov	r0, r5
- 1051              	.LVL111:
- 147:Drivers/coremark_stm32_hal/core_list_join.c **** 		if (this_find==NULL) {
- 1052              		.loc 1 147 8 view .LVU348
- 1053 006c FFF7FEFF 		bl	core_list_reverse
- 1054              	.LVL112:
- 1055 0070 0546     		mov	r5, r0
- 1056              	.LVL113:
- 148:Drivers/coremark_stm32_hal/core_list_join.c **** 			missed++;
- 1057              		.loc 1 148 3 is_stmt 1 view .LVU349
- 148:Drivers/coremark_stm32_hal/core_list_join.c **** 			missed++;
- 1058              		.loc 1 148 6 is_stmt 0 view .LVU350
- 1059 0072 002F     		cmp	r7, #0
- 1060 0074 D3D0     		beq	.L73
- 153:Drivers/coremark_stm32_hal/core_list_join.c **** 			if (this_find->info->data16 & 0x1) /* use found value */
- 1061              		.loc 1 153 4 is_stmt 1 view .LVU351
- 153:Drivers/coremark_stm32_hal/core_list_join.c **** 			if (this_find->info->data16 & 0x1) /* use found value */
- 1062              		.loc 1 153 9 is_stmt 0 view .LVU352
- 1063 0076 08F10108 		add	r8, r8, #1
- 1064              	.LVL114:
- 153:Drivers/coremark_stm32_hal/core_list_join.c **** 			if (this_find->info->data16 & 0x1) /* use found value */
- 1065              		.loc 1 153 9 view .LVU353
- 1066 007a 1FFA88F8 		uxth	r8, r8
- 1067              	.LVL115:
- 154:Drivers/coremark_stm32_hal/core_list_join.c **** 				retval+=(this_find->info->data16 >> 9) & 1;
- 1068              		.loc 1 154 4 is_stmt 1 view .LVU354
- 154:Drivers/coremark_stm32_hal/core_list_join.c **** 				retval+=(this_find->info->data16 >> 9) & 1;
- 1069              		.loc 1 154 17 is_stmt 0 view .LVU355
- 1070 007e 7B68     		ldr	r3, [r7, #4]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 32
-
-
- 154:Drivers/coremark_stm32_hal/core_list_join.c **** 				retval+=(this_find->info->data16 >> 9) & 1;
- 1071              		.loc 1 154 23 view .LVU356
- 1072 0080 B3F90030 		ldrsh	r3, [r3]
- 154:Drivers/coremark_stm32_hal/core_list_join.c **** 				retval+=(this_find->info->data16 >> 9) & 1;
- 1073              		.loc 1 154 7 view .LVU357
- 1074 0084 13F0010F 		tst	r3, #1
- 1075 0088 D5D0     		beq	.L62
- 155:Drivers/coremark_stm32_hal/core_list_join.c **** 			/* and cache next item at the head of the list (if any) */
- 1076              		.loc 1 155 5 is_stmt 1 view .LVU358
- 155:Drivers/coremark_stm32_hal/core_list_join.c **** 			/* and cache next item at the head of the list (if any) */
- 1077              		.loc 1 155 44 is_stmt 0 view .LVU359
- 1078 008a C3F34023 		ubfx	r3, r3, #9, #1
- 155:Drivers/coremark_stm32_hal/core_list_join.c **** 			/* and cache next item at the head of the list (if any) */
- 1079              		.loc 1 155 11 view .LVU360
- 1080 008e 9944     		add	r9, r9, r3
- 1081              	.LVL116:
- 155:Drivers/coremark_stm32_hal/core_list_join.c **** 			/* and cache next item at the head of the list (if any) */
- 1082              		.loc 1 155 11 view .LVU361
- 1083 0090 1FFA89F9 		uxth	r9, r9
- 1084              	.LVL117:
- 155:Drivers/coremark_stm32_hal/core_list_join.c **** 			/* and cache next item at the head of the list (if any) */
- 1085              		.loc 1 155 11 view .LVU362
- 1086 0094 CFE7     		b	.L62
- 1087              	.LVL118:
- 1088              	.L72:
- 170:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* sort the list by data content and remove one item*/
- 1089              		.loc 1 170 2 is_stmt 1 view .LVU363
- 170:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* sort the list by data content and remove one item*/
- 1090              		.loc 1 170 17 is_stmt 0 view .LVU364
- 1091 0096 C4EB8804 		rsb	r4, r4, r8, lsl #2
- 1092              	.LVL119:
- 170:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* sort the list by data content and remove one item*/
- 1093              		.loc 1 170 8 view .LVU365
- 1094 009a 19FA84F9 		uxtah	r9, r9, r4
- 1095              	.LVL120:
- 170:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* sort the list by data content and remove one item*/
- 1096              		.loc 1 170 8 view .LVU366
- 1097 009e 1FFA89F9 		uxth	r9, r9
- 1098              	.LVL121:
- 172:Drivers/coremark_stm32_hal/core_list_join.c **** 		list=core_list_mergesort(list,cmp_complex,res);
- 1099              		.loc 1 172 2 is_stmt 1 view .LVU367
- 172:Drivers/coremark_stm32_hal/core_list_join.c **** 		list=core_list_mergesort(list,cmp_complex,res);
- 1100              		.loc 1 172 5 is_stmt 0 view .LVU368
- 1101 00a2 019B     		ldr	r3, [sp, #4]
- 1102 00a4 002B     		cmp	r3, #0
- 1103 00a6 13DC     		bgt	.L74
- 1104              	.L65:
- 174:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* CRC data content of list from location of index N forward, and then undo remove */
- 1105              		.loc 1 174 2 is_stmt 1 view .LVU369
- 174:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* CRC data content of list from location of index N forward, and then undo remove */
- 1106              		.loc 1 174 10 is_stmt 0 view .LVU370
- 1107 00a8 2868     		ldr	r0, [r5]
- 1108 00aa FFF7FEFF 		bl	core_list_remove
- 1109              	.LVL122:
- 1110 00ae 0446     		mov	r4, r0
- 1111              	.LVL123:
- 176:Drivers/coremark_stm32_hal/core_list_join.c **** 	if (!finder)
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 33
-
-
- 1112              		.loc 1 176 2 is_stmt 1 view .LVU371
- 176:Drivers/coremark_stm32_hal/core_list_join.c **** 	if (!finder)
- 1113              		.loc 1 176 9 is_stmt 0 view .LVU372
- 1114 00b0 03A9     		add	r1, sp, #12
- 1115 00b2 2846     		mov	r0, r5
- 1116              	.LVL124:
- 176:Drivers/coremark_stm32_hal/core_list_join.c **** 	if (!finder)
- 1117              		.loc 1 176 9 view .LVU373
- 1118 00b4 FFF7FEFF 		bl	core_list_find
- 1119              	.LVL125:
- 177:Drivers/coremark_stm32_hal/core_list_join.c **** 		finder=list->next;
- 1120              		.loc 1 177 2 is_stmt 1 view .LVU374
- 177:Drivers/coremark_stm32_hal/core_list_join.c **** 		finder=list->next;
- 1121              		.loc 1 177 5 is_stmt 0 view .LVU375
- 1122 00b8 0646     		mov	r6, r0
- 1123              	.LVL126:
- 177:Drivers/coremark_stm32_hal/core_list_join.c **** 		finder=list->next;
- 1124              		.loc 1 177 5 view .LVU376
- 1125 00ba 80B1     		cbz	r0, .L75
- 1126              	.LVL127:
- 1127              	.L67:
- 179:Drivers/coremark_stm32_hal/core_list_join.c **** 		retval=crc16(list->info->data16,retval);
- 1128              		.loc 1 179 8 is_stmt 1 view .LVU377
- 1129 00bc 8EB1     		cbz	r6, .L76
- 180:Drivers/coremark_stm32_hal/core_list_join.c **** 		finder=finder->next;
- 1130              		.loc 1 180 3 view .LVU378
- 180:Drivers/coremark_stm32_hal/core_list_join.c **** 		finder=finder->next;
- 1131              		.loc 1 180 20 is_stmt 0 view .LVU379
- 1132 00be 6B68     		ldr	r3, [r5, #4]
- 180:Drivers/coremark_stm32_hal/core_list_join.c **** 		finder=finder->next;
- 1133              		.loc 1 180 10 view .LVU380
- 1134 00c0 4946     		mov	r1, r9
- 1135 00c2 B3F90000 		ldrsh	r0, [r3]
- 1136 00c6 FFF7FEFF 		bl	crc16
- 1137              	.LVL128:
- 1138 00ca 8146     		mov	r9, r0
- 1139              	.LVL129:
- 181:Drivers/coremark_stm32_hal/core_list_join.c **** 	}
- 1140              		.loc 1 181 3 is_stmt 1 view .LVU381
- 181:Drivers/coremark_stm32_hal/core_list_join.c **** 	}
- 1141              		.loc 1 181 9 is_stmt 0 view .LVU382
- 1142 00cc 3668     		ldr	r6, [r6]
- 1143              	.LVL130:
- 181:Drivers/coremark_stm32_hal/core_list_join.c **** 	}
- 1144              		.loc 1 181 9 view .LVU383
- 1145 00ce F5E7     		b	.L67
- 1146              	.LVL131:
- 1147              	.L74:
- 173:Drivers/coremark_stm32_hal/core_list_join.c **** 	remover=core_list_remove(list->next);
- 1148              		.loc 1 173 3 is_stmt 1 view .LVU384
- 173:Drivers/coremark_stm32_hal/core_list_join.c **** 	remover=core_list_remove(list->next);
- 1149              		.loc 1 173 8 is_stmt 0 view .LVU385
- 1150 00d0 5A46     		mov	r2, fp
- 1151 00d2 1149     		ldr	r1, .L77
- 1152 00d4 2846     		mov	r0, r5
- 1153 00d6 FFF7FEFF 		bl	core_list_mergesort
- 1154              	.LVL132:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 34
-
-
- 1155 00da 0546     		mov	r5, r0
- 1156              	.LVL133:
- 173:Drivers/coremark_stm32_hal/core_list_join.c **** 	remover=core_list_remove(list->next);
- 1157              		.loc 1 173 8 view .LVU386
- 1158 00dc E4E7     		b	.L65
- 1159              	.LVL134:
- 1160              	.L75:
- 178:Drivers/coremark_stm32_hal/core_list_join.c **** 	while (finder) {
- 1161              		.loc 1 178 3 is_stmt 1 view .LVU387
- 178:Drivers/coremark_stm32_hal/core_list_join.c **** 	while (finder) {
- 1162              		.loc 1 178 9 is_stmt 0 view .LVU388
- 1163 00de 2E68     		ldr	r6, [r5]
- 1164              	.LVL135:
- 178:Drivers/coremark_stm32_hal/core_list_join.c **** 	while (finder) {
- 1165              		.loc 1 178 9 view .LVU389
- 1166 00e0 ECE7     		b	.L67
- 1167              	.L76:
- 186:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* sort the list by index, in effect returning the list to original state */
- 1168              		.loc 1 186 2 is_stmt 1 view .LVU390
- 186:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* sort the list by index, in effect returning the list to original state */
- 1169              		.loc 1 186 10 is_stmt 0 view .LVU391
- 1170 00e2 2968     		ldr	r1, [r5]
- 1171 00e4 2046     		mov	r0, r4
- 1172 00e6 FFF7FEFF 		bl	core_list_undo_remove
- 1173              	.LVL136:
- 188:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* CRC data content of list */
- 1174              		.loc 1 188 2 is_stmt 1 view .LVU392
- 188:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* CRC data content of list */
- 1175              		.loc 1 188 7 is_stmt 0 view .LVU393
- 1176 00ea 0022     		movs	r2, #0
- 1177 00ec 0B49     		ldr	r1, .L77+4
- 1178 00ee 2846     		mov	r0, r5
- 1179 00f0 FFF7FEFF 		bl	core_list_mergesort
- 1180              	.LVL137:
- 1181 00f4 0446     		mov	r4, r0
- 1182              	.LVL138:
- 190:Drivers/coremark_stm32_hal/core_list_join.c **** 	while (finder) {
- 1183              		.loc 1 190 2 is_stmt 1 view .LVU394
- 190:Drivers/coremark_stm32_hal/core_list_join.c **** 	while (finder) {
- 1184              		.loc 1 190 8 is_stmt 0 view .LVU395
- 1185 00f6 0568     		ldr	r5, [r0]
- 1186              	.LVL139:
- 191:Drivers/coremark_stm32_hal/core_list_join.c **** 		retval=crc16(list->info->data16,retval);
- 1187              		.loc 1 191 2 is_stmt 1 view .LVU396
- 191:Drivers/coremark_stm32_hal/core_list_join.c **** 		retval=crc16(list->info->data16,retval);
- 1188              		.loc 1 191 8 is_stmt 0 view .LVU397
- 1189 00f8 07E0     		b	.L69
- 1190              	.LVL140:
- 1191              	.L70:
- 192:Drivers/coremark_stm32_hal/core_list_join.c **** 		finder=finder->next;
- 1192              		.loc 1 192 3 is_stmt 1 view .LVU398
- 192:Drivers/coremark_stm32_hal/core_list_join.c **** 		finder=finder->next;
- 1193              		.loc 1 192 20 is_stmt 0 view .LVU399
- 1194 00fa 6368     		ldr	r3, [r4, #4]
- 192:Drivers/coremark_stm32_hal/core_list_join.c **** 		finder=finder->next;
- 1195              		.loc 1 192 10 view .LVU400
- 1196 00fc 4946     		mov	r1, r9
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 35
-
-
- 1197 00fe B3F90000 		ldrsh	r0, [r3]
- 1198 0102 FFF7FEFF 		bl	crc16
- 1199              	.LVL141:
- 1200 0106 8146     		mov	r9, r0
- 1201              	.LVL142:
- 193:Drivers/coremark_stm32_hal/core_list_join.c **** 	}
- 1202              		.loc 1 193 3 is_stmt 1 view .LVU401
- 193:Drivers/coremark_stm32_hal/core_list_join.c **** 	}
- 1203              		.loc 1 193 9 is_stmt 0 view .LVU402
- 1204 0108 2D68     		ldr	r5, [r5]
- 1205              	.LVL143:
- 1206              	.L69:
- 191:Drivers/coremark_stm32_hal/core_list_join.c **** 		retval=crc16(list->info->data16,retval);
- 1207              		.loc 1 191 8 is_stmt 1 view .LVU403
- 1208 010a 002D     		cmp	r5, #0
- 1209 010c F5D1     		bne	.L70
- 198:Drivers/coremark_stm32_hal/core_list_join.c **** }
- 1210              		.loc 1 198 2 view .LVU404
- 199:Drivers/coremark_stm32_hal/core_list_join.c **** /* Function: core_list_init
- 1211              		.loc 1 199 1 is_stmt 0 view .LVU405
- 1212 010e 4846     		mov	r0, r9
- 1213 0110 05B0     		add	sp, sp, #20
- 1214              	.LCFI14:
- 1215              		.cfi_def_cfa_offset 36
- 1216              		@ sp needed
- 1217 0112 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
- 1218              	.LVL144:
- 1219              	.L78:
- 199:Drivers/coremark_stm32_hal/core_list_join.c **** /* Function: core_list_init
- 1220              		.loc 1 199 1 view .LVU406
- 1221 0116 00BF     		.align	2
- 1222              	.L77:
- 1223 0118 00000000 		.word	cmp_complex
- 1224 011c 00000000 		.word	cmp_idx
- 1225              		.cfi_endproc
- 1226              	.LFE7:
- 1228              		.section	.text.core_list_init,"ax",%progbits
- 1229              		.align	1
- 1230              		.global	core_list_init
- 1231              		.syntax unified
- 1232              		.thumb
- 1233              		.thumb_func
- 1234              		.fpu fpv5-d16
- 1236              	core_list_init:
- 1237              	.LVL145:
- 1238              	.LFB8:
- 213:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* calculated pointers for the list */
- 1239              		.loc 1 213 77 is_stmt 1 view -0
- 1240              		.cfi_startproc
- 1241              		@ args = 0, pretend = 0, frame = 16
- 1242              		@ frame_needed = 0, uses_anonymous_args = 0
- 213:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* calculated pointers for the list */
- 1243              		.loc 1 213 77 is_stmt 0 view .LVU408
- 1244 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
- 1245              	.LCFI15:
- 1246              		.cfi_def_cfa_offset 28
- 1247              		.cfi_offset 4, -28
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 36
-
-
- 1248              		.cfi_offset 5, -24
- 1249              		.cfi_offset 6, -20
- 1250              		.cfi_offset 7, -16
- 1251              		.cfi_offset 8, -12
- 1252              		.cfi_offset 9, -8
- 1253              		.cfi_offset 14, -4
- 1254 0004 87B0     		sub	sp, sp, #28
- 1255              	.LCFI16:
- 1256              		.cfi_def_cfa_offset 56
- 1257 0006 0391     		str	r1, [sp, #12]
- 1258 0008 9046     		mov	r8, r2
- 215:Drivers/coremark_stm32_hal/core_list_join.c **** 	ee_u32 size=(blksize/per_item)-2; /* to accomodate systems with 64b pointers, and make sure same c
- 1259              		.loc 1 215 2 is_stmt 1 view .LVU409
- 1260              	.LVL146:
- 216:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_head *memblock_end=memblock+size;
- 1261              		.loc 1 216 2 view .LVU410
- 216:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_head *memblock_end=memblock+size;
- 1262              		.loc 1 216 22 is_stmt 0 view .LVU411
- 1263 000a 364D     		ldr	r5, .L89
- 1264 000c A5FB0035 		umull	r3, r5, r5, r0
- 1265 0010 2D09     		lsrs	r5, r5, #4
- 216:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_head *memblock_end=memblock+size;
- 1266              		.loc 1 216 9 view .LVU412
- 1267 0012 023D     		subs	r5, r5, #2
- 1268              	.LVL147:
- 217:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_data *datablock=(list_data *)(memblock_end);
- 1269              		.loc 1 217 2 is_stmt 1 view .LVU413
- 217:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_data *datablock=(list_data *)(memblock_end);
- 1270              		.loc 1 217 34 is_stmt 0 view .LVU414
- 1271 0014 0E46     		mov	r6, r1
- 217:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_data *datablock=(list_data *)(memblock_end);
- 1272              		.loc 1 217 13 view .LVU415
- 1273 0016 01EBC507 		add	r7, r1, r5, lsl #3
- 1274              	.LVL148:
- 218:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_data *datablock_end=datablock+size;
- 1275              		.loc 1 218 2 is_stmt 1 view .LVU416
- 218:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_data *datablock_end=datablock+size;
- 1276              		.loc 1 218 13 is_stmt 0 view .LVU417
- 1277 001a 0597     		str	r7, [sp, #20]
- 219:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* some useful variables */
- 1278              		.loc 1 219 2 is_stmt 1 view .LVU418
- 219:Drivers/coremark_stm32_hal/core_list_join.c **** 	/* some useful variables */
- 1279              		.loc 1 219 13 is_stmt 0 view .LVU419
- 1280 001c 07EB8509 		add	r9, r7, r5, lsl #2
- 1281              	.LVL149:
- 221:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_head *finder,*list=memblock;
- 1282              		.loc 1 221 2 is_stmt 1 view .LVU420
- 222:Drivers/coremark_stm32_hal/core_list_join.c **** 	list_data info;
- 1283              		.loc 1 222 2 view .LVU421
- 223:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 1284              		.loc 1 223 2 view .LVU422
- 226:Drivers/coremark_stm32_hal/core_list_join.c **** 	list->info=datablock;
- 1285              		.loc 1 226 2 view .LVU423
- 226:Drivers/coremark_stm32_hal/core_list_join.c **** 	list->info=datablock;
- 1286              		.loc 1 226 12 is_stmt 0 view .LVU424
- 1287 0020 0024     		movs	r4, #0
- 1288 0022 0C60     		str	r4, [r1]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 37
-
-
- 227:Drivers/coremark_stm32_hal/core_list_join.c **** 	list->info->idx=0x0000;
- 1289              		.loc 1 227 2 is_stmt 1 view .LVU425
- 227:Drivers/coremark_stm32_hal/core_list_join.c **** 	list->info->idx=0x0000;
- 1290              		.loc 1 227 12 is_stmt 0 view .LVU426
- 1291 0024 059B     		ldr	r3, [sp, #20]
- 1292 0026 4B60     		str	r3, [r1, #4]
- 228:Drivers/coremark_stm32_hal/core_list_join.c **** 	list->info->data16=(ee_s16)0x8080;
- 1293              		.loc 1 228 2 is_stmt 1 view .LVU427
- 228:Drivers/coremark_stm32_hal/core_list_join.c **** 	list->info->data16=(ee_s16)0x8080;
- 1294              		.loc 1 228 17 is_stmt 0 view .LVU428
- 1295 0028 5C80     		strh	r4, [r3, #2]	@ movhi
- 229:Drivers/coremark_stm32_hal/core_list_join.c **** 	memblock++;
- 1296              		.loc 1 229 2 is_stmt 1 view .LVU429
- 229:Drivers/coremark_stm32_hal/core_list_join.c **** 	memblock++;
- 1297              		.loc 1 229 6 is_stmt 0 view .LVU430
- 1298 002a 4B68     		ldr	r3, [r1, #4]
- 229:Drivers/coremark_stm32_hal/core_list_join.c **** 	memblock++;
- 1299              		.loc 1 229 20 view .LVU431
- 1300 002c 48F28002 		movw	r2, #32896
- 1301              	.LVL150:
- 229:Drivers/coremark_stm32_hal/core_list_join.c **** 	memblock++;
- 1302              		.loc 1 229 20 view .LVU432
- 1303 0030 1A80     		strh	r2, [r3]	@ movhi
- 230:Drivers/coremark_stm32_hal/core_list_join.c **** 	datablock++;
- 1304              		.loc 1 230 2 is_stmt 1 view .LVU433
- 230:Drivers/coremark_stm32_hal/core_list_join.c **** 	datablock++;
- 1305              		.loc 1 230 10 is_stmt 0 view .LVU434
- 1306 0032 039B     		ldr	r3, [sp, #12]
- 1307 0034 0833     		adds	r3, r3, #8
- 1308 0036 0393     		str	r3, [sp, #12]
- 231:Drivers/coremark_stm32_hal/core_list_join.c **** 	info.idx=0x7fff;
- 1309              		.loc 1 231 2 is_stmt 1 view .LVU435
- 231:Drivers/coremark_stm32_hal/core_list_join.c **** 	info.idx=0x7fff;
- 1310              		.loc 1 231 11 is_stmt 0 view .LVU436
- 1311 0038 059B     		ldr	r3, [sp, #20]
- 1312 003a 0433     		adds	r3, r3, #4
- 1313 003c 0593     		str	r3, [sp, #20]
- 232:Drivers/coremark_stm32_hal/core_list_join.c **** 	info.data16=(ee_s16)0xffff;
- 1314              		.loc 1 232 2 is_stmt 1 view .LVU437
- 232:Drivers/coremark_stm32_hal/core_list_join.c **** 	info.data16=(ee_s16)0xffff;
- 1315              		.loc 1 232 10 is_stmt 0 view .LVU438
- 1316 003e 47F6FF73 		movw	r3, #32767
- 1317 0042 ADF81230 		strh	r3, [sp, #18]	@ movhi
- 233:Drivers/coremark_stm32_hal/core_list_join.c **** 	core_list_insert_new(list,&info,&memblock,&datablock,memblock_end,datablock_end);
- 1318              		.loc 1 233 2 is_stmt 1 view .LVU439
- 233:Drivers/coremark_stm32_hal/core_list_join.c **** 	core_list_insert_new(list,&info,&memblock,&datablock,memblock_end,datablock_end);
- 1319              		.loc 1 233 13 is_stmt 0 view .LVU440
- 1320 0046 4FF6FF73 		movw	r3, #65535
- 1321 004a ADF81030 		strh	r3, [sp, #16]	@ movhi
- 234:Drivers/coremark_stm32_hal/core_list_join.c **** 	
- 1322              		.loc 1 234 2 is_stmt 1 view .LVU441
- 1323 004e CDF80490 		str	r9, [sp, #4]
- 1324 0052 0097     		str	r7, [sp]
- 1325 0054 05AB     		add	r3, sp, #20
- 1326 0056 03AA     		add	r2, sp, #12
- 1327 0058 04A9     		add	r1, sp, #16
- 1328              	.LVL151:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 38
-
-
- 234:Drivers/coremark_stm32_hal/core_list_join.c **** 	
- 1329              		.loc 1 234 2 is_stmt 0 view .LVU442
- 1330 005a 3046     		mov	r0, r6
- 1331              	.LVL152:
- 234:Drivers/coremark_stm32_hal/core_list_join.c **** 	
- 1332              		.loc 1 234 2 view .LVU443
- 1333 005c FFF7FEFF 		bl	core_list_insert_new
- 1334              	.LVL153:
- 237:Drivers/coremark_stm32_hal/core_list_join.c **** 		ee_u16 datpat=((ee_u16)(seed^i) & 0xf);
- 1335              		.loc 1 237 2 is_stmt 1 view .LVU444
- 1336              	.L80:
- 237:Drivers/coremark_stm32_hal/core_list_join.c **** 		ee_u16 datpat=((ee_u16)(seed^i) & 0xf);
- 1337              		.loc 1 237 12 discriminator 1 view .LVU445
- 237:Drivers/coremark_stm32_hal/core_list_join.c **** 		ee_u16 datpat=((ee_u16)(seed^i) & 0xf);
- 1338              		.loc 1 237 2 is_stmt 0 discriminator 1 view .LVU446
- 1339 0060 AC42     		cmp	r4, r5
- 1340 0062 18D2     		bcs	.L87
- 1341              	.LBB3:
- 238:Drivers/coremark_stm32_hal/core_list_join.c **** 		ee_u16 dat=(datpat<<3) | (i&0x7); /* alternate between algorithms */
- 1342              		.loc 1 238 3 is_stmt 1 discriminator 3 view .LVU447
- 238:Drivers/coremark_stm32_hal/core_list_join.c **** 		ee_u16 dat=(datpat<<3) | (i&0x7); /* alternate between algorithms */
- 1343              		.loc 1 238 35 is_stmt 0 discriminator 3 view .LVU448
- 1344 0064 A2B2     		uxth	r2, r4
- 1345 0066 1FFA88F3 		uxth	r3, r8
- 238:Drivers/coremark_stm32_hal/core_list_join.c **** 		ee_u16 dat=(datpat<<3) | (i&0x7); /* alternate between algorithms */
- 1346              		.loc 1 238 18 discriminator 3 view .LVU449
- 1347 006a 5340     		eors	r3, r3, r2
- 1348              	.LVL154:
- 239:Drivers/coremark_stm32_hal/core_list_join.c **** 		info.data16=(dat<<8) | dat;		/* fill the data with actual data and upper bits with rebuild value 
- 1349              		.loc 1 239 3 is_stmt 1 discriminator 3 view .LVU450
- 239:Drivers/coremark_stm32_hal/core_list_join.c **** 		info.data16=(dat<<8) | dat;		/* fill the data with actual data and upper bits with rebuild value 
- 1350              		.loc 1 239 21 is_stmt 0 discriminator 3 view .LVU451
- 1351 006c DB00     		lsls	r3, r3, #3
- 1352              	.LVL155:
- 239:Drivers/coremark_stm32_hal/core_list_join.c **** 		info.data16=(dat<<8) | dat;		/* fill the data with actual data and upper bits with rebuild value 
- 1353              		.loc 1 239 21 discriminator 3 view .LVU452
- 1354 006e 03F07803 		and	r3, r3, #120
- 239:Drivers/coremark_stm32_hal/core_list_join.c **** 		info.data16=(dat<<8) | dat;		/* fill the data with actual data and upper bits with rebuild value 
- 1355              		.loc 1 239 30 discriminator 3 view .LVU453
- 1356 0072 02F00702 		and	r2, r2, #7
- 1357              	.LVL156:
- 239:Drivers/coremark_stm32_hal/core_list_join.c **** 		info.data16=(dat<<8) | dat;		/* fill the data with actual data and upper bits with rebuild value 
- 1358              		.loc 1 239 10 discriminator 3 view .LVU454
- 1359 0076 1343     		orrs	r3, r3, r2
- 1360              	.LVL157:
- 240:Drivers/coremark_stm32_hal/core_list_join.c **** 		core_list_insert_new(list,&info,&memblock,&datablock,memblock_end,datablock_end);
- 1361              		.loc 1 240 3 is_stmt 1 discriminator 3 view .LVU455
- 240:Drivers/coremark_stm32_hal/core_list_join.c **** 		core_list_insert_new(list,&info,&memblock,&datablock,memblock_end,datablock_end);
- 1362              		.loc 1 240 24 is_stmt 0 discriminator 3 view .LVU456
- 1363 0078 43EA0323 		orr	r3, r3, r3, lsl #8
- 1364              	.LVL158:
- 240:Drivers/coremark_stm32_hal/core_list_join.c **** 		core_list_insert_new(list,&info,&memblock,&datablock,memblock_end,datablock_end);
- 1365              		.loc 1 240 14 discriminator 3 view .LVU457
- 1366 007c ADF81030 		strh	r3, [sp, #16]	@ movhi
- 241:Drivers/coremark_stm32_hal/core_list_join.c **** 	}
- 1367              		.loc 1 241 3 is_stmt 1 discriminator 3 view .LVU458
- 1368 0080 CDF80490 		str	r9, [sp, #4]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 39
-
-
- 1369 0084 0097     		str	r7, [sp]
- 1370 0086 05AB     		add	r3, sp, #20
- 1371 0088 03AA     		add	r2, sp, #12
- 1372              	.LVL159:
- 241:Drivers/coremark_stm32_hal/core_list_join.c **** 	}
- 1373              		.loc 1 241 3 is_stmt 0 discriminator 3 view .LVU459
- 1374 008a 04A9     		add	r1, sp, #16
- 1375 008c 3046     		mov	r0, r6
- 1376 008e FFF7FEFF 		bl	core_list_insert_new
- 1377              	.LVL160:
- 1378              	.LBE3:
- 237:Drivers/coremark_stm32_hal/core_list_join.c **** 		ee_u16 datpat=((ee_u16)(seed^i) & 0xf);
- 1379              		.loc 1 237 20 is_stmt 1 discriminator 3 view .LVU460
- 237:Drivers/coremark_stm32_hal/core_list_join.c **** 		ee_u16 datpat=((ee_u16)(seed^i) & 0xf);
- 1380              		.loc 1 237 21 is_stmt 0 discriminator 3 view .LVU461
- 1381 0092 0134     		adds	r4, r4, #1
- 1382              	.LVL161:
- 237:Drivers/coremark_stm32_hal/core_list_join.c **** 		ee_u16 datpat=((ee_u16)(seed^i) & 0xf);
- 1383              		.loc 1 237 21 discriminator 3 view .LVU462
- 1384 0094 E4E7     		b	.L80
- 1385              	.L87:
- 244:Drivers/coremark_stm32_hal/core_list_join.c **** 	i=1;
- 1386              		.loc 1 244 2 is_stmt 1 view .LVU463
- 244:Drivers/coremark_stm32_hal/core_list_join.c **** 	i=1;
- 1387              		.loc 1 244 8 is_stmt 0 view .LVU464
- 1388 0096 3268     		ldr	r2, [r6]
- 1389              	.LVL162:
- 245:Drivers/coremark_stm32_hal/core_list_join.c **** 	while (finder->next!=NULL) {
- 1390              		.loc 1 245 2 is_stmt 1 view .LVU465
- 246:Drivers/coremark_stm32_hal/core_list_join.c **** 		if (i<size/5) /* first 20% of the list in order */
- 1391              		.loc 1 246 2 view .LVU466
- 245:Drivers/coremark_stm32_hal/core_list_join.c **** 	while (finder->next!=NULL) {
- 1392              		.loc 1 245 3 is_stmt 0 view .LVU467
- 1393 0098 0123     		movs	r3, #1
- 246:Drivers/coremark_stm32_hal/core_list_join.c **** 		if (i<size/5) /* first 20% of the list in order */
- 1394              		.loc 1 246 8 view .LVU468
- 1395 009a 0EE0     		b	.L82
- 1396              	.LVL163:
- 1397              	.L83:
- 1398              	.LBB4:
- 250:Drivers/coremark_stm32_hal/core_list_join.c **** 			finder->info->idx=0x3fff & (((i & 0x07) << 8) | pat); /* make sure the mixed items end up after 
- 1399              		.loc 1 250 4 is_stmt 1 view .LVU469
- 250:Drivers/coremark_stm32_hal/core_list_join.c **** 			finder->info->idx=0x3fff & (((i & 0x07) << 8) | pat); /* make sure the mixed items end up after 
- 1400              		.loc 1 250 25 is_stmt 0 view .LVU470
- 1401 009c 581C     		adds	r0, r3, #1
- 1402              	.LVL164:
- 250:Drivers/coremark_stm32_hal/core_list_join.c **** 			finder->info->idx=0x3fff & (((i & 0x07) << 8) | pat); /* make sure the mixed items end up after 
- 1403              		.loc 1 250 15 view .LVU471
- 1404 009e 9BB2     		uxth	r3, r3
- 1405 00a0 1FFA88F1 		uxth	r1, r8
- 250:Drivers/coremark_stm32_hal/core_list_join.c **** 			finder->info->idx=0x3fff & (((i & 0x07) << 8) | pat); /* make sure the mixed items end up after 
- 1406              		.loc 1 250 11 view .LVU472
- 1407 00a4 4B40     		eors	r3, r3, r1
- 1408              	.LVL165:
- 251:Drivers/coremark_stm32_hal/core_list_join.c **** 		}
- 1409              		.loc 1 251 4 is_stmt 1 view .LVU473
- 251:Drivers/coremark_stm32_hal/core_list_join.c **** 		}
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 40
-
-
- 1410              		.loc 1 251 44 is_stmt 0 view .LVU474
- 1411 00a6 0102     		lsls	r1, r0, #8
- 1412 00a8 01F4E061 		and	r1, r1, #1792
- 251:Drivers/coremark_stm32_hal/core_list_join.c **** 		}
- 1413              		.loc 1 251 50 view .LVU475
- 1414 00ac 0B43     		orrs	r3, r3, r1
- 1415              	.LVL166:
- 251:Drivers/coremark_stm32_hal/core_list_join.c **** 		}
- 1416              		.loc 1 251 10 view .LVU476
- 1417 00ae 5168     		ldr	r1, [r2, #4]
- 251:Drivers/coremark_stm32_hal/core_list_join.c **** 		}
- 1418              		.loc 1 251 29 view .LVU477
- 1419 00b0 C3F30D03 		ubfx	r3, r3, #0, #14
- 251:Drivers/coremark_stm32_hal/core_list_join.c **** 		}
- 1420              		.loc 1 251 21 view .LVU478
- 1421 00b4 4B80     		strh	r3, [r1, #2]	@ movhi
- 250:Drivers/coremark_stm32_hal/core_list_join.c **** 			finder->info->idx=0x3fff & (((i & 0x07) << 8) | pat); /* make sure the mixed items end up after 
- 1422              		.loc 1 250 25 view .LVU479
- 1423 00b6 0346     		mov	r3, r0
- 1424              	.LVL167:
- 1425              	.L84:
- 250:Drivers/coremark_stm32_hal/core_list_join.c **** 			finder->info->idx=0x3fff & (((i & 0x07) << 8) | pat); /* make sure the mixed items end up after 
- 1426              		.loc 1 250 25 view .LVU480
- 1427              	.LBE4:
- 253:Drivers/coremark_stm32_hal/core_list_join.c **** 	}
- 1428              		.loc 1 253 3 is_stmt 1 view .LVU481
- 253:Drivers/coremark_stm32_hal/core_list_join.c **** 	}
- 1429              		.loc 1 253 9 is_stmt 0 view .LVU482
- 1430 00b8 1268     		ldr	r2, [r2]
- 1431              	.LVL168:
- 1432              	.L82:
- 246:Drivers/coremark_stm32_hal/core_list_join.c **** 		if (i<size/5) /* first 20% of the list in order */
- 1433              		.loc 1 246 8 is_stmt 1 view .LVU483
- 246:Drivers/coremark_stm32_hal/core_list_join.c **** 		if (i<size/5) /* first 20% of the list in order */
- 1434              		.loc 1 246 15 is_stmt 0 view .LVU484
- 1435 00ba 1168     		ldr	r1, [r2]
- 246:Drivers/coremark_stm32_hal/core_list_join.c **** 		if (i<size/5) /* first 20% of the list in order */
- 1436              		.loc 1 246 8 view .LVU485
- 1437 00bc 49B1     		cbz	r1, .L88
- 247:Drivers/coremark_stm32_hal/core_list_join.c **** 			finder->info->idx=i++;
- 1438              		.loc 1 247 3 is_stmt 1 view .LVU486
- 247:Drivers/coremark_stm32_hal/core_list_join.c **** 			finder->info->idx=i++;
- 1439              		.loc 1 247 13 is_stmt 0 view .LVU487
- 1440 00be 0949     		ldr	r1, .L89
- 1441 00c0 A1FB0501 		umull	r0, r1, r1, r5
- 247:Drivers/coremark_stm32_hal/core_list_join.c **** 			finder->info->idx=i++;
- 1442              		.loc 1 247 6 view .LVU488
- 1443 00c4 B3EB910F 		cmp	r3, r1, lsr #2
- 1444 00c8 E8D2     		bcs	.L83
- 248:Drivers/coremark_stm32_hal/core_list_join.c **** 		else { 
- 1445              		.loc 1 248 4 is_stmt 1 view .LVU489
- 1446              	.LVL169:
- 248:Drivers/coremark_stm32_hal/core_list_join.c **** 		else { 
- 1447              		.loc 1 248 10 is_stmt 0 view .LVU490
- 1448 00ca 5168     		ldr	r1, [r2, #4]
- 248:Drivers/coremark_stm32_hal/core_list_join.c **** 		else { 
- 1449              		.loc 1 248 21 view .LVU491
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 41
-
-
- 1450 00cc 4B80     		strh	r3, [r1, #2]	@ movhi
- 248:Drivers/coremark_stm32_hal/core_list_join.c **** 		else { 
- 1451              		.loc 1 248 23 view .LVU492
- 1452 00ce 0133     		adds	r3, r3, #1
- 1453              	.LVL170:
- 248:Drivers/coremark_stm32_hal/core_list_join.c **** 		else { 
- 1454              		.loc 1 248 23 view .LVU493
- 1455 00d0 F2E7     		b	.L84
- 1456              	.L88:
- 255:Drivers/coremark_stm32_hal/core_list_join.c **** #if CORE_DEBUG
- 1457              		.loc 1 255 2 is_stmt 1 view .LVU494
- 255:Drivers/coremark_stm32_hal/core_list_join.c **** #if CORE_DEBUG
- 1458              		.loc 1 255 9 is_stmt 0 view .LVU495
- 1459 00d2 0022     		movs	r2, #0
- 1460              	.LVL171:
- 255:Drivers/coremark_stm32_hal/core_list_join.c **** #if CORE_DEBUG
- 1461              		.loc 1 255 9 view .LVU496
- 1462 00d4 0449     		ldr	r1, .L89+4
- 1463 00d6 3046     		mov	r0, r6
- 1464 00d8 FFF7FEFF 		bl	core_list_mergesort
- 1465              	.LVL172:
- 265:Drivers/coremark_stm32_hal/core_list_join.c **** }
- 1466              		.loc 1 265 2 is_stmt 1 view .LVU497
- 266:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 1467              		.loc 1 266 1 is_stmt 0 view .LVU498
- 1468 00dc 07B0     		add	sp, sp, #28
- 1469              	.LCFI17:
- 1470              		.cfi_def_cfa_offset 28
- 1471              		@ sp needed
- 1472 00de BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
- 1473              	.LVL173:
- 1474              	.L90:
- 266:Drivers/coremark_stm32_hal/core_list_join.c **** 
- 1475              		.loc 1 266 1 view .LVU499
- 1476 00e2 00BF     		.align	2
- 1477              	.L89:
- 1478 00e4 CDCCCCCC 		.word	-858993459
- 1479 00e8 00000000 		.word	cmp_idx
- 1480              		.cfi_endproc
- 1481              	.LFE8:
- 1483              		.text
- 1484              	.Letext0:
- 1485              		.file 2 "Drivers/coremark_stm32_hal/core_portme.h"
- 1486              		.file 3 "Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT.h"
- 1487              		.file 4 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\lib\\gcc\\arm-none
- 1488              		.file 5 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\arm-none-eabi\\inc
- 1489              		.file 6 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\arm-none-eabi\\inc
- 1490              		.file 7 "c:\\program files (x86)\\gnu arm embedded toolchain\\9 2020-q2-update\\arm-none-eabi\\inc
- 1491              		.file 8 "Drivers/coremark_stm32_hal/coremark.h"
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s 			page 42
+  14              		.section	.text.cmp_idx,"ax",%progbits
+  15              		.align	1
+  16              		.p2align 2,,3
+  17              		.global	cmp_idx
+  18              		.arch armv7e-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu fpv5-d16
+  24              	cmp_idx:
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27              		@ link register save eliminated.
+  28 0000 2AB1     		cbz	r2, .L4
+  29 0002 B0F90200 		ldrsh	r0, [r0, #2]
+  30 0006 B1F90230 		ldrsh	r3, [r1, #2]
+  31 000a C01A     		subs	r0, r0, r3
+  32 000c 7047     		bx	lr
+  33              	.L4:
+  34 000e B0F90030 		ldrsh	r3, [r0]
+  35 0012 23F0FF02 		bic	r2, r3, #255
+  36 0016 C3F30723 		ubfx	r3, r3, #8, #8
+  37 001a 1343     		orrs	r3, r3, r2
+  38 001c 0380     		strh	r3, [r0]	@ movhi
+  39 001e B1F90030 		ldrsh	r3, [r1]
+  40 0022 B0F90200 		ldrsh	r0, [r0, #2]
+  41 0026 23F0FF02 		bic	r2, r3, #255
+  42 002a C3F30723 		ubfx	r3, r3, #8, #8
+  43 002e 1343     		orrs	r3, r3, r2
+  44 0030 0B80     		strh	r3, [r1]	@ movhi
+  45 0032 B1F90230 		ldrsh	r3, [r1, #2]
+  46 0036 C01A     		subs	r0, r0, r3
+  47 0038 7047     		bx	lr
+  49 003a 00BF     		.section	.text.calc_func,"ax",%progbits
+  50              		.align	1
+  51              		.p2align 2,,3
+  52              		.global	calc_func
+  53              		.syntax unified
+  54              		.thumb
+  55              		.thumb_func
+  56              		.fpu fpv5-d16
+  58              	calc_func:
+  59              		@ args = 0, pretend = 0, frame = 0
+  60              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 2
+
+
+  61 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  62 0002 B0F90040 		ldrsh	r4, [r0]
+  63 0006 83B0     		sub	sp, sp, #12
+  64 0008 2306     		lsls	r3, r4, #24
+  65 000a 04D5     		bpl	.L6
+  66 000c 04F07F07 		and	r7, r4, #127
+  67 0010 3846     		mov	r0, r7
+  68 0012 03B0     		add	sp, sp, #12
+  69              		@ sp needed
+  70 0014 F0BD     		pop	{r4, r5, r6, r7, pc}
+  71              	.L6:
+  72 0016 0D46     		mov	r5, r1
+  73 0018 14F00703 		ands	r3, r4, #7
+  74 001c C4F3C301 		ubfx	r1, r4, #3, #4
+  75 0020 0646     		mov	r6, r0
+  76 0022 41EA0111 		orr	r1, r1, r1, lsl #4
+  77 0026 1DD0     		beq	.L8
+  78 0028 012B     		cmp	r3, #1
+  79 002a 10D0     		beq	.L9
+  80 002c A0B2     		uxth	r0, r4
+  81 002e 2746     		mov	r7, r4
+  82              	.L10:
+  83 0030 07F07F07 		and	r7, r7, #127
+  84 0034 24F0FF04 		bic	r4, r4, #255
+  85 0038 298F     		ldrh	r1, [r5, #56]
+  86 003a 3C43     		orrs	r4, r4, r7
+  87 003c FFF7FEFF 		bl	crcu16
+  88 0040 2887     		strh	r0, [r5, #56]	@ movhi
+  89 0042 3846     		mov	r0, r7
+  90 0044 44F08004 		orr	r4, r4, #128
+  91 0048 3480     		strh	r4, [r6]	@ movhi
+  92 004a 03B0     		add	sp, sp, #12
+  93              		@ sp needed
+  94 004c F0BD     		pop	{r4, r5, r6, r7, pc}
+  95              	.L9:
+  96 004e 2A8F     		ldrh	r2, [r5, #56]
+  97 0050 05F12800 		add	r0, r5, #40
+  98 0054 FFF7FEFF 		bl	core_bench_matrix
+  99 0058 AB8F     		ldrh	r3, [r5, #60]
+ 100 005a 07B2     		sxth	r7, r0
+ 101 005c 002B     		cmp	r3, #0
+ 102 005e E7D1     		bne	.L10
+ 103 0060 A887     		strh	r0, [r5, #60]	@ movhi
+ 104 0062 E5E7     		b	.L10
+ 105              	.L8:
+ 106 0064 2229     		cmp	r1, #34
+ 107 0066 2A8F     		ldrh	r2, [r5, #56]
+ 108 0068 B5F90230 		ldrsh	r3, [r5, #2]
+ 109 006c B8BF     		it	lt
+ 110 006e 2221     		movlt	r1, #34
+ 111 0070 CDE90012 		strd	r1, r2, [sp]
+ 112 0074 B5F90020 		ldrsh	r2, [r5]
+ 113 0078 D5E90510 		ldrd	r1, r0, [r5, #20]
+ 114 007c FFF7FEFF 		bl	core_bench_state
+ 115 0080 EB8F     		ldrh	r3, [r5, #62]
+ 116 0082 07B2     		sxth	r7, r0
+ 117 0084 002B     		cmp	r3, #0
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 3
+
+
+ 118 0086 D3D1     		bne	.L10
+ 119 0088 E887     		strh	r0, [r5, #62]	@ movhi
+ 120 008a D1E7     		b	.L10
+ 122              		.section	.text.cmp_complex,"ax",%progbits
+ 123              		.align	1
+ 124              		.p2align 2,,3
+ 125              		.global	cmp_complex
+ 126              		.syntax unified
+ 127              		.thumb
+ 128              		.thumb_func
+ 129              		.fpu fpv5-d16
+ 131              	cmp_complex:
+ 132              		@ args = 0, pretend = 0, frame = 0
+ 133              		@ frame_needed = 0, uses_anonymous_args = 0
+ 134 0000 38B5     		push	{r3, r4, r5, lr}
+ 135 0002 0D46     		mov	r5, r1
+ 136 0004 1146     		mov	r1, r2
+ 137 0006 1446     		mov	r4, r2
+ 138 0008 FFF7FEFF 		bl	calc_func
+ 139 000c 0346     		mov	r3, r0
+ 140 000e 2846     		mov	r0, r5
+ 141 0010 2146     		mov	r1, r4
+ 142 0012 1C46     		mov	r4, r3
+ 143 0014 FFF7FEFF 		bl	calc_func
+ 144 0018 201A     		subs	r0, r4, r0
+ 145 001a 38BD     		pop	{r3, r4, r5, pc}
+ 147              		.section	.text.copy_info,"ax",%progbits
+ 148              		.align	1
+ 149              		.p2align 2,,3
+ 150              		.global	copy_info
+ 151              		.syntax unified
+ 152              		.thumb
+ 153              		.thumb_func
+ 154              		.fpu fpv5-d16
+ 156              	copy_info:
+ 157              		@ args = 0, pretend = 0, frame = 0
+ 158              		@ frame_needed = 0, uses_anonymous_args = 0
+ 159              		@ link register save eliminated.
+ 160 0000 B1F90020 		ldrsh	r2, [r1]
+ 161 0004 B1F90230 		ldrsh	r3, [r1, #2]
+ 162 0008 0280     		strh	r2, [r0]	@ movhi
+ 163 000a 4380     		strh	r3, [r0, #2]	@ movhi
+ 164 000c 7047     		bx	lr
+ 166 000e 00BF     		.section	.text.core_list_insert_new,"ax",%progbits
+ 167              		.align	1
+ 168              		.p2align 2,,3
+ 169              		.global	core_list_insert_new
+ 170              		.syntax unified
+ 171              		.thumb
+ 172              		.thumb_func
+ 173              		.fpu fpv5-d16
+ 175              	core_list_insert_new:
+ 176              		@ args = 8, pretend = 0, frame = 0
+ 177              		@ frame_needed = 0, uses_anonymous_args = 0
+ 178              		@ link register save eliminated.
+ 179 0000 F0B4     		push	{r4, r5, r6, r7}
+ 180 0002 0446     		mov	r4, r0
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 4
+
+
+ 181 0004 1068     		ldr	r0, [r2]
+ 182 0006 049D     		ldr	r5, [sp, #16]
+ 183 0008 00F10806 		add	r6, r0, #8
+ 184 000c AE42     		cmp	r6, r5
+ 185 000e 16D2     		bcs	.L18
+ 186 0010 1D68     		ldr	r5, [r3]
+ 187 0012 059F     		ldr	r7, [sp, #20]
+ 188 0014 05F1040C 		add	ip, r5, #4
+ 189 0018 6745     		cmp	r7, ip
+ 190 001a 10D9     		bls	.L18
+ 191 001c 1660     		str	r6, [r2]
+ 192 001e 2268     		ldr	r2, [r4]
+ 193 0020 B1F90060 		ldrsh	r6, [r1]
+ 194 0024 0260     		str	r2, [r0]
+ 195 0026 2060     		str	r0, [r4]
+ 196 0028 4560     		str	r5, [r0, #4]
+ 197 002a 1A68     		ldr	r2, [r3]
+ 198 002c B1F90210 		ldrsh	r1, [r1, #2]
+ 199 0030 0432     		adds	r2, r2, #4
+ 200 0032 1A60     		str	r2, [r3]
+ 201 0034 4368     		ldr	r3, [r0, #4]
+ 202 0036 1E80     		strh	r6, [r3]	@ movhi
+ 203 0038 5980     		strh	r1, [r3, #2]	@ movhi
+ 204 003a F0BC     		pop	{r4, r5, r6, r7}
+ 205 003c 7047     		bx	lr
+ 206              	.L18:
+ 207 003e 0020     		movs	r0, #0
+ 208 0040 F0BC     		pop	{r4, r5, r6, r7}
+ 209 0042 7047     		bx	lr
+ 211              		.section	.text.core_list_remove,"ax",%progbits
+ 212              		.align	1
+ 213              		.p2align 2,,3
+ 214              		.global	core_list_remove
+ 215              		.syntax unified
+ 216              		.thumb
+ 217              		.thumb_func
+ 218              		.fpu fpv5-d16
+ 220              	core_list_remove:
+ 221              		@ args = 0, pretend = 0, frame = 0
+ 222              		@ frame_needed = 0, uses_anonymous_args = 0
+ 223              		@ link register save eliminated.
+ 224 0000 30B4     		push	{r4, r5}
+ 225 0002 0346     		mov	r3, r0
+ 226 0004 0022     		movs	r2, #0
+ 227 0006 D0E90004 		ldrd	r0, r4, [r0]
+ 228 000a D0E90015 		ldrd	r1, r5, [r0]
+ 229 000e 5D60     		str	r5, [r3, #4]
+ 230 0010 4460     		str	r4, [r0, #4]
+ 231 0012 1960     		str	r1, [r3]
+ 232 0014 0260     		str	r2, [r0]
+ 233 0016 30BC     		pop	{r4, r5}
+ 234 0018 7047     		bx	lr
+ 236 001a 00BF     		.section	.text.core_list_undo_remove,"ax",%progbits
+ 237              		.align	1
+ 238              		.p2align 2,,3
+ 239              		.global	core_list_undo_remove
+ 240              		.syntax unified
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 5
+
+
+ 241              		.thumb
+ 242              		.thumb_func
+ 243              		.fpu fpv5-d16
+ 245              	core_list_undo_remove:
+ 246              		@ args = 0, pretend = 0, frame = 0
+ 247              		@ frame_needed = 0, uses_anonymous_args = 0
+ 248              		@ link register save eliminated.
+ 249 0000 0A68     		ldr	r2, [r1]
+ 250 0002 30B4     		push	{r4, r5}
+ 251 0004 4D68     		ldr	r5, [r1, #4]
+ 252 0006 4468     		ldr	r4, [r0, #4]
+ 253 0008 4560     		str	r5, [r0, #4]
+ 254 000a 4C60     		str	r4, [r1, #4]
+ 255 000c 0260     		str	r2, [r0]
+ 256 000e 0860     		str	r0, [r1]
+ 257 0010 30BC     		pop	{r4, r5}
+ 258 0012 7047     		bx	lr
+ 260              		.section	.text.core_list_find,"ax",%progbits
+ 261              		.align	1
+ 262              		.p2align 2,,3
+ 263              		.global	core_list_find
+ 264              		.syntax unified
+ 265              		.thumb
+ 266              		.thumb_func
+ 267              		.fpu fpv5-d16
+ 269              	core_list_find:
+ 270              		@ args = 0, pretend = 0, frame = 0
+ 271              		@ frame_needed = 0, uses_anonymous_args = 0
+ 272              		@ link register save eliminated.
+ 273 0000 B1F90220 		ldrsh	r2, [r1, #2]
+ 274 0004 002A     		cmp	r2, #0
+ 275 0006 09DB     		blt	.L37
+ 276 0008 10B9     		cbnz	r0, .L28
+ 277 000a 14E0     		b	.L38
+ 278              	.L30:
+ 279 000c 0068     		ldr	r0, [r0]
+ 280 000e 20B1     		cbz	r0, .L24
+ 281              	.L28:
+ 282 0010 4368     		ldr	r3, [r0, #4]
+ 283 0012 B3F90230 		ldrsh	r3, [r3, #2]
+ 284 0016 9342     		cmp	r3, r2
+ 285 0018 F8D1     		bne	.L30
+ 286              	.L24:
+ 287 001a 7047     		bx	lr
+ 288              	.L37:
+ 289 001c 0028     		cmp	r0, #0
+ 290 001e FCD0     		beq	.L24
+ 291 0020 B1F90020 		ldrsh	r2, [r1]
+ 292 0024 02E0     		b	.L27
+ 293              	.L29:
+ 294 0026 0068     		ldr	r0, [r0]
+ 295 0028 0028     		cmp	r0, #0
+ 296 002a F6D0     		beq	.L24
+ 297              	.L27:
+ 298 002c 4368     		ldr	r3, [r0, #4]
+ 299 002e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 300 0030 9342     		cmp	r3, r2
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 6
+
+
+ 301 0032 F8D1     		bne	.L29
+ 302 0034 7047     		bx	lr
+ 303              	.L38:
+ 304 0036 7047     		bx	lr
+ 306              		.section	.text.core_list_reverse,"ax",%progbits
+ 307              		.align	1
+ 308              		.p2align 2,,3
+ 309              		.global	core_list_reverse
+ 310              		.syntax unified
+ 311              		.thumb
+ 312              		.thumb_func
+ 313              		.fpu fpv5-d16
+ 315              	core_list_reverse:
+ 316              		@ args = 0, pretend = 0, frame = 0
+ 317              		@ frame_needed = 0, uses_anonymous_args = 0
+ 318              		@ link register save eliminated.
+ 319 0000 38B1     		cbz	r0, .L40
+ 320 0002 0022     		movs	r2, #0
+ 321 0004 00E0     		b	.L41
+ 322              	.L42:
+ 323 0006 1846     		mov	r0, r3
+ 324              	.L41:
+ 325 0008 0368     		ldr	r3, [r0]
+ 326 000a 0260     		str	r2, [r0]
+ 327 000c 0246     		mov	r2, r0
+ 328 000e 002B     		cmp	r3, #0
+ 329 0010 F9D1     		bne	.L42
+ 330              	.L40:
+ 331 0012 7047     		bx	lr
+ 333              		.section	.text.core_list_mergesort,"ax",%progbits
+ 334              		.align	1
+ 335              		.p2align 2,,3
+ 336              		.global	core_list_mergesort
+ 337              		.syntax unified
+ 338              		.thumb
+ 339              		.thumb_func
+ 340              		.fpu fpv5-d16
+ 342              	core_list_mergesort:
+ 343              		@ args = 0, pretend = 0, frame = 16
+ 344              		@ frame_needed = 0, uses_anonymous_args = 0
+ 345 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 346 0004 4FF00108 		mov	r8, #1
+ 347 0008 85B0     		sub	sp, sp, #20
+ 348 000a 0446     		mov	r4, r0
+ 349 000c 9346     		mov	fp, r2
+ 350 000e 0391     		str	r1, [sp, #12]
+ 351              	.L63:
+ 352 0010 002C     		cmp	r4, #0
+ 353 0012 4DD0     		beq	.L47
+ 354 0014 0023     		movs	r3, #0
+ 355 0016 1E46     		mov	r6, r3
+ 356 0018 9946     		mov	r9, r3
+ 357 001a 0193     		str	r3, [sp, #4]
+ 358              	.L60:
+ 359 001c 019B     		ldr	r3, [sp, #4]
+ 360 001e 2146     		mov	r1, r4
+ 361 0020 0025     		movs	r5, #0
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 7
+
+
+ 362 0022 0133     		adds	r3, r3, #1
+ 363 0024 0193     		str	r3, [sp, #4]
+ 364              	.L50:
+ 365 0026 0968     		ldr	r1, [r1]
+ 366 0028 0135     		adds	r5, r5, #1
+ 367 002a 09B1     		cbz	r1, .L51
+ 368 002c A845     		cmp	r8, r5
+ 369 002e FAD1     		bne	.L50
+ 370              	.L51:
+ 371 0030 A246     		mov	r10, r4
+ 372 0032 4746     		mov	r7, r8
+ 373 0034 CDF80880 		str	r8, [sp, #8]
+ 374 0038 0C46     		mov	r4, r1
+ 375 003a D846     		mov	r8, fp
+ 376 003c D346     		mov	fp, r10
+ 377 003e DDF80CA0 		ldr	r10, [sp, #12]
+ 378 0042 85B1     		cbz	r5, .L76
+ 379              	.L57:
+ 380 0044 F7B1     		cbz	r7, .L75
+ 381 0046 ECB1     		cbz	r4, .L75
+ 382 0048 4246     		mov	r2, r8
+ 383 004a 6168     		ldr	r1, [r4, #4]
+ 384 004c DBF80400 		ldr	r0, [fp, #4]
+ 385 0050 D047     		blx	r10
+ 386 0052 0028     		cmp	r0, #0
+ 387 0054 16DD     		ble	.L75
+ 388              	.L55:
+ 389 0056 2346     		mov	r3, r4
+ 390 0058 013F     		subs	r7, r7, #1
+ 391 005a 2468     		ldr	r4, [r4]
+ 392 005c C6B1     		cbz	r6, .L64
+ 393              	.L77:
+ 394 005e 3360     		str	r3, [r6]
+ 395 0060 1E46     		mov	r6, r3
+ 396              	.L78:
+ 397 0062 002D     		cmp	r5, #0
+ 398 0064 EED1     		bne	.L57
+ 399              	.L76:
+ 400 0066 002F     		cmp	r7, #0
+ 401 0068 15DD     		ble	.L66
+ 402 006a 002C     		cmp	r4, #0
+ 403 006c F3D1     		bne	.L55
+ 404 006e 019B     		ldr	r3, [sp, #4]
+ 405 0070 C346     		mov	fp, r8
+ 406 0072 3460     		str	r4, [r6]
+ 407 0074 012B     		cmp	r3, #1
+ 408 0076 DDF80880 		ldr	r8, [sp, #8]
+ 409 007a 15D0     		beq	.L73
+ 410              	.L79:
+ 411 007c 4FEA4808 		lsl	r8, r8, #1
+ 412 0080 4C46     		mov	r4, r9
+ 413 0082 C5E7     		b	.L63
+ 414              	.L75:
+ 415 0084 5B46     		mov	r3, fp
+ 416 0086 013D     		subs	r5, r5, #1
+ 417 0088 DBF800B0 		ldr	fp, [fp]
+ 418 008c 002E     		cmp	r6, #0
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 8
+
+
+ 419 008e E6D1     		bne	.L77
+ 420              	.L64:
+ 421 0090 9946     		mov	r9, r3
+ 422 0092 1E46     		mov	r6, r3
+ 423 0094 E5E7     		b	.L78
+ 424              	.L66:
+ 425 0096 C346     		mov	fp, r8
+ 426 0098 DDF80880 		ldr	r8, [sp, #8]
+ 427 009c 002C     		cmp	r4, #0
+ 428 009e BDD1     		bne	.L60
+ 429 00a0 019B     		ldr	r3, [sp, #4]
+ 430 00a2 3460     		str	r4, [r6]
+ 431 00a4 012B     		cmp	r3, #1
+ 432 00a6 E9D1     		bne	.L79
+ 433              	.L73:
+ 434 00a8 4846     		mov	r0, r9
+ 435 00aa 05B0     		add	sp, sp, #20
+ 436              		@ sp needed
+ 437 00ac BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 438              	.L47:
+ 439 00b0 2460     		str	r4, [r4]
+ 440 00b2 FFDE     		.inst	0xdeff
+ 442              		.section	.text.core_bench_list,"ax",%progbits
+ 443              		.align	1
+ 444              		.p2align 2,,3
+ 445              		.global	core_bench_list
+ 446              		.syntax unified
+ 447              		.thumb
+ 448              		.thumb_func
+ 449              		.fpu fpv5-d16
+ 451              	core_bench_list:
+ 452              		@ args = 0, pretend = 0, frame = 16
+ 453              		@ frame_needed = 0, uses_anonymous_args = 0
+ 454 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 455 0004 B0F90490 		ldrsh	r9, [r0, #4]
+ 456 0008 85B0     		sub	sp, sp, #20
+ 457 000a 446A     		ldr	r4, [r0, #36]
+ 458 000c B9F1000F 		cmp	r9, #0
+ 459 0010 ADF80E10 		strh	r1, [sp, #14]	@ movhi
+ 460 0014 CDE90010 		strd	r1, r0, [sp]
+ 461 0018 40F39580 		ble	.L96
+ 462 001c 0026     		movs	r6, #0
+ 463 001e 8A46     		mov	r10, r1
+ 464 0020 0DF10C0B 		add	fp, sp, #12
+ 465 0024 B046     		mov	r8, r6
+ 466 0026 3746     		mov	r7, r6
+ 467 0028 3546     		mov	r5, r6
+ 468              	.L89:
+ 469 002a 5FFA86FC 		uxtb	ip, r6
+ 470 002e 5946     		mov	r1, fp
+ 471 0030 2046     		mov	r0, r4
+ 472 0032 ADF80CC0 		strh	ip, [sp, #12]	@ movhi
+ 473 0036 FFF7FEFF 		bl	core_list_find
+ 474 003a 0346     		mov	r3, r0
+ 475 003c 3CB1     		cbz	r4, .L82
+ 476 003e 0020     		movs	r0, #0
+ 477 0040 00E0     		b	.L83
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 9
+
+
+ 478              	.L97:
+ 479 0042 0C46     		mov	r4, r1
+ 480              	.L83:
+ 481 0044 2168     		ldr	r1, [r4]
+ 482 0046 2060     		str	r0, [r4]
+ 483 0048 2046     		mov	r0, r4
+ 484 004a 0029     		cmp	r1, #0
+ 485 004c F9D1     		bne	.L97
+ 486              	.L82:
+ 487 004e FBB1     		cbz	r3, .L116
+ 488 0050 5968     		ldr	r1, [r3, #4]
+ 489 0052 0137     		adds	r7, r7, #1
+ 490 0054 B1F90010 		ldrsh	r1, [r1]
+ 491 0058 BFB2     		uxth	r7, r7
+ 492 005a CA07     		lsls	r2, r1, #31
+ 493 005c 03D5     		bpl	.L86
+ 494 005e C1F34021 		ubfx	r1, r1, #9, #1
+ 495 0062 0D44     		add	r5, r5, r1
+ 496 0064 ADB2     		uxth	r5, r5
+ 497              	.L86:
+ 498 0066 1868     		ldr	r0, [r3]
+ 499 0068 20B1     		cbz	r0, .L85
+ 500 006a 0168     		ldr	r1, [r0]
+ 501 006c 1960     		str	r1, [r3]
+ 502 006e 2168     		ldr	r1, [r4]
+ 503 0070 0160     		str	r1, [r0]
+ 504 0072 2060     		str	r0, [r4]
+ 505              	.L85:
+ 506 0074 BAF1000F 		cmp	r10, #0
+ 507 0078 03DB     		blt	.L87
+ 508 007a 0AF10102 		add	r2, r10, #1
+ 509 007e ADF80E20 		strh	r2, [sp, #14]	@ movhi
+ 510              	.L87:
+ 511 0082 0136     		adds	r6, r6, #1
+ 512 0084 32B2     		sxth	r2, r6
+ 513 0086 9145     		cmp	r9, r2
+ 514 0088 0FDD     		ble	.L117
+ 515 008a BDF90EA0 		ldrsh	r10, [sp, #14]
+ 516 008e CCE7     		b	.L89
+ 517              	.L116:
+ 518 0090 2168     		ldr	r1, [r4]
+ 519 0092 08F10108 		add	r8, r8, #1
+ 520 0096 4968     		ldr	r1, [r1, #4]
+ 521 0098 1FFA88F8 		uxth	r8, r8
+ 522 009c 91F90110 		ldrsb	r1, [r1, #1]
+ 523 00a0 01F00101 		and	r1, r1, #1
+ 524 00a4 0D44     		add	r5, r5, r1
+ 525 00a6 ADB2     		uxth	r5, r5
+ 526 00a8 E4E7     		b	.L85
+ 527              	.L117:
+ 528 00aa C8EB8707 		rsb	r7, r8, r7, lsl #2
+ 529 00ae 3D44     		add	r5, r5, r7
+ 530 00b0 ADB2     		uxth	r5, r5
+ 531              	.L81:
+ 532 00b2 009B     		ldr	r3, [sp]
+ 533 00b4 002B     		cmp	r3, #0
+ 534 00b6 05DD     		ble	.L90
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 10
+
+
+ 535 00b8 2046     		mov	r0, r4
+ 536 00ba 019A     		ldr	r2, [sp, #4]
+ 537 00bc 2449     		ldr	r1, .L119
+ 538 00be FFF7FEFF 		bl	core_list_mergesort
+ 539 00c2 0446     		mov	r4, r0
+ 540              	.L90:
+ 541 00c4 2268     		ldr	r2, [r4]
+ 542 00c6 4FF0000C 		mov	ip, #0
+ 543 00ca 5946     		mov	r1, fp
+ 544 00cc 2046     		mov	r0, r4
+ 545 00ce D2E90078 		ldrd	r7, r8, [r2]
+ 546 00d2 D7E90036 		ldrd	r3, r6, [r7]
+ 547 00d6 5660     		str	r6, [r2, #4]
+ 548 00d8 C7F80480 		str	r8, [r7, #4]
+ 549 00dc 1360     		str	r3, [r2]
+ 550 00de C7F800C0 		str	ip, [r7]
+ 551 00e2 FFF7FEFF 		bl	core_list_find
+ 552 00e6 0646     		mov	r6, r0
+ 553 00e8 48B3     		cbz	r0, .L118
+ 554              	.L93:
+ 555 00ea 6368     		ldr	r3, [r4, #4]
+ 556 00ec 2946     		mov	r1, r5
+ 557 00ee B3F90000 		ldrsh	r0, [r3]
+ 558 00f2 FFF7FEFF 		bl	crc16
+ 559 00f6 3668     		ldr	r6, [r6]
+ 560 00f8 0546     		mov	r5, r0
+ 561 00fa 002E     		cmp	r6, #0
+ 562 00fc F5D1     		bne	.L93
+ 563 00fe 2668     		ldr	r6, [r4]
+ 564 0100 D7F80480 		ldr	r8, [r7, #4]
+ 565              	.L92:
+ 566 0104 7268     		ldr	r2, [r6, #4]
+ 567 0106 2046     		mov	r0, r4
+ 568 0108 3368     		ldr	r3, [r6]
+ 569 010a 1249     		ldr	r1, .L119+4
+ 570 010c 7A60     		str	r2, [r7, #4]
+ 571 010e 0022     		movs	r2, #0
+ 572 0110 C6F80480 		str	r8, [r6, #4]
+ 573 0114 3B60     		str	r3, [r7]
+ 574 0116 3760     		str	r7, [r6]
+ 575 0118 FFF7FEFF 		bl	core_list_mergesort
+ 576 011c 0468     		ldr	r4, [r0]
+ 577 011e 0646     		mov	r6, r0
+ 578 0120 4CB1     		cbz	r4, .L94
+ 579              	.L95:
+ 580 0122 7368     		ldr	r3, [r6, #4]
+ 581 0124 2946     		mov	r1, r5
+ 582 0126 B3F90000 		ldrsh	r0, [r3]
+ 583 012a FFF7FEFF 		bl	crc16
+ 584 012e 2468     		ldr	r4, [r4]
+ 585 0130 0546     		mov	r5, r0
+ 586 0132 002C     		cmp	r4, #0
+ 587 0134 F5D1     		bne	.L95
+ 588              	.L94:
+ 589 0136 2846     		mov	r0, r5
+ 590 0138 05B0     		add	sp, sp, #20
+ 591              		@ sp needed
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 11
+
+
+ 592 013a BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 593              	.L118:
+ 594 013e 2668     		ldr	r6, [r4]
+ 595 0140 002E     		cmp	r6, #0
+ 596 0142 D2D1     		bne	.L93
+ 597 0144 DEE7     		b	.L92
+ 598              	.L96:
+ 599 0146 0025     		movs	r5, #0
+ 600 0148 0DF10C0B 		add	fp, sp, #12
+ 601 014c B1E7     		b	.L81
+ 602              	.L120:
+ 603 014e 00BF     		.align	2
+ 604              	.L119:
+ 605 0150 00000000 		.word	cmp_complex
+ 606 0154 00000000 		.word	cmp_idx
+ 608              		.section	.text.core_list_init,"ax",%progbits
+ 609              		.align	1
+ 610              		.p2align 2,,3
+ 611              		.global	core_list_init
+ 612              		.syntax unified
+ 613              		.thumb
+ 614              		.thumb_func
+ 615              		.fpu fpv5-d16
+ 617              	core_list_init:
+ 618              		@ args = 0, pretend = 0, frame = 0
+ 619              		@ frame_needed = 0, uses_anonymous_args = 0
+ 620 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 621 0004 404D     		ldr	r5, .L140
+ 622 0006 0746     		mov	r7, r0
+ 623 0008 0846     		mov	r0, r1
+ 624 000a 0023     		movs	r3, #0
+ 625 000c A5FB0717 		umull	r1, r7, r5, r7
+ 626 0010 48F28004 		movw	r4, #32896
+ 627 0014 00F11005 		add	r5, r0, #16
+ 628 0018 0360     		str	r3, [r0]
+ 629 001a 3F09     		lsrs	r7, r7, #4
+ 630 001c 9146     		mov	r9, r2
+ 631 001e 00F10801 		add	r1, r0, #8
+ 632 0022 023F     		subs	r7, r7, #2
+ 633 0024 00EBC708 		add	r8, r0, r7, lsl #3
+ 634 0028 A845     		cmp	r8, r5
+ 635 002a C0F80480 		str	r8, [r0, #4]
+ 636 002e 08EB870B 		add	fp, r8, r7, lsl #2
+ 637 0032 A8F80230 		strh	r3, [r8, #2]	@ movhi
+ 638 0036 08F10406 		add	r6, r8, #4
+ 639 003a 20F83740 		strh	r4, [r0, r7, lsl #3]	@ movhi
+ 640 003e 5ED9     		bls	.L132
+ 641 0040 08F10802 		add	r2, r8, #8
+ 642 0044 9345     		cmp	fp, r2
+ 643 0046 5AD9     		bls	.L132
+ 644 0048 8360     		str	r3, [r0, #8]
+ 645 004a 4FF6FF74 		movw	r4, #65535
+ 646 004e 47F6FF73 		movw	r3, #32767
+ 647 0052 0160     		str	r1, [r0]
+ 648 0054 C660     		str	r6, [r0, #12]
+ 649 0056 A8F80440 		strh	r4, [r8, #4]	@ movhi
+ 650 005a A8F80630 		strh	r3, [r8, #6]	@ movhi
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 12
+
+
+ 651              	.L122:
+ 652 005e 27B3     		cbz	r7, .L123
+ 653 0060 1FFA89FA 		uxth	r10, r9
+ 654 0064 0026     		movs	r6, #0
+ 655              	.L125:
+ 656 0066 B3B2     		uxth	r3, r6
+ 657 0068 05F1080C 		add	ip, r5, #8
+ 658 006c 02F1040E 		add	lr, r2, #4
+ 659 0070 0136     		adds	r6, r6, #1
+ 660 0072 8AEA0304 		eor	r4, r10, r3
+ 661 0076 E045     		cmp	r8, ip
+ 662 0078 03F00703 		and	r3, r3, #7
+ 663 007c 4FEAC404 		lsl	r4, r4, #3
+ 664 0080 11D9     		bls	.L124
+ 665 0082 04F07804 		and	r4, r4, #120
+ 666 0086 F345     		cmp	fp, lr
+ 667 0088 43EA0403 		orr	r3, r3, r4
+ 668 008c 0BD9     		bls	.L124
+ 669 008e 43EA0323 		orr	r3, r3, r3, lsl #8
+ 670 0092 2960     		str	r1, [r5]
+ 671 0094 0560     		str	r5, [r0]
+ 672 0096 2946     		mov	r1, r5
+ 673 0098 6A60     		str	r2, [r5, #4]
+ 674 009a 6546     		mov	r5, ip
+ 675 009c 1380     		strh	r3, [r2]	@ movhi
+ 676 009e 47F6FF73 		movw	r3, 32767	@ movhi
+ 677 00a2 5380     		strh	r3, [r2, #2]	@ movhi
+ 678 00a4 7246     		mov	r2, lr
+ 679              	.L124:
+ 680 00a6 B742     		cmp	r7, r6
+ 681 00a8 DDD1     		bne	.L125
+ 682              	.L123:
+ 683 00aa 0D68     		ldr	r5, [r1]
+ 684 00ac 0DB3     		cbz	r5, .L130
+ 685 00ae 164B     		ldr	r3, .L140
+ 686 00b0 0124     		movs	r4, #1
+ 687 00b2 A3FB0737 		umull	r3, r7, r3, r7
+ 688 00b6 BF08     		lsrs	r7, r7, #2
+ 689 00b8 06E0     		b	.L129
+ 690              	.L139:
+ 691 00ba 4B68     		ldr	r3, [r1, #4]
+ 692 00bc 2946     		mov	r1, r5
+ 693 00be 5C80     		strh	r4, [r3, #2]	@ movhi
+ 694 00c0 0134     		adds	r4, r4, #1
+ 695 00c2 2B68     		ldr	r3, [r5]
+ 696 00c4 1D46     		mov	r5, r3
+ 697 00c6 A3B1     		cbz	r3, .L130
+ 698              	.L129:
+ 699 00c8 A3B2     		uxth	r3, r4
+ 700 00ca A742     		cmp	r7, r4
+ 701 00cc 03F10102 		add	r2, r3, #1
+ 702 00d0 83EA0903 		eor	r3, r3, r9
+ 703 00d4 F1D8     		bhi	.L139
+ 704 00d6 1202     		lsls	r2, r2, #8
+ 705 00d8 4968     		ldr	r1, [r1, #4]
+ 706 00da 0134     		adds	r4, r4, #1
+ 707 00dc 02F4E062 		and	r2, r2, #1792
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 13
+
+
+ 708 00e0 1343     		orrs	r3, r3, r2
+ 709 00e2 C3F30D03 		ubfx	r3, r3, #0, #14
+ 710 00e6 4B80     		strh	r3, [r1, #2]	@ movhi
+ 711 00e8 2946     		mov	r1, r5
+ 712 00ea 2B68     		ldr	r3, [r5]
+ 713 00ec 1D46     		mov	r5, r3
+ 714 00ee 002B     		cmp	r3, #0
+ 715 00f0 EAD1     		bne	.L129
+ 716              	.L130:
+ 717 00f2 0022     		movs	r2, #0
+ 718 00f4 0549     		ldr	r1, .L140+4
+ 719 00f6 BDE8F04F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 720 00fa FFF7FEBF 		b	core_list_mergesort
+ 721              	.L132:
+ 722 00fe 0D46     		mov	r5, r1
+ 723 0100 3246     		mov	r2, r6
+ 724 0102 1946     		mov	r1, r3
+ 725 0104 ABE7     		b	.L122
+ 726              	.L141:
+ 727 0106 00BF     		.align	2
+ 728              	.L140:
+ 729 0108 CDCCCCCC 		.word	-858993459
+ 730 010c 00000000 		.word	cmp_idx
+ 732              		.ident	"GCC: (GNU Arm Embedded Toolchain 9-2020-q2-update) 9.3.1 20200408 (release)"
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 14
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 core_list_join.c
-C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s:17     .text.cmp_idx:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s:25     .text.cmp_idx:00000000 cmp_idx
-C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s:76     .text.calc_func:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s:83     .text.calc_func:00000000 calc_func
-C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s:242    .text.cmp_complex:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s:249    .text.cmp_complex:00000000 cmp_complex
-C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s:293    .text.copy_info:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s:300    .text.copy_info:00000000 copy_info
-C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s:324    .text.core_list_insert_new:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s:331    .text.core_list_insert_new:00000000 core_list_insert_new
-C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s:414    .text.core_list_remove:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s:421    .text.core_list_remove:00000000 core_list_remove
-C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s:470    .text.core_list_undo_remove:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s:477    .text.core_list_undo_remove:00000000 core_list_undo_remove
-C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s:524    .text.core_list_find:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s:531    .text.core_list_find:00000000 core_list_find
-C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s:590    .text.core_list_reverse:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s:597    .text.core_list_reverse:00000000 core_list_reverse
-C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s:641    .text.core_list_mergesort:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s:648    .text.core_list_mergesort:00000000 core_list_mergesort
-C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s:902    .text.core_bench_list:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s:909    .text.core_bench_list:00000000 core_bench_list
-C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s:1223   .text.core_bench_list:00000118 $d
-C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s:1229   .text.core_list_init:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s:1236   .text.core_list_init:00000000 core_list_init
-C:\Users\Brandon\AppData\Local\Temp\ccTTxhLI.s:1478   .text.core_list_init:000000e4 $d
+C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:15     .text.cmp_idx:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:24     .text.cmp_idx:00000000 cmp_idx
+C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:50     .text.calc_func:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:58     .text.calc_func:00000000 calc_func
+C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:123    .text.cmp_complex:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:131    .text.cmp_complex:00000000 cmp_complex
+C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:148    .text.copy_info:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:156    .text.copy_info:00000000 copy_info
+C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:167    .text.core_list_insert_new:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:175    .text.core_list_insert_new:00000000 core_list_insert_new
+C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:212    .text.core_list_remove:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:220    .text.core_list_remove:00000000 core_list_remove
+C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:237    .text.core_list_undo_remove:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:245    .text.core_list_undo_remove:00000000 core_list_undo_remove
+C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:261    .text.core_list_find:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:269    .text.core_list_find:00000000 core_list_find
+C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:307    .text.core_list_reverse:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:315    .text.core_list_reverse:00000000 core_list_reverse
+C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:334    .text.core_list_mergesort:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:342    .text.core_list_mergesort:00000000 core_list_mergesort
+C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:443    .text.core_bench_list:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:451    .text.core_bench_list:00000000 core_bench_list
+C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:605    .text.core_bench_list:00000150 $d
+C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:609    .text.core_list_init:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:617    .text.core_list_init:00000000 core_list_init
+C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:729    .text.core_list_init:00000108 $d
 
 UNDEFINED SYMBOLS
 crcu16
-core_bench_state
 core_bench_matrix
+core_bench_state
 crc16
