@@ -95,6 +95,26 @@ static void MX_USART1_UART_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_ADC3_Init(void);
 
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+    switch(GPIO_Pin)
+    {
+        case IMU_AG_INT1_Pin:
+        {
+            sensors_imu_int1_callback();
+        } break;
+
+        case IMU_AG_INT2_Pin:
+        {
+            sensors_imu_int2_callback();
+        } break;
+
+        default:
+        break;
+            // no implementation
+    }
+}
+
 
 /**
   * @brief  The application entry point.
@@ -456,14 +476,6 @@ static void MX_I2C1_Init(void)
   */
 static void MX_I2C2_Init(void)
 {
-
-    /* USER CODE BEGIN I2C2_Init 0 */
-
-    /* USER CODE END I2C2_Init 0 */
-
-    /* USER CODE BEGIN I2C2_Init 1 */
-
-    /* USER CODE END I2C2_Init 1 */
     hi2c2.Instance = I2C2;
     hi2c2.Init.Timing = 0x00D049F1;
     hi2c2.Init.OwnAddress1 = 0;
@@ -489,10 +501,6 @@ static void MX_I2C2_Init(void)
     {
         Error_Handler();
     }
-    /* USER CODE BEGIN I2C2_Init 2 */
-
-    /* USER CODE END I2C2_Init 2 */
-
 }
 
 /**
@@ -1260,26 +1268,37 @@ static void MX_GPIO_Init(void)
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
 
-    /* EXTI interrupt init*/
-    HAL_NVIC_SetPriority(EXTI9_5_IRQn, 5, 0);
-    HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
-    HAL_NVIC_SetPriority(EXTI15_10_IRQn, 5, 0);
-    HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 
-    #else // Just the LED Pins
-
+    #else
+    
     HAL_GPIO_WritePin(GPIOB, LED_B_Pin | LED_G_Pin | LED_R_Pin, GPIO_PIN_RESET);
-
-    /*Configure GPIO pins : LED_B_Pin LED_G_Pin LED_R_Pin */
     GPIO_InitStruct.Pin = LED_B_Pin | LED_G_Pin | LED_R_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
+    HAL_GPIO_WritePin(IMU_AG_DEN_GPIO_Port, IMU_AG_DEN_Pin, GPIO_PIN_RESET);
+    GPIO_InitStruct.Pin = IMU_AG_DEN_Pin;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    HAL_GPIO_Init(IMU_AG_DEN_GPIO_Port, &GPIO_InitStruct);
+
+    GPIO_InitStruct.Pin = IMU_AG_INT2_Pin | IMU_AG_INT1_Pin | IMU_MAG_INT_Pin;
+    GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
+
     #endif
 
+    /* EXTI interrupt init*/
+    HAL_NVIC_SetPriority(EXTI9_5_IRQn, 5, 0);
+    HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+
+    HAL_NVIC_SetPriority(EXTI15_10_IRQn, 5, 0);
+    HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 }
 
 /**

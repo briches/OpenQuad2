@@ -39,10 +39,12 @@ typedef union {
     uint8_t u8bit[6];
 } axis3bit16_t;
 
+#define BOOT_TIME_LSM9DS1 20  // ms
+#define BOOT_TIME_LPS22HH 5   // ms
 
-
-#define     BOOT_TIME_LSM9DS1           20  // ms
-#define     BOOT_TIME_LPS22HH           5   // ms
+static volatile uint32_t m_int1_count = 0;
+static volatile uint32_t m_int2_count = 0;
+static bool m_ints_enabled = false;
 
 /* IMU variables ---------------------------------------------------------*/
 static sensbus_t mag_bus =
@@ -119,7 +121,7 @@ static void lsm9ds1_init()
     /* Configure filtering chain - See datasheet for filtering chain details */
     /* Accelerometer filtering chain */
     lsm9ds1_xl_filter_aalias_bandwidth_set(&dev_ctx_imu, LSM9DS1_AUTO);
-    lsm9ds1_xl_filter_lp_bandwidth_set(&dev_ctx_imu, LSM9DS1_LP_ODR_DIV_50);
+    lsm9ds1_xl_filter_lp_bandwidth_set(&dev_ctx_imu, LSM9DS1_LP_ODR_DIV_9);
     lsm9ds1_xl_filter_out_path_set(&dev_ctx_imu, LSM9DS1_LP_OUT);
 
     /* Gyroscope filtering chain */
@@ -128,8 +130,17 @@ static void lsm9ds1_init()
     lsm9ds1_gy_filter_out_path_set(&dev_ctx_imu, LSM9DS1_LPF1_HPF_LPF2_OUT);
 
     /* Set Output Data Rate / Power mode */
-    lsm9ds1_imu_data_rate_set(&dev_ctx_imu, LSM9DS1_IMU_59Hz5);
+    lsm9ds1_imu_data_rate_set(&dev_ctx_imu, LSM9DS1_IMU_119Hz);
     lsm9ds1_mag_data_rate_set(&dev_ctx_mag, LSM9DS1_MAG_UHP_10Hz);
+
+    /* Set Accelerometer data ready interrupt on INT 1_A/G pin */
+    lsm9ds1_pin_int1_route_t int1 = {0};
+    int1.int1_drdy_xl = PROPERTY_ENABLE;
+    lsm9ds1_pin_int1_route_set(&dev_ctx_imu, int1);
+
+    lsm9ds1_pin_int2_route_t int2 = {0};
+    int2.int2_drdy_g = PROPERTY_ENABLE;
+    lsm9ds1_pin_int2_route_set(&dev_ctx_imu, int2);
 }
 
 /**
@@ -156,6 +167,36 @@ static void lps22hh_init()
     lps22hh_block_data_update_set(&dev_ctx_lps, PROPERTY_ENABLE);
     /* Set Output Data Rate */
     lps22hh_data_rate_set(&dev_ctx_lps, LPS22HH_10_Hz_LOW_NOISE);
+}
+
+static void read_imu_data()
+{
+    /* Read device status register */
+    lsm9ds1_dev_status_get(&dev_ctx_mag, &dev_ctx_imu, &lsm9ds1);
+
+    if (lsm9ds1.status_imu.xlda && lsm9ds1.status_imu.gda)
+    {
+        /* Read imu data */
+        memset(data_raw_acceleration.u8bit, 0x00, 3 * sizeof(int16_t));
+        memset(data_raw_angular_rate.u8bit, 0x00, 3 * sizeof(int16_t));
+
+        lsm9ds1_acceleration_raw_get(&dev_ctx_imu, data_raw_acceleration.u8bit);
+        lsm9ds1_angular_rate_raw_get(&dev_ctx_imu, data_raw_angular_rate.u8bit);
+
+        acceleration_mg[0] = lsm9ds1_from_fs4g_to_mg(data_raw_acceleration.i16bit[0]);
+        acceleration_mg[1] = lsm9ds1_from_fs4g_to_mg(data_raw_acceleration.i16bit[1]);
+        acceleration_mg[2] = lsm9ds1_from_fs4g_to_mg(data_raw_acceleration.i16bit[2]);
+
+        angular_rate_mdps[0] = lsm9ds1_from_fs2000dps_to_mdps(data_raw_angular_rate.i16bit[0]);
+        angular_rate_mdps[1] = lsm9ds1_from_fs2000dps_to_mdps(data_raw_angular_rate.i16bit[1]);
+        angular_rate_mdps[2] = lsm9ds1_from_fs2000dps_to_mdps(data_raw_angular_rate.i16bit[2]);
+
+        kinematics_update_accel_gyro(acceleration_mg, angular_rate_mdps);
+
+        // debug_printf("IMU - [mg]:%3.1f\t%3.1f\t%3.1f\t [mdps]:%3.1f\t%3.1f\t%3.1f",
+        // acceleration_mg[0], acceleration_mg[1], acceleration_mg[2],
+        // angular_rate_mdps[0], angular_rate_mdps[1], angular_rate_mdps[2]);
+    }
 }
 
 /**
@@ -187,6 +228,8 @@ void sensor_thread_start(void* argument)
 
     lps22hh_init();
 
+    m_ints_enabled = true;
+
     for (;;)
     {
         TickType_t now = HAL_GetTick();
@@ -210,35 +253,9 @@ void sensor_thread_start(void* argument)
             debug_printf("temperature [degC]:%6.1f", temperature_degC);
         }
 #endif
+        if(m_int1_count)
+            read_imu_data();
 
-#if 1
-        /* Read device status register */
-        lsm9ds1_dev_status_get(&dev_ctx_mag, &dev_ctx_imu, &lsm9ds1);
-
-        if (lsm9ds1.status_imu.xlda && lsm9ds1.status_imu.gda)
-        {
-            /* Read imu data */
-            memset(data_raw_acceleration.u8bit, 0x00, 3 * sizeof(int16_t));
-            memset(data_raw_angular_rate.u8bit, 0x00, 3 * sizeof(int16_t));
-
-            lsm9ds1_acceleration_raw_get(&dev_ctx_imu, data_raw_acceleration.u8bit);
-            lsm9ds1_angular_rate_raw_get(&dev_ctx_imu, data_raw_angular_rate.u8bit);
-
-            acceleration_mg[0] = lsm9ds1_from_fs4g_to_mg(data_raw_acceleration.i16bit[0]);
-            acceleration_mg[1] = lsm9ds1_from_fs4g_to_mg(data_raw_acceleration.i16bit[1]);
-            acceleration_mg[2] = lsm9ds1_from_fs4g_to_mg(data_raw_acceleration.i16bit[2]);
-
-            angular_rate_mdps[0] = lsm9ds1_from_fs2000dps_to_mdps(data_raw_angular_rate.i16bit[0]);
-            angular_rate_mdps[1] = lsm9ds1_from_fs2000dps_to_mdps(data_raw_angular_rate.i16bit[1]);
-            angular_rate_mdps[2] = lsm9ds1_from_fs2000dps_to_mdps(data_raw_angular_rate.i16bit[2]);
-
-            kinematics_update_accel_gyro(acceleration_mg, angular_rate_mdps);
-
-            // debug_printf("IMU - [mg]:%3.1f\t%3.1f\t%3.1f\t [mdps]:%3.1f\t%3.1f\t%3.1f",
-            // acceleration_mg[0], acceleration_mg[1], acceleration_mg[2],
-            // angular_rate_mdps[0], angular_rate_mdps[1], angular_rate_mdps[2]);
-        }
-#endif
 
 #if 0
         if (lsm9ds1.status_mag.zyxda)
@@ -257,6 +274,11 @@ void sensor_thread_start(void* argument)
         }
 #endif 
 
+        // debug_printf("INT1 count = %u", m_int1_count);
+
+        m_int1_count = 0;
+        m_int2_count = 0;
+
         // debug_printf("T = %u", HAL_GetTick() - now);
 
         // HAL_GPIO_WritePin(LED_R_GPIO_Port, LED_R_Pin, GPIO_PIN_SET);
@@ -273,5 +295,56 @@ void sensor_thread_start(void* argument)
         osDelay(10);
         HAL_GPIO_WritePin(LED_B_GPIO_Port, LED_B_Pin, GPIO_PIN_RESET);
         osDelay(10);
+
+        osDelay(980);
     }
+}
+
+
+/**
+ * @brief Callback function to be called when the HAL event HAL_GPIO_EXTI_Callback
+ * is executed, with the pin IMU_AG_INT1_Pin
+ * 
+ * INT1 configured as the accel interrupt
+ * 
+ */
+void sensors_imu_int1_callback()
+{
+    // If we haven't done initialization yet, we'll have to handle this in the task. 
+    if(m_ints_enabled == false)
+    {
+        m_int1_count += 1;
+        return;
+    }
+
+    // Enter a critical region and get the latest data
+    
+    UBaseType_t uxSavedInterruptStatus = taskENTER_CRITICAL_FROM_ISR();
+
+    read_imu_data();
+
+    taskEXIT_CRITICAL_FROM_ISR(uxSavedInterruptStatus);
+}
+
+/**
+ * @brief Callback function to be called when the HAL event HAL_GPIO_EXTI_Callback
+ * is executed, with the pin IMU_AG_INT2_Pin
+ * 
+ * INT2 configured as the GYRO interrupt
+ * 
+ */
+void sensors_imu_int2_callback()
+{
+    // If we haven't done initialization yet, we'll have to handle this in the task. 
+    if(m_ints_enabled == false)
+    {
+        m_int2_count += 1;
+        return;
+    }
+
+    // UBaseType_t uxSavedInterruptStatus = taskENTER_CRITICAL_FROM_ISR();
+
+    // debug_printf("Interrupt pin 2");
+
+    // taskEXIT_CRITICAL_FROM_ISR(uxSavedInterruptStatus);
 }

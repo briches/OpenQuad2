@@ -5,8 +5,8 @@
  * Author: Brandon Riches
  * Email: richesbc@gmail.com
  * -----
- * Last Modified: 
- * Modified By: 
+ * Last Modified: Sun Dec 13 2020                                                                  /
+ * Modified By: Brandon Riches                                                                     /
  * -----
  * 
  * Copyright (c) 2020 OpenQuad2.
@@ -33,6 +33,8 @@ extern I2C_HandleTypeDef hi2c2;
 extern SPI_HandleTypeDef hspi2;
 
 void sensor_thread_start(void* argument);
+void sensors_imu_int1_callback();
+void sensors_imu_int2_callback();
 
 
 #endif
