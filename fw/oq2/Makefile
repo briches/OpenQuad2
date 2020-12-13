@@ -38,6 +38,7 @@ BUILD_DIR = _build
 C_SOURCES =  \
 application/main.c \
 application/freertos/freertos.c \
+application/kinematics/kinematics.c \
 application/sensor_thread/sensor_thread.c \
 application/sensor_thread/platform/mems_platform.c \
 application/sys/stm32h7xx_it.c \
@@ -182,6 +183,7 @@ C_INCLUDES =  \
 -Iapplication \
 -Iapplication/config \
 -Iapplication/freertos \
+-Iapplication/kinematics \
 -Iapplication/sensor_thread \
 -Iapplication/sensor_thread/platform \
 -Iapplication/sys \

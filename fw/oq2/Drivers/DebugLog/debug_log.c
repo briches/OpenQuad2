@@ -42,6 +42,7 @@ const char* module_stringtable[] =
    "main",
    "rtos",
    "sensors",
+   "kinematics",
 };
 
 // Temporary buffer used for printing routines

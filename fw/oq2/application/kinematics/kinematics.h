@@ -1,7 +1,7 @@
 /*
- * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\Drivers\DebugLog\module_ids.h                   /
+ * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\application\kinematics\kinematics.h             /
  * Project: OQ2                                                                                    /
- * Created Date: Saturday, December 12th 2020, 7:36:14 am                                          /
+ * Created Date: Sunday, December 13th 2020, 11:05:48 am                                           /
  * Author: Brandon Riches                                                                          /
  * Email: richesbc@gmail.com                                                                       /
  * -----                                                                                           /
@@ -16,16 +16,53 @@
 */
 
 
-#ifndef MODULE_IDS_H_
-#define MODULE_IDS_H_
+#ifndef KINEMATICS_H_
+#define KINEMATICS_H_
 
-typedef enum
+#include <stdint.h>
+#include "math.h"
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
+#define DEG_TO_RAD(x) (x * M_PI / 180.0)
+#define RAD_TO_DEG(x) (x * 180.0 / M_PI)
+
+typedef struct kinematics_data
 {
-   MAIN_MODULE_ID,
-   FREERTOS_MODULE_ID,
-   SENSOR_MODULE_ID,
-   NUM_MODULES
-} module_id_t;
+    double pitch,
+    roll,
+    yaw,
+    phi,
+    
+    gpitch, 
+    groll,
+    gyaw,
+    
+    pitchRate,
+    rollRate,
+    yawRate,
+    
+    vx, vy,
+
+    altitude,
+    climbRate,
+    prevClimbRate,
+
+    io_ax,
+    io_ay,
+    io_az,
+    io_wx,
+    io_wy,
+    io_wz,
+
+    yaw_mag;
+
+    uint32_t timestamp;
+} kinematics_data_t;
+
+uint32_t kinematics_update_accel_gyro(float * accel_mg, float * rate_mdps);
 
 
 #endif

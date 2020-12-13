@@ -69,16 +69,16 @@ static TickType_t ticks = 0;
 void PreSleepProcessing(uint32_t *ulExpectedIdleTime)
 {
     /* place for user code */
-    ticks = HAL_GetTick();
+    // ticks = HAL_GetTick();
 }
 
 void PostSleepProcessing(uint32_t *ulExpectedIdleTime)
 {
     /* place for user code */
-    TickType_t delta = HAL_GetTick() - ticks;
-    ticks = 0;
-    debug_printf("Slept for %u ticks", delta);
+    // TickType_t delta = HAL_GetTick() - ticks;
+    // ticks = 0;
+    // debug_printf("Slept for %u ticks", delta);
 
-    ticks = 0;
+    // ticks = 0;
 }
 

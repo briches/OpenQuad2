@@ -24,6 +24,7 @@
 #include "cmsis_os.h"
 #include "mems_platform.h"
 #include "main.h"
+#include "kinematics.h"
 
 #define debug_error(fmt, ...)           debug_error(SENSOR_MODULE_ID, fmt, ##__VA_ARGS__)
 #define debug_printf(fmt, ...)          debug_printf(SENSOR_MODULE_ID, fmt, ##__VA_ARGS__)
@@ -84,7 +85,10 @@ stmdev_ctx_t dev_ctx_mag;
 stmdev_ctx_t dev_ctx_lps;
 
 
-
+/**
+ * @brief Initialize the LSM9DS1 9DoF inertial sensor
+ * 
+ */
 static void lsm9ds1_init()
 {
     /* Check device ID */
@@ -127,6 +131,7 @@ static void lsm9ds1_init()
     lsm9ds1_imu_data_rate_set(&dev_ctx_imu, LSM9DS1_IMU_59Hz5);
     lsm9ds1_mag_data_rate_set(&dev_ctx_mag, LSM9DS1_MAG_UHP_10Hz);
 }
+
 /**
  * @brief Initialize the LPS22HH pressure sensor
  * 
@@ -184,9 +189,8 @@ void sensor_thread_start(void* argument)
 
     for (;;)
     {
-        /* Read device status register */
-        lsm9ds1_dev_status_get(&dev_ctx_mag, &dev_ctx_imu, &lsm9ds1);
-
+        TickType_t now = HAL_GetTick();
+#if 0
         lps22hh_read_reg(&dev_ctx_lps, LPS22HH_STATUS, (uint8_t*)&lps22hh, 1);
 
         if (lps22hh.status.p_da)
@@ -205,8 +209,11 @@ void sensor_thread_start(void* argument)
             temperature_degC = lps22hh_from_lsb_to_celsius(data_raw_temperature);
             debug_printf("temperature [degC]:%6.1f", temperature_degC);
         }
+#endif
 
 #if 1
+        /* Read device status register */
+        lsm9ds1_dev_status_get(&dev_ctx_mag, &dev_ctx_imu, &lsm9ds1);
 
         if (lsm9ds1.status_imu.xlda && lsm9ds1.status_imu.gda)
         {
@@ -225,13 +232,15 @@ void sensor_thread_start(void* argument)
             angular_rate_mdps[1] = lsm9ds1_from_fs2000dps_to_mdps(data_raw_angular_rate.i16bit[1]);
             angular_rate_mdps[2] = lsm9ds1_from_fs2000dps_to_mdps(data_raw_angular_rate.i16bit[2]);
 
-            debug_printf("IMU - [mg]:%3.1f\t%3.1f\t%3.1f\t [mdps]:%3.1f\t%3.1f\t%3.1f",
-                acceleration_mg[0], acceleration_mg[1], acceleration_mg[2],
-                angular_rate_mdps[0], angular_rate_mdps[1], angular_rate_mdps[2]);
+            kinematics_update_accel_gyro(acceleration_mg, angular_rate_mdps);
+
+            // debug_printf("IMU - [mg]:%3.1f\t%3.1f\t%3.1f\t [mdps]:%3.1f\t%3.1f\t%3.1f",
+            // acceleration_mg[0], acceleration_mg[1], acceleration_mg[2],
+            // angular_rate_mdps[0], angular_rate_mdps[1], angular_rate_mdps[2]);
         }
 #endif
 
-#if 1
+#if 0
         if (lsm9ds1.status_mag.zyxda)
         {
             /* Read magnetometer data */
@@ -248,21 +257,21 @@ void sensor_thread_start(void* argument)
         }
 #endif 
 
-        HAL_GPIO_WritePin(LED_R_GPIO_Port, LED_R_Pin, GPIO_PIN_SET);
-        HAL_Delay(10);
-        HAL_GPIO_WritePin(LED_R_GPIO_Port, LED_R_Pin, GPIO_PIN_RESET);
-        HAL_Delay(90);
+        // debug_printf("T = %u", HAL_GetTick() - now);
 
-        HAL_GPIO_WritePin(LED_G_GPIO_Port, LED_G_Pin, GPIO_PIN_SET);
-        HAL_Delay(10);
-        HAL_GPIO_WritePin(LED_G_GPIO_Port, LED_G_Pin, GPIO_PIN_RESET);
-        HAL_Delay(90);
+        // HAL_GPIO_WritePin(LED_R_GPIO_Port, LED_R_Pin, GPIO_PIN_SET);
+        // HAL_Delay(10);
+        // HAL_GPIO_WritePin(LED_R_GPIO_Port, LED_R_Pin, GPIO_PIN_RESET);
+        // HAL_Delay(90);
+
+        // HAL_GPIO_WritePin(LED_G_GPIO_Port, LED_G_Pin, GPIO_PIN_SET);
+        // HAL_Delay(10);
+        // HAL_GPIO_WritePin(LED_G_GPIO_Port, LED_G_Pin, GPIO_PIN_RESET);
+        // HAL_Delay(90);
 
         HAL_GPIO_WritePin(LED_B_GPIO_Port, LED_B_Pin, GPIO_PIN_SET);
-        HAL_Delay(10);
+        osDelay(10);
         HAL_GPIO_WritePin(LED_B_GPIO_Port, LED_B_Pin, GPIO_PIN_RESET);
-        HAL_Delay(90);
-
-        HAL_Delay(700);
+        osDelay(10);
     }
 }
