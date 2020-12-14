@@ -18,23 +18,20 @@
  * HISTORY:                                                                                        /
 */
 
-
 #include "debug_log.h"
-
 #ifdef FREERTOS
 #include "cmsis_os.h"
 #endif
-
 #include "stm32h7xx_hal.h"
 #include "stm32h7xx_hal_uart.h"
 
-extern UART_HandleTypeDef huart2;
-
-static osMutexId_t debug_mutex_id;
-static const osMutexAttr_t debug_mutex_attr = 
+typedef struct
 {
-    .name = "debug_mutex"
-};
+    uint8_t* data;
+    uint8_t len;
+} log_queue_item_t;
+
+extern UART_HandleTypeDef huart2;
 
 // String table of module names correlating to the module_id_t enumeration.
 const char* module_stringtable[] =
@@ -46,13 +43,26 @@ const char* module_stringtable[] =
 };
 
 // Temporary buffer used for printing routines
-static uint8_t line_buffer[256];
+static uint8_t line_buffer[64];
+
+// Temporary buffer used for UART operations
+#define LINE_LENGTH 128
+#define DEBUG_UART_QUEUE_SIZE 10
+static uint8_t uart_tx_buffer[DEBUG_UART_QUEUE_SIZE * LINE_LENGTH];
+static uint8_t* p_write;
+static log_queue_item_t m_log_queue[DEBUG_UART_QUEUE_SIZE];
+static volatile int32_t m_index_in_progress = -1;
+
 
 // Flag indicating the enabled or disabled state of default timestamp printing
 static bool timestamp_enabled = true;
 
 // Local (and arguably safer) implementation of vprintf
-void _vprintf(const char* format, va_list ap);
+void _vprintf(uint8_t** pbuf, const char* format, va_list ap);
+
+// Function to send the accumulated buffer over uart
+void _log_finalized(int32_t index, uint32_t length);
+void _log_transmit(uint8_t* p_start, uint32_t length);
 
 // Data field printing routines ------------------------------------------------------------------
 //
@@ -60,28 +70,13 @@ void _vprintf(const char* format, va_list ap);
 //      _putc(..) to perform their actual writing, in case future development requires hooking
 //      into the output of the debug module.
 
-int _putx(uint64_t integer, char hex_base, int width, char pad);
-int _putu(uint64_t integer, int width, char pad);
-int _puti(int64_t integer, int width, char pad);
-int _putf(double value, int width, int precision, char pad);
-int _puts(const char* p_string);
-int _putc(char byte);
+int _putx(uint8_t** pbuf, uint64_t integer, char hex_base, int width, char pad);
+int _putu(uint8_t** pbuf, uint64_t integer, int width, char pad);
+int _puti(uint8_t** pbuf, int64_t integer, int width, char pad);
+int _putf(uint8_t** pbuf, double value, int width, int precision, char pad);
+int _puts(uint8_t** pbuf, const char* p_string);
+int _putc(uint8_t** pbuf, char byte);
 
-// Externals
-
-void debug_log_init(void)
-{
-    debug_mutex_id = osMutexNew(&debug_mutex_attr);
-
-    if(debug_mutex_id == NULL)
-    {
-        while(1)
-        ;
-    }
-    _puts("\r\n");
-    _puts("\r\n");
-    _puts("\033[2J");
-}
 
 /**
  * @name debug_print_timestamp
@@ -90,7 +85,7 @@ void debug_log_init(void)
  * Parameter:
  *    enable:     if true, set the behavior to print timestamp before buffer
  */
-static void debug_print_timestamp()
+static void debug_print_timestamp(uint8_t** pbuf)
 {
     uint32_t decimal;
     uint32_t intpart;
@@ -103,22 +98,92 @@ static void debug_print_timestamp()
     intpart = (uint32_t)(time / 1000);
     decimal = (uint32_t)(time - (uint32_t)(1000 * intpart));
 
-    _putu(intpart, 1, ' ');
-    _putc('.');
-    _putu(decimal, 3, '0');
-    _putc('s');
+    _putu(pbuf, intpart, 1, ' ');
+    _putc(pbuf, '.');
+    _putu(pbuf, decimal, 3, '0');
+    _puts(pbuf, "\t ");
 }
 
-/**
- * @name debug_timestamp_enable
- * @brief: Set the behavior of debug_printf to print timestamp before the buffer
- *
- * Parameter:
- *    enable:     if true, set the behavior to print timestamp before buffer
- */
-void debug_timestamp_enable(bool enable)
+static int32_t debug_log_get_free_queue_index()
 {
-    timestamp_enabled = enable;
+    for (int i = 0; i < DEBUG_UART_QUEUE_SIZE; i++)
+    {
+        if (m_log_queue[i].len == 0)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+static int32_t debug_log_get_new_queue_index()
+{
+    for (int i = 0; i < DEBUG_UART_QUEUE_SIZE; i++)
+    {
+        if (m_log_queue[i].len != 0)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+static int32_t debug_log_new_queue_item()
+{
+    int32_t index = debug_log_get_free_queue_index();
+
+    if (index != -1)
+    {
+        m_log_queue[index].len = 1;
+        m_log_queue[index].data = uart_tx_buffer + index * LINE_LENGTH;
+        return index;
+    }
+
+    return -1;
+}
+
+// Externals
+
+void debug_log_tx_completed_callback()
+{
+    if (m_index_in_progress < 0)
+        return;
+
+    // Zero out the current queue item
+    m_log_queue[m_index_in_progress].data = NULL;
+    m_log_queue[m_index_in_progress].len = 0;
+
+    // Get a new item
+    int32_t index = debug_log_get_new_queue_index();
+
+    // If a valid item was found
+    if (index != -1)
+    {
+        // Transmit the item
+        m_index_in_progress = index;
+        _log_transmit(m_log_queue[m_index_in_progress].data, m_log_queue[m_index_in_progress].len);
+    }
+    else
+    {
+        // Queue execution done
+        m_index_in_progress = -1;
+    }
+}
+
+void debug_log_init(void)
+{
+    uint32_t index = debug_log_new_queue_item();
+    if (index == -1)
+        return;
+
+    uint8_t* start_buf = m_log_queue[index].data;
+    uint8_t* buf = m_log_queue[index].data;
+
+    _puts(&buf, "\r\n");
+    _puts(&buf, "\r\n");
+    _puts(&buf, "\033[2J");
+
+    _log_finalized(index, buf - start_buf);
 }
 
 /**
@@ -131,43 +196,41 @@ void debug_timestamp_enable(bool enable)
  */
 void debug_error(module_id_t source, const char* p_format, ...)
 {
-    if(osKernelGetState() != osKernelInactive)
-    {
-        osStatus_t stat = osMutexAcquire(debug_mutex_id, 1);
+    uint32_t index = debug_log_new_queue_item();
+    if (index == -1)
+        return;
 
-        if(stat != osOK)
-            return;
-    }
+    uint8_t* start_buf = m_log_queue[index].data;
+    uint8_t* buf = m_log_queue[index].data;
 
     // Change the color code to RED
-    _puts(VT100_TEXT_BRIGHT_RED);
+    _puts(&buf, VT100_TEXT_BRIGHT_RED);
 
     // Write the line header
-    debug_print_timestamp();
+    debug_print_timestamp(&buf);
 
     // Print the source module name
-    _puts(" [");
+    _puts(&buf, " [");
     if (source >= NUM_MODULES || source < 0)
-        _puts("???");
+        _puts(&buf, "???");
     else
-        _puts(module_stringtable[source]);
-    _putc(']');
-    _putc(' ');
+        _puts(&buf, module_stringtable[source]);
+    _putc(&buf, ']');
+    _putc(&buf, ' ');
 
     // Write the body of data
     va_list ap;
     va_start(ap, p_format);
-    _vprintf(p_format, ap);
+    _vprintf(&buf, p_format, ap);
     va_end(ap);
 
     // Change the color code back to default
-    _puts(VT100_RESET);
+    _puts(&buf, VT100_RESET);
 
     // Finish up
-    _puts("\r\n");
+    _puts(&buf, "\r\n");
 
-    if(osKernelGetState() != osKernelInactive)
-        osMutexRelease(debug_mutex_id);
+    _log_finalized(index, buf - start_buf);
 }
 
 /**
@@ -180,47 +243,49 @@ void debug_error(module_id_t source, const char* p_format, ...)
  */
 void debug_printf(module_id_t source, const char* p_format, ...)
 {
-    if(osKernelGetState() == osKernelRunning)
-    {
-        osStatus_t stat = osMutexAcquire(debug_mutex_id, 1);
+    uint32_t index = debug_log_new_queue_item();
 
-        if(stat != osOK)
-            return;
-    }
+    if (index == -1)
+        return;
+
+    uint8_t* start_buf = m_log_queue[index].data;
+    uint8_t* buf = m_log_queue[index].data;
+
+    if (start_buf == NULL)
+        return;
 
     if (source == DEBUG_YELLOW_HIGHLIGHT_SELECT)
-        _puts(VT100_TEXT_BRIGHT_YELLOW);
+        _puts(&buf, VT100_TEXT_BRIGHT_YELLOW);
     else if (source == DEBUG_CYAN_HIGHLIGHT_SELECT)
-        _puts(VT100_TEXT_BRIGHT_CYAN);
+        _puts(&buf, VT100_TEXT_BRIGHT_CYAN);
 
     // Print the timestamp
     if (timestamp_enabled)
-        debug_print_timestamp();
+        debug_print_timestamp(&buf);
 
     // Print the source module name
-    _puts(" [");
+    _puts(&buf, " [");
     if (source >= NUM_MODULES || source < 0)
-        _puts("???");
+        _puts(&buf, "???");
     else
-        _puts(module_stringtable[source]);
-    _putc(']');
-    _putc(' ');
+        _puts(&buf, module_stringtable[source]);
+    _putc(&buf, ']');
+    _putc(&buf, ' ');
 
     // Write the body of data
     va_list ap;
     va_start(ap, p_format);
-    _vprintf(p_format, ap);
+    _vprintf(&buf, p_format, ap);
     va_end(ap);
 
     // Finish up
-    _puts("\r\n");
+    _puts(&buf, "\r\n");
 
     // Change the color code back to default
     if (source == DEBUG_YELLOW_HIGHLIGHT_SELECT || source == DEBUG_CYAN_HIGHLIGHT_SELECT)
-        _puts(VT100_RESET);
+        _puts(&buf, VT100_RESET);
 
-    if(osKernelGetState() == osKernelRunning)
-        osMutexRelease(debug_mutex_id);
+    _log_finalized(index, buf - start_buf);
 }
 
 /**
@@ -242,33 +307,35 @@ void debug_printf(module_id_t source, const char* p_format, ...)
 void debug_print_buffer(module_id_t source, const uint8_t* p_buffer, unsigned int length,
     uint32_t start_address, int columns)
 {
-    if(osKernelGetState() != osKernelInactive)
-    {
-        osStatus_t stat = osMutexAcquire(debug_mutex_id, 1);
+    uint32_t index = debug_log_new_queue_item();
 
-        if(stat != osOK)
-            return;
-    }
+    if (index == -1)
+        return;
 
+    uint8_t* start_buf = m_log_queue[index].data;
+    uint8_t* buf = m_log_queue[index].data;
+
+    if (start_buf == NULL)
+        return;
 
     if (source == DEBUG_YELLOW_HIGHLIGHT_SELECT)
-        _puts(VT100_TEXT_BRIGHT_YELLOW);
+        _puts(&buf, VT100_TEXT_BRIGHT_YELLOW);
     else if (source == DEBUG_CYAN_HIGHLIGHT_SELECT)
-        _puts(VT100_TEXT_BRIGHT_CYAN);
+        _puts(&buf, VT100_TEXT_BRIGHT_CYAN);
 
     // Draw the top axis
     // _puts("\r\n  Address |");
     for (int i = 0; i < columns; i++)
     {
-        _puts("   ");
-        _putx(i, 'A', 2, '0');
+        _puts(&buf, "   ");
+        _putx(&buf, i, 'A', 2, '0');
     }
-    _puts("\r\n");
+    _puts(&buf, "\r\n");
 
     // _puts("----------+");
     for (int i = 0; i < columns; i++)
-        _puts("-----");
-    _puts("-\r\n");
+        _puts(&buf, "-----");
+    _puts(&buf, "-\r\n");
 
     while (length > 0)
     {
@@ -282,30 +349,28 @@ void debug_print_buffer(module_id_t source, const uint8_t* p_buffer, unsigned in
         {
             if (length > 0)
             {
-                _puts(" 0x");
-                _putx(*(p_buffer++), 'A', 2, '0');
+                _puts(&buf, " 0x");
+                _putx(&buf, *(p_buffer++), 'A', 2, '0');
                 length--;
             }
             else
             {
-                _puts("  ");
+                _puts(&buf, "  ");
             }
         }
 
         // End the line
-        _puts("\r\n");
+        _puts(&buf, "\r\n");
         start_address += columns;
     }
 
-    _puts("\r\n");
+    _puts(&buf, "\r\n");
 
     // Change the color code back to default
     if (source == DEBUG_YELLOW_HIGHLIGHT_SELECT || source == DEBUG_CYAN_HIGHLIGHT_SELECT)
-        _puts(VT100_RESET);
+        _puts(&buf, VT100_RESET);
 
-
-    if(osKernelGetState() != osKernelInactive)
-        osMutexRelease(debug_mutex_id);
+    _log_finalized(index, buf - start_buf);
 }
 
 /**
@@ -319,7 +384,7 @@ void debug_print_buffer(module_id_t source, const uint8_t* p_buffer, unsigned in
  *      format          The formwat string
  *      ap              Variable argument list of parameters for the print
  */
-void _vprintf(const char* format, va_list ap)
+void _vprintf(uint8_t** pbuf, const char* format, va_list ap)
 {
     int width;
     int precision;
@@ -331,7 +396,7 @@ void _vprintf(const char* format, va_list ap)
         // Just print the character unless it's an escape sequence
         if (*format != '%')
         {
-            _putc(*format);
+            _putc(pbuf, *format);
         }
         // ..otherwise, handle the escape sequence
         else
@@ -349,7 +414,7 @@ void _vprintf(const char* format, va_list ap)
             // Double escape sequence: print '%' instead
             if (*format == '%')
             {
-                _putc(*format);
+                _putc(pbuf, *format);
                 continue;
             }
 
@@ -404,9 +469,9 @@ void _vprintf(const char* format, va_list ap)
             if (*format == 's')
             {
                 char* p_string = va_arg(ap, char*);
-                int chars = _puts(p_string);
+                int chars = _puts(pbuf, p_string);
                 while (chars++ < width)
-                    _putc(' ');
+                    _putc(pbuf, ' ');
             }
             // ..print a signed integer
             else if (*format == 'd')
@@ -414,12 +479,12 @@ void _vprintf(const char* format, va_list ap)
                 if (longlongint)
                 {
                     int64_t integer = va_arg(ap, int64_t);
-                    _puti(integer, width, pad);
+                    _puti(pbuf, integer, width, pad);
                 }
                 else
                 {
                     int32_t integer = va_arg(ap, int32_t);
-                    _puti(integer, width, pad);
+                    _puti(pbuf, integer, width, pad);
                 }
             }
             // ..print an unsigned integer
@@ -428,19 +493,19 @@ void _vprintf(const char* format, va_list ap)
                 if (longlongint)
                 {
                     uint64_t integer = va_arg(ap, uint64_t);
-                    _putu(integer, width, pad);
+                    _putu(pbuf, integer, width, pad);
                 }
                 else
                 {
                     uint32_t integer = va_arg(ap, uint32_t);
-                    _putu(integer, width, pad);
+                    _putu(pbuf, integer, width, pad);
                 }
             }
             // ..print a character
             else if (*format == 'c')
             {
                 char c = va_arg(ap, int);
-                _putc(c);
+                _putc(pbuf, c);
             }
             // ..print lower-case hexadecimal characters
             else if (*format == 'x')
@@ -448,12 +513,12 @@ void _vprintf(const char* format, va_list ap)
                 if (longlongint)
                 {
                     uint64_t integer = va_arg(ap, uint64_t);
-                    _putx(integer, 'a', width, pad);
+                    _putx(pbuf, integer, 'a', width, pad);
                 }
                 else
                 {
                     uint32_t integer = va_arg(ap, uint32_t);
-                    _putx(integer, 'a', width, pad);
+                    _putx(pbuf, integer, 'a', width, pad);
                 }
             }
             // ..print upper-case hexadecimal characters
@@ -462,19 +527,19 @@ void _vprintf(const char* format, va_list ap)
                 if (longlongint)
                 {
                     uint64_t integer = va_arg(ap, uint64_t);
-                    _putx(integer, 'A', width, pad);
+                    _putx(pbuf, integer, 'A', width, pad);
                 }
                 else
                 {
                     uint32_t integer = va_arg(ap, uint32_t);
-                    _putx(integer, 'A', width, pad);
+                    _putx(pbuf, integer, 'A', width, pad);
                 }
             }
             // ..print floating point value
             else if (*format == 'f')
             {
                 double value = va_arg(ap, double);
-                _putf(value, width, precision, pad);
+                _putf(pbuf, value, width, precision, pad);
             }
             // ..abort the print if we've reached the end of the format string
             else if (*format == '\0')
@@ -488,11 +553,11 @@ void _vprintf(const char* format, va_list ap)
                     width = 1;
 
                 uint8_t* p_buffer = (uint8_t*)va_arg(ap, void*);
-                _putx((int)*(p_buffer++), 'a', 2, '0');
+                _putx(pbuf, (int)*(p_buffer++), 'a', 2, '0');
                 while (--width)
                 {
-                    _putc(' ');
-                    _putx((int)*(p_buffer++), 'a', 2, '0');
+                    _putc(pbuf, ' ');
+                    _putx(pbuf, (int)*(p_buffer++), 'a', 2, '0');
                 }
             }
             // // ..print upper-case hex dump of an array (NON-STANDARD FORMAT SPECIFIER)
@@ -636,6 +701,29 @@ void _vprintf(const char* format, va_list ap)
     }
 }
 
+
+void _log_finalized(int32_t index, uint32_t length)
+{
+    m_log_queue[index].len = length;
+
+    if (index != -1 && m_index_in_progress == -1 )
+    {
+        m_index_in_progress = index;
+        _log_transmit(m_log_queue[index].data, length);
+    }
+}
+
+void _log_transmit(uint8_t* p_start, uint32_t length)
+{
+    if (osKernelGetState() == osKernelRunning)
+        HAL_UART_Transmit_IT(&huart2, p_start, length);
+    else
+    {
+        HAL_UART_Transmit(&huart2, p_start, length, 100);
+        debug_log_tx_completed_callback();
+    }
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //
 //  Internal Routine:   int _putc( char byte )
@@ -651,13 +739,15 @@ void _vprintf(const char* format, va_list ap)
 //      byte            The character to print
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-int _putc(char byte)
+int _putc(uint8_t** pbuf, char byte)
 {
-    uint8_t to_print = (uint8_t) byte;
-    // #ifdef DEBUG
-    // SEGGER_RTT_Write(0, &byte, 1);
-    HAL_UART_Transmit(&huart2, &to_print, 1, 10);
-    // #endif
+    // Store the value
+    **pbuf = byte;
+
+    // Increment the pointer
+    *pbuf += 1;
+
+    p_write++;
 
     return 1;
 }
@@ -675,11 +765,11 @@ int _putc(char byte)
 //      p_string        Pointer to the string to print
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-int _puts(const char* p_string)
+int _puts(uint8_t** pbuf, const char* p_string)
 {
     int i;
     for (i = 0; *p_string != '\0'; i++)
-        _putc(*(p_string++));
+        _putc(pbuf, *(p_string++));
 
     return i;
 }
@@ -701,7 +791,7 @@ int _puts(const char* p_string)
 //      pad             The padding character to use to fill unused space
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-int _puti(int64_t integer, int width, char pad)
+int _puti(uint8_t** pbuf, int64_t integer, int width, char pad)
 {
     // Mark if the integer is negative
     bool negative = integer < 0;
@@ -722,13 +812,13 @@ int _puti(int64_t integer, int width, char pad)
     integer = length;
     if (negative)
     {
-        _putc('-');
+        _putc(pbuf, '-');
         length++;
     }
     while (width > length++)
-        _putc(pad);
+        _putc(pbuf, pad);
     while (integer--)
-        _putc(*(--p_insert));
+        _putc(pbuf, *(--p_insert));
 
     // Finished, return the length
     return length - 1;
@@ -751,7 +841,7 @@ int _puti(int64_t integer, int width, char pad)
 //      pad             The padding character to use to fill unused space
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-int _putu(uint64_t integer, int width, char pad)
+int _putu(uint8_t** pbuf, uint64_t integer, int width, char pad)
 {
     // Convert the integer into a string (in reverse order)
     int length = 0;
@@ -766,9 +856,9 @@ int _putu(uint64_t integer, int width, char pad)
     // Print the string back, re-use the 'integer' variable for this
     integer = length;
     while (width > length++)
-        _putc(pad);
+        _putc(pbuf, pad);
     while (integer--)
-        _putc(*(--p_insert));
+        _putc(pbuf, *(--p_insert));
 
     // Finished, return the length
     return length - 1;
@@ -795,7 +885,7 @@ int _putu(uint64_t integer, int width, char pad)
 //      pad             The padding character to use to fill unused space
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-int _putx(uint64_t integer, char hex_base, int width, char pad)
+int _putx(uint8_t** pbuf, uint64_t integer, char hex_base, int width, char pad)
 {
     // Convert the integer into a string (in reverse order)
     int length;
@@ -811,10 +901,10 @@ int _putx(uint64_t integer, char hex_base, int width, char pad)
 
     // Print the string back, re-use the 'integer' variable for this
     while (width-- > length)
-        _putc(pad);
+        _putc(pbuf, pad);
     integer = length;
     while (integer--)
-        _putc(*(--p_insert));
+        _putc(pbuf, *(--p_insert));
 
     // Finished, return the length
     return length;
@@ -839,7 +929,7 @@ int _putx(uint64_t integer, char hex_base, int width, char pad)
 //      pad             The padding character to use to fill unused space
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-int _putf(double value, int width, int precision, char pad)
+int _putf(uint8_t** pbuf, double value, int width, int precision, char pad)
 {
     int scale = 1;
     for (register int i = 0; i < precision; i++)
@@ -864,15 +954,15 @@ int _putf(double value, int width, int precision, char pad)
         fractional *= -1;
 
     if (pad == ' ' || pad == '0')
-        width -= _puti(integer, width - 1 - precision, pad);
+        width -= _puti(pbuf, integer, width - 1 - precision, pad);
     else
-        width -= _puti(integer, 0, pad);
+        width -= _puti(pbuf, integer, 0, pad);
 
-    width -= _putc('.');
-    width -= _putu(fractional, precision, '0');
+    width -= _putc(pbuf, '.');
+    width -= _putu(pbuf, fractional, precision, '0');
 
     while (width-- > 0)
-        _putc(' ');
+        _putc(pbuf, ' ');
 
     return 0; // This is a bit of a hack, we should return the number of characters
 }

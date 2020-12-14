@@ -42,9 +42,11 @@ typedef union {
 #define BOOT_TIME_LSM9DS1 20  // ms
 #define BOOT_TIME_LPS22HH 5   // ms
 
+#define IMU_FIFO_THRESHOLD 16
+
 static volatile uint32_t m_int1_count = 0;
 static volatile uint32_t m_int2_count = 0;
-static bool m_ints_enabled = false;
+static bool m_sensors_initialized = false;
 
 /* IMU variables ---------------------------------------------------------*/
 static sensbus_t mag_bus =
@@ -93,6 +95,8 @@ stmdev_ctx_t dev_ctx_lps;
  */
 static void lsm9ds1_init()
 {
+    debug_printf("LSM9DS1 Init");
+
     /* Check device ID */
     lsm9ds1_dev_id_get(&dev_ctx_mag, &dev_ctx_imu, &whoamI_lsm);
 
@@ -130,7 +134,7 @@ static void lsm9ds1_init()
     lsm9ds1_gy_filter_out_path_set(&dev_ctx_imu, LSM9DS1_LPF1_HPF_LPF2_OUT);
 
     /* Set Output Data Rate / Power mode */
-    lsm9ds1_imu_data_rate_set(&dev_ctx_imu, LSM9DS1_IMU_119Hz);
+    lsm9ds1_imu_data_rate_set(&dev_ctx_imu, LSM9DS1_IMU_14Hz9);
     lsm9ds1_mag_data_rate_set(&dev_ctx_mag, LSM9DS1_MAG_UHP_10Hz);
 
     /* Set Accelerometer data ready interrupt on INT 1_A/G pin */
@@ -139,8 +143,12 @@ static void lsm9ds1_init()
     lsm9ds1_pin_int1_route_set(&dev_ctx_imu, int1);
 
     lsm9ds1_pin_int2_route_t int2 = {0};
-    int2.int2_drdy_g = PROPERTY_ENABLE;
+    int2.int2_fth = PROPERTY_ENABLE;
     lsm9ds1_pin_int2_route_set(&dev_ctx_imu, int2);
+
+    // Configure FIFO as continuous stream mode, watermark threshold of 16 samples
+    lsm9ds1_fifo_mode_set(&dev_ctx_imu, LSM9DS1_STREAM_TO_FIFO_MODE);
+    lsm9ds1_fifo_watermark_set(&dev_ctx_imu, IMU_FIFO_THRESHOLD);
 }
 
 /**
@@ -149,6 +157,7 @@ static void lsm9ds1_init()
  */
 static void lps22hh_init()
 {
+    debug_printf("LPS22HH Init");
     /* Check device ID */
     whoamI_lps = 0;
     lps22hh_device_id_get(&dev_ctx_lps, &whoamI_lps);
@@ -169,6 +178,11 @@ static void lps22hh_init()
     lps22hh_data_rate_set(&dev_ctx_lps, LPS22HH_10_Hz_LOW_NOISE);
 }
 
+/**
+ * @brief Read IMU GYRO and ACCEL data. 
+ * 
+ * Can be called from the task or from the ISR
+ */
 static void read_imu_data()
 {
     /* Read device status register */
@@ -197,6 +211,15 @@ static void read_imu_data()
         // acceleration_mg[0], acceleration_mg[1], acceleration_mg[2],
         // angular_rate_mdps[0], angular_rate_mdps[1], angular_rate_mdps[2]);
     }
+}
+
+static void read_fifo_info()
+{
+    uint8_t val;
+
+    lsm9ds1_fifo_data_level_get(&dev_ctx_imu, &val);
+
+    debug_printf("FIFO level %u", val);
 }
 
 /**
@@ -228,7 +251,7 @@ void sensor_thread_start(void* argument)
 
     lps22hh_init();
 
-    m_ints_enabled = true;
+    m_sensors_initialized = true;
 
     for (;;)
     {
@@ -254,7 +277,16 @@ void sensor_thread_start(void* argument)
         }
 #endif
         if(m_int1_count)
-            read_imu_data();
+        {
+            // read_imu_data();
+            debug_printf("Handled int1 from sensor task.");
+        }
+
+        if(m_int2_count)
+        {
+            debug_printf("Handled int2 from sensor task.");
+            read_fifo_info();
+        }
 
 
 #if 0
@@ -273,8 +305,6 @@ void sensor_thread_start(void* argument)
                 magnetic_field_mgauss[2]);
         }
 #endif 
-
-        // debug_printf("INT1 count = %u", m_int1_count);
 
         m_int1_count = 0;
         m_int2_count = 0;
@@ -296,7 +326,7 @@ void sensor_thread_start(void* argument)
         HAL_GPIO_WritePin(LED_B_GPIO_Port, LED_B_Pin, GPIO_PIN_RESET);
         osDelay(10);
 
-        osDelay(980);
+        osDelay(10);
     }
 }
 
@@ -311,40 +341,40 @@ void sensor_thread_start(void* argument)
 void sensors_imu_int1_callback()
 {
     // If we haven't done initialization yet, we'll have to handle this in the task. 
-    if(m_ints_enabled == false)
+    if(m_sensors_initialized == false)
     {
         m_int1_count += 1;
-        return;
     }
+    m_int1_count += 1;
 
     // Enter a critical region and get the latest data
     
-    UBaseType_t uxSavedInterruptStatus = taskENTER_CRITICAL_FROM_ISR();
+    // UBaseType_t uxSavedInterruptStatus = taskENTER_CRITICAL_FROM_ISR();
 
-    read_imu_data();
+    // read_imu_data();
 
-    taskEXIT_CRITICAL_FROM_ISR(uxSavedInterruptStatus);
+    // taskEXIT_CRITICAL_FROM_ISR(uxSavedInterruptStatus);
 }
 
 /**
  * @brief Callback function to be called when the HAL event HAL_GPIO_EXTI_Callback
  * is executed, with the pin IMU_AG_INT2_Pin
  * 
- * INT2 configured as the GYRO interrupt
+ * INT2 configured as the Fifo threshold interrupt
  * 
  */
 void sensors_imu_int2_callback()
 {
     // If we haven't done initialization yet, we'll have to handle this in the task. 
-    if(m_ints_enabled == false)
+    if(m_sensors_initialized == false)
     {
         m_int2_count += 1;
         return;
     }
 
-    // UBaseType_t uxSavedInterruptStatus = taskENTER_CRITICAL_FROM_ISR();
+    UBaseType_t uxSavedInterruptStatus = taskENTER_CRITICAL_FROM_ISR();
 
-    // debug_printf("Interrupt pin 2");
+    read_fifo_info();
 
-    // taskEXIT_CRITICAL_FROM_ISR(uxSavedInterruptStatus);
+    taskEXIT_CRITICAL_FROM_ISR(uxSavedInterruptStatus);
 }

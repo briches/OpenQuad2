@@ -69,6 +69,7 @@
 
 
 void debug_log_init(void);
+void debug_log_tx_completed_callback(void);
 
 void debug_timestamp_enable(bool enable);
 

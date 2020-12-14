@@ -115,6 +115,14 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     }
 }
 
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
+{
+    if(huart == &huart2)
+    {
+        debug_log_tx_completed_callback();
+    }
+}
+
 
 /**
   * @brief  The application entry point.
@@ -1352,6 +1360,8 @@ void Error_Handler(void)
     __disable_irq();
     while (1)
     {
+        int i = 0;
+        i++;
     }
     /* USER CODE END Error_Handler_Debug */
 }

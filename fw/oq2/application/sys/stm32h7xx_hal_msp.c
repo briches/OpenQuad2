@@ -5,8 +5,8 @@
  * Author: Brandon Riches                                                                          /
  * Email: richesbc@gmail.com                                                                       /
  * -----                                                                                           /
- * Last Modified:                                                                                  /
- * Modified By:                                                                                    /
+ * Last Modified: Sun Dec 13 2020                                                                  /
+ * Modified By: Brandon Riches                                                                     /
  * -----                                                                                           /
  *                                                                                                 /
  * Copyright (c) 2020 OpenQuad2.                                                                   /
@@ -991,16 +991,9 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
         GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
         GPIO_InitStruct.Alternate = GPIO_AF4_USART1;
         HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
-        /* USER CODE BEGIN USART1_MspInit 1 */
-
-        /* USER CODE END USART1_MspInit 1 */
     }
     else if (huart->Instance == USART2)
     {
-        /* USER CODE BEGIN USART2_MspInit 0 */
-
-        /* USER CODE END USART2_MspInit 0 */
           /* Peripheral clock enable */
         __HAL_RCC_USART2_CLK_ENABLE();
 
@@ -1016,9 +1009,8 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
         GPIO_InitStruct.Alternate = GPIO_AF7_USART2;
         HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-        /* USER CODE BEGIN USART2_MspInit 1 */
-
-        /* USER CODE END USART2_MspInit 1 */
+        HAL_NVIC_SetPriority(USART2_IRQn, 5, 0);
+        HAL_NVIC_EnableIRQ(USART2_IRQn);
     }
 
 }

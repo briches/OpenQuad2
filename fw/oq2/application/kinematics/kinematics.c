@@ -46,7 +46,7 @@ uint32_t kinematics_update_accel_gyro(float * accel_mg, float * rate_mdps)
     roll_accel = RAD_TO_DEG(roll_accel);
     pitch_accel = RAD_TO_DEG(pitch_accel);
 
-    debug_printf("roll, %3.1f, pitch, %3.1f", roll_accel, pitch_accel);
+    // debug_printf("roll, %3.1f, pitch, %3.1f", roll_accel, pitch_accel);
 
     return 0;
 }
