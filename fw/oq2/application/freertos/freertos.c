@@ -35,12 +35,13 @@ void vApplicationMallocFailedHook(void);
 /* Functions needed when configGENERATE_RUN_TIME_STATS is on */
 __weak void configureTimerForRunTimeStats(void)
 {
-
+    int i = 0;
+    i += 1;
 }
 
 __weak unsigned long getRunTimeCounterValue(void)
 {
-return 0;
+return HAL_GetTick();
 }
 
 void vApplicationStackOverflowHook(TaskHandle_t xTask, signed char *pcTaskName)

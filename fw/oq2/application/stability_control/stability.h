@@ -1,7 +1,7 @@
 /*
- * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\application\kinematics\kinematics.h             /
+ * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\application\stability_control\stability_thread.h/
  * Project: OQ2                                                                                    /
- * Created Date: Sunday, December 13th 2020, 11:05:48 am                                           /
+ * Created Date: Saturday, December 12th 2020, 7:23:52 am                                          /
  * Author: Brandon Riches                                                                          /
  * Email: richesbc@gmail.com                                                                       /
  * -----                                                                                           /
@@ -16,53 +16,19 @@
 */
 
 
-#ifndef KINEMATICS_H_
-#define KINEMATICS_H_
+#ifndef STABILITY_H__
+#define STABILITY_H__
 
-#include <stdint.h>
-#include "math.h"
+#include "main.h"
 
-#ifndef M_PI
-#define M_PI 3.14159265358979323846
-#endif
+extern I2C_HandleTypeDef hi2c2;
+extern SPI_HandleTypeDef hspi2;
 
-#define DEG_TO_RAD(x) (x * M_PI / 180.0)
-#define RAD_TO_DEG(x) (x * 180.0 / M_PI)
+void stability_thread_pre_init();
+void stability_thread_start(void* argument);
 
-typedef struct kinematics_data
-{
-    double pitch,
-    roll,
-    yaw,
-    phi,
-    
-    gpitch, 
-    groll,
-    gyaw,
-    
-    pitchRate,
-    rollRate,
-    yawRate,
-    
-    vx, vy,
-
-    altitude,
-    climbRate,
-    prevClimbRate,
-
-    io_ax,
-    io_ay,
-    io_az,
-    io_wx,
-    io_wy,
-    io_wz,
-
-    yaw_mag;
-
-    uint32_t timestamp;
-} kinematics_data_t;
-
-uint32_t kinematics_update_accel_gyro(float * accel_mg, float * rate_mdps);
+void imu_int1_callback();
+void imu_int2_callback();
 
 
 #endif

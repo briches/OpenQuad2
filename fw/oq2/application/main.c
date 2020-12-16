@@ -19,12 +19,15 @@
 
 
 #include "main.h"
+#include "app_config.h"
 #include "cmsis_os.h"
 #include "fatfs.h"
 #include "usb_device.h"
 #include "debug_log.h"
-#include "sensor_thread.h"
-#include "version.h"
+#include "stability.h"
+#include "task_manager.h"
+#include "led_blinky.h"
+#include "location.h"
 
 #define debug_error(fmt, ...)           debug_error(MAIN_MODULE_ID, fmt, ##__VA_ARGS__)
 #define debug_printf(fmt, ...)          debug_printf(MAIN_MODULE_ID, fmt, ##__VA_ARGS__)
@@ -63,12 +66,36 @@ UART_HandleTypeDef huart9;
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
 
-/* Definitions for defaultTask */
-osThreadId_t defaultTaskHandle;
-const osThreadAttr_t defaultTask_attributes = {
-  .name = "defaultTask",
-  .priority = (osPriority_t)osPriorityHigh,
-  .stack_size = 1024 * 4
+/* Definitions for stability task */
+osThreadId_t stability_task_handle;
+const osThreadAttr_t stability_task_attributes = {
+  .name = "stability",
+  .priority = (osPriority_t)STABILITY_THREAD_PRIO,
+  .stack_size = STABILITY_THREAD_STACK_SIZE,
+};
+
+/* Definitions for task manager task */
+osThreadId_t task_manager_task_handle;
+const osThreadAttr_t task_manager_attributes = {
+  .name = "task manager",
+  .priority = (osPriority_t)TASK_MANAGER_THREAD_PRIO,
+  .stack_size = TASK_MANAGER_THREAD_STACK_SIZE,
+};
+
+/* Definitions for LED task */
+osThreadId_t led_task_handle;
+const osThreadAttr_t led_task_attributes = {
+  .name = "leds",
+  .priority = (osPriority_t)LED_THREAD_PRIO,
+  .stack_size = LED_THREAD_STACK_SIZE,
+};
+
+/* Definitions for Location task */
+osThreadId_t location_task_handle;
+const osThreadAttr_t location_task_attributes = {
+  .name = "location",
+  .priority = (osPriority_t)LOCATION_THREAD_PRIO,
+  .stack_size = LOCATION_THREAD_STACK_SIZE,
 };
 
 /* Private function prototypes -----------------------------------------------*/
@@ -101,12 +128,16 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     {
         case IMU_AG_INT1_Pin:
         {
-            sensors_imu_int1_callback();
+            #if defined(SENSOR_THREAD_IMU_USE_INDIVIDUAL)
+                imu_int1_callback();
+            #endif
         } break;
 
         case IMU_AG_INT2_Pin:
         {
-            sensors_imu_int2_callback();
+            #if defined(SENSOR_THREAD_IMU_USE_FIFO)
+                imu_int2_callback();
+            #endif
         } break;
 
         default:
@@ -121,6 +152,20 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
     {
         debug_log_tx_completed_callback();
     }
+
+    if(huart == &huart5)
+    {
+        gps_tx_complete_callback();
+    }
+}
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+
+    if(huart == &huart5)
+    {
+        gps_rx_complete_callback();
+    }
 }
 
 
@@ -130,13 +175,13 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
   */
 int main(void)
 {
-    /* Enable I-Cache---------------------------------------------------------*/
+    /*********************************************************************************************/
+    /* Enable CPU Caches-------------------------------------------------------------------------*/
     SCB_EnableICache();
-
-    /* Enable D-Cache---------------------------------------------------------*/
     SCB_EnableDCache();
 
-    /* MCU Configuration--------------------------------------------------------*/
+    /*********************************************************************************************/
+    /* MCU Configuration-------------------------------------------------------------------------*/
 
     /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
     HAL_Init();
@@ -146,28 +191,30 @@ int main(void)
 
     /* Initialize all configured peripherals */
     MX_GPIO_Init();
-    //   MX_CRC_Init();
-    //   MX_CRYP_Init();
-    //   MX_HASH_Init();
-    //   MX_I2C1_Init();
-    MX_I2C2_Init();
-    //   MX_OCTOSPI1_Init();
-    //   MX_RNG_Init();
-    //   MX_SDMMC1_SD_Init();
-    //   MX_SPI1_Init();
-    MX_SPI2_Init();
-    //   MX_TIM1_Init();
-    //   MX_TIM24_Init();
-    //   MX_UART4_Init();
-    //   MX_UART5_Init();
-    //   MX_UART7_Init();
-    //   MX_UART8_Init();
-    //   MX_UART9_Init();
-    //   MX_USART1_UART_Init();
-    MX_USART2_UART_Init();
-    //   MX_FATFS_Init();
+    // MX_CRC_Init();
+    // MX_CRYP_Init();
+    // MX_HASH_Init();
+    // MX_I2C1_Init();
+    MX_I2C2_Init(); // LSM9DS1
+    // MX_OCTOSPI1_Init();
+    // MX_RNG_Init();
+    // MX_SDMMC1_SD_Init();
+    // MX_SPI1_Init();
+    MX_SPI2_Init(); // Barometer
+    // MX_TIM1_Init();
+    // MX_TIM24_Init();
+    // MX_UART4_Init();
+    MX_UART5_Init(); // MAX_M8C UART
+    // MX_UART7_Init();
+    // MX_UART8_Init();
+    // MX_UART9_Init();
+    // MX_USART1_UART_Init();
+    MX_USART2_UART_Init(); // Debug uart
+    // MX_FATFS_Init();
     MX_ADC3_Init();
 
+    /*********************************************************************************************/
+    /* Print config and version info ------------------------------------------------------------*/
     debug_log_init();
     debug_printf("OpenQuad2 Application Start");
     debug_printf("Application version:      %s", _VERSION_OQ2_APPLICATION);
@@ -175,12 +222,31 @@ int main(void)
     debug_printf("FreeRTOS kernel version:  %s", tskKERNEL_VERSION_NUMBER);
     debug_printf("");
 
-    /* Init scheduler */
+    /*********************************************************************************************/
+    /* Pre scheduler initialization--------------------------------------------------------------*/
+    stability_thread_pre_init();
+    location_thread_pre_init();
+
+    /*********************************************************************************************/
+    /* Init scheduler ---------------------------------------------------------------------------*/
     osKernelInitialize();
 
-    defaultTaskHandle = osThreadNew(sensor_thread_start, NULL, &defaultTask_attributes);
+    /*********************************************************************************************/
+    /* Start Tasks ------------------------------------------------------------------------------*/
+    stability_task_handle = 
+    osThreadNew(stability_thread_start,     NULL, &stability_task_attributes);
 
-    /* Start scheduler */
+    location_task_handle = 
+    osThreadNew(location_thread_start,      NULL, &location_task_attributes);
+
+    task_manager_task_handle = 
+    osThreadNew(task_manager_thread_start,  NULL, &task_manager_attributes);
+
+    led_task_handle = 
+    osThreadNew(led_thread_start,           NULL, &led_task_attributes);
+
+    /*********************************************************************************************/
+    /* Start scheduler --------------------------------------------------------------------------*/
     osKernelStart();
 }
 
@@ -895,16 +961,8 @@ static void MX_UART4_Init(void)
   */
 static void MX_UART5_Init(void)
 {
-
-    /* USER CODE BEGIN UART5_Init 0 */
-
-    /* USER CODE END UART5_Init 0 */
-
-    /* USER CODE BEGIN UART5_Init 1 */
-
-    /* USER CODE END UART5_Init 1 */
     huart5.Instance = UART5;
-    huart5.Init.BaudRate = 115200;
+    huart5.Init.BaudRate = 9600;
     huart5.Init.WordLength = UART_WORDLENGTH_8B;
     huart5.Init.StopBits = UART_STOPBITS_1;
     huart5.Init.Parity = UART_PARITY_NONE;
@@ -930,10 +988,6 @@ static void MX_UART5_Init(void)
     {
         Error_Handler();
     }
-    /* USER CODE BEGIN UART5_Init 2 */
-
-    /* USER CODE END UART5_Init 2 */
-
 }
 
 /**
@@ -1198,7 +1252,7 @@ static void MX_GPIO_Init(void)
     #if 0
 
     /*Configure GPIO pin Output Level */
-    HAL_GPIO_WritePin(GPIOE, FLASH_NRESET_Pin | IMU_AG_DEN_Pin | IMU_SDO_AG_Pin | IMU_SDO_MAG_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOE, FLASH_NRESET_Pin | IMU_AG_DEN_Pin | IMU_SDO_AG_Pin | IMU_SDO_MAG_Pin, );
 
     /*Configure GPIO pin Output Level */
     HAL_GPIO_WritePin(GPIOC, WIFI_SER_CFG_Pin | WIFI_CHIP_EN_Pin | WIFI_RESETN_Pin, GPIO_PIN_RESET);
@@ -1298,6 +1352,12 @@ static void MX_GPIO_Init(void)
     GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
+
+    GPIO_InitStruct.Pin = GPS_RESETN_Pin;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    HAL_GPIO_Init(GPS_RESETN_GPIO_Port, &GPIO_InitStruct);
 
     #endif
 

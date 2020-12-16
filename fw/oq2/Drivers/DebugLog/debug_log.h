@@ -71,7 +71,7 @@
 void debug_log_init(void);
 void debug_log_tx_completed_callback(void);
 
-void debug_timestamp_enable(bool enable);
+void debug_timestamp_enable(module_id_t source, bool enable);
 
 void debug_printf(module_id_t source, const char *p_format, ...);
 

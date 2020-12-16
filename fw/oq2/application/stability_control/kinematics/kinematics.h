@@ -1,7 +1,7 @@
 /*
- * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\application\sensor_thread\platform\mems_platform.h/
+ * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\application\kinematics\kinematics.h             /
  * Project: OQ2                                                                                    /
- * Created Date: Sunday, December 13th 2020, 9:34:28 am                                            /
+ * Created Date: Sunday, December 13th 2020, 11:05:48 am                                           /
  * Author: Brandon Riches                                                                          /
  * Email: richesbc@gmail.com                                                                       /
  * -----                                                                                           /
@@ -15,27 +15,55 @@
  * HISTORY:                                                                                        /
 */
 
-#ifndef MEMS_PLATFORM_H_
-#define MEMS_PLATFORM_H_
 
-#include <string.h>
-#include <stdio.h>
+#ifndef KINEMATICS_H_
+#define KINEMATICS_H_
 
-typedef struct {
-    void* hbus;
-    uint8_t i2c_address;
-    uint8_t cs_port;
-    uint8_t cs_pin;
-} sensbus_t;
+#include <stdint.h>
+#include "math.h"
 
-int32_t platform_write_imu(void* handle, uint8_t reg, uint8_t* bufp, uint16_t len);
-int32_t platform_read_imu(void* handle, uint8_t reg, uint8_t* bufp, uint16_t len);
-int32_t platform_write_mag(void* handle, uint8_t reg, uint8_t* bufp, uint16_t len);
-int32_t platform_read_mag(void* handle, uint8_t reg, uint8_t* bufp, uint16_t len);
-int32_t platform_write_baro(void* handle, uint8_t reg, uint8_t* bufp, uint16_t len);
-int32_t platform_read_baro(void* handle, uint8_t reg, uint8_t* bufp, uint16_t len);
-void platform_delay(uint32_t ms);
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
+#define DEG_TO_RAD(x) (x * M_PI / 180.0)
+#define RAD_TO_DEG(x) (x * 180.0 / M_PI)
+
+typedef struct kinematics_data
+{
+    double pitch,
+    roll,
+    yaw,
+    phi,
+    
+    gpitch, 
+    groll,
+    gyaw,
+    
+    pitchRate,
+    rollRate,
+    yawRate,
+    
+    vx, vy,
+
+    altitude,
+    climbRate,
+    prevClimbRate,
+
+    io_ax,
+    io_ay,
+    io_az,
+    io_wx,
+    io_wy,
+    io_wz,
+
+    yaw_mag;
+
+    uint32_t timestamp;
+} kinematics_data_t;
+
+uint32_t kinematics_initialize();
+uint32_t kinematics_update_accel_gyro(float * accel_mg, float * rate_mdps);
 
 
 #endif
-

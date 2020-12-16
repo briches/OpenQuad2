@@ -1,7 +1,7 @@
 /*
- * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\Drivers\DebugLog\module_ids.h                   /
+ * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\application\stability_thread\platform\mems_platform.h/
  * Project: OQ2                                                                                    /
- * Created Date: Saturday, December 12th 2020, 7:36:14 am                                          /
+ * Created Date: Sunday, December 13th 2020, 9:34:28 am                                            /
  * Author: Brandon Riches                                                                          /
  * Email: richesbc@gmail.com                                                                       /
  * -----                                                                                           /
@@ -15,24 +15,27 @@
  * HISTORY:                                                                                        /
 */
 
+#ifndef MEMS_PLATFORM_H_
+#define MEMS_PLATFORM_H_
 
-#ifndef MODULE_IDS_H_
-#define MODULE_IDS_H_
+#include <string.h>
+#include <stdio.h>
 
-typedef enum
-{
-    TASK_MANAGER_MODULE_ID,
-    MAIN_MODULE_ID,
-    FREERTOS_MODULE_ID,
-    STABILITY_MODULE_ID,
-    KINEMATICS_MODULE_ID,
-    LOCATION_MODULE_ID,
-    NUM_MODULES
-} module_id_t;
+typedef struct {
+    void* hbus;
+    uint8_t i2c_address;
+    uint8_t cs_port;
+    uint8_t cs_pin;
+} sensbus_t;
 
+int32_t platform_write_imu(void* handle, uint8_t reg, uint8_t* bufp, uint16_t len);
+int32_t platform_read_imu(void* handle, uint8_t reg, uint8_t* bufp, uint16_t len);
+int32_t platform_write_mag(void* handle, uint8_t reg, uint8_t* bufp, uint16_t len);
+int32_t platform_read_mag(void* handle, uint8_t reg, uint8_t* bufp, uint16_t len);
+int32_t platform_write_baro(void* handle, uint8_t reg, uint8_t* bufp, uint16_t len);
+int32_t platform_read_baro(void* handle, uint8_t reg, uint8_t* bufp, uint16_t len);
+void platform_delay(uint32_t ms);
 
-
-#define DEBUG_CYAN_HIGHLIGHT_SELECT    TASK_MANAGER_MODULE_ID
-#define DEBUG_YELLOW_HIGHLIGHT_SELECT  STABILITY_MODULE_ID
 
 #endif
+

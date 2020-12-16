@@ -20,9 +20,9 @@ TARGET = _oq2
 # building variables
 ######################################
 # debug build?
-DEBUG = 0
+DEBUG = 1
 # optimization
-OPT = -O2
+OPT = -O0
 
 
 #######################################
@@ -38,9 +38,13 @@ BUILD_DIR = _build
 C_SOURCES =  \
 application/main.c \
 application/freertos/freertos.c \
-application/kinematics/kinematics.c \
-application/sensor_thread/sensor_thread.c \
-application/sensor_thread/platform/mems_platform.c \
+application/led_blinky/led_blinky.c \
+application/location/location.c \
+application/stability_control/stability.c \
+application/stability_control/platform/mems_platform.c \
+application/stability_control/kalman/kalman.c \
+application/stability_control/kinematics/kinematics.c \
+application/task_manager/task_manager.c \
 application/sys/stm32h7xx_it.c \
 application/sys/stm32h7xx_hal_msp.c \
 application/sys/stm32h7xx_hal_timebase_tim.c \
@@ -169,24 +173,19 @@ C_DEFS =  \
 -DSTM32H735xx \
 -DFREERTOS
 
-
-# AS includes
-# AS_INCLUDES =  \
-# -Iapplication \
-# -Iapplication/config \
-# -Iapplication/freertos \
-# -Iapplication/sensor_thread \
-# -Iapplication/sys 
-
 # C includes
 C_INCLUDES =  \
 -Iapplication \
 -Iapplication/config \
 -Iapplication/freertos \
--Iapplication/kinematics \
--Iapplication/sensor_thread \
--Iapplication/sensor_thread/platform \
+-Iapplication/location \
+-Iapplication/led_blinky \
+-Iapplication/stability_control \
+-Iapplication/stability_control/kalman \
+-Iapplication/stability_control/kinematics \
+-Iapplication/stability_control/platform \
 -Iapplication/sys \
+-Iapplication/task_manager \
 -IFATFS/Target \
 -IFATFS/App \
 -IUSB_DEVICE/App \

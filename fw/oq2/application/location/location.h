@@ -1,7 +1,7 @@
 /*
- * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\Drivers\DebugLog\module_ids.h                   /
+ * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\application\location\location.h                 /
  * Project: OQ2                                                                                    /
- * Created Date: Saturday, December 12th 2020, 7:36:14 am                                          /
+ * Created Date: Tuesday, December 15th 2020, 8:04:58 pm                                           /
  * Author: Brandon Riches                                                                          /
  * Email: richesbc@gmail.com                                                                       /
  * -----                                                                                           /
@@ -15,24 +15,16 @@
  * HISTORY:                                                                                        /
 */
 
+#ifndef _LOCATION_H_
+#define _LOCATION_H_
 
-#ifndef MODULE_IDS_H_
-#define MODULE_IDS_H_
+#include "main.h"
 
-typedef enum
-{
-    TASK_MANAGER_MODULE_ID,
-    MAIN_MODULE_ID,
-    FREERTOS_MODULE_ID,
-    STABILITY_MODULE_ID,
-    KINEMATICS_MODULE_ID,
-    LOCATION_MODULE_ID,
-    NUM_MODULES
-} module_id_t;
+extern UART_HandleTypeDef huart5;
 
-
-
-#define DEBUG_CYAN_HIGHLIGHT_SELECT    TASK_MANAGER_MODULE_ID
-#define DEBUG_YELLOW_HIGHLIGHT_SELECT  STABILITY_MODULE_ID
+void gps_tx_complete_callback();
+void gps_rx_complete_callback();
+void location_thread_pre_init();
+void location_thread_start(void* argument);
 
 #endif

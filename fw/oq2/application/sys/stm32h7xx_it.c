@@ -22,6 +22,7 @@
 
 /* External variables --------------------------------------------------------*/
 extern PCD_HandleTypeDef hpcd_USB_OTG_HS;
+extern UART_HandleTypeDef huart5;
 extern UART_HandleTypeDef huart2;
 extern TIM_HandleTypeDef htim2;
 
@@ -130,6 +131,14 @@ void EXTI9_5_IRQHandler(void)
 void TIM2_IRQHandler(void)
 {
     HAL_TIM_IRQHandler(&htim2);
+}
+
+/**
+  * @brief This function handles USART5 global interrupt.
+  */
+void UART5_IRQHandler(void)
+{
+  HAL_UART_IRQHandler(&huart5);
 }
 
 /**

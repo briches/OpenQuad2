@@ -1,7 +1,7 @@
 /*
- * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\Drivers\DebugLog\module_ids.h                   /
+ * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\application\led_blinky\led_blinky.h             /
  * Project: OQ2                                                                                    /
- * Created Date: Saturday, December 12th 2020, 7:36:14 am                                          /
+ * Created Date: Tuesday, December 15th 2020, 7:57:10 pm                                           /
  * Author: Brandon Riches                                                                          /
  * Email: richesbc@gmail.com                                                                       /
  * -----                                                                                           /
@@ -16,23 +16,9 @@
 */
 
 
-#ifndef MODULE_IDS_H_
-#define MODULE_IDS_H_
+#ifndef _LED_BLINKY_H_
+#define _LED_BLINKY_H_
 
-typedef enum
-{
-    TASK_MANAGER_MODULE_ID,
-    MAIN_MODULE_ID,
-    FREERTOS_MODULE_ID,
-    STABILITY_MODULE_ID,
-    KINEMATICS_MODULE_ID,
-    LOCATION_MODULE_ID,
-    NUM_MODULES
-} module_id_t;
-
-
-
-#define DEBUG_CYAN_HIGHLIGHT_SELECT    TASK_MANAGER_MODULE_ID
-#define DEBUG_YELLOW_HIGHLIGHT_SELECT  STABILITY_MODULE_ID
+void led_thread_start(void* argument);
 
 #endif

@@ -5,7 +5,7 @@
  * Author: Brandon Riches                                                                          /
  * Email: richesbc@gmail.com                                                                       /
  * -----                                                                                           /
- * Last Modified: Sun Dec 13 2020                                                                  /
+ * Last Modified: Tue Dec 15 2020                                                                  /
  * Modified By: Brandon Riches                                                                     /
  * -----                                                                                           /
  *                                                                                                 /
@@ -36,18 +36,20 @@ extern UART_HandleTypeDef huart2;
 // String table of module names correlating to the module_id_t enumeration.
 const char* module_stringtable[] =
 {
-   "main",
-   "rtos",
-   "sensors",
-   "kinematics",
+    "task_manager",
+    "main",
+    "rtos",
+    "sensors",
+    "kinematics",
+    "location",
 };
 
 // Temporary buffer used for printing routines
-static uint8_t line_buffer[64];
+static uint8_t line_buffer[128];
 
 // Temporary buffer used for UART operations
-#define LINE_LENGTH 128
-#define DEBUG_UART_QUEUE_SIZE 10
+#define LINE_LENGTH 512
+#define DEBUG_UART_QUEUE_SIZE 24
 static uint8_t uart_tx_buffer[DEBUG_UART_QUEUE_SIZE * LINE_LENGTH];
 static uint8_t* p_write;
 static log_queue_item_t m_log_queue[DEBUG_UART_QUEUE_SIZE];
@@ -101,7 +103,7 @@ static void debug_print_timestamp(uint8_t** pbuf)
     _putu(pbuf, intpart, 1, ' ');
     _putc(pbuf, '.');
     _putu(pbuf, decimal, 3, '0');
-    _puts(pbuf, "\t ");
+    _puts(pbuf, " ");
 }
 
 static int32_t debug_log_get_free_queue_index()
@@ -706,7 +708,7 @@ void _log_finalized(int32_t index, uint32_t length)
 {
     m_log_queue[index].len = length;
 
-    if (index != -1 && m_index_in_progress == -1 )
+    if (index != -1 && m_index_in_progress == -1)
     {
         m_index_in_progress = index;
         _log_transmit(m_log_queue[index].data, length);
