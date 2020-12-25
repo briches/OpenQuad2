@@ -139,8 +139,134 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=WXOSXHQO
 
+[Document7]
+DocumentPath=QCopter.OutJob
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=
+
+[Document8]
+DocumentPath=Power PCB Rev A Dec 22 2020.Cam
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=
+
 [GeneratedDocument1]
+DocumentPath=Project Outputs for QCPower Rev A\BOM\Bill of Materials-QCPower Rev A.xls
+DItemRevisionGUID=
+
+[GeneratedDocument2]
 DocumentPath=Project Outputs for QCPower Rev A\Design Rule Check - QCPower Rev A.html
+DItemRevisionGUID=
+
+[GeneratedDocument3]
+DocumentPath=Project Outputs for QCPower Rev A\NC Drill\QCPower Rev A.DRL
+DItemRevisionGUID=
+
+[GeneratedDocument4]
+DocumentPath=Project Outputs for QCPower Rev A\NC Drill\QCPower Rev A.DRR
+DItemRevisionGUID=
+
+[GeneratedDocument5]
+DocumentPath=Project Outputs for QCPower Rev A\Gerber\QCPower Rev A.EXTREP
+DItemRevisionGUID=
+
+[GeneratedDocument6]
+DocumentPath=Project Outputs for QCPower Rev A\Gerber\QCPower Rev A.G1
+DItemRevisionGUID=
+
+[GeneratedDocument7]
+DocumentPath=Project Outputs for QCPower Rev A\Gerber\QCPower Rev A.G2
+DItemRevisionGUID=
+
+[GeneratedDocument8]
+DocumentPath=Project Outputs for QCPower Rev A\Gerber\QCPower Rev A.G3
+DItemRevisionGUID=
+
+[GeneratedDocument9]
+DocumentPath=Project Outputs for QCPower Rev A\Gerber\QCPower Rev A.G4
+DItemRevisionGUID=
+
+[GeneratedDocument10]
+DocumentPath=Project Outputs for QCPower Rev A\Gerber\QCPower Rev A.GBL
+DItemRevisionGUID=
+
+[GeneratedDocument11]
+DocumentPath=Project Outputs for QCPower Rev A\Gerber\QCPower Rev A.GBO
+DItemRevisionGUID=
+
+[GeneratedDocument12]
+DocumentPath=Project Outputs for QCPower Rev A\Gerber\QCPower Rev A.GBP
+DItemRevisionGUID=
+
+[GeneratedDocument13]
+DocumentPath=Project Outputs for QCPower Rev A\Gerber\QCPower Rev A.GBS
+DItemRevisionGUID=
+
+[GeneratedDocument14]
+DocumentPath=Project Outputs for QCPower Rev A\Gerber\QCPower Rev A.GD1
+DItemRevisionGUID=
+
+[GeneratedDocument15]
+DocumentPath=Project Outputs for QCPower Rev A\Gerber\QCPower Rev A.GG1
+DItemRevisionGUID=
+
+[GeneratedDocument16]
+DocumentPath=Project Outputs for QCPower Rev A\Gerber\QCPower Rev A.GM1
+DItemRevisionGUID=
+
+[GeneratedDocument17]
+DocumentPath=Project Outputs for QCPower Rev A\Gerber\QCPower Rev A.GTL
+DItemRevisionGUID=
+
+[GeneratedDocument18]
+DocumentPath=Project Outputs for QCPower Rev A\Gerber\QCPower Rev A.GTO
+DItemRevisionGUID=
+
+[GeneratedDocument19]
+DocumentPath=Project Outputs for QCPower Rev A\Gerber\QCPower Rev A.GTP
+DItemRevisionGUID=
+
+[GeneratedDocument20]
+DocumentPath=Project Outputs for QCPower Rev A\Gerber\QCPower Rev A.GTS
+DItemRevisionGUID=
+
+[GeneratedDocument21]
+DocumentPath=Project Outputs for QCPower Rev A\NC Drill\QCPower Rev A.LDP
+DItemRevisionGUID=
+
+[GeneratedDocument22]
+DocumentPath=Project Outputs for QCPower Rev A\Gerber\QCPower Rev A.REP
+DItemRevisionGUID=
+
+[GeneratedDocument23]
+DocumentPath=Project Outputs for QCPower Rev A\Gerber\QCPower Rev A.RUL
+DItemRevisionGUID=
+
+[GeneratedDocument24]
+DocumentPath=Project Outputs for QCPower Rev A\NC Drill\QCPower Rev A.TXT
 DItemRevisionGUID=
 
 [Configuration1]

@@ -43,6 +43,7 @@
 *.su
 *.idb
 *.pdb
+*.log
 
 # Kernel Module Compile Results
 *.mod*
@@ -56,3 +57,4 @@ dkms.conf
 # Hardware backup files
 *History/
 *Component Models/
+*.SchDocPreview

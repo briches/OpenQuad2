@@ -20,9 +20,9 @@ TARGET = _oq2
 # building variables
 ######################################
 # debug build?
-DEBUG = 1
+DEBUG = 0
 # optimization
-OPT = -O0
+OPT = -O2
 
 
 #######################################
@@ -165,13 +165,15 @@ MCU = $(CPU) -mthumb $(FPU) $(FLOAT-ABI)
 AS_DEFS = \
 -DUSE_HAL_DRIVER \
 -DSTM32H735xx \
--DFREERTOS
+-DFREERTOS \
+-DARM_MATH_CM7
 
 # C defines
 C_DEFS =  \
 -DUSE_HAL_DRIVER \
 -DSTM32H735xx \
--DFREERTOS
+-DFREERTOS \
+-DARM_MATH_CM7
 
 # C includes
 C_INCLUDES =  \
@@ -203,7 +205,12 @@ C_INCLUDES =  \
 -IDrivers/CMSIS/Include \
 -IDrivers/Mems/lps22hh_STdC/driver \
 -IDrivers/Mems/lsm9ds1_STdC/driver \
--IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F
+-IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F \
+-IMiddlewares/ST/STM32_MotionFX_Library/Inc \
+-IMiddlewares/ARM/DSP/Inc
+
+LIBS = Middlewares/ST/STM32_MotionFX_Library/Lib/MotionFX_CM7F_wc32_ot_hard.a
+LIBS += Middlewares/ARM/DSP/Lib/arm_cortexM7lfdp_math.lib
 
 
 # compile gcc flags
@@ -227,12 +234,13 @@ CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
 LDSCRIPT = STM32H735ZGTx_FLASH.ld
 
 # libraries
-LIBS = -lc -lm -lnosys 
+LIBS += -lc -lm -lnosys 
 LIBDIR = 
 LDFLAGS = $(MCU) -specs=nano.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections
 
 # default action: build all
 all: $(BUILD_DIR)/$(TARGET).elf $(BUILD_DIR)/$(TARGET).hex $(BUILD_DIR)/$(TARGET).bin
+	echo $(LIBS)
 
 
 #######################################

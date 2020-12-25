@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
   56 004e 45F00105 		orreq	r5, r5, #1
   57 0052 4D4E     		ldr	r6, .L23+12
   58 0054 7445     		cmp	r4, lr
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 2
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 2
 
 
   59 0056 08BF     		it	eq
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  113 00ea BC42     		cmp	r4, r7
  114 00ec 08BF     		it	eq
  115 00ee 45F00105 		orreq	r5, r5, #1
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 3
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 3
 
 
  116 00f2 1837     		adds	r7, r7, #24
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  170 0168 05FA00F0 		lsl	r0, r5, r0
  171 016c CCF80400 		str	r0, [ip, #4]
  172 0170 6360     		str	r3, [r4, #4]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 4
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 4
 
 
  173 0172 E4D1     		bne	.L7
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  229 0046 AA42     		cmp	r2, r5
  230 0048 08BF     		it	eq
  231 004a 43F00103 		orreq	r3, r3, #1
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 5
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 5
 
 
  232 004e 05F56275 		add	r5, r5, #904
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  286 00ce 22F0FF03 		bic	r3, r2, #255
  287 00d2 8365     		str	r3, [r0, #88]
  288 00d4 F8E7     		b	.L25
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 6
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 6
 
 
  289              	.L32:
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  345 004c 9342     		cmp	r3, r2
  346 004e 13D1     		bne	.L39
  347              	.L34:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 7
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 7
 
 
  348 0050 DBB2     		uxtb	r3, r3
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  402 00d4 80080240 		.word	1073875072
  404              		.section	.text.DMA_CalcDMAMUXRequestGenBaseAndMask,"ax",%progbits
  405              		.align	1
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 8
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 8
 
 
  406              		.p2align 2,,3
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  461              	.L45:
  462 0064 0123     		movs	r3, #1
  463 0066 03FA01F1 		lsl	r1, r3, r1
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 9
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 9
 
 
  464 006a 4167     		str	r1, [r0, #116]
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  520 002e 0CBF     		ite	eq
  521 0030 0122     		moveq	r2, #1
  522 0032 0022     		movne	r2, #0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 10
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 10
 
 
  523 0034 8B42     		cmp	r3, r1
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  577 00c0 06E0     		b	.L56
  578              	.L58:
  579 00c2 FFF7FEFF 		bl	HAL_GetTick
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 11
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 11
 
 
  580 00c6 431B     		subs	r3, r0, r5
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  634              	.L64:
  635 014e 5961     		str	r1, [r3, #20]
  636 0150 2046     		mov	r0, r4
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 12
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 12
 
 
  637 0152 FFF7FEFF 		bl	DMA_CalcBaseAndBitshift
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  691 01da 4831     		adds	r1, r1, #72
  692 01dc AA42     		cmp	r2, r5
  693 01de 08BF     		it	eq
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 13
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 13
 
 
  694 01e0 43F00103 		orreq	r3, r3, #1
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  748 0268 6368     		ldr	r3, [r4, #4]
  749 026a 206E     		ldr	r0, [r4, #96]
  750 026c DDB2     		uxtb	r5, r3
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 14
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 14
 
 
  751 026e 013B     		subs	r3, r3, #1
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  805 02f0 5A60     		str	r2, [r3, #4]
  806 02f2 C7E7     		b	.L74
  807              	.L79:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 15
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 15
 
 
  808 02f4 0120     		movs	r0, #1
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  862 0368 0022     		movne	r2, #0
  863 036a 8342     		cmp	r3, r0
  864 036c 08BF     		it	eq
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 16
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 16
 
 
  865 036e 42F00102 		orreq	r2, r2, #1
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  919 03f6 1143     		orrs	r1, r1, r2
  920 03f8 AD00     		lsls	r5, r5, #2
  921 03fa 1960     		str	r1, [r3]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 17
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 17
 
 
  922 03fc E565     		str	r5, [r4, #92]
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  978 0020 0123     		moveq	r3, #1
  979 0022 0023     		movne	r3, #0
  980 0024 AA42     		cmp	r2, r5
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 18
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 18
 
 
  981 0026 08BF     		it	eq
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  1035 00b0 2125     		movs	r5, #33
  1036 00b2 2046     		mov	r0, r4
  1037 00b4 21F00101 		bic	r1, r1, #1
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 19
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 19
 
 
  1038 00b8 1160     		str	r1, [r2]
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  1092 0132 9A42     		cmpne	r2, r3
  1093 0134 2348     		ldr	r0, .L139+32
  1094 0136 01F13C01 		add	r1, r1, #60
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 20
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 20
 
 
  1095 013a 0CBF     		ite	eq
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  1149 01b0 88000240 		.word	1073873032
  1150 01b4 28000240 		.word	1073872936
  1151 01b8 08540258 		.word	1476547592
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 21
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 21
 
 
  1152 01bc 1C540258 		.word	1476547612
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  1208 005e 0123     		moveq	r3, #1
  1209 0060 0023     		movne	r3, #0
  1210 0062 8A42     		cmp	r2, r1
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 22
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 22
 
 
  1211 0064 08BF     		it	eq
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  1265 00f2 1368     		ldr	r3, [r2]
  1266 00f4 0020     		movs	r0, #0
  1267 00f6 43F00103 		orr	r3, r3, #1
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 23
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 23
 
 
  1268 00fa 1360     		str	r3, [r2]
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  1324 003a 6765     		str	r7, [r4, #84]
  1325 003c 2868     		ldr	r0, [r5]
  1326 003e 20F00100 		bic	r0, r0, #1
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 24
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 24
 
 
  1327 0042 2860     		str	r0, [r5]
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  1381 00c6 42F00102 		orreq	r2, r2, #1
  1382 00ca 3030     		adds	r0, r0, #48
  1383 00cc AB42     		cmp	r3, r5
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 25
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 25
 
 
  1384 00ce 08BF     		it	eq
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  1438 0142 1A60     		str	r2, [r3]
  1439              	.L168:
  1440 0144 184A     		ldr	r2, .L197+20
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 26
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 26
 
 
  1441 0146 194D     		ldr	r5, .L197+24
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  1497              		@ args = 0, pretend = 0, frame = 0
  1498              		@ frame_needed = 0, uses_anonymous_args = 0
  1499 0000 70B5     		push	{r4, r5, r6, lr}
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 27
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 27
 
 
  1500 0002 0546     		mov	r5, r0
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  1554 008e 43F00103 		orreq	r3, r3, #1
  1555 0092 4830     		adds	r0, r0, #72
  1556 0094 9442     		cmp	r4, r2
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 28
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 28
 
 
  1557 0096 08BF     		it	eq
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  1611 0114 01F16001 		add	r1, r1, #96
  1612 0118 0CBF     		ite	eq
  1613 011a 0123     		moveq	r3, #1
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 29
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 29
 
 
  1614 011c 0023     		movne	r3, #0
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  1668 01a6 EA6D     		ldr	r2, [r5, #92]
  1669 01a8 3F23     		movs	r3, #63
  1670 01aa A96D     		ldr	r1, [r5, #88]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 30
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 30
 
 
  1671 01ac 02F01F02 		and	r2, r2, #31
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  1725 0226 8442     		cmp	r4, r0
  1726 0228 08BF     		it	eq
  1727 022a 42F00102 		orreq	r2, r2, #1
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 31
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 31
 
 
  1728 022e 21F00E01 		bic	r1, r1, #14
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  1782 02b4 A242     		cmp	r2, r4
  1783 02b6 08BF     		it	eq
  1784 02b8 43F00103 		orreq	r3, r3, #1
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 32
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 32
 
 
  1785 02bc 2834     		adds	r4, r4, #40
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  1841 0020 5648     		ldr	r0, .L248+4
  1842 0022 574C     		ldr	r4, .L248+8
  1843 0024 8142     		cmp	r1, r0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 33
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 33
 
 
  1844 0026 18BF     		it	ne
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  1898 00ae 0020     		movs	r0, #0
  1899 00b0 83F83520 		strb	r2, [r3, #53]
  1900 00b4 0B68     		ldr	r3, [r1]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 34
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 34
 
 
  1901 00b6 23F00103 		bic	r3, r3, #1
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  1955 0130 D86D     		ldr	r0, [r3, #92]
  1956 0132 2268     		ldr	r2, [r4]
  1957 0134 00F01F00 		and	r0, r0, #31
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 35
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 35
 
 
  1958 0138 9D6D     		ldr	r5, [r3, #88]
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  2014 0006 85B0     		sub	sp, sp, #20
  2015 0008 1646     		mov	r6, r2
  2016 000a 0391     		str	r1, [sp, #12]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 36
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 36
 
 
  2017 000c FFF7FEFF 		bl	HAL_GetTick
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  2071 0098 3030     		adds	r0, r0, #48
  2072 009a AA42     		cmp	r2, r5
  2073 009c 08BF     		it	eq
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 37
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 37
 
 
  2074 009e 43F00103 		orreq	r3, r3, #1
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  2128 011e 08BF     		it	eq
  2129 0120 43F00103 		orreq	r3, r3, #1
  2130 0124 00F57470 		add	r0, r0, #976
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 38
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 38
 
 
  2131 0128 4245     		cmp	r2, r8
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  2185 01b8 41F00201 		orr	r1, r1, #2
  2186 01bc 03FA0CF3 		lsl	r3, r3, ip
  2187 01c0 6165     		str	r1, [r4, #84]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 39
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 39
 
 
  2188 01c2 0099     		ldr	r1, [sp]
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  2242 024e 43F00103 		orreq	r3, r3, #1
  2243 0252 5A45     		cmp	r2, fp
  2244 0254 08BF     		it	eq
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 40
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 40
 
 
  2245 0256 43F00103 		orreq	r3, r3, #1
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  2299 02ee 3C30     		adds	r0, r0, #60
  2300 02f0 8A42     		cmp	r2, r1
  2301 02f2 08BF     		it	eq
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 41
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 41
 
 
  2302 02f4 43F00103 		orreq	r3, r3, #1
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  2356 036e 9A42     		cmpne	r2, r3
  2357 0370 00F13000 		add	r0, r0, #48
  2358 0374 0CBF     		ite	eq
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 42
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 42
 
 
  2359 0376 0123     		moveq	r3, #1
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  2413 0410 3030     		adds	r0, r0, #48
  2414 0412 8A42     		cmp	r2, r1
  2415 0414 08BF     		it	eq
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 43
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 43
 
 
  2416 0416 43F00103 		orreq	r3, r3, #1
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  2470 048c 4FF48073 		mov	r3, #256
  2471 0490 0120     		movs	r0, #1
  2472 0492 6365     		str	r3, [r4, #84]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 44
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 44
 
 
  2473 0494 05B0     		add	sp, sp, #20
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  2527 050e 08BF     		it	eq
  2528 0510 43F00103 		orreq	r3, r3, #1
  2529 0514 00F55C70 		add	r0, r0, #880
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 45
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 45
 
 
  2530 0518 8A42     		cmp	r2, r1
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  2584 0598 ABB9     		cbnz	r3, .L260
  2585 059a E36D     		ldr	r3, [r4, #92]
  2586 059c 03F01F00 		and	r0, r3, #31
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 46
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 46
 
 
  2587 05a0 8140     		lsls	r1, r1, r0
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  2643 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
  2644 0004 9F4A     		ldr	r2, .L493
  2645 0006 0025     		movs	r5, #0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 47
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 47
 
 
  2646 0008 9F4E     		ldr	r6, .L493+4
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  2700 008c 42F00102 		orreq	r2, r2, #1
  2701 0090 3030     		adds	r0, r0, #48
  2702 0092 7345     		cmp	r3, lr
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 48
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 48
 
 
  2703 0094 08BF     		it	eq
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  2757 0122 4345     		cmp	r3, r8
  2758 0124 08BF     		it	eq
  2759 0126 42F00102 		orreq	r2, r2, #1
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 49
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 49
 
 
  2760 012a 08F13008 		add	r8, r8, #48
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  2814 01c2 1CEA070F 		tst	ip, r7
  2815 01c6 6FD0     		beq	.L338
  2816 01c8 002E     		cmp	r6, #0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 50
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 50
 
 
  2817 01ca 46D1     		bne	.L340
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  2871 0250 1AB9     		cbnz	r2, .L340
  2872 0252 104A     		ldr	r2, .L493+16
  2873 0254 9342     		cmp	r3, r2
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 51
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 51
 
 
  2874 0256 40F0DE81 		bne	.L337
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  2928 02d2 43F00103 		orreq	r3, r3, #1
  2929 02d6 3037     		adds	r7, r7, #48
  2930 02d8 8242     		cmp	r2, r0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 52
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 52
 
 
  2931 02da 08BF     		it	eq
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  2985 0362 A660     		str	r6, [r4, #8]
  2986 0364 9AF83530 		ldrb	r3, [r10, #53]	@ zero_extendqisi2
  2987 0368 042B     		cmp	r3, #4
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 53
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 53
 
 
  2988 036a 1368     		ldr	r3, [r2]
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  3042 03e6 5046     		mov	r0, r10
  3043 03e8 02B0     		add	sp, sp, #8
  3044              		@ sp needed
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 54
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 54
 
 
  3045 03ea BDE8F047 		pop	{r4, r5, r6, r7, r8, r9, r10, lr}
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  3099 047a 08F13008 		add	r8, r8, #48
  3100 047e 8342     		cmp	r3, r0
  3101 0480 08BF     		it	eq
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 55
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 55
 
 
  3102 0482 42F00102 		orreq	r2, r2, #1
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  3156 050e 08BF     		it	eq
  3157 0510 42F00102 		orreq	r2, r2, #1
  3158 0514 AB42     		cmp	r3, r5
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 56
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 56
 
 
  3159 0516 08BF     		it	eq
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  3213 05a2 5369     		ldr	r3, [r2, #20]
  3214 05a4 23F08003 		bic	r3, r3, #128
  3215 05a8 5361     		str	r3, [r2, #20]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 57
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 57
 
 
  3216 05aa 3DB3     		cbz	r5, .L492
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  3270 062a 6660     		str	r6, [r4, #4]
  3271 062c 1404     		lsls	r4, r2, #16
  3272 062e 33D5     		bpl	.L371
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 58
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 58
 
 
  3273 0630 D003     		lsls	r0, r2, #15
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  3327 06b6 7FF496AE 		bne	.L482
  3328 06ba 4AE7     		b	.L321
  3330              		.section	.text.HAL_DMA_RegisterCallback,"ax",%progbits
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 59
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 59
 
 
  3331              		.align	1
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  3386              	.L505:
  3387 0046 0020     		movs	r0, #0
  3388 0048 5A64     		str	r2, [r3, #68]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 60
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 60
 
 
  3389 004a E4E7     		b	.L500
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  3445 003b 00       		.p2align 1
  3446              	.L524:
  3447 003c 0123     		movs	r3, #1
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 61
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 61
 
 
  3448 003e 1846     		mov	r0, r3
@@ -3658,7 +3658,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  3505              		.align	1
  3506              		.p2align 2,,3
  3507              		.global	HAL_DMA_GetError
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 62
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 62
 
 
  3508              		.syntax unified
@@ -3678,78 +3678,78 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 1
  3526 0000 00061016 		.ascii	"\000\006\020\026\000\006\020\026"
  3526      00061016 
  3527              		.ident	"GCC: (GNU Arm Embedded Toolchain 9-2020-q2-update) 9.3.1 20200408 (release)"
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 63
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 63
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32h7xx_hal_dma.c
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:15     .text.DMA_SetConfig:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:23     .text.DMA_SetConfig:00000000 DMA_SetConfig
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:181    .text.DMA_SetConfig:0000017c $d
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:189    .text.DMA_CalcBaseAndBitshift:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:196    .text.DMA_CalcBaseAndBitshift:00000000 DMA_CalcBaseAndBitshift
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:292    .text.DMA_CalcBaseAndBitshift:000000d8 $d
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:302    .text.DMA_CalcDMAMUXChannelBaseAndMask:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:309    .text.DMA_CalcDMAMUXChannelBaseAndMask:00000000 DMA_CalcDMAMUXChannelBaseAndMask
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:391    .text.DMA_CalcDMAMUXChannelBaseAndMask:000000a8 $d
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:405    .text.DMA_CalcDMAMUXRequestGenBaseAndMask:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:412    .text.DMA_CalcDMAMUXRequestGenBaseAndMask:00000000 DMA_CalcDMAMUXRequestGenBaseAndMask
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:479    .text.DMA_CalcDMAMUXRequestGenBaseAndMask:00000080 $d
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:489    .text.HAL_DMA_Init:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:497    .text.HAL_DMA_Init:00000000 HAL_DMA_Init
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:787    .text.HAL_DMA_Init:000002b4 $d
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:799    .text.HAL_DMA_Init:000002e0 $t
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:842    .text.HAL_DMA_Init:00000338 $d
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:846    .text.HAL_DMA_Init:00000348 $t
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:943    .text.HAL_DMA_Init:00000424 $d
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:953    .text.HAL_DMA_DeInit:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:961    .text.HAL_DMA_DeInit:00000000 HAL_DMA_DeInit
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:1146   .text.HAL_DMA_DeInit:000001a4 $d
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:1158   .text.HAL_DMA_Start:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:1166   .text.HAL_DMA_Start:00000000 HAL_DMA_Start
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:1284   .text.HAL_DMA_Start:00000110 $d
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:1291   .text.HAL_DMA_Start_IT:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:1299   .text.HAL_DMA_Start_IT:00000000 HAL_DMA_Start_IT
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:1477   .text.HAL_DMA_Start_IT:00000194 $d
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:1488   .text.HAL_DMA_Abort:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:1496   .text.HAL_DMA_Abort:00000000 HAL_DMA_Abort
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:1755   .text.HAL_DMA_Abort:00000264 $d
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:1766   .text.HAL_DMA_Abort:0000028c $t
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:1810   .text.HAL_DMA_Abort:000002f4 $d
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:1815   .text.HAL_DMA_Abort_IT:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:1823   .text.HAL_DMA_Abort_IT:00000000 HAL_DMA_Abort_IT
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:1990   .text.HAL_DMA_Abort_IT:00000178 $d
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:2001   .text.HAL_DMA_PollForTransfer:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:2009   .text.HAL_DMA_PollForTransfer:00000000 HAL_DMA_PollForTransfer
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:2113   .text.HAL_DMA_PollForTransfer:000000f8 $d
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:2118   .text.HAL_DMA_PollForTransfer:00000108 $t
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:2380   .text.HAL_DMA_PollForTransfer:000003a4 $d
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:2397   .text.HAL_DMA_PollForTransfer:000003e4 $t
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:2626   .text.HAL_DMA_PollForTransfer:000005f0 $d
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:2632   .text.HAL_DMA_IRQHandler:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:2640   .text.HAL_DMA_IRQHandler:00000000 HAL_DMA_IRQHandler
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:2897   .text.HAL_DMA_IRQHandler:00000284 $d
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:2906   .text.HAL_DMA_IRQHandler:000002a0 $t
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:3190   .text.HAL_DMA_IRQHandler:00000558 $d
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:3202   .text.HAL_DMA_IRQHandler:00000584 $t
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:3331   .text.HAL_DMA_RegisterCallback:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:3339   .text.HAL_DMA_RegisterCallback:00000000 HAL_DMA_RegisterCallback
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:3361   .text.HAL_DMA_RegisterCallback:00000026 $d
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:3367   .text.HAL_DMA_RegisterCallback:0000002c $t
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:3403   .text.HAL_DMA_UnRegisterCallback:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:3411   .text.HAL_DMA_UnRegisterCallback:00000000 HAL_DMA_UnRegisterCallback
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s 			page 64
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:15     .text.DMA_SetConfig:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:23     .text.DMA_SetConfig:00000000 DMA_SetConfig
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:181    .text.DMA_SetConfig:0000017c $d
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:189    .text.DMA_CalcBaseAndBitshift:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:196    .text.DMA_CalcBaseAndBitshift:00000000 DMA_CalcBaseAndBitshift
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:292    .text.DMA_CalcBaseAndBitshift:000000d8 $d
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:302    .text.DMA_CalcDMAMUXChannelBaseAndMask:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:309    .text.DMA_CalcDMAMUXChannelBaseAndMask:00000000 DMA_CalcDMAMUXChannelBaseAndMask
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:391    .text.DMA_CalcDMAMUXChannelBaseAndMask:000000a8 $d
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:405    .text.DMA_CalcDMAMUXRequestGenBaseAndMask:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:412    .text.DMA_CalcDMAMUXRequestGenBaseAndMask:00000000 DMA_CalcDMAMUXRequestGenBaseAndMask
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:479    .text.DMA_CalcDMAMUXRequestGenBaseAndMask:00000080 $d
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:489    .text.HAL_DMA_Init:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:497    .text.HAL_DMA_Init:00000000 HAL_DMA_Init
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:787    .text.HAL_DMA_Init:000002b4 $d
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:799    .text.HAL_DMA_Init:000002e0 $t
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:842    .text.HAL_DMA_Init:00000338 $d
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:846    .text.HAL_DMA_Init:00000348 $t
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:943    .text.HAL_DMA_Init:00000424 $d
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:953    .text.HAL_DMA_DeInit:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:961    .text.HAL_DMA_DeInit:00000000 HAL_DMA_DeInit
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:1146   .text.HAL_DMA_DeInit:000001a4 $d
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:1158   .text.HAL_DMA_Start:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:1166   .text.HAL_DMA_Start:00000000 HAL_DMA_Start
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:1284   .text.HAL_DMA_Start:00000110 $d
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:1291   .text.HAL_DMA_Start_IT:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:1299   .text.HAL_DMA_Start_IT:00000000 HAL_DMA_Start_IT
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:1477   .text.HAL_DMA_Start_IT:00000194 $d
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:1488   .text.HAL_DMA_Abort:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:1496   .text.HAL_DMA_Abort:00000000 HAL_DMA_Abort
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:1755   .text.HAL_DMA_Abort:00000264 $d
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:1766   .text.HAL_DMA_Abort:0000028c $t
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:1810   .text.HAL_DMA_Abort:000002f4 $d
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:1815   .text.HAL_DMA_Abort_IT:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:1823   .text.HAL_DMA_Abort_IT:00000000 HAL_DMA_Abort_IT
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:1990   .text.HAL_DMA_Abort_IT:00000178 $d
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:2001   .text.HAL_DMA_PollForTransfer:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:2009   .text.HAL_DMA_PollForTransfer:00000000 HAL_DMA_PollForTransfer
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:2113   .text.HAL_DMA_PollForTransfer:000000f8 $d
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:2118   .text.HAL_DMA_PollForTransfer:00000108 $t
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:2380   .text.HAL_DMA_PollForTransfer:000003a4 $d
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:2397   .text.HAL_DMA_PollForTransfer:000003e4 $t
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:2626   .text.HAL_DMA_PollForTransfer:000005f0 $d
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:2632   .text.HAL_DMA_IRQHandler:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:2640   .text.HAL_DMA_IRQHandler:00000000 HAL_DMA_IRQHandler
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:2897   .text.HAL_DMA_IRQHandler:00000284 $d
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:2906   .text.HAL_DMA_IRQHandler:000002a0 $t
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:3190   .text.HAL_DMA_IRQHandler:00000558 $d
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:3202   .text.HAL_DMA_IRQHandler:00000584 $t
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:3331   .text.HAL_DMA_RegisterCallback:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:3339   .text.HAL_DMA_RegisterCallback:00000000 HAL_DMA_RegisterCallback
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:3361   .text.HAL_DMA_RegisterCallback:00000026 $d
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:3367   .text.HAL_DMA_RegisterCallback:0000002c $t
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:3403   .text.HAL_DMA_UnRegisterCallback:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:3411   .text.HAL_DMA_UnRegisterCallback:00000000 HAL_DMA_UnRegisterCallback
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s 			page 64
 
 
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:3438   .text.HAL_DMA_UnRegisterCallback:00000034 $d
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:3489   .text.HAL_DMA_GetState:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:3497   .text.HAL_DMA_GetState:00000000 HAL_DMA_GetState
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:3505   .text.HAL_DMA_GetError:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:3513   .text.HAL_DMA_GetError:00000000 HAL_DMA_GetError
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:3521   .rodata.flagBitshiftOffset.10145:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:3525   .rodata.flagBitshiftOffset.10145:00000000 flagBitshiftOffset.10145
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:3445   .text.HAL_DMA_UnRegisterCallback:0000003b $d
-C:\Users\Brandon\AppData\Local\Temp\ccI59QTV.s:3445   .text.HAL_DMA_UnRegisterCallback:0000003c $t
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:3438   .text.HAL_DMA_UnRegisterCallback:00000034 $d
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:3489   .text.HAL_DMA_GetState:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:3497   .text.HAL_DMA_GetState:00000000 HAL_DMA_GetState
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:3505   .text.HAL_DMA_GetError:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:3513   .text.HAL_DMA_GetError:00000000 HAL_DMA_GetError
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:3521   .rodata.flagBitshiftOffset.10145:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:3525   .rodata.flagBitshiftOffset.10145:00000000 flagBitshiftOffset.10145
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:3445   .text.HAL_DMA_UnRegisterCallback:0000003b $d
+C:\Users\Brandon\AppData\Local\Temp\ccokbwG4.s:3445   .text.HAL_DMA_UnRegisterCallback:0000003c $t
 
 UNDEFINED SYMBOLS
 HAL_GetTick

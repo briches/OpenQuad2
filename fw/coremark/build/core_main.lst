@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 1
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 1
   57              		.section	.rodata.core_main.str1.4,"aMS",%progbits,1
   58              		.align	2
   59              	.LC0:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 2
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s 			page 2
 
 
   60 0000 366B2070 		.ascii	"6k performance run parameters for coremark.\015\012"
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 1
   86 0158 5B25755D 		.ascii	"[%u]ERROR! state crc 0x%04x - should be 0x%04x\015\012"
   86      4552524F 
   86      52212073 
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 3
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s 			page 3
 
 
   86      74617465 
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 1
  109      38202872 
  110              		.align	2
  111              	.LC15:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 4
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s 			page 4
 
 
  112 026c 436F6D70 		.ascii	"Compiler version : %s\015\012\000"
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 1
  137 0339 000000   		.align	2
  138              	.LC24:
  139 033c 5B25645D 		.ascii	"[%d]crcfinal      : 0x%04x\015\012\000"
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 5
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s 			page 5
 
 
  139      63726366 
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 1
  165              		.syntax unified
  166              		.thumb
  167              		.thumb_func
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 6
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s 			page 6
 
 
  168              		.fpu fpv5-d16
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 1
  223 0088 0130     		adds	r0, r0, #1
  224 008a 80B2     		uxth	r0, r0
  225              	.L61:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 7
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s 			page 7
 
 
  226 008c 4FF4FA64 		mov	r4, #2000
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 1
  280 0116 03FB0222 		mla	r2, r3, r2, r2
  281 011a 0C92     		str	r2, [sp, #48]
  282              	.L21:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 8
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s 			page 8
 
 
  283 011c FFF7FEFF 		bl	start_time
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 1
  337              	.L38:
  338 01b4 05AB     		add	r3, sp, #20
  339 01b6 0BEB0B15 		add	r5, fp, fp, lsl #4
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 9
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s 			page 9
 
 
  340 01ba 0022     		movs	r2, #0
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 1
  394 0246 0D9B     		ldr	r3, [sp, #52]
  395 0248 0E90     		str	r0, [sp, #56]
  396 024a 03F00202 		and	r2, r3, #2
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 10
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s 			page 10
 
 
  397 024e 002A     		cmp	r2, #0
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 1
  451 02e2 53EC172B 		vmov	r2, r3, d7
  452 02e6 FFF7FEFF 		bl	debug_eeprintf
  453              	.L39:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 11
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s 			page 11
 
 
  454 02ea 5046     		mov	r0, r10
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 1
  508 036a 04EB0413 		add	r3, r4, r4, lsl #4
  509 036e 05AA     		add	r2, sp, #20
  510 0370 2146     		mov	r1, r4
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 12
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s 			page 12
 
 
  511 0372 0134     		adds	r4, r4, #1
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 1
  565 03f2 FFF7FEFF 		bl	debug_eeprintf
  566 03f6 C6E6     		b	.L32
  567              	.L113:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 13
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s 			page 13
 
 
  568 03f8 05AC     		add	r4, sp, #20
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 1
  622 0478 F4000000 		.word	.LC5
  623 047c 00000000 		.word	.LANCHOR1
  624 0480 24010000 		.word	.LC6
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 14
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s 			page 14
 
 
  625 0484 00000000 		.word	.LANCHOR2
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 1
  679 0532 4FF00108 		mov	r8, #1
  680 0536 FFF7FEFF 		bl	debug_eeprintf
  681 053a 24E6     		b	.L32
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 15
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s 			page 15
 
 
  682              	.L27:
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 1
  738              		.align	2
  739              		.set	.LANCHOR1,. + 0
  742              	matrix_known_crc:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 16
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s 			page 16
 
 
  743 0000 52BE     		.short	-16814
@@ -916,28 +916,28 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 1
  757 0006 3A8E     		.short	-29126
  758 0008 848D     		.short	-29308
  759              		.ident	"GCC: (GNU Arm Embedded Toolchain 9-2020-q2-update) 9.3.1 20200408 (release)"
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s 			page 17
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s 			page 17
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 core_main.c
-C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s:15     .text.iterate:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s:24     .text.iterate:00000000 iterate
-C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s:58     .rodata.core_main.str1.4:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s:162    .text.core_main:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s:170    .text.core_main:00000000 core_main
-C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s:619    .text.core_main:0000046c $d
-C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s:648    .text.core_main:000004dc $t
-C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s:695    .text.core_main:00000554 $d
-C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s:722    .data.mem_name:00000000 mem_name
-C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s:709    .rodata.str1.4:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s:719    .data.mem_name:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s:727    .rodata.list_known_crc:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s:731    .rodata.list_known_crc:00000000 list_known_crc
-C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s:738    .rodata.matrix_known_crc:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s:742    .rodata.matrix_known_crc:00000000 matrix_known_crc
-C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s:749    .rodata.state_known_crc:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\cc37yER8.s:753    .rodata.state_known_crc:00000000 state_known_crc
+C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s:15     .text.iterate:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s:24     .text.iterate:00000000 iterate
+C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s:58     .rodata.core_main.str1.4:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s:162    .text.core_main:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s:170    .text.core_main:00000000 core_main
+C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s:619    .text.core_main:0000046c $d
+C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s:648    .text.core_main:000004dc $t
+C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s:695    .text.core_main:00000554 $d
+C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s:722    .data.mem_name:00000000 mem_name
+C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s:709    .rodata.str1.4:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s:719    .data.mem_name:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s:727    .rodata.list_known_crc:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s:731    .rodata.list_known_crc:00000000 list_known_crc
+C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s:738    .rodata.matrix_known_crc:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s:742    .rodata.matrix_known_crc:00000000 matrix_known_crc
+C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s:749    .rodata.state_known_crc:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\cc6MGwhZ.s:753    .rodata.state_known_crc:00000000 state_known_crc
 
 UNDEFINED SYMBOLS
 core_bench_list

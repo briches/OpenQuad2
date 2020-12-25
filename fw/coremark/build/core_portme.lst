@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s 			page 1
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s 			page 1
   59              		.fpu fpv5-d16
   61              	stop_time:
   62              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s 			page 2
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s 			page 2
 
 
   63              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s 			page 1
  120 0018 00000000 		.word	0
  121 001c 00408F40 		.word	1083129856
  123              		.section	.text.portable_init,"ax",%progbits
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s 			page 3
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s 			page 3
 
 
  124              		.align	1
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s 			page 1
  190              		.set	.LANCHOR1,. + 0
  193              	stop_time_val:
  194 0000 00000000 		.space	4
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s 			page 4
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s 			page 4
 
 
  195              		.section	.data.default_num_contexts,"aw"
@@ -194,45 +194,45 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s 			page 1
  211              	seed4_volatile:
  212 0000 A8610000 		.word	25000
  213              		.ident	"GCC: (GNU Arm Embedded Toolchain 9-2020-q2-update) 9.3.1 20200408 (release)"
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s 			page 5
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 core_portme.c
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:15     .text.barebones_clock:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:24     .text.barebones_clock:00000000 barebones_clock
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:31     .text.start_time:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:39     .text.start_time:00000000 start_time
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:50     .text.start_time:0000000c $d
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:53     .text.stop_time:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:61     .text.stop_time:00000000 stop_time
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:72     .text.stop_time:0000000c $d
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:75     .text.get_time:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:83     .text.get_time:00000000 get_time
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:96     .text.get_time:0000000c $d
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:100    .text.time_in_secs:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:108    .text.time_in_secs:00000000 time_in_secs
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:120    .text.time_in_secs:00000018 $d
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:124    .text.portable_init:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:132    .text.portable_init:00000000 portable_init
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:141    .text.portable_fini:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:149    .text.portable_fini:00000000 portable_fini
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:199    .data.default_num_contexts:00000000 default_num_contexts
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:179    .bss.seed5_volatile:00000000 seed5_volatile
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:211    .data.seed4_volatile:00000000 seed4_volatile
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:205    .data.seed3_volatile:00000000 seed3_volatile
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:173    .bss.seed2_volatile:00000000 seed2_volatile
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:167    .bss.seed1_volatile:00000000 seed1_volatile
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:164    .bss.seed1_volatile:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:170    .bss.seed2_volatile:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:176    .bss.seed5_volatile:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:182    .bss.start_time_val:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:186    .bss.start_time_val:00000000 start_time_val
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:189    .bss.stop_time_val:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:193    .bss.stop_time_val:00000000 stop_time_val
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:196    .data.default_num_contexts:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:202    .data.seed3_volatile:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\ccAMob4j.s:208    .data.seed4_volatile:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:15     .text.barebones_clock:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:24     .text.barebones_clock:00000000 barebones_clock
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:31     .text.start_time:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:39     .text.start_time:00000000 start_time
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:50     .text.start_time:0000000c $d
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:53     .text.stop_time:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:61     .text.stop_time:00000000 stop_time
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:72     .text.stop_time:0000000c $d
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:75     .text.get_time:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:83     .text.get_time:00000000 get_time
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:96     .text.get_time:0000000c $d
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:100    .text.time_in_secs:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:108    .text.time_in_secs:00000000 time_in_secs
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:120    .text.time_in_secs:00000018 $d
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:124    .text.portable_init:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:132    .text.portable_init:00000000 portable_init
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:141    .text.portable_fini:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:149    .text.portable_fini:00000000 portable_fini
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:199    .data.default_num_contexts:00000000 default_num_contexts
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:179    .bss.seed5_volatile:00000000 seed5_volatile
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:211    .data.seed4_volatile:00000000 seed4_volatile
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:205    .data.seed3_volatile:00000000 seed3_volatile
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:173    .bss.seed2_volatile:00000000 seed2_volatile
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:167    .bss.seed1_volatile:00000000 seed1_volatile
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:164    .bss.seed1_volatile:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:170    .bss.seed2_volatile:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:176    .bss.seed5_volatile:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:182    .bss.start_time_val:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:186    .bss.start_time_val:00000000 start_time_val
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:189    .bss.stop_time_val:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:193    .bss.stop_time_val:00000000 stop_time_val
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:196    .data.default_num_contexts:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:202    .data.seed3_volatile:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\cc1Jz5Is.s:208    .data.seed4_volatile:00000000 $d
 
 UNDEFINED SYMBOLS
 HAL_GetTick

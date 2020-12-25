@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 1
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 1
   56 0040 F6D5     		bpl	.L5
   57 0042 A4F11D03 		sub	r3, r4, #29
   58 0046 012B     		cmp	r3, #1
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 2
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s 			page 2
 
 
   59 0048 05D9     		bls	.L6
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 1
  116              		.fpu fpv5-d16
  118              	HAL_PWREx_ControlVoltageScaling:
  119              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 3
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s 			page 3
 
 
  120              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 1
  177              		.section	.text.HAL_PWREx_ControlStopModeVoltageScaling,"ax",%progbits
  178              		.align	1
  179              		.p2align 2,,3
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 4
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s 			page 4
 
 
  180              		.global	HAL_PWREx_ControlStopModeVoltageScaling
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 1
  239 0002 154C     		ldr	r4, .L46
  240 0004 2368     		ldr	r3, [r4]
  241 0006 23F00103 		bic	r3, r3, #1
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 5
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s 			page 5
 
 
  242 000a 0343     		orrs	r3, r3, r0
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 1
  296 005c 00ED00E0 		.word	-536810240
  298              		.section	.text.HAL_PWREx_ClearPendingEvent,"ax",%progbits
  299              		.align	1
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 6
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s 			page 6
 
 
  300              		.p2align 2,,3
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 1
  357              	.L54:
  358 002e 00BF     		.align	2
  359              	.L53:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 7
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s 			page 7
 
 
  360 0030 00480258 		.word	1476544512
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 1
  420              		@ args = 0, pretend = 0, frame = 0
  421              		@ frame_needed = 0, uses_anonymous_args = 0
  422              		@ link register save eliminated.
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 8
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s 			page 8
 
 
  423 0000 024A     		ldr	r2, .L62
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 1
  479 002c 6D00     		lsls	r5, r5, #1
  480 002e 4FF48074 		mov	r4, #256
  481 0032 03F01F06 		and	r6, r3, #31
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 9
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s 			page 9
 
 
  482 0036 5200     		lsls	r2, r2, #1
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 1
  539              		.global	HAL_PWREx_GetWakeupFlag
  540              		.syntax unified
  541              		.thumb
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 10
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s 			page 10
 
 
  542              		.thumb_func
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 1
  602              		.align	1
  603              		.p2align 2,,3
  604              		.weak	HAL_PWREx_WKUP2_Callback
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 11
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s 			page 11
 
 
  605              		.syntax unified
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 1
  666 0010 5A6A     		ldr	r2, [r3, #36]
  667 0012 12F0080F 		tst	r2, #8
  668 0016 1A6A     		ldr	r2, [r3, #32]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 12
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s 			page 12
 
 
  669 0018 13D0     		beq	.L85
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 1
  725 0026 F6D5     		bpl	.L94
  726 0028 0020     		movs	r0, #0
  727 002a 38BD     		pop	{r3, r4, r5, pc}
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 13
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s 			page 13
 
 
  728              	.L95:
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 1
  786              		@ args = 0, pretend = 0, frame = 0
  787              		@ frame_needed = 0, uses_anonymous_args = 0
  788 0000 38B5     		push	{r3, r4, r5, lr}
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 14
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s 			page 14
 
 
  789 0002 0B4B     		ldr	r3, .L113
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 1
  845 0028 F5D1     		bne	.L118
  846 002a 1846     		mov	r0, r3
  847 002c 38BD     		pop	{r3, r4, r5, pc}
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 15
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s 			page 15
 
 
  848              	.L119:
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 1
  907              		.thumb
  908              		.thumb_func
  909              		.fpu fpv5-d16
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 16
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s 			page 16
 
 
  911              	HAL_PWREx_EnableBatteryCharging:
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 1
  969 000a 7047     		bx	lr
  970              	.L137:
  971              		.align	2
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 17
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s 			page 17
 
 
  972              	.L136:
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 1
  1031              		.thumb
  1032              		.thumb_func
  1033              		.fpu fpv5-d16
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 18
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s 			page 18
 
 
  1035              	HAL_PWREx_GetVBATLevel:
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 1
  1091 0046 41F48031 		orr	r1, r1, #65536
  1092 004a C3F88010 		str	r1, [r3, #128]
  1093              	.L160:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 19
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s 			page 19
 
 
  1094 004e 9003     		lsls	r0, r2, #14
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 1
  1151              		.thumb_func
  1152              		.fpu fpv5-d16
  1154              	HAL_PWREx_DisableAVD:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 20
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s 			page 20
 
 
  1155              		@ args = 0, pretend = 0, frame = 0
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 1
  1213              	.L186:
  1214 002a 10BD     		pop	{r4, pc}
  1215              	.L203:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 21
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s 			page 21
 
 
  1216 002c FFF7FEFF 		bl	HAL_PWREx_AVDCallback
@@ -1217,126 +1217,126 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 1
  1229              	.L204:
  1230 0050 00480258 		.word	1476544512
  1232              		.ident	"GCC: (GNU Arm Embedded Toolchain 9-2020-q2-update) 9.3.1 20200408 (release)"
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 22
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s 			page 22
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32h7xx_hal_pwr_ex.c
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:15     .text.HAL_PWREx_ConfigSupply:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:24     .text.HAL_PWREx_ConfigSupply:00000000 HAL_PWREx_ConfigSupply
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:85     .text.HAL_PWREx_ConfigSupply:00000078 $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:88     .text.HAL_PWREx_GetSupplyConfig:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:96     .text.HAL_PWREx_GetSupplyConfig:00000000 HAL_PWREx_GetSupplyConfig
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:107    .text.HAL_PWREx_GetSupplyConfig:0000000c $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:110    .text.HAL_PWREx_ControlVoltageScaling:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:118    .text.HAL_PWREx_ControlVoltageScaling:00000000 HAL_PWREx_ControlVoltageScaling
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:153    .text.HAL_PWREx_ControlVoltageScaling:0000003c $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:156    .text.HAL_PWREx_GetVoltageRange:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:164    .text.HAL_PWREx_GetVoltageRange:00000000 HAL_PWREx_GetVoltageRange
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:175    .text.HAL_PWREx_GetVoltageRange:0000000c $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:178    .text.HAL_PWREx_ControlStopModeVoltageScaling:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:186    .text.HAL_PWREx_ControlStopModeVoltageScaling:00000000 HAL_PWREx_ControlStopModeVoltageScaling
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:201    .text.HAL_PWREx_ControlStopModeVoltageScaling:00000014 $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:204    .text.HAL_PWREx_GetStopModeVoltageRange:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:212    .text.HAL_PWREx_GetStopModeVoltageRange:00000000 HAL_PWREx_GetStopModeVoltageRange
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:223    .text.HAL_PWREx_GetStopModeVoltageRange:0000000c $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:226    .text.HAL_PWREx_EnterSTOPMode:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:234    .text.HAL_PWREx_EnterSTOPMode:00000000 HAL_PWREx_EnterSTOPMode
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:295    .text.HAL_PWREx_EnterSTOPMode:00000058 $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:299    .text.HAL_PWREx_ClearPendingEvent:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:307    .text.HAL_PWREx_ClearPendingEvent:00000000 HAL_PWREx_ClearPendingEvent
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:320    .text.HAL_PWREx_EnterSTANDBYMode:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:328    .text.HAL_PWREx_EnterSTANDBYMode:00000000 HAL_PWREx_EnterSTANDBYMode
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:360    .text.HAL_PWREx_EnterSTANDBYMode:00000030 $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:364    .text.HAL_PWREx_ConfigD3Domain:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:372    .text.HAL_PWREx_ConfigD3Domain:00000000 HAL_PWREx_ConfigD3Domain
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:385    .text.HAL_PWREx_ConfigD3Domain:00000010 $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:388    .text.HAL_PWREx_EnableFlashPowerDown:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:396    .text.HAL_PWREx_EnableFlashPowerDown:00000000 HAL_PWREx_EnableFlashPowerDown
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:408    .text.HAL_PWREx_EnableFlashPowerDown:0000000c $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:411    .text.HAL_PWREx_DisableFlashPowerDown:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:419    .text.HAL_PWREx_DisableFlashPowerDown:00000000 HAL_PWREx_DisableFlashPowerDown
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:431    .text.HAL_PWREx_DisableFlashPowerDown:0000000c $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:434    .text.HAL_PWREx_EnableWakeUpPin:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:442    .text.HAL_PWREx_EnableWakeUpPin:00000000 HAL_PWREx_EnableWakeUpPin
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:511    .text.HAL_PWREx_EnableWakeUpPin:00000084 $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:514    .text.HAL_PWREx_DisableWakeUpPin:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:522    .text.HAL_PWREx_DisableWakeUpPin:00000000 HAL_PWREx_DisableWakeUpPin
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:534    .text.HAL_PWREx_DisableWakeUpPin:0000000c $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:537    .text.HAL_PWREx_GetWakeupFlag:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:545    .text.HAL_PWREx_GetWakeupFlag:00000000 HAL_PWREx_GetWakeupFlag
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:556    .text.HAL_PWREx_GetWakeupFlag:00000008 $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:559    .text.HAL_PWREx_ClearWakeupFlag:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:567    .text.HAL_PWREx_ClearWakeupFlag:00000000 HAL_PWREx_ClearWakeupFlag
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:584    .text.HAL_PWREx_ClearWakeupFlag:00000014 $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:587    .text.HAL_PWREx_WKUP1_Callback:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:595    .text.HAL_PWREx_WKUP1_Callback:00000000 HAL_PWREx_WKUP1_Callback
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:602    .text.HAL_PWREx_WKUP2_Callback:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:610    .text.HAL_PWREx_WKUP2_Callback:00000000 HAL_PWREx_WKUP2_Callback
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:617    .text.HAL_PWREx_WKUP4_Callback:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:625    .text.HAL_PWREx_WKUP4_Callback:00000000 HAL_PWREx_WKUP4_Callback
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:632    .text.HAL_PWREx_WKUP6_Callback:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:640    .text.HAL_PWREx_WKUP6_Callback:00000000 HAL_PWREx_WKUP6_Callback
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 23
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:15     .text.HAL_PWREx_ConfigSupply:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:24     .text.HAL_PWREx_ConfigSupply:00000000 HAL_PWREx_ConfigSupply
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:85     .text.HAL_PWREx_ConfigSupply:00000078 $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:88     .text.HAL_PWREx_GetSupplyConfig:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:96     .text.HAL_PWREx_GetSupplyConfig:00000000 HAL_PWREx_GetSupplyConfig
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:107    .text.HAL_PWREx_GetSupplyConfig:0000000c $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:110    .text.HAL_PWREx_ControlVoltageScaling:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:118    .text.HAL_PWREx_ControlVoltageScaling:00000000 HAL_PWREx_ControlVoltageScaling
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:153    .text.HAL_PWREx_ControlVoltageScaling:0000003c $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:156    .text.HAL_PWREx_GetVoltageRange:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:164    .text.HAL_PWREx_GetVoltageRange:00000000 HAL_PWREx_GetVoltageRange
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:175    .text.HAL_PWREx_GetVoltageRange:0000000c $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:178    .text.HAL_PWREx_ControlStopModeVoltageScaling:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:186    .text.HAL_PWREx_ControlStopModeVoltageScaling:00000000 HAL_PWREx_ControlStopModeVoltageScaling
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:201    .text.HAL_PWREx_ControlStopModeVoltageScaling:00000014 $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:204    .text.HAL_PWREx_GetStopModeVoltageRange:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:212    .text.HAL_PWREx_GetStopModeVoltageRange:00000000 HAL_PWREx_GetStopModeVoltageRange
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:223    .text.HAL_PWREx_GetStopModeVoltageRange:0000000c $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:226    .text.HAL_PWREx_EnterSTOPMode:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:234    .text.HAL_PWREx_EnterSTOPMode:00000000 HAL_PWREx_EnterSTOPMode
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:295    .text.HAL_PWREx_EnterSTOPMode:00000058 $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:299    .text.HAL_PWREx_ClearPendingEvent:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:307    .text.HAL_PWREx_ClearPendingEvent:00000000 HAL_PWREx_ClearPendingEvent
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:320    .text.HAL_PWREx_EnterSTANDBYMode:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:328    .text.HAL_PWREx_EnterSTANDBYMode:00000000 HAL_PWREx_EnterSTANDBYMode
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:360    .text.HAL_PWREx_EnterSTANDBYMode:00000030 $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:364    .text.HAL_PWREx_ConfigD3Domain:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:372    .text.HAL_PWREx_ConfigD3Domain:00000000 HAL_PWREx_ConfigD3Domain
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:385    .text.HAL_PWREx_ConfigD3Domain:00000010 $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:388    .text.HAL_PWREx_EnableFlashPowerDown:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:396    .text.HAL_PWREx_EnableFlashPowerDown:00000000 HAL_PWREx_EnableFlashPowerDown
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:408    .text.HAL_PWREx_EnableFlashPowerDown:0000000c $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:411    .text.HAL_PWREx_DisableFlashPowerDown:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:419    .text.HAL_PWREx_DisableFlashPowerDown:00000000 HAL_PWREx_DisableFlashPowerDown
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:431    .text.HAL_PWREx_DisableFlashPowerDown:0000000c $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:434    .text.HAL_PWREx_EnableWakeUpPin:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:442    .text.HAL_PWREx_EnableWakeUpPin:00000000 HAL_PWREx_EnableWakeUpPin
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:511    .text.HAL_PWREx_EnableWakeUpPin:00000084 $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:514    .text.HAL_PWREx_DisableWakeUpPin:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:522    .text.HAL_PWREx_DisableWakeUpPin:00000000 HAL_PWREx_DisableWakeUpPin
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:534    .text.HAL_PWREx_DisableWakeUpPin:0000000c $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:537    .text.HAL_PWREx_GetWakeupFlag:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:545    .text.HAL_PWREx_GetWakeupFlag:00000000 HAL_PWREx_GetWakeupFlag
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:556    .text.HAL_PWREx_GetWakeupFlag:00000008 $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:559    .text.HAL_PWREx_ClearWakeupFlag:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:567    .text.HAL_PWREx_ClearWakeupFlag:00000000 HAL_PWREx_ClearWakeupFlag
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:584    .text.HAL_PWREx_ClearWakeupFlag:00000014 $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:587    .text.HAL_PWREx_WKUP1_Callback:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:595    .text.HAL_PWREx_WKUP1_Callback:00000000 HAL_PWREx_WKUP1_Callback
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:602    .text.HAL_PWREx_WKUP2_Callback:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:610    .text.HAL_PWREx_WKUP2_Callback:00000000 HAL_PWREx_WKUP2_Callback
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:617    .text.HAL_PWREx_WKUP4_Callback:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:625    .text.HAL_PWREx_WKUP4_Callback:00000000 HAL_PWREx_WKUP4_Callback
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:632    .text.HAL_PWREx_WKUP6_Callback:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:640    .text.HAL_PWREx_WKUP6_Callback:00000000 HAL_PWREx_WKUP6_Callback
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s 			page 23
 
 
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:647    .text.HAL_PWREx_WAKEUP_PIN_IRQHandler:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:655    .text.HAL_PWREx_WAKEUP_PIN_IRQHandler:00000000 HAL_PWREx_WAKEUP_PIN_IRQHandler
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:694    .text.HAL_PWREx_WAKEUP_PIN_IRQHandler:00000050 $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:697    .text.HAL_PWREx_EnableBkUpReg:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:705    .text.HAL_PWREx_EnableBkUpReg:00000000 HAL_PWREx_EnableBkUpReg
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:734    .text.HAL_PWREx_EnableBkUpReg:00000030 $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:737    .text.HAL_PWREx_DisableBkUpReg:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:745    .text.HAL_PWREx_DisableBkUpReg:00000000 HAL_PWREx_DisableBkUpReg
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:774    .text.HAL_PWREx_DisableBkUpReg:00000034 $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:777    .text.HAL_PWREx_EnableUSBReg:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:785    .text.HAL_PWREx_EnableUSBReg:00000000 HAL_PWREx_EnableUSBReg
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:814    .text.HAL_PWREx_EnableUSBReg:00000030 $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:817    .text.HAL_PWREx_DisableUSBReg:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:825    .text.HAL_PWREx_DisableUSBReg:00000000 HAL_PWREx_DisableUSBReg
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:854    .text.HAL_PWREx_DisableUSBReg:00000034 $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:857    .text.HAL_PWREx_EnableUSBVoltageDetector:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:865    .text.HAL_PWREx_EnableUSBVoltageDetector:00000000 HAL_PWREx_EnableUSBVoltageDetector
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:877    .text.HAL_PWREx_EnableUSBVoltageDetector:0000000c $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:880    .text.HAL_PWREx_DisableUSBVoltageDetector:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:888    .text.HAL_PWREx_DisableUSBVoltageDetector:00000000 HAL_PWREx_DisableUSBVoltageDetector
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:900    .text.HAL_PWREx_DisableUSBVoltageDetector:0000000c $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:903    .text.HAL_PWREx_EnableBatteryCharging:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:911    .text.HAL_PWREx_EnableBatteryCharging:00000000 HAL_PWREx_EnableBatteryCharging
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:927    .text.HAL_PWREx_EnableBatteryCharging:00000018 $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:930    .text.HAL_PWREx_DisableBatteryCharging:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:938    .text.HAL_PWREx_DisableBatteryCharging:00000000 HAL_PWREx_DisableBatteryCharging
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:950    .text.HAL_PWREx_DisableBatteryCharging:0000000c $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:953    .text.HAL_PWREx_EnableMonitoring:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:961    .text.HAL_PWREx_EnableMonitoring:00000000 HAL_PWREx_EnableMonitoring
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:973    .text.HAL_PWREx_EnableMonitoring:0000000c $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:976    .text.HAL_PWREx_DisableMonitoring:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:984    .text.HAL_PWREx_DisableMonitoring:00000000 HAL_PWREx_DisableMonitoring
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:996    .text.HAL_PWREx_DisableMonitoring:0000000c $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:999    .text.HAL_PWREx_GetTemperatureLevel:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:1007   .text.HAL_PWREx_GetTemperatureLevel:00000000 HAL_PWREx_GetTemperatureLevel
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:1024   .text.HAL_PWREx_GetTemperatureLevel:00000018 $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:1027   .text.HAL_PWREx_GetVBATLevel:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:1035   .text.HAL_PWREx_GetVBATLevel:00000000 HAL_PWREx_GetVBATLevel
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:1052   .text.HAL_PWREx_GetVBATLevel:00000018 $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:1055   .text.HAL_PWREx_ConfigAVD:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:1063   .text.HAL_PWREx_ConfigAVD:00000000 HAL_PWREx_ConfigAVD
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:1120   .text.HAL_PWREx_ConfigAVD:00000088 $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:1123   .text.HAL_PWREx_EnableAVD:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:1131   .text.HAL_PWREx_EnableAVD:00000000 HAL_PWREx_EnableAVD
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:1143   .text.HAL_PWREx_EnableAVD:0000000c $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:1146   .text.HAL_PWREx_DisableAVD:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:1154   .text.HAL_PWREx_DisableAVD:00000000 HAL_PWREx_DisableAVD
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:1166   .text.HAL_PWREx_DisableAVD:0000000c $d
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:1169   .text.HAL_PWREx_AVDCallback:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:1177   .text.HAL_PWREx_AVDCallback:00000000 HAL_PWREx_AVDCallback
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:1184   .text.HAL_PWREx_PVD_AVD_IRQHandler:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:1192   .text.HAL_PWREx_PVD_AVD_IRQHandler:00000000 HAL_PWREx_PVD_AVD_IRQHandler
-C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s:1230   .text.HAL_PWREx_PVD_AVD_IRQHandler:00000050 $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:647    .text.HAL_PWREx_WAKEUP_PIN_IRQHandler:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:655    .text.HAL_PWREx_WAKEUP_PIN_IRQHandler:00000000 HAL_PWREx_WAKEUP_PIN_IRQHandler
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:694    .text.HAL_PWREx_WAKEUP_PIN_IRQHandler:00000050 $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:697    .text.HAL_PWREx_EnableBkUpReg:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:705    .text.HAL_PWREx_EnableBkUpReg:00000000 HAL_PWREx_EnableBkUpReg
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:734    .text.HAL_PWREx_EnableBkUpReg:00000030 $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:737    .text.HAL_PWREx_DisableBkUpReg:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:745    .text.HAL_PWREx_DisableBkUpReg:00000000 HAL_PWREx_DisableBkUpReg
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:774    .text.HAL_PWREx_DisableBkUpReg:00000034 $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:777    .text.HAL_PWREx_EnableUSBReg:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:785    .text.HAL_PWREx_EnableUSBReg:00000000 HAL_PWREx_EnableUSBReg
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:814    .text.HAL_PWREx_EnableUSBReg:00000030 $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:817    .text.HAL_PWREx_DisableUSBReg:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:825    .text.HAL_PWREx_DisableUSBReg:00000000 HAL_PWREx_DisableUSBReg
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:854    .text.HAL_PWREx_DisableUSBReg:00000034 $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:857    .text.HAL_PWREx_EnableUSBVoltageDetector:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:865    .text.HAL_PWREx_EnableUSBVoltageDetector:00000000 HAL_PWREx_EnableUSBVoltageDetector
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:877    .text.HAL_PWREx_EnableUSBVoltageDetector:0000000c $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:880    .text.HAL_PWREx_DisableUSBVoltageDetector:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:888    .text.HAL_PWREx_DisableUSBVoltageDetector:00000000 HAL_PWREx_DisableUSBVoltageDetector
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:900    .text.HAL_PWREx_DisableUSBVoltageDetector:0000000c $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:903    .text.HAL_PWREx_EnableBatteryCharging:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:911    .text.HAL_PWREx_EnableBatteryCharging:00000000 HAL_PWREx_EnableBatteryCharging
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:927    .text.HAL_PWREx_EnableBatteryCharging:00000018 $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:930    .text.HAL_PWREx_DisableBatteryCharging:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:938    .text.HAL_PWREx_DisableBatteryCharging:00000000 HAL_PWREx_DisableBatteryCharging
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:950    .text.HAL_PWREx_DisableBatteryCharging:0000000c $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:953    .text.HAL_PWREx_EnableMonitoring:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:961    .text.HAL_PWREx_EnableMonitoring:00000000 HAL_PWREx_EnableMonitoring
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:973    .text.HAL_PWREx_EnableMonitoring:0000000c $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:976    .text.HAL_PWREx_DisableMonitoring:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:984    .text.HAL_PWREx_DisableMonitoring:00000000 HAL_PWREx_DisableMonitoring
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:996    .text.HAL_PWREx_DisableMonitoring:0000000c $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:999    .text.HAL_PWREx_GetTemperatureLevel:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:1007   .text.HAL_PWREx_GetTemperatureLevel:00000000 HAL_PWREx_GetTemperatureLevel
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:1024   .text.HAL_PWREx_GetTemperatureLevel:00000018 $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:1027   .text.HAL_PWREx_GetVBATLevel:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:1035   .text.HAL_PWREx_GetVBATLevel:00000000 HAL_PWREx_GetVBATLevel
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:1052   .text.HAL_PWREx_GetVBATLevel:00000018 $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:1055   .text.HAL_PWREx_ConfigAVD:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:1063   .text.HAL_PWREx_ConfigAVD:00000000 HAL_PWREx_ConfigAVD
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:1120   .text.HAL_PWREx_ConfigAVD:00000088 $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:1123   .text.HAL_PWREx_EnableAVD:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:1131   .text.HAL_PWREx_EnableAVD:00000000 HAL_PWREx_EnableAVD
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:1143   .text.HAL_PWREx_EnableAVD:0000000c $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:1146   .text.HAL_PWREx_DisableAVD:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:1154   .text.HAL_PWREx_DisableAVD:00000000 HAL_PWREx_DisableAVD
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:1166   .text.HAL_PWREx_DisableAVD:0000000c $d
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:1169   .text.HAL_PWREx_AVDCallback:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:1177   .text.HAL_PWREx_AVDCallback:00000000 HAL_PWREx_AVDCallback
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:1184   .text.HAL_PWREx_PVD_AVD_IRQHandler:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:1192   .text.HAL_PWREx_PVD_AVD_IRQHandler:00000000 HAL_PWREx_PVD_AVD_IRQHandler
+C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s:1230   .text.HAL_PWREx_PVD_AVD_IRQHandler:00000050 $d
 
 UNDEFINED SYMBOLS
 HAL_GetTick
 HAL_PWR_PVDCallback
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccBzYwRm.s 			page 24
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc6V39Lz.s 			page 24
 
 

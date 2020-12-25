@@ -24,8 +24,9 @@
 #include "cmsis_os.h"
 #include "mems_platform.h"
 #include "main.h"
-#include "kinematics.h"
-#include "app_config.h"
+#include "stability_config.h"
+#include "motion_fx.h"
+#include "arm_math.h"
 
 #define debug_error(fmt, ...)           debug_error(STABILITY_MODULE_ID, fmt, ##__VA_ARGS__)
 #define debug_printf(fmt, ...)          debug_printf(STABILITY_MODULE_ID, fmt, ##__VA_ARGS__)
@@ -34,6 +35,9 @@
 
 #define LSM9DS1_BUS hi2c2
 #define LPS22HH_BUS hspi2
+
+static MFX_knobs_t m_mfx_knobs;
+static TickType_t timestamp;
 
 typedef union {
     int16_t i16bit[3];
@@ -48,7 +52,10 @@ typedef union {
 
 static volatile uint32_t m_int1_count = 0;
 static volatile uint32_t m_int2_count = 0;
+static volatile uint32_t m_drdy_count = 0;
+static volatile uint32_t m_baro_int_count = 0;
 static bool m_sensors_initialized = false;
+
 
 /* IMU variables ---------------------------------------------------------*/
 static sensbus_t mag_bus =
@@ -90,6 +97,23 @@ stmdev_ctx_t dev_ctx_imu;
 stmdev_ctx_t dev_ctx_mag;
 stmdev_ctx_t dev_ctx_lps;
 
+char MotionFX_LoadMagCalFromNVM(unsigned short int dataSize, unsigned int * data)
+{
+    debug_printf("MFX lib wants to load cals from NVM.");
+    debug_printf("size: %u", dataSize);
+    debug_printf("data pointer: 0x%08X", data);
+
+    return 1;
+}
+
+char MotionFX_SaveMagCalInNVM(unsigned short int dataSize, unsigned int * data)
+{
+    debug_printf("MFX lib wants to save cals to NVM.");
+    debug_printf("size: %u", dataSize);
+    debug_printf("data pointer: 0x%08X", data);
+
+    return 1;
+}
 
 /**
  * @brief Initialize the LSM9DS1 9DoF inertial sensor
@@ -100,11 +124,27 @@ static void lsm9ds1_init()
     debug_printf("LSM9DS1 Init");
 
     /* Check device ID */
-    lsm9ds1_dev_id_get(&dev_ctx_mag, &dev_ctx_imu, &whoamI_lsm);
+
+    int retry = SC_MEMS_DETECT_RETRY_MAX;
+
+    do
+    {
+        lsm9ds1_dev_id_get(&dev_ctx_mag, &dev_ctx_imu, &whoamI_lsm);
+
+        if (whoamI_lsm.imu != LSM9DS1_IMU_ID || whoamI_lsm.mag != LSM9DS1_MAG_ID)
+        {
+            debug_error("Sensor not identified!");
+        }
+        else
+        {
+            break;
+        }
+
+    } while (--retry);
 
     if (whoamI_lsm.imu != LSM9DS1_IMU_ID || whoamI_lsm.mag != LSM9DS1_MAG_ID)
     {
-        debug_error("Sensor not identified!");
+        debug_error("Failed to init LSM9DS1");
         return;
     }
 
@@ -131,13 +171,17 @@ static void lsm9ds1_init()
     lsm9ds1_xl_filter_out_path_set(&dev_ctx_imu, LSM9DS1_LP_OUT);
 
     /* Gyroscope filtering chain */
-    lsm9ds1_gy_filter_lp_bandwidth_set(&dev_ctx_imu, LSM9DS1_LP_ULTRA_LIGHT);
-    lsm9ds1_gy_filter_hp_bandwidth_set(&dev_ctx_imu, LSM9DS1_HP_MEDIUM);
-    lsm9ds1_gy_filter_out_path_set(&dev_ctx_imu, LSM9DS1_LPF1_HPF_LPF2_OUT);
+    lsm9ds1_gy_filter_lp_bandwidth_set(&dev_ctx_imu, LSM9DS1_LP_STRONG);
+    lsm9ds1_gy_filter_hp_bandwidth_set(&dev_ctx_imu, LSM9DS1_HP_HIGH);
+    lsm9ds1_gy_filter_out_path_set(&dev_ctx_imu, LSM9DS1_LPF1_OUT);
 
     /* Set Output Data Rate / Power mode */
-    lsm9ds1_imu_data_rate_set(&dev_ctx_imu, LSM9DS1_IMU_59Hz5);
+    lsm9ds1_imu_data_rate_set(&dev_ctx_imu, LSM9DS1_IMU_119Hz);
     lsm9ds1_mag_data_rate_set(&dev_ctx_mag, LSM9DS1_MAG_UHP_10Hz);
+
+    lsm9ds1_ctrl_reg9_t ctrl9;
+    ctrl9.drdy_mask_bit = 1;
+    lsm9ds1_write_reg(&dev_ctx_mag, LSM9DS1_CTRL_REG9, (uint8_t *)&ctrl9, sizeof(ctrl9));
 
     #if defined(SENSOR_THREAD_IMU_USE_INDIVIDUAL)
 
@@ -179,12 +223,21 @@ static void lsm9ds1_init()
 static void lps22hh_init()
 {
     debug_printf("LPS22HH Init");
+
     /* Check device ID */
     whoamI_lps = 0;
-    lps22hh_device_id_get(&dev_ctx_lps, &whoamI_lps);
+    int retry = SC_MEMS_DETECT_RETRY_MAX;
 
-    if (whoamI_lps != LPS22HH_ID)
-        debug_error("LPS22HH id not matched! Got 0x%02X", whoamI_lps);
+    do
+    {
+        lps22hh_device_id_get(&dev_ctx_lps, &whoamI_lps);
+
+        if (whoamI_lps != LPS22HH_ID)
+            debug_error("LPS22HH id not matched! Got 0x%02X", whoamI_lps);
+        else
+            break;
+
+    } while (--retry);
 
     /* Restore default configuration */
     lps22hh_reset_set(&dev_ctx_lps, PROPERTY_ENABLE);
@@ -196,7 +249,12 @@ static void lps22hh_init()
     /* Enable Block Data Update */
     lps22hh_block_data_update_set(&dev_ctx_lps, PROPERTY_ENABLE);
     /* Set Output Data Rate */
-    lps22hh_data_rate_set(&dev_ctx_lps, LPS22HH_10_Hz_LOW_NOISE);
+    lps22hh_data_rate_set(&dev_ctx_lps, LPS22HH_1_Hz_LOW_NOISE);
+
+    // Enable interrupts on DRDY pin
+    lps22hh_ctrl_reg3_t ctrl3;
+    ctrl3.drdy = 1;
+    lps22hh_pin_int_route_set(&dev_ctx_lps, &ctrl3);
 }
 
 /**
@@ -204,7 +262,6 @@ static void lps22hh_init()
  *
  * Can be called from the task or from the ISR
  */
-#if defined(SENSOR_THREAD_IMU_USE_INDIVIDUAL)
 static void read_imu_data()
 {
     /* Read imu data */
@@ -226,7 +283,51 @@ static void read_imu_data()
     // acceleration_mg[0], acceleration_mg[1], acceleration_mg[2],
     // angular_rate_mdps[0], angular_rate_mdps[1], angular_rate_mdps[2]);
 }
-#endif
+
+/**
+ * @brief Read magnetometer 3 axis data
+ *
+ * Can be called from the task or from the ISR
+ */
+static void read_mag_data()
+{
+    /* Read magnetometer data */
+    memset(data_raw_magnetic_field.u8bit, 0x00, 3 * sizeof(int16_t));
+    lsm9ds1_magnetic_raw_get(&dev_ctx_mag, data_raw_magnetic_field.u8bit);
+
+    magnetic_field_mgauss[0] = lsm9ds1_from_fs16gauss_to_mG(data_raw_magnetic_field.i16bit[0]);
+    magnetic_field_mgauss[1] = lsm9ds1_from_fs16gauss_to_mG(data_raw_magnetic_field.i16bit[1]);
+    magnetic_field_mgauss[2] = lsm9ds1_from_fs16gauss_to_mG(data_raw_magnetic_field.i16bit[2]);
+
+    // debug_printf("MAG - [mG]:%4.2f\t%4.2f\t%4.2f",
+    //     magnetic_field_mgauss[0], magnetic_field_mgauss[1],
+    //     magnetic_field_mgauss[2]);
+}
+
+/**
+ * @brief Read barometer temperature and pressure data. 
+ *
+ * Can be called from the task or from the ISR
+ */
+static void read_baro_data()
+{
+    memset(&data_raw_pressure, 0x00, sizeof(uint32_t));
+    memset(&data_raw_temperature, 0x00, sizeof(int16_t));
+
+    lps22hh_pressure_raw_get(&dev_ctx_lps, &data_raw_pressure);
+    pressure_hPa = lps22hh_from_lsb_to_hpa(data_raw_pressure);
+
+    lps22hh_temperature_raw_get(&dev_ctx_lps, &data_raw_temperature);
+    temperature_degC = lps22hh_from_lsb_to_celsius(data_raw_temperature);
+    temperature_degC = -4;
+
+    // debug_printf("pressure [hPa]:%6.1f, temperature [degC]:%6.1f", pressure_hPa, temperature_degC);
+
+    // Convert pressure in hPA to meters elevation
+    float elevation = (powf(1013.25/pressure_hPa, 0.19022256) - 1) * (temperature_degC + 273.15)  * 153.84615;
+
+    // debug_printf("Elevation [m]:%6.1f, temperature [degC]:%6.1f", elevation, temperature_degC);
+}
 
 /**
  * @brief Callback function to be called when the HAL event HAL_GPIO_EXTI_Callback
@@ -235,7 +336,6 @@ static void read_imu_data()
  * INT1 configured as the accel interrupt
  *
  */
-#if defined(SENSOR_THREAD_IMU_USE_INDIVIDUAL)
 void imu_int1_callback()
 {
     // If we haven't done initialization yet, we'll have to handle this in the task. 
@@ -251,68 +351,125 @@ void imu_int1_callback()
     // Read new sensor data that is available.
     read_imu_data();
 
-    kinematics_update_accel_gyro(acceleration_mg, angular_rate_mdps);
+    MFX_input_t data_in;
+    MFX_output_t data_out;
+
+    // Get the time delta since the last data ready
+    float dT;
+    TickType_t now = HAL_GetTick();
+    dT = (float)( now - timestamp ) / (1000.0f * HAL_GetTickFreq());
+    timestamp = now;
+
+    // ACcelerations in G's
+    data_in.acc[0] = acceleration_mg[0] / 1000.0;
+    data_in.acc[1] = acceleration_mg[1] / 1000.0;
+    data_in.acc[2] = acceleration_mg[2] / 1000.0;
+
+    // debug_printf("%3.4f, %3.4f, %3.4f", data_in.acc[0], data_in.acc[1], data_in.acc[2]);
+
+    // Rate in dps
+    data_in.gyro[0] = angular_rate_mdps[0] / 1000.0;
+    data_in.gyro[1] = angular_rate_mdps[1] / 1000.0;
+    data_in.gyro[2] = angular_rate_mdps[2] / 1000.0;
+
+    // debug_printf("%3.4f, %3.4f, %3.4f", data_in.gyro[0], data_in.gyro[1], data_in.gyro[2]);
+
+    // Mag in uT / 50
+    data_in.mag[0] = magnetic_field_mgauss[0] / (50.0f * 10.0f);
+    data_in.mag[1] = magnetic_field_mgauss[1] / (50.0f * 10.0f);
+    data_in.mag[2] = magnetic_field_mgauss[2] / (50.0f * 10.0f);
+
+    // debug_printf("%3.4f, %3.4f, %3.4f", data_in.mag[0], data_in.mag[1], data_in.mag[2]);
+
+    #if (SC_OPERATING_MODE == SC_OP_MODE_MAG_CAL)
+    static MFX_MagCal_quality_t cal_quality = MFX_MAGCALUNKNOWN;
+
+    MFX_MagCal_input_t mc_input_data;
+    MFX_MagCal_output_t mc_output_data;
+    mc_input_data.mag[0] = data_in.mag[0];
+    mc_input_data.mag[1] = data_in.mag[1];
+    mc_input_data.mag[2] = data_in.mag[2];
+    mc_input_data.time_stamp = now;
+
+    MotionFX_MagCal_run(&mc_input_data);
+
+    MotionFX_MagCal_getParams(&mc_output_data);
+
+    cal_quality = mc_output_data.cal_quality;
+
+    // debug_printf("inx, %3.2f, iny, %3.2f, inz, %3.2f, Quality: %u, x, %3.2f, y, %3.2f, z, %3.2f", 
+    //                 data_in.mag[0],
+    //                 data_in.mag[1],
+    //                 data_in.mag[2],
+    //                 mc_output_data.cal_quality,
+    //                 mc_output_data.hi_bias[0],
+    //                 mc_output_data.hi_bias[1],
+    //                 mc_output_data.hi_bias[2]);
+    
+    if(cal_quality == MFX_MAGCALGOOD)
+    {
+        debug_printf("Cald");
+        MotionFX_MagCal_init(0, false);
+
+        data_in.mag[0] -= mc_output_data.hi_bias[0];
+        data_in.mag[1] -= mc_output_data.hi_bias[1];
+        data_in.mag[2] -= mc_output_data.hi_bias[2];
+    }
+    #endif
+    
+    MotionFX_propagate(&data_out, &data_in, &dT);
+    MotionFX_update(&data_out, &data_in, &dT, NULL);
+
+    #if SC_ENABLE_6AXIS_MFX_LIB == APP_CONFIG_ENABLED
+        float * p_angles = &data_out.rotation_6X[0];
+    #else
+        float * p_angles = &data_out.rotation_9X[0];
+    #endif
+
+    float yaw = p_angles[0];
+    float pitch = p_angles[1] - SC_FACTORY_PITCH_OFFSET_DEG;
+    float roll = p_angles[2] - SC_FACTORY_ROLL_OFFSET_DEG;
+
+    // debug_printf("%3.3f,%3.3f,%3.3f", /*data_in.gyro[2],*/ yaw, pitch, roll);
 
     taskEXIT_CRITICAL_FROM_ISR(uxSavedInterruptStatus);
-}
-#endif
-
-/**
- * @brief Read all data in fifo
- * 
- */
-#if defined(SENSOR_THREAD_IMU_USE_FIFO)
-static void read_fifo_info()
-{
-    uint8_t fifo_level;
-
-    lsm9ds1_fifo_data_level_get(&dev_ctx_imu, &fifo_level);
-
-    for (int i = 0; i < fifo_level; i++)
-    {
-        memset(data_raw_acceleration.u8bit, 0x00, 3 * sizeof(int16_t));
-        memset(data_raw_angular_rate.u8bit, 0x00, 3 * sizeof(int16_t));
-
-        lsm9ds1_acceleration_raw_get(&dev_ctx_imu, data_raw_acceleration.u8bit);
-        lsm9ds1_angular_rate_raw_get(&dev_ctx_imu, data_raw_angular_rate.u8bit);
-
-        acceleration_mg[0] = lsm9ds1_from_fs4g_to_mg(data_raw_acceleration.i16bit[0]);
-        acceleration_mg[1] = lsm9ds1_from_fs4g_to_mg(data_raw_acceleration.i16bit[1]);
-        acceleration_mg[2] = lsm9ds1_from_fs4g_to_mg(data_raw_acceleration.i16bit[2]);
-
-        angular_rate_mdps[0] = lsm9ds1_from_fs2000dps_to_mdps(data_raw_angular_rate.i16bit[0]);
-        angular_rate_mdps[1] = lsm9ds1_from_fs2000dps_to_mdps(data_raw_angular_rate.i16bit[1]);
-        angular_rate_mdps[2] = lsm9ds1_from_fs2000dps_to_mdps(data_raw_angular_rate.i16bit[2]);
-
-        // debug_printf("IMU, %3.1f, %3.1f, %3.1f, [mdps], %3.1f,%3.1f,%3.1f",
-        // acceleration_mg[0], acceleration_mg[1], acceleration_mg[2],
-        // angular_rate_mdps[0], angular_rate_mdps[1], angular_rate_mdps[2]);
-    }
-    debug_printf("FIFO level %u", fifo_level);
 }
 
 /**
  * @brief Callback function to be called when the HAL event HAL_GPIO_EXTI_Callback
- * is executed, with the pin IMU_AG_INT2_Pin
- *
- * INT2 configured as the Fifo threshold interrupt
+ * is executed, with the pin IMU_MAG_DRDY
  *
  */
-
-void imu_int2_callback()
+void imu_mag_drdy_callback()
 {
-    // If we haven't done initialization yet, we'll have to handle this in the task. 
     if (m_sensors_initialized == false)
     {
-        m_int2_count += 1;
+        m_baro_int_count += 1;
         return;
     }
 
     UBaseType_t uxSavedInterruptStatus = taskENTER_CRITICAL_FROM_ISR();
-    read_fifo_info();
+    read_mag_data();
     taskEXIT_CRITICAL_FROM_ISR(uxSavedInterruptStatus);
 }
-#endif
+
+/**
+ * @brief Callback function to be called when the HAL event HAL_GPIO_EXTI_Callback
+ * is executed, with the pin BARO_INT_Pin
+ *
+ */
+void baro_int_callback()
+{
+    if (m_sensors_initialized == false)
+    {
+        m_drdy_count += 1;
+        return;
+    }
+
+    UBaseType_t uxSavedInterruptStatus = taskENTER_CRITICAL_FROM_ISR();
+    read_baro_data();
+    taskEXIT_CRITICAL_FROM_ISR(uxSavedInterruptStatus);
+}
 
 /**
  * @brief Initialization prior to interrupts being enabled
@@ -342,7 +499,64 @@ void stability_thread_pre_init()
 
     lps22hh_init();
 
-    kinematics_initialize();
+    char buf[50];
+
+    memset(buf, 0x00, sizeof(buf));
+
+    // See motionfx lib docs for example code
+    MotionFX_initialize();
+    MotionFX_GetLibVersion(buf);
+    MotionFX_getKnobs(&m_mfx_knobs);
+
+    debug_printf("MFX lib ver: %s", buf);
+
+    // Mag is rotated opposite to the accel and gyro for whatever reason
+    m_mfx_knobs.mag_orientation[0] = 'n';
+    m_mfx_knobs.mag_orientation[1] = 'w';
+    m_mfx_knobs.mag_orientation[2] = 'u';
+
+    // Gyro x is normal
+    m_mfx_knobs.gyro_orientation[0] = 's';
+    m_mfx_knobs.gyro_orientation[1] = 'w';
+    m_mfx_knobs.gyro_orientation[2] = 'u';
+
+    // Accel x is normal
+    m_mfx_knobs.acc_orientation[0] = 's';
+    m_mfx_knobs.acc_orientation[1] = 'w';
+    m_mfx_knobs.acc_orientation[2] = 'u';
+
+    m_mfx_knobs.start_automatic_gbias_calculation = 0;
+    m_mfx_knobs.LMode = 1;
+    m_mfx_knobs.modx = 1;
+
+    MotionFX_setKnobs(&m_mfx_knobs);
+ 
+    debug_printf("Accel ATime: %3.3f", m_mfx_knobs.ATime);
+    debug_printf("Mag MTime: %3.3f", m_mfx_knobs.MTime);
+    debug_printf("Dynamica accel FrTime: %3.3f", m_mfx_knobs.FrTime);
+    debug_printf("Gyro bias LMode: %u", m_mfx_knobs.LMode);
+    debug_printf("gbias_mag_th_sc_6X: %3.3f", m_mfx_knobs.gbias_mag_th_sc_6X);
+    debug_printf("gbias_acc_th_sc_6X: %3.3f", m_mfx_knobs.gbias_acc_th_sc_6X);
+    debug_printf("gbias_gyro_th_sc_6X: %3.3f", m_mfx_knobs.gbias_gyro_th_sc_6X);
+    debug_printf("gbias_mag_th_sc_9X: %3.3f", m_mfx_knobs.gbias_mag_th_sc_9X);
+    debug_printf("gbias_acc_th_sc_9X: %3.3f", m_mfx_knobs.gbias_acc_th_sc_9X);
+    debug_printf("gbias_gyro_th_sc_9X: %3.3f", m_mfx_knobs.gbias_gyro_th_sc_9X);
+    debug_printf("decimation modx: %u", m_mfx_knobs.modx);
+    debug_printf("acc orientation: [%c, %c, %c, %c]", m_mfx_knobs.acc_orientation[0],
+                                                    m_mfx_knobs.acc_orientation[1],
+                                                    m_mfx_knobs.acc_orientation[2],
+                                                    m_mfx_knobs.acc_orientation[3]);
+    debug_printf("gyro orientation: [%c, %c, %c, %c]", m_mfx_knobs.gyro_orientation[0],
+                                                    m_mfx_knobs.gyro_orientation[1],
+                                                    m_mfx_knobs.gyro_orientation[2],
+                                                    m_mfx_knobs.gyro_orientation[3]);
+    debug_printf("mag orientation: [%c, %c, %c, %c]", m_mfx_knobs.mag_orientation[0],
+                                                    m_mfx_knobs.mag_orientation[1],
+                                                    m_mfx_knobs.mag_orientation[2],
+                                                    m_mfx_knobs.mag_orientation[3]);
+    debug_printf("MFX_engine_output_ref_sys: %u",   m_mfx_knobs.output_type);
+    debug_printf("start_automatic_gbias_calculation: %d",   m_mfx_knobs.start_automatic_gbias_calculation);
+    debug_printf("");
 
     m_sensors_initialized = true;
 }
@@ -354,66 +568,37 @@ void stability_thread_pre_init()
  */
 void stability_thread_start(void* argument)
 {
+    #if(SC_OPERATING_MODE == SC_OP_MODE_MAG_CAL)
+    MotionFX_MagCal_init(20, true);
+    #endif
+    MotionFX_enable_6X(SC_ENABLE_6AXIS_MFX_LIB);
+    MotionFX_enable_9X(SC_ENABLE_9AXIS_MFX_LIB);
+
     for (;;)
     {
-        TickType_t now = HAL_GetTick();
-
-        #if defined(SENSOR_THREAD_IMU_USE_INDIVIDUAL)
+        // Recover from IMU data ready interrupt before we were ready
         if(m_int1_count)
         {
             read_imu_data();
             debug_printf("Recovered int1 from sensor task.");
         }
         m_int1_count = 0;
-        #endif
 
-        #if defined(SENSOR_THREAD_IMU_USE_FIFO)
-        if (m_int2_count)
+        // Recover Mag Data intterupt before we were ready
+        if (m_drdy_count || HAL_GPIO_ReadPin(IMU_MAG_DRDY_GPIO_Port, IMU_MAG_DRDY_Pin))
         {
-            debug_printf("Handled int2 from sensor task.");
-            read_fifo_info();
+            read_mag_data();
+            debug_printf("Recovered drdy from sensor task.");
         }
-        m_int2_count = 0;
-        #endif
+        m_drdy_count = 0;
 
-        #if 0
-                if (lsm9ds1.status_mag.zyxda)
-                {
-                    /* Read magnetometer data */
-                    memset(data_raw_magnetic_field.u8bit, 0x00, 3 * sizeof(int16_t));
-                    lsm9ds1_magnetic_raw_get(&dev_ctx_mag, data_raw_magnetic_field.u8bit);
-
-                    magnetic_field_mgauss[0] = lsm9ds1_from_fs16gauss_to_mG(data_raw_magnetic_field.i16bit[0]);
-                    magnetic_field_mgauss[1] = lsm9ds1_from_fs16gauss_to_mG(data_raw_magnetic_field.i16bit[1]);
-                    magnetic_field_mgauss[2] = lsm9ds1_from_fs16gauss_to_mG(data_raw_magnetic_field.i16bit[2]);
-
-                    debug_printf("MAG - [mG]:%4.2f\t%4.2f\t%4.2f",
-                        magnetic_field_mgauss[0], magnetic_field_mgauss[1],
-                        magnetic_field_mgauss[2]);
-                }
-        #endif 
-
-        #if 0
-                lps22hh_read_reg(&dev_ctx_lps, LPS22HH_STATUS, (uint8_t*)&lps22hh, 1);
-
-                if (lps22hh.status.p_da)
-                {
-                    memset(&data_raw_pressure, 0x00, sizeof(uint32_t));
-                    lps22hh_pressure_raw_get(&dev_ctx_lps, &data_raw_pressure);
-                    pressure_hPa = lps22hh_from_lsb_to_hpa(data_raw_pressure);
-
-                    debug_printf("pressure [hPa]:%6.1f", pressure_hPa);
-                }
-
-                if (lps22hh.status.t_da)
-                {
-                    memset(&data_raw_temperature, 0x00, sizeof(int16_t));
-                    lps22hh_temperature_raw_get(&dev_ctx_lps, &data_raw_temperature);
-                    temperature_degC = lps22hh_from_lsb_to_celsius(data_raw_temperature);
-                    debug_printf("temperature [degC]:%6.1f", temperature_degC);
-                }
-        #endif
-        // debug_printf("T = %u", HAL_GetTick() - now);
+        // Recover barometer data interrupt from before we were ready
+        if(m_baro_int_count || HAL_GPIO_ReadPin(BARO_INT_GPIO_Port, BARO_INT_Pin))
+        {
+            debug_printf("Recovered baro int from sensor task.");
+            read_baro_data();
+        }
+        m_baro_int_count = 0;
 
         osDelay(STABILITY_THREAD_PERIOD);
     }

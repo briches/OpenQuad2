@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 1
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 1
   58              	calc_func:
   59              		@ args = 0, pretend = 0, frame = 0
   60              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 2
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s 			page 2
 
 
   61 0000 F0B5     		push	{r4, r5, r6, r7, lr}
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 1
  115 0080 EB8F     		ldrh	r3, [r5, #62]
  116 0082 07B2     		sxth	r7, r0
  117 0084 002B     		cmp	r3, #0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 3
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s 			page 3
 
 
  118 0086 D3D1     		bne	.L10
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 1
  178              		@ link register save eliminated.
  179 0000 F0B4     		push	{r4, r5, r6, r7}
  180 0002 0446     		mov	r4, r0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 4
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s 			page 4
 
 
  181 0004 1068     		ldr	r0, [r2]
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 1
  238              		.p2align 2,,3
  239              		.global	core_list_undo_remove
  240              		.syntax unified
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 5
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s 			page 5
 
 
  241              		.thumb
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 1
  298 002c 4368     		ldr	r3, [r0, #4]
  299 002e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
  300 0030 9342     		cmp	r3, r2
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 6
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s 			page 6
 
 
  301 0032 F8D1     		bne	.L29
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 1
  359 001c 019B     		ldr	r3, [sp, #4]
  360 001e 2146     		mov	r1, r4
  361 0020 0025     		movs	r5, #0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 7
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s 			page 7
 
 
  362 0022 0133     		adds	r3, r3, #1
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 1
  416 0086 013D     		subs	r5, r5, #1
  417 0088 DBF800B0 		ldr	fp, [fp]
  418 008c 002E     		cmp	r6, #0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 8
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s 			page 8
 
 
  419 008e E6D1     		bne	.L77
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 1
  475 003c 3CB1     		cbz	r4, .L82
  476 003e 0020     		movs	r0, #0
  477 0040 00E0     		b	.L83
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 9
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s 			page 9
 
 
  478              	.L97:
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 1
  532 00b2 009B     		ldr	r3, [sp]
  533 00b4 002B     		cmp	r3, #0
  534 00b6 05DD     		ble	.L90
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 10
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s 			page 10
 
 
  535 00b8 2046     		mov	r0, r4
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 1
  589 0136 2846     		mov	r0, r5
  590 0138 05B0     		add	sp, sp, #20
  591              		@ sp needed
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 11
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s 			page 11
 
 
  592 013a BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 1
  648 0054 C660     		str	r6, [r0, #12]
  649 0056 A8F80440 		strh	r4, [r8, #4]	@ movhi
  650 005a A8F80630 		strh	r3, [r8, #6]	@ movhi
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 12
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s 			page 12
 
 
  651              	.L122:
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 1
  705 00d8 4968     		ldr	r1, [r1, #4]
  706 00da 0134     		adds	r4, r4, #1
  707 00dc 02F4E062 		and	r2, r2, #1792
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 13
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s 			page 13
 
 
  708 00e0 1343     		orrs	r3, r3, r2
@@ -745,37 +745,37 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 1
  729 0108 CDCCCCCC 		.word	-858993459
  730 010c 00000000 		.word	cmp_idx
  732              		.ident	"GCC: (GNU Arm Embedded Toolchain 9-2020-q2-update) 9.3.1 20200408 (release)"
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s 			page 14
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s 			page 14
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 core_list_join.c
-C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:15     .text.cmp_idx:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:24     .text.cmp_idx:00000000 cmp_idx
-C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:50     .text.calc_func:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:58     .text.calc_func:00000000 calc_func
-C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:123    .text.cmp_complex:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:131    .text.cmp_complex:00000000 cmp_complex
-C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:148    .text.copy_info:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:156    .text.copy_info:00000000 copy_info
-C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:167    .text.core_list_insert_new:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:175    .text.core_list_insert_new:00000000 core_list_insert_new
-C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:212    .text.core_list_remove:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:220    .text.core_list_remove:00000000 core_list_remove
-C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:237    .text.core_list_undo_remove:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:245    .text.core_list_undo_remove:00000000 core_list_undo_remove
-C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:261    .text.core_list_find:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:269    .text.core_list_find:00000000 core_list_find
-C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:307    .text.core_list_reverse:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:315    .text.core_list_reverse:00000000 core_list_reverse
-C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:334    .text.core_list_mergesort:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:342    .text.core_list_mergesort:00000000 core_list_mergesort
-C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:443    .text.core_bench_list:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:451    .text.core_bench_list:00000000 core_bench_list
-C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:605    .text.core_bench_list:00000150 $d
-C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:609    .text.core_list_init:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:617    .text.core_list_init:00000000 core_list_init
-C:\Users\Brandon\AppData\Local\Temp\cc7nuYRY.s:729    .text.core_list_init:00000108 $d
+C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s:15     .text.cmp_idx:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s:24     .text.cmp_idx:00000000 cmp_idx
+C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s:50     .text.calc_func:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s:58     .text.calc_func:00000000 calc_func
+C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s:123    .text.cmp_complex:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s:131    .text.cmp_complex:00000000 cmp_complex
+C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s:148    .text.copy_info:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s:156    .text.copy_info:00000000 copy_info
+C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s:167    .text.core_list_insert_new:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s:175    .text.core_list_insert_new:00000000 core_list_insert_new
+C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s:212    .text.core_list_remove:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s:220    .text.core_list_remove:00000000 core_list_remove
+C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s:237    .text.core_list_undo_remove:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s:245    .text.core_list_undo_remove:00000000 core_list_undo_remove
+C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s:261    .text.core_list_find:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s:269    .text.core_list_find:00000000 core_list_find
+C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s:307    .text.core_list_reverse:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s:315    .text.core_list_reverse:00000000 core_list_reverse
+C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s:334    .text.core_list_mergesort:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s:342    .text.core_list_mergesort:00000000 core_list_mergesort
+C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s:443    .text.core_bench_list:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s:451    .text.core_bench_list:00000000 core_bench_list
+C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s:605    .text.core_bench_list:00000150 $d
+C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s:609    .text.core_list_init:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s:617    .text.core_list_init:00000000 core_list_init
+C:\Users\Brandon\AppData\Local\Temp\ccGXoTRE.s:729    .text.core_list_init:00000108 $d
 
 UNDEFINED SYMBOLS
 crcu16

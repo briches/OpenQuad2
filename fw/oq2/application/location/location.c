@@ -93,7 +93,7 @@ void location_thread_start(void* argument)
             // debug_printf("Location.");
         }
 
-        debug_print_buffer(gps_uart_rx_buf, 30, 0, 16);
+        // debug_print_buffer(gps_uart_rx_buf, 30, 0, 16);
         
     }
 }

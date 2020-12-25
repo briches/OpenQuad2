@@ -65,5 +65,8 @@ typedef struct kinematics_data
 uint32_t kinematics_initialize();
 uint32_t kinematics_update_accel_gyro(float * accel_mg, float * rate_mdps);
 
+float kinematics_get_pitch();
+float kinematics_get_roll();
+
 
 #endif

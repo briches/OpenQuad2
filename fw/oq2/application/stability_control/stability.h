@@ -29,6 +29,8 @@ void stability_thread_start(void* argument);
 
 void imu_int1_callback();
 void imu_int2_callback();
+void imu_mag_drdy_callback();
+void baro_int_callback();
 
 
 #endif

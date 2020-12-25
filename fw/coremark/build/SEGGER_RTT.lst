@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
   57              		.syntax unified
   58              		.thumb
   59              		.thumb_func
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 2
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 2
 
 
   60              		.fpu fpv5-d16
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  114 0010 53454747 		.ascii	"SEGGER\000"
  114      455200
  115              		.section	.text._DoInit,"ax",%progbits
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 3
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 3
 
 
  116              		.align	1
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  172              		.syntax unified
  173              		.thumb
  174              		.thumb_func
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 4
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 4
 
 
  175              		.fpu fpv5-d16
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  230              	.L34:
  231 0076 226D     		ldr	r2, [r4, #80]
  232 0078 3846     		mov	r0, r7
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 5
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 5
 
 
  233 007a E16C     		ldr	r1, [r4, #76]
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  289              		.syntax unified
  290 0010 1946     		mov	r1, r3
  291 0012 FFF7FEFF 		bl	SEGGER_RTT_ReadNoLock
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 6
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 6
 
 
  292              		.syntax unified
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  348 0050 521A     		subs	r2, r2, r1
  349 0052 9A62     		str	r2, [r3, #40]
  350 0054 9A6A     		ldr	r2, [r3, #40]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 7
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 7
 
 
  351 0056 8A42     		cmp	r2, r1
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  406              		.p2align 2,,3
  407              		.global	SEGGER_RTT_WriteSkipNoLock
  408              		.syntax unified
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 8
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 8
 
 
  409              		.thumb
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  464 007c 0120     		movs	r0, #1
  465 007e 6562     		str	r5, [r4, #36]
  466 0080 D7E7     		b	.L55
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 9
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 9
 
 
  467              	.L64:
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  523 0038 B442     		cmp	r4, r6
  524 003a 3946     		mov	r1, r7
  525 003c 28BF     		it	cs
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 10
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 10
 
 
  526 003e 3446     		movcs	r4, r6
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  582 0008 0C46     		mov	r4, r1
  583 000a 63B1     		cbz	r3, .L86
  584              	.L84:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 11
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 11
 
 
  585              		.syntax unified
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  642 001e 00BF     		.section	.text.SEGGER_RTT_PutCharSkipNoLock,"ax",%progbits
  643              		.align	1
  644              		.p2align 2,,3
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 12
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 12
 
 
  645              		.global	SEGGER_RTT_PutCharSkipNoLock
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  702 000c 2BB3     		cbz	r3, .L104
  703              	.L99:
  704              		.syntax unified
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 13
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 13
 
 
  705              	@ 1088 "Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT.c" 1
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  760              		.global	SEGGER_RTT_PutChar
  761              		.syntax unified
  762              		.thumb
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 14
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 14
 
 
  763              		.thumb_func
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  818              	.L111:
  819 0062 996A     		ldr	r1, [r3, #40]
  820 0064 9142     		cmp	r1, r2
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 15
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 15
 
 
  821 0066 E8D1     		bne	.L110
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  877              		.syntax unified
  878 0020 0128     		cmp	r0, #1
  879 0022 0CBF     		ite	eq
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 16
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 16
 
 
  880 0024 9DF80700 		ldrbeq	r0, [sp, #7]	@ zero_extendqisi2
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  939              		.global	SEGGER_RTT_HasData
  940              		.syntax unified
  941              		.thumb
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 17
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 17
 
 
  942              		.thumb_func
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  999              	.L140:
  1000 002e 8342     		cmp	r3, r0
  1001 0030 11DD     		ble	.L145
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 18
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 18
 
 
  1002              	.L142:
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  1058 0016 EFF31182 		mrs   r2, basepri  
  1059 001a 4FF02001 		mov   r1, #32       
  1060 001e 81F31188 		msr   basepri, r1  
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 19
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 19
 
 
  1061              		
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  1116              		.align	1
  1117              		.p2align 2,,3
  1118              		.global	SEGGER_RTT_ConfigUpBuffer
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 20
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 20
 
 
  1119              		.syntax unified
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  1174 0054 45F80690 		str	r9, [r5, r6]
  1175 0058 2E44     		add	r6, r6, r5
  1176 005a BB62     		str	r3, [r7, #40]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 21
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 21
 
 
  1177 005c C6F80480 		str	r8, [r6, #4]
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  1233 0032 83F31188 		msr   basepri, r3  
  1234              		
  1235              	@ 0 "" 2
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 22
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 22
 
 
  1236              		.thumb
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  1292              		.syntax unified
  1293 001e 0134     		adds	r4, r4, #1
  1294 0020 04EB4404 		add	r4, r4, r4, lsl #1
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 23
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 23
 
 
  1295 0024 45F83460 		str	r6, [r5, r4, lsl #3]
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  1351              	@ 1521 "Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT.c" 1
  1352 0028 83F31188 		msr   basepri, r3  
  1353              		
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 24
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 24
 
 
  1354              	@ 0 "" 2
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  1410              		.syntax unified
  1411 002c 0020     		movs	r0, #0
  1412 002e 70BD     		pop	{r4, r5, r6, pc}
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 25
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 25
 
 
  1413              	.L208:
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  1469 0034 EAE7     		b	.L212
  1470              	.L214:
  1471 0036 4FF0FF30 		mov	r0, #-1
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 26
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 26
 
 
  1472 003a 70BD     		pop	{r4, r5, r6, pc}
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  1530 0030 022A     		cmp	r2, #2
  1531 0032 1FD0     		beq	.L231
  1532 0034 AB6A     		ldr	r3, [r5, #40]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 27
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 27
 
 
  1533 0036 696A     		ldr	r1, [r5, #36]
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  1587 008c 00000000 		.word	_SEGGER_RTT
  1588 0090 00000000 		.word	.LANCHOR2
  1589 0094 00000000 		.word	.LANCHOR3
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 28
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 28
 
 
  1590 0098 18000000 		.word	_SEGGER_RTT+24
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  1646              	@ 1736 "Middlewares/Third_Party/SEGGER_RTT/SEGGER_RTT.c" 1
  1647 0050 88F31188 		msr   basepri, r8  
  1648              		
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 29
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 29
 
 
  1649              	@ 0 "" 2
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  1703 00d0 DFF89C90 		ldr	r9, .L253+12
  1704 00d4 4FF0FF0A 		mov	r10, #255
  1705 00d8 01A9     		add	r1, sp, #4
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 30
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 30
 
 
  1706 00da 0222     		movs	r2, #2
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  1760 0168 18000000 		.word	_SEGGER_RTT+24
  1761 016c 00000000 		.word	.LANCHOR3
  1762 0170 00000000 		.word	.LANCHOR2
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 31
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 31
 
 
  1764              		.comm	_SEGGER_RTT,120,4
@@ -1832,101 +1832,101 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 1
  1791      38394142 
  1791      43444546 
  1792              		.ident	"GCC: (GNU Arm Embedded Toolchain 9-2020-q2-update) 9.3.1 20200408 (release)"
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 32
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 32
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 SEGGER_RTT.c
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:15     .text._WriteNoCheck:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:23     .text._WriteNoCheck:00000000 _WriteNoCheck
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:55     .text._WriteBlocking:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:62     .text._WriteBlocking:00000000 _WriteBlocking
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:106    .rodata._DoInit.str1.4:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:116    .text._DoInit:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:123    .text._DoInit:00000000 _DoInit
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:161    .text._DoInit:0000004c $d
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:15     .text._WriteNoCheck:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:23     .text._WriteNoCheck:00000000 _WriteNoCheck
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:55     .text._WriteBlocking:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:62     .text._WriteBlocking:00000000 _WriteBlocking
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:106    .rodata._DoInit.str1.4:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:116    .text._DoInit:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:123    .text._DoInit:00000000 _DoInit
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:161    .text._DoInit:0000004c $d
                             *COM*:00000078 _SEGGER_RTT
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:169    .text.SEGGER_RTT_ReadNoLock:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:177    .text.SEGGER_RTT_ReadNoLock:00000000 SEGGER_RTT_ReadNoLock
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:265    .text.SEGGER_RTT_ReadNoLock:000000c0 $d
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:268    .text.SEGGER_RTT_Read:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:276    .text.SEGGER_RTT_Read:00000000 SEGGER_RTT_Read
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:302    .text.SEGGER_RTT_WriteWithOverwriteNoLock:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:310    .text.SEGGER_RTT_WriteWithOverwriteNoLock:00000000 SEGGER_RTT_WriteWithOverwriteNoLock
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:402    .text.SEGGER_RTT_WriteWithOverwriteNoLock:000000cc $d
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:405    .text.SEGGER_RTT_WriteSkipNoLock:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:413    .text.SEGGER_RTT_WriteSkipNoLock:00000000 SEGGER_RTT_WriteSkipNoLock
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:482    .text.SEGGER_RTT_WriteSkipNoLock:000000a0 $d
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:485    .text.SEGGER_RTT_WriteNoLock:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:493    .text.SEGGER_RTT_WriteNoLock:00000000 SEGGER_RTT_WriteNoLock
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:564    .text.SEGGER_RTT_WriteNoLock:00000084 $d
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:567    .text.SEGGER_RTT_Write:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:575    .text.SEGGER_RTT_Write:00000000 SEGGER_RTT_Write
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:614    .text.SEGGER_RTT_Write:00000034 $d
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:617    .text.SEGGER_RTT_WriteString:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:625    .text.SEGGER_RTT_WriteString:00000000 SEGGER_RTT_WriteString
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:643    .text.SEGGER_RTT_PutCharSkipNoLock:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:651    .text.SEGGER_RTT_PutCharSkipNoLock:00000000 SEGGER_RTT_PutCharSkipNoLock
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:683    .text.SEGGER_RTT_PutCharSkipNoLock:0000003c $d
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:686    .text.SEGGER_RTT_PutCharSkip:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:694    .text.SEGGER_RTT_PutCharSkip:00000000 SEGGER_RTT_PutCharSkip
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:755    .text.SEGGER_RTT_PutCharSkip:00000060 $d
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:758    .text.SEGGER_RTT_PutChar:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:766    .text.SEGGER_RTT_PutChar:00000000 SEGGER_RTT_PutChar
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:842    .text.SEGGER_RTT_PutChar:00000080 $d
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:845    .text.SEGGER_RTT_GetKey:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:853    .text.SEGGER_RTT_GetKey:00000000 SEGGER_RTT_GetKey
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:887    .text.SEGGER_RTT_WaitKey:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:895    .text.SEGGER_RTT_WaitKey:00000000 SEGGER_RTT_WaitKey
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:906    .text.SEGGER_RTT_HasKey:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:914    .text.SEGGER_RTT_HasKey:00000000 SEGGER_RTT_HasKey
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:934    .text.SEGGER_RTT_HasKey:0000001c $d
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:937    .text.SEGGER_RTT_HasData:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:945    .text.SEGGER_RTT_HasData:00000000 SEGGER_RTT_HasData
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:959    .text.SEGGER_RTT_HasData:00000014 $d
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:962    .text.SEGGER_RTT_AllocDownBuffer:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:970    .text.SEGGER_RTT_AllocDownBuffer:00000000 SEGGER_RTT_AllocDownBuffer
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1031   .text.SEGGER_RTT_AllocDownBuffer:00000060 $d
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1034   .text.SEGGER_RTT_AllocUpBuffer:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1042   .text.SEGGER_RTT_AllocUpBuffer:00000000 SEGGER_RTT_AllocUpBuffer
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1113   .text.SEGGER_RTT_AllocUpBuffer:00000074 $d
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1116   .text.SEGGER_RTT_ConfigUpBuffer:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1124   .text.SEGGER_RTT_ConfigUpBuffer:00000000 SEGGER_RTT_ConfigUpBuffer
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s 			page 33
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:169    .text.SEGGER_RTT_ReadNoLock:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:177    .text.SEGGER_RTT_ReadNoLock:00000000 SEGGER_RTT_ReadNoLock
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:265    .text.SEGGER_RTT_ReadNoLock:000000c0 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:268    .text.SEGGER_RTT_Read:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:276    .text.SEGGER_RTT_Read:00000000 SEGGER_RTT_Read
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:302    .text.SEGGER_RTT_WriteWithOverwriteNoLock:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:310    .text.SEGGER_RTT_WriteWithOverwriteNoLock:00000000 SEGGER_RTT_WriteWithOverwriteNoLock
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:402    .text.SEGGER_RTT_WriteWithOverwriteNoLock:000000cc $d
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:405    .text.SEGGER_RTT_WriteSkipNoLock:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:413    .text.SEGGER_RTT_WriteSkipNoLock:00000000 SEGGER_RTT_WriteSkipNoLock
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:482    .text.SEGGER_RTT_WriteSkipNoLock:000000a0 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:485    .text.SEGGER_RTT_WriteNoLock:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:493    .text.SEGGER_RTT_WriteNoLock:00000000 SEGGER_RTT_WriteNoLock
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:564    .text.SEGGER_RTT_WriteNoLock:00000084 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:567    .text.SEGGER_RTT_Write:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:575    .text.SEGGER_RTT_Write:00000000 SEGGER_RTT_Write
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:614    .text.SEGGER_RTT_Write:00000034 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:617    .text.SEGGER_RTT_WriteString:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:625    .text.SEGGER_RTT_WriteString:00000000 SEGGER_RTT_WriteString
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:643    .text.SEGGER_RTT_PutCharSkipNoLock:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:651    .text.SEGGER_RTT_PutCharSkipNoLock:00000000 SEGGER_RTT_PutCharSkipNoLock
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:683    .text.SEGGER_RTT_PutCharSkipNoLock:0000003c $d
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:686    .text.SEGGER_RTT_PutCharSkip:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:694    .text.SEGGER_RTT_PutCharSkip:00000000 SEGGER_RTT_PutCharSkip
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:755    .text.SEGGER_RTT_PutCharSkip:00000060 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:758    .text.SEGGER_RTT_PutChar:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:766    .text.SEGGER_RTT_PutChar:00000000 SEGGER_RTT_PutChar
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:842    .text.SEGGER_RTT_PutChar:00000080 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:845    .text.SEGGER_RTT_GetKey:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:853    .text.SEGGER_RTT_GetKey:00000000 SEGGER_RTT_GetKey
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:887    .text.SEGGER_RTT_WaitKey:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:895    .text.SEGGER_RTT_WaitKey:00000000 SEGGER_RTT_WaitKey
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:906    .text.SEGGER_RTT_HasKey:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:914    .text.SEGGER_RTT_HasKey:00000000 SEGGER_RTT_HasKey
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:934    .text.SEGGER_RTT_HasKey:0000001c $d
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:937    .text.SEGGER_RTT_HasData:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:945    .text.SEGGER_RTT_HasData:00000000 SEGGER_RTT_HasData
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:959    .text.SEGGER_RTT_HasData:00000014 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:962    .text.SEGGER_RTT_AllocDownBuffer:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:970    .text.SEGGER_RTT_AllocDownBuffer:00000000 SEGGER_RTT_AllocDownBuffer
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1031   .text.SEGGER_RTT_AllocDownBuffer:00000060 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1034   .text.SEGGER_RTT_AllocUpBuffer:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1042   .text.SEGGER_RTT_AllocUpBuffer:00000000 SEGGER_RTT_AllocUpBuffer
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1113   .text.SEGGER_RTT_AllocUpBuffer:00000074 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1116   .text.SEGGER_RTT_ConfigUpBuffer:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1124   .text.SEGGER_RTT_ConfigUpBuffer:00000000 SEGGER_RTT_ConfigUpBuffer
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s 			page 33
 
 
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1189   .text.SEGGER_RTT_ConfigUpBuffer:00000070 $d
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1192   .text.SEGGER_RTT_ConfigDownBuffer:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1200   .text.SEGGER_RTT_ConfigDownBuffer:00000000 SEGGER_RTT_ConfigDownBuffer
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1260   .text.SEGGER_RTT_ConfigDownBuffer:00000064 $d
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1263   .text.SEGGER_RTT_SetNameUpBuffer:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1271   .text.SEGGER_RTT_SetNameUpBuffer:00000000 SEGGER_RTT_SetNameUpBuffer
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1314   .text.SEGGER_RTT_SetNameUpBuffer:0000003c $d
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1317   .text.SEGGER_RTT_SetNameDownBuffer:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1325   .text.SEGGER_RTT_SetNameDownBuffer:00000000 SEGGER_RTT_SetNameDownBuffer
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1368   .text.SEGGER_RTT_SetNameDownBuffer:0000003c $d
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1371   .text.SEGGER_RTT_SetFlagsUpBuffer:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1379   .text.SEGGER_RTT_SetFlagsUpBuffer:00000000 SEGGER_RTT_SetFlagsUpBuffer
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1422   .text.SEGGER_RTT_SetFlagsUpBuffer:0000003c $d
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1425   .text.SEGGER_RTT_SetFlagsDownBuffer:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1433   .text.SEGGER_RTT_SetFlagsDownBuffer:00000000 SEGGER_RTT_SetFlagsDownBuffer
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1476   .text.SEGGER_RTT_SetFlagsDownBuffer:0000003c $d
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1479   .text.SEGGER_RTT_Init:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1487   .text.SEGGER_RTT_Init:00000000 SEGGER_RTT_Init
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1494   .text.SEGGER_RTT_SetTerminal:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1502   .text.SEGGER_RTT_SetTerminal:00000000 SEGGER_RTT_SetTerminal
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1587   .text.SEGGER_RTT_SetTerminal:0000008c $d
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1593   .text.SEGGER_RTT_TerminalOut:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1601   .text.SEGGER_RTT_TerminalOut:00000000 SEGGER_RTT_TerminalOut
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1759   .text.SEGGER_RTT_TerminalOut:00000164 $d
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1769   .bss._ActiveTerminal:00000000 _ActiveTerminal
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1770   .bss._ActiveTerminal:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1772   .bss._acDownBuffer:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1776   .bss._acDownBuffer:00000000 _acDownBuffer
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1779   .bss._acUpBuffer:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1783   .bss._acUpBuffer:00000000 _acUpBuffer
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1786   .rodata._aTerminalId:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\cckktDHc.s:1790   .rodata._aTerminalId:00000000 _aTerminalId
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1189   .text.SEGGER_RTT_ConfigUpBuffer:00000070 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1192   .text.SEGGER_RTT_ConfigDownBuffer:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1200   .text.SEGGER_RTT_ConfigDownBuffer:00000000 SEGGER_RTT_ConfigDownBuffer
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1260   .text.SEGGER_RTT_ConfigDownBuffer:00000064 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1263   .text.SEGGER_RTT_SetNameUpBuffer:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1271   .text.SEGGER_RTT_SetNameUpBuffer:00000000 SEGGER_RTT_SetNameUpBuffer
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1314   .text.SEGGER_RTT_SetNameUpBuffer:0000003c $d
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1317   .text.SEGGER_RTT_SetNameDownBuffer:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1325   .text.SEGGER_RTT_SetNameDownBuffer:00000000 SEGGER_RTT_SetNameDownBuffer
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1368   .text.SEGGER_RTT_SetNameDownBuffer:0000003c $d
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1371   .text.SEGGER_RTT_SetFlagsUpBuffer:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1379   .text.SEGGER_RTT_SetFlagsUpBuffer:00000000 SEGGER_RTT_SetFlagsUpBuffer
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1422   .text.SEGGER_RTT_SetFlagsUpBuffer:0000003c $d
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1425   .text.SEGGER_RTT_SetFlagsDownBuffer:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1433   .text.SEGGER_RTT_SetFlagsDownBuffer:00000000 SEGGER_RTT_SetFlagsDownBuffer
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1476   .text.SEGGER_RTT_SetFlagsDownBuffer:0000003c $d
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1479   .text.SEGGER_RTT_Init:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1487   .text.SEGGER_RTT_Init:00000000 SEGGER_RTT_Init
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1494   .text.SEGGER_RTT_SetTerminal:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1502   .text.SEGGER_RTT_SetTerminal:00000000 SEGGER_RTT_SetTerminal
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1587   .text.SEGGER_RTT_SetTerminal:0000008c $d
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1593   .text.SEGGER_RTT_TerminalOut:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1601   .text.SEGGER_RTT_TerminalOut:00000000 SEGGER_RTT_TerminalOut
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1759   .text.SEGGER_RTT_TerminalOut:00000164 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1769   .bss._ActiveTerminal:00000000 _ActiveTerminal
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1770   .bss._ActiveTerminal:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1772   .bss._acDownBuffer:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1776   .bss._acDownBuffer:00000000 _acDownBuffer
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1779   .bss._acUpBuffer:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1783   .bss._acUpBuffer:00000000 _acUpBuffer
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1786   .rodata._aTerminalId:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTNPTre.s:1790   .rodata._aTerminalId:00000000 _aTerminalId
 
 UNDEFINED SYMBOLS
 memcpy

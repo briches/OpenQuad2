@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 1
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 1
   58 0008 8028     		cmp	r0, #128
   59 000a 11D0     		beq	.L33
   60 000c 94F83400 		ldrb	r0, [r4, #52]	@ zero_extendqisi2
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 2
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s 			page 2
 
 
   61 0010 0128     		cmp	r0, #1
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 1
  115 00a0 08BF     		it	eq
  116 00a2 40F00100 		orreq	r0, r0, #1
  117 00a6 3037     		adds	r7, r7, #48
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 3
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s 			page 3
 
 
  118 00a8 6545     		cmp	r5, ip
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 1
  172 0128 0020     		movs	r0, #0
  173 012a 42F00102 		orr	r2, r2, #1
  174 012e 1A60     		str	r2, [r3]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 4
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s 			page 4
 
 
  175 0130 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 1
  229 01b4 58000240 		.word	1073872984
  230 01b8 28000240 		.word	1073872936
  231 01bc 1C540258 		.word	1476547612
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 5
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s 			page 5
 
 
  232 01c0 30540258 		.word	1476547632
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 1
  288 0064 08BF     		it	eq
  289 0066 40F00100 		orreq	r0, r0, #1
  290 006a 0CF1300C 		add	ip, ip, #48
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 6
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s 			page 6
 
 
  291 006e BD42     		cmp	r5, r7
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 1
  345 00fe 2E60     		str	r6, [r5]
  346 0100 2B61     		str	r3, [r5, #16]
  347 0102 B860     		str	r0, [r7, #8]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 7
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s 			page 7
 
 
  348              	.L43:
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 1
  402 017c 08BF     		it	eq
  403 017e 42F00102 		orreq	r2, r2, #1
  404 0182 3035     		adds	r5, r5, #48
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 8
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s 			page 8
 
 
  405 0184 8342     		cmp	r3, r0
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 1
  459 020e 42F00102 		orreq	r2, r2, #1
  460 0212 2835     		adds	r5, r5, #40
  461 0214 8342     		cmp	r3, r0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 9
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s 			page 9
 
 
  462 0216 08BF     		it	eq
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 1
  516 028c 42F00102 		orreq	r2, r2, #1
  517 0290 01F56871 		add	r1, r1, #928
  518 0294 AB42     		cmp	r3, r5
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 10
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s 			page 10
 
 
  519 0296 08BF     		it	eq
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 1
  573 0328 1A60     		str	r2, [r3]
  574 032a F8BD     		pop	{r3, r4, r5, r6, r7, pc}
  575              	.L88:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 11
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s 			page 11
 
 
  576 032c 4FF48073 		mov	r3, #256
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 1
  630 03b0 1835     		adds	r5, r5, #24
  631 03b2 B342     		cmp	r3, r6
  632 03b4 08BF     		it	eq
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 12
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s 			page 12
 
 
  633 03b6 40F00100 		orreq	r0, r0, #1
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 1
  687 043a 00B3     		cbz	r0, .L94
  688              	.L48:
  689 043c 1A68     		ldr	r2, [r3]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 13
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s 			page 13
 
 
  690 043e 42F00402 		orr	r2, r2, #4
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 1
  746 0004 1AB9     		cbnz	r2, .L106
  747 0006 C160     		str	r1, [r0, #12]
  748 0008 0020     		movs	r0, #0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 14
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s 			page 14
 
 
  749 000a 30BC     		pop	{r4, r5}
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 1
  805 005a 0120     		movs	r0, #1
  806 005c 5365     		str	r3, [r2, #84]
  807 005e F0BD     		pop	{r4, r5, r6, r7, pc}
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 15
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s 			page 15
 
 
  808              	.L115:
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 1
  864 004a 83F83450 		strb	r5, [r3, #52]
  865 004e E7E7     		b	.L118
  866              	.L120:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 16
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s 			page 16
 
 
  867 0050 0220     		movs	r0, #2
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 1
  926              		.syntax unified
  927              		.thumb
  928              		.thumb_func
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 17
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s 			page 17
 
 
  929              		.fpu fpv5-d16
@@ -1005,32 +1005,32 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 1
  971              	.L138:
  972 0056 70BD     		pop	{r4, r5, r6, pc}
  974              		.ident	"GCC: (GNU Arm Embedded Toolchain 9-2020-q2-update) 9.3.1 20200408 (release)"
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s 			page 18
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s 			page 18
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32h7xx_hal_dma_ex.c
-C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s:15     .text.DMA_MultiBufferSetConfig:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s:23     .text.DMA_MultiBufferSetConfig:00000000 DMA_MultiBufferSetConfig
-C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s:44     .text.HAL_DMAEx_MultiBufferStart:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s:52     .text.HAL_DMAEx_MultiBufferStart:00000000 HAL_DMAEx_MultiBufferStart
-C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s:228    .text.HAL_DMAEx_MultiBufferStart:000001b0 $d
-C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s:239    .text.HAL_DMAEx_MultiBufferStart_IT:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s:247    .text.HAL_DMAEx_MultiBufferStart_IT:00000000 HAL_DMAEx_MultiBufferStart_IT
-C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s:534    .text.HAL_DMAEx_MultiBufferStart_IT:000002b8 $d
-C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s:546    .text.HAL_DMAEx_MultiBufferStart_IT:000002e4 $t
-C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s:725    .text.HAL_DMAEx_MultiBufferStart_IT:00000488 $d
-C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s:732    .text.HAL_DMAEx_ChangeMemory:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s:740    .text.HAL_DMAEx_ChangeMemory:00000000 HAL_DMAEx_ChangeMemory
-C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s:758    .text.HAL_DMAEx_ConfigMuxSync:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s:766    .text.HAL_DMAEx_ConfigMuxSync:00000000 HAL_DMAEx_ConfigMuxSync
-C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s:816    .text.HAL_DMAEx_ConfigMuxRequestGenerator:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s:824    .text.HAL_DMAEx_ConfigMuxRequestGenerator:00000000 HAL_DMAEx_ConfigMuxRequestGenerator
-C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s:871    .text.HAL_DMAEx_EnableMuxRequestGenerator:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s:879    .text.HAL_DMAEx_EnableMuxRequestGenerator:00000000 HAL_DMAEx_EnableMuxRequestGenerator
-C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s:897    .text.HAL_DMAEx_DisableMuxRequestGenerator:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s:905    .text.HAL_DMAEx_DisableMuxRequestGenerator:00000000 HAL_DMAEx_DisableMuxRequestGenerator
-C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s:923    .text.HAL_DMAEx_MUX_IRQHandler:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccgVQTM5.s:931    .text.HAL_DMAEx_MUX_IRQHandler:00000000 HAL_DMAEx_MUX_IRQHandler
+C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s:15     .text.DMA_MultiBufferSetConfig:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s:23     .text.DMA_MultiBufferSetConfig:00000000 DMA_MultiBufferSetConfig
+C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s:44     .text.HAL_DMAEx_MultiBufferStart:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s:52     .text.HAL_DMAEx_MultiBufferStart:00000000 HAL_DMAEx_MultiBufferStart
+C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s:228    .text.HAL_DMAEx_MultiBufferStart:000001b0 $d
+C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s:239    .text.HAL_DMAEx_MultiBufferStart_IT:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s:247    .text.HAL_DMAEx_MultiBufferStart_IT:00000000 HAL_DMAEx_MultiBufferStart_IT
+C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s:534    .text.HAL_DMAEx_MultiBufferStart_IT:000002b8 $d
+C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s:546    .text.HAL_DMAEx_MultiBufferStart_IT:000002e4 $t
+C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s:725    .text.HAL_DMAEx_MultiBufferStart_IT:00000488 $d
+C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s:732    .text.HAL_DMAEx_ChangeMemory:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s:740    .text.HAL_DMAEx_ChangeMemory:00000000 HAL_DMAEx_ChangeMemory
+C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s:758    .text.HAL_DMAEx_ConfigMuxSync:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s:766    .text.HAL_DMAEx_ConfigMuxSync:00000000 HAL_DMAEx_ConfigMuxSync
+C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s:816    .text.HAL_DMAEx_ConfigMuxRequestGenerator:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s:824    .text.HAL_DMAEx_ConfigMuxRequestGenerator:00000000 HAL_DMAEx_ConfigMuxRequestGenerator
+C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s:871    .text.HAL_DMAEx_EnableMuxRequestGenerator:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s:879    .text.HAL_DMAEx_EnableMuxRequestGenerator:00000000 HAL_DMAEx_EnableMuxRequestGenerator
+C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s:897    .text.HAL_DMAEx_DisableMuxRequestGenerator:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s:905    .text.HAL_DMAEx_DisableMuxRequestGenerator:00000000 HAL_DMAEx_DisableMuxRequestGenerator
+C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s:923    .text.HAL_DMAEx_MUX_IRQHandler:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc9dcMXB.s:931    .text.HAL_DMAEx_MUX_IRQHandler:00000000 HAL_DMAEx_MUX_IRQHandler
 
 NO UNDEFINED SYMBOLS

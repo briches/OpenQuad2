@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 1
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 1
   60              	_putc:
   61              		@ args = 0, pretend = 0, frame = 8
   62              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 2
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s 			page 2
 
 
   63 0000 00B5     		push	{lr}
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 1
  120              		.fpu fpv5-d16
  122              	_puti:
  123              		@ args = 0, pretend = 0, frame = 16
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 3
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s 			page 3
 
 
  124              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 1
  178 007c F5D1     		bne	.L22
  179 007e 019B     		ldr	r3, [sp, #4]
  180 0080 5A1E     		subs	r2, r3, #1
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 4
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s 			page 4
 
 
  181 0082 A2EB0A0A 		sub	r10, r2, r10
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 1
  237 0014 3046     		mov	r0, r6
  238 0016 2946     		mov	r1, r5
  239 0018 0A22     		movs	r2, #10
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 5
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s 			page 5
 
 
  240 001a 0023     		movs	r3, #0
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 1
  294 00a8 0393     		str	r3, [sp, #12]
  295 00aa DDE90267 		ldrd	r6, [sp, #8]
  296 00ae 01E0     		b	.L39
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 6
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s 			page 6
 
 
  297              	.L46:
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 1
  353 0032 4FF47A70 		mov	r0, #1000
  354 0036 2946     		mov	r1, r5
  355 0038 3023     		movs	r3, #48
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 7
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s 			page 7
 
 
  356 003a 00FB1460 		mls	r0, r0, r4, r6
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 1
  412 0052 E5D1     		bne	.L57
  413 0054 9B45     		cmp	fp, r3
  414 0056 03F1FF3A 		add	r10, r3, #-1
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 8
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s 			page 8
 
 
  415 005a 3BDA     		bge	.L76
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 1
  469              	.L77:
  470 00e8 4FF0000B 		mov	fp, #0
  471 00ec E1E7     		b	.L53
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 9
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s 			page 9
 
 
  472              	.L79:
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 1
  524 0010 7FD0     		beq	.L113
  525 0012 039B     		ldr	r3, [sp, #12]
  526 0014 002B     		cmp	r3, #0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 10
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s 			page 10
 
 
  527 0016 73D0     		beq	.L114
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 1
  581 0092 0021     		movs	r1, #0
  582 0094 0223     		movs	r3, #2
  583 0096 4122     		movs	r2, #65
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 11
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s 			page 11
 
 
  584 0098 CDF800A0 		str	r10, [sp]
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 1
  638 010c FFF7FEFF 		bl	_puts
  639 0110 ACE7     		b	.L98
  640              	.L113:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 12
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s 			page 12
 
 
  641 0112 0748     		ldr	r0, .L119+20
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 1
  697 004e ED17     		asrs	r5, r5, #31
  698 0050 C5EBA305 		rsb	r5, r5, r3, asr #2
  699 0054 A542     		cmp	r5, r4
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 13
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s 			page 13
 
 
  700 0056 39DA     		bge	.L124
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 1
  754 00ce 0024     		movs	r4, #0
  755 00d0 0025     		movs	r5, #0
  756 00d2 C3E7     		b	.L125
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 14
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s 			page 14
 
 
  757              	.L130:
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 1
  813 004c A446     		mov	ip, r4
  814 004e 0136     		adds	r6, r6, #1
  815 0050 3478     		ldrb	r4, [r6]	@ zero_extendqisi2
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 15
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s 			page 15
 
 
  816              	.L145:
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 1
  870 00cc 3025     		movs	r5, #48
  871 00ce 8DF80FA0 		strb	r10, [sp, #15]
  872 00d2 FFF7FEFF 		bl	SEGGER_RTT_Write
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 16
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s 			page 16
 
 
  873 00d6 14F8010B 		ldrb	r0, [r4], #1	@ zero_extendqisi2
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 1
  927 014e 732C     		cmp	r4, #115
  928 0150 06F10106 		add	r6, r6, #1
  929 0154 8AD1     		bne	.L233
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 17
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s 			page 17
 
 
  930              	.L152:
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 1
  984 01da 0236     		adds	r6, r6, #2
  985 01dc 732C     		cmp	r4, #115
  986 01de BAD0     		beq	.L152
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 18
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s 			page 18
 
 
  987 01e0 642C     		cmp	r4, #100
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 1
  1041 0264 27F00707 		bic	r7, r7, #7
  1042 0268 B7EC020B 		vldmia.64	r7!, {d0}
  1043 026c FFF7FEFF 		bl	_putf
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 19
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s 			page 19
 
 
  1044 0270 D8E6     		b	.L141
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 1
  1098              		.syntax unified
  1099              		.thumb
  1100              		.thumb_func
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 20
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s 			page 20
 
 
  1101              		.fpu fpv5-d16
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 1
  1156 007c 28000000 		.word	.LC7
  1157 0080 00000000 		.word	.LANCHOR2
  1159              		.section	.text.debug_eeprintf,"ax",%progbits
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 21
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s 			page 21
 
 
  1160              		.align	1
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 1
  1217 0008 83B0     		sub	sp, sp, #12
  1218 000a 58D0     		beq	.L271
  1219 000c 40B3     		cbz	r0, .L272
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 22
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s 			page 22
 
 
  1220              	.L254:
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 1
  1274 008e 2023     		movs	r3, #32
  1275 0090 01A9     		add	r1, sp, #4
  1276 0092 0122     		movs	r2, #1
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 23
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s 			page 23
 
 
  1277 0094 0020     		movs	r0, #0
@@ -1378,63 +1378,63 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 1
  1331 0000 00000000 		.word	.LC12
  1332              		.section	.data.timestamp_enabled,"aw"
  1333              		.set	.LANCHOR0,. + 0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 24
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s 			page 24
 
 
  1336              	timestamp_enabled:
  1337 0000 01       		.byte	1
  1338              		.ident	"GCC: (GNU Arm Embedded Toolchain 9-2020-q2-update) 9.3.1 20200408 (release)"
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s 			page 25
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s 			page 25
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 debug_log.c
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:15     .text.init_rtt_logging:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:24     .text.init_rtt_logging:00000000 init_rtt_logging
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:31     .text.debug_timestamp_enable:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:39     .text.debug_timestamp_enable:00000000 debug_timestamp_enable
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:49     .text.debug_timestamp_enable:00000008 $d
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:52     .text._putc:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:60     .text._putc:00000000 _putc
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:77     .text._puts:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:85     .text._puts:00000000 _puts
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:114    .text._puti:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:122    .text._puti:00000000 _puti
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:215    .text._puti:000000cc $d
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:218    .text._putu:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:226    .text._putu:00000000 _putu
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:321    .text._putu:000000e4 $d
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:324    .text.debug_print_timestamp:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:331    .text.debug_print_timestamp:00000000 debug_print_timestamp
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:371    .text.debug_print_timestamp:0000005c $d
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:374    .text._putx:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:382    .text._putx:00000000 _putx
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:475    .text._putx:000000f0 $d
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:478    .rodata.debug_print_buffer.str1.4:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:506    .text.debug_print_buffer:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:514    .text.debug_print_buffer:00000000 debug_print_buffer
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:647    .text.debug_print_buffer:0000011c $d
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:658    .text._putf:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:666    .text._putf:00000000 _putf
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:764    .text._putf:000000dc $d
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:767    .text._vprintf:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:775    .text._vprintf:00000000 _vprintf
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:1085   .rodata.debug_error.str1.4:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:1095   .text.debug_error:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:1103   .text.debug_error:00000000 debug_error
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:1152   .text.debug_error:0000006c $d
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:1160   .text.debug_eeprintf:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:1168   .text.debug_eeprintf:00000000 debug_eeprintf
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:1199   .text.debug_eeprintf:00000038 $d
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:1202   .text.debug_printf:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:1210   .text.debug_printf:00000000 debug_printf
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:1304   .text.debug_printf:000000cc $d
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:1330   .data.module_stringtable:00000000 module_stringtable
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:1315   .rodata.str1.4:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:1319   .bss.line_buffer:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:1323   .bss.line_buffer:00000000 line_buffer
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:1326   .data.module_stringtable:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\ccruW3cQ.s:1336   .data.timestamp_enabled:00000000 timestamp_enabled
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:15     .text.init_rtt_logging:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:24     .text.init_rtt_logging:00000000 init_rtt_logging
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:31     .text.debug_timestamp_enable:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:39     .text.debug_timestamp_enable:00000000 debug_timestamp_enable
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:49     .text.debug_timestamp_enable:00000008 $d
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:52     .text._putc:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:60     .text._putc:00000000 _putc
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:77     .text._puts:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:85     .text._puts:00000000 _puts
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:114    .text._puti:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:122    .text._puti:00000000 _puti
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:215    .text._puti:000000cc $d
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:218    .text._putu:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:226    .text._putu:00000000 _putu
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:321    .text._putu:000000e4 $d
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:324    .text.debug_print_timestamp:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:331    .text.debug_print_timestamp:00000000 debug_print_timestamp
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:371    .text.debug_print_timestamp:0000005c $d
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:374    .text._putx:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:382    .text._putx:00000000 _putx
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:475    .text._putx:000000f0 $d
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:478    .rodata.debug_print_buffer.str1.4:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:506    .text.debug_print_buffer:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:514    .text.debug_print_buffer:00000000 debug_print_buffer
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:647    .text.debug_print_buffer:0000011c $d
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:658    .text._putf:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:666    .text._putf:00000000 _putf
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:764    .text._putf:000000dc $d
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:767    .text._vprintf:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:775    .text._vprintf:00000000 _vprintf
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:1085   .rodata.debug_error.str1.4:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:1095   .text.debug_error:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:1103   .text.debug_error:00000000 debug_error
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:1152   .text.debug_error:0000006c $d
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:1160   .text.debug_eeprintf:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:1168   .text.debug_eeprintf:00000000 debug_eeprintf
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:1199   .text.debug_eeprintf:00000038 $d
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:1202   .text.debug_printf:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:1210   .text.debug_printf:00000000 debug_printf
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:1304   .text.debug_printf:000000cc $d
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:1330   .data.module_stringtable:00000000 module_stringtable
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:1315   .rodata.str1.4:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:1319   .bss.line_buffer:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:1323   .bss.line_buffer:00000000 line_buffer
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:1326   .data.module_stringtable:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\cc494VCl.s:1336   .data.timestamp_enabled:00000000 timestamp_enabled
 
 UNDEFINED SYMBOLS
 SEGGER_RTT_Init

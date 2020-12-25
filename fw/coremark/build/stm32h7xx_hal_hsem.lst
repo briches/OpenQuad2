@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s 			page 1
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s 			page 1
   58 0004 044B     		ldr	r3, .L6+4
   59 0006 52F82000 		ldr	r0, [r2, r0, lsl #2]
   60 000a C01A     		subs	r0, r0, r3
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s 			page 2
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s 			page 2
 
 
   61 000c 18BF     		it	ne
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s 			page 1
  120              		.thumb_func
  121              		.fpu fpv5-d16
  123              	HAL_HSEM_ReleaseAll:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s 			page 3
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s 			page 3
 
 
  124              		@ args = 0, pretend = 0, frame = 0
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s 			page 1
  183              		.section	.text.HAL_HSEM_ActivateNotification,"ax",%progbits
  184              		.align	1
  185              		.p2align 2,,3
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s 			page 4
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s 			page 4
 
 
  186              		.global	HAL_HSEM_ActivateNotification
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s 			page 1
  246              		.p2align 2,,3
  247              		.global	HAL_HSEM_IRQHandler
  248              		.syntax unified
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s 			page 5
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s 			page 5
 
 
  249              		.thumb
@@ -261,42 +261,42 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s 			page 1
  267              	.L32:
  268 0018 00650258 		.word	1476551936
  270              		.ident	"GCC: (GNU Arm Embedded Toolchain 9-2020-q2-update) 9.3.1 20200408 (release)"
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s 			page 6
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s 			page 6
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32h7xx_hal_hsem.c
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:15     .text.HAL_HSEM_Take:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:24     .text.HAL_HSEM_Take:00000000 HAL_HSEM_Take
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:40     .text.HAL_HSEM_Take:00000018 $d
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:44     .text.HAL_HSEM_FastTake:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:52     .text.HAL_HSEM_FastTake:00000000 HAL_HSEM_FastTake
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:67     .text.HAL_HSEM_FastTake:00000014 $d
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:71     .text.HAL_HSEM_IsSemTaken:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:79     .text.HAL_HSEM_IsSemTaken:00000000 HAL_HSEM_IsSemTaken
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:90     .text.HAL_HSEM_IsSemTaken:0000000c $d
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:93     .text.HAL_HSEM_Release:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:101    .text.HAL_HSEM_Release:00000000 HAL_HSEM_Release
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:112    .text.HAL_HSEM_Release:0000000c $d
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:115    .text.HAL_HSEM_ReleaseAll:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:123    .text.HAL_HSEM_ReleaseAll:00000000 HAL_HSEM_ReleaseAll
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:135    .text.HAL_HSEM_ReleaseAll:00000010 $d
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:138    .text.HAL_HSEM_SetClearKey:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:146    .text.HAL_HSEM_SetClearKey:00000000 HAL_HSEM_SetClearKey
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:159    .text.HAL_HSEM_SetClearKey:00000014 $d
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:162    .text.HAL_HSEM_GetClearKey:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:170    .text.HAL_HSEM_GetClearKey:00000000 HAL_HSEM_GetClearKey
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:181    .text.HAL_HSEM_GetClearKey:0000000c $d
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:184    .text.HAL_HSEM_ActivateNotification:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:192    .text.HAL_HSEM_ActivateNotification:00000000 HAL_HSEM_ActivateNotification
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:204    .text.HAL_HSEM_ActivateNotification:0000000c $d
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:207    .text.HAL_HSEM_DeactivateNotification:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:215    .text.HAL_HSEM_DeactivateNotification:00000000 HAL_HSEM_DeactivateNotification
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:227    .text.HAL_HSEM_DeactivateNotification:0000000c $d
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:230    .text.HAL_HSEM_FreeCallback:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:238    .text.HAL_HSEM_FreeCallback:00000000 HAL_HSEM_FreeCallback
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:245    .text.HAL_HSEM_IRQHandler:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:253    .text.HAL_HSEM_IRQHandler:00000000 HAL_HSEM_IRQHandler
-C:\Users\Brandon\AppData\Local\Temp\ccWwFbJH.s:268    .text.HAL_HSEM_IRQHandler:00000018 $d
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:15     .text.HAL_HSEM_Take:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:24     .text.HAL_HSEM_Take:00000000 HAL_HSEM_Take
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:40     .text.HAL_HSEM_Take:00000018 $d
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:44     .text.HAL_HSEM_FastTake:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:52     .text.HAL_HSEM_FastTake:00000000 HAL_HSEM_FastTake
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:67     .text.HAL_HSEM_FastTake:00000014 $d
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:71     .text.HAL_HSEM_IsSemTaken:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:79     .text.HAL_HSEM_IsSemTaken:00000000 HAL_HSEM_IsSemTaken
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:90     .text.HAL_HSEM_IsSemTaken:0000000c $d
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:93     .text.HAL_HSEM_Release:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:101    .text.HAL_HSEM_Release:00000000 HAL_HSEM_Release
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:112    .text.HAL_HSEM_Release:0000000c $d
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:115    .text.HAL_HSEM_ReleaseAll:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:123    .text.HAL_HSEM_ReleaseAll:00000000 HAL_HSEM_ReleaseAll
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:135    .text.HAL_HSEM_ReleaseAll:00000010 $d
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:138    .text.HAL_HSEM_SetClearKey:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:146    .text.HAL_HSEM_SetClearKey:00000000 HAL_HSEM_SetClearKey
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:159    .text.HAL_HSEM_SetClearKey:00000014 $d
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:162    .text.HAL_HSEM_GetClearKey:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:170    .text.HAL_HSEM_GetClearKey:00000000 HAL_HSEM_GetClearKey
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:181    .text.HAL_HSEM_GetClearKey:0000000c $d
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:184    .text.HAL_HSEM_ActivateNotification:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:192    .text.HAL_HSEM_ActivateNotification:00000000 HAL_HSEM_ActivateNotification
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:204    .text.HAL_HSEM_ActivateNotification:0000000c $d
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:207    .text.HAL_HSEM_DeactivateNotification:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:215    .text.HAL_HSEM_DeactivateNotification:00000000 HAL_HSEM_DeactivateNotification
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:227    .text.HAL_HSEM_DeactivateNotification:0000000c $d
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:230    .text.HAL_HSEM_FreeCallback:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:238    .text.HAL_HSEM_FreeCallback:00000000 HAL_HSEM_FreeCallback
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:245    .text.HAL_HSEM_IRQHandler:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:253    .text.HAL_HSEM_IRQHandler:00000000 HAL_HSEM_IRQHandler
+C:\Users\Brandon\AppData\Local\Temp\ccAgCKzO.s:268    .text.HAL_HSEM_IRQHandler:00000018 $d
 
 NO UNDEFINED SYMBOLS

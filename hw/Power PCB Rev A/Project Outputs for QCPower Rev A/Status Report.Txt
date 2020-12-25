@@ -1,0 +1,13 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : PCB Document [QCPower Rev A.PcbDoc]
+   Generated File[QCPower Rev A.TXT]
+   Generated File[QCPower Rev A.DRL]
+   Generated File[QCPower Rev A.LDP]
+   Generated File[QCPower Rev A.DRR]
+
+
+Files Generated   : 4
+Documents Printed : 0
+
+Finished Output Generation At 6:34:32 PM On 2020-12-22

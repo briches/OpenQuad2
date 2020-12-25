@@ -127,18 +127,24 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     switch(GPIO_Pin)
     {
         case IMU_AG_INT1_Pin:
-        {
             #if defined(SENSOR_THREAD_IMU_USE_INDIVIDUAL)
                 imu_int1_callback();
             #endif
-        } break;
+        break;
 
         case IMU_AG_INT2_Pin:
-        {
             #if defined(SENSOR_THREAD_IMU_USE_FIFO)
                 imu_int2_callback();
             #endif
-        } break;
+        break;
+
+        case IMU_MAG_DRDY_Pin:
+            imu_mag_drdy_callback();
+        break;
+
+        case BARO_INT_Pin:
+            baro_int_callback();
+        break;
 
         default:
         break;
@@ -191,7 +197,7 @@ int main(void)
 
     /* Initialize all configured peripherals */
     MX_GPIO_Init();
-    // MX_CRC_Init();
+    MX_CRC_Init();
     // MX_CRYP_Init();
     // MX_HASH_Init();
     // MX_I2C1_Init();
@@ -239,8 +245,8 @@ int main(void)
     location_task_handle = 
     osThreadNew(location_thread_start,      NULL, &location_task_attributes);
 
-    task_manager_task_handle = 
-    osThreadNew(task_manager_thread_start,  NULL, &task_manager_attributes);
+    // task_manager_task_handle = 
+    // osThreadNew(task_manager_thread_start,  NULL, &task_manager_attributes);
 
     led_task_handle = 
     osThreadNew(led_thread_start,           NULL, &led_task_attributes);
@@ -1189,14 +1195,6 @@ static void MX_USART1_UART_Init(void)
   */
 static void MX_USART2_UART_Init(void)
 {
-
-    /* USER CODE BEGIN USART2_Init 0 */
-
-    /* USER CODE END USART2_Init 0 */
-
-    /* USER CODE BEGIN USART2_Init 1 */
-
-    /* USER CODE END USART2_Init 1 */
     huart2.Instance = USART2;
     huart2.Init.BaudRate = 1000000;
     huart2.Init.WordLength = UART_WORDLENGTH_8B;
@@ -1224,10 +1222,6 @@ static void MX_USART2_UART_Init(void)
     {
         Error_Handler();
     }
-    /* USER CODE BEGIN USART2_Init 2 */
-
-    /* USER CODE END USART2_Init 2 */
-
 }
 
 /**
@@ -1353,11 +1347,21 @@ static void MX_GPIO_Init(void)
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
 
+    GPIO_InitStruct.Pin = IMU_MAG_DRDY_Pin;
+    GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(IMU_MAG_DRDY_GPIO_Port, &GPIO_InitStruct);
+
     GPIO_InitStruct.Pin = GPS_RESETN_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     HAL_GPIO_Init(GPS_RESETN_GPIO_Port, &GPIO_InitStruct);
+
+    GPIO_InitStruct.Pin = BARO_INT_Pin;
+    GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(BARO_INT_GPIO_Port, &GPIO_InitStruct);
 
     #endif
 

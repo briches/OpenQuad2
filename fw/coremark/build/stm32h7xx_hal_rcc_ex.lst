@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
   56 0044 7568     		ldr	r5, [r6, #4]
   57 0046 D6E90232 		ldrd	r3, r2, [r6, #8]
   58 004a 013D     		subs	r5, r5, #1
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 2
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 2
 
 
   59 004c 501E     		subs	r0, r2, #1
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  113 00ce 001B     		subs	r0, r0, r4
  114 00d0 0228     		cmp	r0, #2
  115 00d2 04D8     		bhi	.L9
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 3
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 3
 
 
  116              	.L8:
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  172 0032 F7D4     		bmi	.L21
  173 0034 A36A     		ldr	r3, [r4, #40]
  174 0036 3268     		ldr	r2, [r6]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 4
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 4
 
 
  175 0038 23F07C73 		bic	r3, r3, #66060288
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  229 00bc 42F08052 		orr	r2, r2, #268435456
  230 00c0 1A60     		str	r2, [r3]
  231 00c2 FFF7FEFF 		bl	HAL_GetTick
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 5
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 5
 
 
  232 00c6 0446     		mov	r4, r0
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  288 002a FFF7FEFF 		bl	RCCEx_PLL2_Config
  289 002e 0646     		mov	r6, r0
  290 0030 002E     		cmp	r6, #0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 6
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 6
 
 
  291 0032 40F04984 		bne	.L366
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  345 00a6 7E49     		ldr	r1, .L396
  346 00a8 D4F8A000 		ldr	r0, [r4, #160]
  347 00ac 8A6D     		ldr	r2, [r1, #88]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 7
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 7
 
 
  348 00ae 22F46002 		bic	r2, r2, #14680064
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  402 0132 1DD5     		bpl	.L66
  403 0134 A26D     		ldr	r2, [r4, #88]
  404 0136 B2F5005F 		cmp	r2, #8192
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 8
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 8
 
 
  405 013a 00F0B583 		beq	.L67
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  459 01c0 6AD1     		bne	.L359
  460 01c2 0121     		movs	r1, #1
  461 01c4 201D     		adds	r0, r4, #4
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 9
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 9
 
 
  462 01c6 FFF7FEFF 		bl	RCCEx_PLL2_Config
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  516              	.L355:
  517 024a 0126     		movs	r6, #1
  518 024c 3546     		mov	r5, r6
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 10
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 10
 
 
  519 024e 54E7     		b	.L55
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  573 02ba 00F1E681 		bmi	.L369
  574              	.L91:
  575 02be DF07     		lsls	r7, r3, #31
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 11
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 11
 
 
  576 02c0 39D5     		bpl	.L101
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  630              	.L102:
  631 032e 002D     		cmp	r5, #0
  632 0330 00F05182 		beq	.L370
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 12
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 12
 
 
  633              	.L173:
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  687              	.L111:
  688 039c 9A06     		lsls	r2, r3, #26
  689 039e 1DD5     		bpl	.L116
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 13
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 13
 
 
  690 03a0 D4F88820 		ldr	r2, [r4, #136]
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  744 0430 4AB1     		cbz	r2, .L129
  745 0432 B2F5005F 		cmp	r2, #8192
  746 0436 40F0EC80 		bne	.L363
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 14
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 14
 
 
  747 043a 0021     		movs	r1, #0
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  801              	.L381:
  802 04b8 D4F88020 		ldr	r2, [r4, #128]
  803 04bc B2F5001F 		cmp	r2, #2097152
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 15
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 15
 
 
  804 04c0 00F0B780 		beq	.L141
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  858 0538 22F08072 		bic	r2, r2, #16777216
  859 053c 2A43     		orrs	r2, r2, r5
  860 053e 0A65     		str	r2, [r1, #80]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 16
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 16
 
 
  861              	.L155:
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  915 05b0 0546     		mov	r5, r0
  916              	.L85:
  917 05b2 002D     		cmp	r5, #0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 17
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 17
 
 
  918 05b4 40F0E780 		bne	.L169
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  972 0630 F4E6     		b	.L121
  973              	.L141:
  974 0632 0121     		movs	r1, #1
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 18
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 18
 
 
  975 0634 04F12400 		add	r0, r4, #36
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  1029 06b0 00F24B81 		bhi	.L360
  1030              	.L92:
  1031 06b4 D8F80030 		ldr	r3, [r8]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 19
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 19
 
 
  1032 06b8 DA05     		lsls	r2, r3, #23
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  1086              	.L162:
  1087 0738 2E46     		mov	r6, r5
  1088 073a 9AE4     		b	.L43
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 20
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 20
 
 
  1089              	.L163:
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  1143 079c 22F00302 		bic	r2, r2, #3
  1144 07a0 0243     		orrs	r2, r2, r0
  1145 07a2 CA64     		str	r2, [r1, #76]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 21
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 21
 
 
  1146 07a4 88E5     		b	.L86
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  1200 080c 002D     		cmp	r5, #0
  1201 080e C0D1     		bne	.L180
  1202 0810 1CE6     		b	.L386
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 22
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 22
 
 
  1203              	.L83:
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  1257 0884 04F12400 		add	r0, r4, #36
  1258 0888 FFF7FEFF 		bl	RCCEx_PLL3_Config
  1259 088c E16F     		ldr	r1, [r4, #124]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 23
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 23
 
 
  1260 088e 00B1     		cbz	r0, .L364
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  1314 0902 FFF7FEFF 		bl	RCCEx_PLL3_Config
  1315 0906 2368     		ldr	r3, [r4]
  1316 0908 0546     		mov	r5, r0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 24
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 24
 
 
  1317 090a FFF7EBBB 		b	.L60
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  1371 097c 2449     		ldr	r1, .L402
  1372 097e CA6A     		ldr	r2, [r1, #44]
  1373 0980 42F40032 		orr	r2, r2, #131072
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 25
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 25
 
 
  1374 0984 CA62     		str	r2, [r1, #44]
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  1428 09fa FFF739BB 		b	.L353
  1429              	.L170:
  1430 09fe 0126     		movs	r6, #1
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 26
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 26
 
 
  1431 0a00 3546     		mov	r5, r6
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  1487 0044 C263     		str	r2, [r0, #60]
  1488 0046 9A6A     		ldr	r2, [r3, #40]
  1489 0048 C2F30532 		ubfx	r2, r2, #12, #6
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 27
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 27
 
 
  1490 004c 4260     		str	r2, [r0, #4]
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  1544 00e4 02F44072 		and	r2, r2, #768
  1545 00e8 C0F8AC20 		str	r2, [r0, #172]
  1546 00ec 5A6D     		ldr	r2, [r3, #84]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 28
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 28
 
 
  1547 00ee 02F44012 		and	r2, r2, #3145728
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  1602              		.align	1
  1603              		.p2align 2,,3
  1604              		.global	HAL_RCCEx_GetD1PCLK1Freq
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 29
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 29
 
 
  1605              		.syntax unified
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  1663              		.thumb_func
  1664              		.fpu fpv5-d16
  1666              	HAL_RCCEx_GetPLL2ClockFreq:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 30
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 30
 
 
  1667              		@ args = 0, pretend = 0, frame = 0
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  1721 009c B8EEC77A 		vcvt.f32.s32	s14, s14
  1722 00a0 37EE067A 		vadd.f32	s14, s14, s12
  1723 00a4 C6EE877A 		vdiv.f32	s15, s13, s14
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 31
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 31
 
 
  1724 00a8 FCEEE77A 		vcvt.u32.f32	s15, s15
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  1778 0152 F8EEE77A 		vcvt.f32.s32	s15, s15
  1779 0156 E7EE257A 		vfma.f32	s15, s14, s11
  1780 015a 77EE867A 		vadd.f32	s15, s15, s12
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 32
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 32
 
 
  1781 015e 66EEA76A 		vmul.f32	s13, s13, s15
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  1837 0058 F7EE005A 		vmov.f32	s11, #1.0e+0
  1838 005c F8EEE66A 		vcvt.f32.s32	s13, s13
  1839 0060 E7EE056A 		vfma.f32	s13, s14, s10
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 33
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 33
 
 
  1840 0064 76EEA56A 		vadd.f32	s13, s13, s11
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  1894 0110 C6EE275A 		vdiv.f32	s11, s12, s15
  1895 0114 E7EE246A 		vfma.f32	s13, s14, s9
  1896 0118 76EE856A 		vadd.f32	s13, s13, s10
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 34
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 34
 
 
  1897 011c 66EEA56A 		vmul.f32	s13, s13, s11
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  1953 001e 01F00301 		and	r1, r1, #3
  1954 0022 04FB06F4 		mul	r4, r4, r6
  1955 0026 0129     		cmp	r1, #1
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 35
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 35
 
 
  1956 0028 07EE904A 		vmov	s15, r4	@ int
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  2010 00d6 8260     		str	r2, [r0, #8]
  2011 00d8 7047     		bx	lr
  2012              	.L454:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 36
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 36
 
 
  2013 00da 1968     		ldr	r1, [r3]
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  2068              		.global	HAL_RCCEx_GetPeriphCLKFreq
  2069              		.syntax unified
  2070              		.thumb
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 37
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 37
 
 
  2071              		.thumb_func
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  2126              	.L464:
  2127 007c 01A8     		add	r0, sp, #4
  2128 007e FFF7FEFF 		bl	HAL_RCCEx_GetPLL2ClockFreq
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 38
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 38
 
 
  2129 0082 0198     		ldr	r0, [sp, #4]
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  2183 00f6 13F04053 		ands	r3, r3, #805306368
  2184 00fa B1D1     		bne	.L546
  2185              	.L503:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 39
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 39
 
 
  2186 00fc 3848     		ldr	r0, .L561+12
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  2240              	.L557:
  2241 0172 184B     		ldr	r3, .L561
  2242 0174 9B6D     		ldr	r3, [r3, #88]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 40
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 40
 
 
  2243 0176 03F0E043 		and	r3, r3, #1879048192
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  2299              	HAL_RCCEx_GetD1SysClockFreq:
  2300              		@ args = 0, pretend = 0, frame = 0
  2301              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 41
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 41
 
 
  2302 0000 38B5     		push	{r3, r4, r5, lr}
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  2359              		.fpu fpv5-d16
  2361              	HAL_RCCEx_DisableLSECSS:
  2362              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 42
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 42
 
 
  2363              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  2421              		@ args = 0, pretend = 0, frame = 0
  2422              		@ frame_needed = 0, uses_anonymous_args = 0
  2423              		@ link register save eliminated.
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 43
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 43
 
 
  2424 0000 034A     		ldr	r2, .L577
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  2483              		.align	1
  2484              		.p2align 2,,3
  2485              		.global	HAL_RCCEx_CRSConfig
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 44
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 44
 
 
  2486              		.syntax unified
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  2542              		.align	1
  2543              		.p2align 2,,3
  2544              		.global	HAL_RCCEx_CRSSoftwareSynchronizationGenerate
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 45
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 45
 
 
  2545              		.syntax unified
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  2603              		.fpu fpv5-d16
  2605              	HAL_RCCEx_CRSWaitSynchronization:
  2606              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 46
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 46
 
 
  2607              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  2661 0076 03D5     		bpl	.L599
  2662              	.L606:
  2663 0078 0822     		movs	r2, #8
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 47
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 47
 
 
  2664 007a E260     		str	r2, [r4, #12]
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  2724              		@ args = 0, pretend = 0, frame = 0
  2725              		@ frame_needed = 0, uses_anonymous_args = 0
  2726              		@ link register save eliminated.
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 48
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 48
 
 
  2727 0000 7047     		bx	lr
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  2785 0038 40F01000 		orrmi	r0, r0, #16
  2786 003c 5B05     		lsls	r3, r3, #21
  2787 003e 0C4B     		ldr	r3, .L680
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 49
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 49
 
 
  2788 0040 48BF     		it	mi
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  2846 0006 9205     		lsls	r2, r2, #22
  2847 0008 00D4     		bmi	.L689
  2848 000a 08BD     		pop	{r3, pc}
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 50
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 50
 
 
  2849              	.L689:
@@ -2951,111 +2951,111 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 1
  2856              	.L690:
  2857 0018 00440258 		.word	1476543488
  2859              		.ident	"GCC: (GNU Arm Embedded Toolchain 9-2020-q2-update) 9.3.1 20200408 (release)"
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 51
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 51
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32h7xx_hal_rcc_ex.c
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:15     .text.RCCEx_PLL2_Config:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:23     .text.RCCEx_PLL2_Config:00000000 RCCEx_PLL2_Config
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:135    .text.RCCEx_PLL2_Config:000000f0 $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:139    .text.RCCEx_PLL3_Config:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:146    .text.RCCEx_PLL3_Config:00000000 RCCEx_PLL3_Config
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:258    .text.RCCEx_PLL3_Config:000000f0 $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:262    .text.HAL_RCCEx_PeriphCLKConfig:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:270    .text.HAL_RCCEx_PeriphCLKConfig:00000000 HAL_RCCEx_PeriphCLKConfig
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:311    .text.HAL_RCCEx_PeriphCLKConfig:00000058 $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:316    .text.HAL_RCCEx_PeriphCLKConfig:00000062 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:495    .text.HAL_RCCEx_PeriphCLKConfig:00000214 $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:499    .text.HAL_RCCEx_PeriphCLKConfig:0000021c $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:559    .text.HAL_RCCEx_PeriphCLKConfig:000002a0 $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:561    .text.HAL_RCCEx_PeriphCLKConfig:000002a4 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:582    .text.HAL_RCCEx_PeriphCLKConfig:000002ce $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:623    .text.HAL_RCCEx_PeriphCLKConfig:00000320 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:643    .text.HAL_RCCEx_PeriphCLKConfig:00000346 $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:649    .text.HAL_RCCEx_PeriphCLKConfig:00000352 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:669    .text.HAL_RCCEx_PeriphCLKConfig:0000037a $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:675    .text.HAL_RCCEx_PeriphCLKConfig:00000386 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:1023   .text.HAL_RCCEx_PeriphCLKConfig:000006a0 $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:1026   .text.HAL_RCCEx_PeriphCLKConfig:000006a8 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:1369   .text.HAL_RCCEx_PeriphCLKConfig:00000978 $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:1371   .text.HAL_RCCEx_PeriphCLKConfig:0000097c $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:1444   .text.HAL_RCCEx_PeriphCLKConfig:00000a10 $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:1448   .text.HAL_RCCEx_GetPeriphCLKConfig:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:1456   .text.HAL_RCCEx_GetPeriphCLKConfig:00000000 HAL_RCCEx_GetPeriphCLKConfig
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:1598   .text.HAL_RCCEx_GetPeriphCLKConfig:00000178 $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:1602   .text.HAL_RCCEx_GetD1PCLK1Freq:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:1610   .text.HAL_RCCEx_GetD1PCLK1Freq:00000000 HAL_RCCEx_GetD1PCLK1Freq
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:1626   .text.HAL_RCCEx_GetD1PCLK1Freq:0000001c $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:1630   .text.HAL_RCCEx_GetD3PCLK1Freq:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:1638   .text.HAL_RCCEx_GetD3PCLK1Freq:00000000 HAL_RCCEx_GetD3PCLK1Freq
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:1654   .text.HAL_RCCEx_GetD3PCLK1Freq:0000001c $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:1658   .text.HAL_RCCEx_GetPLL2ClockFreq:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:1666   .text.HAL_RCCEx_GetPLL2ClockFreq:00000000 HAL_RCCEx_GetPLL2ClockFreq
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:1786   .text.HAL_RCCEx_GetPLL2ClockFreq:00000164 $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:1794   .text.HAL_RCCEx_GetPLL3ClockFreq:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:1802   .text.HAL_RCCEx_GetPLL3ClockFreq:00000000 HAL_RCCEx_GetPLL3ClockFreq
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:1922   .text.HAL_RCCEx_GetPLL3ClockFreq:00000164 $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:1930   .text.HAL_RCCEx_GetPLL1ClockFreq:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:1938   .text.HAL_RCCEx_GetPLL1ClockFreq:00000000 HAL_RCCEx_GetPLL1ClockFreq
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2058   .text.HAL_RCCEx_GetPLL1ClockFreq:00000164 $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2066   .text.HAL_RCCEx_GetPeriphCLKFreq:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2074   .text.HAL_RCCEx_GetPeriphCLKFreq:00000000 HAL_RCCEx_GetPeriphCLKFreq
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2148   .text.HAL_RCCEx_GetPeriphCLKFreq:000000a4 $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2153   .text.HAL_RCCEx_GetPeriphCLKFreq:000000b8 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2283   .text.HAL_RCCEx_GetPeriphCLKFreq:000001d4 $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2291   .text.HAL_RCCEx_GetD1SysClockFreq:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2299   .text.HAL_RCCEx_GetD1SysClockFreq:00000000 HAL_RCCEx_GetD1SysClockFreq
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2324   .text.HAL_RCCEx_GetD1SysClockFreq:00000034 $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2330   .text.HAL_RCCEx_EnableLSECSS:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2338   .text.HAL_RCCEx_EnableLSECSS:00000000 HAL_RCCEx_EnableLSECSS
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2350   .text.HAL_RCCEx_EnableLSECSS:0000000c $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2353   .text.HAL_RCCEx_DisableLSECSS:00000000 $t
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s 			page 52
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:15     .text.RCCEx_PLL2_Config:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:23     .text.RCCEx_PLL2_Config:00000000 RCCEx_PLL2_Config
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:135    .text.RCCEx_PLL2_Config:000000f0 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:139    .text.RCCEx_PLL3_Config:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:146    .text.RCCEx_PLL3_Config:00000000 RCCEx_PLL3_Config
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:258    .text.RCCEx_PLL3_Config:000000f0 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:262    .text.HAL_RCCEx_PeriphCLKConfig:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:270    .text.HAL_RCCEx_PeriphCLKConfig:00000000 HAL_RCCEx_PeriphCLKConfig
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:311    .text.HAL_RCCEx_PeriphCLKConfig:00000058 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:316    .text.HAL_RCCEx_PeriphCLKConfig:00000062 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:495    .text.HAL_RCCEx_PeriphCLKConfig:00000214 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:499    .text.HAL_RCCEx_PeriphCLKConfig:0000021c $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:559    .text.HAL_RCCEx_PeriphCLKConfig:000002a0 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:561    .text.HAL_RCCEx_PeriphCLKConfig:000002a4 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:582    .text.HAL_RCCEx_PeriphCLKConfig:000002ce $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:623    .text.HAL_RCCEx_PeriphCLKConfig:00000320 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:643    .text.HAL_RCCEx_PeriphCLKConfig:00000346 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:649    .text.HAL_RCCEx_PeriphCLKConfig:00000352 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:669    .text.HAL_RCCEx_PeriphCLKConfig:0000037a $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:675    .text.HAL_RCCEx_PeriphCLKConfig:00000386 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:1023   .text.HAL_RCCEx_PeriphCLKConfig:000006a0 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:1026   .text.HAL_RCCEx_PeriphCLKConfig:000006a8 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:1369   .text.HAL_RCCEx_PeriphCLKConfig:00000978 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:1371   .text.HAL_RCCEx_PeriphCLKConfig:0000097c $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:1444   .text.HAL_RCCEx_PeriphCLKConfig:00000a10 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:1448   .text.HAL_RCCEx_GetPeriphCLKConfig:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:1456   .text.HAL_RCCEx_GetPeriphCLKConfig:00000000 HAL_RCCEx_GetPeriphCLKConfig
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:1598   .text.HAL_RCCEx_GetPeriphCLKConfig:00000178 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:1602   .text.HAL_RCCEx_GetD1PCLK1Freq:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:1610   .text.HAL_RCCEx_GetD1PCLK1Freq:00000000 HAL_RCCEx_GetD1PCLK1Freq
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:1626   .text.HAL_RCCEx_GetD1PCLK1Freq:0000001c $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:1630   .text.HAL_RCCEx_GetD3PCLK1Freq:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:1638   .text.HAL_RCCEx_GetD3PCLK1Freq:00000000 HAL_RCCEx_GetD3PCLK1Freq
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:1654   .text.HAL_RCCEx_GetD3PCLK1Freq:0000001c $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:1658   .text.HAL_RCCEx_GetPLL2ClockFreq:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:1666   .text.HAL_RCCEx_GetPLL2ClockFreq:00000000 HAL_RCCEx_GetPLL2ClockFreq
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:1786   .text.HAL_RCCEx_GetPLL2ClockFreq:00000164 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:1794   .text.HAL_RCCEx_GetPLL3ClockFreq:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:1802   .text.HAL_RCCEx_GetPLL3ClockFreq:00000000 HAL_RCCEx_GetPLL3ClockFreq
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:1922   .text.HAL_RCCEx_GetPLL3ClockFreq:00000164 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:1930   .text.HAL_RCCEx_GetPLL1ClockFreq:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:1938   .text.HAL_RCCEx_GetPLL1ClockFreq:00000000 HAL_RCCEx_GetPLL1ClockFreq
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2058   .text.HAL_RCCEx_GetPLL1ClockFreq:00000164 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2066   .text.HAL_RCCEx_GetPeriphCLKFreq:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2074   .text.HAL_RCCEx_GetPeriphCLKFreq:00000000 HAL_RCCEx_GetPeriphCLKFreq
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2148   .text.HAL_RCCEx_GetPeriphCLKFreq:000000a4 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2153   .text.HAL_RCCEx_GetPeriphCLKFreq:000000b8 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2283   .text.HAL_RCCEx_GetPeriphCLKFreq:000001d4 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2291   .text.HAL_RCCEx_GetD1SysClockFreq:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2299   .text.HAL_RCCEx_GetD1SysClockFreq:00000000 HAL_RCCEx_GetD1SysClockFreq
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2324   .text.HAL_RCCEx_GetD1SysClockFreq:00000034 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2330   .text.HAL_RCCEx_EnableLSECSS:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2338   .text.HAL_RCCEx_EnableLSECSS:00000000 HAL_RCCEx_EnableLSECSS
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2350   .text.HAL_RCCEx_EnableLSECSS:0000000c $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2353   .text.HAL_RCCEx_DisableLSECSS:00000000 $t
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s 			page 52
 
 
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2361   .text.HAL_RCCEx_DisableLSECSS:00000000 HAL_RCCEx_DisableLSECSS
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2376   .text.HAL_RCCEx_DisableLSECSS:00000014 $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2379   .text.HAL_RCCEx_EnableLSECSS_IT:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2387   .text.HAL_RCCEx_EnableLSECSS_IT:00000000 HAL_RCCEx_EnableLSECSS_IT
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2409   .text.HAL_RCCEx_EnableLSECSS_IT:0000002c $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2412   .text.HAL_RCCEx_WakeUpStopCLKConfig:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2420   .text.HAL_RCCEx_WakeUpStopCLKConfig:00000000 HAL_RCCEx_WakeUpStopCLKConfig
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2433   .text.HAL_RCCEx_WakeUpStopCLKConfig:00000010 $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2436   .text.HAL_RCCEx_KerWakeUpStopCLKConfig:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2444   .text.HAL_RCCEx_KerWakeUpStopCLKConfig:00000000 HAL_RCCEx_KerWakeUpStopCLKConfig
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2457   .text.HAL_RCCEx_KerWakeUpStopCLKConfig:00000010 $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2460   .text.HAL_RCCEx_WWDGxSysResetConfig:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2468   .text.HAL_RCCEx_WWDGxSysResetConfig:00000000 HAL_RCCEx_WWDGxSysResetConfig
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2480   .text.HAL_RCCEx_WWDGxSysResetConfig:00000010 $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2483   .text.HAL_RCCEx_CRSConfig:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2491   .text.HAL_RCCEx_CRSConfig:00000000 HAL_RCCEx_CRSConfig
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2538   .text.HAL_RCCEx_CRSConfig:00000068 $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2542   .text.HAL_RCCEx_CRSSoftwareSynchronizationGenerate:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2550   .text.HAL_RCCEx_CRSSoftwareSynchronizationGenerate:00000000 HAL_RCCEx_CRSSoftwareSynchronizationGenerate
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2562   .text.HAL_RCCEx_CRSSoftwareSynchronizationGenerate:0000000c $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2565   .text.HAL_RCCEx_CRSGetSynchronizationInfo:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2573   .text.HAL_RCCEx_CRSGetSynchronizationInfo:00000000 HAL_RCCEx_CRSGetSynchronizationInfo
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2594   .text.HAL_RCCEx_CRSGetSynchronizationInfo:00000020 $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2597   .text.HAL_RCCEx_CRSWaitSynchronization:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2605   .text.HAL_RCCEx_CRSWaitSynchronization:00000000 HAL_RCCEx_CRSWaitSynchronization
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2682   .text.HAL_RCCEx_CRSWaitSynchronization:00000094 $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2685   .text.HAL_RCCEx_CRS_SyncOkCallback:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2693   .text.HAL_RCCEx_CRS_SyncOkCallback:00000000 HAL_RCCEx_CRS_SyncOkCallback
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2700   .text.HAL_RCCEx_CRS_SyncWarnCallback:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2708   .text.HAL_RCCEx_CRS_SyncWarnCallback:00000000 HAL_RCCEx_CRS_SyncWarnCallback
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2715   .text.HAL_RCCEx_CRS_ExpectedSyncCallback:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2723   .text.HAL_RCCEx_CRS_ExpectedSyncCallback:00000000 HAL_RCCEx_CRS_ExpectedSyncCallback
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2730   .text.HAL_RCCEx_CRS_ErrorCallback:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2738   .text.HAL_RCCEx_CRS_ErrorCallback:00000000 HAL_RCCEx_CRS_ErrorCallback
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2745   .text.HAL_RCCEx_CRS_IRQHandler:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2753   .text.HAL_RCCEx_CRS_IRQHandler:00000000 HAL_RCCEx_CRS_IRQHandler
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2814   .text.HAL_RCCEx_CRS_IRQHandler:00000070 $d
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2817   .text.HAL_RCCEx_LSECSS_Callback:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2825   .text.HAL_RCCEx_LSECSS_Callback:00000000 HAL_RCCEx_LSECSS_Callback
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2832   .text.HAL_RCCEx_LSECSS_IRQHandler:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2840   .text.HAL_RCCEx_LSECSS_IRQHandler:00000000 HAL_RCCEx_LSECSS_IRQHandler
-C:\Users\Brandon\AppData\Local\Temp\cc15zA07.s:2857   .text.HAL_RCCEx_LSECSS_IRQHandler:00000018 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2361   .text.HAL_RCCEx_DisableLSECSS:00000000 HAL_RCCEx_DisableLSECSS
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2376   .text.HAL_RCCEx_DisableLSECSS:00000014 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2379   .text.HAL_RCCEx_EnableLSECSS_IT:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2387   .text.HAL_RCCEx_EnableLSECSS_IT:00000000 HAL_RCCEx_EnableLSECSS_IT
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2409   .text.HAL_RCCEx_EnableLSECSS_IT:0000002c $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2412   .text.HAL_RCCEx_WakeUpStopCLKConfig:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2420   .text.HAL_RCCEx_WakeUpStopCLKConfig:00000000 HAL_RCCEx_WakeUpStopCLKConfig
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2433   .text.HAL_RCCEx_WakeUpStopCLKConfig:00000010 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2436   .text.HAL_RCCEx_KerWakeUpStopCLKConfig:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2444   .text.HAL_RCCEx_KerWakeUpStopCLKConfig:00000000 HAL_RCCEx_KerWakeUpStopCLKConfig
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2457   .text.HAL_RCCEx_KerWakeUpStopCLKConfig:00000010 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2460   .text.HAL_RCCEx_WWDGxSysResetConfig:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2468   .text.HAL_RCCEx_WWDGxSysResetConfig:00000000 HAL_RCCEx_WWDGxSysResetConfig
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2480   .text.HAL_RCCEx_WWDGxSysResetConfig:00000010 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2483   .text.HAL_RCCEx_CRSConfig:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2491   .text.HAL_RCCEx_CRSConfig:00000000 HAL_RCCEx_CRSConfig
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2538   .text.HAL_RCCEx_CRSConfig:00000068 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2542   .text.HAL_RCCEx_CRSSoftwareSynchronizationGenerate:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2550   .text.HAL_RCCEx_CRSSoftwareSynchronizationGenerate:00000000 HAL_RCCEx_CRSSoftwareSynchronizationGenerate
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2562   .text.HAL_RCCEx_CRSSoftwareSynchronizationGenerate:0000000c $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2565   .text.HAL_RCCEx_CRSGetSynchronizationInfo:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2573   .text.HAL_RCCEx_CRSGetSynchronizationInfo:00000000 HAL_RCCEx_CRSGetSynchronizationInfo
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2594   .text.HAL_RCCEx_CRSGetSynchronizationInfo:00000020 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2597   .text.HAL_RCCEx_CRSWaitSynchronization:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2605   .text.HAL_RCCEx_CRSWaitSynchronization:00000000 HAL_RCCEx_CRSWaitSynchronization
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2682   .text.HAL_RCCEx_CRSWaitSynchronization:00000094 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2685   .text.HAL_RCCEx_CRS_SyncOkCallback:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2693   .text.HAL_RCCEx_CRS_SyncOkCallback:00000000 HAL_RCCEx_CRS_SyncOkCallback
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2700   .text.HAL_RCCEx_CRS_SyncWarnCallback:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2708   .text.HAL_RCCEx_CRS_SyncWarnCallback:00000000 HAL_RCCEx_CRS_SyncWarnCallback
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2715   .text.HAL_RCCEx_CRS_ExpectedSyncCallback:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2723   .text.HAL_RCCEx_CRS_ExpectedSyncCallback:00000000 HAL_RCCEx_CRS_ExpectedSyncCallback
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2730   .text.HAL_RCCEx_CRS_ErrorCallback:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2738   .text.HAL_RCCEx_CRS_ErrorCallback:00000000 HAL_RCCEx_CRS_ErrorCallback
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2745   .text.HAL_RCCEx_CRS_IRQHandler:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2753   .text.HAL_RCCEx_CRS_IRQHandler:00000000 HAL_RCCEx_CRS_IRQHandler
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2814   .text.HAL_RCCEx_CRS_IRQHandler:00000070 $d
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2817   .text.HAL_RCCEx_LSECSS_Callback:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2825   .text.HAL_RCCEx_LSECSS_Callback:00000000 HAL_RCCEx_LSECSS_Callback
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2832   .text.HAL_RCCEx_LSECSS_IRQHandler:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2840   .text.HAL_RCCEx_LSECSS_IRQHandler:00000000 HAL_RCCEx_LSECSS_IRQHandler
+C:\Users\Brandon\AppData\Local\Temp\ccTupvap.s:2857   .text.HAL_RCCEx_LSECSS_IRQHandler:00000018 $d
 
 UNDEFINED SYMBOLS
 HAL_GetTick

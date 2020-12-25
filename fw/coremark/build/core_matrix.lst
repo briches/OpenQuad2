@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s 			page 1
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s 			page 1
   56 004a 4FF00008 		mov	r8, #0
   57 004e 4FF0010C 		mov	ip, #1
   58 0052 0093     		str	r3, [sp]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s 			page 2
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s 			page 2
 
 
   59              	.L9:
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s 			page 1
  113 00d0 09F1040A 		add	r10, r9, #4
  114 00d4 09F10609 		add	r9, r9, #6
  115 00d8 B2E7     		b	.L10
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s 			page 3
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s 			page 3
 
 
  117 00da 00BF     		.section	.text.matrix_sum,"ax",%progbits
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s 			page 1
  173              		.syntax unified
  174              		.thumb
  175              		.thumb_func
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s 			page 4
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s 			page 4
 
 
  176              		.fpu fpv5-d16
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s 			page 1
  233 001a 0CEB0106 		add	r6, ip, r1
  234 001e 3346     		mov	r3, r6
  235              	.L45:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s 			page 5
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s 			page 5
 
 
  236 0020 B3F90020 		ldrsh	r2, [r3]
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s 			page 1
  293              		.align	1
  294              		.p2align 2,,3
  295              		.global	matrix_mul_matrix
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s 			page 6
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s 			page 6
 
 
  296              		.syntax unified
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s 			page 1
  352              		.thumb
  353              		.thumb_func
  354              		.fpu fpv5-d16
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s 			page 7
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s 			page 7
 
 
  356              	matrix_mul_matrix_bitextract:
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s 			page 1
  411              		.thumb_func
  412              		.fpu fpv5-d16
  414              	matrix_test:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s 			page 8
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s 			page 8
 
 
  415              		@ args = 4, pretend = 0, frame = 24
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s 			page 1
  469 008c 32F9023B 		ldrsh	r3, [r2], #2
  470 0090 03FB0CF3 		mul	r3, r3, ip
  471 0094 BA42     		cmp	r2, r7
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s 			page 9
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s 			page 9
 
 
  472 0096 41F8043F 		str	r3, [r1, #4]!
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s 			page 1
  526 0110 4FF00009 		mov	r9, #0
  527 0114 DDE90476 		ldrd	r7, r6, [sp, #16]
  528 0118 FFF7FEFF 		bl	crc16
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s 			page 10
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s 			page 10
 
 
  529 011c 8346     		mov	fp, r0
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s 			page 1
  583 01a0 0020     		movs	r0, #0
  584 01a2 DDF80480 		ldr	r8, [sp, #4]
  585 01a6 BA46     		mov	r10, r7
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s 			page 11
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s 			page 11
 
 
  586 01a8 07EE90BA 		vmov	s15, fp	@ int
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s 			page 1
  640 022a A445     		cmp	ip, r4
  641 022c 0FD2     		bcs	.L132
  642              	.L105:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s 			page 12
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s 			page 12
 
 
  643 022e 1146     		mov	r1, r2
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s 			page 1
  697 02ac 4846     		mov	r0, r9
  698 02ae FFF7FEFF 		bl	crc16
  699 02b2 0446     		mov	r4, r0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s 			page 13
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s 			page 13
 
 
  700 02b4 18EE903A 		vmov	r3, s17	@ int
@@ -770,30 +770,30 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s 			page 1
  748 0018 BDE81040 		pop	{r4, lr}
  749 001c FFF7FEBF 		b	crc16
  751              		.ident	"GCC: (GNU Arm Embedded Toolchain 9-2020-q2-update) 9.3.1 20200408 (release)"
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s 			page 14
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s 			page 14
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 core_matrix.c
-C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s:15     .text.core_init_matrix:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s:24     .text.core_init_matrix:00000000 core_init_matrix
-C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s:118    .text.matrix_sum:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s:126    .text.matrix_sum:00000000 matrix_sum
-C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s:170    .text.matrix_mul_const:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s:178    .text.matrix_mul_const:00000000 matrix_mul_const
-C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s:211    .text.matrix_add_const:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s:219    .text.matrix_add_const:00000000 matrix_add_const
-C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s:251    .text.matrix_mul_vect:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s:259    .text.matrix_mul_vect:00000000 matrix_mul_vect
-C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s:293    .text.matrix_mul_matrix:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s:301    .text.matrix_mul_matrix:00000000 matrix_mul_matrix
-C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s:348    .text.matrix_mul_matrix_bitextract:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s:356    .text.matrix_mul_matrix_bitextract:00000000 matrix_mul_matrix_bitextract
-C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s:406    .text.matrix_test:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s:414    .text.matrix_test:00000000 matrix_test
-C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s:723    .text.matrix_test:000002f0 $d
-C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s:726    .text.core_bench_matrix:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccLyEpdi.s:734    .text.core_bench_matrix:00000000 core_bench_matrix
+C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s:15     .text.core_init_matrix:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s:24     .text.core_init_matrix:00000000 core_init_matrix
+C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s:118    .text.matrix_sum:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s:126    .text.matrix_sum:00000000 matrix_sum
+C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s:170    .text.matrix_mul_const:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s:178    .text.matrix_mul_const:00000000 matrix_mul_const
+C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s:211    .text.matrix_add_const:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s:219    .text.matrix_add_const:00000000 matrix_add_const
+C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s:251    .text.matrix_mul_vect:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s:259    .text.matrix_mul_vect:00000000 matrix_mul_vect
+C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s:293    .text.matrix_mul_matrix:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s:301    .text.matrix_mul_matrix:00000000 matrix_mul_matrix
+C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s:348    .text.matrix_mul_matrix_bitextract:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s:356    .text.matrix_mul_matrix_bitextract:00000000 matrix_mul_matrix_bitextract
+C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s:406    .text.matrix_test:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s:414    .text.matrix_test:00000000 matrix_test
+C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s:723    .text.matrix_test:000002f0 $d
+C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s:726    .text.core_bench_matrix:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\cc8rPdHh.s:734    .text.core_bench_matrix:00000000 core_bench_matrix
 
 UNDEFINED SYMBOLS
 crc16

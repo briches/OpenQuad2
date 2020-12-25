@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s 			page 1
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccDTpWVL.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s 			page 1
   56              	.L9:
   57 0048 02EB040C 		add	ip, r2, r4
   58 004c 03EB070E 		add	lr, r3, r7
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s 			page 2
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccDTpWVL.s 			page 2
 
 
   59 0050 6446     		mov	r4, ip
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s 			page 1
  113              	.L20:
  114 00bc 00000000 		.word	.LANCHOR1
  115 00c0 00000000 		.word	.LANCHOR0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s 			page 3
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccDTpWVL.s 			page 3
 
 
  116 00c4 00000000 		.word	.LANCHOR3
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s 			page 1
  172 0054 0B61     		str	r3, [r1, #16]
  173 0056 4278     		ldrb	r2, [r0, #1]	@ zero_extendqisi2
  174 0058 002A     		cmp	r2, #0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s 			page 4
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccDTpWVL.s 			page 4
 
 
  175 005a 00F09C80 		beq	.L64
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s 			page 1
  229 00c8 30BC     		pop	{r4, r5}
  230 00ca 7047     		bx	lr
  231              	.L32:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s 			page 5
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccDTpWVL.s 			page 5
 
 
  232 00cc 0A68     		ldr	r2, [r1]
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s 			page 1
  286 0132 2C2A     		cmp	r2, #44
  287 0134 46D0     		beq	.L93
  288 0136 303A     		subs	r2, r2, #48
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s 			page 6
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccDTpWVL.s 			page 6
 
 
  289 0138 E31C     		adds	r3, r4, #3
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s 			page 1
  343 019a 7CE7     		b	.L24
  344              	.L91:
  345 019c 8A68     		ldr	r2, [r1, #8]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s 			page 7
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccDTpWVL.s 			page 7
 
 
  346 019e 9C1C     		adds	r4, r3, #2
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s 			page 1
  402              	core_bench_state:
  403              		@ args = 8, pretend = 0, frame = 80
  404              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s 			page 8
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccDTpWVL.s 			page 8
 
 
  405 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s 			page 1
  459 0082 9119     		adds	r1, r2, r6
  460 0084 B942     		cmp	r1, r7
  461 0086 0391     		str	r1, [sp, #12]
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s 			page 9
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccDTpWVL.s 			page 9
 
 
  462 0088 F3D3     		bcc	.L128
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s 			page 1
  517              		.section	.rodata.str1.4,"aMS",%progbits,1
  518              		.align	2
  519              	.LC0:
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s 			page 10
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccDTpWVL.s 			page 10
 
 
  520 0000 54302E33 		.ascii	"T0.3e-1F\000"
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s 			page 1
  552              	.LC11:
  553 0084 2B302E36 		.ascii	"+0.64400\000"
  553      34343030 
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s 			page 11
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccDTpWVL.s 			page 11
 
 
  553      00
@@ -651,27 +651,27 @@ ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s 			page 1
  604 0008 48000000 		.word	.LC6
  605 000c 54000000 		.word	.LC7
  606              		.ident	"GCC: (GNU Arm Embedded Toolchain 9-2020-q2-update) 9.3.1 20200408 (release)"
-ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s 			page 12
+ARM GAS  C:\Users\Brandon\AppData\Local\Temp\ccDTpWVL.s 			page 12
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 core_state.c
-C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s:15     .text.core_init_state:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s:24     .text.core_init_state:00000000 core_init_state
-C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s:114    .text.core_init_state:000000bc $d
-C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s:120    .text.core_state_transition:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s:128    .text.core_state_transition:00000000 core_state_transition
-C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s:394    .text.core_bench_state:00000000 $t
-C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s:402    .text.core_bench_state:00000000 core_bench_state
-C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s:518    .rodata.str1.4:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s:567    .rodata.errpat:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s:571    .rodata.errpat:00000000 errpat
-C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s:577    .rodata.floatpat:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s:581    .rodata.floatpat:00000000 floatpat
-C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s:587    .rodata.intpat:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s:591    .rodata.intpat:00000000 intpat
-C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s:597    .rodata.scipat:00000000 $d
-C:\Users\Brandon\AppData\Local\Temp\ccKdDlSB.s:601    .rodata.scipat:00000000 scipat
+C:\Users\Brandon\AppData\Local\Temp\ccDTpWVL.s:15     .text.core_init_state:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccDTpWVL.s:24     .text.core_init_state:00000000 core_init_state
+C:\Users\Brandon\AppData\Local\Temp\ccDTpWVL.s:114    .text.core_init_state:000000bc $d
+C:\Users\Brandon\AppData\Local\Temp\ccDTpWVL.s:120    .text.core_state_transition:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccDTpWVL.s:128    .text.core_state_transition:00000000 core_state_transition
+C:\Users\Brandon\AppData\Local\Temp\ccDTpWVL.s:394    .text.core_bench_state:00000000 $t
+C:\Users\Brandon\AppData\Local\Temp\ccDTpWVL.s:402    .text.core_bench_state:00000000 core_bench_state
+C:\Users\Brandon\AppData\Local\Temp\ccDTpWVL.s:518    .rodata.str1.4:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\ccDTpWVL.s:567    .rodata.errpat:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\ccDTpWVL.s:571    .rodata.errpat:00000000 errpat
+C:\Users\Brandon\AppData\Local\Temp\ccDTpWVL.s:577    .rodata.floatpat:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\ccDTpWVL.s:581    .rodata.floatpat:00000000 floatpat
+C:\Users\Brandon\AppData\Local\Temp\ccDTpWVL.s:587    .rodata.intpat:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\ccDTpWVL.s:591    .rodata.intpat:00000000 intpat
+C:\Users\Brandon\AppData\Local\Temp\ccDTpWVL.s:597    .rodata.scipat:00000000 $d
+C:\Users\Brandon\AppData\Local\Temp\ccDTpWVL.s:601    .rodata.scipat:00000000 scipat
 
 UNDEFINED SYMBOLS
 crcu32
