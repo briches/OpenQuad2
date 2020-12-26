@@ -47,8 +47,6 @@ void task_manager_thread_start(void* argument)
         uint32_t free_heap = xPortGetFreeHeapSize();
         uint32_t min_heap = xPortGetMinimumEverFreeHeapSize();
 
-        TickType_t now = HAL_GetTick();
-
         float percent_free = 100.0f*((float)free_heap);
         percent_free /= configTOTAL_HEAP_SIZE;
         

@@ -39,7 +39,7 @@ int32_t platform_write_imu(void* handle, uint8_t reg, uint8_t* bufp, uint16_t le
 {
     sensbus_t* sensbus = (sensbus_t*)handle;
 
-    HAL_I2C_Mem_Write(sensbus->hbus, sensbus->i2c_address, reg, I2C_MEMADD_SIZE_8BIT, bufp, len, 1000);
+    HAL_I2C_Mem_Write(sensbus->hbus, sensbus->i2c_address, reg, I2C_MEMADD_SIZE_8BIT, bufp, len, 100);
     return 0;
 }
 
@@ -59,7 +59,7 @@ int32_t platform_write_mag(void* handle, uint8_t reg, uint8_t* bufp, uint16_t le
 
     /* Write multiple command */
     reg |= 0x80;
-    HAL_I2C_Mem_Write(sensbus->hbus, sensbus->i2c_address, reg, I2C_MEMADD_SIZE_8BIT, bufp, len, 1000);
+    HAL_I2C_Mem_Write(sensbus->hbus, sensbus->i2c_address, reg, I2C_MEMADD_SIZE_8BIT, bufp, len, 100);
     return 0;
 }
 
@@ -77,7 +77,7 @@ int32_t platform_read_imu(void* handle, uint8_t reg, uint8_t* bufp, uint16_t len
 {
     sensbus_t* sensbus = (sensbus_t*)handle;
 
-    HAL_I2C_Mem_Read(sensbus->hbus, sensbus->i2c_address, reg, I2C_MEMADD_SIZE_8BIT, bufp, len, 1000);
+    HAL_I2C_Mem_Read(sensbus->hbus, sensbus->i2c_address, reg, I2C_MEMADD_SIZE_8BIT, bufp, len, 100);
     return 0;
 }
 
@@ -97,7 +97,7 @@ int32_t platform_read_mag(void* handle, uint8_t reg, uint8_t* bufp, uint16_t len
 
     /* Read multiple command */
     reg |= 0x80;
-    HAL_I2C_Mem_Read(sensbus->hbus, sensbus->i2c_address, reg, I2C_MEMADD_SIZE_8BIT, bufp, len, 1000);
+    HAL_I2C_Mem_Read(sensbus->hbus, sensbus->i2c_address, reg, I2C_MEMADD_SIZE_8BIT, bufp, len, 100);
     return 0;
 }
 

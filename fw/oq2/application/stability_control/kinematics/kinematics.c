@@ -17,7 +17,8 @@
 
 #include "kinematics.h"
 #include "main.h"
-#include "kalman.h"
+#include "stability_config.h"
+#include "timer.h"
 
 #include "debug_log.h"
 #define debug_error(fmt, ...)           debug_error(KINEMATICS_MODULE_ID, fmt, ##__VA_ARGS__)
@@ -30,76 +31,85 @@
 #define Y_INDEX 1
 #define Z_INDEX 2
 
-static kalman_filter_ctx_t roll_ctx;
-static kalman_filter_ctx_t pitch_ctx;
-static kalman_filter_ctx_t yaw_ctx;
-
-uint32_t kinematics_initialize()
+static inline float _kinematics_get_seconds()
 {
-    kalman_init(&roll_ctx);
-    kalman_init(&pitch_ctx);
-    kalman_init(&yaw_ctx);
+    return timer_get_elapsed();
+}
 
-    debug_printf("%s", KINEMATICS_LOG_HEADER);
+uint32_t kinematics_initialize(kinematics_ctx_t * pctx, bool lib_mode_9)
+{
+    if(pctx == NULL)
+        return -1;
+
+    memset(pctx, 0x00, sizeof(kinematics_ctx_t));
+
+    pctx->lib_mode_9 = lib_mode_9;
+
+    pctx->timestamp = _kinematics_get_seconds();
 
     return 1;
 }
 
-int32_t last_time = -1;
-
-uint32_t kinematics_update_accel_gyro(float * accel_mg, float * rate_mdps)
+uint32_t kinematics_new_motionfx_data_callback(kinematics_ctx_t * pctx, MFX_output_t * p_data)
 {
-    uint32_t timestamp_now = HAL_GetTick();
-    float delta_time = (last_time < 0) ? 0 : timestamp_now - last_time;
-    delta_time /= 1000.0f;
+    float yaw, pitch, roll;
 
-    // Correct axis orientation
-    // accel_mg[X_INDEX] *= -1;
+    // Get the current time, and calculate the delta since the last call. 
+    float time_s = _kinematics_get_seconds();
+    float dt_s = time_s - pctx->timestamp;
+    pctx->timestamp = time_s;
 
-    // Calculate the squares
-    float x_sq = accel_mg[X_INDEX] * accel_mg[X_INDEX];
-    float y_sq = accel_mg[Y_INDEX] * accel_mg[Y_INDEX];
-    float z_sq = accel_mg[Z_INDEX] * accel_mg[Z_INDEX];
+    // Store MFX output data
+    memcpy(&pctx->mfx_data, p_data, sizeof(MFX_output_t));
 
-    // Calculate the total magnitude
-    float magnitudeApprox = sqrt(x_sq + y_sq + z_sq);
+    // Store offset angles
+    if(pctx->lib_mode_9)
+    {
+        yaw = p_data->rotation_9X[0];
+        pitch = p_data->rotation_9X[1] - SC_FACTORY_PITCH_OFFSET_DEG;
+        roll = p_data->rotation_9X[2] - SC_FACTORY_ROLL_OFFSET_DEG;
+    }
+    else
+    {
+        yaw = p_data->rotation_6X[0];
+        pitch = p_data->rotation_6X[1] - SC_FACTORY_PITCH_OFFSET_DEG;
+        roll = p_data->rotation_6X[2] - SC_FACTORY_ROLL_OFFSET_DEG;
+    }
 
-    // Calculate angles roll and pitch
-    float roll_accel = atan2f(accel_mg[Y_INDEX], accel_mg[Z_INDEX]);
-    float pitch_accel = atan2f(-accel_mg[X_INDEX], sqrtf(y_sq + z_sq));
+    if(dt_s != 0)
+    {
+        pctx->pitch_rate = (pitch - pctx->pitch) / dt_s;
+        pctx->roll_rate = (roll - pctx->roll) / dt_s;
+        pctx->yaw_rate = (yaw - pctx->yaw) / dt_s;
+    }
 
-    // Convert to degrees
-    roll_accel = RAD_TO_DEG(roll_accel);
-    pitch_accel = RAD_TO_DEG(pitch_accel);
+    pctx->vx_inertial += p_data->linear_acceleration_6X[0] * dt_s;
+    pctx->vy_inertial += p_data->linear_acceleration_6X[1] * dt_s;
+    pctx->vz_inertial += p_data->linear_acceleration_6X[2] * dt_s;
 
-    // Get rotational rate
-    float roll_rate_dps = -1.0f * rate_mdps[X_INDEX] / 1000.0f;
-    float pitch_rate_dps = -1.0f * rate_mdps[Y_INDEX] / 1000.0f;
-    float yaw_rate_dps = -1.0f * rate_mdps[Z_INDEX] / 1000.0f;
+    pctx->x_inertial += pctx->vx_inertial * dt_s;
+    pctx->y_inertial += pctx->vy_inertial * dt_s;
+    pctx->z_inertial += pctx->vz_inertial * dt_s;
 
-    kalman_calulate_new(&roll_ctx, roll_accel, roll_rate_dps, delta_time);
-    kalman_calulate_new(&pitch_ctx, pitch_accel, pitch_rate_dps, delta_time);
-    kalman_calulate_new(&yaw_ctx, yaw_ctx.angle, yaw_rate_dps, delta_time);
 
-    // #define KINEMATICS_LOG_HEADER "Roll Rate, Raw Roll, Kalman Roll, Pitch Rate, Raw Pitch, Kalman Pitch"
-    // debug_printf(", %3.1f, %3.1f, %3.1f, %3.1f, %3.1f, %3.1f", 
-    // roll_rate_dps, roll_accel, roll_ctx.angle, pitch_rate_dps, pitch_accel, pitch_ctx.angle);
-    // debug_printf(", %3.1f, %3.1f", roll_accel, roll_ctx.angle);
-    // debug_printf(", %3.1f, %3.1f", -5.0f, 5.0f);
+    // debug_printf("x, %3.1f, y, %3.1f, z, %3.1f", pctx->x_inertial, pctx->y_inertial, pctx->z_inertial);
+    // debug_printf("x, %3.3f, y, %3.3f, z, %3.3f", p_data->linear_acceleration_6X[0], 
+    //                                             p_data->linear_acceleration_6X[1], 
+    //                                             p_data->linear_acceleration_6X[2]);
+    // debug_printf("x, %3.1f, y, %3.1f, z, %3.1f", yaw, pitch, roll);
 
-    // debug_printf(",%3.1f,%3.1f,%3.1f", pitch_ctx.angle, roll_ctx.angle, yaw_ctx.angle);
+    // debug_printf(" heading: %3.3f, (%3.3f)", p_data->heading_6X, p_data->headingErr_6X);
 
-    last_time = timestamp_now;
-    return 0;
+    // debug_printf(", %3.5f", dt_s);
+
+    return 1;
 }
 
-float kinematics_get_roll()
+uint32_t kinematics_new_elevation_data_callback(kinematics_ctx_t * pctx, float elevation)
 {
-    return roll_ctx.angle;
+    pctx->z_baro = elevation;
+
+    return 1;
 }
 
-float kinematics_get_pitch()
-{
-    return pitch_ctx.angle;
-}
 

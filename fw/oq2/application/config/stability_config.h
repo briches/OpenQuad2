@@ -41,7 +41,14 @@ MEMS Config
 /***************************************************************************************************
 Default Sensor Offsets, cal values, etc
 */
-#define SC_FACTORY_PITCH_OFFSET_DEG      1.870343
-#define SC_FACTORY_ROLL_OFFSET_DEG      -0.854811
+#define SC_MFX_ATIME                    (0.899)
+// #define SC_MFX_ATIME                    (0.2)
+#define SC_FACTORY_PITCH_OFFSET_DEG     (1.870343)
+#define SC_FACTORY_ROLL_OFFSET_DEG      (-0.854811)
+
+#define SC_FACTORY_1G_VALUE_MPS         (9.81f)
+
+#define SC_SEA_LEVEL_PRESS_HPA          (1013.25)
+#define SC_AIR_TEMPERATURE              (-4)
 
 #endif

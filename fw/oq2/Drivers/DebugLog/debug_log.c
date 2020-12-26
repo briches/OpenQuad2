@@ -5,7 +5,7 @@
  * Author: Brandon Riches                                                                          /
  * Email: richesbc@gmail.com                                                                       /
  * -----                                                                                           /
- * Last Modified: Tue Dec 15 2020                                                                  /
+ * Last Modified: Sat Dec 26 2020                                                                  /
  * Modified By: Brandon Riches                                                                     /
  * -----                                                                                           /
  *                                                                                                 /
@@ -97,6 +97,7 @@ static void debug_print_timestamp(uint8_t** pbuf)
 #else
     uint32_t time = HAL_GetTick();
 #endif
+
     intpart = (uint32_t)(time / 1000);
     decimal = (uint32_t)(time - (uint32_t)(1000 * intpart));
 

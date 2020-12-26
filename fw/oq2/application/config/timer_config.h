@@ -1,7 +1,7 @@
 /*
- * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\application\kinematics\kinematics.h             /
+ * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\application\config\timer_config.h               /
  * Project: OQ2                                                                                    /
- * Created Date: Sunday, December 13th 2020, 11:05:48 am                                           /
+ * Created Date: Friday, December 25th 2020, 9:05:52 am                                            /
  * Author: Brandon Riches                                                                          /
  * Email: richesbc@gmail.com                                                                       /
  * -----                                                                                           /
@@ -16,56 +16,19 @@
 */
 
 
-#ifndef KINEMATICS_H_
-#define KINEMATICS_H_
+#ifndef TIMER_CONFIG_H_
+#define TIMER_CONFIG_H_
 
-#include <stdint.h>
-#include <stdbool.h>
-#include "arm_math.h"
-#include "motion_fx.h"
-
-#define DEG_TO_RAD(x) (x * PI / 180.0)
-#define RAD_TO_DEG(x) (x * 180.0 / PI)
-
-typedef struct kinematics_data
-{
-    // Angles in degrees
-    float pitch,
-    roll,
-    yaw,
-
-    // Angular rates in dps
-    pitch_rate,
-    roll_rate,
-    yaw_rate,
-
-    // Positions
-    x_inertial,
-    y_inertial,
-    z_inertial,
-    z_baro,
-
-    // Velocities
-    vx_inertial,
-    vy_inertial,
-    vz_inertial,
-    vz_baro;
-
-    // Time in seconds
-    float timestamp;
-
-    bool lib_mode_9;
-
-    MFX_output_t mfx_data;
-
-} kinematics_ctx_t;
-
-uint32_t kinematics_initialize(kinematics_ctx_t * pctx, bool lib_mode_9);
-uint32_t kinematics_new_motionfx_data_callback(kinematics_ctx_t * pctx, MFX_output_t * p_data);
-uint32_t kinematics_new_elevation_data_callback(kinematics_ctx_t * pctx, float elevation);
-
-float kinematics_get_pitch();
-float kinematics_get_roll();
-
+/**
+ * The clock is PCLK1, with divider 128 -> 1074218.75 Hz
+ * 
+ * So F_match = PCLK1 / 128 / period
+ * 
+ * So DC1F gives a match frequency of 20Hz
+ * 
+ */
+#define TC_TIMER_MATCH_VALUE    0xD1CF
+#define TC_TIMER_TICK_PERIOD_S  0.0000009309091f
+#define TC_TIMER_MATCH_PERIOD_S 0.05000005818f
 
 #endif

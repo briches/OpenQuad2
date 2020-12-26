@@ -20,6 +20,7 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "main.h"
+#include "timer.h"
 
 #include "debug_log.h"
 #define debug_error(fmt, ...)           debug_error(FREERTOS_MODULE_ID, fmt, ##__VA_ARGS__)

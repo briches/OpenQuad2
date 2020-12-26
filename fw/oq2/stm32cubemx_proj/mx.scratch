@@ -16,25 +16,7 @@
       <Secure />
       <filestoremove>
         <file>
-          <name>ALGOBUILD\App\app_algobuild.c</name>
-        </file>
-        <file>
-          <name>Core\Src\custom_bus.c</name>
-        </file>
-        <file>
-          <name>..\Drivers\BSP\Components\lps22hh\lps22hh_reg.c</name>
-        </file>
-        <file>
-          <name>..\Drivers\BSP\Components\lps22hh\lps22hh.c</name>
-        </file>
-        <file>
-          <name>..\Drivers\BSP\Components\lps22hh\lps22hh_reg.h</name>
-        </file>
-        <file>
-          <name>..\Drivers\BSP\Components\lps22hh\lps22hh.h</name>
-        </file>
-        <file>
-          <name>..\Middlewares\ST\ARM\DSP\Inc\arm_math.h</name>
+          <name>Middlewares\ST\ARM\DSP\Inc\arm_math.h</name>
         </file>
       </filestoremove>
       <sourceEntriesToRemove>
@@ -58,7 +40,7 @@
           </memories>
           <startup>C:\Users\Brandon\STM32Cube\Repository\STM32Cube_FW_H7_V1.8.0\Drivers\CMSIS\Device\ST\STM32H7xx\Source\Templates\gcc\startup_stm32h735xx.s</startup>
           <LinkSettings>
-            <icfloc>1</icfloc>
+            <icfloc />
             <LinkAdditionalLibs />
           </LinkSettings>
           <heapSize>0x200</heapSize>
@@ -79,6 +61,7 @@
             <include>Core\Inc</include>
             <include>FATFS\Target</include>
             <include>FATFS\App</include>
+            <include>ALGOBUILD\App</include>
             <include>USB_DEVICE\App</include>
             <include>USB_DEVICE\Target</include>
             <include>Drivers\STM32H7xx_HAL_Driver\Inc</include>

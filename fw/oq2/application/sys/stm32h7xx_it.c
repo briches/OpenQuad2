@@ -22,6 +22,7 @@
 
 /* External variables --------------------------------------------------------*/
 extern PCD_HandleTypeDef hpcd_USB_OTG_HS;
+extern LPTIM_HandleTypeDef hlptim1;
 extern UART_HandleTypeDef huart5;
 extern UART_HandleTypeDef huart2;
 extern TIM_HandleTypeDef htim2;
@@ -167,4 +168,12 @@ void EXTI15_10_IRQHandler(void)
 void OTG_HS_IRQHandler(void)
 {
     HAL_PCD_IRQHandler(&hpcd_USB_OTG_HS);
+}
+
+/**
+  * @brief This function handles LPTIM1 global interrupt.
+  */
+void LPTIM1_IRQHandler(void)
+{
+    HAL_LPTIM_IRQHandler(&hlptim1);
 }

@@ -5,7 +5,7 @@
  * Author: Brandon Riches                                                                          /
  * Email: richesbc@gmail.com                                                                       /
  * -----                                                                                           /
- * Last Modified: Tue Dec 15 2020                                                                  /
+ * Last Modified: Fri Dec 25 2020                                                                  /
  * Modified By: Brandon Riches                                                                     /
  * -----                                                                                           /
  *                                                                                                 /
@@ -300,6 +300,45 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
         /* USER CODE BEGIN I2C2_MspDeInit 1 */
 
         /* USER CODE END I2C2_MspDeInit 1 */
+    }
+
+}
+
+/**
+* @brief LPTIM MSP Initialization
+* This function configures the hardware resources used in this example
+* @param hlptim: LPTIM handle pointer
+* @retval None
+*/
+void HAL_LPTIM_MspInit(LPTIM_HandleTypeDef* hlptim)
+{
+    if(hlptim->Instance==LPTIM1)
+    {
+        /* Peripheral clock enable */
+        __HAL_RCC_LPTIM1_CLK_ENABLE();
+        
+        /* LPTIM1 interrupt Init */
+        HAL_NVIC_SetPriority(LPTIM1_IRQn, 5, 0);
+        HAL_NVIC_EnableIRQ(LPTIM1_IRQn);
+    }
+
+}
+
+/**
+* @brief LPTIM MSP De-Initialization
+* This function freeze the hardware resources used in this example
+* @param hlptim: LPTIM handle pointer
+* @retval None
+*/
+void HAL_LPTIM_MspDeInit(LPTIM_HandleTypeDef* hlptim)
+{
+    if(hlptim->Instance==LPTIM1)
+    {
+        /* Peripheral clock disable */
+        __HAL_RCC_LPTIM1_CLK_DISABLE();
+
+        /* LPTIM1 interrupt DeInit */
+        HAL_NVIC_DisableIRQ(LPTIM1_IRQn);
     }
 
 }

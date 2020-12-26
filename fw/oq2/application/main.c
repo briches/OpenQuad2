@@ -28,6 +28,7 @@
 #include "task_manager.h"
 #include "led_blinky.h"
 #include "location.h"
+#include "timer.h"
 
 #define debug_error(fmt, ...)           debug_error(MAIN_MODULE_ID, fmt, ##__VA_ARGS__)
 #define debug_printf(fmt, ...)          debug_printf(MAIN_MODULE_ID, fmt, ##__VA_ARGS__)
@@ -57,6 +58,7 @@ SPI_HandleTypeDef hspi2;
 
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim24;
+LPTIM_HandleTypeDef hlptim1;
 
 UART_HandleTypeDef huart4;
 UART_HandleTypeDef huart5;
@@ -111,6 +113,7 @@ static void MX_RNG_Init(void);
 static void MX_SDMMC1_SD_Init(void);
 static void MX_SPI1_Init(void);
 static void MX_SPI2_Init(void);
+static void MX_LPTIM1_Init(void);
 static void MX_TIM1_Init(void);
 static void MX_TIM24_Init(void);
 static void MX_UART4_Init(void);
@@ -127,10 +130,16 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     switch(GPIO_Pin)
     {
         case IMU_AG_INT1_Pin:
+        {
             #if defined(SENSOR_THREAD_IMU_USE_INDIVIDUAL)
-                imu_int1_callback();
+
+                // float tick = timer_get_elapsed();
+                // imu_int1_callback();
+                // float toc = timer_get_elapsed();
+                // debug_printf("elapsed time %3.5f", toc-tick);
+
             #endif
-        break;
+        } break;
 
         case IMU_AG_INT2_Pin:
             #if defined(SENSOR_THREAD_IMU_USE_FIFO)
@@ -174,6 +183,14 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
     }
 }
 
+void HAL_LPTIM_AutoReloadMatchCallback(LPTIM_HandleTypeDef * hlptim)
+{
+    if(hlptim == &hlptim1)
+    {
+        timer_lptim_match_callback();
+    }
+}
+
 
 /**
   * @brief  The application entry point.
@@ -209,6 +226,7 @@ int main(void)
     MX_SPI2_Init(); // Barometer
     // MX_TIM1_Init();
     // MX_TIM24_Init();
+    MX_LPTIM1_Init();
     // MX_UART4_Init();
     MX_UART5_Init(); // MAX_M8C UART
     // MX_UART7_Init();
@@ -245,11 +263,13 @@ int main(void)
     location_task_handle = 
     osThreadNew(location_thread_start,      NULL, &location_task_attributes);
 
-    // task_manager_task_handle = 
-    // osThreadNew(task_manager_thread_start,  NULL, &task_manager_attributes);
+    task_manager_task_handle = 
+    osThreadNew(task_manager_thread_start,  NULL, &task_manager_attributes);
 
     led_task_handle = 
     osThreadNew(led_thread_start,           NULL, &led_task_attributes);
+
+    timer_time_start();
 
     /*********************************************************************************************/
     /* Start scheduler --------------------------------------------------------------------------*/
@@ -320,7 +340,7 @@ void SystemClock_Config(void)
         | RCC_PERIPHCLK_SPI2 | RCC_PERIPHCLK_SDMMC
         | RCC_PERIPHCLK_I2C2 | RCC_PERIPHCLK_ADC
         | RCC_PERIPHCLK_I2C1 | RCC_PERIPHCLK_USB
-        | RCC_PERIPHCLK_OSPI;
+        | RCC_PERIPHCLK_OSPI | RCC_PERIPHCLK_LPTIM1;
     PeriphClkInitStruct.PLL2.PLL2M = 4;
     PeriphClkInitStruct.PLL2.PLL2N = 160;
     PeriphClkInitStruct.PLL2.PLL2P = 4;
@@ -345,6 +365,7 @@ void SystemClock_Config(void)
     PeriphClkInitStruct.RngClockSelection = RCC_RNGCLKSOURCE_PLL;
     PeriphClkInitStruct.I2c1235ClockSelection = RCC_I2C1235CLKSOURCE_PLL3;
     PeriphClkInitStruct.UsbClockSelection = RCC_USBCLKSOURCE_PLL3;
+    PeriphClkInitStruct.Lptim1ClockSelection = RCC_LPTIM1CLKSOURCE_D2PCLK1;
     PeriphClkInitStruct.AdcClockSelection = RCC_ADCCLKSOURCE_PLL3;
     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
     {
@@ -581,6 +602,28 @@ static void MX_I2C2_Init(void)
     {
         Error_Handler();
     }
+}
+
+/**
+  * @brief LPTIM1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_LPTIM1_Init(void)
+{
+  hlptim1.Instance = LPTIM1;
+  hlptim1.Init.Clock.Source = LPTIM_CLOCKSOURCE_APBCLOCK_LPOSC;
+  hlptim1.Init.Clock.Prescaler = LPTIM_PRESCALER_DIV128;
+  hlptim1.Init.Trigger.Source = LPTIM_TRIGSOURCE_SOFTWARE;
+  hlptim1.Init.OutputPolarity = LPTIM_OUTPUTPOLARITY_HIGH;
+  hlptim1.Init.UpdateMode = LPTIM_UPDATE_IMMEDIATE;
+  hlptim1.Init.CounterSource = LPTIM_COUNTERSOURCE_INTERNAL;
+  hlptim1.Init.Input1Source = LPTIM_INPUT1SOURCE_GPIO;
+  hlptim1.Init.Input2Source = LPTIM_INPUT2SOURCE_GPIO;
+  if (HAL_LPTIM_Init(&hlptim1) != HAL_OK)
+  {
+    Error_Handler();
+  }
 }
 
 /**

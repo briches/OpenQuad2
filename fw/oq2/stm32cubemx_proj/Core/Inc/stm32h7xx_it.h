@@ -59,6 +59,7 @@ void USART2_IRQHandler(void);
 void EXTI15_10_IRQHandler(void);
 void UART5_IRQHandler(void);
 void OTG_HS_IRQHandler(void);
+void LPTIM1_IRQHandler(void);
 /* USER CODE BEGIN EFP */
 
 /* USER CODE END EFP */

@@ -41,7 +41,7 @@ void led_thread_start(void* argument)
             {
                 m_state = 1;
                 HAL_GPIO_WritePin(LED_G_GPIO_Port, LED_G_Pin, GPIO_PIN_SET);
-                HAL_Delay(LED_THREAD_PERIOD);
+                osDelay(LED_THREAD_PERIOD);
 
             } break;
 
@@ -49,7 +49,7 @@ void led_thread_start(void* argument)
             {
                 m_state = 2;
                 HAL_GPIO_WritePin(LED_R_GPIO_Port, LED_R_Pin, GPIO_PIN_SET);
-                HAL_Delay(LED_THREAD_PERIOD);
+                osDelay(LED_THREAD_PERIOD);
             } break;
 
             case 2:

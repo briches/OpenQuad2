@@ -1,3 +1,21 @@
+/*
+ * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\application\sys\stm32h7xx_it.h                  /
+ * Project: OQ2                                                                                    /
+ * Created Date: Wednesday, December 2nd 2020, 7:44:42 pm                                          /
+ * Author: Brandon Riches                                                                          /
+ * Email: richesbc@gmail.com                                                                       /
+ * -----                                                                                           /
+ *                                                                                                 /
+ * Copyright (c) 2020 OpenQuad2.                                                                   /
+ * All rights reserved.                                                                            /
+ *                                                                                                 /
+ * Redistribution and use in source or binary forms, with or without modification,                 /
+ * are not permitted without express written approval of OpenQuad2                                 /
+ * -----                                                                                           /
+ * HISTORY:                                                                                        /
+*/
+
+
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
@@ -26,27 +44,6 @@
  extern "C" {
 #endif
 
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
-
-/* USER CODE END Includes */
-
-/* Exported types ------------------------------------------------------------*/
-/* USER CODE BEGIN ET */
-
-/* USER CODE END ET */
-
-/* Exported constants --------------------------------------------------------*/
-/* USER CODE BEGIN EC */
-
-/* USER CODE END EC */
-
-/* Exported macro ------------------------------------------------------------*/
-/* USER CODE BEGIN EM */
-
-/* USER CODE END EM */
-
-/* Exported functions prototypes ---------------------------------------------*/
 void NMI_Handler(void);
 void HardFault_Handler(void);
 void MemManage_Handler(void);
@@ -55,16 +52,14 @@ void UsageFault_Handler(void);
 void DebugMon_Handler(void);
 void EXTI9_5_IRQHandler(void);
 void TIM2_IRQHandler(void);
+void USART2_IRQHandler(void);
 void EXTI15_10_IRQHandler(void);
+void UART5_IRQHandler(void);
 void OTG_HS_IRQHandler(void);
-/* USER CODE BEGIN EFP */
-
-/* USER CODE END EFP */
+void LPTIM1_IRQHandler(void);
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* __STM32H7xx_IT_H */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

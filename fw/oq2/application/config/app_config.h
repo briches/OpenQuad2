@@ -25,8 +25,8 @@
 
 /*********************************************************************************************/
 /* Task Configuration------------------------------------------------------------------------*/
-#define STABILITY_THREAD_PRIO           osPriorityNormal
-#define STABILITY_THREAD_PERIOD         250
+#define STABILITY_THREAD_PRIO           osPriorityRealtime7
+#define STABILITY_THREAD_PERIOD         10
 #define STABILITY_THREAD_STACK_SIZE     1024 * 4
 
 #define LOCATION_THREAD_PRIO            osPriorityNormal

@@ -1,21 +1,3 @@
-/*
- * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\Middlewares\ARM\DSP\Inc\arm_math.h              /
- * Project: OQ2                                                                                    /
- * Created Date: Thursday, December 24th 2020, 8:45:28 am                                          /
- * Author: Brandon Riches                                                                          /
- * Email: richesbc@gmail.com                                                                       /
- * -----                                                                                           /
- *                                                                                                 /
- * Copyright (c) 2020 OpenQuad2.                                                                   /
- * All rights reserved.                                                                            /
- *                                                                                                 /
- * Redistribution and use in source or binary forms, with or without modification,                 /
- * are not permitted without express written approval of OpenQuad2                                 /
- * -----                                                                                           /
- * HISTORY:                                                                                        /
-*/
-
-
 /******************************************************************************
  * @file     arm_math.h
  * @brief    Public header file for CMSIS DSP LibraryU
@@ -306,8 +288,6 @@
  */
 #ifndef _ARM_MATH_H
 #define _ARM_MATH_H
-
-#include "stm32h735xx.h"
 
 /* Compiler specific diagnostic adjustment */
 #if   defined ( __CC_ARM )

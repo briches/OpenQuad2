@@ -20,9 +20,9 @@ TARGET = _oq2
 # building variables
 ######################################
 # debug build?
-DEBUG = 0
+DEBUG = 1
 # optimization
-OPT = -O2
+OPT = -O0
 
 
 #######################################
@@ -42,9 +42,9 @@ application/led_blinky/led_blinky.c \
 application/location/location.c \
 application/stability_control/stability.c \
 application/stability_control/platform/mems_platform.c \
-application/stability_control/kalman/kalman.c \
 application/stability_control/kinematics/kinematics.c \
 application/task_manager/task_manager.c \
+application/timer/timer.c \
 application/sys/stm32h7xx_it.c \
 application/sys/stm32h7xx_hal_msp.c \
 application/sys/stm32h7xx_hal_timebase_tim.c \
@@ -94,6 +94,7 @@ Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_spi.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_spi_ex.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim_ex.c \
+Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_lptim.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart_ex.c \
 Drivers/Mems/lsm9ds1_STdC/driver/lsm9ds1_reg.c \
@@ -183,11 +184,11 @@ C_INCLUDES =  \
 -Iapplication/location \
 -Iapplication/led_blinky \
 -Iapplication/stability_control \
--Iapplication/stability_control/kalman \
 -Iapplication/stability_control/kinematics \
 -Iapplication/stability_control/platform \
 -Iapplication/sys \
 -Iapplication/task_manager \
+-Iapplication/timer \
 -IFATFS/Target \
 -IFATFS/App \
 -IUSB_DEVICE/App \

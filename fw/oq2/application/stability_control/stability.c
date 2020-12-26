@@ -27,6 +27,8 @@
 #include "stability_config.h"
 #include "motion_fx.h"
 #include "arm_math.h"
+#include "kinematics.h"
+#include "timer.h"
 
 #define debug_error(fmt, ...)           debug_error(STABILITY_MODULE_ID, fmt, ##__VA_ARGS__)
 #define debug_printf(fmt, ...)          debug_printf(STABILITY_MODULE_ID, fmt, ##__VA_ARGS__)
@@ -37,7 +39,7 @@
 #define LPS22HH_BUS hspi2
 
 static MFX_knobs_t m_mfx_knobs;
-static TickType_t timestamp;
+static kinematics_ctx_t m_kctx;
 
 typedef union {
     int16_t i16bit[3];
@@ -124,7 +126,6 @@ static void lsm9ds1_init()
     debug_printf("LSM9DS1 Init");
 
     /* Check device ID */
-
     int retry = SC_MEMS_DETECT_RETRY_MAX;
 
     do
@@ -180,14 +181,14 @@ static void lsm9ds1_init()
     lsm9ds1_mag_data_rate_set(&dev_ctx_mag, LSM9DS1_MAG_UHP_10Hz);
 
     lsm9ds1_ctrl_reg9_t ctrl9;
-    ctrl9.drdy_mask_bit = 1;
+    // ctrl9.drdy_mask_bit = 1;
     lsm9ds1_write_reg(&dev_ctx_mag, LSM9DS1_CTRL_REG9, (uint8_t *)&ctrl9, sizeof(ctrl9));
 
     #if defined(SENSOR_THREAD_IMU_USE_INDIVIDUAL)
 
         /* Set Accelerometer data ready interrupt on INT 1_A/G pin */
         lsm9ds1_pin_int1_route_t int1 = { 0 };
-        int1.int1_drdy_xl = PROPERTY_ENABLE;
+        // int1.int1_drdy_xl = PROPERTY_ENABLE;
         lsm9ds1_pin_int1_route_set(&dev_ctx_imu, int1);
 
         /* No interrupts pathed to INT2 pin */
@@ -319,12 +320,13 @@ static void read_baro_data()
 
     lps22hh_temperature_raw_get(&dev_ctx_lps, &data_raw_temperature);
     temperature_degC = lps22hh_from_lsb_to_celsius(data_raw_temperature);
-    temperature_degC = -4;
 
     // debug_printf("pressure [hPa]:%6.1f, temperature [degC]:%6.1f", pressure_hPa, temperature_degC);
 
     // Convert pressure in hPA to meters elevation
-    float elevation = (powf(1013.25/pressure_hPa, 0.19022256) - 1) * (temperature_degC + 273.15)  * 153.84615;
+    float elevation = (powf(SC_SEA_LEVEL_PRESS_HPA/pressure_hPa, 0.19022256) - 1) * (SC_AIR_TEMPERATURE + 273.15)  * 153.84615;
+
+    kinematics_new_elevation_data_callback(&m_kctx, elevation);
 
     // debug_printf("Elevation [m]:%6.1f, temperature [degC]:%6.1f", elevation, temperature_degC);
 }
@@ -346,93 +348,9 @@ void imu_int1_callback()
     }
 
     // Enter a critical region and get the latest data
-    UBaseType_t uxSavedInterruptStatus = taskENTER_CRITICAL_FROM_ISR();
+    // UBaseType_t uxSavedInterruptStatus = taskENTER_CRITICAL_FROM_ISR();
 
-    // Read new sensor data that is available.
-    read_imu_data();
-
-    MFX_input_t data_in;
-    MFX_output_t data_out;
-
-    // Get the time delta since the last data ready
-    float dT;
-    TickType_t now = HAL_GetTick();
-    dT = (float)( now - timestamp ) / (1000.0f * HAL_GetTickFreq());
-    timestamp = now;
-
-    // ACcelerations in G's
-    data_in.acc[0] = acceleration_mg[0] / 1000.0;
-    data_in.acc[1] = acceleration_mg[1] / 1000.0;
-    data_in.acc[2] = acceleration_mg[2] / 1000.0;
-
-    // debug_printf("%3.4f, %3.4f, %3.4f", data_in.acc[0], data_in.acc[1], data_in.acc[2]);
-
-    // Rate in dps
-    data_in.gyro[0] = angular_rate_mdps[0] / 1000.0;
-    data_in.gyro[1] = angular_rate_mdps[1] / 1000.0;
-    data_in.gyro[2] = angular_rate_mdps[2] / 1000.0;
-
-    // debug_printf("%3.4f, %3.4f, %3.4f", data_in.gyro[0], data_in.gyro[1], data_in.gyro[2]);
-
-    // Mag in uT / 50
-    data_in.mag[0] = magnetic_field_mgauss[0] / (50.0f * 10.0f);
-    data_in.mag[1] = magnetic_field_mgauss[1] / (50.0f * 10.0f);
-    data_in.mag[2] = magnetic_field_mgauss[2] / (50.0f * 10.0f);
-
-    // debug_printf("%3.4f, %3.4f, %3.4f", data_in.mag[0], data_in.mag[1], data_in.mag[2]);
-
-    #if (SC_OPERATING_MODE == SC_OP_MODE_MAG_CAL)
-    static MFX_MagCal_quality_t cal_quality = MFX_MAGCALUNKNOWN;
-
-    MFX_MagCal_input_t mc_input_data;
-    MFX_MagCal_output_t mc_output_data;
-    mc_input_data.mag[0] = data_in.mag[0];
-    mc_input_data.mag[1] = data_in.mag[1];
-    mc_input_data.mag[2] = data_in.mag[2];
-    mc_input_data.time_stamp = now;
-
-    MotionFX_MagCal_run(&mc_input_data);
-
-    MotionFX_MagCal_getParams(&mc_output_data);
-
-    cal_quality = mc_output_data.cal_quality;
-
-    // debug_printf("inx, %3.2f, iny, %3.2f, inz, %3.2f, Quality: %u, x, %3.2f, y, %3.2f, z, %3.2f", 
-    //                 data_in.mag[0],
-    //                 data_in.mag[1],
-    //                 data_in.mag[2],
-    //                 mc_output_data.cal_quality,
-    //                 mc_output_data.hi_bias[0],
-    //                 mc_output_data.hi_bias[1],
-    //                 mc_output_data.hi_bias[2]);
-    
-    if(cal_quality == MFX_MAGCALGOOD)
-    {
-        debug_printf("Cald");
-        MotionFX_MagCal_init(0, false);
-
-        data_in.mag[0] -= mc_output_data.hi_bias[0];
-        data_in.mag[1] -= mc_output_data.hi_bias[1];
-        data_in.mag[2] -= mc_output_data.hi_bias[2];
-    }
-    #endif
-    
-    MotionFX_propagate(&data_out, &data_in, &dT);
-    MotionFX_update(&data_out, &data_in, &dT, NULL);
-
-    #if SC_ENABLE_6AXIS_MFX_LIB == APP_CONFIG_ENABLED
-        float * p_angles = &data_out.rotation_6X[0];
-    #else
-        float * p_angles = &data_out.rotation_9X[0];
-    #endif
-
-    float yaw = p_angles[0];
-    float pitch = p_angles[1] - SC_FACTORY_PITCH_OFFSET_DEG;
-    float roll = p_angles[2] - SC_FACTORY_ROLL_OFFSET_DEG;
-
-    // debug_printf("%3.3f,%3.3f,%3.3f", /*data_in.gyro[2],*/ yaw, pitch, roll);
-
-    taskEXIT_CRITICAL_FROM_ISR(uxSavedInterruptStatus);
+    // taskEXIT_CRITICAL_FROM_ISR(uxSavedInterruptStatus);
 }
 
 /**
@@ -472,6 +390,107 @@ void baro_int_callback()
 }
 
 /**
+ * @brief Read IMU data, Update and Propagate MotionFX kalman library
+ * 
+ */
+void stability_thread_read_and_calculate()
+{
+    uint32_t TAG = osKernelGetTickCount();
+
+    // Get the time delta since the last data ready
+    static volatile float timestamp = 0;
+    float dT = 0;
+    float now = timer_get_elapsed();
+    dT = ( now - timestamp );
+    timestamp = now;
+    
+    // debug_printf("dt: %3.5f", dT);
+    if(dT < 0)
+    {
+        debug_error("%u, WATCHOUT!", TAG);
+        float test = timer_get_elapsed();
+    }
+
+    // Read new sensor data that is available.
+    read_imu_data();
+
+    // float read_time = timer_get_elapsed() - now;
+
+    MFX_input_t data_in;
+    MFX_output_t data_out;
+
+    // ACcelerations in G's
+    data_in.acc[0] = acceleration_mg[0] / 1000.0;
+    data_in.acc[1] = acceleration_mg[1] / 1000.0;
+    data_in.acc[2] = acceleration_mg[2] / 1000.0;
+
+    // debug_printf("%3.4f, %3.4f, %3.4f", data_in.acc[0], data_in.acc[1], data_in.acc[2]);
+
+    // Rate in dps
+    data_in.gyro[0] = angular_rate_mdps[0] / 1000.0;
+    data_in.gyro[1] = angular_rate_mdps[1] / 1000.0;
+    data_in.gyro[2] = angular_rate_mdps[2] / 1000.0;
+
+    // debug_printf("%3.4f, %3.4f, %3.4f", data_in.gyro[0], data_in.gyro[1], data_in.gyro[2]);
+
+    // Mag in uT / 50
+    data_in.mag[0] = magnetic_field_mgauss[0] / (50.0f * 10.0f);
+    data_in.mag[1] = magnetic_field_mgauss[1] / (50.0f * 10.0f);
+    data_in.mag[2] = magnetic_field_mgauss[2] / (50.0f * 10.0f);
+
+    // debug_printf("%3.4f, %3.4f, %3.4f", data_in.mag[0], data_in.mag[1], data_in.mag[2]);
+
+#if (SC_OPERATING_MODE == SC_OP_MODE_MAG_CAL)
+    static MFX_MagCal_quality_t cal_quality = MFX_MAGCALUNKNOWN;
+
+    MFX_MagCal_input_t mc_input_data;
+    MFX_MagCal_output_t mc_output_data;
+    mc_input_data.mag[0] = data_in.mag[0];
+    mc_input_data.mag[1] = data_in.mag[1];
+    mc_input_data.mag[2] = data_in.mag[2];
+    mc_input_data.time_stamp = now;
+
+    MotionFX_MagCal_run(&mc_input_data);
+
+    MotionFX_MagCal_getParams(&mc_output_data);
+
+    cal_quality = mc_output_data.cal_quality;
+
+    // debug_printf("inx, %3.2f, iny, %3.2f, inz, %3.2f, Quality: %u, x, %3.2f, y, %3.2f, z, %3.2f", 
+    //                 data_in.mag[0],
+    //                 data_in.mag[1],
+    //                 data_in.mag[2],
+    //                 mc_output_data.cal_quality,
+    //                 mc_output_data.hi_bias[0],
+    //                 mc_output_data.hi_bias[1],
+    //                 mc_output_data.hi_bias[2]);
+    
+    if(cal_quality == MFX_MAGCALGOOD)
+    {
+        debug_printf("Cald");
+        MotionFX_MagCal_init(0, false);
+
+        data_in.mag[0] -= mc_output_data.hi_bias[0];
+        data_in.mag[1] -= mc_output_data.hi_bias[1];
+        data_in.mag[2] -= mc_output_data.hi_bias[2];
+    }
+#endif
+    
+    MotionFX_propagate(&data_out, &data_in, &dT);
+    MotionFX_update(&data_out, &data_in, &dT, NULL);
+
+    #if SC_ENABLE_6AXIS_MFX_LIB == APP_CONFIG_ENABLED
+        float * p_angles = &data_out.rotation_6X[0];
+    #else
+        float * p_angles = &data_out.rotation_9X[0];
+    #endif
+
+    kinematics_new_motionfx_data_callback(&m_kctx, &data_out);
+
+    // debug_printf("%3.3f,%3.3f,%3.3f", /*data_in.gyro[2],*/ yaw, pitch, roll);
+}
+
+/**
  * @brief Initialization prior to interrupts being enabled
  *
  */
@@ -491,6 +510,9 @@ void stability_thread_pre_init()
     dev_ctx_lps.write_reg = platform_write_baro;
     dev_ctx_lps.read_reg = platform_read_baro;
     dev_ctx_lps.handle = (void*)&LPS22HH_BUS;
+
+    // Init kinematics context
+    kinematics_initialize(&m_kctx, SC_ENABLE_9AXIS_MFX_LIB);
 
     /* Wait sensor boot time */
     platform_delay(BOOT_TIME_LSM9DS1);
@@ -525,6 +547,7 @@ void stability_thread_pre_init()
     m_mfx_knobs.acc_orientation[1] = 'w';
     m_mfx_knobs.acc_orientation[2] = 'u';
 
+    m_mfx_knobs.ATime = SC_MFX_ATIME;
     m_mfx_knobs.start_automatic_gbias_calculation = 0;
     m_mfx_knobs.LMode = 1;
     m_mfx_knobs.modx = 1;
@@ -580,25 +603,27 @@ void stability_thread_start(void* argument)
         if(m_int1_count)
         {
             read_imu_data();
-            debug_printf("Recovered int1 from sensor task.");
+            // debug_printf("Recovered int1 from sensor task.");
         }
         m_int1_count = 0;
 
-        // Recover Mag Data intterupt before we were ready
+        // Recover Mag Data interupt before we were ready
         if (m_drdy_count || HAL_GPIO_ReadPin(IMU_MAG_DRDY_GPIO_Port, IMU_MAG_DRDY_Pin))
         {
             read_mag_data();
-            debug_printf("Recovered drdy from sensor task.");
+            // debug_printf("Recovered drdy from sensor task.");
         }
         m_drdy_count = 0;
 
         // Recover barometer data interrupt from before we were ready
         if(m_baro_int_count || HAL_GPIO_ReadPin(BARO_INT_GPIO_Port, BARO_INT_Pin))
         {
-            debug_printf("Recovered baro int from sensor task.");
+            // debug_printf("Recovered baro int from sensor task.");
             read_baro_data();
         }
         m_baro_int_count = 0;
+
+        stability_thread_read_and_calculate();
 
         osDelay(STABILITY_THREAD_PERIOD);
     }
