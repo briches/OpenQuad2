@@ -40,9 +40,11 @@ application/main.c \
 application/freertos/freertos.c \
 application/led_blinky/led_blinky.c \
 application/location/location.c \
+application/pid/pid.c \
 application/stability_control/stability.c \
 application/stability_control/platform/mems_platform.c \
 application/stability_control/kinematics/kinematics.c \
+application/stability_control/motors/motors.c \
 application/task_manager/task_manager.c \
 application/timer/timer.c \
 application/sys/stm32h7xx_it.c \
@@ -183,9 +185,11 @@ C_INCLUDES =  \
 -Iapplication/freertos \
 -Iapplication/location \
 -Iapplication/led_blinky \
+-Iapplication/pid \
 -Iapplication/stability_control \
 -Iapplication/stability_control/kinematics \
 -Iapplication/stability_control/platform \
+-Iapplication/stability_control/motors \
 -Iapplication/sys \
 -Iapplication/task_manager \
 -Iapplication/timer \
@@ -241,8 +245,6 @@ LDFLAGS = $(MCU) -specs=nano.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BU
 
 # default action: build all
 all: $(BUILD_DIR)/$(TARGET).elf $(BUILD_DIR)/$(TARGET).hex $(BUILD_DIR)/$(TARGET).bin
-	echo $(LIBS)
-
 
 #######################################
 # build the application

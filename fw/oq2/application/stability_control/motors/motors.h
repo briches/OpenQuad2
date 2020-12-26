@@ -1,7 +1,7 @@
 /*
- * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\Drivers\DebugLog\module_ids.h                   /
+ * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\application\motors\motors.h                     /
  * Project: OQ2                                                                                    /
- * Created Date: Saturday, December 12th 2020, 7:36:14 am                                          /
+ * Created Date: Saturday, December 26th 2020, 10:40:38 am                                         /
  * Author: Brandon Riches                                                                          /
  * Email: richesbc@gmail.com                                                                       /
  * -----                                                                                           /
@@ -15,26 +15,44 @@
  * HISTORY:                                                                                        /
 */
 
+#ifndef MOTORS_H_
+#define MOTORS_H_
 
-#ifndef MODULE_IDS_H_
-#define MODULE_IDS_H_
+#include <stdbool.h>
+#include <stdint.h>
+#include "main.h"
 
-typedef enum
+extern TIM_HandleTypeDef htim1;
+extern TIM_HandleTypeDef htim24;
+
+typedef enum motor_armed
 {
-    TASK_MANAGER_MODULE_ID,
-    MAIN_MODULE_ID,
-    FREERTOS_MODULE_ID,
-    STABILITY_MODULE_ID,
-    KINEMATICS_MODULE_ID,
-    LOCATION_MODULE_ID,
-    PID_MODULE_ID,
-    MOTORS_MODULE_ID,
-    NUM_MODULES
-} module_id_t;
+    MOTOR_DISARMED = 0,
+    MOTOR_ARMED = 1,
+} motor_arm_t;
+
+typedef struct motors
+{
+    bool armed;
+
+    uint8_t index;
+
+    float period_us;
+
+    // PWM Timer ref
+    TIM_HandleTypeDef * htimer;
+    uint32_t channel;
+    __IO uint32_t ccr;
+
+    // GPIO pin ref
+    GPIO_pin_t arm_pin;
+
+} motor_t;
 
 
+void motor_controllers_init();
+void motor_controllers_set_arm_state(uint8_t index, motor_arm_t armed);
+void motor_controllers_control_input(float * pitch_ctrl, float * roll_ctrl, float * yaw_ctrl);
 
-#define DEBUG_CYAN_HIGHLIGHT_SELECT    PID_MODULE_ID
-#define DEBUG_YELLOW_HIGHLIGHT_SELECT  STABILITY_MODULE_ID
 
 #endif

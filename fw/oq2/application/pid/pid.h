@@ -33,9 +33,9 @@ typedef struct
 
 typedef struct
 {
-    float P_lim;
-    float I_lim;
-    float D_lim;
+    float P_lim;    // Limit the P * err term
+    float I_lim;    // Limit the size of the integral
+    float D_lim;    // Limit the derivative
 } pid_limits_t;
 
 
@@ -67,10 +67,17 @@ typedef struct pid
 
     // The previous measurement input
     float last_input;
+
+    // The setpoint
+    float setpoint;
 } pid_ctx_t;
 
 
-void pid_initialize_ctx(pid_ctx_t * p_ctx);
+void pid_initialize_ctx(pid_ctx_t * pctx, 
+                        pid_params_t *pparams, 
+                        pid_limits_t *plimits);
+
+float pid_calculate(pid_ctx_t * pctx, float new_state, float dt);
 
 
 #endif

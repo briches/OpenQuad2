@@ -1,7 +1,7 @@
 /*
- * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\Drivers\DebugLog\module_ids.h                   /
+ * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\application\config\motors_config.h              /
  * Project: OQ2                                                                                    /
- * Created Date: Saturday, December 12th 2020, 7:36:14 am                                          /
+ * Created Date: Saturday, December 26th 2020, 10:41:01 am                                         /
  * Author: Brandon Riches                                                                          /
  * Email: richesbc@gmail.com                                                                       /
  * -----                                                                                           /
@@ -15,26 +15,14 @@
  * HISTORY:                                                                                        /
 */
 
+#ifndef MOTORS_CONFIG_H
+#define MOTORS_CONFIG_H
 
-#ifndef MODULE_IDS_H_
-#define MODULE_IDS_H_
+#include "app_config.h"
 
-typedef enum
-{
-    TASK_MANAGER_MODULE_ID,
-    MAIN_MODULE_ID,
-    FREERTOS_MODULE_ID,
-    STABILITY_MODULE_ID,
-    KINEMATICS_MODULE_ID,
-    LOCATION_MODULE_ID,
-    PID_MODULE_ID,
-    MOTORS_MODULE_ID,
-    NUM_MODULES
-} module_id_t;
-
-
-
-#define DEBUG_CYAN_HIGHLIGHT_SELECT    PID_MODULE_ID
-#define DEBUG_YELLOW_HIGHLIGHT_SELECT  STABILITY_MODULE_ID
+#define MC_NUM_MOTORS               4
+#define MC_PWM_PERIOD               3097.2217f
+#define MC_MIN_TON_US_PERIOD        1060
+#define MC_MAX_TON_US_PERIOD        2084
 
 #endif

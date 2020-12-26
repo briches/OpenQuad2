@@ -51,4 +51,29 @@ Default Sensor Offsets, cal values, etc
 #define SC_SEA_LEVEL_PRESS_HPA          (1013.25)
 #define SC_AIR_TEMPERATURE              (-4)
 
+/***************************************************************************************************
+Attitude PID values
+*/
+#define SC_PITCH_PID_P                  1
+#define SC_PITCH_PID_I                  1
+#define SC_PITCH_PID_D                  0
+#define SC_PITCH_PID_P_LIM              100
+#define SC_PITCH_PID_I_LIM              100
+#define SC_PITCH_PID_D_LIM              0
+
+#define SC_ROLL_PID_P                   1
+#define SC_ROLL_PID_I                   1
+#define SC_ROLL_PID_D                   0
+#define SC_ROLL_PID_P_LIM               100
+#define SC_ROLL_PID_I_LIM               100
+#define SC_ROLL_PID_D_LIM               0
+
+#define SC_YAW_PID_P                    0.1
+#define SC_YAW_PID_I                    0.1
+#define SC_YAW_PID_D                    0
+#define SC_YAW_PID_P_LIM                10
+#define SC_YAW_PID_I_LIM                10
+#define SC_YAW_PID_D_LIM                0
+
+
 #endif

@@ -36,12 +36,14 @@ extern UART_HandleTypeDef huart2;
 // String table of module names correlating to the module_id_t enumeration.
 const char* module_stringtable[] =
 {
-    "task_manager",
+    "tskmgr",
     "main",
     "rtos",
-    "sensors",
-    "kinematics",
-    "location",
+    "snsr",
+    "kmtcs",
+    "loc",
+    "pid",
+    "motors",
 };
 
 // Temporary buffer used for printing routines
@@ -954,7 +956,13 @@ int _putf(uint8_t** pbuf, double value, int width, int precision, char pad)
     }
 
     if (fractional < 0)
+    {
+        if(integer == 0)
+        {
+            _putc(pbuf, '-');
+        }
         fractional *= -1;
+    }
 
     if (pad == ' ' || pad == '0')
         width -= _puti(pbuf, integer, width - 1 - precision, pad);

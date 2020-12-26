@@ -71,9 +71,9 @@ uint32_t kinematics_new_motionfx_data_callback(kinematics_ctx_t * pctx, MFX_outp
     }
     else
     {
-        yaw = p_data->rotation_6X[0];
-        pitch = p_data->rotation_6X[1] - SC_FACTORY_PITCH_OFFSET_DEG;
-        roll = p_data->rotation_6X[2] - SC_FACTORY_ROLL_OFFSET_DEG;
+        pctx->yaw = p_data->rotation_6X[0];
+        pctx->pitch = p_data->rotation_6X[1] - SC_FACTORY_PITCH_OFFSET_DEG;
+        pctx->roll = p_data->rotation_6X[2] - SC_FACTORY_ROLL_OFFSET_DEG;
     }
 
     if(dt_s != 0)

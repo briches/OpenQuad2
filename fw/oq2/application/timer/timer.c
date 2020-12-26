@@ -61,7 +61,7 @@ static volatile float last = 0;
 float timer_get_elapsed()
 {
     if(HAL_LPTIM_GetState(&hlptim1) != HAL_LPTIM_STATE_READY)
-        return;
+        return 0;
 
     int32_t ticks = HAL_LPTIM_ReadCounter(&hlptim1);
     // int32_t ticks1 = HAL_LPTIM_ReadCounter(&hlptim1);

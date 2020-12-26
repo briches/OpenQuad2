@@ -5,7 +5,7 @@
  * Author: Brandon Riches                                                                          /
  * Email: richesbc@gmail.com                                                                       /
  * -----                                                                                           /
- * Last Modified: Sun Dec 13 2020                                                                  /
+ * Last Modified: Sat Dec 26 2020                                                                  /
  * Modified By: Brandon Riches                                                                     /
  * -----                                                                                           /
  *                                                                                                 /
@@ -35,6 +35,12 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
+
+typedef struct GPIO_PIN
+{
+    uint16_t pin;
+    GPIO_TypeDef * port;
+} GPIO_pin_t;
 
 
 /* Private defines -----------------------------------------------------------*/

@@ -29,17 +29,59 @@
 #include "arm_math.h"
 #include "kinematics.h"
 #include "timer.h"
+#include "pid.h"
+#include "motors.h"
 
 #define debug_error(fmt, ...)           debug_error(STABILITY_MODULE_ID, fmt, ##__VA_ARGS__)
 #define debug_printf(fmt, ...)          debug_printf(STABILITY_MODULE_ID, fmt, ##__VA_ARGS__)
 #define debug_print_buffer(fmt, ...)    debug_print_buffer(STABILITY_MODULE_ID, fmt, ##__VA_ARGS__)
 
-
 #define LSM9DS1_BUS hi2c2
 #define LPS22HH_BUS hspi2
 
 static MFX_knobs_t m_mfx_knobs;
-static kinematics_ctx_t m_kctx;
+static kinematics_ctx_t m_kinematics;
+static pid_ctx_t m_pitch_pid;
+static pid_limits_t m_pitch_pid_limits = 
+{
+    .P_lim = SC_PITCH_PID_P_LIM,
+    .I_lim = SC_PITCH_PID_I_LIM,
+    .D_lim = SC_PITCH_PID_D_LIM,
+};
+static pid_params_t m_pitch_pid_params = 
+{
+    .P = SC_PITCH_PID_P,
+    .I = SC_PITCH_PID_I,
+    .D = SC_PITCH_PID_D,
+};
+
+static pid_ctx_t m_roll_pid;
+static pid_limits_t m_roll_pid_limits = 
+{
+    .P_lim = SC_ROLL_PID_P_LIM,
+    .I_lim = SC_ROLL_PID_I_LIM,
+    .D_lim = SC_ROLL_PID_D_LIM,
+};
+static pid_params_t m_roll_pid_params = 
+{
+    .P = SC_ROLL_PID_P,
+    .I = SC_ROLL_PID_I,
+    .D = SC_ROLL_PID_D,
+};
+
+static pid_ctx_t m_yaw_pid;
+static pid_limits_t m_yaw_pid_limits = 
+{
+    .P_lim = SC_YAW_PID_P_LIM,
+    .I_lim = SC_YAW_PID_I_LIM,
+    .D_lim = SC_YAW_PID_D_LIM,
+};
+static pid_params_t m_yaw_pid_params = 
+{
+    .P = SC_YAW_PID_P,
+    .I = SC_YAW_PID_I,
+    .D = SC_YAW_PID_D,
+};
 
 typedef union {
     int16_t i16bit[3];
@@ -326,7 +368,7 @@ static void read_baro_data()
     // Convert pressure in hPA to meters elevation
     float elevation = (powf(SC_SEA_LEVEL_PRESS_HPA/pressure_hPa, 0.19022256) - 1) * (SC_AIR_TEMPERATURE + 273.15)  * 153.84615;
 
-    kinematics_new_elevation_data_callback(&m_kctx, elevation);
+    kinematics_new_elevation_data_callback(&m_kinematics, elevation);
 
     // debug_printf("Elevation [m]:%6.1f, temperature [degC]:%6.1f", elevation, temperature_degC);
 }
@@ -392,8 +434,9 @@ void baro_int_callback()
 /**
  * @brief Read IMU data, Update and Propagate MotionFX kalman library
  * 
+ * @retval time delta since last call in seconds
  */
-void stability_thread_read_and_calculate()
+float stability_thread_read_and_calculate()
 {
     uint32_t TAG = osKernelGetTickCount();
 
@@ -404,7 +447,6 @@ void stability_thread_read_and_calculate()
     dT = ( now - timestamp );
     timestamp = now;
     
-    // debug_printf("dt: %3.5f", dT);
     if(dT < 0)
     {
         debug_error("%u, WATCHOUT!", TAG);
@@ -414,8 +456,6 @@ void stability_thread_read_and_calculate()
     // Read new sensor data that is available.
     read_imu_data();
 
-    // float read_time = timer_get_elapsed() - now;
-
     MFX_input_t data_in;
     MFX_output_t data_out;
 
@@ -424,21 +464,15 @@ void stability_thread_read_and_calculate()
     data_in.acc[1] = acceleration_mg[1] / 1000.0;
     data_in.acc[2] = acceleration_mg[2] / 1000.0;
 
-    // debug_printf("%3.4f, %3.4f, %3.4f", data_in.acc[0], data_in.acc[1], data_in.acc[2]);
-
     // Rate in dps
     data_in.gyro[0] = angular_rate_mdps[0] / 1000.0;
     data_in.gyro[1] = angular_rate_mdps[1] / 1000.0;
     data_in.gyro[2] = angular_rate_mdps[2] / 1000.0;
 
-    // debug_printf("%3.4f, %3.4f, %3.4f", data_in.gyro[0], data_in.gyro[1], data_in.gyro[2]);
-
     // Mag in uT / 50
     data_in.mag[0] = magnetic_field_mgauss[0] / (50.0f * 10.0f);
     data_in.mag[1] = magnetic_field_mgauss[1] / (50.0f * 10.0f);
     data_in.mag[2] = magnetic_field_mgauss[2] / (50.0f * 10.0f);
-
-    // debug_printf("%3.4f, %3.4f, %3.4f", data_in.mag[0], data_in.mag[1], data_in.mag[2]);
 
 #if (SC_OPERATING_MODE == SC_OP_MODE_MAG_CAL)
     static MFX_MagCal_quality_t cal_quality = MFX_MAGCALUNKNOWN;
@@ -485,9 +519,9 @@ void stability_thread_read_and_calculate()
         float * p_angles = &data_out.rotation_9X[0];
     #endif
 
-    kinematics_new_motionfx_data_callback(&m_kctx, &data_out);
+    kinematics_new_motionfx_data_callback(&m_kinematics, &data_out);
 
-    // debug_printf("%3.3f,%3.3f,%3.3f", /*data_in.gyro[2],*/ yaw, pitch, roll);
+    return dT;
 }
 
 /**
@@ -512,7 +546,22 @@ void stability_thread_pre_init()
     dev_ctx_lps.handle = (void*)&LPS22HH_BUS;
 
     // Init kinematics context
-    kinematics_initialize(&m_kctx, SC_ENABLE_9AXIS_MFX_LIB);
+    kinematics_initialize(&m_kinematics, SC_ENABLE_9AXIS_MFX_LIB);
+
+    // Initialize motors
+    motor_controllers_init();
+    motor_controllers_set_arm_state(1, MOTOR_ARMED);
+    motor_controllers_set_arm_state(2, MOTOR_ARMED);
+    motor_controllers_set_arm_state(3, MOTOR_ARMED);
+    motor_controllers_set_arm_state(4, MOTOR_ARMED);
+
+    // Initialize PID controllers
+    pid_initialize_ctx(&m_pitch_pid, &m_pitch_pid_params, &m_pitch_pid_limits);
+    pid_initialize_ctx(&m_roll_pid, &m_roll_pid_params, &m_roll_pid_limits);
+    pid_initialize_ctx(&m_yaw_pid, &m_yaw_pid_params, &m_yaw_pid_limits);
+    m_pitch_pid.setpoint = 0;
+    m_roll_pid.setpoint = 0;
+    m_yaw_pid.setpoint = 0;
 
     /* Wait sensor boot time */
     platform_delay(BOOT_TIME_LSM9DS1);
@@ -623,7 +672,23 @@ void stability_thread_start(void* argument)
         }
         m_baro_int_count = 0;
 
-        stability_thread_read_and_calculate();
+        // The main stability control loop
+        // Calculate kinematics data
+        float dT = stability_thread_read_and_calculate();
+
+        // Calculate pid control values
+        float pitch_pid_out = pid_calculate(&m_pitch_pid, m_kinematics.pitch, dT);
+        float roll_pid_out = pid_calculate(&m_roll_pid, m_kinematics.roll, dT);
+        float yaw_pid_out = pid_calculate(&m_yaw_pid, m_kinematics.yaw, dT);
+
+        pitch_pid_out = 0;
+        roll_pid_out = 0;
+        yaw_pid_out = 0;
+
+        // Update motors with control values
+        motor_controllers_control_input(&pitch_pid_out, &roll_pid_out, &yaw_pid_out);
+
+        // debug_printf("p: %3.2f, pc: %3.2f, r: %3.2f, rc: %3.2f", m_kinematics.pitch, pitch_pid_out, m_kinematics.roll, roll_pid_out);
 
         osDelay(STABILITY_THREAD_PERIOD);
     }

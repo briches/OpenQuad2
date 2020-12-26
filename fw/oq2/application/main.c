@@ -224,8 +224,8 @@ int main(void)
     // MX_SDMMC1_SD_Init();
     // MX_SPI1_Init();
     MX_SPI2_Init(); // Barometer
-    // MX_TIM1_Init();
-    // MX_TIM24_Init();
+    MX_TIM1_Init();
+    MX_TIM24_Init();
     MX_LPTIM1_Init();
     // MX_UART4_Init();
     MX_UART5_Init(); // MAX_M8C UART
@@ -263,8 +263,8 @@ int main(void)
     location_task_handle = 
     osThreadNew(location_thread_start,      NULL, &location_task_attributes);
 
-    task_manager_task_handle = 
-    osThreadNew(task_manager_thread_start,  NULL, &task_manager_attributes);
+    // task_manager_task_handle = 
+    // osThreadNew(task_manager_thread_start,  NULL, &task_manager_attributes);
 
     led_task_handle = 
     osThreadNew(led_thread_start,           NULL, &led_task_attributes);
@@ -815,26 +815,19 @@ static void MX_SPI2_Init(void)
   */
 static void MX_TIM1_Init(void)
 {
-
-    /* USER CODE BEGIN TIM1_Init 0 */
-
-    /* USER CODE END TIM1_Init 0 */
-
     TIM_ClockConfigTypeDef sClockSourceConfig = { 0 };
     TIM_MasterConfigTypeDef sMasterConfig = { 0 };
     TIM_OC_InitTypeDef sConfigOC = { 0 };
     TIM_BreakDeadTimeConfigTypeDef sBreakDeadTimeConfig = { 0 };
 
-    /* USER CODE BEGIN TIM1_Init 1 */
-
-    /* USER CODE END TIM1_Init 1 */
     htim1.Instance = TIM1;
-    htim1.Init.Prescaler = 0;
+    // FPWM = 322.87 Hz = 275000000 / (65536 * (12 + 1))
+    htim1.Init.Prescaler = 12;
     htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
-    htim1.Init.Period = 65535;
+    htim1.Init.Period = 0xFFFF;
     htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
     htim1.Init.RepetitionCounter = 0;
-    htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+    htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
     if (HAL_TIM_Base_Init(&htim1) != HAL_OK)
     {
         Error_Handler();
@@ -859,7 +852,7 @@ static void MX_TIM1_Init(void)
     sConfigOC.Pulse = 0;
     sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
     sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
-    sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+    sConfigOC.OCFastMode = TIM_OCFAST_ENABLE;
     sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
     sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
     if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_3) != HAL_OK)
@@ -885,11 +878,8 @@ static void MX_TIM1_Init(void)
     {
         Error_Handler();
     }
-    /* USER CODE BEGIN TIM1_Init 2 */
 
-    /* USER CODE END TIM1_Init 2 */
     HAL_TIM_MspPostInit(&htim1);
-
 }
 
 /**
@@ -899,24 +889,17 @@ static void MX_TIM1_Init(void)
   */
 static void MX_TIM24_Init(void)
 {
-
-    /* USER CODE BEGIN TIM24_Init 0 */
-
-    /* USER CODE END TIM24_Init 0 */
-
     TIM_ClockConfigTypeDef sClockSourceConfig = { 0 };
     TIM_MasterConfigTypeDef sMasterConfig = { 0 };
     TIM_OC_InitTypeDef sConfigOC = { 0 };
 
-    /* USER CODE BEGIN TIM24_Init 1 */
-
-    /* USER CODE END TIM24_Init 1 */
     htim24.Instance = TIM24;
-    htim24.Init.Prescaler = 0;
+    // FPWM = 322.87 Hz = 275000000 / (65536 * (12 + 1))
+    htim24.Init.Prescaler = 12;
     htim24.Init.CounterMode = TIM_COUNTERMODE_UP;
-    htim24.Init.Period = 4294967295;
+    htim24.Init.Period = 65535;
     htim24.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-    htim24.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+    htim24.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
     if (HAL_TIM_Base_Init(&htim24) != HAL_OK)
     {
         Error_Handler();
@@ -939,7 +922,7 @@ static void MX_TIM24_Init(void)
     sConfigOC.OCMode = TIM_OCMODE_PWM1;
     sConfigOC.Pulse = 0;
     sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
-    sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+    sConfigOC.OCFastMode = TIM_OCFAST_ENABLE;
     if (HAL_TIM_PWM_ConfigChannel(&htim24, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
     {
         Error_Handler();
@@ -948,11 +931,8 @@ static void MX_TIM24_Init(void)
     {
         Error_Handler();
     }
-    /* USER CODE BEGIN TIM24_Init 2 */
 
-    /* USER CODE END TIM24_Init 2 */
     HAL_TIM_MspPostInit(&htim24);
-
 }
 
 /**
@@ -1336,22 +1316,15 @@ static void MX_GPIO_Init(void)
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
     /*Configure GPIO pins : BLDC_BOOTSEL1_Pin BLDC_BOOTSEL2_Pin BLDC_BOOTSEL3_Pin BLDC_BOOTSEL4_Pin
-                             BLDC_ARM1_Pin BLDC_nRESET1_Pin BLDC_nRESET2_Pin BLDC_nRESET3_Pin
+                             BLDC_nRESET1_Pin BLDC_nRESET2_Pin BLDC_nRESET3_Pin
                              BLDC_nRESET4_Pin */
     GPIO_InitStruct.Pin = BLDC_BOOTSEL1_Pin | BLDC_BOOTSEL2_Pin | BLDC_BOOTSEL3_Pin | BLDC_BOOTSEL4_Pin
-        | BLDC_ARM1_Pin | BLDC_nRESET1_Pin | BLDC_nRESET2_Pin | BLDC_nRESET3_Pin
+         | BLDC_nRESET1_Pin | BLDC_nRESET2_Pin | BLDC_nRESET3_Pin
         | BLDC_nRESET4_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
-
-    /*Configure GPIO pins : BLDC_ARM4_Pin BLDC_ARM3_Pin BLDC_ARM2_Pin */
-    GPIO_InitStruct.Pin = BLDC_ARM4_Pin | BLDC_ARM3_Pin | BLDC_ARM2_Pin;
-    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
     /*Configure GPIO pins : BARO_INT_Pin IMU_MAG_DRDY_Pin */
     GPIO_InitStruct.Pin = BARO_INT_Pin | IMU_MAG_DRDY_Pin;
@@ -1405,6 +1378,30 @@ static void MX_GPIO_Init(void)
     GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(BARO_INT_GPIO_Port, &GPIO_InitStruct);
+
+    GPIO_InitStruct.Pin = BLDC_ARM1_Pin;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    HAL_GPIO_Init(BLDC_ARM1_GPIO_Port, &GPIO_InitStruct);
+
+    HAL_GPIO_WritePin(BLDC_ARM1_GPIO_Port, BLDC_ARM1_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(BLDC_ARM2_GPIO_Port, BLDC_ARM2_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(BLDC_ARM3_GPIO_Port, BLDC_ARM3_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(BLDC_ARM4_GPIO_Port, BLDC_ARM4_Pin, GPIO_PIN_RESET);
+
+    GPIO_InitStruct.Pin = BLDC_ARM2_Pin | BLDC_ARM3_Pin | BLDC_ARM4_Pin;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+    // GPIO_InitStruct.Pin = GPIO_PIN_13;
+    // GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    // GPIO_InitStruct.Pull = GPIO_NOPULL;
+    // GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    // GPIO_InitStruct.Alternate = GPIO_AF1_TIM1;
+    // HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
     #endif
 
