@@ -1,7 +1,7 @@
 /*
- * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\application\location\location.h                 /
+ * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\application\location\nmea_checksum_lookup.h     /
  * Project: OQ2                                                                                    /
- * Created Date: Tuesday, December 15th 2020, 8:04:58 pm                                           /
+ * Created Date: Sunday, December 27th 2020, 7:18:56 am                                            /
  * Author: Brandon Riches                                                                          /
  * Email: richesbc@gmail.com                                                                       /
  * -----                                                                                           /
@@ -15,32 +15,38 @@
  * HISTORY:                                                                                        /
 */
 
-#ifndef _GNSS_H_
-#define _GNSS_H_
 
-#include <stdbool.h>
+#ifndef _ASCII_LOOKUP_H_
+#define _ASCII_LOOKUP_H_
+
 #include <stdint.h>
-#include "main.h"
 
-extern UART_HandleTypeDef huart5;
-
-typedef struct 
+// Looking up a character - '0' will return it's value in decimal. 
+const uint8_t ASCII_LOOKUP[] = 
 {
-    bool valid;
-    uint8_t hours;
-    uint8_t minutes;
-    uint8_t seconds;
-    uint8_t millis;
-} utc_time_t;
-
-void gnss_fix_status_callback();
-void gnss_new_data_callback();
-void gps_tx_complete_callback();
-void gps_rx_complete_callback();
-
-void location_thread_pre_init();
-void location_thread_start(void* argument);
-
-
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    0,  // :
+    0,  // ;
+    0,  // <
+    0,  // =
+    0,  // >
+    0,  // ?
+    0,  // @
+    10, // A
+    11, // B
+    12, // C
+    13, // D
+    14, // E
+    15, // F
+};
 
 #endif

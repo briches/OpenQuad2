@@ -176,7 +176,6 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-
     if(huart == &huart5)
     {
         gps_rx_complete_callback();
@@ -244,6 +243,7 @@ int main(void)
     debug_printf("Application version:      %s", _VERSION_OQ2_APPLICATION);
     debug_printf("Hardware revision:        %s", _VERSION_OQ2_HARDWARE);
     debug_printf("FreeRTOS kernel version:  %s", tskKERNEL_VERSION_NUMBER);
+    debug_printf("Clock Freq:               %u MHz", HAL_RCC_GetSysClockFreq() / 1000000);
     debug_printf("");
 
     /*********************************************************************************************/
@@ -1367,6 +1367,8 @@ static void MX_GPIO_Init(void)
     GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(IMU_MAG_DRDY_GPIO_Port, &GPIO_InitStruct);
+
+    HAL_GPIO_WritePin(GPS_RESETN_GPIO_Port, GPS_RESETN_Pin, GPIO_PIN_RESET);
 
     GPIO_InitStruct.Pin = GPS_RESETN_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
