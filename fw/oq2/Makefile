@@ -37,6 +37,7 @@ BUILD_DIR = _build
 # C sources
 C_SOURCES =  \
 application/main.c \
+application/debug_log/debug_log.c \
 application/freertos/freertos.c \
 application/led_blinky/led_blinky.c \
 application/location/location.c \
@@ -57,7 +58,6 @@ USB_DEVICE/App/usb_device.c \
 USB_DEVICE/App/usbd_desc.c \
 USB_DEVICE/App/usbd_storage_if.c \
 USB_DEVICE/Target/usbd_conf.c \
-Drivers/DebugLog/debug_log.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pcd.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pcd_ex.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_usb.c \
@@ -182,6 +182,7 @@ C_DEFS =  \
 C_INCLUDES =  \
 -Iapplication \
 -Iapplication/config \
+-Iapplication/debug_log \
 -Iapplication/freertos \
 -Iapplication/location \
 -Iapplication/led_blinky \
@@ -197,7 +198,6 @@ C_INCLUDES =  \
 -IFATFS/App \
 -IUSB_DEVICE/App \
 -IUSB_DEVICE/Target \
--IDrivers/DebugLog \
 -IDrivers/STM32H7xx_HAL_Driver/Inc \
 -IDrivers/STM32H7xx_HAL_Driver/Inc/Legacy \
 -IMiddlewares/Third_Party/FreeRTOS/Source/include \

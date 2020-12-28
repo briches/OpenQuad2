@@ -15,8 +15,8 @@
  * HISTORY:                                                                                        /
 */
 
-#ifndef _GNSS_H_
-#define _GNSS_H_
+#ifndef _LOCATION_H_
+#define _LOCATION_H_
 
 #include <stdbool.h>
 #include <stdint.h>
