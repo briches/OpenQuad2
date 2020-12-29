@@ -525,7 +525,7 @@ float stability_thread_read_and_calculate()
 }
 
 /**
- * @brief Initialization prior to interrupts being enabled
+ * @brief Initialization prior to freertos being enabled
  *
  */
 void stability_thread_pre_init()
@@ -638,7 +638,7 @@ void stability_thread_pre_init()
  * @param  argument: Not used
  * @retval None
  */
-void stability_thread_start(void* argument)
+void stability_thread(void* argument)
 {
     #if(SC_OPERATING_MODE == SC_OP_MODE_MAG_CAL)
     MotionFX_MagCal_init(20, true);

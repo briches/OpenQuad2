@@ -19,6 +19,6 @@
 #ifndef TASK_MANAGER_H_
 #define TASK_MANAGER_H_
 
-void task_manager_thread_start(void* argument);
+void task_manager_thread(void* argument);
 
 #endif

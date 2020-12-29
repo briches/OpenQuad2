@@ -39,7 +39,7 @@ void gps_tx_complete_callback();
 void gps_rx_complete_callback();
 
 void location_thread_pre_init();
-void location_thread_start(void* argument);
+void location_thread(void* argument);
 
 
 

@@ -29,7 +29,7 @@
 #define debug_print_buffer(fmt, ...)    debug_print_buffer(LOCATION_MODULE_ID, fmt, ##__VA_ARGS__)
 
 static uint8_t gps_rx_buf[128];
-static uint8_t gps_tx_buf[128];
+__unused static uint8_t gps_tx_buf[128];
 static uint8_t gps_rx_char;
 static volatile uint32_t message_length = 0;
 static volatile uint32_t rx_count = 0;
@@ -331,12 +331,12 @@ void gnss_fix_status_callback()
  */
 void gnss_new_data_callback()
 {
-    debug_printf("%u:%u:%u.%u UTC", m_utc_time.hours, m_utc_time.minutes, m_utc_time.seconds, m_utc_time.millis);
-    debug_printf("lat/long: %3.6f, %3.6f", m_latitude, m_longitude);
-    debug_printf("Quality: %u", m_quality);
-    debug_printf("Satellites: %u", m_tracking_sats);
-    debug_printf("HDOP: %1.2f", m_hdop);
-    debug_printf("Elevation: %.1f", m_elevation);
+    // debug_printf("%u:%u:%u.%u UTC", m_utc_time.hours, m_utc_time.minutes, m_utc_time.seconds, m_utc_time.millis);
+    // debug_printf("lat/long: %3.6f, %3.6f", m_latitude, m_longitude);
+    // debug_printf("Quality: %u", m_quality);
+    // debug_printf("Satellites: %u", m_tracking_sats);
+    // debug_printf("HDOP: %1.2f", m_hdop);
+    // debug_printf("Elevation: %.1f", m_elevation);
 
     /** @todo Inform listeners */
 }
@@ -396,7 +396,7 @@ void location_thread_pre_init()
  * @param  argument: Not used
  * @retval None
  */
-void location_thread_start(void* argument)
+void location_thread(void* argument)
 {
     // Start receiving
     HAL_UART_Receive_IT(&huart5, &gps_rx_char, 1);

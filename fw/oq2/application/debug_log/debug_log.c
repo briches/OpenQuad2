@@ -5,7 +5,7 @@
  * Author: Brandon Riches                                                                          /
  * Email: richesbc@gmail.com                                                                       /
  * -----                                                                                           /
- * Last Modified: Sat Dec 26 2020                                                                  /
+ * Last Modified: Mon Dec 28 2020                                                                  /
  * Modified By: Brandon Riches                                                                     /
  * -----                                                                                           /
  *                                                                                                 /
@@ -19,6 +19,7 @@
 */
 
 #include "debug_log.h"
+#include "module_ids.h"
 #ifdef FREERTOS
 #include "cmsis_os.h"
 #endif
@@ -33,6 +34,7 @@ typedef struct
 
 extern UART_HandleTypeDef huart2;
 
+
 // String table of module names correlating to the module_id_t enumeration.
 const char* module_stringtable[] =
 {
@@ -44,7 +46,30 @@ const char* module_stringtable[] =
     "loc",
     "pid",
     "motors",
+    "net",
+    "w3400",
+    "w3400_bsp",
+    "w3400_bus",
+    "w3400_cmn",
+    "w3400_cryp",
+    "w3400_flash",
+    "w3400_hif",
+    "w3400_ota",
+    "w3400_periph",
+    "w3400_ssl",
+    "w3400_wifi",
+    "w3400_nmasic",
+    "w3400_nmbus",
+    "w3400_nmdrv",
+    "w3400_nmflash",
+    "w3400_nmi2c",
+    "w3400_nmspi",
+    "w3400_nmuart",
+    "w3400_socket",
+    "w3400_spiflash",
 };
+
+
 
 // Temporary buffer used for printing routines
 static uint8_t line_buffer[128];
@@ -657,13 +682,13 @@ void _vprintf(uint8_t** pbuf, const char* format, va_list ap)
             //       chars = _puts("boolean");
             //       break;
             //    case typeU8:
-            //       chars = _puts("uint8");
+            //       chars = _puts("uint8_t");
             //       break;
             //    case typeU16:
-            //       chars = _puts("uint16");
+            //       chars = _puts("uint16_t");
             //       break;
             //    case typeU32:
-            //       chars = _puts("uint32");
+            //       chars = _puts("uint32_t");
             //       break;
             //    case typeU64:
             //       chars = _puts("uint64");

@@ -5,7 +5,7 @@
  * Author: Brandon Riches                                                                          /
  * Email: richesbc@gmail.com                                                                       /
  * -----                                                                                           /
- * Last Modified: Sat Dec 26 2020                                                                  /
+ * Last Modified: Tue Dec 29 2020                                                                  /
  * Modified By: Brandon Riches                                                                     /
  * -----                                                                                           /
  *                                                                                                 /
@@ -580,9 +580,6 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef* hspi)
     GPIO_InitTypeDef GPIO_InitStruct = { 0 };
     if (hspi->Instance == SPI1)
     {
-        /* USER CODE BEGIN SPI1_MspInit 0 */
-
-        /* USER CODE END SPI1_MspInit 0 */
           /* Peripheral clock enable */
         __HAL_RCC_SPI1_CLK_ENABLE();
 
@@ -596,13 +593,9 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef* hspi)
         GPIO_InitStruct.Pin = GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;
         GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
         GPIO_InitStruct.Pull = GPIO_NOPULL;
-        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
         GPIO_InitStruct.Alternate = GPIO_AF5_SPI1;
         HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-        /* USER CODE BEGIN SPI1_MspInit 1 */
-
-        /* USER CODE END SPI1_MspInit 1 */
     }
 
     if (hspi->Instance == SPI2)

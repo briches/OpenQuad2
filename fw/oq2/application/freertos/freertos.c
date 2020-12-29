@@ -64,7 +64,7 @@ void vApplicationMallocFailedHook(void)
    provide information on how the remaining heap might be fragmented). */
 }
 
-static TickType_t ticks = 0;
+// static TickType_t ticks = 0;
 
 void PreSleepProcessing(uint32_t *ulExpectedIdleTime)
 {

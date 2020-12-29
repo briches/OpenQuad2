@@ -19,6 +19,8 @@
 
 #include "cmsis_os.h"
 #include "version.h"
+#include <stdint.h>
+#include <stdbool.h>
 
 #define APP_CONFIG_ENABLED 1
 #define APP_CONFIG_DISABLED 0
@@ -28,6 +30,11 @@
 #define STABILITY_THREAD_PRIO           osPriorityRealtime7
 #define STABILITY_THREAD_PERIOD         10
 #define STABILITY_THREAD_STACK_SIZE     1024 * 4
+
+#define NETWORK_THREAD_PRIO             osPriorityRealtime6
+#define NETWORK_THREAD_PERIOD           2
+#define NETWORK_THREAD_STACK_SIZE       1024*4
+
 
 #define LOCATION_THREAD_PRIO            osPriorityNormal
 #define LOCATION_THREAD_PERIOD          500

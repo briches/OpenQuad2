@@ -24,7 +24,7 @@
  * @param  argument: Not used
  * @retval None
  */
-void led_thread_start(void* argument)
+void led_thread(void* argument)
 {
     static int m_state = 0;
 

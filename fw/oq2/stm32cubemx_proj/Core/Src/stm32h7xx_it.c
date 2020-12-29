@@ -58,6 +58,8 @@
 /* External variables --------------------------------------------------------*/
 extern PCD_HandleTypeDef hpcd_USB_OTG_HS;
 extern LPTIM_HandleTypeDef hlptim1;
+extern DMA_HandleTypeDef hdma_spi1_rx;
+extern DMA_HandleTypeDef hdma_spi1_tx;
 extern UART_HandleTypeDef huart5;
 extern UART_HandleTypeDef huart2;
 extern TIM_HandleTypeDef htim2;
@@ -165,6 +167,34 @@ void DebugMon_Handler(void)
 /******************************************************************************/
 
 /**
+  * @brief This function handles DMA1 stream0 global interrupt.
+  */
+void DMA1_Stream0_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA1_Stream0_IRQn 0 */
+
+  /* USER CODE END DMA1_Stream0_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_spi1_rx);
+  /* USER CODE BEGIN DMA1_Stream0_IRQn 1 */
+
+  /* USER CODE END DMA1_Stream0_IRQn 1 */
+}
+
+/**
+  * @brief This function handles DMA1 stream1 global interrupt.
+  */
+void DMA1_Stream1_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA1_Stream1_IRQn 0 */
+
+  /* USER CODE END DMA1_Stream1_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_spi1_tx);
+  /* USER CODE BEGIN DMA1_Stream1_IRQn 1 */
+
+  /* USER CODE END DMA1_Stream1_IRQn 1 */
+}
+
+/**
   * @brief This function handles EXTI line[9:5] interrupts.
   */
 void EXTI9_5_IRQHandler(void)
@@ -266,6 +296,23 @@ void LPTIM1_IRQHandler(void)
   /* USER CODE BEGIN LPTIM1_IRQn 1 */
 
   /* USER CODE END LPTIM1_IRQn 1 */
+}
+
+/**
+  * @brief This function handles DMAMUX1 overrun interrupt.
+  */
+void DMAMUX1_OVR_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMAMUX1_OVR_IRQn 0 */
+
+  /* USER CODE END DMAMUX1_OVR_IRQn 0 */
+  // Handle DMA1_Stream0
+  HAL_DMAEx_MUX_IRQHandler(&hdma_spi1_rx);
+  // Handle DMA1_Stream1
+  HAL_DMAEx_MUX_IRQHandler(&hdma_spi1_tx);
+  /* USER CODE BEGIN DMAMUX1_OVR_IRQn 1 */
+
+  /* USER CODE END DMAMUX1_OVR_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */

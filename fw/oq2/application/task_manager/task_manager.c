@@ -31,7 +31,7 @@
  * @param  argument: Not used
  * @retval None
  */
-void task_manager_thread_start(void* argument)
+void task_manager_thread(void* argument)
 {
 
     char * runtime_stat_buf = pvPortMalloc(300);

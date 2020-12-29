@@ -29,6 +29,8 @@
 #include "led_blinky.h"
 #include "location.h"
 #include "timer.h"
+#include "network.h"
+#include "nm_bsp.h"
 
 #define debug_error(fmt, ...)           debug_error(MAIN_MODULE_ID, fmt, ##__VA_ARGS__)
 #define debug_printf(fmt, ...)          debug_printf(MAIN_MODULE_ID, fmt, ##__VA_ARGS__)
@@ -68,36 +70,44 @@ UART_HandleTypeDef huart9;
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
 
-/* Definitions for stability task */
-osThreadId_t stability_task_handle;
-const osThreadAttr_t stability_task_attributes = {
+/* Definitions for stability thread */
+osThreadId_t stability_thread_handle;
+const osThreadAttr_t stability_thread_attributes = {
   .name = "stability",
   .priority = (osPriority_t)STABILITY_THREAD_PRIO,
   .stack_size = STABILITY_THREAD_STACK_SIZE,
 };
 
-/* Definitions for task manager task */
-osThreadId_t task_manager_task_handle;
+/* Definitions for task manager thread */
+osThreadId_t task_manager_thread_handle;
 const osThreadAttr_t task_manager_attributes = {
   .name = "task manager",
   .priority = (osPriority_t)TASK_MANAGER_THREAD_PRIO,
   .stack_size = TASK_MANAGER_THREAD_STACK_SIZE,
 };
 
-/* Definitions for LED task */
-osThreadId_t led_task_handle;
-const osThreadAttr_t led_task_attributes = {
+/* Definitions for LED thread */
+osThreadId_t led_thread_handle;
+const osThreadAttr_t led_thread_attributes = {
   .name = "leds",
   .priority = (osPriority_t)LED_THREAD_PRIO,
   .stack_size = LED_THREAD_STACK_SIZE,
 };
 
-/* Definitions for Location task */
-osThreadId_t location_task_handle;
-const osThreadAttr_t location_task_attributes = {
+/* Definitions for Location thread */
+osThreadId_t location_thread_handle;
+const osThreadAttr_t location_thread_attributes = {
   .name = "location",
   .priority = (osPriority_t)LOCATION_THREAD_PRIO,
   .stack_size = LOCATION_THREAD_STACK_SIZE,
+};
+
+/* Definitions for Network thread */
+osThreadId_t network_thread_handle;
+const osThreadAttr_t network_thread_attributes = {
+  .name = "network",
+  .priority = (osPriority_t)NETWORK_THREAD_PRIO,
+  .stack_size = NETWORK_THREAD_STACK_SIZE,
 };
 
 /* Private function prototypes -----------------------------------------------*/
@@ -155,6 +165,10 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
             baro_int_callback();
         break;
 
+        case WIFI_IRQ_Pin:
+            winc3400_pin_isr();
+        break;
+
         default:
         break;
             // no implementation
@@ -190,6 +204,23 @@ void HAL_LPTIM_AutoReloadMatchCallback(LPTIM_HandleTypeDef * hlptim)
     }
 }
 
+/**
+ * @brief  Period elapsed callback in non blocking mode
+ * @note   This function is called  when TIM2 interrupt took place, inside
+ * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
+ * a global variable "uwTick" used as application time base.
+ * @param  htim : TIM handle
+ * @retval None
+ */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
+{
+    if (htim->Instance == TIM2) {
+        HAL_IncTick();
+    }
+}
+
+
+
 
 /**
   * @brief  The application entry point.
@@ -221,7 +252,7 @@ int main(void)
     // MX_OCTOSPI1_Init();
     // MX_RNG_Init();
     // MX_SDMMC1_SD_Init();
-    // MX_SPI1_Init();
+    MX_SPI1_Init(); // Wifi
     MX_SPI2_Init(); // Barometer
     MX_TIM1_Init();
     MX_TIM24_Init();
@@ -248,6 +279,7 @@ int main(void)
 
     /*********************************************************************************************/
     /* Pre scheduler initialization--------------------------------------------------------------*/
+    network_thread_pre_init();
     stability_thread_pre_init();
     location_thread_pre_init();
 
@@ -256,18 +288,21 @@ int main(void)
     osKernelInitialize();
 
     /*********************************************************************************************/
-    /* Start Tasks ------------------------------------------------------------------------------*/
-    stability_task_handle = 
-    osThreadNew(stability_thread_start,     NULL, &stability_task_attributes);
+    /* Start threads ------------------------------------------------------------------------------*/
+    stability_thread_handle = 
+    osThreadNew(stability_thread,     NULL, &stability_thread_attributes);
 
-    location_task_handle = 
-    osThreadNew(location_thread_start,      NULL, &location_task_attributes);
+    location_thread_handle = 
+    osThreadNew(location_thread,      NULL, &location_thread_attributes);
 
-    // task_manager_task_handle = 
-    // osThreadNew(task_manager_thread_start,  NULL, &task_manager_attributes);
+    // task_manager_thread_handle = 
+    // osThreadNew(task_manager_thread,  NULL, &task_manager_attributes);
 
-    led_task_handle = 
-    osThreadNew(led_thread_start,           NULL, &led_task_attributes);
+    led_thread_handle = 
+    osThreadNew(led_thread,           NULL, &led_thread_attributes);
+
+    network_thread_handle = 
+    osThreadNew(network_thread,       NULL, &network_thread_attributes);
 
     timer_time_start();
 
@@ -307,7 +342,7 @@ void SystemClock_Config(void)
     RCC_OscInitStruct.PLL.PLLM = 4;
     RCC_OscInitStruct.PLL.PLLN = 110;
     RCC_OscInitStruct.PLL.PLLP = 1;
-    RCC_OscInitStruct.PLL.PLLQ = 3;
+    RCC_OscInitStruct.PLL.PLLQ = 5;
     RCC_OscInitStruct.PLL.PLLR = 2;
     RCC_OscInitStruct.PLL.PLLRGE = RCC_PLL1VCIRANGE_2;
     RCC_OscInitStruct.PLL.PLLVCOSEL = RCC_PLL1VCOWIDE;
@@ -359,7 +394,7 @@ void SystemClock_Config(void)
     PeriphClkInitStruct.PLL3.PLL3FRACN = 0;
     PeriphClkInitStruct.OspiClockSelection = RCC_OSPICLKSOURCE_PLL2;
     PeriphClkInitStruct.SdmmcClockSelection = RCC_SDMMCCLKSOURCE_PLL2;
-    PeriphClkInitStruct.Spi123ClockSelection = RCC_SPI123CLKSOURCE_PLL2;
+    PeriphClkInitStruct.Spi123ClockSelection = RCC_SPI123CLKSOURCE_PLL;
     PeriphClkInitStruct.Usart234578ClockSelection = RCC_USART234578CLKSOURCE_D2PCLK1;
     PeriphClkInitStruct.Usart16ClockSelection = RCC_USART16910CLKSOURCE_D2PCLK2;
     PeriphClkInitStruct.RngClockSelection = RCC_RNGCLKSOURCE_PLL;
@@ -633,16 +668,7 @@ static void MX_LPTIM1_Init(void)
   */
 static void MX_OCTOSPI1_Init(void)
 {
-
-    /* USER CODE BEGIN OCTOSPI1_Init 0 */
-
-    /* USER CODE END OCTOSPI1_Init 0 */
-
     OSPIM_CfgTypeDef sOspiManagerCfg = { 0 };
-
-    /* USER CODE BEGIN OCTOSPI1_Init 1 */
-
-    /* USER CODE END OCTOSPI1_Init 1 */
     /* OCTOSPI1 parameter configuration*/
     hospi1.Instance = OCTOSPI1;
     hospi1.Init.FifoThreshold = 1;
@@ -672,9 +698,6 @@ static void MX_OCTOSPI1_Init(void)
     {
         Error_Handler();
     }
-    /* USER CODE BEGIN OCTOSPI1_Init 2 */
-
-    /* USER CODE END OCTOSPI1_Init 2 */
 
 }
 
@@ -685,24 +708,12 @@ static void MX_OCTOSPI1_Init(void)
   */
 static void MX_RNG_Init(void)
 {
-
-    /* USER CODE BEGIN RNG_Init 0 */
-
-    /* USER CODE END RNG_Init 0 */
-
-    /* USER CODE BEGIN RNG_Init 1 */
-
-    /* USER CODE END RNG_Init 1 */
     hrng.Instance = RNG;
     hrng.Init.ClockErrorDetection = RNG_CED_ENABLE;
     if (HAL_RNG_Init(&hrng) != HAL_OK)
     {
         Error_Handler();
     }
-    /* USER CODE BEGIN RNG_Init 2 */
-
-    /* USER CODE END RNG_Init 2 */
-
 }
 
 /**
@@ -712,14 +723,6 @@ static void MX_RNG_Init(void)
   */
 static void MX_SDMMC1_SD_Init(void)
 {
-
-    /* USER CODE BEGIN SDMMC1_Init 0 */
-
-    /* USER CODE END SDMMC1_Init 0 */
-
-    /* USER CODE BEGIN SDMMC1_Init 1 */
-
-    /* USER CODE END SDMMC1_Init 1 */
     hsd1.Instance = SDMMC1;
     hsd1.Init.ClockEdge = SDMMC_CLOCK_EDGE_RISING;
     hsd1.Init.ClockPowerSave = SDMMC_CLOCK_POWER_SAVE_DISABLE;
@@ -731,10 +734,6 @@ static void MX_SDMMC1_SD_Init(void)
     {
         Error_Handler();
     }
-    /* USER CODE BEGIN SDMMC1_Init 2 */
-
-    /* USER CODE END SDMMC1_Init 2 */
-
 }
 
 /**
@@ -749,16 +748,16 @@ static void MX_SPI1_Init(void)
     hspi1.Instance = SPI1;
     hspi1.Init.Mode = SPI_MODE_MASTER;
     hspi1.Init.Direction = SPI_DIRECTION_2LINES;
-    hspi1.Init.DataSize = SPI_DATASIZE_4BIT;
+    hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
     hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
     hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
     hspi1.Init.NSS = SPI_NSS_HARD_OUTPUT;
-    hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
+    hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_4;
     hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
     hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
     hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
     hspi1.Init.CRCPolynomial = 0x0;
-    hspi1.Init.NSSPMode = SPI_NSS_PULSE_ENABLE;
+    hspi1.Init.NSSPMode = SPI_NSS_PULSE_DISABLE;
     hspi1.Init.NSSPolarity = SPI_NSS_POLARITY_LOW;
     hspi1.Init.FifoThreshold = SPI_FIFO_THRESHOLD_01DATA;
     hspi1.Init.TxCRCInitializationPattern = SPI_CRC_INITIALIZATION_ALL_ZERO_PATTERN;
@@ -766,7 +765,7 @@ static void MX_SPI1_Init(void)
     hspi1.Init.MasterSSIdleness = SPI_MASTER_SS_IDLENESS_00CYCLE;
     hspi1.Init.MasterInterDataIdleness = SPI_MASTER_INTERDATA_IDLENESS_00CYCLE;
     hspi1.Init.MasterReceiverAutoSusp = SPI_MASTER_RX_AUTOSUSP_DISABLE;
-    hspi1.Init.MasterKeepIOState = SPI_MASTER_KEEP_IO_STATE_DISABLE;
+    hspi1.Init.MasterKeepIOState = SPI_MASTER_KEEP_IO_STATE_ENABLE;
     hspi1.Init.IOSwap = SPI_IO_SWAP_DISABLE;
     if (HAL_SPI_Init(&hspi1) != HAL_OK)
     {
@@ -1271,8 +1270,7 @@ static void MX_GPIO_Init(void)
     /*Configure GPIO pin Output Level */
     HAL_GPIO_WritePin(GPIOE, FLASH_NRESET_Pin | IMU_AG_DEN_Pin | IMU_SDO_AG_Pin | IMU_SDO_MAG_Pin, );
 
-    /*Configure GPIO pin Output Level */
-    HAL_GPIO_WritePin(GPIOC, WIFI_SER_CFG_Pin | WIFI_CHIP_EN_Pin | WIFI_RESETN_Pin, GPIO_PIN_RESET);
+    
 
     /*Configure GPIO pin Output Level */
     HAL_GPIO_WritePin(GPIOB, LED_B_Pin | LED_G_Pin | LED_R_Pin | GPS_RESETN_Pin
@@ -1398,12 +1396,20 @@ static void MX_GPIO_Init(void)
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-    // GPIO_InitStruct.Pin = GPIO_PIN_13;
-    // GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-    // GPIO_InitStruct.Pull = GPIO_NOPULL;
-    // GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-    // GPIO_InitStruct.Alternate = GPIO_AF1_TIM1;
-    // HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+    /*Configure GPIO pin Output Level */
+    HAL_GPIO_WritePin(GPIOC,  WIFI_CHIP_EN_Pin | WIFI_RESETN_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOC,  WIFI_SER_CFG_Pin, GPIO_PIN_SET);
+
+    GPIO_InitStruct.Pin = WIFI_SER_CFG_Pin | WIFI_CHIP_EN_Pin | WIFI_RESETN_Pin;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+    GPIO_InitStruct.Pin = WIFI_IRQ_Pin;
+    GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
 
     #endif
 
@@ -1413,46 +1419,6 @@ static void MX_GPIO_Init(void)
 
     HAL_NVIC_SetPriority(EXTI15_10_IRQn, 5, 0);
     HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
-}
-
-/**
-  * @brief  Function implementing the defaultTask thread.
-  * @param  argument: Not used
-  * @retval None
-  */
-  /* USER CODE END Header_StartDefaultTask */
-// void StartDefaultTask(void* argument)
-// {
-//     /* init code for USB_DEVICE */
-//     MX_USB_DEVICE_Init();
-//     /* USER CODE BEGIN 5 */
-//     /* Infinite loop */
-//     for (;;)
-//     {
-//         osDelay(1);
-//     }
-//     /* USER CODE END 5 */
-// }
-
-/**
- * @brief  Period elapsed callback in non blocking mode
- * @note   This function is called  when TIM2 interrupt took place, inside
- * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
- * a global variable "uwTick" used as application time base.
- * @param  htim : TIM handle
- * @retval None
- */
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
-{
-    /* USER CODE BEGIN Callback 0 */
-
-    /* USER CODE END Callback 0 */
-    if (htim->Instance == TIM2) {
-        HAL_IncTick();
-    }
-    /* USER CODE BEGIN Callback 1 */
-
-    /* USER CODE END Callback 1 */
 }
 
 /**

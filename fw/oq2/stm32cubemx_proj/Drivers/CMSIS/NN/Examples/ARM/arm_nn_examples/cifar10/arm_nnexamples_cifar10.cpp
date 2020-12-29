@@ -116,7 +116,7 @@ static q7_t conv3_bias[CONV3_OUT_CH] = CONV3_BIAS;
 static q7_t ip1_wt[IP1_DIM * IP1_OUT] = IP1_WT;
 static q7_t ip1_bias[IP1_OUT] = IP1_BIAS;
 
-/* Here the image_data should be the raw uint8 type RGB image in [RGB, RGB, RGB ... RGB] format */
+/* Here the image_data should be the raw uint8_t type RGB image in [RGB, RGB, RGB ... RGB] format */
 uint8_t   image_data[CONV1_IM_CH * CONV1_IM_DIM * CONV1_IM_DIM] = IMG_DATA;
 q7_t      output_data[IP1_OUT];
 

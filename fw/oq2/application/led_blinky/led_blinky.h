@@ -19,6 +19,6 @@
 #ifndef _LED_BLINKY_H_
 #define _LED_BLINKY_H_
 
-void led_thread_start(void* argument);
+void led_thread(void* argument);
 
 #endif

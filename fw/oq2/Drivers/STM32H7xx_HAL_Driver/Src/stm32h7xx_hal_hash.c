@@ -1378,7 +1378,7 @@ HAL_StatusTypeDef HAL_HASH_GetStatus(HASH_HandleTypeDef *hhash)
   * @note   By default, all the context swap registers (there are
   *         HASH_NUMBER_OF_CSR_REGISTERS of those) are saved.
   * @note   pMemBuffer points to a buffer allocated by the user. The buffer size
-  *         must be at least (HASH_NUMBER_OF_CSR_REGISTERS + 3) * 4 uint8 long.
+  *         must be at least (HASH_NUMBER_OF_CSR_REGISTERS + 3) * 4 uint8_t long.
   * @retval None
   */
 void HAL_HASH_ContextSaving(HASH_HandleTypeDef *hhash, uint8_t* pMemBuffer)
