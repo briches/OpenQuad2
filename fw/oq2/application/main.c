@@ -270,15 +270,17 @@ int main(void)
     /*********************************************************************************************/
     /* Print config and version info ------------------------------------------------------------*/
     debug_log_init();
+    debug_printf("*********************************");
     debug_printf("OpenQuad2 Application Start");
     debug_printf("Application version:      %s", _VERSION_OQ2_APPLICATION);
     debug_printf("Hardware revision:        %s", _VERSION_OQ2_HARDWARE);
     debug_printf("FreeRTOS kernel version:  %s", tskKERNEL_VERSION_NUMBER);
     debug_printf("Clock Freq:               %u MHz", HAL_RCC_GetSysClockFreq() / 1000000);
-    debug_printf("");
+    debug_printf("*********************************");
 
     /*********************************************************************************************/
     /* Pre scheduler initialization--------------------------------------------------------------*/
+    timer_time_start();
     network_thread_pre_init();
     stability_thread_pre_init();
     location_thread_pre_init();
@@ -303,9 +305,6 @@ int main(void)
 
     network_thread_handle = 
     osThreadNew(network_thread,       NULL, &network_thread_attributes);
-
-    timer_time_start();
-
     /*********************************************************************************************/
     /* Start scheduler --------------------------------------------------------------------------*/
     osKernelStart();

@@ -38,5 +38,11 @@
 #define MAIN_WLAN_AUTH        M2M_WIFI_SEC_WPA_PSK /* < Security type */
 #define MAIN_WLAN_PSK         "DrAspen409" /* < Password for Destination SSID */
 
+#define MAIN_WIFI_M2M_BUFFER_SIZE 512
+#define MAIN_WIFI_M2M_PRODUCT_NAME "heybb"
+
+#define MAIN_WIFI_M2M_SERVER_PORT 1337
+#define MAIN_WIFI_M2M_SERVER_IP   0xC0A80141
+
 
 #endif

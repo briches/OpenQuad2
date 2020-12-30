@@ -3,8 +3,8 @@ import processing.data.*;
 import processing.event.*; 
 import processing.opengl.*; 
 
-import peasy.*; 
 import processing.serial.*; 
+import processing.net.*; 
 import java.io.*; 
 import java.util.*; 
 
@@ -24,6 +24,8 @@ public class oq2_ui extends PApplet {
  
  
 
+Server myServer;
+
 static PShape quad;
 static Serial myPort;
 
@@ -42,15 +44,17 @@ static float g_roll = ROLL_DEFAULT;
 public void setup() {
 
     //Set up the serial port
-    println(Serial.list());
-    myPort = new Serial(this, Serial.list()[0], 1000000);
-    print("Connected to serial port: ");
-    println(Serial.list()[0]);
+    // println(Serial.list());
+    // myPort = new Serial(this, Serial.list()[0], 1000000);
+    // print("Connected to serial port: ");
+    // println(Serial.list()[0]);
 
     
     println("Test");
     quad = loadShape("Frame v9.obj");
     lights();
+
+    myServer = new Server(this, 1337, "192.168.1.65");
 }
 
 public void draw() {
@@ -65,6 +69,20 @@ public void draw() {
     rotateZ(g_yaw);
     shape(quad, 0, 0);
     popMatrix();
+
+
+    Client thisClient = myServer.available();
+    // If the client is not null, and says something, display what it said
+    if (thisClient != null) 
+    {
+        String whatClientSaid = thisClient.readString();
+
+        if (whatClientSaid != null) 
+        {
+            println(thisClient.ip() + "t" + whatClientSaid);
+            thisClient.write("Hello");
+        }
+    }
 }
 
 public void keyPressed() {
@@ -107,6 +125,13 @@ public void keyPressed() {
         default:
             break;
     }
+}
+
+/*================================================================================
+     Server Event: Created when a new client connects to the server
+     -----------------------------------------------------------------------------*/
+public void serverEvent(Server someServer, Client someClient) {
+  println("We have a new client: " + someClient.ip());
 }
 
 /*================================================================================

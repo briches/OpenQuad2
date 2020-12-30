@@ -254,7 +254,7 @@ NMI_API int8_t m2m_ssl_send_certs_to_winc(uint8_t *pu8Buffer, uint32_t u32Buffer
 
         // first is special - over writing our header
         m2m_memcpy(saveblob, &pu8Buffer[ofs], CHUNKHDRSZ);
-        thischunksz = min(CHUNKSZ, u32BufferSz-ofs); // no need to round up to quad words this time
+        thischunksz = BSP_MIN(CHUNKSZ, u32BufferSz-ofs); // no need to round up to quad words this time
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wcast-align"
         tstrTlsSrvChunkHdr *pchkhdr = (tstrTlsSrvChunkHdr *)&pu8Buffer[ofs];
@@ -272,7 +272,7 @@ NMI_API int8_t m2m_ssl_send_certs_to_winc(uint8_t *pu8Buffer, uint32_t u32Buffer
         {
             // Subsequent chunks write header before and send a little more
             m2m_memcpy(saveblob, &pu8Buffer[ofs-CHUNKHDRSZ], CHUNKHDRSZ);
-            thischunksz = min(CHUNKSZ, u32BufferSz-ofs);
+            thischunksz = BSP_MIN(CHUNKSZ, u32BufferSz-ofs);
             thischunksz = (thischunksz + 3) & 0xFFFFFFFC; // needs to round up to quad word length
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wcast-align"
