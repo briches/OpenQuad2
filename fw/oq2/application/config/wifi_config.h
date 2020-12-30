@@ -21,6 +21,7 @@
 
 #include "app_config.h"
 
+#define ETH_MODE
 #define CONF_WINC_USE_SPI
 #define CONF_WINC_SPI_LOW_DELAY
 // #define CONF_WINC_SPI_DMA
@@ -43,6 +44,14 @@
 
 #define MAIN_WIFI_M2M_SERVER_PORT 1337
 #define MAIN_WIFI_M2M_SERVER_IP   0xC0A80141
+
+/** Default subnet mask in provisioning mode */
+#define SN_MASK                        255, 255, 255, 0
+#define SN_MASK_IP                    0xFFFFFF00
+
+/** Default gateway in provisioning mode. */
+#define GW_ADDR                        192, 168, 5, 1
+#define GW_ADDR_IP                    0xC0A80101
 
 
 #endif

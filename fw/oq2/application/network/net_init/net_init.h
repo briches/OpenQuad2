@@ -1,3 +1,21 @@
+/*
+ * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\application\network\net_init\net_init.h         /
+ * Project: OQ2                                                                                    /
+ * Created Date: Wednesday, December 30th 2020, 7:06:10 am                                         /
+ * Author: Brandon Riches                                                                          /
+ * Email: richesbc@gmail.com                                                                       /
+ * -----                                                                                           /
+ *                                                                                                 /
+ * Copyright (c) 2020 OpenQuad2.                                                                   /
+ * All rights reserved.                                                                            /
+ *                                                                                                 /
+ * Redistribution and use in source or binary forms, with or without modification,                 /
+ * are not permitted without express written approval of OpenQuad2                                 /
+ * -----                                                                                           /
+ * HISTORY:                                                                                        /
+*/
+
+
 /**
  *
  * \file
@@ -44,19 +62,20 @@
 #define NET_MODE_USE_DHCP_SVR	0x10
 
 typedef struct {
-	uint8_t	*u8StaticIP;
-	/*!< The static IP assigned to the device.
-	*/
-	uint8_t	*u8SubnetMask;
-	/*!< Subnet mask for the local area network.
-	*/
-	uint8_t	*u8StaticIPv6;
+    uint8_t* u8StaticIP;
+    /*!< The static IP assigned to the device.
+    */
+    uint8_t* u8SubnetMask;
+    /*!< Subnet mask for the local area network.
+    */
+    uint8_t* u8StaticIPv6;
 } tstrM2MIPConfig2;
 
 void net_init(void);
 void net_set_mode(uint32_t net_if, uint32_t mode);
 void net_interface_up(uint32_t net_if);
 void net_interface_down(uint32_t net_if);
+void net_interface_dhcp_done(uint32_t net_if, ip4_addr_t * paddr);
 void net_add_winc_netif(void);
 void net_remove_winc_netif(void);
 int net_in_tcpip_task(void);

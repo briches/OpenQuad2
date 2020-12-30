@@ -23,7 +23,6 @@
 #include "cmsis_os.h"
 #include "fatfs.h"
 #include "usb_device.h"
-#include "debug_log.h"
 #include "stability.h"
 #include "task_manager.h"
 #include "led_blinky.h"
@@ -32,6 +31,7 @@
 #include "network.h"
 #include "nm_bsp.h"
 
+#include "debug_log.h"
 #define debug_error(fmt, ...)           debug_error(MAIN_MODULE_ID, fmt, ##__VA_ARGS__)
 #define debug_printf(fmt, ...)          debug_printf(MAIN_MODULE_ID, fmt, ##__VA_ARGS__)
 #define debug_print_buffer(fmt, ...)    debug_print_buffer(MAIN_MODULE_ID, fmt, ##__VA_ARGS__)
@@ -290,12 +290,15 @@ int main(void)
     osKernelInitialize();
 
     /*********************************************************************************************/
-    /* Start threads ------------------------------------------------------------------------------*/
-    stability_thread_handle = 
-    osThreadNew(stability_thread,     NULL, &stability_thread_attributes);
+    /* Start threads ----------------------------------------------------------------------------*/
+    network_thread_handle = 
+    osThreadNew(network_thread,       NULL, &network_thread_attributes);
 
-    location_thread_handle = 
-    osThreadNew(location_thread,      NULL, &location_thread_attributes);
+    // stability_thread_handle = 
+    // osThreadNew(stability_thread,     NULL, &stability_thread_attributes);
+
+    // location_thread_handle = 
+    // osThreadNew(location_thread,      NULL, &location_thread_attributes);
 
     // task_manager_thread_handle = 
     // osThreadNew(task_manager_thread,  NULL, &task_manager_attributes);
@@ -303,8 +306,6 @@ int main(void)
     led_thread_handle = 
     osThreadNew(led_thread,           NULL, &led_thread_attributes);
 
-    network_thread_handle = 
-    osThreadNew(network_thread,       NULL, &network_thread_attributes);
     /*********************************************************************************************/
     /* Start scheduler --------------------------------------------------------------------------*/
     osKernelStart();
@@ -1447,10 +1448,7 @@ void Error_Handler(void)
   */
 void assert_failed(uint8_t* file, uint32_t line)
 {
-    /* USER CODE BEGIN 6 */
-    /* User can add his own implementation to report the file name and line number,
-       ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-       /* USER CODE END 6 */
+    debug_error("Assert failed on line %u of %s", line, file);
 }
 #endif /* USE_FULL_ASSERT */
 

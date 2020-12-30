@@ -1,3 +1,21 @@
+/*
+ * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\application\network\os_hook\os_hook.h           /
+ * Project: OQ2                                                                                    /
+ * Created Date: Wednesday, December 30th 2020, 7:06:46 am                                         /
+ * Author: Brandon Riches                                                                          /
+ * Email: richesbc@gmail.com                                                                       /
+ * -----                                                                                           /
+ *                                                                                                 /
+ * Copyright (c) 2020 OpenQuad2.                                                                   /
+ * All rights reserved.                                                                            /
+ *                                                                                                 /
+ * Redistribution and use in source or binary forms, with or without modification,                 /
+ * are not permitted without express written approval of OpenQuad2                                 /
+ * -----                                                                                           /
+ * HISTORY:                                                                                        /
+*/
+
+
 /**
  *
  * \file
@@ -34,7 +52,7 @@
 #ifndef OS_HOOK_H_INCLUDED
 #define OS_HOOK_H_INCLUDED
 
-#include "compiler.h"
+#include <stdint.h>
 
 typedef void (*wifi_task_cb)(void *arg);
 

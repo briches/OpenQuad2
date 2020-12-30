@@ -1,3 +1,21 @@
+/*
+ * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\application\network\wifi_ex\m2m_wifi_ex.h       /
+ * Project: OQ2                                                                                    /
+ * Created Date: Wednesday, December 30th 2020, 7:06:34 am                                         /
+ * Author: Brandon Riches                                                                          /
+ * Email: richesbc@gmail.com                                                                       /
+ * -----                                                                                           /
+ *                                                                                                 /
+ * Copyright (c) 2020 OpenQuad2.                                                                   /
+ * All rights reserved.                                                                            /
+ *                                                                                                 /
+ * Redistribution and use in source or binary forms, with or without modification,                 /
+ * are not permitted without express written approval of OpenQuad2                                 /
+ * -----                                                                                           /
+ * HISTORY:                                                                                        /
+*/
+
+
 /**
  *
  * \file
@@ -33,17 +51,17 @@
  */
 #ifndef M2M_WIFI_EX_H_INCLUDED
 #define M2M_WIFI_EX_H_INCLUDED
-#include <driver/include/m2m_wifi.h>
+#include <m2m_wifi.h>
 
 typedef void (*m2m_wifi_callback_t)(void *arg);
 
-sint8 os_m2m_wifi_init(tstrWifiInitParam *param);
-sint8 os_m2m_wifi_connect(char *pcSsid, uint8 u8SsidLen, uint8 u8SecType, void *pvAuthInfo, uint16 u16Ch);
-sint8 os_m2m_wifi_enable_ap(tstrM2MAPConfig *ap);
-sint8 m2m_wifi_request_callback_ex(m2m_wifi_callback_t callback, void *arg);
-sint8 m2m_wifi_request_dhcp_client_ex(void);
-sint8 m2m_wifi_enable_ap_ex(CONST tstrM2MAPConfig* pstrM2MAPConfig);
-sint8 m2m_wifi_disable_ap_ex(void);
+int8_t os_m2m_wifi_init(tstrWifiInitParam *param);
+int8_t os_m2m_wifi_connect(char *pcSsid, uint8_t u8SsidLen, uint8_t u8SecType, void *pvAuthInfo, uint16_t u16Ch);
+int8_t os_m2m_wifi_enable_ap(tstrM2MAPConfig *ap);
+int8_t m2m_wifi_request_callback_ex(m2m_wifi_callback_t callback, void *arg);
+int8_t m2m_wifi_request_dhcp_client_ex(void);
+int8_t m2m_wifi_enable_ap_ex(const tstrM2MAPConfig* pstrM2MAPConfig);
+int8_t m2m_wifi_disable_ap_ex(void);
 
 // Macros to alias all other APIs to the _ex versions.
 #define m2m_wifi_download_mode_ex			m2m_wifi_download_mode
@@ -84,46 +102,49 @@ sint8 m2m_wifi_disable_ap_ex(void);
 #define m2m_wifi_enable_mac_mcast_ex		m2m_wifi_enable_mac_mcast
 #define m2m_wifi_set_receive_buffer_ex		m2m_wifi_set_receive_buffer
 
-sint8 os_m2m_wifi_download_mode(void);
-sint8 os_m2m_wifi_deinit(void* arg);
-sint8 os_m2m_wifi_default_connect(void);
-sint8 os_m2m_wifi_disconnect(void);
-sint8 os_m2m_wifi_start_provision_mode(tstrM2MAPConfig* pstrAPConfig, char* pcHttpServerDomainName, uint8 bEnableHttpRedirect);
-sint8 os_m2m_wifi_stop_provision_mode(void);
-sint8 os_m2m_wifi_get_connection_info(void);
-sint8 os_m2m_wifi_set_mac_address(uint8* au8MacAddress);
-sint8 os_m2m_wifi_wps(uint8 u8TriggerType, const char* pcPinNumber);
-sint8 os_m2m_wifi_wps_disable(void);
-sint8 os_m2m_wifi_p2p(uint8 u8Channel);
-sint8 os_m2m_wifi_p2p_disconnect(void);
-sint8 os_m2m_wifi_disable_ap(void);
-sint8 os_m2m_wifi_ap_get_assoc_info(void);
-sint8 os_m2m_wifi_set_static_ip(tstrM2MIPConfig* pstrStaticIPConf);
-sint8 os_m2m_wifi_set_scan_options(uint8 u8NumOfSlot, uint8 u8SlotTime);
-sint8 os_m2m_wifi_set_scan_region(uint8 ScanRegion);
-sint8 os_m2m_wifi_request_scan(uint8 ch);
-sint8 os_m2m_wifi_request_scan_ssid(uint8 ch, char* pcssid);
-uint8 os_m2m_wifi_get_num_ap_found(void);
-sint8 os_m2m_wifi_req_scan_result(uint8 index);
-sint8 os_m2m_wifi_req_curr_rssi(void);
-sint8 os_m2m_wifi_get_otp_mac_address(uint8* pu8MacAddr, uint8* pu8IsValid);
-sint8 os_m2m_wifi_get_mac_address(uint8* pu8MacAddr);
-sint8 os_m2m_wifi_set_sleep_mode(uint8 PsTyp, uint8 BcastEn);
-sint8 os_m2m_wifi_request_sleep(uint32 u32SlpReqTime);
-sint8 os_m2m_wifi_req_client_ctrl(uint8 cmd);
-sint8 os_m2m_wifi_req_server_init(uint8 ch);
-sint8 os_m2m_wifi_set_device_name(uint8* pu8DeviceName, uint8 u8DeviceNameLength);
-sint8 os_m2m_wifi_set_lsn_int(tstrM2mLsnInt* pstrM2mLsnInt);
-sint8 os_m2m_wifi_enable_monitoring_mode(tstrM2MWifiMonitorModeCtrl* pstrMtrCtrl, uint8* pu8PayloadBuffer, uint16 u16BufferSize, uint16 u16DataOffset);
-sint8 os_m2m_wifi_disable_monitoring_mode(void);
-sint8 os_m2m_wifi_send_wlan_pkt(uint8* pu8WlanPacket, uint16 u16WlanHeaderLength, uint16 u16WlanPktSize);
-sint8 os_m2m_wifi_send_ethernet_pkt(uint8* pu8Packet, uint16 u16PacketSize);
-sint8 os_m2m_wifi_set_sytem_time(uint32 u32UTCSeconds);
-sint8 os_m2m_wifi_set_cust_InfoElement(uint8* pau8M2mCustInfoElement);
-sint8 os_m2m_wifi_enable_mac_mcast(uint8* pu8MulticastMacAddress, uint8 u8AddRemove);
-sint8 os_m2m_wifi_set_receive_buffer(void* pvBuffer, uint16 u16BufferLen);
-sint8 os_m2m_wifi_set_control_ifc(uint8 u8IfcId);
-sint8 os_m2m_wifi_send_ethernet_pkt_ifc1(uint8* pu8Packet, uint16 u16PacketSize);
-uint8 os_m2m_wifi_get_sleep_mode(void);
+int8_t os_m2m_wifi_download_mode(void);
+int8_t os_m2m_wifi_deinit(void* arg);
+int8_t os_m2m_wifi_default_connect(void);
+int8_t os_m2m_wifi_disconnect(void);
+int8_t os_m2m_wifi_start_provision_mode(tstrM2MAPConfig* pstrAPConfig, char* pcHttpServerDomainName, uint8_t bEnableHttpRedirect);
+int8_t os_m2m_wifi_stop_provision_mode(void);
+int8_t os_m2m_wifi_get_connection_info(void);
+int8_t os_m2m_wifi_set_mac_address(uint8_t* au8MacAddress);
+int8_t os_m2m_wifi_wps(uint8_t u8TriggerType, const char* pcPinNumber);
+int8_t os_m2m_wifi_wps_disable(void);
+int8_t os_m2m_wifi_p2p(uint8_t u8Channel);
+int8_t os_m2m_wifi_p2p_disconnect(void);
+int8_t os_m2m_wifi_disable_ap(void);
+int8_t os_m2m_wifi_ap_get_assoc_info(void);
+int8_t os_m2m_wifi_set_static_ip(tstrM2MIPConfig* pstrStaticIPConf);
+int8_t os_m2m_wifi_set_scan_options(uint8_t u8NumOfSlot, uint8_t u8SlotTime);
+int8_t os_m2m_wifi_set_scan_region(uint8_t ScanRegion);
+int8_t os_m2m_wifi_request_scan(uint8_t ch);
+int8_t os_m2m_wifi_request_scan_ssid(uint8_t ch, char* pcssid);
+uint8_t os_m2m_wifi_get_num_ap_found(void);
+int8_t os_m2m_wifi_req_scan_result(uint8_t index);
+int8_t os_m2m_wifi_req_curr_rssi(void);
+int8_t os_m2m_wifi_get_otp_mac_address(uint8_t* pu8MacAddr, uint8_t* pu8IsValid);
+int8_t os_m2m_wifi_get_mac_address(uint8_t* pu8MacAddr);
+int8_t os_m2m_wifi_set_sleep_mode(uint8_t PsTyp, uint8_t BcastEn);
+int8_t os_m2m_wifi_request_sleep(uint32_t u32SlpReqTime);
+int8_t os_m2m_wifi_req_client_ctrl(uint8_t cmd);
+int8_t os_m2m_wifi_req_server_init(uint8_t ch);
+int8_t os_m2m_wifi_set_device_name(uint8_t* pu8DeviceName, uint8_t u8DeviceNameLength);
+int8_t os_m2m_wifi_set_lsn_int(tstrM2mLsnInt* pstrM2mLsnInt);
+int8_t os_m2m_wifi_enable_monitoring_mode(tstrM2MWifiMonitorModeCtrl* pstrMtrCtrl, uint8_t* pu8PayloadBuffer, uint16_t u16BufferSize, uint16_t u16DataOffset);
+int8_t os_m2m_wifi_disable_monitoring_mode(void);
+int8_t os_m2m_wifi_send_wlan_pkt(uint8_t* pu8WlanPacket, uint16_t u16WlanHeaderLength, uint16_t u16WlanPktSize);
+int8_t os_m2m_wifi_send_ethernet_pkt(uint8_t* pu8Packet, uint16_t u16PacketSize);
+int8_t os_m2m_wifi_set_sytem_time(uint32_t u32UTCSeconds);
+int8_t os_m2m_wifi_set_cust_InfoElement(uint8_t* pau8M2mCustInfoElement);
+int8_t os_m2m_wifi_enable_mac_mcast(uint8_t* pu8MulticastMacAddress, uint8_t u8AddRemove);
+int8_t os_m2m_wifi_set_receive_buffer(void* pvBuffer, uint16_t u16BufferLen);
+int8_t os_m2m_wifi_set_control_ifc(uint8_t u8IfcId);
+int8_t os_m2m_wifi_send_ethernet_pkt_ifc1(uint8_t* pu8Packet, uint16_t u16PacketSize);
+uint8_t os_m2m_wifi_get_sleep_mode(void);
+
+uint8_t os_m2m_socket_init(void);
+
 
 #endif /* M2M_WIFI_EX_H_INCLUDED */

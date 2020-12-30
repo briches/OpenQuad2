@@ -17,9 +17,19 @@
 #include <string.h> // to get memset
 #include "network.h"
 #include "wifi_config.h"
-#include "m2m_wifi.h"
-#include "socket.h"
-#include "nmasic.h"
+#include "lwip/ip.h"
+#include "lwip/api.h"
+#include "lwip/tcpip.h"
+#include "lwip/dns.h"
+#include "net_init.h"
+#include "m2m_wifi_ex.h"
+#include "FreeRTOS.h"
+#include "timer.h"
+#include "oq2_protocol.h"
+
+#include "lwip/sockets.h"
+#include "lwip/sys.h"
+
 
 #include "debug_log.h"
 #define debug_error(fmt, ...)           debug_error(NETWORK_MODULE_ID, fmt, ##__VA_ARGS__)
@@ -30,30 +40,46 @@
 static uint8_t mac_addr[M2M_MAC_ADDRES_LEN];
 
 /** User defined MAC Address. */
-const char main_user_defined_mac_address[] = { 0xf8, 0xf0, 0x05, 0x20, 0x0b, 0x09 };
+const char main_user_defined_mac_address[] = { 0xf8, 0xf0, 0x05, 0x20, 0x0b, 0x11 };
 
-/** Message format definitions. */
-typedef struct s_msg_wifi_product {
-    uint8_t name[9];
-} t_msg_wifi_product;
+/** Wi-Fi status variable. */
+static volatile bool gbConnectedWifi = false;
 
-/** Message format declarations. */
-static t_msg_wifi_product msg_wifi_product = {
-    .name = MAIN_WIFI_M2M_PRODUCT_NAME,
-};
+/** IP address of host. */
+uint32_t gu32HostIp = 0;
 
-/** Receive buffer definition. */
-static uint8_t gau8SocketTestBuffer[MAIN_WIFI_M2M_BUFFER_SIZE];
+/** Get host IP status variable. */
+static volatile bool gbHostIpByName = false;
 
-/** Socket for client */
-static SOCKET tcp_client_socket = -1;
+/** Server host name. */
+static char server_host_name[] = "google.com";
 
-/** Wi-Fi connection state */
-static uint8_t wifi_connected;
+#if LWIP_STATS
+/** Used to compute LwIP bandwidth */
+extern uint32_t lwip_tx_count;
+extern uint32_t lwip_rx_count;
+extern uint32_t lwip_tx_rate;
+extern uint32_t lwip_rx_rate;
+#endif
 
 
-static struct sockaddr_in socket_addr;
-
+/**
+ * @brief
+ *
+ * NETCONN_EVT_RCVPLUS,
+  NETCONN_EVT_RCVMINUS,
+  NETCONN_EVT_SENDPLUS,
+  NETCONN_EVT_SENDMINUS,
+  NETCONN_EVT_ERROR
+ *
+ * @param pnetconn
+ * @param evt
+ * @param len
+ */
+void net_callback(struct netconn* pnetconn, enum netconn_evt evt, u16_t len)
+{
+    debug_printf("Callback evt %u", evt);
+}
 
 /**
  * \brief Callback to get the Data from socket.
@@ -75,53 +101,63 @@ static struct sockaddr_in socket_addr;
  *  - tstrSocketConnectMsg
  *  - tstrSocketRecvMsg
  */
-static void socket_cb(SOCKET sock, uint8_t u8Msg, void* pvMsg)
+ // static void socket_cb(SOCKET sock, uint8_t u8Msg, void* pvMsg)
+ // {
+ //     switch (u8Msg) {
+ //         /* Socket connected */
+ //     case SOCKET_MSG_CONNECT:
+ //     {
+ //         tstrSocketConnectMsg* pstrConnect = (tstrSocketConnectMsg*)pvMsg;
+
+ //         if (pstrConnect && pstrConnect->s8Error >= 0) {
+ //             debug_printf("socket_cb: connect success!");
+ //             oq2p_connect_callback(sock);
+ //         }
+ //         else {
+ //             debug_printf("socket_cb: connect error!");
+ //             close(tcp_client_socket);
+ //             tcp_client_socket = -1;
+ //             oq2p_disconnect_callback(sock);
+ //         }
+ //     }
+ //     break;
+
+ //     /* Message send */
+ //     case SOCKET_MSG_SEND:
+ //     {
+ //         debug_printf("socket_cb: send success!");
+ //     }
+ //     break;
+
+ //     /* Message receive */
+ //     case SOCKET_MSG_RECV:
+ //     {
+ //         tstrSocketRecvMsg* pstrRecv = (tstrSocketRecvMsg*)pvMsg;
+
+ //         oq2p_receive_callback(sock, pstrRecv);
+
+
+ //     }
+
+ //     break;
+
+ //     default:
+ //         break;
+ //     }
+ // }
+
+ /**
+  * \brief Callback function of IP address.
+  *
+  * \param[in] hostName Domain name.
+  * \param[in] hostIp Server IP.
+  *
+  * \return None.
+  */
+static void resolve_cb(const char* hostName, ip_addr_t* ipaddr, void* callback_arg)
 {
-    switch (u8Msg) {
-        /* Socket connected */
-    case SOCKET_MSG_CONNECT:
-    {
-        tstrSocketConnectMsg* pstrConnect = (tstrSocketConnectMsg*)pvMsg;
-        if (pstrConnect && pstrConnect->s8Error >= 0) {
-            debug_printf("socket_cb: connect success!\r\n");
-            send(tcp_client_socket, &msg_wifi_product, sizeof(t_msg_wifi_product), 0);
-        }
-        else {
-            debug_printf("socket_cb: connect error!\r\n");
-            close(tcp_client_socket);
-            tcp_client_socket = -1;
-        }
-    }
-    break;
-
-    /* Message send */
-    case SOCKET_MSG_SEND:
-    {
-        debug_printf("socket_cb: send success!\r\n");
-        recv(tcp_client_socket, gau8SocketTestBuffer, sizeof(gau8SocketTestBuffer), 0);
-    }
-    break;
-
-    /* Message receive */
-    case SOCKET_MSG_RECV:
-    {
-        tstrSocketRecvMsg* pstrRecv = (tstrSocketRecvMsg*)pvMsg;
-        if (pstrRecv && pstrRecv->s16BufferSize > 0) {
-            debug_printf("socket_cb: recv success!\r\n");
-            debug_printf("TCP Client Test Complete!\r\n");
-        }
-        else {
-            debug_printf("socket_cb: recv error!\r\n");
-            close(tcp_client_socket);
-            tcp_client_socket = -1;
-        }
-    }
-
-    break;
-
-    default:
-        break;
-    }
+    gu32HostIp = ipaddr->addr;
+    gbHostIpByName = true;
 }
 
 /**
@@ -149,21 +185,25 @@ static void socket_cb(SOCKET sock, uint8_t u8Msg, void* pvMsg)
  *  - tstrM2mScanDone
  *  - tstrM2mWifiscanResult
  */
-static void wifi_cb(uint8_t u8MsgType, void* pvMsg)
+static void wifi_cb(uint8_t msg_type, void* msg)
 {
-    switch (u8MsgType) {
+    switch (msg_type) {
     case M2M_WIFI_RESP_CON_STATE_CHANGED:
     {
-        tstrM2mWifiStateChanged* pstrWifiState = (tstrM2mWifiStateChanged*)pvMsg;
+        tstrM2mWifiStateChanged* pstrWifiState = (tstrM2mWifiStateChanged*)msg;
         if (pstrWifiState->u8CurrState == M2M_WIFI_CONNECTED) {
             debug_printf("Connected");
+            net_interface_up(NET_IF_STA);
+            m2m_wifi_request_dhcp_client_ex();
         }
         else if (pstrWifiState->u8CurrState == M2M_WIFI_DISCONNECTED) {
             debug_printf("Wi-Fi disconnected");
-            wifi_connected = M2M_WIFI_DISCONNECTED;
+            debug_printf("Reconnecting...");
+            gbConnectedWifi = M2M_WIFI_DISCONNECTED;
 
             /* Connect to defined AP. */
-            m2m_wifi_connect((char*)MAIN_WLAN_SSID, sizeof(MAIN_WLAN_SSID), MAIN_WLAN_AUTH, (void*)MAIN_WLAN_PSK, M2M_WIFI_CH_ALL);
+            net_interface_down(NET_IF_STA);
+            os_m2m_wifi_connect((char*)MAIN_WLAN_SSID, sizeof(MAIN_WLAN_SSID), MAIN_WLAN_AUTH, (void*)MAIN_WLAN_PSK, M2M_WIFI_CH_ALL);
         }
 
         break;
@@ -171,14 +211,33 @@ static void wifi_cb(uint8_t u8MsgType, void* pvMsg)
 
     case M2M_WIFI_REQ_DHCP_CONF:
     {
-        uint8_t* pu8IPAddress = (uint8_t*)pvMsg;
+        tstrM2MIPConfig2* strIpConfig = (tstrM2MIPConfig2*)msg;
+        static u8_t resolve_addr[4];
+        uint16_t a[8];// = trIpConfig->u8StaticIPv6;
 
-        debug_printf("DHCP CONF, IP is %u.%u.%u.%u",
-            pu8IPAddress[0], pu8IPAddress[1], pu8IPAddress[2], pu8IPAddress[3]);
+        memcpy(&resolve_addr, strIpConfig, 4);
 
-        wifi_connected = M2M_WIFI_CONNECTED;
-        break;
-    }
+        ip4_addr_t addr;
+        // blob together into uint32_t
+        addr.addr = lwip_htonl(*(uint32_t*)&resolve_addr[0]);
+        //flip byte order
+        addr.addr = lwip_htonl(addr.addr);
+        net_interface_dhcp_done(NET_IF_STA, &addr);
+
+        debug_printf("%s", ip4addr_ntoa(&addr));
+
+        debug_printf("wifi_cb: STA M2M_WIFI_REQ_DHCP_CONF");
+        debug_printf("wifi_cb: STA IPv4 addr: %d.%d.%d.%d", resolve_addr[0], resolve_addr[1],
+            resolve_addr[2], resolve_addr[3]);
+        /*osprintf("\n\rwifi_cb: STA IPv6 addr: %04x:%04x:%04x:%04x:%04x:%04x:%04x:%04x\n",
+            htons(a[0]), htons(a[1]), htons(a[2]), htons(a[3]),
+            htons(a[4]), htons(a[5]), htons(a[6]), htons(a[7]));*/
+        gbConnectedWifi = true;
+
+        /* Obtain the IP Address by network name. */
+        // dns_gethostbyname(server_host_name, &resolve_addr, resolve_cb, 0);
+
+    } break;
 
     default:
     {
@@ -194,65 +253,6 @@ static void wifi_cb(uint8_t u8MsgType, void* pvMsg)
 void network_thread_pre_init()
 {
     debug_printf("Network thread pre-init");
-
-    tstrWifiInitParam param;
-    int8_t ret;
-    uint8_t u8IsMacAddrValid;
-
-    /* Initialize Wi-Fi parameters structure. */
-    memset((uint8_t*)&param, 0, sizeof(tstrWifiInitParam));
-
-    /* Initialize the BSP. */
-    nm_bsp_init();
-
-    /* Initialize Wi-Fi driver with data and status callbacks. */
-    param.pfAppWifiCb = wifi_cb;
-    ret = m2m_wifi_init(&param);
-    if (M2M_SUCCESS != ret) {
-        debug_printf("main: m2m_wifi_init call error!(%d)", ret);
-        while (1) {
-        }
-    }
-
-    /* Display WINC3400 chip information. */
-    debug_printf("Chip ID : 0x%x", (unsigned int)nmi_get_chipid());
-    debug_printf("RF Revision ID : %x", (unsigned int)nmi_get_rfrevid());
-    debug_printf("Done.");
-
-    /* Get MAC Address from OTP. */
-    m2m_wifi_get_otp_mac_address(mac_addr, &u8IsMacAddrValid);
-    if (!u8IsMacAddrValid)
-    {
-        debug_printf("USER MAC Address : ");
-
-        /* Cannot found MAC Address from OTP. Set user defined MAC address. */
-        m2m_wifi_set_mac_address((uint8_t*)main_user_defined_mac_address);
-    }
-    else
-    {
-        debug_printf("OTP MAC Address : ");
-    }
-
-    /* Get MAC Address. */
-    m2m_wifi_get_mac_address(mac_addr);
-
-    debug_printf("%02X:%02X:%02X:%02X:%02X:%02X",
-        mac_addr[0], mac_addr[1], mac_addr[2],
-        mac_addr[3], mac_addr[4], mac_addr[5]);
-
-    /* Initialize socket address structure. */
-    socket_addr.sin_family = AF_INET;
-    socket_addr.sin_port = _htons(MAIN_WIFI_M2M_SERVER_PORT);
-    socket_addr.sin_addr.s_addr = _htonl(MAIN_WIFI_M2M_SERVER_IP);
-
-    /* Initialize socket module */
-    socketInit();
-    registerSocketCallback(socket_cb, NULL);
-
-    /* Connect to Access Point */
-    debug_printf("Connecting to %s.", (char*)MAIN_WLAN_SSID);
-    m2m_wifi_connect((char*)MAIN_WLAN_SSID, sizeof(MAIN_WLAN_SSID), MAIN_WLAN_AUTH, (void*)MAIN_WLAN_PSK, M2M_WIFI_CH_ALL);
-
 }
 
 
@@ -265,29 +265,93 @@ void network_thread(void* argument)
 {
     debug_printf("Network thread");
 
+    tstrWifiInitParam param;
+    int8_t ret;
+    uint8_t u8IsMacAddrValid;
+
+    /* Initialize the network stack. */
+    net_init();
+
+    /* Initialize Wi-Fi parameters structure. */
+    memset((uint8_t*)&param, 0, sizeof(tstrWifiInitParam));
+
+    /* Initialize Wi-Fi driver with data and status callbacks. */
+    param.pfAppWifiCb = wifi_cb;
+    ret = os_m2m_wifi_init(&param);
+    if (ret != M2M_SUCCESS) {
+        debug_printf("main: m2m_wifi_init call error!(%d)", ret);
+        while (1) {
+        }
+    }
+
+    /* Get MAC Address from OTP. */
+    os_m2m_wifi_get_otp_mac_address(mac_addr, &u8IsMacAddrValid);
+    if (!u8IsMacAddrValid)
+    {
+        debug_printf("USER MAC Address : ");
+
+        /* Cannot found MAC Address from OTP. Set user defined MAC address. */
+        os_m2m_wifi_set_mac_address((uint8_t*)main_user_defined_mac_address);
+    }
+    else
+    {
+        debug_printf("OTP MAC Address : ");
+    }
+
+    /* Get MAC Address. */
+    os_m2m_wifi_get_mac_address(mac_addr);
+
+    debug_printf("%02X:%02X:%02X:%02X:%02X:%02X",
+        mac_addr[0], mac_addr[1], mac_addr[2],
+        mac_addr[3], mac_addr[4], mac_addr[5]);
+
+    const char ip[] = "192.168.1.65";
+
+    static struct sockaddr_in addr;
+    memset(&addr, 0, sizeof(addr));
+    addr.sin_len = sizeof(addr);
+    addr.sin_family = AF_INET;
+    addr.sin_port = PP_HTONS(1337);
+    addr.sin_addr.s_addr = inet_addr("192.168.1.65");
+
+    /* Connect to Access Point */
+    debug_printf("Connecting to %s.", (char*)MAIN_WLAN_SSID);
+    os_m2m_wifi_connect((char*)MAIN_WLAN_SSID, sizeof(MAIN_WLAN_SSID), MAIN_WLAN_AUTH, (void*)MAIN_WLAN_PSK, M2M_WIFI_CH_ALL);
+
+    bool connected = false;
+
     for (;;)
     {
+        if (gbConnectedWifi == M2M_WIFI_CONNECTED && !connected)
+        {
+            connected = true;
+            
+            /* create the socket */
 
-        taskENTER_CRITICAL();
-        m2m_wifi_handle_events(NULL);
-        taskEXIT_CRITICAL();
+            int8_t socket = lwip_socket(AF_INET, SOCK_STREAM, 0);
 
-        if (wifi_connected == M2M_WIFI_CONNECTED) {
-            /* Open client socket. */
-            if (tcp_client_socket < 0) {
-                if ((tcp_client_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-                    printf("main: failed to create TCP client socket error!\r\n");
-                    continue;
-                }
-
-                /* Connect server */
-                uint32_t ret = connect(tcp_client_socket, (struct sockaddr*)&socket_addr, sizeof(struct sockaddr_in));
-
-                if (ret < 0) {
-                    close(tcp_client_socket);
-                    tcp_client_socket = -1;
-                }
+            if (socket < 0)
+            {
+                debug_error("Socket not created: %d", socket);
             }
+
+            // uint32_t opt = lwip_fcntl(socket, F_GETFL, 0);
+            // LWIP_ASSERT("ret != -1", ret != -1);
+
+            // opt |= O_NONBLOCK;
+            // ret = lwip_fcntl(socket, F_SETFL, opt);
+            // LWIP_ASSERT("ret != -1", ret != -1);
+
+            uint32_t opt = 1;
+            ret = lwip_ioctl(socket, FIONBIO, &opt);
+            LWIP_ASSERT("ret == 0", ret == 0);
+
+            ret = lwip_connect(socket, (struct sockaddr*)&addr, sizeof(addr));
+            LWIP_ASSERT("ret == -1", ret == -1);
+
+            uint32_t err = errno;
+            LWIP_ASSERT("errno == EINPROGRESS", err == EINPROGRESS);
+
         }
 
         osDelay(NETWORK_THREAD_PERIOD);

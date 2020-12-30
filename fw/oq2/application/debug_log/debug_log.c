@@ -5,7 +5,7 @@
  * Author: Brandon Riches                                                                          /
  * Email: richesbc@gmail.com                                                                       /
  * -----                                                                                           /
- * Last Modified: Mon Dec 28 2020                                                                  /
+ * Last Modified: Wed Dec 30 2020                                                                  /
  * Modified By: Brandon Riches                                                                     /
  * -----                                                                                           /
  *                                                                                                 /
@@ -47,6 +47,10 @@ const char* module_stringtable[] =
     "pid",
     "motors",
     "net",
+    "net_init",
+    "wifi_ex",
+    "net_if",
+    "os_hook",
     "w3400",
     "w3400_bsp",
     "w3400_bus",
@@ -67,15 +71,17 @@ const char* module_stringtable[] =
     "w3400_nmuart",
     "w3400_socket",
     "w3400_spiflash",
+    "oq2p",
+    "lwip",
 };
 
 
 
 // Temporary buffer used for printing routines
-static uint8_t line_buffer[128];
+static uint8_t line_buffer[256];
 
 // Temporary buffer used for UART operations
-#define LINE_LENGTH 512
+#define LINE_LENGTH 650
 #define DEBUG_UART_QUEUE_SIZE 24
 static uint8_t uart_tx_buffer[DEBUG_UART_QUEUE_SIZE * LINE_LENGTH];
 static uint8_t* p_write;

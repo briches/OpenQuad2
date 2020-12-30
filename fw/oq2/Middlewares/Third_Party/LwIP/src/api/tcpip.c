@@ -1,3 +1,21 @@
+/*
+ * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\Middlewares\Third_Party\LwIP\src\api\tcpip.c    /
+ * Project: OQ2                                                                                    /
+ * Created Date: Wednesday, December 30th 2020, 6:03:59 am                                         /
+ * Author: Brandon Riches                                                                          /
+ * Email: richesbc@gmail.com                                                                       /
+ * -----                                                                                           /
+ *                                                                                                 /
+ * Copyright (c) 2020 OpenQuad2.                                                                   /
+ * All rights reserved.                                                                            /
+ *                                                                                                 /
+ * Redistribution and use in source or binary forms, with or without modification,                 /
+ * are not permitted without express written approval of OpenQuad2                                 /
+ * -----                                                                                           /
+ * HISTORY:                                                                                        /
+*/
+
+
 /**
  * @file
  * Sequential API Main thread module
@@ -132,6 +150,7 @@ tcpip_thread(void *arg)
   LWIP_MARK_TCPIP_THREAD();
 
   LOCK_TCPIP_CORE();
+
   if (tcpip_init_done != NULL) {
     tcpip_init_done(tcpip_init_done_arg);
   }

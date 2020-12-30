@@ -1,3 +1,21 @@
+/*
+ * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\Middlewares\Third_Party\LwIP\src\include\lwip\arch.h/
+ * Project: OQ2                                                                                    /
+ * Created Date: Wednesday, December 30th 2020, 6:03:59 am                                         /
+ * Author: Brandon Riches                                                                          /
+ * Email: richesbc@gmail.com                                                                       /
+ * -----                                                                                           /
+ *                                                                                                 /
+ * Copyright (c) 2020 OpenQuad2.                                                                   /
+ * All rights reserved.                                                                            /
+ *                                                                                                 /
+ * Redistribution and use in source or binary forms, with or without modification,                 /
+ * are not permitted without express written approval of OpenQuad2                                 /
+ * -----                                                                                           /
+ * HISTORY:                                                                                        /
+*/
+
+
 /**
  * @file
  * Support for different processor and compiler architectures
@@ -78,7 +96,9 @@
  * systems, this should be defined to something less resource-consuming.
  */
 #ifndef LWIP_PLATFORM_DIAG
-#define LWIP_PLATFORM_DIAG(x) do {printf x;} while(0)
+#include "debug_log.h"
+// #define debug_printf(fmt, ...)          debug_printf(LWIP_MODULE_ID, fmt, ##__VA_ARGS__)
+#define LWIP_PLATFORM_DIAG(x) do {/*debug_printf(LWIP_MODULE_ID, "%s", x);*/} while(0)
 #include <stdio.h>
 #include <stdlib.h>
 #endif

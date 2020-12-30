@@ -59,8 +59,13 @@
 #include "nmspi.h"
 
 #include "debug_log.h"
+#if (WINC_MODULE_DRIVER_VERBOSE)
 #define M2M_ERR(fmt, ...)               debug_error(WINC3400_NMSPI_MODULE_ID, fmt, ##__VA_ARGS__)
 #define M2M_INFO(fmt, ...)              debug_printf(WINC3400_NMSPI_MODULE_ID, fmt, ##__VA_ARGS__)
+#else
+#define M2M_ERR(fmt, ...)
+#define M2M_INFO(fmt, ...)
+#endif
 
 #define NMI_PERIPH_REG_BASE 0x1000
 #define NMI_INTR_REG_BASE (NMI_PERIPH_REG_BASE+0xa00)

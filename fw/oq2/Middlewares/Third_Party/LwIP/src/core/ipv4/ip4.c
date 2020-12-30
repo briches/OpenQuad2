@@ -1,3 +1,21 @@
+/*
+ * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\Middlewares\Third_Party\LwIP\src\core\ipv4\ip4.c/
+ * Project: OQ2                                                                                    /
+ * Created Date: Wednesday, December 30th 2020, 6:03:59 am                                         /
+ * Author: Brandon Riches                                                                          /
+ * Email: richesbc@gmail.com                                                                       /
+ * -----                                                                                           /
+ *                                                                                                 /
+ * Copyright (c) 2020 OpenQuad2.                                                                   /
+ * All rights reserved.                                                                            /
+ *                                                                                                 /
+ * Redistribution and use in source or binary forms, with or without modification,                 /
+ * are not permitted without express written approval of OpenQuad2                                 /
+ * -----                                                                                           /
+ * HISTORY:                                                                                        /
+*/
+
+
 /**
  * @file
  * This is the IPv4 layer implementation for incoming and outgoing IP traffic.
@@ -213,8 +231,13 @@ ip4_route(const ip4_addr_t *dest)
 #endif
 #endif /* !LWIP_SINGLE_NETIF */
 
-  if ((netif_default == NULL) || !netif_is_up(netif_default) || !netif_is_link_up(netif_default) ||
-      ip4_addr_isany_val(*netif_ip4_addr(netif_default)) || ip4_addr_isloopback(dest)) {
+  bool isup = netif_is_up(netif_default);
+  bool islinkup = netif_is_link_up(netif_default);
+  bool isany = ip4_addr_isany_val(*netif_ip4_addr(netif_default));
+  bool isloopback = ip4_addr_isloopback(dest);
+
+  if ((netif_default == NULL) || !isup || !islinkup ||
+      isany || isloopback) {
     /* No matching netif found and default netif is not usable.
        If this is not good enough for you, use LWIP_HOOK_IP4_ROUTE() */
     LWIP_DEBUGF(IP_DEBUG | LWIP_DBG_LEVEL_SERIOUS, ("ip4_route: No route to %"U16_F".%"U16_F".%"U16_F".%"U16_F"\n",

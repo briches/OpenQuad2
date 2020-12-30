@@ -58,7 +58,10 @@ void HardFault_Handler(void)
     while (1)
     {
         HAL_GPIO_TogglePin(LED_R_GPIO_Port, LED_R_Pin);
-        HAL_Delay(100);
+        for(int i = 0; i < 10000000; i++)
+        {
+            ;
+        }
     }
 }
 

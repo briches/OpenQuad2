@@ -1,3 +1,21 @@
+/*
+ * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\application\network\net_if\winc_netif.c         /
+ * Project: OQ2                                                                                    /
+ * Created Date: Wednesday, December 30th 2020, 7:07:19 am                                         /
+ * Author: Brandon Riches                                                                          /
+ * Email: richesbc@gmail.com                                                                       /
+ * -----                                                                                           /
+ *                                                                                                 /
+ * Copyright (c) 2020 OpenQuad2.                                                                   /
+ * All rights reserved.                                                                            /
+ *                                                                                                 /
+ * Redistribution and use in source or binary forms, with or without modification,                 /
+ * are not permitted without express written approval of OpenQuad2                                 /
+ * -----                                                                                           /
+ * HISTORY:                                                                                        /
+*/
+
+
 /**
  *
  * \file
@@ -43,20 +61,24 @@
 #include <lwip/tcpip.h>
 #include <netif/etharp.h>
 #include <winc_netif.h>
-#include <sysclk.h>
 #include <string.h>
 #include <semphr.h>
 #include <m2m_wifi_ex.h>
 #include <net_init.h>
 #include <os_hook.h>
 
+#include "debug_log.h"
+#define debug_error(fmt, ...)           debug_error(NET_IF_MODULE_ID, fmt, ##__VA_ARGS__)
+#define debug_printf(fmt, ...)          debug_printf(NET_IF_MODULE_ID, fmt, ##__VA_ARGS__)
+#define debug_print_buffer(fmt, ...)    debug_print_buffer(NET_IF_MODULE_ID, fmt, ##__VA_ARGS__)
+
 void winc_netif_tx_from_queue(hif_msg_t *msg);
-void winc_netif_rx_callback(uint8 msg_type, void * msg, void *ctrl_buf);
+void winc_netif_rx_callback(uint8_t msg_type, void * msg, void *ctrl_buf);
 err_t winc_netif_init(struct netif *netif);
 void winc_fill_callback_info(tstrEthInitParam *info);
 
 /** Queue used by HIF task. */
-extern xQueueHandle hif_queue;
+extern QueueHandle_t hif_queue;
 
 /** Define those to better describe your network interface. */
 #define IFNAME0 'e'
@@ -95,9 +117,9 @@ static void winc_netif_low_level_init(struct netif *netif)
 	memcpy(netif->hwaddr, mac, sizeof(mac));
 	netif->mtu = NET_MTU;
 	netif->flags |= NETIF_FLAG_BROADCAST | NETIF_FLAG_ETHARP
-#if LWIP_IGMP
-			| NETIF_FLAG_IGMP
-#endif // LWIP_IGMP
+    #if LWIP_IGMP
+                | NETIF_FLAG_IGMP
+    #endif // LWIP_IGMP
 	;
 }
 
@@ -120,7 +142,7 @@ static err_t winc_netif_tx(struct netif *netif, struct pbuf *p)
 	if (p->tot_len == p->len) {
 		msg.pbuf = (void *) p;
 		msg.payload_size = p->len - ETH_PAD_SIZE;
-		msg.payload = (void *) &(((uint8 *)p->payload)[ETH_PAD_SIZE]);
+		msg.payload = (void *) &(((uint8_t *)p->payload)[ETH_PAD_SIZE]);
 	} else {
 		for (q = p; q != NULL; q = q->next) {
 			memcpy(bufptr, q->payload, q->len);
@@ -150,7 +172,7 @@ void winc_netif_tx_from_queue(hif_msg_t *msg)
 	void *payload = msg->payload;
 	uint32_t len = msg->payload_size;
 	uint32_t tries = 0;
-	sint8 err;
+	int8_t err;
 
 	for (;;) {
 		/* Try to send packet on corresponding interface. */
@@ -173,7 +195,7 @@ void winc_netif_tx_from_queue(hif_msg_t *msg)
 /**
  * \brief Receive packets from the winc under HIF thread context.
  */
-void winc_netif_rx_callback(uint8 msg_type, void * msg, void *ctrl_buf)
+void winc_netif_rx_callback(uint8_t msg_type, void * msg, void *ctrl_buf)
 {
 	uint16_t sz;
 	uint16_t rem;

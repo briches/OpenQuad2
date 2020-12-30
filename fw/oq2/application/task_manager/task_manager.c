@@ -34,13 +34,13 @@
 void task_manager_thread(void* argument)
 {
 
-    char * runtime_stat_buf = pvPortMalloc(300);
-    char * task_info_buf = pvPortMalloc(300);
+    char * runtime_stat_buf = pvPortMalloc(600);
+    char * task_info_buf = pvPortMalloc(600);
 
     for(;;)
     {
-        memset(runtime_stat_buf, 0x00, 300);
-        memset(task_info_buf, 0x00, 300);
+        memset(runtime_stat_buf, 0x00, 600);
+        memset(task_info_buf, 0x00, 600);
 
         vTaskGetRunTimeStats(runtime_stat_buf);
         vTaskList(task_info_buf);

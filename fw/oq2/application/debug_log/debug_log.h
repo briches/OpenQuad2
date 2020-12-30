@@ -23,6 +23,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdarg.h>
+#include "app_config.h"
 
 #include "module_ids.h"
 

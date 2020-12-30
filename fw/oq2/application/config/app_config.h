@@ -25,16 +25,19 @@
 #define APP_CONFIG_ENABLED 1
 #define APP_CONFIG_DISABLED 0
 
+#define DEBUG_CYAN_HIGHLIGHT_SELECT    OQ2_PROTOCOL_MODULE_ID
+#define DEBUG_YELLOW_HIGHLIGHT_SELECT  NET_INIT_MODULE_ID
+#define WINC_MODULE_DRIVER_VERBOSE     APP_CONFIG_DISABLED
+
 /*********************************************************************************************/
 /* Task Configuration------------------------------------------------------------------------*/
 #define STABILITY_THREAD_PRIO           osPriorityRealtime7
 #define STABILITY_THREAD_PERIOD         10
 #define STABILITY_THREAD_STACK_SIZE     1024 * 4
 
-#define NETWORK_THREAD_PRIO             osPriorityRealtime6
-#define NETWORK_THREAD_PERIOD           2
+#define NETWORK_THREAD_PRIO             osPriorityNormal1
+#define NETWORK_THREAD_PERIOD           500
 #define NETWORK_THREAD_STACK_SIZE       1024*4
-
 
 #define LOCATION_THREAD_PRIO            osPriorityNormal
 #define LOCATION_THREAD_PERIOD          500
@@ -50,8 +53,7 @@
 
 /*********************************************************************************************/
 /* Task Manager -----------------------------------------------------------------------------*/
-#define APP_CONFIG_TASK_MANAGER_PRINT_OUTPUT    APP_CONFIG_ENABLED
-
+#define APP_CONFIG_TASK_MANAGER_PRINT_OUTPUT    APP_CONFIG_DISABLED
 
 /*********************************************************************************************/
 /* Stability Thread -------------------------------------------------------------------------*/

@@ -84,3 +84,9 @@ float timer_get_elapsed()
 
     return res;
 }
+
+
+uint32_t sys_now()
+{
+    return (uint32_t) (1000.0 * timer_get_elapsed());
+}
