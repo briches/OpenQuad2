@@ -162,13 +162,13 @@ void EXTI15_10_IRQHandler(void)
     HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_14);
 }
 
-/**
-  * @brief This function handles USB On The Go HS global interrupt.
-  */
-void OTG_HS_IRQHandler(void)
-{
-    HAL_PCD_IRQHandler(&hpcd_USB_OTG_HS);
-}
+// /**
+//   * @brief This function handles USB On The Go HS global interrupt.
+//   */
+// void OTG_HS_IRQHandler(void)
+// {
+//     HAL_PCD_IRQHandler(&hpcd_USB_OTG_HS);
+// }
 
 /**
   * @brief This function handles LPTIM1 global interrupt.

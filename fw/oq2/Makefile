@@ -13,29 +13,24 @@
 ######################################
 # target
 ######################################
-TARGET = _oq2
-
-
-######################################
-# building variables
-######################################
-# debug build?
-DEBUG = 1
-# optimization
-OPT = -O0
-
+TARGETS = _oq2
 
 #######################################
 # paths
 #######################################
 # Build path
-BUILD_DIR = _build
+OUTPUT_DIRECTORY = _build
+
+# link script
+$(OUTPUT_DIRECTORY)/_oq2.out: \
+  LINKER_SCRIPT  := STM32H735ZGTx_FLASH.ld
 
 ######################################
 # source
 ######################################
 # C sources
-C_SOURCES =  \
+SRC_FILES +=  \
+application/sys/startup/startup_stm32h735zgtx.s \
 application/main.c \
 application/debug_log/debug_log.c \
 application/freertos/freertos.c \
@@ -55,10 +50,6 @@ application/sys/stm32h7xx_hal_timebase_tim.c \
 application/sys/system_stm32h7xx.c \
 FATFS/Target/user_diskio.c \
 FATFS/App/fatfs.c \
-USB_DEVICE/App/usb_device.c \
-USB_DEVICE/App/usbd_desc.c \
-USB_DEVICE/App/usbd_storage_if.c \
-USB_DEVICE/Target/usbd_conf.c \
 Drivers/wifi_drv_winc3400/bsp/source/nm_bsp_stm32h7xx.c \
 Drivers/wifi_drv_winc3400/bus_wrapper/source/nm_bus_wrapper_stm32.c \
 Drivers/wifi_drv_winc3400/common/source/efuse.c \
@@ -134,38 +125,180 @@ Middlewares/Third_Party/FreeRTOS/Source/timers.c \
 Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c \
 Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c \
 Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.c \
-Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c \
-Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c \
-Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c \
-Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc.c \
-Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_bot.c \
-Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_data.c \
-Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Src/usbd_msc_scsi.c 
+Middlewares/Third_Party/LwIP/src/netif/ppp/auth.c \
+Middlewares/Third_Party/LwIP/src/netif/ppp/ccp.c \
+Middlewares/Third_Party/LwIP/src/netif/ppp/chap_ms.c \
+Middlewares/Third_Party/LwIP/src/netif/ppp/chap-md5.c \
+Middlewares/Third_Party/LwIP/src/netif/ppp/chap-new.c \
+Middlewares/Third_Party/LwIP/src/netif/ppp/demand.c \
+Middlewares/Third_Party/LwIP/src/netif/ppp/eap.c \
+Middlewares/Third_Party/LwIP/src/netif/ppp/eui64.c \
+Middlewares/Third_Party/LwIP/src/netif/ppp/fsm.c \
+Middlewares/Third_Party/LwIP/src/netif/ppp/ipcp.c \
+Middlewares/Third_Party/LwIP/src/netif/ppp/ipv6cp.c \
+Middlewares/Third_Party/LwIP/src/netif/ppp/lcp.c \
+Middlewares/Third_Party/LwIP/src/netif/ppp/magic.c \
+Middlewares/Third_Party/LwIP/src/netif/ppp/mppe.c \
+Middlewares/Third_Party/LwIP/src/netif/ppp/multilink.c \
+Middlewares/Third_Party/LwIP/src/netif/ppp/ppp.c \
+Middlewares/Third_Party/LwIP/src/netif/ppp/pppapi.c \
+Middlewares/Third_Party/LwIP/src/netif/ppp/pppcrypt.c \
+Middlewares/Third_Party/LwIP/src/netif/ppp/pppoe.c \
+Middlewares/Third_Party/LwIP/src/netif/ppp/pppol2tp.c \
+Middlewares/Third_Party/LwIP/src/netif/ppp/pppos.c \
+Middlewares/Third_Party/LwIP/src/netif/ppp/upap.c \
+Middlewares/Third_Party/LwIP/src/netif/ppp/utils.c \
+Middlewares/Third_Party/LwIP/src/netif/ppp/vj.c \
+Middlewares/Third_Party/LwIP/src/netif/bridgeif.c \
+Middlewares/Third_Party/LwIP/src/netif/bridgeif_fdb.c \
+Middlewares/Third_Party/LwIP/src/netif/ethernet.c \
+Middlewares/Third_Party/LwIP/src/netif/lowpan6.c \
+Middlewares/Third_Party/LwIP/src/netif/lowpan6_ble.c \
+Middlewares/Third_Party/LwIP/src/netif/lowpan6_common.c \
+Middlewares/Third_Party/LwIP/src/netif/slipif.c \
+Middlewares/Third_Party/LwIP/src/netif/zepif.c \
+Middlewares/Third_Party/LwIP/src/netif/ppp/ecp.c \
+Middlewares/Third_Party/LwIP/src/api/api_lib.c \
+Middlewares/Third_Party/LwIP/src/api/api_msg.c \
+Middlewares/Third_Party/LwIP/src/api/err.c \
+Middlewares/Third_Party/LwIP/src/api/if_api.c \
+Middlewares/Third_Party/LwIP/src/api/netbuf.c \
+Middlewares/Third_Party/LwIP/src/api/netdb.c \
+Middlewares/Third_Party/LwIP/src/api/netifapi.c \
+Middlewares/Third_Party/LwIP/src/api/sockets.c \
+Middlewares/Third_Party/LwIP/src/api/tcpip.c \
+Middlewares/Third_Party/LwIP/src/core/altcp.c \
+Middlewares/Third_Party/LwIP/src/core/altcp_alloc.c \
+Middlewares/Third_Party/LwIP/src/core/altcp_tcp.c \
+Middlewares/Third_Party/LwIP/src/core/def.c \
+Middlewares/Third_Party/LwIP/src/core/dns.c \
+Middlewares/Third_Party/LwIP/src/core/inet_chksum.c \
+Middlewares/Third_Party/LwIP/src/core/init.c \
+Middlewares/Third_Party/LwIP/src/core/ip.c \
+Middlewares/Third_Party/LwIP/src/core/mem.c \
+Middlewares/Third_Party/LwIP/src/core/memp.c \
+Middlewares/Third_Party/LwIP/src/core/netif.c \
+Middlewares/Third_Party/LwIP/src/core/pbuf.c \
+Middlewares/Third_Party/LwIP/src/core/raw.c \
+Middlewares/Third_Party/LwIP/src/core/stats.c \
+Middlewares/Third_Party/LwIP/src/core/sys.c \
+Middlewares/Third_Party/LwIP/src/core/tcp.c \
+Middlewares/Third_Party/LwIP/src/core/tcp_in.c \
+Middlewares/Third_Party/LwIP/src/core/tcp_out.c \
+Middlewares/Third_Party/LwIP/src/core/timeouts.c \
+Middlewares/Third_Party/LwIP/src/core/udp.c \
+Middlewares/Third_Party/LwIP/src/core/ipv4/autoip.c \
+Middlewares/Third_Party/LwIP/src/core/ipv4/dhcp.c \
+Middlewares/Third_Party/LwIP/src/core/ipv4/etharp.c \
+Middlewares/Third_Party/LwIP/src/core/ipv4/icmp.c \
+Middlewares/Third_Party/LwIP/src/core/ipv4/igmp.c \
+Middlewares/Third_Party/LwIP/src/core/ipv4/ip4.c \
+Middlewares/Third_Party/LwIP/src/core/ipv4/ip4_addr.c \
+Middlewares/Third_Party/LwIP/src/core/ipv4/ip4_frag.c \
+Middlewares/Third_Party/LwIP/src/core/ipv6/dhcp6.c \
+Middlewares/Third_Party/LwIP/src/core/ipv6/ethip6.c \
+Middlewares/Third_Party/LwIP/src/core/ipv6/icmp6.c \
+Middlewares/Third_Party/LwIP/src/core/ipv6/inet6.c \
+Middlewares/Third_Party/LwIP/src/core/ipv6/ip6.c \
+Middlewares/Third_Party/LwIP/src/core/ipv6/ip6_addr.c \
+Middlewares/Third_Party/LwIP/src/core/ipv6/ip6_frag.c \
+Middlewares/Third_Party/LwIP/src/core/ipv6/mld6.c \
+Middlewares/Third_Party/LwIP/src/core/ipv6/nd6.c \
+Middlewares/Third_Party/LwIP/system/OS/sys_arch.c \
+Middlewares/Third_Party/LwIP/src/apps/mqtt/mqtt.c \
+Middlewares/Third_Party/LwIP/src/apps/snmp/snmpv3.c \
+Middlewares/Third_Party/LwIP/src/apps/snmp/snmpv3_mbedtls.c \
+Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_asn1.c \
+Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_core.c \
+Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2.c \
+Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2_icmp.c \
+Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2_interfaces.c \
+Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2_ip.c \
+Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2_snmp.c \
+Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2_system.c \
+Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2_tcp.c \
+Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2_udp.c \
+Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_msg.c \
+Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_netconn.c \
+Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_pbuf_stream.c \
+Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_raw.c \
+Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_scalar.c \
+Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_snmpv2_framework.c \
+Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_snmpv2_usm.c \
+Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_table.c \
+Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_threadsync.c \
+Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_traps.c \
+Middlewares/Third_Party/LwIP/src/apps/sntp/sntp.c \
+Middlewares/Third_Party/LwIP/src/apps/smtp/smtp.c
 
-# ASM sources
-ASM_SOURCES =  \
-startup_stm32h735xx.s
+# Include folders common to all targets
+INC_FOLDERS +=  \
+  application \
+  application/config \
+  application/debug_log \
+  application/freertos \
+  application/location \
+  application/led_blinky \
+  application/network \
+  application/pid \
+  application/stability_control \
+  application/stability_control/kinematics \
+  application/stability_control/platform \
+  application/stability_control/motors \
+  application/sys \
+  application/task_manager \
+  application/timer \
+  FATFS/Target \
+  FATFS/App \
+  USB_DEVICE/App \
+  USB_DEVICE/Target \
+  Middlewares/Third_Party/FreeRTOS/Source/include \
+  Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 \
+  Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 \
+  Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F \
+  Middlewares/Third_Party/FatFs/src \
+  Middlewares/ST/STM32_USB_Device_Library/Core/Inc \
+  Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc \
+  Drivers/CMSIS/Device/ST/STM32H7xx/Include \
+  Drivers/CMSIS/Include \
+  Drivers/Mems/lps22hh_STdC/driver \
+  Drivers/Mems/lsm9ds1_STdC/driver \
+  Drivers/STM32H7xx_HAL_Driver/Inc \
+  Drivers/STM32H7xx_HAL_Driver/Inc/Legacy \
+  Middlewares/ST/STM32_MotionFX_Library/Inc \
+  Middlewares/ARM/DSP/Inc \
+  Drivers/wifi_drv_winc3400/driver/include \
+  Drivers/wifi_drv_winc3400/driver/source \
+  Drivers/wifi_drv_winc3400/bsp/include \
+  Drivers/wifi_drv_winc3400/bus_wrapper/include \
+  Drivers/wifi_drv_winc3400/common/include \
+  Drivers/wifi_drv_winc3400/socket/include \
+  Drivers/wifi_drv_winc3400/socket/source \
+  Middlewares/Third_Party/LwIP/src/include \
+  Middlewares/Third_Party/LwIP/system \
+  Middlewares/Third_Party/LwIP/src/include/netif/ppp \
+  Middlewares/Third_Party/LwIP/src/include/lwip \
+  Middlewares/Third_Party/LwIP/src/include/lwip/apps \
+  Middlewares/Third_Party/LwIP/src/include/lwip/priv \
+  Middlewares/Third_Party/LwIP/src/include/lwip/prot \
+  Middlewares/Third_Party/LwIP/src/include \
+  Middlewares/Third_Party/LwIP/src/include/netif \
+  Middlewares/Third_Party/LwIP/src/include/compat/posix \
+  Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa \
+  Middlewares/Third_Party/LwIP/src/include/compat/posix/net \
+  Middlewares/Third_Party/LwIP/src/include/compat/posix/sys \
+  Middlewares/Third_Party/LwIP/src/include/compat/stdc \
+  Middlewares/Third_Party/LwIP/system/arch
 
 
-#######################################
-# binaries
-#######################################
-PREFIX = arm-none-eabi-
-# The gcc compiler bin path can be either defined in make command via GCC_PATH variable (> make GCC_PATH=xxx)
-# either it can be added to the PATH environment variable.
-ifdef GCC_PATH
-CC = $(GCC_PATH)/$(PREFIX)gcc
-AS = $(GCC_PATH)/$(PREFIX)gcc -x assembler-with-cpp
-CP = $(GCC_PATH)/$(PREFIX)objcopy
-SZ = $(GCC_PATH)/$(PREFIX)size
-else
-CC = $(PREFIX)gcc
-AS = $(PREFIX)gcc -x assembler-with-cpp
-CP = $(PREFIX)objcopy
-SZ = $(PREFIX)size
-endif
-HEX = $(CP) -O ihex
-BIN = $(CP) -O binary -S
+LIB_FILES += \
+  Middlewares/ST/STM32_MotionFX_Library/Lib/MotionFX_CM7F_wc32_ot_hard.a\
+  Middlewares/ARM/DSP/Lib/arm_cortexM7lfdp_math.lib
+
+# debug build?
+DEBUG = 1
+# optimization
+OPT = -O0
  
 #######################################
 # CFLAGS
@@ -197,121 +330,95 @@ C_DEFS =  \
 -DFREERTOS \
 -DARM_MATH_CM7
 
-# C includes
-C_INCLUDES =  \
--Iapplication \
--Iapplication/config \
--Iapplication/debug_log \
--Iapplication/freertos \
--Iapplication/location \
--Iapplication/led_blinky \
--Iapplication/network \
--Iapplication/pid \
--Iapplication/stability_control \
--Iapplication/stability_control/kinematics \
--Iapplication/stability_control/platform \
--Iapplication/stability_control/motors \
--Iapplication/sys \
--Iapplication/task_manager \
--Iapplication/timer \
--IFATFS/Target \
--IFATFS/App \
--IUSB_DEVICE/App \
--IUSB_DEVICE/Target \
--IDrivers/wifi_drv_winc3400/driver/include \
--IDrivers/wifi_drv_winc3400/driver/source \
--IDrivers/wifi_drv_winc3400/bsp/include \
--IDrivers/wifi_drv_winc3400/bus_wrapper/include \
--IDrivers/wifi_drv_winc3400/common/include \
--IDrivers/wifi_drv_winc3400/socket/include \
--IDrivers/wifi_drv_winc3400/socket/source \
--IDrivers/STM32H7xx_HAL_Driver/Inc \
--IDrivers/STM32H7xx_HAL_Driver/Inc/Legacy \
--IMiddlewares/Third_Party/FreeRTOS/Source/include \
--IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 \
--IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1 \
--IMiddlewares/Third_Party/FatFs/src \
--IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc \
--IMiddlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc \
--IDrivers/CMSIS/Device/ST/STM32H7xx/Include \
--IDrivers/CMSIS/Include \
--IDrivers/Mems/lps22hh_STdC/driver \
--IDrivers/Mems/lsm9ds1_STdC/driver \
--IMiddlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F \
--IMiddlewares/ST/STM32_MotionFX_Library/Inc \
--IMiddlewares/ARM/DSP/Inc
-
-LIBS = Middlewares/ST/STM32_MotionFX_Library/Lib/MotionFX_CM7F_wc32_ot_hard.a
-LIBS += Middlewares/ARM/DSP/Lib/arm_cortexM7lfdp_math.lib
-
+CXXFLAGS += $(OPT)
 
 # compile gcc flags
-ASFLAGS = $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
-
-CFLAGS = $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
-
+CFLAGS += $(OPT)
+CFLAGS += $(C_DEFS)
+CFLAGS += $(MCU)
+CLFAGS += -Wall
+CFLAGS += -fdata-sections
+CFLAGS += -ffunction-sections
+CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
 ifeq ($(DEBUG), 1)
 CFLAGS += -g -gdwarf-2
 endif
 
-
-# Generate dependency information
+#assembler flags
+ASFLAGS += $(OPT)
+CFLAGS += $(C_DEFS)
+CFLAGS += $(MCU)
+CLFAGS += -Wall
+CFLAGS += -fdata-sections
+CFLAGS += -ffunction-sections
 CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
+ifeq ($(DEBUG), 1)
+CFLAGS += -g -gdwarf-2
+endif
+
+# linker flags
+LDFLAGS = $(MCU) -specs=nano.specs -T$(LINKER_SCRIPT) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections
+
+# Add standard libraries at the very end of the linker input, after all objects
+# that may need symbols provided by these libraries.
+LIB_FILES += -lc -lnosys -lm
 
 
-#######################################
-# LDFLAGS
-#######################################
-# link script
-LDSCRIPT = STM32H735ZGTx_FLASH.ld
+# #######################################
+# # build the application
+# #######################################
+# # list of objects
+# OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(C_SOURCES:.c=.o)))
+# vpath %.c $(sort $(dir $(C_SOURCES)))
+# # list of ASM program objects
+# OBJECTS += $(addprefix $(BUILD_DIR)/,$(notdir $(ASM_SOURCES:.s=.o)))
+# vpath %.s $(sort $(dir $(ASM_SOURCES)))
 
-# libraries
-LIBS += -lc -lm -lnosys 
-LIBDIR = 
-LDFLAGS = $(MCU) -specs=nano.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections
+# $(BUILD_DIR)/%.o: %.c Makefile | $(BUILD_DIR) 
+# 	$(CC) -c $(CFLAGS) -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(<:.c=.lst)) $< -o $@
 
-# default action: build all
-all: $(BUILD_DIR)/$(TARGET).elf $(BUILD_DIR)/$(TARGET).hex $(BUILD_DIR)/$(TARGET).bin
+# $(BUILD_DIR)/%.o: %.s Makefile | $(BUILD_DIR)
+# 	$(AS) -c $(CFLAGS) $< -o $@
 
-#######################################
-# build the application
-#######################################
-# list of objects
-OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(C_SOURCES:.c=.o)))
-vpath %.c $(sort $(dir $(C_SOURCES)))
-# list of ASM program objects
-OBJECTS += $(addprefix $(BUILD_DIR)/,$(notdir $(ASM_SOURCES:.s=.o)))
-vpath %.s $(sort $(dir $(ASM_SOURCES)))
+# $(BUILD_DIR)/$(TARGET).elf: $(OBJECTS) Makefile
+# 	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
+# 	$(SZ) $@
 
-$(BUILD_DIR)/%.o: %.c Makefile | $(BUILD_DIR) 
-	$(CC) -c $(CFLAGS) -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(<:.c=.lst)) $< -o $@
-
-$(BUILD_DIR)/%.o: %.s Makefile | $(BUILD_DIR)
-	$(AS) -c $(CFLAGS) $< -o $@
-
-$(BUILD_DIR)/$(TARGET).elf: $(OBJECTS) Makefile
-	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
-	$(SZ) $@
-
-$(BUILD_DIR)/%.hex: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
-	$(HEX) $< $@
+# $(BUILD_DIR)/%.hex: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
+# 	$(HEX) $< $@
 	
-$(BUILD_DIR)/%.bin: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
-	$(BIN) $< $@	
+# $(BUILD_DIR)/%.bin: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
+# 	$(BIN) $< $@	
 	
-$(BUILD_DIR):
-	mkdir $@		
+# $(BUILD_DIR):
+# 	mkdir $@		
+
+.PHONY: default help
+
+# Default target - first one defined
+default: _oq2
+
+# Print all targets that can be built
+help:
+	@echo following targets are available:
+	@echo		clean
+	@echo		erase
+	@echo		flash
+	@echo		reset
+
+include Makefile.common
+
+$(foreach target, $(TARGETS), $(call define_target, $(target)))
+
+.PHONY: flash 
 
 #######################################
 # clean up
-#######################################
-clean:
-	-rm -fR $(BUILD_DIR)
-  
+#######################################  
 erase:
 	jlink -SelectEmuBySN 801020691 -device STM32H735ZGT -if SWD -speed 8000 -autoconnect 1 -ExitOnError -CommanderScript ./jlink/erase.jlink
 
-flash: all
+flash: default
 	jlink -SelectEmuBySN 801020691 -device STM32H735ZGT -if SWD -speed 8000 -autoconnect 1 -ExitOnError -CommanderScript ./jlink/flash.jlink
 
 reset:
