@@ -27,8 +27,14 @@
 #include "timer.h"
 #include "oq2_protocol.h"
 
+
+#if defined(CONFIG_USE_ASYNC_API)
 #include "lwip/sockets.h"
 #include "lwip/sys.h"
+#else
+#include "socket.h"
+static SOCKET tcp_client_socket = -1;
+#endif
 
 
 #include "debug_log.h"
@@ -101,59 +107,61 @@ void net_callback(struct netconn* pnetconn, enum netconn_evt evt, u16_t len)
  *  - tstrSocketConnectMsg
  *  - tstrSocketRecvMsg
  */
- // static void socket_cb(SOCKET sock, uint8_t u8Msg, void* pvMsg)
- // {
- //     switch (u8Msg) {
- //         /* Socket connected */
- //     case SOCKET_MSG_CONNECT:
- //     {
- //         tstrSocketConnectMsg* pstrConnect = (tstrSocketConnectMsg*)pvMsg;
-
- //         if (pstrConnect && pstrConnect->s8Error >= 0) {
- //             debug_printf("socket_cb: connect success!");
- //             oq2p_connect_callback(sock);
- //         }
- //         else {
- //             debug_printf("socket_cb: connect error!");
- //             close(tcp_client_socket);
- //             tcp_client_socket = -1;
- //             oq2p_disconnect_callback(sock);
- //         }
- //     }
- //     break;
-
- //     /* Message send */
- //     case SOCKET_MSG_SEND:
- //     {
- //         debug_printf("socket_cb: send success!");
- //     }
- //     break;
-
- //     /* Message receive */
- //     case SOCKET_MSG_RECV:
- //     {
- //         tstrSocketRecvMsg* pstrRecv = (tstrSocketRecvMsg*)pvMsg;
-
- //         oq2p_receive_callback(sock, pstrRecv);
 
 
- //     }
+#if !defined(CONFIG_USE_ASYNC_API)
+static void socket_cb(SOCKET sock, uint8_t u8Msg, void* pvMsg)
+{
+    switch (u8Msg) {
+        /* Socket connected */
+    case SOCKET_MSG_CONNECT:
+    {
+        tstrSocketConnectMsg* pstrConnect = (tstrSocketConnectMsg*)pvMsg;
 
- //     break;
+        if (pstrConnect && pstrConnect->s8Error >= 0) {
+            debug_printf("socket_cb: connect success!");
+            oq2p_connect_callback(sock);
+        }
+        else {
+            debug_printf("socket_cb: connect error!");
+            close(tcp_client_socket);
+            tcp_client_socket = -1;
+            oq2p_disconnect_callback(sock);
+        }
+    }
+    break;
 
- //     default:
- //         break;
- //     }
- // }
+    /* Message send */
+    case SOCKET_MSG_SEND:
+    {
+        // debug_printf("socket_cb: send success!");
+    }
+    break;
 
- /**
-  * \brief Callback function of IP address.
-  *
-  * \param[in] hostName Domain name.
-  * \param[in] hostIp Server IP.
-  *
-  * \return None.
-  */
+    /* Message receive */
+    case SOCKET_MSG_RECV:
+    {
+        tstrSocketRecvMsg* pstrRecv = (tstrSocketRecvMsg*)pvMsg;
+
+        oq2p_receive_callback(sock, pstrRecv);
+    }
+
+    break;
+
+    default:
+        break;
+    }
+}
+#endif
+
+/**
+ * \brief Callback function of IP address.
+ *
+ * \param[in] hostName Domain name.
+ * \param[in] hostIp Server IP.
+ *
+ * \return None.
+ */
 static void resolve_cb(const char* hostName, ip_addr_t* ipaddr, void* callback_arg)
 {
     gu32HostIp = ipaddr->addr;
@@ -239,6 +247,13 @@ static void wifi_cb(uint8_t msg_type, void* msg)
 
     } break;
 
+    case M2M_WIFI_RESP_CURRENT_RSSI:
+    {
+        int8_t rssi = * ((int8_t *)msg);
+
+        debug_printf("RSSI %d dBm", rssi, (uint8_t)rssi);
+    }
+
     default:
     {
         break;
@@ -256,6 +271,187 @@ void network_thread_pre_init()
 }
 
 
+#if defined(CONFIG_USE_ASYNC_API)
+void _socket_func()
+{
+    ip_addr_t local_ip;
+    ip_addr_t remote_ip;
+    struct netconn *tcp_socket;
+    u16_t port;
+
+    debug_printf("Socket async lwip API");
+
+    bool connected = false;
+    // const char ip[] = "192.168.1.65";
+
+    // static struct sockaddr_in addr;
+    // memset(&addr, 0, sizeof(addr));
+    // addr.sin_len = sizeof(addr);
+    // addr.sin_family = AF_INET;
+    // addr.sin_port = PP_HTONS(1337);
+    // addr.sin_addr.s_addr = inet_addr(ip);
+
+    for (;;)
+    {
+        if (gbConnectedWifi == M2M_WIFI_CONNECTED && !connected)
+        {
+            connected = true;
+
+            // debug_printf("Create server socket");
+            // /* Create server socket. */
+            // if ((tcp_socket = netconn_new(NETCONN_TCP)) == NULL) {
+            //     debug_printf("iperf_tcp_task: could not create TCP socket!\n");
+            //     while (1);
+            // }
+
+            // debug_printf("Bind server socket");
+            // if (netconn_bind(tcp_socket, NULL, 1336) != ERR_OK) {
+            //     debug_printf("iperf_tcp_task: could not bind TCP socket!\n");
+            //     while (1);
+            // }
+
+            // debug_printf("Listen server socket");
+            // if (netconn_listen(tcp_socket) != ERR_OK) {
+            //     debug_printf("iperf_tcp_task: could not enter listen state for TCP socket!\n");
+            //     while (1);
+            // }
+
+            // while (netconn_accept(tcp_socket, &conn) != ERR_OK) {
+            //     vTaskDelay(10);
+            // }
+
+            /* Client socket */
+            struct netconn* conn = netconn_new(NETCONN_TCP);
+
+            ip_addr_t * plocalip = net_interface_get_ipaddr(NET_IF_STA);
+
+            local_ip.addr = plocalip->addr;
+
+            debug_printf("Create client socket");
+            if (ERR_OK != netconn_bind(conn, &local_ip, 0)) 
+            {
+                debug_printf("iperf_tcp_send: bind failed\n");
+                netconn_delete(conn);
+            }
+
+            remote_ip.addr = lwip_htonl(MAIN_WIFI_M2M_SERVER_IP);
+
+            debug_printf("local %s", ip4addr_ntoa(&local_ip));
+            debug_printf("remote %s", ip4addr_ntoa(&remote_ip));
+
+            debug_printf("Connect client socket");
+
+            // netconn_set_nonblocking(conn, O_NONBLOCK);
+
+            if (ERR_OK != netconn_connect(conn, &remote_ip, MAIN_WIFI_M2M_SERVER_PORT)) 
+            {
+                debug_printf("iperf_tcp_send: connect failed\n");
+                netconn_delete(conn);
+            }
+
+            debug_printf("Done");
+
+
+            // /* create the socket */
+
+            // int8_t socket = lwip_socket(AF_INET, SOCK_STREAM, 0);
+
+            // if (socket < 0)
+            // {
+            //     debug_error("Socket not created: %d", socket);
+            // }
+
+            // // uint32_t opt = lwip_fcntl(socket, F_GETFL, 0);
+            // // LWIP_ASSERT("ret != -1", ret != -1);
+
+            // // opt |= O_NONBLOCK;
+            // // ret = lwip_fcntl(socket, F_SETFL, opt);
+            // // LWIP_ASSERT("ret != -1", ret != -1);
+
+            // uint32_t opt = 1;
+            // uint32_t ret = lwip_ioctl(socket, FIONBIO, &opt);
+            // LWIP_ASSERT("ret == 0", ret == 0);
+
+            // ret = lwip_connect(socket, (struct sockaddr*)&addr, sizeof(addr));
+            // LWIP_ASSERT("ret == -1", ret == -1);
+
+            // uint32_t err = errno;
+            // LWIP_ASSERT("errno == EINPROGRESS", err == EINPROGRESS);
+
+        }
+
+        osDelay(NETWORK_THREAD_PERIOD);
+    }
+}
+#else
+void _socket_func()
+{
+    int32_t ret;
+
+    debug_printf("Socket blocking API");
+
+    socketInit();
+    registerSocketCallback(socket_cb, NULL);
+
+    uint32_t five_second_average[5] = {0};
+    uint32_t byte_count = 0;
+    uint32_t last_byte_count = 0;
+    uint32_t rate_index = 0;
+
+    for (;;)
+    {
+        if (gbConnectedWifi && tcp_client_socket == -1)
+        {
+            debug_printf("Create socket.");
+            tcp_client_socket = socket(AF_INET, SOCK_STREAM, 0);
+
+            struct sockaddr_in addr;
+
+            /* Initialize socket address structure. */
+            addr.sin_family = AF_INET;
+            addr.sin_port = _htons(MAIN_WIFI_M2M_SERVER_PORT);
+            addr.sin_addr.s_addr = _htonl(MAIN_WIFI_M2M_SERVER_IP);
+
+            debug_printf("Connect");
+            ret = connect(tcp_client_socket, (struct sockaddr*)&addr, sizeof(struct sockaddr_in));
+            debug_printf("done.");
+
+            if (ret < 0)
+            {
+                close(tcp_client_socket);
+                tcp_client_socket = -1;
+            }
+        }
+
+        byte_count = op2p_get_received_bytes() + op2p_get_sent_bytes();
+
+        five_second_average[rate_index++] = byte_count - last_byte_count;
+
+        last_byte_count = byte_count;
+
+        if(rate_index >= 5)
+            rate_index = 0;
+
+        float bitrate = 0;
+
+        for(int i = 0; i < 5; i++)
+        {
+            bitrate +=  8 * five_second_average[i];
+        }
+
+        bitrate /= 5;
+
+        debug_printf("BITRATE %3.2f kbps",  bitrate/1000); 
+
+        os_m2m_wifi_req_curr_rssi();
+
+        osDelay(NETWORK_THREAD_PERIOD);
+    }
+}
+
+#endif
+
+
 /**
  * @brief  Function implementing the stability task thread.
  * @param  argument: Not used
@@ -266,8 +462,10 @@ void network_thread(void* argument)
     debug_printf("Network thread");
 
     tstrWifiInitParam param;
-    int8_t ret;
     uint8_t u8IsMacAddrValid;
+    uint32_t ret;
+
+    oq2p_init();
 
     /* Initialize the network stack. */
     net_init();
@@ -305,55 +503,11 @@ void network_thread(void* argument)
         mac_addr[0], mac_addr[1], mac_addr[2],
         mac_addr[3], mac_addr[4], mac_addr[5]);
 
-    const char ip[] = "192.168.1.65";
-
-    static struct sockaddr_in addr;
-    memset(&addr, 0, sizeof(addr));
-    addr.sin_len = sizeof(addr);
-    addr.sin_family = AF_INET;
-    addr.sin_port = PP_HTONS(1337);
-    addr.sin_addr.s_addr = inet_addr("192.168.1.65");
-
     /* Connect to Access Point */
     debug_printf("Connecting to %s.", (char*)MAIN_WLAN_SSID);
     os_m2m_wifi_connect((char*)MAIN_WLAN_SSID, sizeof(MAIN_WLAN_SSID), MAIN_WLAN_AUTH, (void*)MAIN_WLAN_PSK, M2M_WIFI_CH_ALL);
 
-    bool connected = false;
 
-    for (;;)
-    {
-        if (gbConnectedWifi == M2M_WIFI_CONNECTED && !connected)
-        {
-            connected = true;
-            
-            /* create the socket */
-
-            int8_t socket = lwip_socket(AF_INET, SOCK_STREAM, 0);
-
-            if (socket < 0)
-            {
-                debug_error("Socket not created: %d", socket);
-            }
-
-            // uint32_t opt = lwip_fcntl(socket, F_GETFL, 0);
-            // LWIP_ASSERT("ret != -1", ret != -1);
-
-            // opt |= O_NONBLOCK;
-            // ret = lwip_fcntl(socket, F_SETFL, opt);
-            // LWIP_ASSERT("ret != -1", ret != -1);
-
-            uint32_t opt = 1;
-            ret = lwip_ioctl(socket, FIONBIO, &opt);
-            LWIP_ASSERT("ret == 0", ret == 0);
-
-            ret = lwip_connect(socket, (struct sockaddr*)&addr, sizeof(addr));
-            LWIP_ASSERT("ret == -1", ret == -1);
-
-            uint32_t err = errno;
-            LWIP_ASSERT("errno == EINPROGRESS", err == EINPROGRESS);
-
-        }
-
-        osDelay(NETWORK_THREAD_PERIOD);
-    }
+    // Either blocking with winc3400 driver, or non-blocking with netconn api
+    _socket_func();
 }

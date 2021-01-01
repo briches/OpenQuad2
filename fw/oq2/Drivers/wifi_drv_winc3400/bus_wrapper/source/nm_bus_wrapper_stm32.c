@@ -76,12 +76,14 @@ extern SPI_HandleTypeDef hspi1;
 /* Number of times to try to send packet if failed. */
 #define I2C_TIMEOUT 100
 
-#define NM_BUS_MAX_TRX_SZ   256
+#define NM_BUS_MAX_TRX_SZ   4096
 
 tstrNmBusCapabilities egstrNmBusCapabilities =
 {
     NM_BUS_MAX_TRX_SZ
 };
+
+static uint8_t dummy_buf[NM_BUS_MAX_TRX_SZ];
 
 #ifdef CONF_WINC_USE_I2C
 static int8_t nm_i2c_write(uint8_t* b, uint16_t sz)
@@ -163,19 +165,22 @@ int8_t nm_spi_rw(uint8_t* pu8Mosi, uint8_t* pu8Miso, uint16_t u16Sz)
     else {
         return M2M_ERR_BUS_FAIL;
     }
+
+    // if(u16Sz > 400)
+    // {
+    //     M2M_INFO("txrx %u bytes", u16Sz);
+    // }
     
     /*TX path*/
     if (!u8SkipMosi)
     {
         SPI_ASSERT_CS();
-        // while (u16Sz--)
-        // {
-        //     CONF_WINC_SPI->SPI_TDR = SPI_TDR_TD((uint16_t)*pu8Mosi);
-        //     while (!(CONF_WINC_SPI->SPI_SR & SPI_SR_TDRE));
-        //     pu8Mosi++;
-        // }
-        HAL_SPI_Transmit(&mspi, pu8Mosi, u16Sz, 100);
+        HAL_StatusTypeDef stat = HAL_SPI_TransmitReceive(&mspi, pu8Mosi, dummy_buf, u16Sz, 1000);
         SPI_DEASSERT_CS();
+        if(stat != HAL_OK)
+        {
+            M2M_ERR("HAL_SPI_TransmitReceive returned %u", stat);
+        }
     }
 
     /*RX path*/
@@ -183,18 +188,13 @@ int8_t nm_spi_rw(uint8_t* pu8Mosi, uint8_t* pu8Miso, uint16_t u16Sz)
     {
         uc_pcs = 0;
         SPI_ASSERT_CS();
-        // HAL_SPI_Receive(&mspi, pu8Miso, u16Sz, 100);
-        HAL_SPI_TransmitReceive(&mspi, pu8Mosi, pu8Miso, u16Sz, 100);
-        // while (u16Sz--)
-        // {
-
-        //     CONF_WINC_SPI->SPI_TDR = SPI_TDR_TD((uint16_t)*pu8Mosi);
-        //     while (!(CONF_WINC_SPI->SPI_SR & SPI_SR_TDRE));
-        //     while (!(CONF_WINC_SPI->SPI_SR & (SPI_SR_RDRF)));
-        //     *pu8Miso = (uint16_t)((CONF_WINC_SPI->SPI_RDR) & SPI_RDR_RD_Msk);
-        //     pu8Miso++;
-        // }
+        HAL_StatusTypeDef stat = HAL_SPI_TransmitReceive(&mspi, dummy_buf, pu8Miso, u16Sz, 1000);
         SPI_DEASSERT_CS();
+
+        if(stat != HAL_OK)
+        {
+            M2M_ERR("HAL_SPI_TransmitReceive returned %u", stat);
+        }
     }
     return M2M_SUCCESS;
 

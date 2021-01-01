@@ -57,9 +57,15 @@
 #include "m2m_wifi.h"
 
 #include "debug_log.h"
+#if (M2M_WIFI_EX_VERBOSE == APP_CONFIG_ENABLED)
 #define debug_error(fmt, ...)           debug_error(WIFI_EX_MODULE_ID, fmt, ##__VA_ARGS__)
 #define debug_printf(fmt, ...)          debug_printf(WIFI_EX_MODULE_ID, fmt, ##__VA_ARGS__)
 #define debug_print_buffer(fmt, ...)    debug_print_buffer(WIFI_EX_MODULE_ID, fmt, ##__VA_ARGS__)
+#else
+#define debug_error(fmt, ...)
+#define debug_printf(fmt, ...)
+#define debug_print_buffer(fmt, ...) 
+#endif
 
 static int wifi_netif_init = 0;
 
@@ -110,6 +116,8 @@ struct uint8_uint8_params {
 
 static void os_m2m_wifi_init_imp(void* pv)
 {
+    debug_printf("os_m2m_wifi_init_imp");
+
     struct init_params* p = (struct init_params*)pv;
 
     /* Save tcpip task handle. */
@@ -136,6 +144,7 @@ static void os_m2m_wifi_init_imp(void* pv)
 
 int8_t os_m2m_wifi_init(tstrWifiInitParam* param)
 {
+    debug_printf("os_m2m_wifi_init");
     struct init_params params;
     params.init = param;
     params.dispatch.retval = M2M_ERR_TIME_OUT;
@@ -161,6 +170,8 @@ struct connect_params {
 
 static void os_m2m_wifi_connect_imp(void* pv)
 {
+    debug_printf("os_m2m_wifi_connect_imp");
+
     struct connect_params* p = (struct connect_params*)pv;
     p->dispatch.retval = m2m_wifi_connect(p->pcSsid, p->u8SsidLen, p->u8SecType, p->pvAuthInfo, p->u16Ch);
     if (p->dispatch.signal_semaphore) {
@@ -170,6 +181,8 @@ static void os_m2m_wifi_connect_imp(void* pv)
 
 int8_t os_m2m_wifi_connect(char* pcSsid, uint8_t u8SsidLen, uint8_t u8SecType, void* pvAuthInfo, uint16_t u16Ch)
 {
+    debug_printf("os_m2m_wifi_connect");
+
     struct connect_params params;
     params.pcSsid = pcSsid;
     params.u8SsidLen = u8SsidLen;
@@ -190,6 +203,8 @@ struct connect_ap_params {
 
 static void os_m2m_wifi_enable_ap_imp(void* pv)
 {
+    debug_printf("os_m2m_wifi_enable_ap_imp");
+
     struct connect_ap_params* p = (struct connect_ap_params*)pv;
     p->dispatch.retval = m2m_wifi_enable_ap(p->ap);
     if (p->dispatch.signal_semaphore) {
@@ -199,6 +214,8 @@ static void os_m2m_wifi_enable_ap_imp(void* pv)
 
 int8_t os_m2m_wifi_enable_ap(tstrM2MAPConfig* ap)
 {
+    debug_printf("os_m2m_wifi_enable_ap");
+
     struct connect_ap_params params;
     params.ap = ap;
     params.dispatch.retval = M2M_ERR_TIME_OUT;
@@ -215,17 +232,23 @@ int8_t os_m2m_wifi_enable_ap(tstrM2MAPConfig* ap)
 
 int8_t m2m_wifi_request_callback_ex(m2m_wifi_callback_t callback, void* arg)
 {
+    debug_printf("m2m_wifi_request_callback_ex");
+
     return tcpip_callback_with_block(callback, arg, 0);
 }
 
 int8_t m2m_wifi_request_dhcp_client_ex(void)
 {
+    debug_printf("m2m_wifi_request_dhcp_client_ex");
+
     net_set_mode(NET_IF_STA, NET_MODE_USE_DHCP);
     return 0;
 }
 
 int8_t m2m_wifi_enable_ap_ex(const tstrM2MAPConfig* pstrM2MAPConfig)
 {
+    debug_printf("m2m_wifi_enable_ap_ex");
+
     int8_t rc;
     rc = m2m_wifi_enable_ap(pstrM2MAPConfig);
     if (!rc) {
@@ -236,12 +259,16 @@ int8_t m2m_wifi_enable_ap_ex(const tstrM2MAPConfig* pstrM2MAPConfig)
 
 int8_t m2m_wifi_disable_ap_ex(void)
 {
+    debug_printf("m2m_wifi_disable_ap_ex");
+
     net_set_mode(NET_IF_C, 0);
     return m2m_wifi_disable_ap();
 }
 
 static void func_void_imp(void* pv)
 {
+    debug_printf("func_void_imp");
+
     struct void_params* p = (struct void_params*)pv;
     if (p->fn) {
         p->dispatch.retval = p->fn();
@@ -254,6 +281,8 @@ static void func_void_imp(void* pv)
 }
 static void func_uint_imp(void* pv)
 {
+    debug_printf("func_uint_imp");
+
     struct uint_params* p = (struct uint_params*)pv;
     if (p->fn) {
         p->dispatch.retval = p->fn(p->arg);
@@ -267,6 +296,8 @@ static void func_uint_imp(void* pv)
 
 int8_t os_m2m_wifi_download_mode(void)
 {
+    debug_printf("os_m2m_wifi_download_mode");
+
     struct void_params params;
     params.dispatch.retval = M2M_ERR_TIME_OUT;
     params.fn = m2m_wifi_download_mode;
@@ -276,6 +307,8 @@ int8_t os_m2m_wifi_download_mode(void)
 
 int8_t os_m2m_wifi_default_connect(void)
 {
+    debug_printf("os_m2m_wifi_default_connect");
+
     struct void_params params;
     params.dispatch.retval = M2M_ERR_TIME_OUT;
     params.fn = m2m_wifi_default_connect;
@@ -286,6 +319,8 @@ int8_t os_m2m_wifi_default_connect(void)
 
 int8_t os_m2m_wifi_disconnect(void)
 {
+    debug_printf("os_m2m_wifi_disconnect");
+
     struct void_params params;
     params.dispatch.retval = M2M_ERR_TIME_OUT;
     params.fn = m2m_wifi_disconnect;
@@ -301,12 +336,16 @@ struct wifi_start_provision_mode_params {
 };
 static void os_m2m_wifi_start_provision_mode_imp(void* pv)
 {
+    debug_printf("os_m2m_wifi_start_provision_mode_imp");
+
     struct wifi_start_provision_mode_params* p = (struct wifi_start_provision_mode_params*)pv;
     p->dispatch.retval = m2m_wifi_start_provision_mode(p->pstrAPConfig, p->pcHttpServerDomainName, p->bEnableHttpRedirect);
     OS_WIFI_NOTIFY(p);
 }
 int8_t os_m2m_wifi_start_provision_mode(tstrM2MAPConfig* pstrAPConfig, char* pcHttpServerDomainName, uint8_t bEnableHttpRedirect)
 {
+    debug_printf("os_m2m_wifi_start_provision_mode");
+
     struct wifi_start_provision_mode_params params;
     params.pstrAPConfig = pstrAPConfig;
     params.pcHttpServerDomainName = pcHttpServerDomainName;
@@ -318,6 +357,8 @@ int8_t os_m2m_wifi_start_provision_mode(tstrM2MAPConfig* pstrAPConfig, char* pcH
 
 int8_t os_m2m_wifi_stop_provision_mode(void)
 {
+    debug_printf("os_m2m_wifi_stop_provision_mode");
+
     struct void_params params;
     params.dispatch.retval = M2M_ERR_TIME_OUT;
     params.fn = m2m_wifi_stop_provision_mode;
@@ -327,6 +368,8 @@ int8_t os_m2m_wifi_stop_provision_mode(void)
 
 int8_t os_m2m_wifi_get_connection_info(void)
 {
+    debug_printf("os_m2m_wifi_get_connection_info");
+
     struct void_params params;
     params.dispatch.retval = M2M_ERR_TIME_OUT;
     params.fn = m2m_wifi_get_connection_info;
@@ -341,12 +384,16 @@ struct wifi_set_mac_address_params {
 };
 static void os_m2m_wifi_set_mac_address_imp(void* pv)
 {
+    debug_printf("os_m2m_wifi_set_mac_address_imp");
+
     struct wifi_set_mac_address_params* p = (struct wifi_set_mac_address_params*)pv;
     p->dispatch.retval = m2m_wifi_set_mac_address(p->au8MacAddress);
     OS_WIFI_NOTIFY(p);
 }
 int8_t os_m2m_wifi_set_mac_address(uint8_t* au8MacAddress)
 {
+    debug_printf("os_m2m_wifi_set_mac_address");
+
     struct wifi_set_mac_address_params params;
     params.au8MacAddress = au8MacAddress;
     OS_WIFI_DISPATCH_WAIT(os_m2m_wifi_set_mac_address_imp, &params);
@@ -361,12 +408,16 @@ struct wifi_wps_params {
 };
 static void os_m2m_wifi_wps_imp(void* pv)
 {
+    debug_printf("os_m2m_wifi_wps_imp");
+
     struct wifi_wps_params* p = (struct wifi_wps_params*)pv;
     p->dispatch.retval = m2m_wifi_wps(p->u8TriggerType, p->pcPinNumber);
     OS_WIFI_NOTIFY(p);
 }
 int8_t os_m2m_wifi_wps(uint8_t u8TriggerType, const char* pcPinNumber)
 {
+    debug_printf("os_m2m_wifi_wps");
+
     struct wifi_wps_params params;
     params.u8TriggerType = u8TriggerType;
     params.pcPinNumber = pcPinNumber;
@@ -376,6 +427,8 @@ int8_t os_m2m_wifi_wps(uint8_t u8TriggerType, const char* pcPinNumber)
 
 int8_t os_m2m_wifi_wps_disable(void)
 {
+    debug_printf("os_m2m_wifi_wps_disable");
+
     struct void_params params;
     params.dispatch.retval = M2M_ERR_TIME_OUT;
     params.fn = m2m_wifi_wps_disable;
@@ -386,6 +439,8 @@ int8_t os_m2m_wifi_wps_disable(void)
 
 int8_t os_m2m_wifi_p2p(uint8_t u8Channel)
 {
+    debug_printf("os_m2m_wifi_p2p");
+    
     struct uint_params params;
     params.dispatch.retval = M2M_ERR_TIME_OUT;
     params.arg = u8Channel;
@@ -397,6 +452,8 @@ int8_t os_m2m_wifi_p2p(uint8_t u8Channel)
 
 int8_t os_m2m_wifi_p2p_disconnect(void)
 {
+    debug_printf("os_m2m_wifi_p2p_disconnect");
+    
     struct void_params params;
     params.dispatch.retval = M2M_ERR_TIME_OUT;
     params.fn = m2m_wifi_p2p_disconnect;
@@ -407,6 +464,8 @@ int8_t os_m2m_wifi_p2p_disconnect(void)
 
 int8_t os_m2m_wifi_disable_ap(void)
 {
+    debug_printf("os_m2m_wifi_disable_ap");
+    
     struct void_params params;
     params.dispatch.retval = M2M_ERR_TIME_OUT;
     params.fn = m2m_wifi_disable_ap;
@@ -431,12 +490,16 @@ struct wifi_set_static_ip_params {
 };
 static void os_m2m_wifi_set_static_ip_imp(void* pv)
 {
+    debug_printf("os_m2m_wifi_set_static_ip_imp");
+    
     struct wifi_set_static_ip_params* p = (struct wifi_set_static_ip_params*)pv;
     p->dispatch.retval = m2m_wifi_set_static_ip(p->pstrStaticIPConf);
     OS_WIFI_NOTIFY(p);
 }
 int8_t os_m2m_wifi_set_static_ip(tstrM2MIPConfig* pstrStaticIPConf)
 {
+    debug_printf("os_m2m_wifi_set_static_ip");
+    
     struct wifi_set_static_ip_params params;
     params.pstrStaticIPConf = pstrStaticIPConf;
     OS_WIFI_DISPATCH_WAIT(os_m2m_wifi_set_static_ip_imp, &params);
@@ -451,6 +514,8 @@ struct wifi_set_scan_options_params {
 };
 static void os_m2m_wifi_set_scan_options_imp(void* pv)
 {
+    debug_printf("os_m2m_wifi_set_scan_options_imp");
+    
     struct wifi_set_scan_options_params* p = (struct wifi_set_scan_options_params*)pv;
     tstrM2MScanOption	ScanOpt;
     ScanOpt.u8NumOfSlot = p->u8NumOfSlot;
@@ -460,6 +525,8 @@ static void os_m2m_wifi_set_scan_options_imp(void* pv)
 }
 int8_t os_m2m_wifi_set_scan_options(uint8_t u8NumOfSlot, uint8_t u8SlotTime)
 {
+    debug_printf("os_m2m_wifi_set_scan_options");
+    
     struct wifi_set_scan_options_params params;
     params.u8NumOfSlot = u8NumOfSlot;
     params.u8SlotTime = u8SlotTime;
@@ -470,6 +537,8 @@ int8_t os_m2m_wifi_set_scan_options(uint8_t u8NumOfSlot, uint8_t u8SlotTime)
 
 int8_t os_m2m_wifi_set_scan_region(uint8_t ScanRegion)
 {
+    debug_printf("os_m2m_wifi_set_scan_region");
+    
     struct uint_params params;
     params.dispatch.retval = M2M_ERR_TIME_OUT;
     params.arg = ScanRegion;
@@ -534,6 +603,8 @@ int8_t os_m2m_wifi_request_scan_ssid(uint8_t ch, char* pcssid)
 
 uint8_t os_m2m_wifi_get_num_ap_found(void)
 {
+    debug_printf("os_m2m_wifi_get_num_ap_found");
+    
     struct void_params params;
     params.dispatch.retval = (int8_t)M2M_ERR_TIME_OUT;
     params.fn = (func_void)m2m_wifi_get_num_ap_found;
@@ -544,6 +615,8 @@ uint8_t os_m2m_wifi_get_num_ap_found(void)
 
 int8_t os_m2m_wifi_req_scan_result(uint8_t index)
 {
+    debug_printf("os_m2m_wifi_req_scan_result");
+    
     struct uint_params params;
     params.dispatch.retval = M2M_ERR_TIME_OUT;
     params.arg = index;
@@ -555,6 +628,8 @@ int8_t os_m2m_wifi_req_scan_result(uint8_t index)
 
 int8_t os_m2m_wifi_req_curr_rssi(void)
 {
+    debug_printf("os_m2m_wifi_req_curr_rssi");
+    
     struct void_params params;
     params.dispatch.retval = M2M_ERR_TIME_OUT;
     params.fn = m2m_wifi_req_curr_rssi;
@@ -570,12 +645,16 @@ struct wifi_get_otp_mac_address_params {
 };
 static void os_m2m_wifi_get_otp_mac_address_imp(void* pv)
 {
+    debug_printf("os_m2m_wifi_get_otp_mac_address_imp");
+    
     struct wifi_get_otp_mac_address_params* p = (struct wifi_get_otp_mac_address_params*)pv;
     p->dispatch.retval = m2m_wifi_get_otp_mac_address(p->pu8MacAddr, p->pu8IsValid);
     OS_WIFI_NOTIFY(p);
 }
 int8_t os_m2m_wifi_get_otp_mac_address(uint8_t* pu8MacAddr, uint8_t* pu8IsValid)
 {
+    debug_printf("os_m2m_wifi_get_otp_mac_address");
+    
     struct wifi_get_otp_mac_address_params params;
     params.pu8MacAddr = pu8MacAddr;
     params.pu8IsValid = pu8IsValid;
@@ -590,12 +669,16 @@ struct wifi_get_mac_address_params {
 };
 static void os_m2m_wifi_get_mac_address_imp(void* pv)
 {
+    debug_printf("os_m2m_wifi_get_mac_address_imp");
+    
     struct wifi_get_mac_address_params* p = (struct wifi_get_mac_address_params*)pv;
     p->dispatch.retval = m2m_wifi_get_mac_address(p->pu8MacAddr);
     OS_WIFI_NOTIFY(p);
 }
 int8_t os_m2m_wifi_get_mac_address(uint8_t* pu8MacAddr)
 {
+    debug_printf("os_m2m_wifi_get_mac_address");
+    
     struct wifi_get_mac_address_params params;
     params.pu8MacAddr = pu8MacAddr;
     OS_WIFI_DISPATCH_WAIT(os_m2m_wifi_get_mac_address_imp, &params);
@@ -610,12 +693,16 @@ struct wifi_set_sleep_mode_params {
 };
 static void os_m2m_wifi_set_sleep_mode_imp(void* pv)
 {
+    debug_printf("os_m2m_wifi_set_sleep_mode_imp");
+    
     struct wifi_set_sleep_mode_params* p = (struct wifi_set_sleep_mode_params*)pv;
     p->dispatch.retval = m2m_wifi_set_sleep_mode(p->PsTyp, p->BcastEn);
     OS_WIFI_NOTIFY(p);
 }
 int8_t os_m2m_wifi_set_sleep_mode(uint8_t PsTyp, uint8_t BcastEn)
 {
+    debug_printf("os_m2m_wifi_set_sleep_mode");
+    
     struct wifi_set_sleep_mode_params params;
     params.PsTyp = PsTyp;
     params.BcastEn = BcastEn;
@@ -630,12 +717,16 @@ struct wifi_request_sleep_params {
 };
 static void os_m2m_wifi_request_sleep_imp(void* pv)
 {
+    debug_printf("os_m2m_wifi_request_sleep_imp");
+    
     struct wifi_request_sleep_params* p = (struct wifi_request_sleep_params*)pv;
     p->dispatch.retval = m2m_wifi_request_sleep(p->u32SlpReqTime);
     OS_WIFI_NOTIFY(p);
 }
 int8_t os_m2m_wifi_request_sleep(uint32_t u32SlpReqTime)
 {
+    debug_printf("os_m2m_wifi_request_sleep");
+    
     struct wifi_request_sleep_params params;
     params.u32SlpReqTime = u32SlpReqTime;
     OS_WIFI_DISPATCH_WAIT(os_m2m_wifi_request_sleep_imp, &params);
@@ -645,6 +736,8 @@ int8_t os_m2m_wifi_request_sleep(uint32_t u32SlpReqTime)
 
 int8_t os_m2m_wifi_req_client_ctrl(uint8_t cmd)
 {
+    debug_printf("os_m2m_wifi_req_client_ctrl");
+    
     struct uint_params params;
     params.dispatch.retval = M2M_ERR_TIME_OUT;
     params.arg = cmd;
@@ -656,6 +749,8 @@ int8_t os_m2m_wifi_req_client_ctrl(uint8_t cmd)
 
 int8_t os_m2m_wifi_req_server_init(uint8_t ch)
 {
+    debug_printf("os_m2m_wifi_req_server_init");
+    
     struct uint_params params;
     params.dispatch.retval = M2M_ERR_TIME_OUT;
     params.arg = ch;
@@ -672,12 +767,16 @@ struct wifi_set_device_name_params {
 };
 static void os_m2m_wifi_set_device_name_imp(void* pv)
 {
+    debug_printf("os_m2m_wifi_set_device_name_imp");
+    
     struct wifi_set_device_name_params* p = (struct wifi_set_device_name_params*)pv;
     p->dispatch.retval = m2m_wifi_set_device_name(p->pu8DeviceName, p->u8DeviceNameLength);
     OS_WIFI_NOTIFY(p);
 }
 int8_t os_m2m_wifi_set_device_name(uint8_t* pu8DeviceName, uint8_t u8DeviceNameLength)
 {
+    debug_printf("os_m2m_wifi_set_device_name");
+    
     struct wifi_set_device_name_params params;
     params.pu8DeviceName = pu8DeviceName;
     params.u8DeviceNameLength = u8DeviceNameLength;
@@ -692,12 +791,16 @@ struct wifi_set_lsn_int_params {
 };
 static void os_m2m_wifi_set_lsn_int_imp(void* pv)
 {
+    debug_printf("os_m2m_wifi_set_lsn_int_imp");
+    
     struct wifi_set_lsn_int_params* p = (struct wifi_set_lsn_int_params*)pv;
     p->dispatch.retval = m2m_wifi_set_lsn_int(p->pstrM2mLsnInt);
     OS_WIFI_NOTIFY(p);
 }
 int8_t os_m2m_wifi_set_lsn_int(tstrM2mLsnInt* pstrM2mLsnInt)
 {
+    debug_printf("os_m2m_wifi_set_lsn_int");
+    
     struct wifi_set_lsn_int_params params;
     params.pstrM2mLsnInt = pstrM2mLsnInt;
     OS_WIFI_DISPATCH_WAIT(os_m2m_wifi_set_lsn_int_imp, &params);
@@ -714,12 +817,16 @@ struct wifi_enable_monitoring_mode_params {
 };
 static void os_m2m_wifi_enable_monitoring_mode_imp(void* pv)
 {
+    debug_printf("os_m2m_wifi_enable_monitoring_mode_imp");
+    
     struct wifi_enable_monitoring_mode_params* p = (struct wifi_enable_monitoring_mode_params*)pv;
     p->dispatch.retval = m2m_wifi_enable_monitoring_mode(p->pstrMtrCtrl, p->pu8PayloadBuffer, p->u16BufferSize, p->u16DataOffset);
     OS_WIFI_NOTIFY(p);
 }
 int8_t os_m2m_wifi_enable_monitoring_mode(tstrM2MWifiMonitorModeCtrl* pstrMtrCtrl, uint8_t* pu8PayloadBuffer, uint16_t u16BufferSize, uint16_t u16DataOffset)
 {
+    debug_printf("os_m2m_wifi_enable_monitoring_mode");
+    
     struct wifi_enable_monitoring_mode_params params;
     params.pstrMtrCtrl = pstrMtrCtrl;
     params.pu8PayloadBuffer = pu8PayloadBuffer;
@@ -732,6 +839,8 @@ int8_t os_m2m_wifi_enable_monitoring_mode(tstrM2MWifiMonitorModeCtrl* pstrMtrCtr
 
 int8_t os_m2m_wifi_disable_monitoring_mode(void)
 {
+    debug_printf("os_m2m_wifi_disable_monitoring_mode");
+    
     struct void_params params;
     params.dispatch.retval = M2M_ERR_TIME_OUT;
     params.fn = m2m_wifi_disable_monitoring_mode;
@@ -748,12 +857,16 @@ struct wifi_send_wlan_pkt_params {
 };
 static void os_m2m_wifi_send_wlan_pkt_imp(void* pv)
 {
+    debug_printf("os_m2m_wifi_send_wlan_pkt_imp");
+    
     struct wifi_send_wlan_pkt_params* p = (struct wifi_send_wlan_pkt_params*)pv;
     p->dispatch.retval = m2m_wifi_send_wlan_pkt(p->pu8WlanPacket, p->u16WlanHeaderLength, p->u16WlanPktSize);
     OS_WIFI_NOTIFY(p);
 }
 int8_t os_m2m_wifi_send_wlan_pkt(uint8_t* pu8WlanPacket, uint16_t u16WlanHeaderLength, uint16_t u16WlanPktSize)
 {
+    debug_printf("os_m2m_wifi_send_wlan_pkt");
+    
     struct wifi_send_wlan_pkt_params params;
     params.pu8WlanPacket = pu8WlanPacket;
     params.u16WlanHeaderLength = u16WlanHeaderLength;
@@ -770,12 +883,16 @@ struct wifi_send_ethernet_pkt_params {
 };
 static void os_m2m_wifi_send_ethernet_pkt_imp(void* pv)
 {
+    debug_printf("os_m2m_wifi_send_ethernet_pkt_imp");
+    
     struct wifi_send_ethernet_pkt_params* p = (struct wifi_send_ethernet_pkt_params*)pv;
     p->dispatch.retval = m2m_wifi_send_ethernet_pkt(p->pu8Packet, p->u16PacketSize);
     OS_WIFI_NOTIFY(p);
 }
 int8_t os_m2m_wifi_send_ethernet_pkt(uint8_t* pu8Packet, uint16_t u16PacketSize)
 {
+    debug_printf("os_m2m_wifi_send_ethernet_pkt");
+    
     struct wifi_send_ethernet_pkt_params params;
     params.pu8Packet = pu8Packet;
     params.u16PacketSize = u16PacketSize;
@@ -789,12 +906,16 @@ struct wifi_set_sytem_time_params {
 };
 static void os_m2m_wifi_set_sytem_time_imp(void* pv)
 {
+    debug_printf("os_m2m_wifi_set_sytem_time_imp");
+    
     struct wifi_set_sytem_time_params* p = (struct wifi_set_sytem_time_params*)pv;
     p->dispatch.retval = m2m_wifi_set_system_time(p->u32UTCSeconds);
     OS_WIFI_NOTIFY(p);
 }
 int8_t os_m2m_wifi_set_sytem_time(uint32_t u32UTCSeconds)
 {
+    debug_printf("os_m2m_wifi_set_sytem_time");
+    
     struct wifi_set_sytem_time_params params;
     params.u32UTCSeconds = u32UTCSeconds;
     OS_WIFI_DISPATCH_WAIT(os_m2m_wifi_set_sytem_time_imp, &params);
@@ -808,12 +929,16 @@ struct wifi_set_cust_InfoElement_params {
 };
 static void os_m2m_wifi_set_cust_InfoElement_imp(void* pv)
 {
+    debug_printf("os_m2m_wifi_set_cust_InfoElement_imp");
+    
     struct wifi_set_cust_InfoElement_params* p = (struct wifi_set_cust_InfoElement_params*)pv;
     p->dispatch.retval = m2m_wifi_set_cust_InfoElement(p->pau8M2mCustInfoElement);
     OS_WIFI_NOTIFY(p);
 }
 int8_t os_m2m_wifi_set_cust_InfoElement(uint8_t* pau8M2mCustInfoElement)
 {
+    debug_printf("os_m2m_wifi_set_cust_InfoElement");
+    
     struct wifi_set_cust_InfoElement_params params;
     params.pau8M2mCustInfoElement = pau8M2mCustInfoElement;
     OS_WIFI_DISPATCH_WAIT(os_m2m_wifi_set_cust_InfoElement_imp, &params);
@@ -828,12 +953,16 @@ struct wifi_enable_mac_mcast_params {
 };
 static void os_m2m_wifi_enable_mac_mcast_imp(void* pv)
 {
+    debug_printf("os_m2m_wifi_enable_mac_mcast_imp");
+    
     struct wifi_enable_mac_mcast_params* p = (struct wifi_enable_mac_mcast_params*)pv;
     p->dispatch.retval = m2m_wifi_enable_mac_mcast(p->pu8MulticastMacAddress, p->u8AddRemove);
     OS_WIFI_NOTIFY(p);
 }
 int8_t os_m2m_wifi_enable_mac_mcast(uint8_t* pu8MulticastMacAddress, uint8_t u8AddRemove)
 {
+    debug_printf("os_m2m_wifi_enable_mac_mcast");
+    
     struct wifi_enable_mac_mcast_params params;
     params.pu8MulticastMacAddress = pu8MulticastMacAddress;
     params.u8AddRemove = u8AddRemove;
@@ -849,12 +978,16 @@ struct wifi_set_receive_buffer_params {
 };
 static void os_m2m_wifi_set_receive_buffer_imp(void* pv)
 {
+    debug_printf("os_m2m_wifi_set_receive_buffer_imp");
+    
     struct wifi_set_receive_buffer_params* p = (struct wifi_set_receive_buffer_params*)pv;
     p->dispatch.retval = m2m_wifi_set_receive_buffer(p->pvBuffer, p->u16BufferLen);
     OS_WIFI_NOTIFY(p);
 }
 int8_t os_m2m_wifi_set_receive_buffer(void* pvBuffer, uint16_t u16BufferLen)
 {
+    debug_printf("os_m2m_wifi_set_receive_buffer");
+    
     struct wifi_set_receive_buffer_params params;
     params.pvBuffer = pvBuffer;
     params.u16BufferLen = u16BufferLen;
@@ -864,6 +997,8 @@ int8_t os_m2m_wifi_set_receive_buffer(void* pvBuffer, uint16_t u16BufferLen)
 
 uint8_t os_m2m_wifi_get_sleep_mode(void)
 {
+    debug_printf("os_m2m_wifi_get_sleep_mode");
+    
     struct void_params params;
     params.dispatch.retval = (int8_t)M2M_ERR_TIME_OUT;
     params.fn = (func_void)m2m_wifi_get_sleep_mode;

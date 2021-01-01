@@ -7,7 +7,7 @@
         {
             "name" : "Cortex Debug",
             "cwd": "${workspaceFolder}",
-            "executable": "_build/_oq2.elf",
+            "executable": "_build/_oq2.out",
             "servertype": "jlink",
             "request": "launch",
             "type": "cortex-debug",
@@ -15,6 +15,18 @@
             "interface" : "swd",
             "armToolchainPath": "C:/Program Files (x86)/GNU Arm Embedded Toolchain/9 2020-q2-update/bin",
             "runToMain": true,
+            "svdFile": "STM32H73x.svd"
+        },
+        {
+            "name" : "Attach",
+            "cwd": "${workspaceFolder}",
+            "executable": "_build/_oq2.out",
+            "servertype": "jlink",
+            "request": "attach",
+            "type": "cortex-debug",
+            "device": "STM32H735ZGT",
+            "interface" : "swd",
+            "armToolchainPath": "C:/Program Files (x86)/GNU Arm Embedded Toolchain/9 2020-q2-update/bin",
             "svdFile": "STM32H73x.svd"
         }
     ]

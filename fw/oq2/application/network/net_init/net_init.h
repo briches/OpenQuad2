@@ -76,6 +76,7 @@ void net_set_mode(uint32_t net_if, uint32_t mode);
 void net_interface_up(uint32_t net_if);
 void net_interface_down(uint32_t net_if);
 void net_interface_dhcp_done(uint32_t net_if, ip4_addr_t * paddr);
+ip_addr_t * net_interface_get_ipaddr(uint32_t net_if);
 void net_add_winc_netif(void);
 void net_remove_winc_netif(void);
 int net_in_tcpip_task(void);

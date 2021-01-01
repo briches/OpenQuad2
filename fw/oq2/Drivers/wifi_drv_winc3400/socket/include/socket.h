@@ -16,24 +16,6 @@
 */
 
 
-/*
- * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\Drivers\wifi_drv_winc3400\socket\include\socket.h/
- * Project: OQ2                                                                                    /
- * Created Date: Monday, December 28th 2020, 6:48:02 am                                            /
- * Author: Brandon Riches                                                                          /
- * Email: richesbc@gmail.com                                                                       /
- * -----                                                                                           /
- *                                                                                                 /
- * Copyright (c) 2020 OpenQuad2.                                                                   /
- * All rights reserved.                                                                            /
- *                                                                                                 /
- * Redistribution and use in source or binary forms, with or without modification,                 /
- * are not permitted without express written approval of OpenQuad2                                 /
- * -----                                                                                           /
- * HISTORY:                                                                                        /
-*/
-
-
 /**
  *
  * \file

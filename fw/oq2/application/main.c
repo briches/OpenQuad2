@@ -158,11 +158,11 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
         break;
 
         case IMU_MAG_DRDY_Pin:
-            imu_mag_drdy_callback();
+            // imu_mag_drdy_callback();
         break;
 
         case BARO_INT_Pin:
-            baro_int_callback();
+            // baro_int_callback();
         break;
 
         case WIFI_IRQ_Pin:
@@ -218,9 +218,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
         HAL_IncTick();
     }
 }
-
-
-
 
 /**
   * @brief  The application entry point.

@@ -1,5 +1,4 @@
 PRETTY = 1
-
 ######################################
 # target
 ######################################
@@ -32,6 +31,7 @@ application/network/os_hook/os_hook.c \
 application/network/wifi_ex/m2m_wifi_ex.c \
 application/network/network.c \
 application/network/oq2_protocol/oq2_protocol.c \
+application/network/oq2_protocol/oq2p_packet_builders.c \
 application/pid/pid.c \
 application/stability_control/stability.c \
 application/stability_control/platform/mems_platform.c \
@@ -62,6 +62,7 @@ Drivers/wifi_drv_winc3400/driver/source/nmdrv.c \
 Drivers/wifi_drv_winc3400/driver/source/nmi2c.c \
 Drivers/wifi_drv_winc3400/driver/source/nmspi.c \
 Drivers/wifi_drv_winc3400/driver/source/nmuart.c \
+Drivers/wifi_drv_winc3400/socket/source/socket.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pcd.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pcd_ex.c \
 Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_usb.c \
@@ -198,32 +199,32 @@ Middlewares/Third_Party/LwIP/src/core/ipv6/ip6_addr.c \
 Middlewares/Third_Party/LwIP/src/core/ipv6/ip6_frag.c \
 Middlewares/Third_Party/LwIP/src/core/ipv6/mld6.c \
 Middlewares/Third_Party/LwIP/src/core/ipv6/nd6.c \
-Middlewares/Third_Party/LwIP/system/OS/sys_arch.c \
-Middlewares/Third_Party/LwIP/src/apps/mqtt/mqtt.c \
-Middlewares/Third_Party/LwIP/src/apps/snmp/snmpv3.c \
-Middlewares/Third_Party/LwIP/src/apps/snmp/snmpv3_mbedtls.c \
-Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_asn1.c \
-Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_core.c \
-Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2.c \
-Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2_icmp.c \
-Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2_interfaces.c \
-Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2_ip.c \
-Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2_snmp.c \
-Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2_system.c \
-Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2_tcp.c \
-Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2_udp.c \
-Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_msg.c \
-Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_netconn.c \
-Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_pbuf_stream.c \
-Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_raw.c \
-Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_scalar.c \
-Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_snmpv2_framework.c \
-Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_snmpv2_usm.c \
-Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_table.c \
-Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_threadsync.c \
-Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_traps.c \
-Middlewares/Third_Party/LwIP/src/apps/sntp/sntp.c \
-Middlewares/Third_Party/LwIP/src/apps/smtp/smtp.c
+Middlewares/Third_Party/LwIP/system/OS/sys_arch.c 
+# Middlewares/Third_Party/LwIP/src/apps/mqtt/mqtt.c \
+# Middlewares/Third_Party/LwIP/src/apps/snmp/snmpv3.c \
+# Middlewares/Third_Party/LwIP/src/apps/snmp/snmpv3_mbedtls.c \
+# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_asn1.c \
+# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_core.c \
+# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2.c \
+# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2_icmp.c \
+# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2_interfaces.c \
+# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2_ip.c \
+# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2_snmp.c \
+# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2_system.c \
+# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2_tcp.c \
+# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2_udp.c \
+# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_msg.c \
+# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_netconn.c \
+# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_pbuf_stream.c \
+# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_raw.c \
+# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_scalar.c \
+# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_snmpv2_framework.c \
+# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_snmpv2_usm.c \
+# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_table.c \
+# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_threadsync.c \
+# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_traps.c \
+# Middlewares/Third_Party/LwIP/src/apps/sntp/sntp.c \
+# Middlewares/Third_Party/LwIP/src/apps/smtp/smtp.c
 
 # Include folders common to all targets
 INC_FOLDERS +=  \
@@ -288,7 +289,6 @@ INC_FOLDERS +=  \
   Middlewares/Third_Party/LwIP/src/include/compat/posix/sys \
   Middlewares/Third_Party/LwIP/src/include/compat/stdc \
   Middlewares/Third_Party/LwIP/system/arch
-
 
 LIB_FILES += \
   Middlewares/ST/STM32_MotionFX_Library/Lib/MotionFX_CM7F_wc32_ot_hard.a\

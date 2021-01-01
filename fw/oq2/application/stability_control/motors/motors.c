@@ -61,7 +61,10 @@ static void _motor_set_arm(motor_t * motor, motor_arm_t arm)
     if(arm == MOTOR_ARMED)
     {
         debug_printf("ARMING motor %u", motor->index);
+
         motor->period_us = MC_MIN_TON_US_PERIOD;
+        motor->armed = true;
+
         _motor_set_on_period(motor);
         HAL_TIM_PWM_Start(motor->htimer, motor->channel);
     }
@@ -70,6 +73,8 @@ static void _motor_set_arm(motor_t * motor, motor_arm_t arm)
         debug_printf("DISARMING motor %u", motor->index);
 
         HAL_TIM_PWM_Stop(motor->htimer, motor->channel);
+        motor->armed = false;
+
     }
 }
 
@@ -141,6 +146,33 @@ void motor_controllers_set_arm_state(uint8_t index, motor_arm_t armed)
         break;
         case 4:
             _motor_set_arm(&motor4, armed);
+        break;
+        default:
+            break;
+    }
+}
+
+/**
+ * @brief Query the motor controller state (ARMED or DISARMED) for a given index.
+ * 
+ * @param index motor controller index
+ * @return motor_arm_t ARMED or DISARMED
+ */
+motor_arm_t motor_controllers_get_arm_state(uint8_t index)
+{
+    switch(index)
+    {
+        case 1:
+            return motor1.armed;
+        break;
+        case 2:
+            return motor2.armed;
+        break;
+        case 3:
+            return motor3.armed;
+        break;
+        case 4:
+            return motor4.armed;
         break;
         default:
             break;

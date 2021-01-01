@@ -69,8 +69,12 @@
 #define LWIP_RAM_HEAP_POINTER 0x20000000
 /*----- Value supported for H7 devices: 1 -----*/
 #define LWIP_SUPPORT_CUSTOM_PBUF 1
+/**
+ * LWIP_NETCONN==1: Enable Netconn API (require to use api_lib.c)
+ */
+#define LWIP_NETCONN  1
 /*----- Value in opt.h for LWIP_ETHERNET: LWIP_ARP || PPPOE_SUPPORT -*/
-// #define LWIP_ETHERNET 1
+#define LWIP_ETHERNET 1
 /*----- Value in opt.h for LWIP_DNS_SECURE: (LWIP_DNS_SECURE_RAND_XID | LWIP_DNS_SECURE_NO_MULTIPLE_OUTSTANDING | LWIP_DNS_SECURE_RAND_SRC_PORT) -*/
 #define LWIP_DNS_SECURE 7
 /*----- Value in opt.h for TCP_SND_QUEUELEN: (4*TCP_SND_BUF + (TCP_MSS - 1))/TCP_MSS -----*/
@@ -150,7 +154,7 @@
 /**
  * LWIP_STATS_DISPLAY==1: Compile in the statistics output functions.
  */
-#define LWIP_STATS_DISPLAY				0
+#define LWIP_STATS_DISPLAY				1
 
 /**
  * LWIP_STATS_LARGE==1: Use 32 bits counter instead of 16.
@@ -177,7 +181,7 @@
 
 //#define LWIP_NOASSERT
 
-//#define LWIP_DEBUG
+// #define LWIP_DEBUG  1
 #define LWIP_DBG_MIN_LEVEL              LWIP_DBG_LEVEL_ALL
 #define LWIP_DBG_TYPES_ON               LWIP_DBG_ON
 
@@ -206,12 +210,12 @@
 #define TCP_OUTPUT_DEBUG                LWIP_DBG_OFF
 #define TCP_RST_DEBUG                   LWIP_DBG_OFF
 #define TCP_QLEN_DEBUG                  LWIP_DBG_OFF
-#define UDP_DEBUG                       LWIP_DBG_OFF
+#define UDP_DEBUG                       LWIP_DBG_ON
 #define TCPIP_DEBUG                     LWIP_DBG_OFF
 #define PPP_DEBUG                       LWIP_DBG_OFF
 #define SLIP_DEBUG                      LWIP_DBG_OFF
 #define DHCP_DEBUG                      LWIP_DBG_ON
-#define AUTOIP_DEBUG                    LWIP_DBG_OFF
+#define AUTOIP_DEBUG                    LWIP_DBG_ON
 #define SNMP_MSG_DEBUG                  LWIP_DBG_OFF
 #define SNMP_MIB_DEBUG                  LWIP_DBG_OFF
 #define DNS_DEBUG                       LWIP_DBG_OFF

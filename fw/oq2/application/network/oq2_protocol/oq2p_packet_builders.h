@@ -1,7 +1,7 @@
 /*
- * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\application\motors\motors.h                     /
+ * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\application\network\oq2_protocol\oq2p_messages.h/
  * Project: OQ2                                                                                    /
- * Created Date: Saturday, December 26th 2020, 10:40:38 am                                         /
+ * Created Date: Friday, January 1st 2021, 8:40:53 am                                              /
  * Author: Brandon Riches                                                                          /
  * Email: richesbc@gmail.com                                                                       /
  * -----                                                                                           /
@@ -15,45 +15,18 @@
  * HISTORY:                                                                                        /
 */
 
-#ifndef MOTORS_H_
-#define MOTORS_H_
+#ifndef OQ2P_PACKET_BUILDERS_H_
+#define OQ2P_PACKET_BUILDERS_H_
 
-#include <stdbool.h>
+#include "oq2_protocol.h"
+#include "motors.h"
 #include <stdint.h>
-#include "main.h"
+#include <string.h>
 
-extern TIM_HandleTypeDef htim1;
-extern TIM_HandleTypeDef htim24;
+#define OQ2P_ENCODE_DATA_LEN(pkt, length) \
+    pkt[OQ2P_LEN_MSB_INDEX] = (uint8_t)(((uint16_t)length & 0xFF00) >> 8); \
+    pkt[OQ2P_LEN_LSB_INDEX] = (uint8_t)(((uint16_t)length & 0x00FF) >> 0);
 
-typedef enum motor_armed
-{
-    MOTOR_DISARMED = 0,
-    MOTOR_ARMED = 1,
-} motor_arm_t;
-
-typedef struct motors
-{
-    bool armed;
-
-    uint8_t index;
-
-    float period_us;
-
-    // PWM Timer ref
-    TIM_HandleTypeDef * htimer;
-    uint32_t channel;
-    __IO uint32_t ccr;
-
-    // GPIO pin ref
-    GPIO_pin_t arm_pin;
-
-} motor_t;
-
-
-void        motor_controllers_init              ( void );
-void        motor_controllers_set_arm_state     (uint8_t index, motor_arm_t armed);
-motor_arm_t motor_controllers_get_arm_state     (uint8_t index);
-void        motor_controllers_control_input     (float * pitch_ctrl, float * roll_ctrl, float * yaw_ctrl);
-
+int32_t oq2p_msg_build_arm_response(uint8_t * pbuf, uint16_t buf_len, motor_arm_t * armed_info_buf);
 
 #endif

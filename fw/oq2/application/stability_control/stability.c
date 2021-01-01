@@ -550,10 +550,6 @@ void stability_thread_pre_init()
 
     // Initialize motors
     motor_controllers_init();
-    motor_controllers_set_arm_state(1, MOTOR_ARMED);
-    motor_controllers_set_arm_state(2, MOTOR_ARMED);
-    motor_controllers_set_arm_state(3, MOTOR_ARMED);
-    motor_controllers_set_arm_state(4, MOTOR_ARMED);
 
     // Initialize PID controllers
     pid_initialize_ctx(&m_pitch_pid, &m_pitch_pid_params, &m_pitch_pid_limits);

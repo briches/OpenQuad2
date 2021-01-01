@@ -201,6 +201,8 @@ void net_interface_dhcp_done(uint32_t net_if, ip4_addr_t * paddr)
     if(net_if == NET_IF_STA)
     {
         netif_set_ipaddr(&winc_netif_sta, paddr);
+
+        dhcp_stop(&winc_netif_sta);
     }
 }
 
@@ -213,6 +215,30 @@ void net_interface_down(uint32_t net_if)
 {
     net_interface_down_imp(net_if);
 }
+
+ip_addr_t * net_interface_get_ipaddr(uint32_t net_if)
+{
+    if(net_if == NET_IF_STA)
+    {
+        return &winc_netif_sta.ip_addr;
+    }
+    else 
+    {
+        return NULL;
+    }
+}
+
+// uint16_t net_interface_get_port(uint32_t net_if)
+// {
+//     if(net_if == NET_IF_STA)
+//     {
+//         return winc_netif_sta;
+//     }
+//     else 
+//     {
+//         return 0;
+//     }
+// }
 
 void net_set_mode(uint32_t net_if, uint32_t mode)
 {

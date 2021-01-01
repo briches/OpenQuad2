@@ -28,6 +28,12 @@
 // #define NM_LEVEL_INTERRUPT
 #define NM_EDGE_INTERRUPT
 
+// #define CONFIG_USE_ASYNC_API 1
+
+
+#define OQ2P_TX_BUFSIZE (8 * 1024)
+#define OQ2P_RX_BUFSIZE (8 * 1024)
+
 
 #define CONF_WINC_SPI_INT_PIO_ID        0
 #define CONF_WINC_SPI_INT_MASK          0
@@ -50,8 +56,8 @@
 #define SN_MASK_IP                    0xFFFFFF00
 
 /** Default gateway in provisioning mode. */
-#define GW_ADDR                        192, 168, 5, 1
-#define GW_ADDR_IP                    0xC0A80101
+#define GW_ADDR                        192, 168, 1, 254
+#define GW_ADDR_IP                    0xC0A801FE
 
 
 #endif

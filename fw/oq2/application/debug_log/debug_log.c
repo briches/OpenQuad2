@@ -5,7 +5,7 @@
  * Author: Brandon Riches                                                                          /
  * Email: richesbc@gmail.com                                                                       /
  * -----                                                                                           /
- * Last Modified: Wed Dec 30 2020                                                                  /
+ * Last Modified: Thu Dec 31 2020                                                                  /
  * Modified By: Brandon Riches                                                                     /
  * -----                                                                                           /
  *                                                                                                 /
@@ -29,7 +29,7 @@
 typedef struct
 {
     uint8_t* data;
-    uint8_t len;
+    uint16_t len;
 } log_queue_item_t;
 
 extern UART_HandleTypeDef huart2;
@@ -363,14 +363,14 @@ void debug_print_buffer(module_id_t source, const uint8_t* p_buffer, unsigned in
     // _puts("\r\n  Address |");
     for (int i = 0; i < columns; i++)
     {
-        _puts(&buf, "   ");
+        _putc(&buf, ' ');
         _putx(&buf, i, 'A', 2, '0');
     }
     _puts(&buf, "\r\n");
 
     // _puts("----------+");
     for (int i = 0; i < columns; i++)
-        _puts(&buf, "-----");
+        _puts(&buf, "---");
     _puts(&buf, "-\r\n");
 
     while (length > 0)
@@ -385,7 +385,7 @@ void debug_print_buffer(module_id_t source, const uint8_t* p_buffer, unsigned in
         {
             if (length > 0)
             {
-                _puts(&buf, " 0x");
+                _putc(&buf, ' ');
                 _putx(&buf, *(p_buffer++), 'A', 2, '0');
                 length--;
             }

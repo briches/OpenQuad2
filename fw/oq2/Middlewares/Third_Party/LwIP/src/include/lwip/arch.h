@@ -97,8 +97,8 @@
  */
 #ifndef LWIP_PLATFORM_DIAG
 #include "debug_log.h"
-// #define debug_printf(fmt, ...)          debug_printf(LWIP_MODULE_ID, fmt, ##__VA_ARGS__)
-#define LWIP_PLATFORM_DIAG(x) do {/*debug_printf(LWIP_MODULE_ID, "%s", x);*/} while(0)
+#define debug_log_go(...) {char absdcsadc[100]; snprintf(absdcsadc, 100, __VA_ARGS__); debug_printf(LWIP_MODULE_ID, "%s", absdcsadc);}
+#define LWIP_PLATFORM_DIAG(x) debug_log_go x
 #include <stdio.h>
 #include <stdlib.h>
 #endif

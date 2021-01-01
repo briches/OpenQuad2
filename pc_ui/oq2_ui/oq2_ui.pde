@@ -1,9 +1,13 @@
 import processing.serial.*;
 import processing.net.*;
 import java.io.*; 
+import java.nio.*;
 import java.util.*; 
 
+private static final char[] HEX_ARRAY = "0123456789ABCDEF".toCharArray();
+
 Server myServer;
+byte[] byteBuffer = new byte[4096];
 
 static PShape quad;
 static Serial myPort;
@@ -28,7 +32,7 @@ void setup() {
     // print("Connected to serial port: ");
     // println(Serial.list()[0]);
 
-    size(640,480,P3D);
+    // size(640,480,P3D);
     println("Test");
     quad = loadShape("Frame v9.obj");
     lights();
@@ -36,35 +40,58 @@ void setup() {
     myServer = new Server(this, 1337, "192.168.1.65");
 }
 
-void draw() {
 
+public static String bytesToHexString(byte[] bytes, int numbytes) 
+{
+    char[] hexChars = new char[numbytes * 3];
 
-    background(0);
+    for (int j = 0; j < numbytes; j++) 
+    {
+        int v = bytes[j] & 0xFF;
+        hexChars[j * 3] = HEX_ARRAY[v >>> 4];
+        hexChars[j * 3 + 1] = HEX_ARRAY[v & 0x0F];
+        hexChars[j * 3 + 2] = ' ';
+    }
+    return new String(hexChars);
+}
+
+boolean firstConnect = false;
+
+public void draw() 
+{
+    // background(0);
     
-    pushMatrix();
-    translate(width/2, height/2, 0);
-    rotateX(g_pitch);
-    rotateY(g_roll);
-    rotateZ(g_yaw);
-    shape(quad, 0, 0);
-    popMatrix();
-
+    // pushMatrix();
+    // translate(width/2, height/2, 0);
+    // rotateX(g_pitch);
+    // rotateY(g_roll);
+    // rotateZ(g_yaw);
+    // shape(quad, 0, 0);
+    // popMatrix();
 
     Client thisClient = myServer.available();
     // If the client is not null, and says something, display what it said
     if (thisClient != null) 
     {
-        String whatClientSaid = thisClient.readString();
+        println(thisClient);
 
-        if (whatClientSaid != null) 
+        int rxByteCount = thisClient.readBytes(byteBuffer);
+
+        if (rxByteCount > 0) 
         {
-            println(thisClient.ip() + "t" + whatClientSaid);
-            thisClient.write("Hello");
+            println(thisClient.ip() + "\t" + bytesToHexString(byteBuffer, rxByteCount));
+
+            if(firstConnect == false)
+            {
+                firstConnect = true;
+                oq2p_exhaustive_test(thisClient, 500);
+            }
         }
     }
 }
 
-void keyPressed() {
+public void keyPressed() 
+{
 
     println("pitch: ", g_pitch, " roll: ", g_roll, " yaw: ", g_yaw);
 
@@ -109,7 +136,8 @@ void keyPressed() {
 /*================================================================================
      Server Event: Created when a new client connects to the server
      -----------------------------------------------------------------------------*/
-void serverEvent(Server someServer, Client someClient) {
+void serverEvent(Server someServer, Client someClient) 
+{
   println("We have a new client: " + someClient.ip());
 }
 

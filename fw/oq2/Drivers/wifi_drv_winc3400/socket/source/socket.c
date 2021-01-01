@@ -303,7 +303,7 @@ static void m2m_ip_cb(uint8_t u8OpCode, uint16_t u16BufferSize, uint32_t u32Addr
 
             sock            = strRecvReply.sock;
             u16SessionID = strRecvReply.u16SessionID;
-            M2M_INFO("recv callback session ID = %d\r\n", u16SessionID);
+            // M2M_INFO("recv callback session ID = %d\r\n", u16SessionID);
 
             /* Reset the Socket RX Pending Flag.
             */
@@ -363,7 +363,7 @@ static void m2m_ip_cb(uint8_t u8OpCode, uint16_t u16BufferSize, uint32_t u32Addr
 
             sock = strReply.sock;
             u16SessionID = strReply.u16SessionID;
-            M2M_INFO("send callback session ID = %d\r\n", u16SessionID);
+            // M2M_INFO("send callback session ID = %d\r\n", u16SessionID);
 
             s16Rcvd = NM_BSP_B_L_16(strReply.s16SentBytes);
 

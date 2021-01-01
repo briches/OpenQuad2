@@ -61,8 +61,13 @@
 #include "m2m_socket_host_if.h"
 
 #include "debug_log.h"
+#if (M2M_HIF_VERBOSE == APP_CONFIG_ENABLED)
 #define M2M_ERR(fmt, ...)               debug_error(WINC3400_HIF_MODULE_ID, fmt, ##__VA_ARGS__)
 #define M2M_INFO(fmt, ...)              debug_printf(WINC3400_HIF_MODULE_ID, fmt, ##__VA_ARGS__)
+#else
+#define M2M_ERR(fmt, ...)
+#define M2M_INFO(fmt, ...) 
+#endif
 
 #if (defined NM_EDGE_INTERRUPT)&&(defined NM_LEVEL_INTERRUPT)
 #error "only one type of interrupt NM_EDGE_INTERRUPT,NM_LEVEL_INTERRUPT"
@@ -173,10 +178,12 @@ static int8_t hif_set_rx_done(void)
 #ifdef NM_EDGE_INTERRUPT
     nm_bsp_interrupt_ctrl(1);
 #endif
-    if(ISNMC3400(nmi_get_chipid())) {
+    if(ISNMC3400(nmi_get_chipid())) 
+    {
         ret = nm_write_reg(INTERRUPT_CORTUS_0_3000D0, 1);
         if(ret != M2M_SUCCESS)goto ERR1;
-    } else  {
+    } else  
+    {
         ret = nm_read_reg_with_ret(WIFI_HOST_RCV_CTRL_0, &reg);
         if(ret != M2M_SUCCESS)goto ERR1;
 
@@ -540,7 +547,7 @@ int8_t hif_send(uint8_t u8Gid, uint8_t u8Opcode, uint8_t *pu8CtrlBuf, uint16_t u
                  */
                 if(cnt >= 1000) {
                     if(cnt == 1000) {
-                        // M2M_INFO("Slowing down...\n");
+                        M2M_INFO("Slowing down...\n");
                     }
                     nm_bsp_sleep(5);
                 }
@@ -562,7 +569,7 @@ int8_t hif_send(uint8_t u8Gid, uint8_t u8Opcode, uint8_t *pu8CtrlBuf, uint16_t u
                 volatile uint32_t u32CurrAddr;
                 u32CurrAddr = dma_addr;
                 strHif.u16Length=NM_BSP_B_L_16(strHif.u16Length);
-                // M2M_INFO("Writing into %lx %ld\n", dma_addr, strHif.u16Length);
+                M2M_INFO("Writing into %lx %ld\n", dma_addr, strHif.u16Length);
                 ret = nm_write_block(u32CurrAddr, (uint8_t *)&strHif, M2M_HIF_HDR_OFFSET);
                 if(M2M_SUCCESS != ret) goto ERR1;
                 u32CurrAddr += M2M_HIF_HDR_OFFSET;
@@ -604,7 +611,7 @@ int8_t hif_send(uint8_t u8Gid, uint8_t u8Opcode, uint8_t *pu8CtrlBuf, uint16_t u
         }
         else
         {
-            // M2M_ERR("(HIF)Failed to wakeup the chip\n");
+            M2M_ERR("(HIF)Failed to wakeup the chip\n");
             goto ERR2;
         }
     }

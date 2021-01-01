@@ -499,8 +499,8 @@ int8_t m2m_wifi_init_start(tstrWifiInitParam *param)
     ret = nm_drv_init_start(&u8WifiMode);
     if(ret != M2M_SUCCESS)  goto _EXIT0;
 
-    // M2M_INFO("Curr driver ver: %u.%u.%u\n", M2M_DRIVER_VERSION_MAJOR_NO, M2M_DRIVER_VERSION_MINOR_NO, M2M_DRIVER_VERSION_PATCH_NO);
-    // M2M_INFO("Curr driver HIF Level: (%u) %u.%u\n", M2M_HIF_BLOCK_VALUE, M2M_HIF_MAJOR_VALUE, M2M_HIF_MINOR_VALUE);
+    M2M_INFO("Curr driver ver: %u.%u.%u", M2M_DRIVER_VERSION_MAJOR_NO, M2M_DRIVER_VERSION_MINOR_NO, M2M_DRIVER_VERSION_PATCH_NO);
+    M2M_INFO("Curr driver HIF Level: (%u) %u.%u", M2M_HIF_BLOCK_VALUE, M2M_HIF_MAJOR_VALUE, M2M_HIF_MINOR_VALUE);
     ret = m2m_wifi_get_firmware_version(&strtmp);
     m2m_ota_get_firmware_version(&strtmp);
 
@@ -1495,6 +1495,8 @@ int8_t m2m_wifi_req_unrestrict_ble(void)
 int8_t m2m_wifi_send_ethernet_pkt(uint8_t *pu8Packet, uint16_t u16PacketSize)
 {
     int8_t   s8Ret = -1;
+    // M2M_INFO("send eth pkt sz %u", u16PacketSize);
+
     if((pu8Packet != NULL)&&(u16PacketSize>0))
     {
         tstrM2MWifiTxPacketInfo     strTxPkt;

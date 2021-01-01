@@ -72,12 +72,12 @@ static void os_hif_task(void* pv)
             /* Incoming data packet. */
             else if (msg.id == MSG_RX) {
                 m2m_wifi_handle_events(NULL);
-                // debug_printf("rx from q");
+                // debug_printf("incoming data");
             }
             /* Outgoing data packet. */
             else if ((msg.id == MSG_TX_STA) || (msg.id == MSG_TX_AP)) {
                 winc_netif_tx_from_queue(&msg);
-                // debug_printf("tx from q");
+                // debug_printf("outgoing data");
             }
 
             /* WiFi command. */
@@ -86,7 +86,7 @@ static void os_hif_task(void* pv)
                 if (msg.handler)
                     msg.handler(msg.priv);
 
-                // debug_printf("cmd from q");
+                // debug_printf("cmd");
 
             }
 
@@ -118,7 +118,7 @@ void os_hook_isr(void)
         os_hif_task_msg_post_counter_rx++;
         portEND_SWITCHING_ISR(woken);
     }
-    	// debug_printf("os_hook_isr: posted isr - os_hif_task_msg_post_counter_rx = %d\n", os_hif_task_msg_post_counter_rx);
+    // debug_printf("os_hook_isr: posted isr - os_hif_task_msg_post_counter_rx = %d\n", os_hif_task_msg_post_counter_rx);
 }
 
 /**
