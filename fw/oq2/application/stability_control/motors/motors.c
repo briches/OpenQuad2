@@ -30,6 +30,9 @@ static motor_t motor2;
 static motor_t motor3;
 static motor_t motor4;
 
+// Percentage setting of thrust. 
+static uint8_t m_thrust_setting = 0;
+
 /**
  * @brief Constrain a value to between MC_MIN_TON_US_PERIOD and MC_MAX_TON_US_PERIOD
  * 
@@ -222,3 +225,27 @@ void motor_controllers_control_input(float * pitch_ctrl, float * roll_ctrl, floa
     _motor_set_on_period(&motor3);
     _motor_set_on_period(&motor4);
 }
+
+/**
+ * @brief Set a new thrust percentage
+ * 
+ * @param new_thrust_setting percent
+ */
+void motors_set_thrust_setting(uint8_t new_thrust_setting)
+{
+    if(new_thrust_setting > 100)
+        return;
+    
+    m_thrust_setting = new_thrust_setting;
+}
+
+/**
+ * @brief Get the current thrust percentage
+ * 
+ * @return uint8_t thrust percent
+ */
+uint8_t motors_get_thrust_setting()
+{
+    return m_thrust_setting;
+}
+

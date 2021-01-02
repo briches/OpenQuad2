@@ -32,5 +32,12 @@ void imu_int2_callback();
 void imu_mag_drdy_callback();
 void baro_int_callback();
 
+// Getters / setters
+float stability_get_yaw_target();
+void stability_set_yaw_target(float yaw_target);
+float stability_get_roll_target();
+void stability_set_roll_target(float roll_target);
+float stability_get_pitch_target();
+void stability_set_pitch_target(float pitch_target);
 
 #endif

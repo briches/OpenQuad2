@@ -53,6 +53,8 @@ typedef struct motors
 void        motor_controllers_init              ( void );
 void        motor_controllers_set_arm_state     (uint8_t index, motor_arm_t armed);
 motor_arm_t motor_controllers_get_arm_state     (uint8_t index);
+uint8_t     motors_get_thrust_setting           ();
+void        motors_set_thrust_setting           (uint8_t new_thrust_setting);
 void        motor_controllers_control_input     (float * pitch_ctrl, float * roll_ctrl, float * yaw_ctrl);
 
 

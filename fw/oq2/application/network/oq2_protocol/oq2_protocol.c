@@ -19,6 +19,7 @@
 #include <string.h>
 #include "timer.h"
 #include "motors.h"
+#include "stability.h"
 #include "oq2_protocol.h"
 #include "oq2p_packet_builders.h"
 
@@ -26,8 +27,6 @@
 #define debug_error(fmt, ...)           debug_error(OQ2_PROTOCOL_MODULE_ID, fmt, ##__VA_ARGS__)
 #define debug_printf(fmt, ...)          debug_printf(OQ2_PROTOCOL_MODULE_ID, fmt, ##__VA_ARGS__)
 #define debug_print_buffer(fmt, ...)    debug_print_buffer(OQ2_PROTOCOL_MODULE_ID, fmt, ##__VA_ARGS__)
-
-
 
 
 /** Receive buffer definition. */
@@ -69,10 +68,8 @@ static void _op2p_receive(void* buf, uint16_t num)
 
 static void application_oq2p_control_message_handler(oq2p_control_mid_t msg_id, oq2p_command_request_t cr, uint8_t* pdata, uint16_t data_length)
 {
-    uint8_t line_length = (data_length < 8) ? data_length : 8;
-
-    // if()
-    // debug_print_buffer(pdata, data_length, 0, line_length);
+    __unused
+        uint8_t line_length = (data_length < 8) ? data_length : 8;
 
     switch (msg_id)
     {
@@ -107,31 +104,112 @@ static void application_oq2p_control_message_handler(oq2p_control_mid_t msg_id, 
             }
             else
                 motor_controllers_set_arm_state(index, arm);
-
         }
-        // Handle Request to get current motor armed states
-        else if(cr == OQ2P_REQUEST)
-        {
-            motor_arm_t arm_info[4] = {motor_controllers_get_arm_state(1), 
-                                    motor_controllers_get_arm_state(2), 
-                                    motor_controllers_get_arm_state(3), 
-                                    motor_controllers_get_arm_state(4)};
 
-            int32_t len = oq2p_msg_build_arm_response(oq2p_out_buffer, OQ2P_TX_BUFSIZE, arm_info);
+        // Send response to command or request
+        motor_arm_t arm_info[4] = { motor_controllers_get_arm_state(1),
+                                    motor_controllers_get_arm_state(2),
+                                    motor_controllers_get_arm_state(3),
+                                    motor_controllers_get_arm_state(4) };
 
-            debug_printf("Sending armed state info response:");
-            debug_print_buffer(oq2p_out_buffer, len, 0, 8);
-
-            if(len > 0)
-            {
-                _op2p_send(oq2p_out_buffer, len);
-            }
-        }
+        // Build response and if correct, send over socket.
+        int32_t len = oq2p_msg_build_arm_response(oq2p_out_buffer, OQ2P_TX_BUFSIZE, arm_info);
+        if (len > 0)
+            _op2p_send(oq2p_out_buffer, len);
 
     } break; // case OQ2P_MID_ARM
 
-    }
+    case OQ2P_MID_PITCH_SETPOINT:
+    {
+        int16_t new_pitch = 0;
 
+        if (cr == OQ2P_REQUEST)
+        {
+            new_pitch = (int16_t)(stability_get_pitch_target() * 100);
+            debug_printf("Request for current PITCH setpoint. %d(°x100)", new_pitch);
+        }
+        else if (cr == OQ2P_COMMAND)
+        {
+            new_pitch = OQ2P_UINT16_BIG_DECODE(pdata);
+            debug_printf("Command to set PITCH setpoint to %3.2f°", ((float)new_pitch) / 100.0, 0xB0);
+            stability_set_pitch_target(((float)new_pitch) / 100.0);
+        }
+
+        // Build response and if correct, send over socket.
+        int32_t len = oq2p_msg_build_angle_setpoint_response(oq2p_out_buffer, OQ2P_TX_BUFSIZE, OQ2P_MID_PITCH_SETPOINT, new_pitch);
+        if (len > 0)
+            _op2p_send(oq2p_out_buffer, len);
+
+    } break;
+
+    case OQ2P_MID_ROLL_SETPOINT:
+    {
+        int16_t new_roll = 0;
+
+        if (cr == OQ2P_REQUEST)
+        {
+            new_roll = (int16_t)(stability_get_roll_target() * 100);
+            debug_printf("Request for current ROLL setpoint. %d(°x100)", new_roll);
+        }
+        else if (cr == OQ2P_COMMAND)
+        {
+            new_roll = OQ2P_UINT16_BIG_DECODE(pdata);
+            debug_printf("Command to set ROLL setpoint to %3.2f°", ((float)new_roll) / 100.0, 0xB0);
+            stability_set_roll_target(((float)new_roll) / 100.0);
+        }
+
+        // Build response and if correct, send over socket.
+        int32_t len = oq2p_msg_build_angle_setpoint_response(oq2p_out_buffer, OQ2P_TX_BUFSIZE, OQ2P_MID_ROLL_SETPOINT, new_roll);
+        if (len > 0)
+            _op2p_send(oq2p_out_buffer, len);
+    } break;
+
+    case OQ2P_MID_YAW_SETPOINT:
+    {
+        int16_t new_yaw = 0;
+
+        if (cr == OQ2P_REQUEST)
+        {
+            new_yaw = (int16_t)(stability_get_yaw_target() * 100);
+            debug_printf("Request for current YAW setpoint. %d(°x100)", new_yaw);
+        }
+        else if (cr == OQ2P_COMMAND)
+        {
+            new_yaw = OQ2P_UINT16_BIG_DECODE(pdata);
+            debug_printf("Command to set YAW setpoint to %3.2f°", ((float)new_yaw) / 100.0, 0xB0);
+            stability_set_yaw_target(((float)new_yaw) / 100.0);
+        }
+
+        // Build response and if correct, send over socket.
+        int32_t len = oq2p_msg_build_angle_setpoint_response(oq2p_out_buffer, OQ2P_TX_BUFSIZE, OQ2P_MID_YAW_SETPOINT, new_yaw);
+        if (len > 0)
+            _op2p_send(oq2p_out_buffer, len);
+    } break;
+
+    case OQ2P_MID_THRUST:
+    {
+        uint8_t thrust = 0;
+
+        if (cr == OQ2P_REQUEST)
+        {
+            thrust = motors_get_thrust_setting();
+            debug_printf("Request for current THRUST setting. %u%%", thrust);
+        }
+        else if (cr == OQ2P_COMMAND)
+        {
+            thrust = *(pdata++);
+            debug_printf("Command to set THRUST setting to %u%%", thrust);
+            motors_set_thrust_setting(thrust);
+        }
+
+        // Build response and if correct, send over socket.
+        int32_t len = oq2p_msg_build_thrust_response(oq2p_out_buffer, OQ2P_TX_BUFSIZE, thrust);
+        if (len > 0)
+            _op2p_send(oq2p_out_buffer, len);
+
+    } break;
+
+    }
 }
 
 /**
@@ -143,7 +221,13 @@ static void application_oq2p_control_message_handler(oq2p_control_mid_t msg_id, 
  */
 static void oq2p_parse_message(uint8_t* buf, uint16_t packet_len)
 {
-    uint8_t start, class, msg_id, request, length_msb, length_lsb, end;
+    uint8_t start = 0; 
+    uint8_t class = 0; 
+    uint8_t msg_id = 0; 
+    oq2p_command_request_t request = 0; 
+    uint8_t length_msb = 0;
+    uint8_t length_lsb = 0;
+    uint8_t end = 0;
     uint8_t* bufstart = buf;
 
     end = buf[packet_len - 1];
@@ -154,7 +238,6 @@ static void oq2p_parse_message(uint8_t* buf, uint16_t packet_len)
         debug_error("Invalid start byte (0x%02X) or end byte (0x%02X)", start, end);
         return;
     }
-    debug_printf("received OQ2P message");
 
     class = *(buf++);
     msg_id = *(buf++);
@@ -190,7 +273,7 @@ void oq2p_connect_callback(int8_t sock)
         return;
 
     m_sock = sock;
-    debug_printf("oq2p_connect_callback() with int8_t %d", sock);
+    debug_printf("oq2p_connect_callback() with socket %d", sock);
 
     _op2p_receive(oq2p_in_buffer, OQ2P_RX_BUFSIZE);
     _op2p_send(m_hello, (uint16_t)sizeof(m_hello));
@@ -206,7 +289,7 @@ void oq2p_disconnect_callback(int8_t sock)
     if (!m_init)
         return;
 
-    debug_printf("oq2p_disconnect_callback() from int8_t %d", sock);
+    debug_printf("oq2p_disconnect_callback() from socket %d", sock);
 
     if (sock != m_sock)
         return;
@@ -225,24 +308,26 @@ void oq2p_receive_callback(int8_t sock, tstrSocketRecvMsg* p_recv)
 
     if (p_recv && p_recv->s16BufferSize > 0)
     {
-        // debug_printf("int8_t_cb: recv success!");
+        // debug_printf("socket callback: recv success!");
         bytes_received += p_recv->s16BufferSize;
-        debug_printf("received %u B", p_recv->s16BufferSize);
-
-        oq2p_parse_message(p_recv->pu8Buffer, p_recv->s16BufferSize);
 
         // debug_printf("%s", p_recv->pu8Buffer);
         // debug_print_buffer(p_recv->pu8Buffer, p_recv->s16BufferSize, 0, 16);
+
+        oq2p_parse_message(p_recv->pu8Buffer, p_recv->s16BufferSize);
+
+        // Zero out the bytes that we received instead of zeroing the whole buffer.
+        memset(oq2p_in_buffer, 0x00, p_recv->s16BufferSize);
+
+        // Start listening again.
+        _op2p_receive(oq2p_in_buffer, OQ2P_RX_BUFSIZE);
     }
     else
     {
-        debug_printf("int8_t_cb: recv error!");
+        debug_error("Receive error.");
         close(sock);
-        sock = -1;
+        oq2p_disconnect_callback(sock);
     }
-
-    memset(oq2p_in_buffer, 0x00, OQ2P_RX_BUFSIZE);
-    _op2p_receive(oq2p_in_buffer, OQ2P_RX_BUFSIZE);
 }
 #endif
 

@@ -690,3 +690,35 @@ void stability_thread(void* argument)
     }
 }
 
+/*********************************************************************************************/
+/* Getters / Setters for PID targets --------------------------------------------------------*/
+
+void stability_set_pitch_target(float pitch_target)
+{
+    m_pitch_pid.setpoint = pitch_target;
+}
+
+float stability_get_pitch_target()
+{
+    return m_pitch_pid.setpoint;
+}
+
+void stability_set_roll_target(float roll_target)
+{
+    m_roll_pid.setpoint = roll_target;
+}
+
+float stability_get_roll_target()
+{
+    return m_roll_pid.setpoint;
+}
+
+void stability_set_yaw_target(float yaw_target)
+{
+    m_yaw_pid.setpoint = yaw_target;
+}
+
+float stability_get_yaw_target()
+{
+    return m_yaw_pid.setpoint;
+}

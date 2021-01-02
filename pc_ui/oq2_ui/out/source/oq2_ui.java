@@ -46,6 +46,17 @@ static float g_pitch = PITCH_DEFAULT;
 static float g_yaw = YAW_DEFAULT;
 static float g_roll = ROLL_DEFAULT;
 
+public boolean read_from_socket(Client read_client)
+{
+    int rxByteCount = read_client.readBytes(byteBuffer);
+    if (rxByteCount > 0) 
+    {
+        println(read_client.ip() + "\t" + bytesToHexString(byteBuffer, rxByteCount));
+        return true;
+    }
+    return false;
+}
+
 public void setup() {
 
     //Set up the serial port
@@ -97,17 +108,12 @@ public void draw()
     {
         println(thisClient);
 
-        int rxByteCount = thisClient.readBytes(byteBuffer);
+        read_from_socket(thisClient);
 
-        if (rxByteCount > 0) 
+        if(firstConnect == false)
         {
-            println(thisClient.ip() + "\t" + bytesToHexString(byteBuffer, rxByteCount));
-
-            if(firstConnect == false)
-            {
-                firstConnect = true;
-                oq2p_exhaustive_test(thisClient, 500);
-            }
+            firstConnect = true;
+            oq2p_exhaustive_test(thisClient, 200);
         }
     }
 }
@@ -194,34 +200,129 @@ public void oq2p_exhaustive_test(Client _socket, int inter_test_period)
     // Arm motors 1 by 1
     _socket.write( oq2p_arm_message(OQ2P_MOTOR_INDEX_1, OQ2P_MOTOR_ARM) );
     delay(inter_test_period);
+    if(!read_from_socket(_socket))
+        println("error no response");
+
+
     _socket.write( oq2p_arm_message(OQ2P_MOTOR_INDEX_2, OQ2P_MOTOR_ARM) );
     delay(inter_test_period);
+    if(!read_from_socket(_socket))
+        println("error no response");
+
+
     _socket.write( oq2p_arm_message(OQ2P_MOTOR_INDEX_3, OQ2P_MOTOR_ARM) );
     delay(inter_test_period);
+    if(!read_from_socket(_socket))
+        println("error no response");
+
+
     _socket.write( oq2p_arm_message(OQ2P_MOTOR_INDEX_4, OQ2P_MOTOR_ARM) );
     delay(inter_test_period);
+    if(!read_from_socket(_socket))
+        println("error no response");
+
 
     // Disarm motors 1 by 1
     _socket.write( oq2p_arm_message(OQ2P_MOTOR_INDEX_1, OQ2P_MOTOR_DISARM) );
     delay(inter_test_period);
+    if(!read_from_socket(_socket))
+        println("error no response");
+
     _socket.write( oq2p_arm_message(OQ2P_MOTOR_INDEX_2, OQ2P_MOTOR_DISARM) );
     delay(inter_test_period);
+    if(!read_from_socket(_socket))
+        println("error no response");
+
     _socket.write( oq2p_arm_message(OQ2P_MOTOR_INDEX_3, OQ2P_MOTOR_DISARM) );
     delay(inter_test_period);
+    if(!read_from_socket(_socket))
+        println("error no response");
+
     _socket.write( oq2p_arm_message(OQ2P_MOTOR_INDEX_4, OQ2P_MOTOR_DISARM) );
     delay(inter_test_period);
+    if(!read_from_socket(_socket))
+        println("error no response");
 
     // Arm all
     _socket.write( oq2p_arm_message(OQ2P_MOTOR_INDEX_ALL, OQ2P_MOTOR_ARM) );
     delay(inter_test_period);
+    if(!read_from_socket(_socket))
+        println("error no response");
 
     // Disarm all
-    // _socket.write( oq2p_arm_message(OQ2P_MOTOR_INDEX_ALL, OQ2P_MOTOR_DISARM) );
-    // delay(inter_test_period);
+    _socket.write( oq2p_arm_message(OQ2P_MOTOR_INDEX_ALL, OQ2P_MOTOR_DISARM) );
+    delay(inter_test_period);
+    if(!read_from_socket(_socket))
+        println("error no response");
 
     // Query armed state
     _socket.write( oq2p_arm_state_request());
     delay(inter_test_period);
+    if(!read_from_socket(_socket))
+        println("error no response");
+
+    // Test set pitch
+    // Units are 100 * degrees
+    _socket.write( oq2p_setpoint_command(OQ2P_MID_PITCH_SET, 256));
+    delay(inter_test_period);
+    if(!read_from_socket(_socket))
+        println("error no response");
+
+    // Test set roll
+    // Units are 100 * degrees
+    _socket.write( oq2p_setpoint_command(OQ2P_MID_ROLL_SET, 512));
+    delay(inter_test_period);
+    if(!read_from_socket(_socket))
+        println("error no response");
+
+    // Test set yaw
+    // Units are 100 * degrees
+    _socket.write( oq2p_setpoint_command(OQ2P_MID_YAW_SET, 768));
+    delay(inter_test_period);
+    if(!read_from_socket(_socket))
+        println("error no response");
+
+    // Test get yaw
+    // Units are 100 * degrees
+    _socket.write( oq2p_setpoint_request(OQ2P_MID_YAW_SET));
+    delay(inter_test_period);
+    if(!read_from_socket(_socket))
+        println("error no response");
+
+    // Test set roll
+    // Units are 100 * degrees
+    _socket.write( oq2p_setpoint_request(OQ2P_MID_ROLL_SET));
+    delay(inter_test_period);
+    if(!read_from_socket(_socket))
+        println("error no response");
+
+    // Test set pitch
+    // Units are 100 * degrees
+    _socket.write( oq2p_setpoint_request(OQ2P_MID_PITCH_SET));
+    delay(inter_test_period);
+    if(!read_from_socket(_socket))
+        println("error no response");
+
+    // Test get thrust base
+    // Units are percent. 0 - 100
+    _socket.write( oq2p_thrust_request());
+    delay(inter_test_period);
+    if(!read_from_socket(_socket))
+        println("error no response");
+
+    // Test set thrust base
+    // Units are percent. 0 - 100
+    _socket.write( oq2p_thrust_command(50));
+    delay(inter_test_period);
+    if(!read_from_socket(_socket))
+        println("error no response");
+
+    // Test get thrust base
+    // Units are percent. 0 - 100
+    _socket.write( oq2p_thrust_request());
+    delay(inter_test_period);
+    if(!read_from_socket(_socket))
+        println("error no response");
 }
 static final byte OQ2P_START = (byte)0xCA;
 static final byte OQ2P_END = (byte)0xFE;
@@ -232,21 +333,29 @@ static final byte OQ2P_TYPE_COMMAND = (byte)0x00;
 static final byte OQ2P_TYPE_REQUEST = (byte)0x01;
 static final byte OQ2P_TYPE_RESPONSE = (byte)0x02;
 
+// Message IDS
+static final byte OQ2P_MID_ARM =        (byte)0x00;
+static final byte OQ2P_MID_PITCH_SET =  (byte)0x01;
+static final byte OQ2P_MID_ROLL_SET =   (byte)0x02;
+static final byte OQ2P_MID_YAW_SET =    (byte)0x03;
+static final byte OQ2P_MID_ELEVATION_SET =  (byte)0x04;
+static final byte OQ2P_MID_SPEED_SET =  (byte)0x05;
+static final byte OQ2P_MID_THRUST =     (byte)0x06;
+static final byte OQ2P_MID_KEEP_ALIVE = (byte)0xAA;
 
+// Motor indexes
 static final byte OQ2P_MOTOR_INDEX_ALL  = (byte)0xFF;
 static final byte OQ2P_MOTOR_INDEX_1  = (byte)0x01;
 static final byte OQ2P_MOTOR_INDEX_2  = (byte)0x02;
 static final byte OQ2P_MOTOR_INDEX_3  = (byte)0x03;
 static final byte OQ2P_MOTOR_INDEX_4  = (byte)0x04;
 
+// Motor arm or no
 static final byte OQ2P_MOTOR_ARM        = (byte)0x01;
 static final byte OQ2P_MOTOR_DISARM     = (byte)0x00;
 
 
-/**
- * 
- */
-public byte[] oq2p_arm_message(byte index, byte arm)
+public byte[] oq2p_arm_message(byte index, byte arm) 
 {
     byte buffer[] = new byte[9];
     
@@ -275,12 +384,84 @@ public byte[] oq2p_arm_state_request()
     // Header
     buffer[0] = OQ2P_START;
     buffer[1] = OQ2P_CLASS_CONTROL;
-    buffer[2] = (byte)0x00;    // Message ARM
+    buffer[2] = OQ2P_MID_ARM;
     buffer[3] = OQ2P_TYPE_REQUEST;
     buffer[4] = (byte)0x00;    // Length MSB
     buffer[5] = (byte)0x00;    // Length LSB
 
     // Footer
+    buffer[6] = OQ2P_END;
+
+    return buffer;
+}
+
+public byte[] oq2p_setpoint_command(byte index, int value) 
+{
+    byte buffer[] = new byte[9];
+
+    buffer[0] = OQ2P_START;
+    buffer[1] = OQ2P_CLASS_CONTROL;
+    buffer[2] = index;
+    buffer[3] = OQ2P_TYPE_COMMAND;
+    buffer[4] = (byte)0x00;    // Length MSB
+    buffer[5] = (byte)0x02;    // Length LSB
+
+    // Data
+    buffer[6] = (byte)((value & (int)0xFF00) >> 8);
+    buffer[7] = (byte)((value & (int)0x00FF) >> 0);
+
+    buffer[8] = OQ2P_END;
+
+    return buffer;
+}
+
+public byte[] oq2p_setpoint_request(byte index) 
+{
+
+    byte buffer[] = new byte[7];
+
+    buffer[0] = OQ2P_START;
+    buffer[1] = OQ2P_CLASS_CONTROL;
+    buffer[2] = index;
+    buffer[3] = OQ2P_TYPE_REQUEST;
+    buffer[4] = (byte)0x00;    // Length MSB
+    buffer[5] = (byte)0x00;    // Length LSB
+
+    buffer[6] = OQ2P_END;
+
+    return buffer;
+}
+
+public byte[] oq2p_thrust_command(int percent) 
+{
+    byte buffer[] = new byte[8];
+
+    buffer[0] = OQ2P_START;
+    buffer[1] = OQ2P_CLASS_CONTROL;
+    buffer[2] = OQ2P_MID_THRUST;
+    buffer[3] = OQ2P_TYPE_COMMAND;
+    buffer[4] = (byte)0x00;    // Length MSB
+    buffer[5] = (byte)0x01;    // Length LSB
+
+    buffer[6] = (byte)percent;
+
+    buffer[7] = OQ2P_END;
+
+    return buffer;
+}
+
+public byte[] oq2p_thrust_request() 
+{
+
+    byte buffer[] = new byte[7];
+
+    buffer[0] = OQ2P_START;
+    buffer[1] = OQ2P_CLASS_CONTROL;
+    buffer[2] = OQ2P_MID_THRUST;
+    buffer[3] = OQ2P_TYPE_REQUEST;
+    buffer[4] = (byte)0x00;    // Length MSB
+    buffer[5] = (byte)0x00;    // Length LSB
+
     buffer[6] = OQ2P_END;
 
     return buffer;

@@ -24,6 +24,17 @@ static float g_pitch = PITCH_DEFAULT;
 static float g_yaw = YAW_DEFAULT;
 static float g_roll = ROLL_DEFAULT;
 
+public boolean read_from_socket(Client read_client)
+{
+    int rxByteCount = read_client.readBytes(byteBuffer);
+    if (rxByteCount > 0) 
+    {
+        println(read_client.ip() + "\t" + bytesToHexString(byteBuffer, rxByteCount));
+        return true;
+    }
+    return false;
+}
+
 void setup() {
 
     //Set up the serial port
@@ -75,17 +86,12 @@ public void draw()
     {
         println(thisClient);
 
-        int rxByteCount = thisClient.readBytes(byteBuffer);
+        read_from_socket(thisClient);
 
-        if (rxByteCount > 0) 
+        if(firstConnect == false)
         {
-            println(thisClient.ip() + "\t" + bytesToHexString(byteBuffer, rxByteCount));
-
-            if(firstConnect == false)
-            {
-                firstConnect = true;
-                oq2p_exhaustive_test(thisClient, 500);
-            }
+            firstConnect = true;
+            oq2p_exhaustive_test(thisClient, 200);
         }
     }
 }

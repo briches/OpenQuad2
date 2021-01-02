@@ -251,7 +251,7 @@ static void wifi_cb(uint8_t msg_type, void* msg)
     {
         int8_t rssi = * ((int8_t *)msg);
 
-        debug_printf("RSSI %d dBm", rssi, (uint8_t)rssi);
+        // debug_printf("RSSI %d dBm", rssi, (uint8_t)rssi);
     }
 
     default:
@@ -441,7 +441,7 @@ void _socket_func()
 
         bitrate /= 5;
 
-        debug_printf("BITRATE %3.2f kbps",  bitrate/1000); 
+        // debug_printf("BITRATE %3.2f kbps",  bitrate/1000); 
 
         os_m2m_wifi_req_curr_rssi();
 
