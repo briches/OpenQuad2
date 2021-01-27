@@ -25,6 +25,7 @@ extern PCD_HandleTypeDef hpcd_USB_OTG_HS;
 extern LPTIM_HandleTypeDef hlptim1;
 extern UART_HandleTypeDef huart5;
 extern UART_HandleTypeDef huart2;
+extern UART_HandleTypeDef huart1;   // Motor 4
 extern TIM_HandleTypeDef htim2;
 
 
@@ -151,6 +152,14 @@ void UART5_IRQHandler(void)
 void USART2_IRQHandler(void)
 {
   HAL_UART_IRQHandler(&huart2);
+}
+
+/**
+  * @brief This function handles USART1 global interrupt.
+  */
+void USART1_IRQHandler(void)
+{
+  HAL_UART_IRQHandler(&huart1);
 }
 
 /**

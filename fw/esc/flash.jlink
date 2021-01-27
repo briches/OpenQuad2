@@ -1,0 +1,6 @@
+h
+r
+erase
+loadbin _build/oq2_esc.bin,0x08000000
+r
+q

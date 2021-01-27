@@ -30,7 +30,7 @@
 #include "kinematics.h"
 #include "timer.h"
 #include "pid.h"
-#include "motors.h"
+#include "flight_app.h"
 
 #define debug_error(fmt, ...)           debug_error(STABILITY_MODULE_ID, fmt, ##__VA_ARGS__)
 #define debug_printf(fmt, ...)          debug_printf(STABILITY_MODULE_ID, fmt, ##__VA_ARGS__)
@@ -42,13 +42,13 @@
 static MFX_knobs_t m_mfx_knobs;
 static kinematics_ctx_t m_kinematics;
 static pid_ctx_t m_pitch_pid;
-static pid_limits_t m_pitch_pid_limits = 
+static pid_limits_t m_pitch_pid_limits =
 {
     .P_lim = SC_PITCH_PID_P_LIM,
     .I_lim = SC_PITCH_PID_I_LIM,
     .D_lim = SC_PITCH_PID_D_LIM,
 };
-static pid_params_t m_pitch_pid_params = 
+static pid_params_t m_pitch_pid_params =
 {
     .P = SC_PITCH_PID_P,
     .I = SC_PITCH_PID_I,
@@ -56,13 +56,13 @@ static pid_params_t m_pitch_pid_params =
 };
 
 static pid_ctx_t m_roll_pid;
-static pid_limits_t m_roll_pid_limits = 
+static pid_limits_t m_roll_pid_limits =
 {
     .P_lim = SC_ROLL_PID_P_LIM,
     .I_lim = SC_ROLL_PID_I_LIM,
     .D_lim = SC_ROLL_PID_D_LIM,
 };
-static pid_params_t m_roll_pid_params = 
+static pid_params_t m_roll_pid_params =
 {
     .P = SC_ROLL_PID_P,
     .I = SC_ROLL_PID_I,
@@ -70,13 +70,13 @@ static pid_params_t m_roll_pid_params =
 };
 
 static pid_ctx_t m_yaw_pid;
-static pid_limits_t m_yaw_pid_limits = 
+static pid_limits_t m_yaw_pid_limits =
 {
     .P_lim = SC_YAW_PID_P_LIM,
     .I_lim = SC_YAW_PID_I_LIM,
     .D_lim = SC_YAW_PID_D_LIM,
 };
-static pid_params_t m_yaw_pid_params = 
+static pid_params_t m_yaw_pid_params =
 {
     .P = SC_YAW_PID_P,
     .I = SC_YAW_PID_I,
@@ -141,7 +141,7 @@ stmdev_ctx_t dev_ctx_imu;
 stmdev_ctx_t dev_ctx_mag;
 stmdev_ctx_t dev_ctx_lps;
 
-char MotionFX_LoadMagCalFromNVM(unsigned short int dataSize, unsigned int * data)
+char MotionFX_LoadMagCalFromNVM(unsigned short int dataSize, unsigned int* data)
 {
     debug_printf("MFX lib wants to load cals from NVM.");
     debug_printf("size: %u", dataSize);
@@ -150,7 +150,7 @@ char MotionFX_LoadMagCalFromNVM(unsigned short int dataSize, unsigned int * data
     return 1;
 }
 
-char MotionFX_SaveMagCalInNVM(unsigned short int dataSize, unsigned int * data)
+char MotionFX_SaveMagCalInNVM(unsigned short int dataSize, unsigned int* data)
 {
     debug_printf("MFX lib wants to save cals to NVM.");
     debug_printf("size: %u", dataSize);
@@ -210,53 +210,55 @@ static void lsm9ds1_init()
     /* Configure filtering chain - See datasheet for filtering chain details */
     /* Accelerometer filtering chain */
     lsm9ds1_xl_filter_aalias_bandwidth_set(&dev_ctx_imu, LSM9DS1_AUTO);
-    lsm9ds1_xl_filter_lp_bandwidth_set(&dev_ctx_imu, LSM9DS1_LP_ODR_DIV_9);
+    lsm9ds1_xl_filter_lp_bandwidth_set(&dev_ctx_imu, LSM9DS1_LP_ODR_DIV_50);
     lsm9ds1_xl_filter_out_path_set(&dev_ctx_imu, LSM9DS1_LP_OUT);
 
     /* Gyroscope filtering chain */
-    lsm9ds1_gy_filter_lp_bandwidth_set(&dev_ctx_imu, LSM9DS1_LP_STRONG);
-    lsm9ds1_gy_filter_hp_bandwidth_set(&dev_ctx_imu, LSM9DS1_HP_HIGH);
-    lsm9ds1_gy_filter_out_path_set(&dev_ctx_imu, LSM9DS1_LPF1_OUT);
+    // Ultralight LP is highest cutoff
+    // Extreme HP is highest cutoff
+    lsm9ds1_gy_filter_lp_bandwidth_set(&dev_ctx_imu, LSM9DS1_LP_ULTRA_LIGHT);
+    lsm9ds1_gy_filter_hp_bandwidth_set(&dev_ctx_imu, LSM9DS1_HP_ULTRA_LIGHT);
+    lsm9ds1_gy_filter_out_path_set(&dev_ctx_imu, LSM9DS1_LPF1_HPF_OUT);
 
     /* Set Output Data Rate / Power mode */
-    lsm9ds1_imu_data_rate_set(&dev_ctx_imu, LSM9DS1_IMU_119Hz);
+    lsm9ds1_imu_data_rate_set(&dev_ctx_imu, LSM9DS1_IMU_238Hz);
     lsm9ds1_mag_data_rate_set(&dev_ctx_mag, LSM9DS1_MAG_UHP_10Hz);
 
     lsm9ds1_ctrl_reg9_t ctrl9;
     // ctrl9.drdy_mask_bit = 1;
-    lsm9ds1_write_reg(&dev_ctx_mag, LSM9DS1_CTRL_REG9, (uint8_t *)&ctrl9, sizeof(ctrl9));
+    lsm9ds1_write_reg(&dev_ctx_mag, LSM9DS1_CTRL_REG9, (uint8_t*)&ctrl9, sizeof(ctrl9));
 
-    #if defined(SENSOR_THREAD_IMU_USE_INDIVIDUAL)
+#if defined(SENSOR_THREAD_IMU_USE_INDIVIDUAL)
 
-        /* Set Accelerometer data ready interrupt on INT 1_A/G pin */
-        lsm9ds1_pin_int1_route_t int1 = { 0 };
-        // int1.int1_drdy_xl = PROPERTY_ENABLE;
-        lsm9ds1_pin_int1_route_set(&dev_ctx_imu, int1);
+    /* Set Accelerometer data ready interrupt on INT 1_A/G pin */
+    lsm9ds1_pin_int1_route_t int1 = { 0 };
+    // int1.int1_drdy_xl = PROPERTY_ENABLE;
+    lsm9ds1_pin_int1_route_set(&dev_ctx_imu, int1);
 
-        /* No interrupts pathed to INT2 pin */
-        lsm9ds1_pin_int2_route_t int2 = { 0 };
-        lsm9ds1_pin_int2_route_set(&dev_ctx_imu, int2);
+    /* No interrupts pathed to INT2 pin */
+    lsm9ds1_pin_int2_route_t int2 = { 0 };
+    lsm9ds1_pin_int2_route_set(&dev_ctx_imu, int2);
 
-        lsm9ds1_fifo_mode_set(&dev_ctx_imu, LSM9DS1_FIFO_OFF);
+    lsm9ds1_fifo_mode_set(&dev_ctx_imu, LSM9DS1_FIFO_OFF);
 
-    #elif defined(SENSOR_THREAD_IMU_USE_FIFO)
+#elif defined(SENSOR_THREAD_IMU_USE_FIFO)
 
-        /* Set Accelerometer data ready interrupt on INT 1_A/G pin */
-        lsm9ds1_pin_int1_route_t int1 = { 0 };
-        lsm9ds1_pin_int1_route_set(&dev_ctx_imu, int1);
+    /* Set Accelerometer data ready interrupt on INT 1_A/G pin */
+    lsm9ds1_pin_int1_route_t int1 = { 0 };
+    lsm9ds1_pin_int1_route_set(&dev_ctx_imu, int1);
 
-        /* Set accelerometer fifo threshold interrupt on INT2_A/G pin */
-        lsm9ds1_pin_int2_route_t int2 = { 0 };
-        int2.int2_fth = PROPERTY_ENABLE;
-        lsm9ds1_pin_int2_route_set(&dev_ctx_imu, int2);
+    /* Set accelerometer fifo threshold interrupt on INT2_A/G pin */
+    lsm9ds1_pin_int2_route_t int2 = { 0 };
+    int2.int2_fth = PROPERTY_ENABLE;
+    lsm9ds1_pin_int2_route_set(&dev_ctx_imu, int2);
 
-        // Configure FIFO as continuous stream mode, watermark threshold of 16 samples
-        lsm9ds1_fifo_mode_set(&dev_ctx_imu, LSM9DS1_STREAM_TO_FIFO_MODE);
-        lsm9ds1_fifo_watermark_set(&dev_ctx_imu, IMU_FIFO_THRESHOLD);
+    // Configure FIFO as continuous stream mode, watermark threshold of 16 samples
+    lsm9ds1_fifo_mode_set(&dev_ctx_imu, LSM9DS1_STREAM_TO_FIFO_MODE);
+    lsm9ds1_fifo_watermark_set(&dev_ctx_imu, IMU_FIFO_THRESHOLD);
 
-    #else
-        #error "check app config and define either SENSOR_THREAD_IMU_USE_INDIVIDUAL or SENSOR_THREAD_IMU_USE_FIFO"
-    #endif
+#else
+#error "check app config and define either SENSOR_THREAD_IMU_USE_INDIVIDUAL or SENSOR_THREAD_IMU_USE_FIFO"
+#endif
 }
 
 /**
@@ -348,7 +350,7 @@ static void read_mag_data()
 }
 
 /**
- * @brief Read barometer temperature and pressure data. 
+ * @brief Read barometer temperature and pressure data.
  *
  * Can be called from the task or from the ISR
  */
@@ -366,7 +368,7 @@ static void read_baro_data()
     // debug_printf("pressure [hPa]:%6.1f, temperature [degC]:%6.1f", pressure_hPa, temperature_degC);
 
     // Convert pressure in hPA to meters elevation
-    float elevation = (powf(SC_SEA_LEVEL_PRESS_HPA/pressure_hPa, 0.19022256) - 1) * (SC_AIR_TEMPERATURE + 273.15)  * 153.84615;
+    float elevation = (powf(SC_SEA_LEVEL_PRESS_HPA / pressure_hPa, 0.19022256) - 1) * (SC_AIR_TEMPERATURE + 273.15) * 153.84615;
 
     kinematics_new_elevation_data_callback(&m_kinematics, elevation);
 
@@ -433,7 +435,7 @@ void baro_int_callback()
 
 /**
  * @brief Read IMU data, Update and Propagate MotionFX kalman library
- * 
+ *
  * @retval time delta since last call in seconds
  */
 float stability_thread_read_and_calculate()
@@ -444,10 +446,10 @@ float stability_thread_read_and_calculate()
     static volatile float timestamp = 0;
     float dT = 0;
     float now = timer_get_elapsed();
-    dT = ( now - timestamp );
+    dT = (now - timestamp);
     timestamp = now;
-    
-    if(dT < 0)
+
+    if (dT < 0)
     {
         debug_error("%u, WATCHOUT!", TAG);
         float test = timer_get_elapsed();
@@ -498,8 +500,8 @@ float stability_thread_read_and_calculate()
     //                 mc_output_data.hi_bias[0],
     //                 mc_output_data.hi_bias[1],
     //                 mc_output_data.hi_bias[2]);
-    
-    if(cal_quality == MFX_MAGCALGOOD)
+
+    if (cal_quality == MFX_MAGCALGOOD)
     {
         debug_printf("Cald");
         MotionFX_MagCal_init(0, false);
@@ -509,15 +511,15 @@ float stability_thread_read_and_calculate()
         data_in.mag[2] -= mc_output_data.hi_bias[2];
     }
 #endif
-    
+
     MotionFX_propagate(&data_out, &data_in, &dT);
     MotionFX_update(&data_out, &data_in, &dT, NULL);
 
-    #if SC_ENABLE_6AXIS_MFX_LIB == APP_CONFIG_ENABLED
-        float * p_angles = &data_out.rotation_6X[0];
-    #else
-        float * p_angles = &data_out.rotation_9X[0];
-    #endif
+#if SC_ENABLE_6AXIS_MFX_LIB == APP_CONFIG_ENABLED
+    float* p_angles = &data_out.rotation_6X[0];
+#else
+    float* p_angles = &data_out.rotation_9X[0];
+#endif
 
     kinematics_new_motionfx_data_callback(&m_kinematics, &data_out);
 
@@ -547,9 +549,6 @@ void stability_thread_pre_init()
 
     // Init kinematics context
     kinematics_initialize(&m_kinematics, SC_ENABLE_9AXIS_MFX_LIB);
-
-    // Initialize motors
-    motor_controllers_init();
 
     // Initialize PID controllers
     pid_initialize_ctx(&m_pitch_pid, &m_pitch_pid_params, &m_pitch_pid_limits);
@@ -594,11 +593,11 @@ void stability_thread_pre_init()
 
     m_mfx_knobs.ATime = SC_MFX_ATIME;
     m_mfx_knobs.start_automatic_gbias_calculation = 0;
-    m_mfx_knobs.LMode = 1;
+    m_mfx_knobs.LMode = 2;
     m_mfx_knobs.modx = 1;
 
     MotionFX_setKnobs(&m_mfx_knobs);
- 
+
     debug_printf("Accel ATime: %3.3f", m_mfx_knobs.ATime);
     debug_printf("Mag MTime: %3.3f", m_mfx_knobs.MTime);
     debug_printf("Dynamica accel FrTime: %3.3f", m_mfx_knobs.FrTime);
@@ -611,19 +610,19 @@ void stability_thread_pre_init()
     debug_printf("gbias_gyro_th_sc_9X: %3.3f", m_mfx_knobs.gbias_gyro_th_sc_9X);
     debug_printf("decimation modx: %u", m_mfx_knobs.modx);
     debug_printf("acc orientation: [%c, %c, %c, %c]", m_mfx_knobs.acc_orientation[0],
-                                                    m_mfx_knobs.acc_orientation[1],
-                                                    m_mfx_knobs.acc_orientation[2],
-                                                    m_mfx_knobs.acc_orientation[3]);
+        m_mfx_knobs.acc_orientation[1],
+        m_mfx_knobs.acc_orientation[2],
+        m_mfx_knobs.acc_orientation[3]);
     debug_printf("gyro orientation: [%c, %c, %c, %c]", m_mfx_knobs.gyro_orientation[0],
-                                                    m_mfx_knobs.gyro_orientation[1],
-                                                    m_mfx_knobs.gyro_orientation[2],
-                                                    m_mfx_knobs.gyro_orientation[3]);
+        m_mfx_knobs.gyro_orientation[1],
+        m_mfx_knobs.gyro_orientation[2],
+        m_mfx_knobs.gyro_orientation[3]);
     debug_printf("mag orientation: [%c, %c, %c, %c]", m_mfx_knobs.mag_orientation[0],
-                                                    m_mfx_knobs.mag_orientation[1],
-                                                    m_mfx_knobs.mag_orientation[2],
-                                                    m_mfx_knobs.mag_orientation[3]);
-    debug_printf("MFX_engine_output_ref_sys: %u",   m_mfx_knobs.output_type);
-    debug_printf("start_automatic_gbias_calculation: %d",   m_mfx_knobs.start_automatic_gbias_calculation);
+        m_mfx_knobs.mag_orientation[1],
+        m_mfx_knobs.mag_orientation[2],
+        m_mfx_knobs.mag_orientation[3]);
+    debug_printf("MFX_engine_output_ref_sys: %u", m_mfx_knobs.output_type);
+    debug_printf("start_automatic_gbias_calculation: %d", m_mfx_knobs.start_automatic_gbias_calculation);
     debug_printf("");
 
     m_sensors_initialized = true;
@@ -636,16 +635,16 @@ void stability_thread_pre_init()
  */
 void stability_thread(void* argument)
 {
-    #if(SC_OPERATING_MODE == SC_OP_MODE_MAG_CAL)
+#if(SC_OPERATING_MODE == SC_OP_MODE_MAG_CAL)
     MotionFX_MagCal_init(20, true);
-    #endif
+#endif
     MotionFX_enable_6X(SC_ENABLE_6AXIS_MFX_LIB);
     MotionFX_enable_9X(SC_ENABLE_9AXIS_MFX_LIB);
 
     for (;;)
     {
         // Recover from IMU data ready interrupt before we were ready
-        if(m_int1_count)
+        if (m_int1_count)
         {
             read_imu_data();
             // debug_printf("Recovered int1 from sensor task.");
@@ -661,7 +660,7 @@ void stability_thread(void* argument)
         m_drdy_count = 0;
 
         // Recover barometer data interrupt from before we were ready
-        if(m_baro_int_count || HAL_GPIO_ReadPin(BARO_INT_GPIO_Port, BARO_INT_Pin))
+        if (m_baro_int_count || HAL_GPIO_ReadPin(BARO_INT_GPIO_Port, BARO_INT_Pin))
         {
             // debug_printf("Recovered baro int from sensor task.");
             read_baro_data();
@@ -672,19 +671,35 @@ void stability_thread(void* argument)
         // Calculate kinematics data
         float dT = stability_thread_read_and_calculate();
 
-        // Calculate pid control values
-        float pitch_pid_out = pid_calculate(&m_pitch_pid, m_kinematics.pitch, dT);
-        float roll_pid_out = pid_calculate(&m_roll_pid, m_kinematics.roll, dT);
-        float yaw_pid_out = pid_calculate(&m_yaw_pid, m_kinematics.yaw, dT);
+        static float pitch_pid_out = 0;
+        static float roll_pid_out = 0;
+        static float yaw_pid_out = 0;
 
-        pitch_pid_out = 0;
-        roll_pid_out = 0;
-        yaw_pid_out = 0;
+        // Check angle within safe range
+        if (fabs(m_kinematics.pitch) > SC_SAFETY_PITCH_LIMIT || fabs(m_kinematics.roll) > SC_SAFETY_ROLL_LIMIT)
+        {
+            flight_app_critical_angle_callback();
+        }
+        else
+        {
+            if (flight_app_get_state() >= FLIGHT_MOTOR_READY)
+            {
+                // Calculate pid control values
+                pitch_pid_out = pid_calculate(&m_pitch_pid, m_kinematics.pitch, dT);
+                // roll_pid_out = pid_calculate(&m_roll_pid, m_kinematics.roll, dT);
+                // yaw_pid_out = pid_calculate(&m_yaw_pid, m_kinematics.yaw, dT);
 
-        // Update motors with control values
-        motor_controllers_control_input(&pitch_pid_out, &roll_pid_out, &yaw_pid_out);
+                debug_printf("\t%3.2f \t%3.2f", m_kinematics.pitch, pitch_pid_out);
 
-        // debug_printf("p: %3.2f, pc: %3.2f, r: %3.2f, rc: %3.2f", m_kinematics.pitch, pitch_pid_out, m_kinematics.roll, roll_pid_out);
+
+                // Selectively disable PID control
+                // pitch_pid_out = 0;
+                roll_pid_out = 0;
+                yaw_pid_out = 0;
+                flight_app_new_stability_inputs(&pitch_pid_out, &roll_pid_out, &yaw_pid_out);
+            }
+
+        }
 
         osDelay(STABILITY_THREAD_PERIOD);
     }

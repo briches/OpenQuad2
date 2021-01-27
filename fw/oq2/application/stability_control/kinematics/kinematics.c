@@ -19,6 +19,7 @@
 #include "main.h"
 #include "stability_config.h"
 #include "timer.h"
+#include "arm_math.h"
 
 #include "debug_log.h"
 #define debug_error(fmt, ...)           debug_error(KINEMATICS_MODULE_ID, fmt, ##__VA_ARGS__)
@@ -30,6 +31,23 @@
 #define X_INDEX 0
 #define Y_INDEX 1
 #define Z_INDEX 2
+/*********************************************************************************************/
+/* FIR Filter Parameters and Memory ---------------------------------------------------------*/
+// Coefficients for angle filters on pitch, roll, yaw
+static float fir_coeffs[SC_FIR_NUM_TAPS] = 
+{0.16596037, 0.23995298, 0.25911969, 0.20166299, 0.10638556, 0.02479441};
+
+// Memory for arm_fir filter state, pitch, roll, and yaw
+static float pitch_fir_state[SC_FIR_BLOCK_SIZE + SC_FIR_NUM_TAPS - 1];
+static float roll_fir_state[SC_FIR_BLOCK_SIZE + SC_FIR_NUM_TAPS - 1];
+static float yaw_fir_state[SC_FIR_BLOCK_SIZE + SC_FIR_NUM_TAPS - 1];
+
+// Arm math FIR instances for pitch, roll, yaw
+static arm_fir_instance_f32 pitch_fir_inst;
+static arm_fir_instance_f32 roll_fir_inst;
+static arm_fir_instance_f32 yaw_fir_inst;
+
+
 
 static inline float _kinematics_get_seconds()
 {
@@ -46,6 +64,14 @@ uint32_t kinematics_initialize(kinematics_ctx_t * pctx, bool lib_mode_9)
     pctx->lib_mode_9 = lib_mode_9;
 
     pctx->timestamp = _kinematics_get_seconds();
+
+    debug_printf("Kinematics init");
+
+    // Init arm_math lib finite impulse response filters
+    arm_fir_init_f32(&pitch_fir_inst, SC_FIR_NUM_TAPS, fir_coeffs, pitch_fir_state, SC_FIR_BLOCK_SIZE);
+    arm_fir_init_f32(&roll_fir_inst, SC_FIR_NUM_TAPS, fir_coeffs, roll_fir_state, SC_FIR_BLOCK_SIZE);
+    arm_fir_init_f32(&yaw_fir_inst, SC_FIR_NUM_TAPS, fir_coeffs, yaw_fir_state, SC_FIR_BLOCK_SIZE);
+
 
     return 1;
 }
@@ -65,23 +91,27 @@ uint32_t kinematics_new_motionfx_data_callback(kinematics_ctx_t * pctx, MFX_outp
     // Store offset angles
     if(pctx->lib_mode_9)
     {
-        yaw = p_data->rotation_9X[0];
-        pitch = p_data->rotation_9X[1] - SC_FACTORY_PITCH_OFFSET_DEG;
-        roll = p_data->rotation_9X[2] - SC_FACTORY_ROLL_OFFSET_DEG;
+        arm_fir_f32(&yaw_fir_inst, &p_data->rotation_9X[0], &pctx->yaw, SC_FIR_BLOCK_SIZE);
+        arm_fir_f32(&pitch_fir_inst, &p_data->rotation_9X[1], &pctx->pitch, SC_FIR_BLOCK_SIZE);
+        arm_fir_f32(&roll_fir_inst, &p_data->rotation_9X[2], &pctx->roll, SC_FIR_BLOCK_SIZE);
+        pctx->pitch -= SC_FACTORY_PITCH_OFFSET_DEG;
+        pctx->roll -= SC_FACTORY_ROLL_OFFSET_DEG;
     }
     else
     {
-        pctx->yaw = p_data->rotation_6X[0];
-        pctx->pitch = p_data->rotation_6X[1] - SC_FACTORY_PITCH_OFFSET_DEG;
-        pctx->roll = p_data->rotation_6X[2] - SC_FACTORY_ROLL_OFFSET_DEG;
+        arm_fir_f32(&yaw_fir_inst, &p_data->rotation_6X[0], &pctx->yaw, SC_FIR_BLOCK_SIZE);
+        arm_fir_f32(&pitch_fir_inst, &p_data->rotation_6X[1], &pctx->pitch, SC_FIR_BLOCK_SIZE);
+        arm_fir_f32(&roll_fir_inst, &p_data->rotation_6X[2], &pctx->roll, SC_FIR_BLOCK_SIZE);
+        pctx->pitch -= SC_FACTORY_PITCH_OFFSET_DEG;
+        pctx->roll -= SC_FACTORY_ROLL_OFFSET_DEG;
     }
 
-    if(dt_s != 0)
-    {
-        pctx->pitch_rate = (pitch - pctx->pitch) / dt_s;
-        pctx->roll_rate = (roll - pctx->roll) / dt_s;
-        pctx->yaw_rate = (yaw - pctx->yaw) / dt_s;
-    }
+    // if(dt_s != 0)
+    // {
+    //     pctx->pitch_rate = (pitch - pctx->pitch) / dt_s;
+    //     pctx->roll_rate = (roll - pctx->roll) / dt_s;
+    //     pctx->yaw_rate = (yaw - pctx->yaw) / dt_s;
+    // }
 
     pctx->vx_inertial += p_data->linear_acceleration_6X[0] * dt_s;
     pctx->vy_inertial += p_data->linear_acceleration_6X[1] * dt_s;
@@ -96,7 +126,7 @@ uint32_t kinematics_new_motionfx_data_callback(kinematics_ctx_t * pctx, MFX_outp
     // debug_printf("x, %3.3f, y, %3.3f, z, %3.3f", p_data->linear_acceleration_6X[0], 
     //                                             p_data->linear_acceleration_6X[1], 
     //                                             p_data->linear_acceleration_6X[2]);
-    // debug_printf("x, %3.1f, y, %3.1f, z, %3.1f", yaw, pitch, roll);
+    // debug_printf("%4.4f, %4.4f", p_data->rotation_6X[1], pctx->pitch);
 
     // debug_printf(" heading: %3.3f, (%3.3f)", p_data->heading_6X, p_data->headingErr_6X);
 

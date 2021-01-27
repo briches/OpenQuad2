@@ -22,7 +22,15 @@
 
 #define MC_NUM_MOTORS               4
 #define MC_PWM_PERIOD               3097.2217f
+
+/**
+ * The actual startup for the default stspin32f0a is 1060 us, 
+ * but the drive becomes smooth at 1130.
+ * 
+ */
+#define MC_STARTUP_TON_US_PERIOD    900
 #define MC_MIN_TON_US_PERIOD        1060
 #define MC_MAX_TON_US_PERIOD        2084
+#define MC_TON_US_RANGE             (MC_MAX_TON_US_PERIOD - MC_MIN_TON_US_PERIOD)
 
 #endif

@@ -1,0 +1,5 @@
+h
+r
+loadbin EWARM_STSPIN32F0A_ESC.bin,0x08000000
+r
+q

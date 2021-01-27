@@ -23,6 +23,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include "nmea_protocol.h"
+#include "utility.h"
 
 #define debug_error(fmt, ...)           debug_error(LOCATION_MODULE_ID, fmt, ##__VA_ARGS__)
 #define debug_printf(fmt, ...)          debug_printf(LOCATION_MODULE_ID, fmt, ##__VA_ARGS__)

@@ -59,6 +59,9 @@ typedef struct pid
     // The previous calculated error
     float err_prev;
 
+    // The last derivative for smooting
+    float der_prev;
+
     // The integrating value
     float err_integral;
 

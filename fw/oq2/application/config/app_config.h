@@ -25,8 +25,8 @@
 #define APP_CONFIG_ENABLED 1
 #define APP_CONFIG_DISABLED 0
 
-#define DEBUG_CYAN_HIGHLIGHT_SELECT     OQ2_PROTOCOL_MODULE_ID
-#define DEBUG_YELLOW_HIGHLIGHT_SELECT   NETWORK_MODULE_ID
+#define DEBUG_CYAN_HIGHLIGHT_SELECT     FLIGHT_APP_MODULE_ID
+#define DEBUG_YELLOW_HIGHLIGHT_SELECT   ESC_DFU_MODULE_ID
 #define WINC_MODULE_DRIVER_VERBOSE      APP_CONFIG_DISABLED
 #define M2M_WIFI_EX_VERBOSE             APP_CONFIG_DISABLED
 #define M2M_HIF_VERBOSE                 APP_CONFIG_DISABLED
@@ -34,8 +34,12 @@
 /*********************************************************************************************/
 /* Task Configuration------------------------------------------------------------------------*/
 #define STABILITY_THREAD_PRIO           osPriorityRealtime7
-#define STABILITY_THREAD_PERIOD         10
-#define STABILITY_THREAD_STACK_SIZE     1024 * 4
+#define STABILITY_THREAD_PERIOD         4
+#define STABILITY_THREAD_STACK_SIZE     2048 * 4
+
+#define FLIGHT_THREAD_PRIO              osPriorityHigh
+#define FLIGHT_THREAD_PERIOD            150
+#define FLIGHT_THREAD_STACK_SIZE        2048 * 4
 
 #define NETWORK_THREAD_PRIO             osPriorityNormal1
 #define NETWORK_THREAD_PERIOD           1000
@@ -51,7 +55,7 @@
 
 #define TASK_MANAGER_THREAD_PRIO        osPriorityLow1
 #define TASK_MANAGER_THREAD_STACK_SIZE  512 * 4
-#define TASK_MANAGER_THREAD_PERIOD      10000
+#define TASK_MANAGER_THREAD_PERIOD      2500
 
 /*********************************************************************************************/
 /* Task Manager -----------------------------------------------------------------------------*/

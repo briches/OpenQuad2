@@ -30,14 +30,14 @@
 
 /**
  * @brief Init PID context with user provided parameters, and default values
- * 
+ *
  * @param p_ctx pointer to pid_ctx_t struct
  * @param p_params P, I, D coefficients contained in struct pid_params_t
  * @param p_limits If limits are needed on any of the values, like integral or derivative
  */
-void pid_initialize_ctx(pid_ctx_t * pctx, 
-                        pid_params_t *pparams, 
-                        pid_limits_t *plimits)
+void pid_initialize_ctx(pid_ctx_t* pctx,
+    pid_params_t* pparams,
+    pid_limits_t* plimits)
 {
     memset(pctx, 0x00, sizeof(pid_ctx_t));
 
@@ -54,14 +54,14 @@ void pid_initialize_ctx(pid_ctx_t * pctx,
     debug_printf("Init PID@0x%08X", pctx);
 }
 
-float pid_calculate(pid_ctx_t * pctx, float new_state, float dt)
+float pid_calculate(pid_ctx_t* pctx, float new_state, float dt)
 {
     float error = pctx->setpoint - new_state;
 
     float pterm, iterm, dterm;
     float output;
 
-    if(dt == 0)
+    if (dt == 0)
         return 0;
 
     // Update the integral
@@ -71,7 +71,12 @@ float pid_calculate(pid_ctx_t * pctx, float new_state, float dt)
     iterm = pctx->params.I * pctx->err_integral;
     dterm = pctx->params.D * (error - pctx->err_prev) / dt;
 
-    if(pctx->err_prev == PID_VALUE_INVALID)
+    // Two sample running average
+    // float temp = dterm;
+    // dterm = (dterm + pctx->der_prev) / 2;
+    // pctx->der_prev = temp;
+
+    if (pctx->err_prev == PID_VALUE_INVALID)
     {
         dterm = 0;
     }
@@ -83,33 +88,30 @@ float pid_calculate(pid_ctx_t * pctx, float new_state, float dt)
     pctx->err_prev = error;
 
     // Constrain the proportional error to the limit
-    if(fabs(pterm) > pctx->limits.P_lim && pctx->limits.P_lim != 0)
+    if (fabs(pterm) > pctx->limits.P_lim && pctx->limits.P_lim != 0)
     {
         pterm = (pterm > 0) ? pctx->limits.P_lim : -1 * pctx->limits.P_lim;
     }
 
     // Constrain the integral to the limit
-    if(fabs(pctx->err_integral) > pctx->limits.I_lim && pctx->limits.I_lim != 0)
+    if (fabs(pctx->err_integral) > pctx->limits.I_lim && pctx->limits.I_lim != 0)
     {
-        pctx->err_integral = (pctx->err_integral > 0) ? pctx->limits.I_lim : -1*pctx->limits.I_lim;
+        pctx->err_integral = (pctx->err_integral > 0) ? pctx->limits.I_lim : -1 * pctx->limits.I_lim;
     }
 
     // Constrain the derivative to the limit
-    if(fabs(dterm) > pctx->limits.D_lim && pctx->limits.D_lim != 0)
+    if (fabs(dterm) > pctx->limits.D_lim && pctx->limits.D_lim != 0)
     {
-        dterm = (dterm > 0) ? pctx->limits.D_lim : -1*pctx->limits.D_lim;
+        dterm = (dterm > 0) ? pctx->limits.D_lim : -1 * pctx->limits.D_lim;
     }
 
     // Calculate result
     output = pterm + iterm + dterm;
 
-    // debug_printf("%3.4f,%3.4f,%3.4f,%3.4f,%3.4f,%3.4f,%3.4f", new_state, 
-    //                                                         pctx->setpoint,
-    //                                                         error,
-    //                                                         pterm,
-    //                                                         iterm,
-    //                                                         dterm,
-    //                                                         output);
+    // debug_printf("%3.2f,%3.2f,%3.2f,%3.2f", new_state,
+    //     pterm,
+    //     iterm,
+    //     dterm);
 
     pctx->output_prev = output;
 

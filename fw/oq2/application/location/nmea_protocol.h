@@ -132,25 +132,6 @@ bool _nmea_sf_match(uint8_t * pdata, char const * compare)
     return (memcmp(pdata+NMEA_OFFSET_SENTENCE_FORMAT, compare, NMEA_LENGTH_SENTENCE_FORMAT) == 0);
 }
 
-/**
- * @brief Routine to calculate the 8 bit XOR checksum of an array of bytes
- * 
- * @param data pointer to start of data
- * @param length length of data
- * @return uint8_t XOR checksum
- */
-uint8_t _crc_xor_8(uint8_t * data, uint32_t length)
-{
-    uint8_t cs = 0x00;
-
-    for(int i = 0; i < length; i++)
-    {
-        cs ^= data[i];
-    }
-
-    return cs;
-}
-
 
 
 #endif

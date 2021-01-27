@@ -17,7 +17,7 @@
 
 
 
-
+#include "arm_math.h"
 #include "main.h"
 #include "app_config.h"
 #include "cmsis_os.h"
@@ -30,6 +30,9 @@
 #include "timer.h"
 #include "network.h"
 #include "nm_bsp.h"
+#include "flight_app.h"
+#include "motors.h"
+#include "esc_dfu.h"
 
 #include "debug_log.h"
 #define debug_error(fmt, ...)           debug_error(MAIN_MODULE_ID, fmt, ##__VA_ARGS__)
@@ -69,6 +72,14 @@ UART_HandleTypeDef huart8;
 UART_HandleTypeDef huart9;
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
+
+/* Definitions for flight app thread */
+osThreadId_t flight_thread_handle;
+const osThreadAttr_t flight_thread_attributes = {
+  .name = "flight",
+  .priority = (osPriority_t)FLIGHT_THREAD_PRIO,
+  .stack_size = FLIGHT_THREAD_STACK_SIZE,
+};
 
 /* Definitions for stability thread */
 osThreadId_t stability_thread_handle;
@@ -113,27 +124,7 @@ const osThreadAttr_t network_thread_attributes = {
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-static void MX_CRC_Init(void);
-static void MX_CRYP_Init(void);
-static void MX_HASH_Init(void);
-static void MX_I2C1_Init(void);
-static void MX_I2C2_Init(void);
-static void MX_OCTOSPI1_Init(void);
-static void MX_RNG_Init(void);
-static void MX_SDMMC1_SD_Init(void);
-static void MX_SPI1_Init(void);
-static void MX_SPI2_Init(void);
-static void MX_LPTIM1_Init(void);
-static void MX_TIM1_Init(void);
-static void MX_TIM24_Init(void);
-static void MX_UART4_Init(void);
-static void MX_UART5_Init(void);
-static void MX_UART7_Init(void);
-static void MX_UART8_Init(void);
-static void MX_UART9_Init(void);
-static void MX_USART1_UART_Init(void);
-static void MX_USART2_UART_Init(void);
-static void MX_ADC3_Init(void);
+
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
@@ -177,6 +168,11 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 {
+    if(huart == &huart1) // Motor controller 4
+    {
+        esc_dfu_tx_complete_callback(4);
+    }
+
     if(huart == &huart2)
     {
         debug_log_tx_completed_callback();
@@ -190,6 +186,11 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
+    if(huart == &huart1) // Motor controller 4
+    {
+        esc_dfu_rx_complete_callback(4);
+    }
+
     if(huart == &huart5)
     {
         gps_rx_complete_callback();
@@ -218,6 +219,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
         HAL_IncTick();
     }
 }
+
+
 
 /**
   * @brief  The application entry point.
@@ -259,7 +262,7 @@ int main(void)
     // MX_UART7_Init();
     // MX_UART8_Init();
     // MX_UART9_Init();
-    // MX_USART1_UART_Init();
+    // MX_USART1_UART_Init(); // Motor4 bootloader - Call later.
     MX_USART2_UART_Init(); // Debug uart
     // MX_FATFS_Init();
     MX_ADC3_Init();
@@ -278,6 +281,7 @@ int main(void)
     /*********************************************************************************************/
     /* Pre scheduler initialization--------------------------------------------------------------*/
     timer_time_start();
+    motor_controllers_init();
     network_thread_pre_init();
     stability_thread_pre_init();
     location_thread_pre_init();
@@ -288,20 +292,23 @@ int main(void)
 
     /*********************************************************************************************/
     /* Start threads ----------------------------------------------------------------------------*/
-    network_thread_handle = 
-    osThreadNew(network_thread,       NULL, &network_thread_attributes);
+    // network_thread_handle = 
+    // osThreadNew(network_thread,       NULL, &network_thread_attributes);
 
-    // stability_thread_handle = 
-    // osThreadNew(stability_thread,     NULL, &stability_thread_attributes);
+    flight_thread_handle = 
+    osThreadNew(flight_thread,       NULL, &flight_thread_attributes);
+
+    stability_thread_handle = 
+    osThreadNew(stability_thread,     NULL, &stability_thread_attributes);
 
     // location_thread_handle = 
     // osThreadNew(location_thread,      NULL, &location_thread_attributes);
 
-    // task_manager_thread_handle = 
-    // osThreadNew(task_manager_thread,  NULL, &task_manager_attributes);
+    task_manager_thread_handle = 
+    osThreadNew(task_manager_thread,  NULL, &task_manager_attributes);
 
-    led_thread_handle = 
-    osThreadNew(led_thread,           NULL, &led_thread_attributes);
+    // led_thread_handle = 
+    // osThreadNew(led_thread,           NULL, &led_thread_attributes);
 
     /*********************************************************************************************/
     /* Start scheduler --------------------------------------------------------------------------*/
@@ -413,7 +420,7 @@ void SystemClock_Config(void)
   * @param None
   * @retval None
   */
-static void MX_ADC3_Init(void)
+void MX_ADC3_Init(void)
 {
 
     /* USER CODE BEGIN ADC3_Init 0 */
@@ -475,7 +482,7 @@ static void MX_ADC3_Init(void)
   * @param None
   * @retval None
   */
-static void MX_CRC_Init(void)
+void MX_CRC_Init(void)
 {
 
     /* USER CODE BEGIN CRC_Init 0 */
@@ -506,7 +513,7 @@ static void MX_CRC_Init(void)
   * @param None
   * @retval None
   */
-static void MX_CRYP_Init(void)
+void MX_CRYP_Init(void)
 {
 
     /* USER CODE BEGIN CRYP_Init 0 */
@@ -535,7 +542,7 @@ static void MX_CRYP_Init(void)
   * @param None
   * @retval None
   */
-static void MX_HASH_Init(void)
+void MX_HASH_Init(void)
 {
 
     /* USER CODE BEGIN HASH_Init 0 */
@@ -561,7 +568,7 @@ static void MX_HASH_Init(void)
   * @param None
   * @retval None
   */
-static void MX_I2C1_Init(void)
+void MX_I2C1_Init(void)
 {
 
     /* USER CODE BEGIN I2C1_Init 0 */
@@ -607,7 +614,7 @@ static void MX_I2C1_Init(void)
   * @param None
   * @retval None
   */
-static void MX_I2C2_Init(void)
+void MX_I2C2_Init(void)
 {
     hi2c2.Instance = I2C2;
     hi2c2.Init.Timing = 0x00D049F1;
@@ -641,7 +648,7 @@ static void MX_I2C2_Init(void)
   * @param None
   * @retval None
   */
-static void MX_LPTIM1_Init(void)
+void MX_LPTIM1_Init(void)
 {
   hlptim1.Instance = LPTIM1;
   hlptim1.Init.Clock.Source = LPTIM_CLOCKSOURCE_APBCLOCK_LPOSC;
@@ -663,7 +670,7 @@ static void MX_LPTIM1_Init(void)
   * @param None
   * @retval None
   */
-static void MX_OCTOSPI1_Init(void)
+void MX_OCTOSPI1_Init(void)
 {
     OSPIM_CfgTypeDef sOspiManagerCfg = { 0 };
     /* OCTOSPI1 parameter configuration*/
@@ -703,7 +710,7 @@ static void MX_OCTOSPI1_Init(void)
   * @param None
   * @retval None
   */
-static void MX_RNG_Init(void)
+void MX_RNG_Init(void)
 {
     hrng.Instance = RNG;
     hrng.Init.ClockErrorDetection = RNG_CED_ENABLE;
@@ -718,7 +725,7 @@ static void MX_RNG_Init(void)
   * @param None
   * @retval None
   */
-static void MX_SDMMC1_SD_Init(void)
+void MX_SDMMC1_SD_Init(void)
 {
     hsd1.Instance = SDMMC1;
     hsd1.Init.ClockEdge = SDMMC_CLOCK_EDGE_RISING;
@@ -738,7 +745,7 @@ static void MX_SDMMC1_SD_Init(void)
   * @param None
   * @retval None
   */
-static void MX_SPI1_Init(void)
+void MX_SPI1_Init(void)
 {
 
     /* SPI1 parameter configuration*/
@@ -776,7 +783,7 @@ static void MX_SPI1_Init(void)
   * @param None
   * @retval None
   */
-static void MX_SPI2_Init(void)
+void MX_SPI2_Init(void)
 {
     /* SPI2 parameter configuration*/
     hspi2.Instance = SPI2;
@@ -809,7 +816,7 @@ static void MX_SPI2_Init(void)
   * @param None
   * @retval None
   */
-static void MX_TIM1_Init(void)
+void MX_TIM1_Init(void)
 {
     TIM_ClockConfigTypeDef sClockSourceConfig = { 0 };
     TIM_MasterConfigTypeDef sMasterConfig = { 0 };
@@ -823,7 +830,7 @@ static void MX_TIM1_Init(void)
     htim1.Init.Period = 0xFFFF;
     htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
     htim1.Init.RepetitionCounter = 0;
-    htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+    htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
     if (HAL_TIM_Base_Init(&htim1) != HAL_OK)
     {
         Error_Handler();
@@ -883,7 +890,7 @@ static void MX_TIM1_Init(void)
   * @param None
   * @retval None
   */
-static void MX_TIM24_Init(void)
+void MX_TIM24_Init(void)
 {
     TIM_ClockConfigTypeDef sClockSourceConfig = { 0 };
     TIM_MasterConfigTypeDef sMasterConfig = { 0 };
@@ -936,7 +943,7 @@ static void MX_TIM24_Init(void)
   * @param None
   * @retval None
   */
-static void MX_UART4_Init(void)
+void MX_UART4_Init(void)
 {
 
     /* USER CODE BEGIN UART4_Init 0 */
@@ -984,7 +991,7 @@ static void MX_UART4_Init(void)
   * @param None
   * @retval None
   */
-static void MX_UART5_Init(void)
+void MX_UART5_Init(void)
 {
     huart5.Instance = UART5;
     huart5.Init.BaudRate = 9600;
@@ -1020,7 +1027,7 @@ static void MX_UART5_Init(void)
   * @param None
   * @retval None
   */
-static void MX_UART7_Init(void)
+void MX_UART7_Init(void)
 {
 
     /* USER CODE BEGIN UART7_Init 0 */
@@ -1068,7 +1075,7 @@ static void MX_UART7_Init(void)
   * @param None
   * @retval None
   */
-static void MX_UART8_Init(void)
+void MX_UART8_Init(void)
 {
 
     /* USER CODE BEGIN UART8_Init 0 */
@@ -1116,7 +1123,7 @@ static void MX_UART8_Init(void)
   * @param None
   * @retval None
   */
-static void MX_UART9_Init(void)
+void MX_UART9_Init(void)
 {
 
     /* USER CODE BEGIN UART9_Init 0 */
@@ -1164,7 +1171,7 @@ static void MX_UART9_Init(void)
   * @param None
   * @retval None
   */
-static void MX_USART1_UART_Init(void)
+void MX_USART1_UART_Init(void)
 {
 
     /* USER CODE BEGIN USART1_Init 0 */
@@ -1176,9 +1183,9 @@ static void MX_USART1_UART_Init(void)
     /* USER CODE END USART1_Init 1 */
     huart1.Instance = USART1;
     huart1.Init.BaudRate = 115200;
-    huart1.Init.WordLength = UART_WORDLENGTH_8B;
+    huart1.Init.WordLength = UART_WORDLENGTH_9B;
     huart1.Init.StopBits = UART_STOPBITS_1;
-    huart1.Init.Parity = UART_PARITY_NONE;
+    huart1.Init.Parity = UART_PARITY_EVEN;
     huart1.Init.Mode = UART_MODE_TX_RX;
     huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
     huart1.Init.OverSampling = UART_OVERSAMPLING_16;
@@ -1201,10 +1208,6 @@ static void MX_USART1_UART_Init(void)
     {
         Error_Handler();
     }
-    /* USER CODE BEGIN USART1_Init 2 */
-
-    /* USER CODE END USART1_Init 2 */
-
 }
 
 /**
@@ -1212,7 +1215,7 @@ static void MX_USART1_UART_Init(void)
   * @param None
   * @retval None
   */
-static void MX_USART2_UART_Init(void)
+void MX_USART2_UART_Init(void)
 {
     huart2.Instance = USART2;
     huart2.Init.BaudRate = 1000000;
@@ -1310,16 +1313,7 @@ static void MX_GPIO_Init(void)
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-    /*Configure GPIO pins : BLDC_BOOTSEL1_Pin BLDC_BOOTSEL2_Pin BLDC_BOOTSEL3_Pin BLDC_BOOTSEL4_Pin
-                             BLDC_nRESET1_Pin BLDC_nRESET2_Pin BLDC_nRESET3_Pin
-                             BLDC_nRESET4_Pin */
-    GPIO_InitStruct.Pin = BLDC_BOOTSEL1_Pin | BLDC_BOOTSEL2_Pin | BLDC_BOOTSEL3_Pin | BLDC_BOOTSEL4_Pin
-         | BLDC_nRESET1_Pin | BLDC_nRESET2_Pin | BLDC_nRESET3_Pin
-        | BLDC_nRESET4_Pin;
-    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-    HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+
 
     /*Configure GPIO pins : BARO_INT_Pin IMU_MAG_DRDY_Pin */
     GPIO_InitStruct.Pin = BARO_INT_Pin | IMU_MAG_DRDY_Pin;
@@ -1376,16 +1370,16 @@ static void MX_GPIO_Init(void)
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(BARO_INT_GPIO_Port, &GPIO_InitStruct);
 
+    HAL_GPIO_WritePin(BLDC_ARM1_GPIO_Port, BLDC_ARM1_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(BLDC_ARM2_GPIO_Port, BLDC_ARM2_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(BLDC_ARM3_GPIO_Port, BLDC_ARM3_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(BLDC_ARM4_GPIO_Port, BLDC_ARM4_Pin, GPIO_PIN_RESET);
+
     GPIO_InitStruct.Pin = BLDC_ARM1_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     HAL_GPIO_Init(BLDC_ARM1_GPIO_Port, &GPIO_InitStruct);
-
-    HAL_GPIO_WritePin(BLDC_ARM1_GPIO_Port, BLDC_ARM1_Pin, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(BLDC_ARM2_GPIO_Port, BLDC_ARM2_Pin, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(BLDC_ARM3_GPIO_Port, BLDC_ARM3_Pin, GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(BLDC_ARM4_GPIO_Port, BLDC_ARM4_Pin, GPIO_PIN_RESET);
 
     GPIO_InitStruct.Pin = BLDC_ARM2_Pin | BLDC_ARM3_Pin | BLDC_ARM4_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -1393,7 +1387,21 @@ static void MX_GPIO_Init(void)
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-    /*Configure GPIO pin Output Level */
+    HAL_GPIO_WritePin(GPIOD, BLDC_BOOTSEL1_Pin | BLDC_BOOTSEL2_Pin | BLDC_BOOTSEL3_Pin | BLDC_BOOTSEL4_Pin
+        | BLDC_ARM1_Pin | BLDC_nRESET1_Pin | BLDC_nRESET2_Pin | BLDC_nRESET3_Pin
+        | BLDC_nRESET4_Pin, GPIO_PIN_RESET);
+
+    /*Configure GPIO pins : BLDC_BOOTSEL1_Pin BLDC_BOOTSEL2_Pin BLDC_BOOTSEL3_Pin BLDC_BOOTSEL4_Pin
+                             BLDC_nRESET1_Pin BLDC_nRESET2_Pin BLDC_nRESET3_Pin
+                             BLDC_nRESET4_Pin */
+    GPIO_InitStruct.Pin = BLDC_BOOTSEL1_Pin | BLDC_BOOTSEL2_Pin | BLDC_BOOTSEL3_Pin | BLDC_BOOTSEL4_Pin
+                        | BLDC_nRESET1_Pin | BLDC_nRESET2_Pin | BLDC_nRESET3_Pin
+                        | BLDC_nRESET4_Pin;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+
     HAL_GPIO_WritePin(GPIOC,  WIFI_CHIP_EN_Pin | WIFI_RESETN_Pin, GPIO_PIN_RESET);
     HAL_GPIO_WritePin(GPIOC,  WIFI_SER_CFG_Pin, GPIO_PIN_SET);
 

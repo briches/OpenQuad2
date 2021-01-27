@@ -1,17 +1,20 @@
+SHELL := /bin/bash
 PRETTY = 1
 ######################################
 # target
 ######################################
-TARGETS = _oq2
+TARGETS = oq2
+TARGET = $(TARGETS)
 
 #######################################
 # paths
 #######################################
 # Build path
 OUTPUT_DIRECTORY = _build
+BUILD_DIR = $(OUTPUT_DIRECTORY)
 
 # link script
-$(OUTPUT_DIRECTORY)/_oq2.out: \
+$(OUTPUT_DIRECTORY)/$(TARGET).out: \
   LINKER_SCRIPT  := STM32H735ZGTx_FLASH.ld
 
 ######################################
@@ -22,6 +25,9 @@ SRC_FILES +=  \
 application/sys/startup/startup_stm32h735zgtx.s \
 application/main.c \
 application/debug_log/debug_log.c \
+application/flight_app/flight_app.c \
+application/flight_app/esc_dfu/esc_dfu.c \
+application/flight_app/esc_dfu/stm32_uart_dfu/stm32_uart_dfu.c \
 application/freertos/freertos.c \
 application/led_blinky/led_blinky.c \
 application/location/location.c \
@@ -43,6 +49,7 @@ application/sys/stm32h7xx_it.c \
 application/sys/stm32h7xx_hal_msp.c \
 application/sys/stm32h7xx_hal_timebase_tim.c \
 application/sys/system_stm32h7xx.c \
+application/utility/utility.c \
 FATFS/Target/user_diskio.c \
 FATFS/App/fatfs.c \
 Drivers/wifi_drv_winc3400/bsp/source/nm_bsp_stm32h7xx.c \
@@ -231,6 +238,9 @@ INC_FOLDERS +=  \
   application \
   application/config \
   application/debug_log \
+  application/flight_app \
+  application/flight_app/esc_dfu \
+  application/flight_app/esc_dfu/stm32_uart_dfu \
   application/freertos \
   application/location \
   application/led_blinky \
@@ -248,6 +258,7 @@ INC_FOLDERS +=  \
   application/sys \
   application/task_manager \
   application/timer \
+  application/utility \
   FATFS/Target \
   FATFS/App \
   USB_DEVICE/App \
@@ -290,12 +301,11 @@ INC_FOLDERS +=  \
   Middlewares/Third_Party/LwIP/src/include/compat/stdc \
   Middlewares/Third_Party/LwIP/system/arch
 
-LIB_FILES += \
-  Middlewares/ST/STM32_MotionFX_Library/Lib/MotionFX_CM7F_wc32_ot_hard.a\
-  Middlewares/ARM/DSP/Lib/arm_cortexM7lfdp_math.lib
+LIB_FILES += Middlewares/ST/STM32_MotionFX_Library/Lib/MotionFX_CM7F_wc32_ot_hard.a
+LIB_FILES += Middlewares/ARM/DSP/Lib/libarm_cortexM7lfsp_math.a
 
 # debug build?
-DEBUG = 1
+DEBUG = 0
 # optimization
 OPT = -O0
  
@@ -316,18 +326,16 @@ MCU = $(CPU) -mthumb $(FPU) $(FLOAT-ABI)
 
 # macros for gcc
 # AS defines
-AS_DEFS = \
--DUSE_HAL_DRIVER \
--DSTM32H735xx \
--DFREERTOS \
--DARM_MATH_CM7
+AS_DEFS = 
 
 # C defines
 C_DEFS =  \
 -DUSE_HAL_DRIVER \
 -DSTM32H735xx \
 -DFREERTOS \
--DARM_MATH_CM7
+-DARM_MATH_CM7 \
+-D_FLASH_STORAGE_=0x080C0000 \
+-D_FLASH_STORAGE_SIZE_=0x40000
 
 CXXFLAGS += $(OPT)
 
@@ -362,40 +370,10 @@ LDFLAGS = $(MCU) -specs=nano.specs -T$(LINKER_SCRIPT) -Wl,-Map=$(BUILD_DIR)/$(TA
 # that may need symbols provided by these libraries.
 LIB_FILES += -lc -lnosys -lm
 
-
-# #######################################
-# # build the application
-# #######################################
-# # list of objects
-# OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(C_SOURCES:.c=.o)))
-# vpath %.c $(sort $(dir $(C_SOURCES)))
-# # list of ASM program objects
-# OBJECTS += $(addprefix $(BUILD_DIR)/,$(notdir $(ASM_SOURCES:.s=.o)))
-# vpath %.s $(sort $(dir $(ASM_SOURCES)))
-
-# $(BUILD_DIR)/%.o: %.c Makefile | $(BUILD_DIR) 
-# 	$(CC) -c $(CFLAGS) -Wa,-a,-ad,-alms=$(BUILD_DIR)/$(notdir $(<:.c=.lst)) $< -o $@
-
-# $(BUILD_DIR)/%.o: %.s Makefile | $(BUILD_DIR)
-# 	$(AS) -c $(CFLAGS) $< -o $@
-
-# $(BUILD_DIR)/$(TARGET).elf: $(OBJECTS) Makefile
-# 	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
-# 	$(SZ) $@
-
-# $(BUILD_DIR)/%.hex: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
-# 	$(HEX) $< $@
-	
-# $(BUILD_DIR)/%.bin: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
-# 	$(BIN) $< $@	
-	
-# $(BUILD_DIR):
-# 	mkdir $@		
-
 .PHONY: default help
 
 # Default target - first one defined
-default: _oq2
+default: $(TARGET)
 
 # Print all targets that can be built
 help:
@@ -415,13 +393,21 @@ $(foreach target, $(TARGETS), $(call define_target, $(target)))
 # clean up
 #######################################  
 erase:
-	jlink -SelectEmuBySN 801020691 -device STM32H735ZGT -if SWD -speed 8000 -autoconnect 1 -ExitOnError -CommanderScript ./jlink/erase.jlink
+	jlink -SelectEmuBySN 801020691 -device STM32H735ZGT -if SWD -speed 16000 -autoconnect 1 -ExitOnError -CommanderScript ./jlink/erase.jlink
 
 flash: default
-	jlink -SelectEmuBySN 801020691 -device STM32H735ZGT -if SWD -speed 8000 -autoconnect 1 -ExitOnError -CommanderScript ./jlink/flash.jlink
+	jlink -SelectEmuBySN 801020691 -device STM32H735ZGT -if SWD -speed 16000 -autoconnect 1 -ExitOnError -CommanderScript ./jlink/flash.jlink
+
+flash_wholedevice:
+	@echo Done Compiling
+	@echo Merging
+	@python merger.py
+	@echo Flashing
+	jlink -SelectEmuBySN 801020691 -device STM32H735ZGT -if SWD -speed 16000 -autoconnect 1 -ExitOnError -CommanderScript ./jlink/flash_esc_fw.jlink
+
 
 reset:
-	jlink -SelectEmuBySN 801020691 -device STM32H735ZGT -if SWD -speed 8000 -autoconnect 1 -ExitOnError -CommanderScript ./jlink/reset.jlink
+	jlink -SelectEmuBySN 801020691 -device STM32H735ZGT -if SWD -speed 16000 -autoconnect 1 -ExitOnError -CommanderScript ./jlink/reset.jlink
 
 #######################################
 # dependencies

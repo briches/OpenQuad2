@@ -5,7 +5,7 @@
  * Author: Brandon Riches                                                                          /
  * Email: richesbc@gmail.com                                                                       /
  * -----                                                                                           /
- * Last Modified: Sat Dec 26 2020                                                                  /
+ * Last Modified: Sun Jan 24 2021                                                                  /
  * Modified By: Brandon Riches                                                                     /
  * -----                                                                                           /
  *                                                                                                 /
@@ -35,6 +35,28 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
+
+void MX_CRC_Init(void);
+void MX_CRYP_Init(void);
+void MX_HASH_Init(void);
+void MX_I2C1_Init(void);
+void MX_I2C2_Init(void);
+void MX_OCTOSPI1_Init(void);
+void MX_RNG_Init(void);
+void MX_SDMMC1_SD_Init(void);
+void MX_SPI1_Init(void);
+void MX_SPI2_Init(void);
+void MX_LPTIM1_Init(void);
+void MX_TIM1_Init(void);
+void MX_TIM24_Init(void);
+void MX_UART4_Init(void);
+void MX_UART5_Init(void);
+void MX_UART7_Init(void);
+void MX_UART8_Init(void);
+void MX_UART9_Init(void);
+void MX_USART1_UART_Init(void);
+void MX_USART2_UART_Init(void);
+void MX_ADC3_Init(void);
 
 typedef struct GPIO_PIN
 {

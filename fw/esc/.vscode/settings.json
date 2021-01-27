@@ -1,0 +1,124 @@
+{
+    "C_Cpp.default.cStandard": "c11",
+    "C_Cpp.default.intelliSenseMode": "gcc-arm",
+    "C_Cpp.default.compilerPath": "C:/Program Files (x86)/GNU Arm Embedded Toolchain/9 2020-q2-update/bin/arm-none-eabi-gcc.exe",
+    "C_Cpp.formatting": "vcFormat",
+    "C_Cpp.codeFolding": "Enabled",
+    "C_Cpp.inactiveRegionOpacity": 0.5,
+    "C_Cpp.workspaceSymbols": "All",
+    "C_Cpp.loggingLevel": "Debug",
+    "C_Cpp.clang_format_sortIncludes": true,
+    "files.associations": {
+        "*.pde": "java",
+        "*.h": "c",
+        "*.c": "c",
+        "cmath": "c",
+        "*.tcc": "c",
+        "cinttypes": "c",
+        "cstdlib": "c",
+        "type_traits": "c"
+    },
+    "C_Cpp.default.defines": [
+        "_DEBUG",
+        "UNICODE",
+        "_UNICODE",
+        "STEVAL_ESC002V1",
+        "USE_HAL_DRIVER",
+        "STM32F031x6",
+        "NO_UART_COMM",
+        "ST_PWM_INTERFACE",
+        "ARR_FILTER",
+        "SENSE_COMPARATORS",
+        "OPEN_LOOP_RAMP",
+        "NO_VARIABLE_ADVANCE",
+        "FAST_DEMAG",
+        "PID_V2",
+        "MC_7PP_3S_PROPELLER",
+        "DELTA_6STEP_TABLE",
+        "COMPLEMENTARY_DRIVE",
+        "VOLTAGE_MODE",
+        "SPEED_SENDING",
+        "SPEED_RAMP",
+    ],
+    "C_Cpp.default.includePath": [
+        "${workspaceFolder}",
+        "${workspaceFolder}/Src",
+        "${workspaceFolder}/Inc",
+        "${workspaceFolder}/Drivers/STM32F0xx_HAL_Driver/Inc",
+        "${workspaceFolder}/Drivers/STM32F0xx_HAL_Driver/Src",
+        "${workspaceFolder}/Drivers/BSP/Components/stspin32f0",
+        "${workspaceFolder}/Drivers/BSP/Components/common",
+        "${workspaceFolder}/Drivers/BSP/STEVAL-ESC002V1",
+        "${workspaceFolder}/Drivers/SEGGER_RTT",
+        "${workspaceFolder}/Middlewares/ST/MC_6Step_Lib/Src",
+        "${workspaceFolder}/Middlewares/ST/MC_6Step_Lib/Inc",
+        "${workspaceFolder}/Drivers/CMSIS/Include",
+        "${workspaceFolder}/Drivers/CMSIS/Device/ST/STM32F0xx/Include",
+        "${workspaceFolder}/Drivers/CMSIS/Device/ST/STM32F0xx/Source/Templates/iar/startup_stm32f031x6.s"
+    ],
+    "git.openDiffOnClick": false,
+    "git.decorations.enabled": false,
+    "C_Cpp.default.browse.limitSymbolsToIncludedHeaders": false,
+    "psi-header.license-text": [
+        "Copyright (c) 2020 OpenQuad2.",
+        "All rights reserved.",
+        "",
+        "Redistribution and use in source or binary forms, with or without modification,",
+        "are not permitted without express written approval of OpenQuad2",
+    ],
+    "psi-header.config": {
+        "forceToTop": true,
+        "blankLinesAfter": 2,
+        "license": "Custom"
+    },
+    "psi-header.changes-tracking": {
+        "enforceHeader": true,
+        "isActive": true,
+        "include": ["C", "c", "h", ".h"],
+        "excludeGlob": [
+            "**/settings.json"
+        ],
+        "exclude": ["jsonc, json"],
+        "autoHeader": "autoSave",
+    },
+    "psi-header.variables": [
+        ["company", "OpenQuad2"],
+        ["author", "Brandon Riches"],
+        ["authoremail", "richesbc@gmail.com"]
+    ],
+    "psi-header.lang-config": [
+        {
+            "language": "c",
+            "begin": "/*",
+            "prefix": " * ",
+            "suffix": "/",
+            "end": "*/",
+            "blankLinesAfter": 2,
+            "lineLength": 100,
+        },
+    ],
+    "psi-header.templates": [
+        {
+            "changeLogNaturalOrder": true,
+            "language": "*",
+            "template": [
+                "File: <<filepath>>",
+                "Project: OQ2",
+                "Created Date: <<filecreated('dddd, MMMM Do YYYY, h:mm:ss a')>>",
+                "Author: <<author>>",
+                "Email: <<authoremail>>",
+                "-----",
+                "",
+                "<<licensetext>>",
+                "-----",
+                "HISTORY:"
+            ],
+            "changeLogCaption": "HISTORY:",
+            "changeLogHeaderLineCount": 2,
+            "changeLogEntryTemplate": [
+                "<<dateformat('YYYY-MM"D')>>/t<<initials>>/t"
+            ]
+        },
+    ],
+
+}

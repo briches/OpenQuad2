@@ -5,7 +5,7 @@
  * Author: Brandon Riches                                                                          /
  * Email: richesbc@gmail.com                                                                       /
  * -----                                                                                           /
- * Last Modified: Tue Dec 29 2020                                                                  /
+ * Last Modified: Sun Jan 24 2021                                                                  /
  * Modified By: Brandon Riches                                                                     /
  * -----                                                                                           /
  *                                                                                                 /
@@ -936,6 +936,9 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
         GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
         GPIO_InitStruct.Alternate = GPIO_AF4_USART1;
         HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+        HAL_NVIC_SetPriority(USART1_IRQn, 5, 0);
+        HAL_NVIC_EnableIRQ(USART1_IRQn);
     }
     else if (huart->Instance == USART2)
     {
@@ -1073,7 +1076,7 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
         HAL_GPIO_DeInit(GPIOB, GPIO_PIN_14 | GPIO_PIN_15);
 
         /* USER CODE BEGIN USART1_MspDeInit 1 */
-
+        HAL_NVIC_DisableIRQ(USART1_IRQn);
         /* USER CODE END USART1_MspDeInit 1 */
     }
     else if (huart->Instance == USART2)

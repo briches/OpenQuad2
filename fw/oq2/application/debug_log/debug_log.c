@@ -5,7 +5,7 @@
  * Author: Brandon Riches                                                                          /
  * Email: richesbc@gmail.com                                                                       /
  * -----                                                                                           /
- * Last Modified: Thu Dec 31 2020                                                                  /
+ * Last Modified: Sun Jan 24 2021                                                                  /
  * Modified By: Brandon Riches                                                                     /
  * -----                                                                                           /
  *                                                                                                 /
@@ -73,6 +73,9 @@ const char* module_stringtable[] =
     "w3400_spiflash",
     "oq2p",
     "lwip",
+    "flight",
+    "esc_dfu",
+    "stm_dfu"
 };
 
 
@@ -137,7 +140,7 @@ static void debug_print_timestamp(uint8_t** pbuf)
     _putu(pbuf, intpart, 1, ' ');
     _putc(pbuf, '.');
     _putu(pbuf, decimal, 3, '0');
-    _puts(pbuf, " ");
+    _puts(pbuf, ",");
 }
 
 static int32_t debug_log_get_free_queue_index()
@@ -246,13 +249,13 @@ void debug_error(module_id_t source, const char* p_format, ...)
     debug_print_timestamp(&buf);
 
     // Print the source module name
-    _puts(&buf, " [");
+    _puts(&buf, "[");
     if (source >= NUM_MODULES || source < 0)
         _puts(&buf, "???");
     else
         _puts(&buf, module_stringtable[source]);
     _putc(&buf, ']');
-    _putc(&buf, ' ');
+    _putc(&buf, ',');
 
     // Write the body of data
     va_list ap;
@@ -300,13 +303,13 @@ void debug_printf(module_id_t source, const char* p_format, ...)
         debug_print_timestamp(&buf);
 
     // Print the source module name
-    _puts(&buf, " [");
+    _puts(&buf, "[");
     if (source >= NUM_MODULES || source < 0)
         _puts(&buf, "???");
     else
         _puts(&buf, module_stringtable[source]);
     _putc(&buf, ']');
-    _putc(&buf, ' ');
+    _putc(&buf, ',');
 
     // Write the body of data
     va_list ap;

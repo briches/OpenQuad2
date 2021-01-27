@@ -4,128 +4,247 @@ import java.io.*;
 import java.nio.*;
 import java.util.*; 
 
-private static final char[] HEX_ARRAY = "0123456789ABCDEF".toCharArray();
+static final float PITCH_INCREMENT_RAD = (PI/180);
+static final float YAW_INCREMENT_RAD   = (PI/180);
+static final float ROLL_INCREMENT_RAD  = (PI/180);
 
-Server myServer;
-byte[] byteBuffer = new byte[4096];
-
-static PShape quad;
-static Serial myPort;
-
-static final float PITCH_INCREMENT_RAD = (PI/64);
-static final float YAW_INCREMENT_RAD   = (PI/64);
-static final float ROLL_INCREMENT_RAD  = (PI/64);
-
-static final float PITCH_DEFAULT = (PI/2);
-static final float YAW_DEFAULT = (PI/4);
-static final float ROLL_DEFAULT = (0);
+static final float PITCH_DEFAULT = 0;
+static final float YAW_DEFAULT = 0;
+static final float ROLL_DEFAULT = 0;
 
 static float g_pitch = PITCH_DEFAULT;
 static float g_yaw = YAW_DEFAULT;
 static float g_roll = ROLL_DEFAULT;
 
+static PShape quad; 
+static Serial myPort;
+static Server mServer;
+static Client quadSocket = null;
+static boolean connectedStatus = false;
+
+// Used to set up a simple fifo buffer of messages to send to the quad
+static ArrayList<byte[]> messageList;
+
+static byte armed1;
+static byte armed2;
+static byte armed3;
+static byte armed4;
+
+// Graphical locations and definitions
+static final int quadModelX = 466;
+static final int quadModelY = 466;
+static final int quadBoxX = 520;
+static final int quadBoxY = 520;
+static final int quadBoxZ = -200;
+static final int quadBoxSize = 400;
+
+
 public boolean read_from_socket(Client read_client)
 {
-    int rxByteCount = read_client.readBytes(byteBuffer);
-    if (rxByteCount > 0) 
+    byte msg[] = read_client.readBytes();
+
+    if (msg != null) 
     {
-        println(read_client.ip() + "\t" + bytesToHexString(byteBuffer, rxByteCount));
+        println(read_client.ip() + "\t" + bytesToHexString(msg, msg.length));
         return true;
     }
+
     return false;
 }
 
 void setup() {
 
-    //Set up the serial port
-    // println(Serial.list());
-    // myPort = new Serial(this, Serial.list()[0], 1000000);
-    // print("Connected to serial port: ");
-    // println(Serial.list()[0]);
+    armed1 = OQ2P_MOTOR_DISARM;
+    armed2 = OQ2P_MOTOR_DISARM;
+    armed3 = OQ2P_MOTOR_DISARM;
+    armed4 = OQ2P_MOTOR_DISARM;
 
-    // size(640,480,P3D);
+    messageList = new ArrayList<byte[]>();
+
+    size(640,640,P3D);
     println("Test");
     quad = loadShape("Frame v9.obj");
-    lights();
 
-    myServer = new Server(this, 1337, "192.168.1.65");
+    mServer = new Server(this, 1337, "192.168.1.65");
 }
 
-
-public static String bytesToHexString(byte[] bytes, int numbytes) 
-{
-    char[] hexChars = new char[numbytes * 3];
-
-    for (int j = 0; j < numbytes; j++) 
-    {
-        int v = bytes[j] & 0xFF;
-        hexChars[j * 3] = HEX_ARRAY[v >>> 4];
-        hexChars[j * 3 + 1] = HEX_ARRAY[v & 0x0F];
-        hexChars[j * 3 + 2] = ' ';
-    }
-    return new String(hexChars);
-}
-
-boolean firstConnect = false;
 
 public void draw() 
 {
-    // background(0);
+    background(200);
+    lights();
     
-    // pushMatrix();
-    // translate(width/2, height/2, 0);
-    // rotateX(g_pitch);
-    // rotateY(g_roll);
-    // rotateZ(g_yaw);
-    // shape(quad, 0, 0);
-    // popMatrix();
+    // Add quad
+    pushMatrix();
+    translate( quadModelX, quadModelY, 0);
+    rotateX(g_pitch);
+    rotateY(g_roll);
+    rotateZ(g_yaw);
+    shape(quad, 0, 0);
+    popMatrix();
 
-    Client thisClient = myServer.available();
+    // Add Box around quad
+    translate( quadBoxX, quadBoxY, quadBoxZ);
+    fill(255);
+    rectMode(CENTER);
+    rect(0, 0, quadBoxSize, quadBoxSize);
+
+
+
     // If the client is not null, and says something, display what it said
-    if (thisClient != null) 
+    if (connectedStatus == true) 
     {
-        println(thisClient);
-
-        read_from_socket(thisClient);
-
-        if(firstConnect == false)
+        try
         {
-            firstConnect = true;
-            oq2p_exhaustive_test(thisClient, 200);
+            if(messageList.size() > 0)
+            {
+                byte[] message = messageList.get(0);
+
+                println("Sending\t\t" + bytesToHexString(message, message.length));
+
+                quadSocket.write(message);
+
+                messageList.remove(0);
+            }
+
+            if(quadSocket.available() > 0)
+            {
+                read_from_socket(quadSocket);
+            }
+
+            if(quadSocket.active() == false)
+            {
+                println("Disconnecting from quad");
+                quadSocket.stop();
+                quadSocket = null;
+                connectedStatus = false;
+            }
+        }
+        catch (Exception e) 
+        {
+            println("Exception: " + e);
+
+            connectedStatus = false;
         }
     }
 }
 
+/*================================================================================
+    Keyboard event: Created when a new client connects to the Server
+    -----------------------------------------------------------------------------*/
 public void keyPressed() 
 {
 
-    println("pitch: ", g_pitch, " roll: ", g_roll, " yaw: ", g_yaw);
+    // println("pitch: ", g_pitch, " roll: ", g_roll, " yaw: ", g_yaw);
 
     switch(key)
     {
+        case '1':
+            if(armed1 == OQ2P_MOTOR_DISARM)
+            {
+                armed1 = OQ2P_MOTOR_ARM;
+                println("ARM 1");
+                messageList.add(oq2p_arm_message(OQ2P_MOTOR_INDEX_1, OQ2P_MOTOR_ARM) );
+            }
+            else
+            {
+                armed1 = OQ2P_MOTOR_DISARM;
+                println("DISARM 1");
+                messageList.add(oq2p_arm_message(OQ2P_MOTOR_INDEX_1, OQ2P_MOTOR_DISARM) );
+            }
+        break;
+
+        case '2':
+            if(armed2 == OQ2P_MOTOR_DISARM)
+            {
+                armed2 = OQ2P_MOTOR_ARM;
+                println("ARM 2");
+                messageList.add(oq2p_arm_message(OQ2P_MOTOR_INDEX_2, OQ2P_MOTOR_ARM) );
+            }
+            else
+            {
+                armed2 = OQ2P_MOTOR_DISARM;
+                println("DISARM 2");
+                messageList.add(oq2p_arm_message(OQ2P_MOTOR_INDEX_2, OQ2P_MOTOR_DISARM) );
+            }
+        break;
+
+        case '3':
+            if(armed3 == OQ2P_MOTOR_DISARM)
+            {
+                armed3 = OQ2P_MOTOR_ARM;
+                println("ARM 3");
+                messageList.add(oq2p_arm_message(OQ2P_MOTOR_INDEX_3, OQ2P_MOTOR_ARM) );
+            }
+            else
+            {
+                armed3 = OQ2P_MOTOR_DISARM;
+                println("DISARM 3");
+                messageList.add(oq2p_arm_message(OQ2P_MOTOR_INDEX_3, OQ2P_MOTOR_DISARM) );
+            }
+        break;
+
+        case '4':
+            if(armed4 == OQ2P_MOTOR_DISARM)
+            {
+                armed4 = OQ2P_MOTOR_ARM;
+                println("ARM 4");
+                messageList.add(oq2p_arm_message(OQ2P_MOTOR_INDEX_4, OQ2P_MOTOR_ARM) );
+            }
+            else
+            {
+                armed4 = OQ2P_MOTOR_DISARM;
+                println("DISARM 4");
+                messageList.add(oq2p_arm_message(OQ2P_MOTOR_INDEX_4, OQ2P_MOTOR_DISARM) );
+            }
+        break;
+
         case 'w':
+        {
             g_pitch += PITCH_INCREMENT_RAD;
+            int degress100 = (int)((180 / PI) * g_pitch * 100);
+            messageList.add(oq2p_setpoint_command(OQ2P_MID_PITCH_SET, degress100));
+        }
         break;
 
         case 's':
+        {
             g_pitch -= PITCH_INCREMENT_RAD;
+            int degress100 = (int)((180 / PI) * g_pitch * 100);
+            messageList.add(oq2p_setpoint_command(OQ2P_MID_PITCH_SET, degress100));
+        }
         break;
 
         case 'a':
+        {
             g_roll -= ROLL_INCREMENT_RAD;
-            break;
+            int degress100 = (int)((180 / PI) * g_roll * 100);
+            messageList.add(oq2p_setpoint_command(OQ2P_MID_ROLL_SET, degress100));
+        } 
+        break;
 
         case 'd':
+        {
             g_roll += ROLL_INCREMENT_RAD;
-            break;
+            int degress100 = (int)((180 / PI) * g_roll * 100);
+            messageList.add(oq2p_setpoint_command(OQ2P_MID_ROLL_SET, degress100));
+        }  
+        break;
 
         case 'q':
+        {
             g_yaw -= YAW_INCREMENT_RAD;
-            break;
+            int degress100 = (int)((180 / PI) * g_yaw * 100);
+            messageList.add(oq2p_setpoint_command(OQ2P_MID_YAW_SET, degress100));
+        } 
+        break;
 
         case 'e':
+        {
             g_yaw += YAW_INCREMENT_RAD;
-            break;
+            int degress100 = (int)((180 / PI) * g_yaw * 100);
+            messageList.add(oq2p_setpoint_command(OQ2P_MID_YAW_SET, degress100));
+        }  break;
 
         case 'h':
             println("Home position");
@@ -137,19 +256,54 @@ public void keyPressed()
         default:
             break;
     }
+
+    if(key == CODED)
+    {
+        switch(keyCode)
+        {
+            case SHIFT:
+            {
+                println("Shift");
+            } break;
+
+            case CONTROL:
+            {
+                println("CTRL");
+            } break;
+        }
+    }
 }
 
 /*================================================================================
-     Server Event: Created when a new client connects to the server
-     -----------------------------------------------------------------------------*/
+    Server Event: Created when a new client connects to the mServer
+    -----------------------------------------------------------------------------*/
 void serverEvent(Server someServer, Client someClient) 
 {
-  println("We have a new client: " + someClient.ip());
+    if(connectedStatus == false)
+    {
+        quadSocket = someClient;
+
+        connectedStatus = true;
+    
+        println("Connected to quad at IP " + quadSocket.ip());
+
+        read_from_socket(quadSocket);
+    }
+}
+
+void disconnectEvent(Client someClient) 
+{
+    print("Disconnect event for client ", someClient.ip());
+    if(quadSocket == someClient)
+    {
+        quadSocket = null;
+        connectedStatus = true;
+    }
 }
 
 /*================================================================================
-     Serial Event: Used to RX data
-     -----------------------------------------------------------------------------*/
+    Serial Event: Used to RX data
+    -----------------------------------------------------------------------------*/
 void serialEvent(Serial port)
 {
     if(port.available() > 0)
