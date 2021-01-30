@@ -22,18 +22,16 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+// API
 uint32_t esc_dfu_init();
-uint32_t esc_dfu_process();
+uint32_t esc_dfu_erase_chip();
+uint32_t esc_dfu_write_app(uint8_t * p_esc_app, uint32_t length);
+uint32_t esc_dfu_verify(uint8_t * p_verify, uint32_t length);
+uint32_t esc_dfu_start_app();
+
+// Main application calls these callbacks when uart interrupts are received.
 void esc_dfu_rx_complete_callback(uint8_t index);
 void esc_dfu_tx_complete_callback(uint8_t index);
-
-typedef enum
-{
-    DFU_STATE_INIT,
-    DFU_STATE_VERIFY,
-    DFU_STATE_DONE,
-} dfu_state_t;
-
 
 
 #endif

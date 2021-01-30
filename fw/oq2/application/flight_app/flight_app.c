@@ -150,24 +150,65 @@ void flight_thread(void* argument)
         /** ESC DFU Erase: Erase firmware from the escs                                              */
         case FLIGHT_ESC_DFU_ERASE:
 
-            esc_dfu_process();
-
-            m_flight_state = FLIGHT_ESC_DFU_WRITE;
-
+            if(esc_dfu_erase_chip() == 0)
+                m_flight_state = FLIGHT_ESC_DFU_WRITE;
+            else
+                m_flight_state = FLIGHT_ESC_DFU_DONE;
+            
             break;
 
         /*********************************************************************************************/
         /** ESC DFU Write: Write new firmware file to the escs                                       */
         case FLIGHT_ESC_DFU_WRITE:
+        {
 
+            debug_printf("Writing new app.");
+            debug_printf("Flash storage location: 0x%08X (0x%08X B)", _FLASH_STORAGE_, _FLASH_STORAGE_SIZE_);
+            uint8_t * p_esc_app = (uint8_t *) (_FLASH_STORAGE_);
 
-            break;
+            if(esc_dfu_write_app(p_esc_app, 22000) == 0)
+                m_flight_state = FLIGHT_ESC_DFU_VERIFY;
+            else
+                m_flight_state = FLIGHT_ESC_DFU_DONE;
+
+            
+        } break;
 
 
         /*********************************************************************************************/
         /** ESC DFU Verify: Verify the flash on the escs against the file                            */
         case FLIGHT_ESC_DFU_VERIFY:
+        {
+            debug_printf("Doing flash verification");
+            debug_printf("Flash storage location: 0x%08X (0x%08X B)", _FLASH_STORAGE_, _FLASH_STORAGE_SIZE_);
 
+            uint8_t * p_esc_app = (uint8_t *) (_FLASH_STORAGE_);
+
+            debug_printf("Verify pointer is 0x%08X", p_esc_app);
+
+            if(esc_dfu_verify(p_esc_app, 22000) == 0)
+            {
+                esc_dfu_start_app();
+
+                // Set reset pin, then boot pin, wait, then release reset to enter bootloader
+                motor_controllers_set_reset_state(4, MOTOR_CONTROLLER_RESET);
+                motor_controllers_set_boot_state(4, MOTOR_CONTROLLER_NORMAL_BOOT);
+                osDelay(5);
+                motor_controllers_set_reset_state(4, MOTOR_CONTROLLER_NOT_RESET);
+
+                m_flight_state = FLIGHT_ESC_DFU_DONE;
+            }
+            else
+            {
+                debug_error("DFU failed.");
+                m_flight_state = FLIGHT_ESC_DFU_FAILED;
+            }
+            
+        } break;
+
+        /*********************************************************************************************/
+        /** ESC DFU Done: The DFU should be... finished?                                             */
+        case FLIGHT_ESC_DFU_DONE:
 
             break;
 

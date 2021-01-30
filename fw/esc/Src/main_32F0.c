@@ -100,6 +100,21 @@ int main(void)
 
     /* Initialize all configured peripherals */
     MX_GPIO_Init();
+
+    BSP_BOARD_RGB3_LED_ON();
+
+    while(1)
+    {
+        HAL_Delay(500);
+        // for(int i = 0; i < 10000000; i++)
+        // {
+        //     ;
+        // }
+
+        BSP_BOARD_RGB3_LED_TOGGLE();
+    }
+
+
 #if (defined(POTENTIOMETER)||defined(CURRENT_SENSE_ADC)||defined(VBUS_SENSE_ADC)||defined(TEMP_SENSE_ADC))
     MX_ADC_Init();
 #endif

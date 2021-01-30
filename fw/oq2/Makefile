@@ -305,7 +305,7 @@ LIB_FILES += Middlewares/ST/STM32_MotionFX_Library/Lib/MotionFX_CM7F_wc32_ot_har
 LIB_FILES += Middlewares/ARM/DSP/Lib/libarm_cortexM7lfsp_math.a
 
 # debug build?
-DEBUG = 0
+DEBUG = 1
 # optimization
 OPT = -O0
  

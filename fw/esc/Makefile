@@ -3,7 +3,7 @@ PRETTY = 1
 ######################################
 # target
 ######################################
-TARGETS = oq2_esc
+TARGETS = blinky
 
 #######################################
 # paths
@@ -12,7 +12,7 @@ TARGETS = oq2_esc
 OUTPUT_DIRECTORY = _build
 
 # link script
-$(OUTPUT_DIRECTORY)/oq2_esc.out: \
+$(OUTPUT_DIRECTORY)/blinky.out: \
   LINKER_SCRIPT  := STM32F031C6Tx_FLASH.ld
 
 ######################################
@@ -142,7 +142,7 @@ LIB_FILES += -lc -lnosys -lm
 
 .PHONY: default help
 
-default: oq2_esc
+default: blinky
 
 # Print all targets that can be built
 help:

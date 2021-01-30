@@ -57,5 +57,4 @@ typedef struct
     uint32_t flags;
 } stm32_dev_info_t;
 
-
 #endif

@@ -67,3 +67,30 @@ uint32_t uint32_encode(uint32_t data, uint8_t * buf)
     buf[0] = (data & 0xFF) >> 0;
     return 4;
 }
+
+/**
+ * @brief Encode the uint16_t number "data" into the buffer, MSB at lowest (First) address
+ * Big Endian
+ * @param data data to encode
+ * @param buf memory location to encode data into 
+ * @return uint32_t number of bytes written
+ */
+uint32_t uint16_big_encode(uint16_t data, uint8_t * buf)
+{
+    buf[0] = (data & 0xFF00) >> 8;
+    buf[1] = (data & 0xFF) >> 0;
+    return 2;
+}
+
+/**
+ * @brief Encode the uint16_t number "data" into the buffer, LSB at lowest (First) address
+ * Little Endian
+ * @param data data to encode
+ * @param buf memory location to encode data into 
+ */
+uint32_t uint16_encode(uint16_t data, uint8_t * buf)
+{
+    buf[1] = (data & 0xFF00) >> 8;
+    buf[0] = (data & 0xFF) >> 0;
+    return 2;
+}

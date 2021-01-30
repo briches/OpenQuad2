@@ -58,10 +58,16 @@ typedef enum
     UART_DFU_STATE_VERSION_RP, 
     UART_DFU_STATE_GET_ID,
     UART_DFU_STATE_GET_ID_RESPONSE,
-    UART_DFU_STATE_READ_FLASH,
-    UART_DFU_STATE_ERROR,
     UART_DFU_STATE_IDLE,
+    UART_DFU_STATE_ERASE_FLASH,
+    UART_DFU_STATE_READ_FLASH,
+    UART_DFU_STATE_WRITE_FLASH,
+    UART_DFU_STATE_ERROR,
 } stm_uart_dfu_state_t;
+
+#define STM_DFU_ERASE_CODE_GLOBAL_ERASE 0xFFFF
+#define STM_DFU_ERASE_CODE_BANK1_ERASE  0xFFFE
+#define STM_DFU_ERASE_CODE_BANK2_ERASE  0xFFFD
 
 #define STM_DFU_NO_ERROR                0x00000000
 #define STM_DFU_ERROR_TIMEOUT           0x00000001
@@ -78,8 +84,7 @@ typedef enum
 // Handle, pointer to data, data length, blocking or not
 #define BLOCKING_INTERFACE_TX true
 #define NON_BLOCKING_INTERFACE_TX false
-typedef uint32_t(*stmdfu_write_ptr)(void*, uint8_t*, uint32_t, bool);
-typedef uint32_t(*stmdfu_read_ptr) (void*, uint8_t*, uint32_t, bool);
+typedef uint32_t(*stmdfu_send_ptr)(void*, uint8_t*, uint32_t, bool);
 typedef void (*stmdfu_wait_function)();
 typedef float (*stmdfu_timestamp_function)();
 
@@ -90,7 +95,7 @@ typedef struct
     stm_uart_dfu_state_t state;
 
     // Interface function for writing data
-    stmdfu_write_ptr  write_data;
+    stmdfu_send_ptr  send_data;
 
     // Interface function for delay (see FreeRTOS vTaskYield(), or osDelay())
     stmdfu_wait_function delay;
@@ -134,12 +139,19 @@ typedef struct
 
 } stm_uart_dfu_ctx;
 
-
+/*********************************************************************************************/
+/** Callbacks - Application Must Implement                                                   */
+/*********************************************************************************************/
 void stm_uart_dfu_tx_complete_callback(stm_uart_dfu_ctx * pctx);
 void stm_uart_dfu_rx_complete_callback(stm_uart_dfu_ctx * pctx, uint8_t rx_byte);
 
+/*********************************************************************************************/
+/** API                                                                                      */
+/*********************************************************************************************/
 uint32_t stm_uart_dfu_init(stm_uart_dfu_ctx* pctx);
 uint32_t stm_uart_dfu_read_flash(stm_uart_dfu_ctx* pctx, uint32_t start_address, uint32_t num_bytes, uint8_t * p_verify);
-
+uint32_t stm_uart_dfu_erase_flash(stm_uart_dfu_ctx* pctx, uint32_t start_address, uint32_t num_bytes);
+uint32_t stm_uart_dfu_write_flash(stm_uart_dfu_ctx* pctx, uint32_t start_address, uint32_t num_bytes, uint8_t * p_data);
+uint32_t stm_uart_dfu_start_app(stm_uart_dfu_ctx* pctx);
 
 #endif

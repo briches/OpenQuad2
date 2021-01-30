@@ -12,7 +12,7 @@ main_app_len = len(main_app)
 print("Main app is ", main_app_len, " bytes")
   
 # Reading data from file2 
-with open("../esc/_build/oq2_esc.bin", "rb") as fp: 
+with open("../esc/_build/blinky.bin", "rb") as fp: 
     esc_app = fp.read() 
 
 esc_app_len = len(esc_app)

@@ -23,6 +23,8 @@ uint8_t _crc_xor_8(uint8_t * data, uint32_t length);
 
 uint32_t uint32_big_encode(uint32_t data, uint8_t * buf);
 uint32_t uint32_encode(uint32_t data, uint8_t * buf);
+uint32_t uint16_big_encode(uint16_t data, uint8_t * buf);
+uint32_t uint16_encode(uint16_t data, uint8_t * buf);
 
 
 

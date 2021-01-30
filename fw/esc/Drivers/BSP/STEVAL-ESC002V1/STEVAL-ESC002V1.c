@@ -1,3 +1,21 @@
+/*
+ * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\esc\Drivers\BSP\STEVAL-ESC002V1\STEVAL-ESC002V1.c   /
+ * Project: OQ2                                                                                    /
+ * Created Date: Saturday, January 16th 2021, 7:07:34 am                                           /
+ * Author: Brandon Riches                                                                          /
+ * Email: richesbc@gmail.com                                                                       /
+ * -----                                                                                           /
+ *                                                                                                 /
+ * Copyright (c) 2020 OpenQuad2.                                                                   /
+ * All rights reserved.                                                                            /
+ *                                                                                                 /
+ * Redistribution and use in source or binary forms, with or without modification,                 /
+ * are not permitted without express written approval of OpenQuad2                                 /
+ * -----                                                                                           /
+ * HISTORY:                                                                                        /
+*/
+
+
 /**
  ******************************************************************************
  * @file    STEVAL-ESC002V1.c
@@ -154,7 +172,8 @@ void BSP_BOARD_RGB3_LED_ON(void)
  **********************************************************/
 void BSP_BOARD_RGB3_LED_TOGGLE(void)
 {
-  HAL_GPIO_WritePin(BSP_BOARD_RGB3_LED_PORT,BSP_BOARD_RGB3_LED_PIN,GPIO_PIN_SET);
+    HAL_GPIO_TogglePin(BSP_BOARD_RGB3_LED_PORT,BSP_BOARD_RGB3_LED_PIN);
+
 }
 
 /******************************************************//**
@@ -163,7 +182,7 @@ void BSP_BOARD_RGB3_LED_TOGGLE(void)
  **********************************************************/
 void BSP_BOARD_RGB3_LED_OFF(void)
 {
-  HAL_GPIO_TogglePin(BSP_BOARD_RGB3_LED_PORT,BSP_BOARD_RGB3_LED_PIN);
+    HAL_GPIO_WritePin(BSP_BOARD_RGB3_LED_PORT,BSP_BOARD_RGB3_LED_PIN,GPIO_PIN_SET);
 }
 
 /******************************************************//**
