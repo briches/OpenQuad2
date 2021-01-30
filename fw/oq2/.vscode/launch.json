@@ -7,7 +7,7 @@
         {
             "name" : "Cortex Debug",
             "cwd": "${workspaceFolder}",
-            "executable": "_build/_oq2.out",
+            "executable": "_build/oq2.out",
             "servertype": "jlink",
             "request": "launch",
             "type": "cortex-debug",
@@ -20,7 +20,7 @@
         {
             "name" : "Attach",
             "cwd": "${workspaceFolder}",
-            "executable": "_build/_oq2.out",
+            "executable": "_build/oq2.out",
             "servertype": "jlink",
             "request": "attach",
             "type": "cortex-debug",

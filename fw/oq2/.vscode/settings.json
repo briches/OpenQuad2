@@ -9,17 +9,23 @@
     "C_Cpp.loggingLevel": "Error",
     "C_Cpp.clang_format_sortIncludes": true,
     "files.associations": {
+        "*.pde": "java",
         "*.h": "c",
         "*.c": "c",
         "cmath": "c",
         "*.tcc": "c",
         "cinttypes": "c",
-        "cstdlib": "c"
+        "cstdlib": "c",
+        "type_traits": "c",
+        "typeinfo": "c"
     },
     "C_Cpp.default.includePath": [
         "${workspaceFolder}",
         "${workspaceFolder}/application",
         "${workspaceFolder}/application/config",
+        "${workspaceFolder}/application/flight_app",
+        "${workspaceFolder}/application/flight_app/esc_dfu",
+        "${workspaceFolder}/application/flight_app/esc_dfu/stm32_uart_dfu",
         "${workspaceFolder}/application/freertos",
         "${workspaceFolder}/application/location",
         "${workspaceFolder}/application/led_blinky",
@@ -39,6 +45,7 @@
         "${workspaceFolder}/application/task_manager",
         "${workspaceFolder}/application/timer",
         "${workspaceFolder}/application/debug_log",
+        "${workspaceFolder}/application/utility",
         "${workspaceFolder}/Drivers/CMSIS/Include",
         "${workspaceFolder}/Drivers/CMSIS/Device/ST/STM32H7xx",
         "${workspaceFolder}/Drivers/CMSIS/Device/ST/STM32H7xx/**",
@@ -53,7 +60,7 @@
         "${workspaceFolder}/Drivers/wifi_drv_winc3400/module_config/**",
         "${workspaceFolder}/Drivers/wifi_drv_winc3400/programmer/**",
         "${workspaceFolder}/Drivers/wifi_drv_winc3400/spi_flash/**",
-        "${workspaceFolder}/Drivers/wifi_drv_winc3400/socket/**",
+        "${workspaceFolder}/Drivers/wifi_drv_winc3400/socket/include",
         "${workspaceFolder}/FATFS/**",
         "${workspaceFolder}/Middlewares/ST/STM32_USB_Device_Library/**",
         "${workspaceFolder}/Middlewares/ST/STM32_MotionFX_Library/Inc",
@@ -77,6 +84,8 @@
         "STM32H735xx",
         "FREERTOS",
         "ARM_MATH_CM7",
+        "_FLASH_STORAGE_=0x080C0000",
+        "_FLASH_STORAGE_SIZE_=0x40000"
     ],
     "psi-header.license-text": [
         "Copyright (c) 2020 OpenQuad2.",
@@ -139,5 +148,6 @@
             ]
         },
     ],
+    "workbench.colorTheme": "Monokai Dimmed",
 
 }
