@@ -26,6 +26,7 @@
 #include "FreeRTOS.h"
 #include "timer.h"
 #include "oq2_protocol.h"
+#include "led_blinky.h"
 
 
 #if defined(CONFIG_USE_ASYNC_API)
@@ -121,12 +122,14 @@ static void socket_cb(SOCKET sock, uint8_t u8Msg, void* pvMsg)
         if (pstrConnect && pstrConnect->s8Error >= 0) {
             debug_printf("socket_cb: connect success!");
             oq2p_connect_callback(sock);
+            led_set_blink_mode(LED_BLINK_MODE_BLUE);
         }
         else {
             debug_printf("socket_cb: connect error!");
             close(tcp_client_socket);
             tcp_client_socket = -1;
             oq2p_disconnect_callback(sock);
+            led_set_blink_mode(LED_BLINK_MODE_RED);
         }
     }
     break;

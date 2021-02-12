@@ -209,7 +209,7 @@ static uint32_t _stm_dfu_connect(stm_uart_dfu_ctx * pctx)
     if(_stm_dfu_timeout_on_acks(pctx, 1) == false)
         return STM_DFU_ERROR_TIMEOUT;
 
-    debug_printf("Got first ACK.");
+    // debug_printf("Got first ACK.");
     retval = STM_DFU_NO_ERROR; // NO error, keep going.
     pctx->state = UART_DFU_STATE_VERSION;
 
@@ -236,8 +236,8 @@ static uint32_t _stm_dfu_get_version(stm_uart_dfu_ctx* pctx)
     pctx->version_major = (version & 0xF0) >> 4;
     pctx->version_minor = (version & 0x0F) >> 0;
 
-    debug_printf("DFU version %X.%X", pctx->version_major, pctx->version_minor);
-    debug_printf("Parsing command list.");
+    // debug_printf("DFU version %X.%X", pctx->version_major, pctx->version_minor);
+    // debug_printf("Parsing command list.");
 
     // The rest of the bytes here are the list of supported commands.
     // Check for support of the Extended Erase command
@@ -246,12 +246,12 @@ static uint32_t _stm_dfu_get_version(stm_uart_dfu_ctx* pctx)
         if (pctx->buffer[3 + i] == STM_DFU_CMD_EX_ERASE)
         {
             pctx->use_extended_erase = true;
-            debug_printf("Extended Erase supported.");
+            // debug_printf("Extended Erase supported.");
         }
         if (pctx->buffer[3 + i] == STM_DFU_CMD_ERASE)
         {
             pctx->use_extended_erase = true;
-            debug_printf("Erase supported.");
+            // debug_printf("Erase supported.");
         }
     }
 
@@ -281,8 +281,8 @@ static uint32_t _stm_dfu_get_version_read_protect(stm_uart_dfu_ctx* pctx)
     uint8_t option1 = pctx->buffer[2];
     uint8_t option2 = pctx->buffer[3];
 
-    debug_printf("RP Boot version %u.%u", (boot_version >> 4), (boot_version & 0x0f));
-    debug_printf("option bytes: %u %u", option1, option2);
+    // debug_printf("RP Boot version %u.%u", (boot_version >> 4), (boot_version & 0x0f));
+    // debug_printf("option bytes: %u %u", option1, option2);
 
     pctx->state = UART_DFU_STATE_GET_ID;
 
@@ -307,7 +307,7 @@ static uint32_t _stm_dfu_get_device_id(stm_uart_dfu_ctx* pctx)
     // Parse product ID
     uint16_t ID = (pctx->buffer[2]) << 8 | pctx->buffer[3];
 
-    debug_printf("PID 0x%X", ID);
+    // debug_printf("PID 0x%X", ID);
 
     // Check our known list of IDs for a match.
     pctx->pdev_info = _stm_dfu_find_matching_device(ID);
@@ -321,7 +321,7 @@ static uint32_t _stm_dfu_get_device_id(stm_uart_dfu_ctx* pctx)
     }
     else
     {
-        debug_printf("%s identified!", pctx->pdev_info->name);
+        // debug_printf("%s identified!", pctx->pdev_info->name);
         retval = STM_DFU_NO_ERROR;
         pctx->state = UART_DFU_STATE_IDLE;
     }
@@ -585,7 +585,7 @@ uint32_t stm_uart_dfu_write_flash(stm_uart_dfu_ctx* pctx, uint32_t start_address
         if(_stm_dfu_timeout_on_acks(pctx, 1) == false)
             return STM_DFU_ERROR_TIMEOUT;
 
-        debug_printf("Wrote %u B at 0x%08X", chunk_length, pctx->cmd_write_addr);
+        // debug_printf("Wrote %u B at 0x%08X", chunk_length, pctx->cmd_write_addr);
 
         // Update all the state variables so next time through the loop we are good to go
         bytes_written += chunk_length;
@@ -699,8 +699,8 @@ uint32_t stm_uart_dfu_read_flash(stm_uart_dfu_ctx* pctx, uint32_t start_address,
                 debug_error("Verify failed at 0x%08X.", pctx->cmd_read_addr);
                 return STM_DFU_ERROR_UNKNOWN;
             }
-            else
-                debug_printf("Verified %u B at 0x%08X", pctx->pending_rx_bytes, pctx->cmd_read_addr);
+            // else
+                // debug_printf("Verified %u B at 0x%08X", pctx->pending_rx_bytes, pctx->cmd_read_addr);
             
             verified_bytes_count += pctx->received_byte_count;
         }

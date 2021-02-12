@@ -59,9 +59,9 @@ ASM_SOURCES =  \
 
 
 # debug build?
-DEBUG = 1
+DEBUG = 0
 # optimization
-OPT = -O0
+OPT = -O2
 
 #######################################
 # CFLAGS
@@ -96,10 +96,11 @@ C_DEFS =  \
 -DDELTA_6STEP_TABLE \
 -DCOMPLEMENTARY_DRIVE \
 -DVOLTAGE_MODE \
--DSPEED_SENDING \
--DSPEED_RAMP
-# -DFAST_DEMAG
-# -DOPEN_LOOP
+-DNO_SPEED_SENDING \
+-DSPEED_RAMP \
+-DOPEN_LOOP \
+-DFAST_DEMAG
+
 
 
 

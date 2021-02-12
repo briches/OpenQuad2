@@ -325,10 +325,10 @@ void motor_controllers_control_input(float* pitch_ctrl, float* roll_ctrl, float*
     // Roll control. 
     // Motor 2 and 3 can INCREASE to INCREASE roll
     // Motor 1 and 4 can DECREASE to INCREASE roll
-    motor1.period_us -= *roll_ctrl;
-    motor2.period_us += *roll_ctrl;
-    motor3.period_us += *roll_ctrl;
-    motor4.period_us -= *roll_ctrl;
+    motor1.period_us += *roll_ctrl;
+    motor2.period_us -= *roll_ctrl;
+    motor3.period_us -= *roll_ctrl;
+    motor4.period_us += *roll_ctrl;
 
     // Yaw control. 
     // Motor 1 and 3 can INCREASE to INCREASE yaw
@@ -337,8 +337,6 @@ void motor_controllers_control_input(float* pitch_ctrl, float* roll_ctrl, float*
     motor2.period_us -= *yaw_ctrl;
     motor3.period_us += *yaw_ctrl;
     motor4.period_us -= *yaw_ctrl;
-
-    // debug_printf("Motor1 us period: %4.0f", motor1.period_us);
 
     _motor_constrain_us(&motor1);
     _motor_constrain_us(&motor2);

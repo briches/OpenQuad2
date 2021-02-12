@@ -65,7 +65,7 @@ uint32_t kinematics_initialize(kinematics_ctx_t * pctx, bool lib_mode_9)
 
     pctx->timestamp = _kinematics_get_seconds();
 
-    debug_printf("Kinematics init");
+    debug_printf("Kinematics init, 9axis mode? %u", lib_mode_9);
 
     // Init arm_math lib finite impulse response filters
     arm_fir_init_f32(&pitch_fir_inst, SC_FIR_NUM_TAPS, fir_coeffs, pitch_fir_state, SC_FIR_BLOCK_SIZE);
@@ -120,17 +120,6 @@ uint32_t kinematics_new_motionfx_data_callback(kinematics_ctx_t * pctx, MFX_outp
     pctx->x_inertial += pctx->vx_inertial * dt_s;
     pctx->y_inertial += pctx->vy_inertial * dt_s;
     pctx->z_inertial += pctx->vz_inertial * dt_s;
-
-
-    // debug_printf("x, %3.1f, y, %3.1f, z, %3.1f", pctx->x_inertial, pctx->y_inertial, pctx->z_inertial);
-    // debug_printf("x, %3.3f, y, %3.3f, z, %3.3f", p_data->linear_acceleration_6X[0], 
-    //                                             p_data->linear_acceleration_6X[1], 
-    //                                             p_data->linear_acceleration_6X[2]);
-    // debug_printf("%4.4f, %4.4f", p_data->rotation_6X[1], pctx->pitch);
-
-    // debug_printf(" heading: %3.3f, (%3.3f)", p_data->heading_6X, p_data->headingErr_6X);
-
-    // debug_printf(", %3.5f", dt_s);
 
     return 1;
 }

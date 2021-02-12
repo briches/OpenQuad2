@@ -74,6 +74,10 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef* pcdHandle)
     __HAL_RCC_USB_OTG_HS_CLK_ENABLE();
 
     /* Peripheral interrupt init */
+    HAL_NVIC_SetPriority(OTG_HS_EP1_OUT_IRQn, 5, 0);
+    HAL_NVIC_EnableIRQ(OTG_HS_EP1_OUT_IRQn);
+    HAL_NVIC_SetPriority(OTG_HS_EP1_IN_IRQn, 5, 0);
+    HAL_NVIC_EnableIRQ(OTG_HS_EP1_IN_IRQn);
     HAL_NVIC_SetPriority(OTG_HS_IRQn, 5, 0);
     HAL_NVIC_EnableIRQ(OTG_HS_IRQn);
   /* USER CODE BEGIN USB_OTG_HS_MspInit 1 */
@@ -93,6 +97,10 @@ void HAL_PCD_MspDeInit(PCD_HandleTypeDef* pcdHandle)
     __HAL_RCC_USB_OTG_HS_CLK_DISABLE();
 
     /* Peripheral interrupt Deinit*/
+    HAL_NVIC_DisableIRQ(OTG_HS_EP1_OUT_IRQn);
+
+    HAL_NVIC_DisableIRQ(OTG_HS_EP1_IN_IRQn);
+
     HAL_NVIC_DisableIRQ(OTG_HS_IRQn);
 
   /* USER CODE BEGIN USB_OTG_HS_MspDeInit 1 */
@@ -312,14 +320,14 @@ USBD_StatusTypeDef USBD_LL_Init(USBD_HandleTypeDef *pdev)
   hpcd_USB_OTG_HS.Instance = USB_OTG_HS;
   hpcd_USB_OTG_HS.Init.dev_endpoints = 9;
   hpcd_USB_OTG_HS.Init.speed = PCD_SPEED_FULL;
-  hpcd_USB_OTG_HS.Init.dma_enable = DISABLE;
+  hpcd_USB_OTG_HS.Init.dma_enable = ENABLE;
   hpcd_USB_OTG_HS.Init.phy_itface = USB_OTG_EMBEDDED_PHY;
   hpcd_USB_OTG_HS.Init.Sof_enable = DISABLE;
   hpcd_USB_OTG_HS.Init.low_power_enable = DISABLE;
   hpcd_USB_OTG_HS.Init.lpm_enable = DISABLE;
   hpcd_USB_OTG_HS.Init.battery_charging_enable = ENABLE;
   hpcd_USB_OTG_HS.Init.vbus_sensing_enable = DISABLE;
-  hpcd_USB_OTG_HS.Init.use_dedicated_ep1 = DISABLE;
+  hpcd_USB_OTG_HS.Init.use_dedicated_ep1 = ENABLE;
   hpcd_USB_OTG_HS.Init.use_external_vbus = DISABLE;
   if (HAL_PCD_Init(&hpcd_USB_OTG_HS) != HAL_OK)
   {

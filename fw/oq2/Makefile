@@ -25,6 +25,7 @@ SRC_FILES +=  \
 application/sys/startup/startup_stm32h735zgtx.s \
 application/main.c \
 application/debug_log/debug_log.c \
+application/file_manager/file_manager.c \
 application/flight_app/flight_app.c \
 application/flight_app/esc_dfu/esc_dfu.c \
 application/flight_app/esc_dfu/stm32_uart_dfu/stm32_uart_dfu.c \
@@ -39,6 +40,7 @@ application/network/network.c \
 application/network/oq2_protocol/oq2_protocol.c \
 application/network/oq2_protocol/oq2p_packet_builders.c \
 application/pid/pid.c \
+application/qspi_flash/qspi_flash.c \
 application/stability_control/stability.c \
 application/stability_control/platform/mems_platform.c \
 application/stability_control/kinematics/kinematics.c \
@@ -197,47 +199,14 @@ Middlewares/Third_Party/LwIP/src/core/ipv4/igmp.c \
 Middlewares/Third_Party/LwIP/src/core/ipv4/ip4.c \
 Middlewares/Third_Party/LwIP/src/core/ipv4/ip4_addr.c \
 Middlewares/Third_Party/LwIP/src/core/ipv4/ip4_frag.c \
-Middlewares/Third_Party/LwIP/src/core/ipv6/dhcp6.c \
-Middlewares/Third_Party/LwIP/src/core/ipv6/ethip6.c \
-Middlewares/Third_Party/LwIP/src/core/ipv6/icmp6.c \
-Middlewares/Third_Party/LwIP/src/core/ipv6/inet6.c \
-Middlewares/Third_Party/LwIP/src/core/ipv6/ip6.c \
-Middlewares/Third_Party/LwIP/src/core/ipv6/ip6_addr.c \
-Middlewares/Third_Party/LwIP/src/core/ipv6/ip6_frag.c \
-Middlewares/Third_Party/LwIP/src/core/ipv6/mld6.c \
-Middlewares/Third_Party/LwIP/src/core/ipv6/nd6.c \
-Middlewares/Third_Party/LwIP/system/OS/sys_arch.c 
-# Middlewares/Third_Party/LwIP/src/apps/mqtt/mqtt.c \
-# Middlewares/Third_Party/LwIP/src/apps/snmp/snmpv3.c \
-# Middlewares/Third_Party/LwIP/src/apps/snmp/snmpv3_mbedtls.c \
-# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_asn1.c \
-# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_core.c \
-# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2.c \
-# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2_icmp.c \
-# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2_interfaces.c \
-# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2_ip.c \
-# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2_snmp.c \
-# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2_system.c \
-# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2_tcp.c \
-# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_mib2_udp.c \
-# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_msg.c \
-# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_netconn.c \
-# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_pbuf_stream.c \
-# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_raw.c \
-# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_scalar.c \
-# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_snmpv2_framework.c \
-# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_snmpv2_usm.c \
-# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_table.c \
-# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_threadsync.c \
-# Middlewares/Third_Party/LwIP/src/apps/snmp/snmp_traps.c \
-# Middlewares/Third_Party/LwIP/src/apps/sntp/sntp.c \
-# Middlewares/Third_Party/LwIP/src/apps/smtp/smtp.c
+Middlewares/Third_Party/LwIP/system/OS/sys_arch.c
 
 # Include folders common to all targets
 INC_FOLDERS +=  \
   application \
   application/config \
   application/debug_log \
+  application/file_manager \
   application/flight_app \
   application/flight_app/esc_dfu \
   application/flight_app/esc_dfu/stm32_uart_dfu \
@@ -251,6 +220,7 @@ INC_FOLDERS +=  \
   application/network/wifi_ex \
   application/network/oq2_protocol \
   application/pid \
+  application/qspi_flash \
   application/stability_control \
   application/stability_control/kinematics \
   application/stability_control/platform \
@@ -375,6 +345,8 @@ LIB_FILES += -lc -lnosys -lm
 # Default target - first one defined
 default: $(TARGET)
 
+flash_esc_dfu: C_DEFS += -DESC_DFU_ENABLED
+
 # Print all targets that can be built
 help:
 	@echo following targets are available:
@@ -398,7 +370,7 @@ erase:
 flash: default
 	jlink -SelectEmuBySN 801020691 -device STM32H735ZGT -if SWD -speed 16000 -autoconnect 1 -ExitOnError -CommanderScript ./jlink/flash.jlink
 
-flash_wholedevice:
+flash_esc_dfu: default
 	@echo Done Compiling
 	@echo Merging
 	@python merger.py

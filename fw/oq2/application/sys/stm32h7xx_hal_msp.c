@@ -5,7 +5,7 @@
  * Author: Brandon Riches                                                                          /
  * Email: richesbc@gmail.com                                                                       /
  * -----                                                                                           /
- * Last Modified: Sun Jan 24 2021                                                                  /
+ * Last Modified: Sun Feb 07 2021                                                                  /
  * Modified By: Brandon Riches                                                                     /
  * -----                                                                                           /
  *                                                                                                 /
@@ -398,9 +398,8 @@ void HAL_OSPI_MspInit(OSPI_HandleTypeDef* hospi)
         GPIO_InitStruct.Alternate = GPIO_AF11_OCTOSPIM_P1;
         HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
-        /* USER CODE BEGIN OCTOSPI1_MspInit 1 */
-
-        /* USER CODE END OCTOSPI1_MspInit 1 */
+        HAL_NVIC_SetPriority(OCTOSPI1_IRQn, 5, 0);
+        HAL_NVIC_EnableIRQ(OCTOSPI1_IRQn);
     }
 
 }
@@ -415,9 +414,6 @@ void HAL_OSPI_MspDeInit(OSPI_HandleTypeDef* hospi)
 {
     if (hospi->Instance == OCTOSPI1)
     {
-        /* USER CODE BEGIN OCTOSPI1_MspDeInit 0 */
-
-        /* USER CODE END OCTOSPI1_MspDeInit 0 */
           /* Peripheral clock disable */
         __HAL_RCC_OSPI1_CLK_DISABLE();
 
@@ -433,9 +429,7 @@ void HAL_OSPI_MspDeInit(OSPI_HandleTypeDef* hospi)
 
         HAL_GPIO_DeInit(GPIOF, GPIO_PIN_6 | GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10);
 
-        /* USER CODE BEGIN OCTOSPI1_MspDeInit 1 */
-
-        /* USER CODE END OCTOSPI1_MspDeInit 1 */
+        HAL_NVIC_DisableIRQ(OCTOSPI1_IRQn);
     }
 
 }
@@ -716,7 +710,7 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim)
         GPIO_InitStruct.Pin = GPIO_PIN_13 | GPIO_PIN_14;
         GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
         GPIO_InitStruct.Pull = GPIO_NOPULL;
-        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
         GPIO_InitStruct.Alternate = GPIO_AF1_TIM1;
         HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
@@ -738,7 +732,7 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim)
         GPIO_InitStruct.Pin = GPIO_PIN_11 | GPIO_PIN_14;
         GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
         GPIO_InitStruct.Pull = GPIO_NOPULL;
-        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
         GPIO_InitStruct.Alternate = GPIO_AF14_TIM24;
         HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
 
@@ -865,9 +859,8 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
         GPIO_InitStruct.Alternate = GPIO_AF7_UART7;
         HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
-        /* USER CODE BEGIN UART7_MspInit 1 */
-
-        /* USER CODE END UART7_MspInit 1 */
+        HAL_NVIC_SetPriority(UART7_IRQn, 5, 0);
+        HAL_NVIC_EnableIRQ(UART7_IRQn);
     }
     else if (huart->Instance == UART8)
     {
@@ -889,9 +882,8 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
         GPIO_InitStruct.Alternate = GPIO_AF8_UART8;
         HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
-        /* USER CODE BEGIN UART8_MspInit 1 */
-
-        /* USER CODE END UART8_MspInit 1 */
+        HAL_NVIC_SetPriority(UART8_IRQn, 5, 0);
+        HAL_NVIC_EnableIRQ(UART8_IRQn);
     }
     else if (huart->Instance == UART9)
     {
@@ -913,9 +905,8 @@ void HAL_UART_MspInit(UART_HandleTypeDef* huart)
         GPIO_InitStruct.Alternate = GPIO_AF11_UART9;
         HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
-        /* USER CODE BEGIN UART9_MspInit 1 */
-
-        /* USER CODE END UART9_MspInit 1 */
+        HAL_NVIC_SetPriority(UART9_IRQn, 5, 0);
+        HAL_NVIC_EnableIRQ(UART9_IRQn);
     }
     else if (huart->Instance == USART1)
     {
@@ -1022,7 +1013,7 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
         HAL_GPIO_DeInit(GPIOE, GPIO_PIN_7);
 
         /* USER CODE BEGIN UART7_MspDeInit 1 */
-
+        HAL_NVIC_DisableIRQ(UART7_IRQn);
         /* USER CODE END UART7_MspDeInit 1 */
     }
     else if (huart->Instance == UART8)
@@ -1040,7 +1031,7 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
         HAL_GPIO_DeInit(GPIOE, GPIO_PIN_0 | GPIO_PIN_1);
 
         /* USER CODE BEGIN UART8_MspDeInit 1 */
-
+        HAL_NVIC_DisableIRQ(UART8_IRQn);
         /* USER CODE END UART8_MspDeInit 1 */
     }
     else if (huart->Instance == UART9)
@@ -1058,7 +1049,7 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
         HAL_GPIO_DeInit(GPIOD, GPIO_PIN_14 | GPIO_PIN_15);
 
         /* USER CODE BEGIN UART9_MspDeInit 1 */
-
+        HAL_NVIC_DisableIRQ(UART9_IRQn);
         /* USER CODE END UART9_MspDeInit 1 */
     }
     else if (huart->Instance == USART1)

@@ -22,6 +22,7 @@
 #include "stability.h"
 #include "oq2_protocol.h"
 #include "oq2p_packet_builders.h"
+#include "flight_app.h"
 
 #include "debug_log.h"
 #define debug_error(fmt, ...)           debug_error(OQ2_PROTOCOL_MODULE_ID, fmt, ##__VA_ARGS__)
@@ -66,10 +67,10 @@ static void _op2p_receive(void* buf, uint16_t num)
 }
 
 
-static void application_oq2p_control_message_handler(oq2p_control_mid_t msg_id, oq2p_command_request_t cr, uint8_t* pdata, uint16_t data_length)
+void application_oq2p_control_message_handler(oq2p_control_mid_t msg_id, oq2p_command_request_t cr, uint8_t* pdata, uint16_t data_length)
 {
     __unused
-        uint8_t line_length = (data_length < 8) ? data_length : 8;
+    uint8_t line_length = (data_length < 8) ? data_length : 8;
 
     switch (msg_id)
     {
@@ -97,13 +98,8 @@ static void application_oq2p_control_message_handler(oq2p_control_mid_t msg_id, 
 
             if (index == 0xFF)
             {
-                motor_controllers_set_arm_state(1, arm);
-                motor_controllers_set_arm_state(2, arm);
-                motor_controllers_set_arm_state(3, arm);
-                motor_controllers_set_arm_state(4, arm);
+                flight_app_on_arm_command(arm);
             }
-            else
-                motor_controllers_set_arm_state(index, arm);
         }
 
         // Send response to command or request
@@ -211,6 +207,7 @@ static void application_oq2p_control_message_handler(oq2p_control_mid_t msg_id, 
 
     }
 }
+
 
 /**
  * @brief Parse the incoming message and dispatch it to the correct handler based on

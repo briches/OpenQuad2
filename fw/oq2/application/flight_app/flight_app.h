@@ -19,6 +19,7 @@
 #ifndef FLIGHT_APP_H
 #define FLIGHT_APP_H
 
+#include "motors.h"
 
 typedef enum
 {
@@ -35,6 +36,7 @@ typedef enum
     FLIGHT_MOTOR_STARTUP,
     FLIGHT_MOTOR_POST_STARTUP,
     FLIGHT_MOTOR_READY,
+    FLIGHT_READY,
 } flight_state_t;
 
 
@@ -42,5 +44,9 @@ void flight_thread(void* argument);
 void flight_app_new_stability_inputs(float * pitch_ctrl, float * roll_ctrl, float * yaw_ctrl);
 void flight_app_critical_angle_callback();
 flight_state_t flight_app_get_state();
+
+/*********************************************************************************************/
+/** Controller Functions                                                                    **/
+void flight_app_on_arm_command(motor_arm_t arm);
 
 #endif

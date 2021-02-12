@@ -20,12 +20,16 @@
 #define STABILITY_H__
 
 #include "main.h"
+#include <stdbool.h>
 
 extern I2C_HandleTypeDef hi2c2;
 extern SPI_HandleTypeDef hspi2;
 
 void stability_thread_pre_init();
 void stability_thread(void* argument);
+
+void stability_start_gyro_bias(bool onoff);
+void stability_store_gyro_bias();
 
 void imu_int1_callback();
 void imu_int2_callback();

@@ -1,3 +1,21 @@
+/*
+ * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\FATFS\Target\ffconf.h                           /
+ * Project: OQ2                                                                                    /
+ * Created Date: Saturday, February 6th 2021, 9:25:24 am                                           /
+ * Author: Brandon Riches                                                                          /
+ * Email: richesbc@gmail.com                                                                       /
+ * -----                                                                                           /
+ *                                                                                                 /
+ * Copyright (c) 2020 OpenQuad2.                                                                   /
+ * All rights reserved.                                                                            /
+ *                                                                                                 /
+ * Redistribution and use in source or binary forms, with or without modification,                 /
+ * are not permitted without express written approval of OpenQuad2                                 /
+ * -----                                                                                           /
+ * HISTORY:                                                                                        /
+*/
+
+
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
@@ -5,7 +23,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -25,6 +43,7 @@
 /-----------------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32h7xx_hal.h"
+#include "bsp_driver_sd.h"
 #include "cmsis_os.h" /* _FS_REENTRANT set to 1 and CMSIS API chosen */
 
 /*-----------------------------------------------------------------------------/
@@ -189,7 +208,7 @@
 /  To enable Trim function, also CTRL_TRIM command should be implemented to the
 /  disk_ioctl() function. */
 
-#define _FS_NOFSINFO    0 /* 0,1,2 or 3 */
+#define _FS_NOFSINFO    1 /* 0,1,2 or 3 */
 /* If you need to know correct free space on the FAT32 volume, set bit 0 of this
 /  option, and f_getfree() function at first time after volume mount will force
 /  a full FAT scan. Bit 1 controls the use of last allocated cluster number.
@@ -204,7 +223,7 @@
 / System Configurations
 /----------------------------------------------------------------------------*/
 
-#define _FS_TINY    0      /* 0:Normal or 1:Tiny */
+#define _FS_TINY    1      /* 0:Normal or 1:Tiny */
 /* This option switches tiny buffer configuration. (0:Normal or 1:Tiny)
 /  At the tiny configuration, size of file object (FIL) is reduced _MAX_SS bytes.
 /  Instead of private sector buffer eliminated from the file object, common sector

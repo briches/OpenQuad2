@@ -1,3 +1,21 @@
+/*
+ * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\FATFS\App\fatfs.c                               /
+ * Project: OQ2                                                                                    /
+ * Created Date: Saturday, February 6th 2021, 9:25:24 am                                           /
+ * Author: Brandon Riches                                                                          /
+ * Email: richesbc@gmail.com                                                                       /
+ * -----                                                                                           /
+ *                                                                                                 /
+ * Copyright (c) 2020 OpenQuad2.                                                                   /
+ * All rights reserved.                                                                            /
+ *                                                                                                 /
+ * Redistribution and use in source or binary forms, with or without modification,                 /
+ * are not permitted without express written approval of OpenQuad2                                 /
+ * -----                                                                                           /
+ * HISTORY:                                                                                        /
+*/
+
+
 /**
   ******************************************************************************
   * @file   fatfs.c
@@ -5,7 +23,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -18,6 +36,10 @@
 
 #include "fatfs.h"
 
+uint8_t retSD;    /* Return value for SD */
+char SDPath[4];   /* SD logical drive path */
+FATFS SDFatFS;    /* File system object for SD logical drive */
+FIL SDFile;       /* File object for SD */
 uint8_t retUSER;    /* Return value for USER */
 char USERPath[4];   /* USER logical drive path */
 FATFS USERFatFS;    /* File system object for USER logical drive */
@@ -29,6 +51,8 @@ FIL USERFile;       /* File object for USER */
 
 void MX_FATFS_Init(void)
 {
+  /*## FatFS: Link the SD driver ###########################*/
+//   retSD = FATFS_LinkDriver(&SD_Driver, SDPath);
   /*## FatFS: Link the USER driver ###########################*/
   retUSER = FATFS_LinkDriver(&USER_Driver, USERPath);
 

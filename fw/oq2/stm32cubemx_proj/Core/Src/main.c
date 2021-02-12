@@ -632,7 +632,7 @@ static void MX_OCTOSPI1_Init(void)
   hospi1.Instance = OCTOSPI1;
   hospi1.Init.FifoThreshold = 1;
   hospi1.Init.DualQuad = HAL_OSPI_DUALQUAD_DISABLE;
-  hospi1.Init.MemoryType = HAL_OSPI_MEMTYPE_MICRON;
+  hospi1.Init.MemoryType = HAL_OSPI_MEMTYPE_MACRONIX;
   hospi1.Init.DeviceSize = 32;
   hospi1.Init.ChipSelectHighTime = 1;
   hospi1.Init.FreeRunningClock = HAL_OSPI_FREERUNCLK_DISABLE;
@@ -712,10 +712,6 @@ static void MX_SDMMC1_SD_Init(void)
   hsd1.Init.HardwareFlowControl = SDMMC_HARDWARE_FLOW_CONTROL_DISABLE;
   hsd1.Init.ClockDiv = 0;
   hsd1.Init.TranceiverPresent = SDMMC_TRANSCEIVER_NOT_PRESENT;
-  if (HAL_SD_Init(&hsd1) != HAL_OK)
-  {
-    Error_Handler();
-  }
   /* USER CODE BEGIN SDMMC1_Init 2 */
 
   /* USER CODE END SDMMC1_Init 2 */

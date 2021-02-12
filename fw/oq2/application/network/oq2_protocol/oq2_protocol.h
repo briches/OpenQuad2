@@ -87,7 +87,12 @@ void oq2p_disconnect_callback(int8_t sock);
 uint32_t op2p_get_sent_bytes();
 uint32_t op2p_get_received_bytes();
 
+// Application needs to implement this.
+void application_oq2p_control_message_handler(oq2p_control_mid_t msg_id, oq2p_command_request_t cr, uint8_t* pdata, uint16_t data_length);
+
 void oq2p_init();
+
+
 
 
 #endif

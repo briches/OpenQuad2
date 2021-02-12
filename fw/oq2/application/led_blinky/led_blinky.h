@@ -19,6 +19,21 @@
 #ifndef _LED_BLINKY_H_
 #define _LED_BLINKY_H_
 
+typedef enum 
+{
+    LED_BLINK_MODE_NONE,
+    LED_BLINK_MODE_RED,
+    LED_BLINK_MODE_GREEN,
+    LED_BLINK_MODE_BLUE,
+    LED_BLINK_MODE_YELLOW,
+    LED_BLINK_MODE_CYAN,
+    LED_BLINK_MODE_PINK,
+    LED_BLINK_MODE_WHITE,
+    LED_BLINK_NUMBER_OF_MODES, 
+} led_blink_mode_t;
+
+void led_set_blink_mode(led_blink_mode_t mode);
+
 void led_thread(void* argument);
 
 #endif

@@ -20,6 +20,8 @@
 #include "flight_config.h"
 #include "motors.h"
 #include "esc_dfu.h"
+#include "stability.h"
+#include "led_blinky.h"
 
 #include "debug_log.h"
 
@@ -29,6 +31,10 @@
 
 static flight_state_t m_flight_state = FLIGHT_RESET;
 
+/**
+ * @brief If angle exceeds SC_SAFETY_ROLL_LIMIT or SC_SAFETY_PITCH_LIMIT, disarm immediately
+ * 
+ */
 void flight_app_critical_angle_callback()
 {
     // return;
@@ -46,6 +52,13 @@ void flight_app_critical_angle_callback()
         motor_controllers_set_arm_state(4, MOTOR_DISARMED);
 }
 
+/**
+ * @brief Process basic stability control inputs from stability thread
+ * 
+ * @param pitch_ctrl pitch pid output
+ * @param roll_ctrl roll pid output
+ * @param yaw_ctrl yaw pid output
+ */
 void flight_app_new_stability_inputs(float* pitch_ctrl, float* roll_ctrl, float* yaw_ctrl)
 {
     if (m_flight_state < FLIGHT_MOTOR_READY)
@@ -57,7 +70,26 @@ void flight_app_new_stability_inputs(float* pitch_ctrl, float* roll_ctrl, float*
     // float ctrl = 25;
     float zero = 0;
 
-    motor_controllers_control_input(pitch_ctrl, &zero, &zero);
+    motor_controllers_control_input(pitch_ctrl, roll_ctrl, yaw_ctrl);
+}
+
+/**
+ * @brief Receive arm command from controller
+ * 
+ */
+void flight_app_on_arm_command(motor_arm_t arm)
+{
+    if(arm == MOTOR_ARMED)
+    {
+        if(m_flight_state == FLIGHT_INIT)
+        {
+            m_flight_state = FLIGHT_MOTOR_ARM;
+        }
+    }
+    else
+    {
+        m_flight_state = FLIGHT_MOTOR_DISARM;
+    }
 }
 
 /**
@@ -80,6 +112,8 @@ void flight_thread(void* argument)
         /*********************************************************************************************/
         /** Flight State: Motors Disarmed. Can end up here if exceeded critical safety limits        */
         case FLIGHT_MOTOR_DISARM:
+            led_set_blink_mode(LED_BLINK_MODE_RED);
+            
             // debug_error("Disarmed");
             if (motor_controllers_get_arm_state(1) != MOTOR_DISARMED)
                 motor_controllers_set_arm_state(1, MOTOR_DISARMED);
@@ -109,20 +143,24 @@ void flight_thread(void* argument)
         /*********************************************************************************************/
         /** Flight Init: After reset perform initialization                                          */
         case FLIGHT_INIT:
-            debug_printf("Flight Init (no action)");
-            m_flight_state = FLIGHT_MOTOR_ARM;
+            // debug_printf("Flight Init (no action)");
             break;
 
         /*********************************************************************************************/
         /** Flight Motor Arm: Power on the escs and motors                                           */
         case FLIGHT_MOTOR_ARM:
             debug_printf("Armed state 1, 2, 3, 4");
-            // motor_controllers_set_arm_state(2, MOTOR_ARMED);
-            // motor_controllers_set_arm_state(3, MOTOR_ARMED);
+            motor_controllers_set_arm_state(2, MOTOR_ARMED);
+            motor_controllers_set_arm_state(3, MOTOR_ARMED);
             motor_controllers_set_arm_state(4, MOTOR_ARMED);
-            // motor_controllers_set_arm_state(1, MOTOR_ARMED);
+            motor_controllers_set_arm_state(1, MOTOR_ARMED);
 
-            m_flight_state = FLIGHT_ESC_DFU_START;
+            #ifndef ESC_DFU_ENABLED
+                m_flight_state = FLIGHT_MOTOR_STARTUP;
+            #else
+                m_flight_state = FLIGHT_ESC_DFU_START;
+            #endif
+            // m_flight_state = FLIGHT_MOTOR_READY;
             break;
         
         /*********************************************************************************************/
@@ -132,10 +170,14 @@ void flight_thread(void* argument)
             debug_printf("ESC DFU Start.");
 
             // Set reset pin, then boot pin, wait, then release reset to enter bootloader
-            motor_controllers_set_reset_state(4, MOTOR_CONTROLLER_RESET);
-            motor_controllers_set_boot_state(4, MOTOR_CONTROLLER_BOOTLOADER);
-            osDelay(5);
-            motor_controllers_set_reset_state(4, MOTOR_CONTROLLER_NOT_RESET);
+            for(int i = 1; i <= 4; i++)
+            {
+                motor_controllers_set_reset_state(i, MOTOR_CONTROLLER_RESET);
+                motor_controllers_set_boot_state(i, MOTOR_CONTROLLER_BOOTLOADER);
+                osDelay(5);
+                motor_controllers_set_reset_state(i, MOTOR_CONTROLLER_NOT_RESET);
+            }
+
 
             // ESC unit is now in bootloader. 
             osDelay(100);
@@ -173,8 +215,6 @@ void flight_thread(void* argument)
 
             
         } break;
-
-
         /*********************************************************************************************/
         /** ESC DFU Verify: Verify the flash on the escs against the file                            */
         case FLIGHT_ESC_DFU_VERIFY:
@@ -196,6 +236,8 @@ void flight_thread(void* argument)
                 osDelay(5);
                 motor_controllers_set_reset_state(4, MOTOR_CONTROLLER_NOT_RESET);
 
+                debug_printf("Verified!");
+
                 m_flight_state = FLIGHT_ESC_DFU_DONE;
             }
             else
@@ -205,13 +247,11 @@ void flight_thread(void* argument)
             }
             
         } break;
-
         /*********************************************************************************************/
         /** ESC DFU Done: The DFU should be... finished?                                             */
         case FLIGHT_ESC_DFU_DONE:
 
             break;
-
 
         /*********************************************************************************************/
         /** Motor Startup: Start the motors to the lowest speed possible                             */
@@ -220,18 +260,18 @@ void flight_thread(void* argument)
             debug_printf("Motor startup");
 
             motor_controllers_startup(2);
-            osDelay(1000);
+            osDelay(500);
 
             motor_controllers_startup(3);
-            osDelay(1000);
+            osDelay(500);
 
             motor_controllers_startup(4);
-            osDelay(1000);
+            osDelay(500);
 
             motor_controllers_startup(1);
-            osDelay(1000);
+            osDelay(500);
 
-            // m_flight_state = FLIGHT_MOTOR_POST_STARTUP;
+            m_flight_state = FLIGHT_MOTOR_POST_STARTUP;
             break;
 
         /*********************************************************************************************/
@@ -250,13 +290,32 @@ void flight_thread(void* argument)
             count++;
             thrust_pct++;
 
-            if (count >= 30)
-                m_flight_state++;
+            if (count >= 25)
+                m_flight_state = FLIGHT_MOTOR_READY;
         } break;
 
         /*********************************************************************************************/
-        /** Motor Ready: Motors are at operating speed and craft is ready for further actions        */
+        /** Motors are ramped, calculate gyro bias                                                   */
         case FLIGHT_MOTOR_READY:
+        {
+            led_set_blink_mode(LED_BLINK_MODE_CYAN);
+
+            debug_printf("Starting gyro bias.");
+
+            stability_start_gyro_bias(true);
+
+            osDelay(10000);
+
+            stability_store_gyro_bias();
+
+            m_flight_state = FLIGHT_READY;
+        } break;
+
+        /*********************************************************************************************/
+        /** Flight Ready: Motors are at operating speed and craft is ready for further actions        */
+        case FLIGHT_READY:
+            led_set_blink_mode(LED_BLINK_MODE_GREEN);
+
             break;
 
         default:

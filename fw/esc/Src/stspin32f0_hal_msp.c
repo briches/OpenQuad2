@@ -694,7 +694,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef* htim)
                         SIXSTEP_parameters.pulse_command = ((speed_command * (SIXSTEP_parameters.HF_TIMx_ARR - SIXSTEP_parameters.startup_reference)) >> BSP_BOARD_IF_TIMx_MIN2MAX_BITS) + SIXSTEP_parameters.startup_reference;
 
                         // Could increase the resolution of pulse command. What does the speed_target version of control use that is so much more contigious?
-                        SEGGER_RTT_printf(0, "Pulse command: %d\r\n", SIXSTEP_parameters.pulse_command);
+                        // SEGGER_RTT_printf(0, "Pulse command: %d\r\n", SIXSTEP_parameters.pulse_command);
                     #else
                         SIXSTEP_parameters.speed_target = ((speed_command * (MAX_SPEED - MIN_SPEED)) >> BSP_BOARD_IF_TIMx_MIN2MAX_BITS) + MIN_SPEED;
                         if (SIXSTEP_parameters.speed_target > MAX_SPEED)

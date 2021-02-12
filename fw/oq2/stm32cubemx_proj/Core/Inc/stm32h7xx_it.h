@@ -61,7 +61,10 @@ void USART1_IRQHandler(void);
 void USART2_IRQHandler(void);
 void EXTI15_10_IRQHandler(void);
 void UART5_IRQHandler(void);
+void OTG_HS_EP1_OUT_IRQHandler(void);
+void OTG_HS_EP1_IN_IRQHandler(void);
 void OTG_HS_IRQHandler(void);
+void OCTOSPI1_IRQHandler(void);
 void LPTIM1_IRQHandler(void);
 void DMAMUX1_OVR_IRQHandler(void);
 /* USER CODE BEGIN EFP */

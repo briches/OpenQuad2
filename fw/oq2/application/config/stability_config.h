@@ -41,12 +41,12 @@ MEMS Config
 /***************************************************************************************************
 Default Sensor Offsets, cal values, etc
 */
-#define SC_MFX_ATIME                    (0.899)
-// #define SC_MFX_ATIME                    (0.2)
+#define SC_MFX_ATIME                    (5)
+// #define SC_MFX_ATIME                    (1)
 #define SC_FACTORY_PITCH_OFFSET_DEG     (0)
 #define SC_FACTORY_ROLL_OFFSET_DEG      (0)
-#define SC_SAFETY_PITCH_LIMIT           20.0
-#define SC_SAFETY_ROLL_LIMIT            1000
+#define SC_SAFETY_PITCH_LIMIT           30.0
+#define SC_SAFETY_ROLL_LIMIT            30.0
 
 #define SC_FACTORY_1G_VALUE_MPS         (9.81f)
 
@@ -59,26 +59,26 @@ Attitude PID values
 // #define SC_PITCH_PID_P                  1.5
 // #define SC_PITCH_PID_I                  0.5
 // #define SC_PITCH_PID_D                  0.3
-#define SC_PITCH_PID_P                  2.0
-#define SC_PITCH_PID_I                  1
-#define SC_PITCH_PID_D                  0.5
+#define SC_PITCH_PID_P                  4
+#define SC_PITCH_PID_I                  0.3
+#define SC_PITCH_PID_D                  0.4
 #define SC_PITCH_PID_P_LIM              0
 #define SC_PITCH_PID_I_LIM              0
 #define SC_PITCH_PID_D_LIM              0
 
-#define SC_ROLL_PID_P                   0
-#define SC_ROLL_PID_I                   0
-#define SC_ROLL_PID_D                   0
+#define SC_ROLL_PID_P                   4
+#define SC_ROLL_PID_I                   0.3
+#define SC_ROLL_PID_D                   0.4
 #define SC_ROLL_PID_P_LIM               0
 #define SC_ROLL_PID_I_LIM               0
 #define SC_ROLL_PID_D_LIM               0
 
-#define SC_YAW_PID_P                    0
-#define SC_YAW_PID_I                    0
-#define SC_YAW_PID_D                    0
-#define SC_YAW_PID_P_LIM                0
-#define SC_YAW_PID_I_LIM                0
-#define SC_YAW_PID_D_LIM                0
+#define SC_YAW_PID_P                    0.5
+#define SC_YAW_PID_I                    0.05
+#define SC_YAW_PID_D                    0.001
+#define SC_YAW_PID_P_LIM                50
+#define SC_YAW_PID_I_LIM                50
+#define SC_YAW_PID_D_LIM                25
 
 /*********************************************************************************************/
 /* FIR Filter params ------------------------------------------------------------------------*/

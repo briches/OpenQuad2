@@ -31,8 +31,8 @@
 // #define CONFIG_USE_ASYNC_API 1
 
 
-#define OQ2P_TX_BUFSIZE (8 * 1024)
-#define OQ2P_RX_BUFSIZE (8 * 1024)
+#define OQ2P_TX_BUFSIZE (4 * 1024)
+#define OQ2P_RX_BUFSIZE (4 * 1024)
 
 
 #define CONF_WINC_SPI_INT_PIO_ID        0
@@ -48,7 +48,7 @@
 #define MAIN_WIFI_M2M_BUFFER_SIZE 512
 #define MAIN_WIFI_M2M_PRODUCT_NAME "heybb"
 
-#define MAIN_WIFI_M2M_SERVER_PORT 1337
+#define MAIN_WIFI_M2M_SERVER_PORT 1338
 #define MAIN_WIFI_M2M_SERVER_IP   0xC0A80141
 
 /** Default subnet mask in provisioning mode */

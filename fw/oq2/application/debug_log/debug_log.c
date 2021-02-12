@@ -5,7 +5,7 @@
  * Author: Brandon Riches                                                                          /
  * Email: richesbc@gmail.com                                                                       /
  * -----                                                                                           /
- * Last Modified: Sun Jan 24 2021                                                                  /
+ * Last Modified: Fri Feb 12 2021                                                                  /
  * Modified By: Brandon Riches                                                                     /
  * -----                                                                                           /
  *                                                                                                 /
@@ -75,7 +75,10 @@ const char* module_stringtable[] =
     "lwip",
     "flight",
     "esc_dfu",
-    "stm_dfu"
+    "stm_dfu",
+    "qspi_flash",
+    "fatfs_io",
+    "fmanager"
 };
 
 
@@ -298,7 +301,7 @@ void debug_printf(module_id_t source, const char* p_format, ...)
     else if (source == DEBUG_CYAN_HIGHLIGHT_SELECT)
         _puts(&buf, VT100_TEXT_BRIGHT_CYAN);
 
-    // Print the timestamp
+    // // Print the timestamp
     if (timestamp_enabled)
         debug_print_timestamp(&buf);
 

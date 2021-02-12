@@ -29,7 +29,7 @@
  * 
  */
 #define MC_STARTUP_TON_US_PERIOD    900
-#define MC_MIN_TON_US_PERIOD        1060
+#define MC_MIN_TON_US_PERIOD        1061
 #define MC_MAX_TON_US_PERIOD        2084
 #define MC_TON_US_RANGE             (MC_MAX_TON_US_PERIOD - MC_MIN_TON_US_PERIOD)
 

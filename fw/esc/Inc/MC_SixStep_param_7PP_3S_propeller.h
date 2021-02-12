@@ -76,11 +76,11 @@
 **************************************************************************** */   
 #define NUM_POLE_PAIRS                       7      /*!< Number of Motor Pole pairs */
 #define DIRECTION                            0      /*!< Set motor direction CW = 0 and CCW = 1*/
-#define TARGET_SPEED_OPEN_LOOP            3000      /*!< Target speed in open loop control */
-#define TARGET_SPEED                     3000      /*!< Target speed in closed loop control */
+#define TARGET_SPEED_OPEN_LOOP            6000      /*!< Target speed in open loop control */
+#define TARGET_SPEED                      6000      /*!< Target speed in closed loop control */
 
-#define MIN_SPEED                         3000
-#define MAX_SPEED                        20000      /*!< Motor rated max speed */
+#define MIN_SPEED                         6000
+#define MAX_SPEED                        15000      /*!< Motor rated max speed */
 
 /* **************************************************************************** 
  ==============================================================================   
@@ -99,7 +99,7 @@
     // #define KP_GAIN                           48       /*!< Kp parameter for PID regulator */
     // #define KI_GAIN                            5       /*!< Ti parameter for PID regulator */
     // #define KD_GAIN                            2      /*!< Td parameter for PID regulator */    
-#define KP_GAIN                             200       /*!< Kp parameter for PID regulator */
+#define KP_GAIN                             800       /*!< Kp parameter for PID regulator */
 #define KI_GAIN                             5       /*!< Ti parameter for PID regulator */
 #define KD_GAIN                             4      /*!< Td parameter for PID regulator */             
 #else
@@ -134,7 +134,7 @@
 #define ACC                              70000     /*!< Mechanical acceleration rate (setting available in manual mode, LOAD_TYPE = 0) */
 #define MINIMUM_ACC                        500     /*!< Mechanical acceleration rate for BIG load application */
 #define NUMBER_OF_STEPS                  65535     /*!< Number of elements for motor start-UP (max value 65535)*/
-#define TIME_FOR_ALIGN                    150     /*!< Time for alignment (msec)*/
+#define TIME_FOR_ALIGN                    300     /*!< Time for alignment (msec)*/
 #define BUTTON_DELAY                      1000     /*!< Delay time to enable push button for new command (1 = 1msec)*/
 
 /*!< ********************* Closed Loop control *******************************/
@@ -159,8 +159,8 @@
 #define ZC_READ_TO_PWM_EDGE_POST_GUARD_TIME_CYC  (ZC_READ_TO_PWM_EDGE_POST_GUARD_TIME_NS/HF_COUNTER_CYCLE_TIME_NS)
 
 /*!< Speed parameters */
-#define SPEED_LOOP_TIME                      1     /*!< Speed Loop time (1 = 1msec) */
-#define FILTER_DEEP_SHIFT                    4
+#define SPEED_LOOP_TIME                      4     /*!< Speed Loop time (1 = 1msec) */
+#define FILTER_DEEP_SHIFT                    6
 #define FILTER_DEEP     (1<<FILTER_DEEP_SHIFT)     /*!< Number of bits for digital filter */
 
 /*!< Motor stall detection parameters */

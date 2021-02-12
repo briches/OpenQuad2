@@ -65,7 +65,7 @@ void setup() {
     println("Test");
     quad = loadShape("Frame v9.obj");
 
-    mServer = new Server(this, 1337, "192.168.1.65");
+    mServer = new Server(this, 1338, "192.168.1.65");
 }
 
 
@@ -143,61 +143,68 @@ public void keyPressed()
             if(armed1 == OQ2P_MOTOR_DISARM)
             {
                 armed1 = OQ2P_MOTOR_ARM;
-                println("ARM 1");
-                messageList.add(oq2p_arm_message(OQ2P_MOTOR_INDEX_1, OQ2P_MOTOR_ARM) );
+                armed2 = armed1;
+                armed3 = armed1;
+                armed4 = armed1;
+                println("ARM ALL");
+                messageList.add(oq2p_arm_message(OQ2P_MOTOR_INDEX_ALL, OQ2P_MOTOR_ARM) );
             }
             else
             {
                 armed1 = OQ2P_MOTOR_DISARM;
-                println("DISARM 1");
-                messageList.add(oq2p_arm_message(OQ2P_MOTOR_INDEX_1, OQ2P_MOTOR_DISARM) );
+                armed2 = armed1;
+                armed3 = armed1;
+                armed4 = armed1;
+                println("DISARM ALL");
+                messageList.add(oq2p_arm_message(OQ2P_MOTOR_INDEX_ALL, OQ2P_MOTOR_DISARM) );
             }
         break;
 
-        case '2':
-            if(armed2 == OQ2P_MOTOR_DISARM)
-            {
-                armed2 = OQ2P_MOTOR_ARM;
-                println("ARM 2");
-                messageList.add(oq2p_arm_message(OQ2P_MOTOR_INDEX_2, OQ2P_MOTOR_ARM) );
-            }
-            else
-            {
-                armed2 = OQ2P_MOTOR_DISARM;
-                println("DISARM 2");
-                messageList.add(oq2p_arm_message(OQ2P_MOTOR_INDEX_2, OQ2P_MOTOR_DISARM) );
-            }
-        break;
+        //case '2':
+        //    if(armed2 == OQ2P_MOTOR_DISARM)
+        //    {
+        //        armed2 = OQ2P_MOTOR_ARM;
+        //        println("ARM 2");
+        //        messageList.add(oq2p_arm_message(OQ2P_MOTOR_INDEX_2, OQ2P_MOTOR_ARM) );
+        //    }
+        //    else
+        //    {
+        //        armed2 = OQ2P_MOTOR_DISARM;
+        //        println("DISARM 2");
+        //        messageList.add(oq2p_arm_message(OQ2P_MOTOR_INDEX_2, OQ2P_MOTOR_DISARM) );
+        //    }
+        //break;
 
-        case '3':
-            if(armed3 == OQ2P_MOTOR_DISARM)
-            {
-                armed3 = OQ2P_MOTOR_ARM;
-                println("ARM 3");
-                messageList.add(oq2p_arm_message(OQ2P_MOTOR_INDEX_3, OQ2P_MOTOR_ARM) );
-            }
-            else
-            {
-                armed3 = OQ2P_MOTOR_DISARM;
-                println("DISARM 3");
-                messageList.add(oq2p_arm_message(OQ2P_MOTOR_INDEX_3, OQ2P_MOTOR_DISARM) );
-            }
-        break;
+        //case '3':
+        //    if(armed3 == OQ2P_MOTOR_DISARM)
+        //    {
+        //        armed3 = OQ2P_MOTOR_ARM;
+        //        println("ARM 3");
+        //        messageList.add(oq2p_arm_message(OQ2P_MOTOR_INDEX_3, OQ2P_MOTOR_ARM) );
+        //    }
+        //    else
+        //    {
+        //        armed3 = OQ2P_MOTOR_DISARM;
+        //        println("DISARM 3");
+        //        messageList.add(oq2p_arm_message(OQ2P_MOTOR_INDEX_3, OQ2P_MOTOR_DISARM) );
+        //    }
+        //break;
 
-        case '4':
-            if(armed4 == OQ2P_MOTOR_DISARM)
-            {
-                armed4 = OQ2P_MOTOR_ARM;
-                println("ARM 4");
-                messageList.add(oq2p_arm_message(OQ2P_MOTOR_INDEX_4, OQ2P_MOTOR_ARM) );
-            }
-            else
-            {
-                armed4 = OQ2P_MOTOR_DISARM;
-                println("DISARM 4");
-                messageList.add(oq2p_arm_message(OQ2P_MOTOR_INDEX_4, OQ2P_MOTOR_DISARM) );
-            }
-        break;
+        //case '4':
+        //    if(armed4 == OQ2P_MOTOR_DISARM)
+        //    {
+        //        armed4 = OQ2P_MOTOR_ARM;
+        //        println("ARM 4");
+        //        messageList.add(oq2p_arm_message(OQ2P_MOTOR_INDEX_4, OQ2P_MOTOR_ARM) );
+        //    }
+        //    else
+        //    {
+        //        armed4 = OQ2P_MOTOR_DISARM;
+        //        println("DISARM 4");
+        //        messageList.add(oq2p_arm_message(OQ2P_MOTOR_INDEX_4, OQ2P_MOTOR_DISARM) );
+        //    }
+        //break;
+        
 
         case 'w':
         {
@@ -279,16 +286,13 @@ public void keyPressed()
     -----------------------------------------------------------------------------*/
 void serverEvent(Server someServer, Client someClient) 
 {
-    if(connectedStatus == false)
-    {
-        quadSocket = someClient;
+      quadSocket = someClient;
 
-        connectedStatus = true;
-    
-        println("Connected to quad at IP " + quadSocket.ip());
+      connectedStatus = true;
+  
+      println("Connected to quad at IP " + quadSocket.ip());
 
-        read_from_socket(quadSocket);
-    }
+      read_from_socket(quadSocket);
 }
 
 void disconnectEvent(Client someClient) 

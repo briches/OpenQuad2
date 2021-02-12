@@ -1,3 +1,21 @@
+/*
+ * File: c:\Users\Brandon\Desktop\OpenQuad2\fw\oq2\FATFS\App\fatfs.h                               /
+ * Project: OQ2                                                                                    /
+ * Created Date: Saturday, February 6th 2021, 9:25:24 am                                           /
+ * Author: Brandon Riches                                                                          /
+ * Email: richesbc@gmail.com                                                                       /
+ * -----                                                                                           /
+ *                                                                                                 /
+ * Copyright (c) 2020 OpenQuad2.                                                                   /
+ * All rights reserved.                                                                            /
+ *                                                                                                 /
+ * Redistribution and use in source or binary forms, with or without modification,                 /
+ * are not permitted without express written approval of OpenQuad2                                 /
+ * -----                                                                                           /
+ * HISTORY:                                                                                        /
+*/
+
+
 /**
   ******************************************************************************
   * @file   fatfs.h
@@ -5,7 +23,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -25,12 +43,17 @@
 
 #include "ff.h"
 #include "ff_gen_drv.h"
+// #include "sd_diskio.h" /* defines SD_Driver as external */
 #include "user_diskio.h" /* defines USER_Driver as external */
 
 /* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
 
+extern uint8_t retSD; /* Return value for SD */
+extern char SDPath[4]; /* SD logical drive path */
+extern FATFS SDFatFS; /* File system object for SD logical drive */
+extern FIL SDFile; /* File object for SD */
 extern uint8_t retUSER; /* Return value for USER */
 extern char USERPath[4]; /* USER logical drive path */
 extern FATFS USERFatFS; /* File system object for USER logical drive */

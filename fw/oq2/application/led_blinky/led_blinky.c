@@ -19,6 +19,49 @@
 #include "main.h"
 #include "app_config.h"
 
+static led_blink_mode_t m_mode = LED_BLINK_MODE_WHITE;
+
+__always_inline
+static void red_off()
+{
+    HAL_GPIO_WritePin(LED_R_GPIO_Port, LED_R_Pin, GPIO_PIN_RESET);
+}
+
+__always_inline
+static void red_on()
+{
+    HAL_GPIO_WritePin(LED_R_GPIO_Port, LED_R_Pin, GPIO_PIN_SET);
+}
+
+__always_inline
+static void green_off()
+{
+    HAL_GPIO_WritePin(LED_G_GPIO_Port, LED_G_Pin, GPIO_PIN_RESET);
+}
+
+__always_inline
+static void green_on()
+{
+    HAL_GPIO_WritePin(LED_G_GPIO_Port, LED_G_Pin, GPIO_PIN_SET);
+}
+
+__always_inline
+static void blue_off()
+{
+    HAL_GPIO_WritePin(LED_B_GPIO_Port, LED_B_Pin, GPIO_PIN_RESET);
+}
+
+__always_inline
+static void blue_on()
+{
+    HAL_GPIO_WritePin(LED_B_GPIO_Port, LED_B_Pin, GPIO_PIN_SET);
+}
+
+void led_set_blink_mode(led_blink_mode_t mode)
+{
+    m_mode = mode;
+}
+
 /**
  * @brief  Function implementing the led blinky task thread.
  * @param  argument: Not used
@@ -30,39 +73,59 @@ void led_thread(void* argument)
 
     for (;;)
     {
-        // HAL_GPIO_WritePin(LED_G_GPIO_Port, LED_G_Pin, GPIO_PIN_SET);
-        // HAL_Delay(10);
-        // HAL_GPIO_WritePin(LED_G_GPIO_Port, LED_G_Pin, GPIO_PIN_RESET);
-        // HAL_Delay(90);
+        led_blink_mode_t this_round = m_mode;
 
-        switch(m_state)
+        switch (this_round)
         {
-            case 0:
-            {
-                m_state = 1;
-                HAL_GPIO_WritePin(LED_G_GPIO_Port, LED_G_Pin, GPIO_PIN_SET);
-                osDelay(LED_THREAD_PERIOD);
 
-            } break;
-
-            case 1:
-            {
-                m_state = 2;
-                HAL_GPIO_WritePin(LED_R_GPIO_Port, LED_R_Pin, GPIO_PIN_SET);
-                osDelay(LED_THREAD_PERIOD);
-            } break;
-
-            case 2:
-            {
-                m_state = 0;
-                HAL_GPIO_WritePin(LED_B_GPIO_Port, LED_B_Pin, GPIO_PIN_SET);
-                osDelay(LED_THREAD_PERIOD);
-            } break;
+        case LED_BLINK_MODE_NONE:
+            red_off();
+            green_off();
+            blue_off();
+            break;
+        case LED_BLINK_MODE_RED:
+            red_on();
+            green_off();
+            blue_off();
+            break;
+        case LED_BLINK_MODE_GREEN:
+            red_off();
+            green_on();
+            blue_off();
+            break;
+        case LED_BLINK_MODE_BLUE:
+            red_off();
+            green_off();
+            blue_on();
+            break;
+        case LED_BLINK_MODE_YELLOW:
+            red_on();
+            green_on();
+            blue_off();
+            break;
+        case LED_BLINK_MODE_CYAN:
+            red_off();
+            green_on();
+            blue_on();
+            break;
+        case LED_BLINK_MODE_PINK:
+            red_on();
+            green_off();
+            blue_on();
+            break;
+        case LED_BLINK_MODE_WHITE:
+            red_on();
+            green_on();
+            blue_on();
+            break;
         }
 
-        HAL_GPIO_WritePin(LED_R_GPIO_Port, LED_R_Pin, GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(LED_B_GPIO_Port, LED_B_Pin, GPIO_PIN_RESET);
-        HAL_GPIO_WritePin(LED_G_GPIO_Port, LED_G_Pin, GPIO_PIN_RESET);
-        osDelay(LED_THREAD_PERIOD);
+        osDelay(LED_THREAD_PERIOD / 5);
+
+        red_off();
+        green_off();
+        blue_off();
+
+        osDelay(LED_THREAD_PERIOD * 4/5);
     }
 }

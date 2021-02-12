@@ -23,8 +23,12 @@
 /* External variables --------------------------------------------------------*/
 extern PCD_HandleTypeDef hpcd_USB_OTG_HS;
 extern LPTIM_HandleTypeDef hlptim1;
+extern OSPI_HandleTypeDef hospi1;
 extern UART_HandleTypeDef huart5;
 extern UART_HandleTypeDef huart2;
+extern UART_HandleTypeDef huart7;   // Motor 1
+extern UART_HandleTypeDef huart8;   // Motor 2
+extern UART_HandleTypeDef huart9;   // Motor 3
 extern UART_HandleTypeDef huart1;   // Motor 4
 extern TIM_HandleTypeDef htim2;
 
@@ -131,6 +135,14 @@ void EXTI9_5_IRQHandler(void)
 }
 
 /**
+  * @brief This function handles OCTOSPI1 global interrupt.
+  */
+void OCTOSPI1_IRQHandler(void)
+{
+  HAL_OSPI_IRQHandler(&hospi1);
+}
+
+/**
   * @brief This function handles TIM2 global interrupt.
   */
 void TIM2_IRQHandler(void)
@@ -160,6 +172,30 @@ void USART2_IRQHandler(void)
 void USART1_IRQHandler(void)
 {
   HAL_UART_IRQHandler(&huart1);
+}
+
+/**
+  * @brief This function handles USART5 global interrupt.
+  */
+void UART7_IRQHandler(void)
+{
+  HAL_UART_IRQHandler(&huart7);
+}
+
+/**
+  * @brief This function handles USART5 global interrupt.
+  */
+void UART8_IRQHandler(void)
+{
+  HAL_UART_IRQHandler(&huart8);
+}
+
+/**
+  * @brief This function handles USART5 global interrupt.
+  */
+void UART9_IRQHandler(void)
+{
+  HAL_UART_IRQHandler(&huart9);
 }
 
 /**

@@ -15,8 +15,6 @@
  * HISTORY:                                                                                        /
 */
 
-
-
 #include "arm_math.h"
 #include "main.h"
 #include "app_config.h"
@@ -33,6 +31,8 @@
 #include "flight_app.h"
 #include "motors.h"
 #include "esc_dfu.h"
+#include "qspi_flash.h"
+#include "file_manager.h"
 
 #include "debug_log.h"
 #define debug_error(fmt, ...)           debug_error(MAIN_MODULE_ID, fmt, ##__VA_ARGS__)
@@ -121,10 +121,21 @@ const osThreadAttr_t network_thread_attributes = {
   .stack_size = NETWORK_THREAD_STACK_SIZE,
 };
 
+/* Definitions for File Manager thread */
+osThreadId_t fmanager_thread_handle;
+const osThreadAttr_t fmanager_thread_attributes = {
+  .name = "file manager",
+  .priority = (osPriority_t)FILEMANAGER_THREAD_PRIO,
+  .stack_size = FILEMANAGER_THREAD_STACK_SIZE,
+};
+
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 
+/*********************************************************************************************/
+/* Interrupt Callbacks ----------------------------------------------------------------------*/
+/*********************************************************************************************/
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
@@ -168,10 +179,23 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 {
+    if(huart == &huart7) // Motor controller 1
+    {
+        esc_dfu_tx_complete_callback(1);
+    }
+    if(huart == &huart8) // Motor controller 2
+    {
+        esc_dfu_tx_complete_callback(2);
+    }
+    if(huart == &huart9) // Motor controller 3
+    {
+        esc_dfu_tx_complete_callback(3);
+    }
     if(huart == &huart1) // Motor controller 4
     {
         esc_dfu_tx_complete_callback(4);
     }
+
 
     if(huart == &huart2)
     {
@@ -186,6 +210,18 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
+    if(huart == &huart7) // Motor controller 1
+    {
+        esc_dfu_rx_complete_callback(1);
+    }
+    if(huart == &huart8) // Motor controller 2
+    {
+        esc_dfu_rx_complete_callback(2);
+    }
+    if(huart == &huart9) // Motor controller 3
+    {
+        esc_dfu_rx_complete_callback(3);
+    }
     if(huart == &huart1) // Motor controller 4
     {
         esc_dfu_rx_complete_callback(4);
@@ -222,6 +258,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
 
 
 
+/*********************************************************************************************/
+/* Main -------------------------------------------------------------------------------------*/
+/*********************************************************************************************/
 /**
   * @brief  The application entry point.
   * @retval int
@@ -249,7 +288,7 @@ int main(void)
     // MX_HASH_Init();
     // MX_I2C1_Init();
     MX_I2C2_Init(); // LSM9DS1
-    // MX_OCTOSPI1_Init();
+    MX_OCTOSPI1_Init();
     // MX_RNG_Init();
     // MX_SDMMC1_SD_Init();
     MX_SPI1_Init(); // Wifi
@@ -259,12 +298,12 @@ int main(void)
     MX_LPTIM1_Init();
     // MX_UART4_Init();
     MX_UART5_Init(); // MAX_M8C UART
-    // MX_UART7_Init();
-    // MX_UART8_Init();
-    // MX_UART9_Init();
-    // MX_USART1_UART_Init(); // Motor4 bootloader - Call later.
+    // MX_UART7_Init(); // Motor 1 uart boot
+    // MX_UART8_Init(); // Motor 2 uart boot
+    // MX_UART9_Init(); // Motor 3 uart boot
+    // MX_USART1_UART_Init(); // Motor 4 boot
     MX_USART2_UART_Init(); // Debug uart
-    // MX_FATFS_Init();
+    MX_FATFS_Init();
     MX_ADC3_Init();
 
     /*********************************************************************************************/
@@ -292,23 +331,26 @@ int main(void)
 
     /*********************************************************************************************/
     /* Start threads ----------------------------------------------------------------------------*/
-    // network_thread_handle = 
-    // osThreadNew(network_thread,       NULL, &network_thread_attributes);
+    network_thread_handle = 
+    osThreadNew(network_thread,         NULL, &network_thread_attributes);
 
     flight_thread_handle = 
-    osThreadNew(flight_thread,       NULL, &flight_thread_attributes);
+    osThreadNew(flight_thread,          NULL, &flight_thread_attributes);
 
     stability_thread_handle = 
-    osThreadNew(stability_thread,     NULL, &stability_thread_attributes);
+    osThreadNew(stability_thread,       NULL, &stability_thread_attributes);
 
     // location_thread_handle = 
-    // osThreadNew(location_thread,      NULL, &location_thread_attributes);
+    // osThreadNew(location_thread,        NULL, &location_thread_attributes);
 
-    task_manager_thread_handle = 
-    osThreadNew(task_manager_thread,  NULL, &task_manager_attributes);
+    // task_manager_thread_handle = 
+    // osThreadNew(task_manager_thread,    NULL, &task_manager_attributes);
 
-    // led_thread_handle = 
-    // osThreadNew(led_thread,           NULL, &led_thread_attributes);
+    led_thread_handle = 
+    osThreadNew(led_thread,             NULL, &led_thread_attributes);
+
+    // fmanager_thread_handle =
+    // osThreadNew(file_manager_thread,    NULL, &fmanager_thread_attributes);
 
     /*********************************************************************************************/
     /* Start scheduler --------------------------------------------------------------------------*/
@@ -675,20 +717,20 @@ void MX_OCTOSPI1_Init(void)
     OSPIM_CfgTypeDef sOspiManagerCfg = { 0 };
     /* OCTOSPI1 parameter configuration*/
     hospi1.Instance = OCTOSPI1;
-    hospi1.Init.FifoThreshold = 1;
+    hospi1.Init.FifoThreshold = 4;
     hospi1.Init.DualQuad = HAL_OSPI_DUALQUAD_DISABLE;
     hospi1.Init.MemoryType = HAL_OSPI_MEMTYPE_MICRON;
     hospi1.Init.DeviceSize = 32;
-    hospi1.Init.ChipSelectHighTime = 1;
+    hospi1.Init.ChipSelectHighTime = 2;
     hospi1.Init.FreeRunningClock = HAL_OSPI_FREERUNCLK_DISABLE;
     hospi1.Init.ClockMode = HAL_OSPI_CLOCK_MODE_0;
     hospi1.Init.WrapSize = HAL_OSPI_WRAP_NOT_SUPPORTED;
-    hospi1.Init.ClockPrescaler = 1;
+    hospi1.Init.ClockPrescaler = 16;
     hospi1.Init.SampleShifting = HAL_OSPI_SAMPLE_SHIFTING_NONE;
-    hospi1.Init.DelayHoldQuarterCycle = HAL_OSPI_DHQC_DISABLE;
-    hospi1.Init.ChipSelectBoundary = 1;
+    hospi1.Init.DelayHoldQuarterCycle = HAL_OSPI_DHQC_ENABLE;
+    hospi1.Init.ChipSelectBoundary = 0;
     hospi1.Init.ClkChipSelectHighTime = 0;
-    hospi1.Init.DelayBlockBypass = HAL_OSPI_DELAY_BLOCK_BYPASSED;
+    hospi1.Init.DelayBlockBypass = HAL_OSPI_DELAY_BLOCK_USED;
     hospi1.Init.MaxTran = 0;
     hospi1.Init.Refresh = 0;
     if (HAL_OSPI_Init(&hospi1) != HAL_OK)
@@ -1029,19 +1071,11 @@ void MX_UART5_Init(void)
   */
 void MX_UART7_Init(void)
 {
-
-    /* USER CODE BEGIN UART7_Init 0 */
-
-    /* USER CODE END UART7_Init 0 */
-
-    /* USER CODE BEGIN UART7_Init 1 */
-
-    /* USER CODE END UART7_Init 1 */
     huart7.Instance = UART7;
     huart7.Init.BaudRate = 115200;
-    huart7.Init.WordLength = UART_WORDLENGTH_8B;
+    huart7.Init.WordLength = UART_WORDLENGTH_9B;
     huart7.Init.StopBits = UART_STOPBITS_1;
-    huart7.Init.Parity = UART_PARITY_NONE;
+    huart7.Init.Parity = UART_PARITY_EVEN;
     huart7.Init.Mode = UART_MODE_TX_RX;
     huart7.Init.HwFlowCtl = UART_HWCONTROL_NONE;
     huart7.Init.OverSampling = UART_OVERSAMPLING_16;
@@ -1064,10 +1098,6 @@ void MX_UART7_Init(void)
     {
         Error_Handler();
     }
-    /* USER CODE BEGIN UART7_Init 2 */
-
-    /* USER CODE END UART7_Init 2 */
-
 }
 
 /**
@@ -1077,19 +1107,11 @@ void MX_UART7_Init(void)
   */
 void MX_UART8_Init(void)
 {
-
-    /* USER CODE BEGIN UART8_Init 0 */
-
-    /* USER CODE END UART8_Init 0 */
-
-    /* USER CODE BEGIN UART8_Init 1 */
-
-    /* USER CODE END UART8_Init 1 */
     huart8.Instance = UART8;
     huart8.Init.BaudRate = 115200;
-    huart8.Init.WordLength = UART_WORDLENGTH_8B;
+    huart8.Init.WordLength = UART_WORDLENGTH_9B;
     huart8.Init.StopBits = UART_STOPBITS_1;
-    huart8.Init.Parity = UART_PARITY_NONE;
+    huart8.Init.Parity = UART_PARITY_EVEN;
     huart8.Init.Mode = UART_MODE_TX_RX;
     huart8.Init.HwFlowCtl = UART_HWCONTROL_NONE;
     huart8.Init.OverSampling = UART_OVERSAMPLING_16;
@@ -1112,10 +1134,6 @@ void MX_UART8_Init(void)
     {
         Error_Handler();
     }
-    /* USER CODE BEGIN UART8_Init 2 */
-
-    /* USER CODE END UART8_Init 2 */
-
 }
 
 /**
@@ -1125,19 +1143,11 @@ void MX_UART8_Init(void)
   */
 void MX_UART9_Init(void)
 {
-
-    /* USER CODE BEGIN UART9_Init 0 */
-
-    /* USER CODE END UART9_Init 0 */
-
-    /* USER CODE BEGIN UART9_Init 1 */
-
-    /* USER CODE END UART9_Init 1 */
     huart9.Instance = UART9;
     huart9.Init.BaudRate = 115200;
-    huart9.Init.WordLength = UART_WORDLENGTH_8B;
+    huart9.Init.WordLength = UART_WORDLENGTH_9B;
     huart9.Init.StopBits = UART_STOPBITS_1;
-    huart9.Init.Parity = UART_PARITY_NONE;
+    huart9.Init.Parity = UART_PARITY_EVEN;
     huart9.Init.Mode = UART_MODE_TX_RX;
     huart9.Init.HwFlowCtl = UART_HWCONTROL_NONE;
     huart9.Init.OverSampling = UART_OVERSAMPLING_16;
@@ -1160,10 +1170,6 @@ void MX_UART9_Init(void)
     {
         Error_Handler();
     }
-    /* USER CODE BEGIN UART9_Init 2 */
-
-    /* USER CODE END UART9_Init 2 */
-
 }
 
 /**
@@ -1173,14 +1179,6 @@ void MX_UART9_Init(void)
   */
 void MX_USART1_UART_Init(void)
 {
-
-    /* USER CODE BEGIN USART1_Init 0 */
-
-    /* USER CODE END USART1_Init 0 */
-
-    /* USER CODE BEGIN USART1_Init 1 */
-
-    /* USER CODE END USART1_Init 1 */
     huart1.Instance = USART1;
     huart1.Init.BaudRate = 115200;
     huart1.Init.WordLength = UART_WORDLENGTH_9B;
@@ -1218,7 +1216,7 @@ void MX_USART1_UART_Init(void)
 void MX_USART2_UART_Init(void)
 {
     huart2.Instance = USART2;
-    huart2.Init.BaudRate = 1000000;
+    huart2.Init.BaudRate = 2000000;
     huart2.Init.WordLength = UART_WORDLENGTH_8B;
     huart2.Init.StopBits = UART_STOPBITS_1;
     huart2.Init.Parity = UART_PARITY_NONE;
@@ -1416,6 +1414,14 @@ static void MX_GPIO_Init(void)
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
 
+    // Init the flash nRESET in "RESET"
+    HAL_GPIO_WritePin(FLASH_NRESET_GPIO_Port, FLASH_NRESET_Pin, GPIO_PIN_RESET);
+    GPIO_InitStruct.Pin = FLASH_NRESET_Pin;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    HAL_GPIO_Init(FLASH_NRESET_GPIO_Port, &GPIO_InitStruct);
+
     #endif
 
     /* EXTI interrupt init*/
@@ -1434,6 +1440,14 @@ void Error_Handler(void)
 {
     /* USER CODE BEGIN Error_Handler_Debug */
     /* User can add his own implementation to report the HAL error return state */
+    
+    debug_error("Error handler.");
+
+    while(1)
+    {
+        __WFE();
+    }
+
     __disable_irq();
     while (1)
     {

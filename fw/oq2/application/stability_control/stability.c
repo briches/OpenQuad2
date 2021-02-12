@@ -210,14 +210,14 @@ static void lsm9ds1_init()
     /* Configure filtering chain - See datasheet for filtering chain details */
     /* Accelerometer filtering chain */
     lsm9ds1_xl_filter_aalias_bandwidth_set(&dev_ctx_imu, LSM9DS1_AUTO);
-    lsm9ds1_xl_filter_lp_bandwidth_set(&dev_ctx_imu, LSM9DS1_LP_ODR_DIV_50);
+    lsm9ds1_xl_filter_lp_bandwidth_set(&dev_ctx_imu, LSM9DS1_LP_ODR_DIV_400);
     lsm9ds1_xl_filter_out_path_set(&dev_ctx_imu, LSM9DS1_LP_OUT);
 
     /* Gyroscope filtering chain */
     // Ultralight LP is highest cutoff
     // Extreme HP is highest cutoff
     lsm9ds1_gy_filter_lp_bandwidth_set(&dev_ctx_imu, LSM9DS1_LP_ULTRA_LIGHT);
-    lsm9ds1_gy_filter_hp_bandwidth_set(&dev_ctx_imu, LSM9DS1_HP_ULTRA_LIGHT);
+    lsm9ds1_gy_filter_hp_bandwidth_set(&dev_ctx_imu, LSM9DS1_HP_LOW);
     lsm9ds1_gy_filter_out_path_set(&dev_ctx_imu, LSM9DS1_LPF1_HPF_OUT);
 
     /* Set Output Data Rate / Power mode */
@@ -476,54 +476,82 @@ float stability_thread_read_and_calculate()
     data_in.mag[1] = magnetic_field_mgauss[1] / (50.0f * 10.0f);
     data_in.mag[2] = magnetic_field_mgauss[2] / (50.0f * 10.0f);
 
-#if (SC_OPERATING_MODE == SC_OP_MODE_MAG_CAL)
-    static MFX_MagCal_quality_t cal_quality = MFX_MAGCALUNKNOWN;
+    #if (SC_OPERATING_MODE == SC_OP_MODE_MAG_CAL)
+        static MFX_MagCal_quality_t cal_quality = MFX_MAGCALUNKNOWN;
 
-    MFX_MagCal_input_t mc_input_data;
-    MFX_MagCal_output_t mc_output_data;
-    mc_input_data.mag[0] = data_in.mag[0];
-    mc_input_data.mag[1] = data_in.mag[1];
-    mc_input_data.mag[2] = data_in.mag[2];
-    mc_input_data.time_stamp = now;
+        MFX_MagCal_input_t mc_input_data;
+        MFX_MagCal_output_t mc_output_data;
+        mc_input_data.mag[0] = data_in.mag[0];
+        mc_input_data.mag[1] = data_in.mag[1];
+        mc_input_data.mag[2] = data_in.mag[2];
+        mc_input_data.time_stamp = now;
 
-    MotionFX_MagCal_run(&mc_input_data);
+        MotionFX_MagCal_run(&mc_input_data);
 
-    MotionFX_MagCal_getParams(&mc_output_data);
+        MotionFX_MagCal_getParams(&mc_output_data);
 
-    cal_quality = mc_output_data.cal_quality;
+        cal_quality = mc_output_data.cal_quality;
 
-    // debug_printf("inx, %3.2f, iny, %3.2f, inz, %3.2f, Quality: %u, x, %3.2f, y, %3.2f, z, %3.2f", 
-    //                 data_in.mag[0],
-    //                 data_in.mag[1],
-    //                 data_in.mag[2],
-    //                 mc_output_data.cal_quality,
-    //                 mc_output_data.hi_bias[0],
-    //                 mc_output_data.hi_bias[1],
-    //                 mc_output_data.hi_bias[2]);
+        // debug_printf("inx, %3.2f, iny, %3.2f, inz, %3.2f, Quality: %u, x, %3.2f, y, %3.2f, z, %3.2f", 
+        //                 data_in.mag[0],
+        //                 data_in.mag[1],
+        //                 data_in.mag[2],
+        //                 mc_output_data.cal_quality,
+        //                 mc_output_data.hi_bias[0],
+        //                 mc_output_data.hi_bias[1],
+        //                 mc_output_data.hi_bias[2]);
 
-    if (cal_quality == MFX_MAGCALGOOD)
-    {
-        debug_printf("Cald");
-        MotionFX_MagCal_init(0, false);
+        if (cal_quality == MFX_MAGCALGOOD)
+        {
+            debug_printf("Cald");
+            MotionFX_MagCal_init(0, false);
 
-        data_in.mag[0] -= mc_output_data.hi_bias[0];
-        data_in.mag[1] -= mc_output_data.hi_bias[1];
-        data_in.mag[2] -= mc_output_data.hi_bias[2];
-    }
-#endif
+            data_in.mag[0] -= mc_output_data.hi_bias[0];
+            data_in.mag[1] -= mc_output_data.hi_bias[1];
+            data_in.mag[2] -= mc_output_data.hi_bias[2];
+        }
+    #endif
 
     MotionFX_propagate(&data_out, &data_in, &dT);
     MotionFX_update(&data_out, &data_in, &dT, NULL);
 
-#if SC_ENABLE_6AXIS_MFX_LIB == APP_CONFIG_ENABLED
-    float* p_angles = &data_out.rotation_6X[0];
-#else
-    float* p_angles = &data_out.rotation_9X[0];
-#endif
+    #if SC_ENABLE_6AXIS_MFX_LIB == APP_CONFIG_ENABLED
+        float* p_angles = &data_out.rotation_6X[0];
+    #else
+        float* p_angles = &data_out.rotation_9X[0];
+    #endif
 
     kinematics_new_motionfx_data_callback(&m_kinematics, &data_out);
 
     return dT;
+}
+
+void stability_start_gyro_bias(bool onoff)
+{
+    float gbias[3];
+    MotionFX_getGbias(gbias);
+
+    debug_printf("Original bias: %3.3f, %3.3f, %3.3f", gbias[0], gbias[1], gbias[2]);
+
+    MotionFX_getKnobs(&m_mfx_knobs);
+    m_mfx_knobs.start_automatic_gbias_calculation = onoff;
+    MotionFX_setKnobs(&m_mfx_knobs);
+}
+
+void stability_store_gyro_bias()
+{
+    float gbias[3];
+    MotionFX_getGbias(gbias);
+
+    // gbias[0] = 2;
+    // gbias[1] = 2;
+    // gbias[2] = 2;
+
+    debug_printf("New bias: %3.3f, %3.3f, %3.3f", gbias[0], gbias[1], gbias[2]);
+
+    MotionFX_setGbias(gbias);
+
+    stability_start_gyro_bias(false);
 }
 
 /**
@@ -593,7 +621,7 @@ void stability_thread_pre_init()
 
     m_mfx_knobs.ATime = SC_MFX_ATIME;
     m_mfx_knobs.start_automatic_gbias_calculation = 0;
-    m_mfx_knobs.LMode = 2;
+    m_mfx_knobs.LMode = 1; // 1 = static, 2 = dynamic
     m_mfx_knobs.modx = 1;
 
     MotionFX_setKnobs(&m_mfx_knobs);
@@ -635,9 +663,9 @@ void stability_thread_pre_init()
  */
 void stability_thread(void* argument)
 {
-#if(SC_OPERATING_MODE == SC_OP_MODE_MAG_CAL)
-    MotionFX_MagCal_init(20, true);
-#endif
+    #if(SC_OPERATING_MODE == SC_OP_MODE_MAG_CAL)
+        MotionFX_MagCal_init(20, true);
+    #endif
     MotionFX_enable_6X(SC_ENABLE_6AXIS_MFX_LIB);
     MotionFX_enable_9X(SC_ENABLE_9AXIS_MFX_LIB);
 
@@ -682,24 +710,35 @@ void stability_thread(void* argument)
         }
         else
         {
-            if (flight_app_get_state() >= FLIGHT_MOTOR_READY)
+            if (flight_app_get_state() >= FLIGHT_READY)
             {
                 // Calculate pid control values
                 pitch_pid_out = pid_calculate(&m_pitch_pid, m_kinematics.pitch, dT);
-                // roll_pid_out = pid_calculate(&m_roll_pid, m_kinematics.roll, dT);
-                // yaw_pid_out = pid_calculate(&m_yaw_pid, m_kinematics.yaw, dT);
+                roll_pid_out = pid_calculate(&m_roll_pid, m_kinematics.roll, dT);
+                yaw_pid_out = pid_calculate(&m_yaw_pid, m_kinematics.yaw, dT);
 
-                debug_printf("\t%3.2f \t%3.2f", m_kinematics.pitch, pitch_pid_out);
-
+                // debug_printf("%.1f,%.1f,%.1f,%.1f,%.1f,%.1f,%.1f", 
+                //             acceleration_mg[0],
+                //             acceleration_mg[1],
+                //             acceleration_mg[2],
+                //             angular_rate_mdps[0],
+                //             angular_rate_mdps[1],
+                //             angular_rate_mdps[2],   
+                //             m_kinematics.pitch);
+                // debug_printf("%.3f, %.3f", m_kinematics.roll, roll_pid_out);
+               
+                // debug_printf("%.3f, %.3f", angular_rate_mdps[0], angular_rate_mdps[1]);
+                debug_printf("%.3f, %.3f", m_kinematics.yaw, yaw_pid_out);
 
                 // Selectively disable PID control
                 // pitch_pid_out = 0;
-                roll_pid_out = 0;
-                yaw_pid_out = 0;
+                // roll_pid_out = 0;
+                // yaw_pid_out = 0;
                 flight_app_new_stability_inputs(&pitch_pid_out, &roll_pid_out, &yaw_pid_out);
             }
-
         }
+
+        // debug_printf("%.3f, %.3f", m_kinematics.pitch, m_kinematics.roll);
 
         osDelay(STABILITY_THREAD_PERIOD);
     }
